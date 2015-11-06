@@ -1,8 +1,10 @@
 package com.joy.app.activity.sample;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -34,6 +36,7 @@ public class FullScreenActivity extends Activity {
      * @param act
      * @param view The view which starts the transition
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void startActivity(Activity act, View view) {
 
         if (act == null || view == null)

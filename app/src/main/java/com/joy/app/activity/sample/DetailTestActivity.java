@@ -1,8 +1,10 @@
 package com.joy.app.activity.sample;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,7 +12,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.joy.app.R;
 import com.joy.library.activity.frame.BaseUiActivity;
-import com.joy.app.activity.sample.FullScreenActivity;
 
 /**
  * Created by KEVIN.DAI on 15/7/11.
@@ -64,6 +65,7 @@ public class DetailTestActivity extends BaseUiActivity {
      * @param act
      * @param view The view which starts the transition
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void startActivity(Activity act, View view, String photoUrl) {
 
         if (act == null || view == null)
