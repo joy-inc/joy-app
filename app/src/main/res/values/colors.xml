@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- title bar -->
+    <color name="color_primary">#4054b2</color>
+    <color name="color_accent">#f74782</color>
+</resources>

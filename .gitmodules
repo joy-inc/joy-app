@@ -1,0 +1,3 @@
+[submodule "joy-library-android"]
+	path = joy-library-android
+	url = git@gitlab.dev:joy/joy-library-android.git
