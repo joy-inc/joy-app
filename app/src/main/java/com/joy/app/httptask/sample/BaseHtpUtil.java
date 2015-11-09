@@ -7,12 +7,20 @@ import com.joy.app.BuildConfig;
 import com.joy.library.utils.AppUtil;
 import com.joy.library.utils.DeviceUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by KEVIN.DAI on 15/7/10.
  */
 public class BaseHtpUtil implements HtpApi {
+
+    protected static Map<String, String> getBaseParams() {
+
+        Map<String, String> params = new HashMap<>();
+        addDefaultParams(params);
+        return params;
+    }
 
     protected static void addDefaultParams(Map<String, String> params) {
 
@@ -46,7 +54,7 @@ public class BaseHtpUtil implements HtpApi {
 
         String requestUrl = sb.toString();
         if (BuildConfig.DEBUG)
-            Log.d("BaseHtpUtil", "~~" + requestUrl);
+            Log.d("BaseHtpUtil", "~~get: " + requestUrl);
 
         return requestUrl;
     }

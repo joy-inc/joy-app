@@ -26,11 +26,6 @@ public class DetailTestActivity extends BaseUiActivity {
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     protected void initTitleView() {
 
         setTitleText("详情页");

@@ -1,5 +1,6 @@
 package com.joy.app;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.joy.library.BaseApplication;
 
 /**
@@ -11,5 +12,17 @@ public class JoyApplication extends BaseApplication {
     public void onCreate() {
 
         super.onCreate();
+        initApplication();
+    }
+
+    private void initApplication() {
+
+        Fresco.initialize(getContext());
+    }
+
+    public static void releaseForExitApp() {
+
+//        Fresco.shutDown();
+        release();
     }
 }

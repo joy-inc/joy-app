@@ -2,15 +2,18 @@ package com.joy.app.activity.sample;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.library.activity.frame.BaseHttpLvActivity;
 import com.joy.app.adapter.sample.CityAdapter;
 import com.joy.app.bean.sample.HotCityItem;
 import com.joy.app.httptask.sample.TestHtpUtil;
+import com.joy.library.activity.frame.BaseHttpLvActivity;
+import com.joy.library.httptask.frame.ObjectRequest;
 
 import java.util.List;
 
@@ -19,17 +22,10 @@ import java.util.List;
  */
 public class ListTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
 
-    @Override
-    public void finish() {
+    public static void startActivity(Activity act) {
 
-        removeRequestFromQueue(0);
-        super.finish();
-    }
-
-    @Override
-    protected void initData() {
-
-        addRequest2QueueHasCache(TestHtpUtil.getTestUrl(), 0, HotCityItem.class);
+        if (act != null)
+            act.startActivity(new Intent(act, ListTestActivity.class));
     }
 
     @Override
@@ -55,18 +51,40 @@ public class ListTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
     }
 
     @Override
-    protected void onHttpFailed(String msg) {
+    protected void onCreate(Bundle savedInstanceState) {
 
-//        super.onHttpFailed(msg);
-        showToast("~~" + msg);
+        super.onCreate(savedInstanceState);
+//        executeRefresh();
+//        executeRefreshAndCache();
+        executeCache();
     }
 
-    public static void startActivity(Activity act) {
+    @Override
+    protected ObjectRequest<List<HotCityItem>> getObjectRequest() {
 
-        if (act == null)
-            return;
+        return new ObjectRequest(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
+    }
 
-        Intent intent = new Intent(act, ListTestActivity.class);
-        act.startActivity(intent);
+    @Override
+    protected void onHttpFailed(Object tag, String msg) {
+
+        showToast("error: " + msg);
+    }
+
+    private long mLastPressedTime;
+
+    @Override
+    public void onBackPressed() {
+
+        long currentPressedTime = System.currentTimeMillis();
+        if (currentPressedTime - mLastPressedTime > 2000) {
+
+            mLastPressedTime = currentPressedTime;
+            showToast(R.string.toast_exit_tip);
+        } else {
+
+            super.onBackPressed();
+            JoyApplication.releaseForExitApp();
+        }
     }
 }
