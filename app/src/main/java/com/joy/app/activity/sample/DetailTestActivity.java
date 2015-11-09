@@ -28,7 +28,8 @@ public class DetailTestActivity extends BaseUiActivity {
     @Override
     protected void initTitleView() {
 
-        setTitleText("详情页");
+//        setTitleText("详情页");
+        setTitle("详情页");
     }
 
     @Override

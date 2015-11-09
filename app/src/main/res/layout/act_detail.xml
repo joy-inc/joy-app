@@ -10,18 +10,17 @@
         android:scaleType="centerCrop"
         android:transitionName="@string/list_2_detail" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/tvTest"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"
-        android:background="@drawable/info_background"
         android:gravity="center"
-        android:text="GO"
-        android:textColor="@color/white_trans87"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:text="AppCompatButton"
+        android:textColor="@color/color_accent"
+        android:textSize="10dp"
+        android:theme="@style/ex_theme"
         android:transitionName="@string/detail_2_fullscreen" />
 </RelativeLayout>
