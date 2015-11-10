@@ -22,7 +22,7 @@ public class DetailTestActivity extends BaseUiActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_detail);
+        setContentView(R.layout.t_act_detail);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class CityAdapter extends ExAdapter<HotCityItem> {
         @Override
         public int getConvertViewRid() {
 
-            return R.layout.item_listview;
+            return R.layout.t_item_listview;
         }
 
         @Override

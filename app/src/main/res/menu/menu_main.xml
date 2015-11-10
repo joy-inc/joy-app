@@ -6,6 +6,7 @@
         android:orderInCategory="100"
         android:title="Settings"
         app:showAsAction="never" />
+    <!--
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
@@ -18,4 +19,5 @@
         android:orderInCategory="300"
         android:title="Share"
         app:showAsAction="ifRoom" />
+    -->
 </menu>

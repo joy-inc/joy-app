@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.joy.app.R;
-import com.joy.app.activity.sample.ListTestActivity;
 
 /**
  * 闪屏页面
@@ -17,7 +16,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_splash);
+        setContentView(R.layout.t_act_splash);
         delayStartMainActivity();
     }
 
@@ -38,7 +37,8 @@ public class SplashActivity extends Activity {
 
     private void finishToEnterActivity() {
 
-        ListTestActivity.startActivity(this);
+//        ListTestActivity.startActivity(this);
+        TabTestActivity.startActivity(this);
         finish();
     }
 }
