@@ -20,7 +20,7 @@ public class FullScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_full_screen);
+        setContentView(R.layout.t_act_full_screen);
     }
 
     public static void startActivity(Activity act) {

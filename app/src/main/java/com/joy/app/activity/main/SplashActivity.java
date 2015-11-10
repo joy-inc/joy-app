@@ -7,7 +7,6 @@ import android.os.Message;
 
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.activity.sample.ListTestActivity;
 import com.joy.library.utils.AppUtil;
 
 
@@ -22,7 +21,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_splash);
+        setContentView(R.layout.t_act_splash);
         delayStartMainActivity();
     }
 

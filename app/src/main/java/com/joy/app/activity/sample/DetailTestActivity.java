@@ -22,31 +22,31 @@ public class DetailTestActivity extends BaseUiActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_detail);
+        setContentView(R.layout.t_act_detail);
     }
 
     @Override
     protected void initTitleView() {
 
-//        setTitleText("详情页");
         setTitle("详情页");
+        addTitleLeftBackView();
     }
 
     @Override
     protected void initContentView() {
 
-        ImageView ivPhoto = (ImageView) findViewById(R.id.ivDetailPhoto);
+        ImageView ivPhoto = (ImageView) findViewById(R.id.ivPhoto);
         Glide.with(this)
                 .load(getIntent().getStringExtra("photoUrl"))
                 .placeholder(R.color.transparent)
                 .into(ivPhoto);
 
-        findViewById(R.id.tvTest).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.fabTest).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                FullScreenActivity.startActivity(DetailTestActivity.this);
+                FullScreenActivity.startActivity(DetailTestActivity.this, v);
             }
         });
     }

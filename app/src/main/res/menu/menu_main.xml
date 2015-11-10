@@ -4,16 +4,20 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="设置"
+        android:title="Settings"
         app:showAsAction="never" />
+    <!--
     <item
         android:id="@+id/action_search"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
         android:orderInCategory="200"
         android:title="Search"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_user"
+        android:id="@+id/action_share"
+        android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
         android:orderInCategory="300"
-        android:title="User"
+        android:title="Share"
         app:showAsAction="ifRoom" />
+    -->
 </menu>
