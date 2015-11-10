@@ -1,15 +1,20 @@
-package com.joy.app.activity.sample;
+package com.joy.app.activity.main;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.sample.ListTestActivity;
+import com.joy.library.utils.AppUtil;
+
 
 /**
- * 闪屏页面
+ * 闪屏处理,是否要打开引导页
+ * User: liulongzhenhai(longzhenhai.liu@qyer.com)
+ * Date: 2015-11-09
  */
 public class SplashActivity extends Activity {
 
@@ -22,6 +27,7 @@ public class SplashActivity extends Activity {
     }
 
     private void delayStartMainActivity() {
+
 
         new Handler() {
 
@@ -38,7 +44,12 @@ public class SplashActivity extends Activity {
 
     private void finishToEnterActivity() {
 
-        ListTestActivity.startActivity(this);
+        if (JoyApplication.getCommonPrefs().isVersionCodeLessThan(AppUtil.getVersionCode())) {
+            GuideSplashActivity.startActivity(this);
+        } else {
+            MainActivity.startActivity(this);
+//            ListTestActivity.startActivity(this);
+        }
         finish();
     }
 }
