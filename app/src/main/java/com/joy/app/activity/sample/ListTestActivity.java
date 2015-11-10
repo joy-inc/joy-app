@@ -33,7 +33,6 @@ public class ListTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
     @Override
     protected void initTitleView() {
 
-//        setTitleText("列表页");
         setTitle("列表页");
     }
 
