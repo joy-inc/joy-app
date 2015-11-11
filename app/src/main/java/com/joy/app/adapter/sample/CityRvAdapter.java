@@ -48,10 +48,8 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
 
     public class ViewHolder extends ExRvViewHolder {
 
-        @Bind(R.id.sdvPhoto)
-        SimpleDraweeView sdvPhoto;
-        @Bind(R.id.tvName)
-        TextView tvName;
+        @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
+        @Bind(R.id.tvName)   TextView         tvName;
 
         public ViewHolder(View itemView) {
 

@@ -51,12 +51,6 @@ public class DetailTestActivity extends BaseUiActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-
-        super.onBackPressed();
-    }
-
     /**
      * @param act
      * @param view The view which starts the transition
