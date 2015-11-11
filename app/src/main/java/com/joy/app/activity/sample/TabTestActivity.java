@@ -47,9 +47,9 @@ public class TabTestActivity extends AppCompatActivity {
 
         mViewPager = (ExViewPager) findViewById(R.id.viewpager);
         List<BaseUiFragment> fragments = new ArrayList<>();
-        fragments.add(ListTestFragment.instantiate(this).setLableText("目的地"));
-        fragments.add(ListTestFragment.instantiate(this).setLableText("旅行规划"));
-        fragments.add(ListTestFragment.instantiate(this).setLableText("订单"));
+        fragments.add(RvTestFragment.instantiate(this).setLableText("目的地"));
+        fragments.add(LvTestFragment.instantiate(this).setLableText("旅行规划"));
+        fragments.add(LvTestFragment.instantiate(this).setLableText("订单"));
         initFragments(fragments, false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -101,6 +101,11 @@ public class TabTestActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -6,15 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.adapter.sample.CityAdapter;
+import com.joy.app.adapter.sample.CityLvAdapter;
 import com.joy.app.bean.sample.HotCityItem;
 import com.joy.app.httptask.sample.TestHtpUtil;
 import com.joy.library.activity.frame.BaseHttpLvActivity;
+import com.joy.library.adapter.frame.OnItemViewClickListener;
 import com.joy.library.httptask.frame.ObjectRequest;
 
 import java.util.List;
@@ -22,12 +21,12 @@ import java.util.List;
 /**
  * Created by KEVIN.DAI on 15/7/8.
  */
-public class ListTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
+public class LvTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
 
     public static void startActivity(Activity act) {
 
         if (act != null)
-            act.startActivity(new Intent(act, ListTestActivity.class));
+            act.startActivity(new Intent(act, LvTestActivity.class));
     }
 
     @Override
@@ -39,17 +38,16 @@ public class ListTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
     @Override
     protected void initContentView() {
 
-        setAdapter(new CityAdapter());
-        setOnItemClickListener(new OnItemClickListener() {
+        CityLvAdapter adapter = new CityLvAdapter();
+        adapter.setOnItemViewClickListener(new OnItemViewClickListener<HotCityItem>() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemViewClick(int position, View clickView, HotCityItem hotCityItem) {
 
-                View v = view.findViewById(R.id.sdvPhoto);
-                String url = ((CityAdapter) getAdapter()).getItem(position).getPhoto();
-                DetailTestActivity.startActivity(ListTestActivity.this, v, url);
+                DetailTestActivity.startActivity(LvTestActivity.this, clickView.findViewById(R.id.sdvPhoto), hotCityItem.getPhoto());
             }
         });
+        setAdapter(adapter);
     }
 
     @Override
@@ -101,6 +99,11 @@ public class ListTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

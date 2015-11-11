@@ -4,13 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.AdapterView;
 
 import com.joy.app.R;
-import com.joy.app.adapter.sample.CityAdapter;
+import com.joy.app.adapter.sample.CityLvAdapter;
 import com.joy.app.bean.sample.HotCityItem;
 import com.joy.app.httptask.sample.TestHtpUtil;
 import com.joy.library.activity.frame.BaseHttpLvFragment;
+import com.joy.library.adapter.frame.OnItemViewClickListener;
 import com.joy.library.httptask.frame.ObjectRequest;
 
 import java.util.List;
@@ -18,11 +18,11 @@ import java.util.List;
 /**
  * Created by KEVIN.DAI on 15/11/10.
  */
-public class ListTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
+public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
 
-    public static ListTestFragment instantiate(Context context) {
+    public static LvTestFragment instantiate(Context context) {
 
-        return (ListTestFragment) Fragment.instantiate(context, ListTestFragment.class.getName(), new Bundle());
+        return (LvTestFragment) Fragment.instantiate(context, LvTestFragment.class.getName(), new Bundle());
     }
 
     @Override
@@ -35,17 +35,16 @@ public class ListTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
     @Override
     protected void initContentView() {
 
-        setAdapter(new CityAdapter());
-        setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        CityLvAdapter adapter = new CityLvAdapter();
+        adapter.setOnItemViewClickListener(new OnItemViewClickListener<HotCityItem>() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemViewClick(int position, View clickView, HotCityItem hotCityItem) {
 
-                View v = view.findViewById(R.id.sdvPhoto);
-                String url = ((CityAdapter) getAdapter()).getItem(position).getPhoto();
-                DetailTestActivity.startActivity(getActivity(), v, url);
+                DetailTestActivity.startActivity(getActivity(), clickView.findViewById(R.id.sdvPhoto), hotCityItem.getPhoto());
             }
         });
+        setAdapter(adapter);
     }
 
     @Override

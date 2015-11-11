@@ -37,7 +37,7 @@ public class SplashActivity extends Activity {
 
     private void finishToEnterActivity() {
 
-//        ListTestActivity.startActivity(this);
+//        LvTestActivity.startActivity(this);
         TabTestActivity.startActivity(this);
         finish();
     }
