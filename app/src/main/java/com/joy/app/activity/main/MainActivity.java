@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.joy.app.bc.main.MainActivityBC;
-import com.joy.app.bc.main.MainActivityHelperBC;
 import com.joy.library.activity.frame.BaseUiActivity;
-import com.joy.library.httptask.frame.ObjectRequest;
 
 /**
  * 专题列表

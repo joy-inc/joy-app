@@ -1,4 +1,4 @@
-package com.joy.app.bc.main;
+package com.joy.app.activity.main;
 
 import com.joy.app.activity.main.MainActivity;
 import com.joy.library.httptask.frame.ObjectRequest;
