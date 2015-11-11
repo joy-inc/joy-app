@@ -1,6 +1,7 @@
 package com.joy.app;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.joy.app.utils.prefs.CommonPrefs;
 import com.joy.library.BaseApplication;
 
 /**
@@ -24,5 +25,28 @@ public class JoyApplication extends BaseApplication {
 
 //        Fresco.shutDown();
         release();
+        getCommonPrefs().releaseInstance();
+    }
+
+    public static CommonPrefs getCommonPrefs() {
+
+        return CommonPrefs.getInstance(getContext());
+    }
+
+    /**
+     * 用户是否登录
+     * @return
+     */
+    public static boolean isLogin(){
+
+        return false;
+    }
+
+    /**
+     * 直接获取用户token
+     * @return
+     */
+    public static String getUserToken(){
+        return "";
     }
 }
