@@ -1,6 +1,5 @@
 package com.joy.app.adapter.sample;
 
-import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import com.joy.app.bean.sample.HotCityItem;
 import com.joy.library.adapter.frame.ExRvAdapter;
 import com.joy.library.adapter.frame.ExRvViewHolder;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -21,16 +18,6 @@ import butterknife.ButterKnife;
  * Created by KEVIN.DAI on 15/11/10.
  */
 public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCityItem> {
-
-    public CityRvAdapter(Context context) {
-
-        super(context);
-    }
-
-    public CityRvAdapter(Context context, List<HotCityItem> data) {
-
-        super(context, data);
-    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {

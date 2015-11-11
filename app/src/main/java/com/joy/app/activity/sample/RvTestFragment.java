@@ -36,7 +36,7 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
     @Override
     protected void initContentView() {
 
-        CityRvAdapter adapter = new CityRvAdapter(getActivity());
+        CityRvAdapter adapter = new CityRvAdapter();
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<HotCityItem>() {
 
             @Override
