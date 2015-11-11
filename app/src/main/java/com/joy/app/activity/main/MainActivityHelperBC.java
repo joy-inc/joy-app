@@ -1,4 +1,4 @@
-package com.joy.app.bc.main;
+package com.joy.app.activity.main;
 
 import android.os.Bundle;
 
