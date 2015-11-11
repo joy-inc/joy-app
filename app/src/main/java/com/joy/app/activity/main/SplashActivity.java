@@ -7,7 +7,7 @@ import android.os.Message;
 
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.activity.sample.ListTestActivity;
+import com.joy.app.activity.sample.TabTestActivity;
 import com.joy.library.utils.AppUtil;
 
 
@@ -45,10 +45,12 @@ public class SplashActivity extends Activity {
     private void finishToEnterActivity() {
 
         if (JoyApplication.getCommonPrefs().isVersionCodeLessThan(AppUtil.getVersionCode())) {
+
             GuideSplashActivity.startActivity(this);
         } else {
+
 //            MainActivity.startActivity(this);
-            ListTestActivity.startActivity(this);
+            TabTestActivity.startActivity(this);
         }
         finish();
     }

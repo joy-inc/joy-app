@@ -1,4 +1,4 @@
-package com.joy.app.view;
+package com.joy.app.view.webview;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.joy.app.R;
 import com.joy.app.utils.LoadingViewUtil;
 import com.joy.app.utils.StorageUtil;
-import com.joy.app.view.laodview.LoadingView;
+import com.joy.app.view.loadview.LoadingView;
 import com.joy.library.utils.DeviceUtil;
 import com.joy.library.utils.DimenCons;
 import com.joy.library.utils.ToastUtil;

@@ -1,4 +1,4 @@
-package com.joy.app.view;
+package com.joy.app.view.webview;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -2,7 +2,7 @@ package com.joy.app.utils;
 
 import android.content.Context;
 
-import com.joy.app.view.laodview.LoadingView;
+import com.joy.app.view.loadview.LoadingView;
 import com.joy.library.utils.DimenCons;
 
 /**
