@@ -1,4 +1,4 @@
-package com.joy.app.view;
+package com.joy.app.view.webview;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,7 +22,6 @@ import com.joy.library.utils.DimenCons;
 import com.joy.library.utils.LogMgr;
 import com.joy.library.utils.TextUtil;
 import com.joy.library.view.ExLayoutWidget;
-import com.joy.library.view.ExViewWidget;
 
 /**
  * QyerApp webView逻辑的组件基类

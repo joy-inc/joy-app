@@ -4,25 +4,25 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
+import com.joy.app.bean.sample.HotCityItem;
 import com.joy.library.adapter.frame.ExAdapter;
 import com.joy.library.adapter.frame.ExViewHolder;
 import com.joy.library.adapter.frame.ExViewHolderBase;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.joy.app.bean.sample.HotCityItem;
 
 /**
  * Created by KEVIN.DAI on 15/7/10.
  */
-public class CityAdapter extends ExAdapter<HotCityItem> {
+public class CityLvAdapter extends ExAdapter<HotCityItem> {
 
     @Override
     protected ExViewHolder getViewHolder(int position) {
 
-        return new CityViewHolder();
+        return new ViewHolder();
     }
 
-    private class CityViewHolder extends ExViewHolderBase {
+    private class ViewHolder extends ExViewHolderBase {
 
         private SimpleDraweeView sdvPhoto;
         private TextView tvName;
@@ -38,6 +38,14 @@ public class CityAdapter extends ExAdapter<HotCityItem> {
 
             sdvPhoto = (SimpleDraweeView) convertView.findViewById(R.id.sdvPhoto);
             tvName = (TextView) convertView.findViewById(R.id.tvName);
+            convertView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    callbackOnItemViewClickListener(mPosition, v);
+                }
+            });
         }
 
         @Override

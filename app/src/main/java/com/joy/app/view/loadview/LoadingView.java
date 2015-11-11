@@ -1,8 +1,6 @@
-package com.joy.app.view.laodview;
+package com.joy.app.view.loadview;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.animation.Animation;
 import android.view.animation.Interpolator;

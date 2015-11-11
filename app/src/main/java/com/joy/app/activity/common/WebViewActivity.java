@@ -3,17 +3,15 @@ package com.joy.app.activity.common;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
 
 import com.joy.app.utils.ActivityUrlUtil;
-import com.joy.app.view.BaseWebView;
-import com.joy.app.view.WebViewBaseWidget;
-import com.joy.app.view.WebViewNativeWidget;
+import com.joy.app.view.webview.BaseWebView;
+import com.joy.app.view.webview.WebViewBaseWidget;
+import com.joy.app.view.webview.WebViewNativeWidget;
 import com.joy.library.activity.frame.BaseUiActivity;
 import com.joy.library.utils.LogMgr;
 
