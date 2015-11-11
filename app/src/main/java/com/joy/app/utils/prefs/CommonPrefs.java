@@ -2,6 +2,7 @@ package com.joy.app.utils.prefs;
 
 import android.content.Context;
 
+import com.joy.app.BuildConfig;
 import com.joy.library.utils.ExSharedPrefs;
 
 /**
@@ -11,11 +12,8 @@ import com.joy.library.utils.ExSharedPrefs;
  */
 public class CommonPrefs {
 
-    private final String KEY_VERSION_CODE = "version_code";//版本号
-
-
+    private static final String KEY_VERSION_CODE = "version_code";//版本号
     private static CommonPrefs mSettingPrefs;
-
     private ExSharedPrefs mExSharedPrefs;
 
     private CommonPrefs(Context context) {
@@ -31,38 +29,38 @@ public class CommonPrefs {
         return mSettingPrefs;
     }
 
-    public static void releaseInstance(){
+    public static void releaseInstance() {
 
-        if(mSettingPrefs != null)
+        if (mSettingPrefs != null)
             mSettingPrefs = null;
     }
 
     /**
-     * 获取存储的版本号，如果没有返回0
+     * 获取存储的版本号，如果没有返回1
+     *
      * @return
      */
-    public int getVersionCode(){
+    public int getVersionCode() {
 
-        return mExSharedPrefs.getInt(KEY_VERSION_CODE, 0);
+        return mExSharedPrefs.getInt(KEY_VERSION_CODE, 1);
     }
 
     /**
-     * 判断存储的版本号是否小于versionCode
-     * @param versionCode
+     * 判断是否为新安装版本
+     *
      * @return
      */
-    public boolean isVersionCodeLessThan(int versionCode){
+    public boolean isNewVersion() {
 
-        return getVersionCode() < versionCode;
+        return getVersionCode() < BuildConfig.VERSION_CODE;
     }
 
     /**
      * 如果存储的版本号小于versionCode，则存储新的versionCode
-     * @param versionCode
      */
-    public void saveVersionCodeIfLessThan(int versionCode){
+    public void saveVersionCodeIfNeed() {
 
-        if(isVersionCodeLessThan(versionCode))
-            mExSharedPrefs.putInt(KEY_VERSION_CODE, versionCode);
+        if (isNewVersion())
+            mExSharedPrefs.putInt(KEY_VERSION_CODE, BuildConfig.VERSION_CODE);
     }
 }

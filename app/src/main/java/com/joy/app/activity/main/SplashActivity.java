@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.sample.TabTestActivity;
-import com.joy.library.utils.AppUtil;
 
 
 /**
@@ -44,7 +44,7 @@ public class SplashActivity extends Activity {
 
     private void finishToEnterActivity() {
 
-        if (JoyApplication.getCommonPrefs().isVersionCodeLessThan(AppUtil.getVersionCode())) {
+        if (JoyApplication.getCommonPrefs().isNewVersion()) {
 
             GuideSplashActivity.startActivity(this);
         } else {
