@@ -24,13 +24,13 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
 
         HotCityItem data = getItem(position);
         holder.sdvPhoto.setImageURI(Uri.parse(data.getPhoto()));
-        holder.tvName.setText(data.getCnname());
+        holder.tvName.setText(data.getCnname() + "\n" + data.getEnname());
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(inflate(parent, R.layout.t_item_listview));
+        return new ViewHolder(inflate(parent, R.layout.t_item_card_rv));
     }
 
     public class ViewHolder extends ExRvViewHolder {

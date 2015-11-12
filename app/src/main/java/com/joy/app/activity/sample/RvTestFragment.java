@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.joy.app.R;
 import com.joy.app.adapter.sample.CityRvAdapter;
 import com.joy.app.bean.sample.HotCityItem;
 import com.joy.app.httptask.sample.TestHtpUtil;
@@ -42,7 +41,7 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
             @Override
             public void onItemViewClick(int position, View clickView, HotCityItem hotCityItem) {
 
-                DetailTestActivity.startActivity(getActivity(), clickView.findViewById(R.id.sdvPhoto), hotCityItem.getPhoto());
+                DetailTestActivity.startActivity(getActivity(), clickView, hotCityItem.getPhoto());
             }
         });
         adapter.setOnItemViewLongClickListener(new OnItemViewLongClickListener<HotCityItem>() {
