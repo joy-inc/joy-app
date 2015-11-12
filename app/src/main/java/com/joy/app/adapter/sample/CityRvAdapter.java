@@ -38,25 +38,16 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
         @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
         @Bind(R.id.tvName)   TextView         tvName;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
 
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            tvName.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), v);
-                }
-            });
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-
-                @Override
-                public boolean onLongClick(View v) {
-
-                    callbackOnItemViewLongClickListener(getLayoutPosition(), v);
-                    return true;
+                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
                 }
             });
         }
