@@ -3,7 +3,11 @@ package com.joy.app;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.joy.app.utils.prefs.CommonPrefs;
 import com.joy.library.BaseApplication;
+<<<<<<< HEAD
+import com.joy.library.share.ShareConstant;
+=======
 import com.joy.library.utils.LogMgr;
+>>>>>>> d3f9315f0beafa7a51a681a625e52225c47e7ebf
 
 /**
  * Created by KEVIN.DAI on 15/7/8.
@@ -20,6 +24,9 @@ public class JoyApplication extends BaseApplication {
     private void initApplication() {
 
         Fresco.initialize(getContext());
+<<<<<<< HEAD
+        initShareInfo();
+=======
         if (BuildConfig.DEBUG) {
 
             LogMgr.turnOn();
@@ -27,6 +34,7 @@ public class JoyApplication extends BaseApplication {
 
             LogMgr.turnOff();
         }
+>>>>>>> d3f9315f0beafa7a51a681a625e52225c47e7ebf
     }
 
     public static void releaseForExitApp() {
@@ -60,4 +68,18 @@ public class JoyApplication extends BaseApplication {
 
         return "";
     }
+
+    /**
+     * 初始化分享的常量信息
+     */
+    private void initShareInfo(){
+
+        ShareConstant.getIns().setQqZoneAppid("1");
+        ShareConstant.getIns().setQqZoneKey("1");
+        ShareConstant.getIns().setQqZoneUrl("http://www.qq.com");
+
+        ShareConstant.getIns().setWeixinAppid("1");
+        ShareConstant.getIns().setWeixinSecret("1");
+    }
+
 }
