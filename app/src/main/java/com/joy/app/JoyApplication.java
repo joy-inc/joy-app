@@ -3,7 +3,11 @@ package com.joy.app;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.joy.app.utils.prefs.CommonPrefs;
 import com.joy.library.BaseApplication;
+<<<<<<< HEAD
 import com.joy.library.share.ShareConstant;
+=======
+import com.joy.library.utils.LogMgr;
+>>>>>>> d3f9315f0beafa7a51a681a625e52225c47e7ebf
 
 /**
  * Created by KEVIN.DAI on 15/7/8.
@@ -20,7 +24,17 @@ public class JoyApplication extends BaseApplication {
     private void initApplication() {
 
         Fresco.initialize(getContext());
+<<<<<<< HEAD
         initShareInfo();
+=======
+        if (BuildConfig.DEBUG) {
+
+            LogMgr.turnOn();
+        } else {
+
+            LogMgr.turnOff();
+        }
+>>>>>>> d3f9315f0beafa7a51a681a625e52225c47e7ebf
     }
 
     public static void releaseForExitApp() {
@@ -37,18 +51,21 @@ public class JoyApplication extends BaseApplication {
 
     /**
      * 用户是否登录
+     *
      * @return
      */
-    public static boolean isLogin(){
+    public static boolean isLogin() {
 
         return false;
     }
 
     /**
      * 直接获取用户token
+     *
      * @return
      */
-    public static String getUserToken(){
+    public static String getUserToken() {
+
         return "";
     }
 

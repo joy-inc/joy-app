@@ -1,6 +1,5 @@
 package com.joy.app.adapter.sample;
 
-import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import com.joy.app.bean.sample.HotCityItem;
 import com.joy.library.adapter.frame.ExRvAdapter;
 import com.joy.library.adapter.frame.ExRvViewHolder;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -22,56 +19,35 @@ import butterknife.ButterKnife;
  */
 public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCityItem> {
 
-    public CityRvAdapter(Context context) {
-
-        super(context);
-    }
-
-    public CityRvAdapter(Context context, List<HotCityItem> data) {
-
-        super(context, data);
-    }
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         HotCityItem data = getItem(position);
         holder.sdvPhoto.setImageURI(Uri.parse(data.getPhoto()));
-        holder.tvName.setText(data.getCnname());
+        holder.tvName.setText(data.getCnname() + "\n" + data.getEnname());
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(inflate(parent, R.layout.t_item_listview));
+        return new ViewHolder(inflate(parent, R.layout.t_item_card_rv));
     }
 
     public class ViewHolder extends ExRvViewHolder {
 
-        @Bind(R.id.sdvPhoto)
-        SimpleDraweeView sdvPhoto;
-        @Bind(R.id.tvName)
-        TextView tvName;
+        @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
+        @Bind(R.id.tvName)   TextView         tvName;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
 
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            tvName.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), v);
-                }
-            });
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-
-                @Override
-                public boolean onLongClick(View v) {
-
-                    callbackOnItemViewLongClickListener(getLayoutPosition(), v);
-                    return true;
+                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
                 }
             });
         }

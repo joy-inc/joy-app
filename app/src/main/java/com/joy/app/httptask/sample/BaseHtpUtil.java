@@ -1,11 +1,11 @@
 package com.joy.app.httptask.sample;
 
 import android.os.Build;
-import android.util.Log;
 
 import com.joy.app.BuildConfig;
 import com.joy.library.utils.AppUtil;
 import com.joy.library.utils.DeviceUtil;
+import com.joy.library.utils.LogMgr;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,8 +53,8 @@ public class BaseHtpUtil implements HtpApi {
         sb.deleteCharAt(sb.length() - 1);
 
         String requestUrl = sb.toString();
-        if (BuildConfig.DEBUG)
-            Log.d("BaseHtpUtil", "~~get: " + requestUrl);
+        if (LogMgr.isDebug())
+            LogMgr.d("BaseHtpUtil", "~~get: " + requestUrl);
 
         return requestUrl;
     }

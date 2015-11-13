@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.sample.TabTestActivity;
-
 
 /**
  * 闪屏处理,是否要打开引导页
@@ -28,16 +26,13 @@ public class SplashActivity extends Activity {
 
     private void delayStartMainActivity() {
 
-
         new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
 
-                if (!isFinishing()) {
-
+                if (!isFinishing())
                     finishToEnterActivity();
-                }
             }
         }.sendEmptyMessageDelayed(0, 2000);
     }

@@ -1,5 +1,6 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
+<<<<<<< HEAD
     <style name="ex_theme">
         <item name="android:windowNoTitle">true</item>
     </style>
@@ -15,5 +16,19 @@
     <!-- 对话框样式，带白色圆角背景 -->
     <style name="qa_ex_theme_dialog" parent="@style/ex_theme_dialog">
         <item name="android:windowBackground">@drawable/bg_card_item_round</item>
+=======
+    <style name="Card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">180dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+
+        <item name="cardBackgroundColor">@color/black_trans26</item>
+        <item name="cardCornerRadius">4dp</item>
+        <!--
+        <item name="cardElevation">@dimen/card_elevation</item>
+        -->
+>>>>>>> d3f9315f0beafa7a51a681a625e52225c47e7ebf
     </style>
 </resources>
