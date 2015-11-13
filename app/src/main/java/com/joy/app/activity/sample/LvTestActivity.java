@@ -30,6 +30,16 @@ public class LvTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+//        executeRefresh();
+//        executeRefreshAndCache();
+//        executeCache();
+        executeCacheAndRefresh();
+    }
+
+    @Override
     protected void initTitleView() {
 
         setTitle("列表页");
@@ -44,20 +54,10 @@ public class LvTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
             @Override
             public void onItemViewClick(int position, View clickView, HotCityItem hotCityItem) {
 
-                DetailTestActivity.startActivity(LvTestActivity.this, clickView.findViewById(R.id.sdvPhoto), hotCityItem.getPhoto());
+                DetailTestActivity.startActivity(LvTestActivity.this, clickView.findViewById(R.id.sdvPhoto), hotCityItem.getId(), hotCityItem.getPhoto());
             }
         });
         setAdapter(adapter);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-//        executeRefresh();
-//        executeRefreshAndCache();
-//        executeCache();
-        executeCacheAndRefresh();
     }
 
     @Override

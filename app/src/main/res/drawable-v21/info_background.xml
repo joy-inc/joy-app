@@ -11,10 +11,10 @@
         android:right="2px"
         android:top="2px">
         <shape android:shape="oval">
-            <solid android:color="@color/color_accent" />
+            <solid android:color="?colorAccent" />
         </shape>
     </item>
     <item>
-        <ripple android:color="@color/color_accent" />
+        <ripple android:color="?colorAccent" />
     </item>
 </layer-list>

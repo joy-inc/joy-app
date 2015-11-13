@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:scaleType="centerCrop"
+        android:tint="@color/black_trans26" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sdvPhoto"
+        android:layout_alignLeft="@id/sdvPhoto"
+        android:layout_alignRight="@id/sdvPhoto"
+        android:layout_alignTop="@id/sdvPhoto"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="19dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/llDiv1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/sdvPhoto"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvSubPhoto1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:tint="@color/black_trans26"
+            fresco:roundedCornerRadius="2dp" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvSubPhoto2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:tint="@color/black_trans26"
+            fresco:roundedCornerRadius="2dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDiv2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/llDiv1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvSubPhoto3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:tint="@color/black_trans26"
+            fresco:roundedCornerRadius="2dp" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvSubPhoto4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:tint="@color/black_trans26"
+            fresco:roundedCornerRadius="2dp" />
+    </LinearLayout>
+</RelativeLayout>

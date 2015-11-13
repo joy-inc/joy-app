@@ -10,7 +10,7 @@
         android:id="@+id/sdvPhoto"
         android:layout_width="120dp"
         android:layout_height="80dp"
-        android:transitionName="@string/list_2_detail"
+        android:scaleType="centerCrop"
         fresco:placeholderImage="@mipmap/ic_launcher" />
 
     <TextView

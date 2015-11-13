@@ -3,7 +3,7 @@
 
     <string name="app_name">JOY</string>
 
-    <string name="list_2_detail">list_2_detail</string>
-    <string name="detail_2_fullscreen">detail_2_fullscreen</string>
+    <!--<string name="list_2_detail">list_2_detail</string>-->
+    <!--<string name="detail_2_fullscreen">detail_2_fullscreen</string>-->
 
 </resources>

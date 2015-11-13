@@ -41,7 +41,7 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
             @Override
             public void onItemViewClick(int position, View clickView, HotCityItem hotCityItem) {
 
-                DetailTestActivity.startActivity(getActivity(), clickView.findViewById(R.id.sdvPhoto), hotCityItem.getPhoto());
+                DetailTestActivity.startActivity(getActivity(), clickView.findViewById(R.id.sdvPhoto), hotCityItem.getId(), hotCityItem.getPhoto());
             }
         });
         setAdapter(adapter);

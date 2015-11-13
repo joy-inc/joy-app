@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    cardBackgroundColor="@color/white"
+    cardCornerRadius="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:tint="@color/black_trans26" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
+        android:ellipsize="end"
+        android:lineSpacingExtra="2dp"
+        android:maxLines="2"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/black_trans54"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvAvatar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="14dp"
+            android:scaleType="centerCrop"
+            fresco:placeholderImage="@color/black_trans54"
+            fresco:roundAsCircle="true"
+            fresco:roundingBorderColor="@color/black_trans12"
+            fresco:roundingBorderWidth="1.5dp" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:textColor="@color/black_trans26"
+            android:textSize="11dp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

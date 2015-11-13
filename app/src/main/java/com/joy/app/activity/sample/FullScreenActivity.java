@@ -16,13 +16,6 @@ import com.joy.library.utils.DeviceUtil;
  */
 public class FullScreenActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.t_act_full_screen);
-    }
-
     public static void startActivity(Activity act) {
 
         if (act == null)
@@ -52,5 +45,12 @@ public class FullScreenActivity extends Activity {
 
             act.startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.t_act_full_screen);
     }
 }

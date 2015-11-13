@@ -26,6 +26,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sample.DetailTestActivity"
+            android:theme="@style/theme_translucent"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sample.FullScreenActivity"
