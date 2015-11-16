@@ -42,7 +42,7 @@
             android:layout_height="35dp"
             android:layout_marginLeft="14dp"
             android:scaleType="centerCrop"
-            fresco:placeholderImage="@color/black_trans54"
+            fresco:placeholderImage="@color/black_trans26"
             fresco:roundAsCircle="true"
             fresco:roundingBorderColor="@color/black_trans12"
             fresco:roundingBorderWidth="1.5dp" />

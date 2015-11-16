@@ -2,6 +2,7 @@ package com.joy.app.adapter.sample;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.joy.app.R;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.bean.sample.Trip;
 import com.joy.library.adapter.frame.ExRvMultipleAdapter;
+import com.joy.library.utils.CollectionUtil;
 import com.joy.library.utils.DimenCons;
 import com.joy.library.utils.LogMgr;
 
@@ -60,93 +62,91 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
     @Override
     public int getContentItemCount() {
 
-        return mCityDetail == null ? 0 : mCityDetail.getNew_trip().size();
+        return mCityDetail == null ? 0 : mCityDetail.getNew_trip() == null ? 0 : mCityDetail.getNew_trip().size();
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
+        if (mCityDetail == null)
+            return;
+
         if (holder instanceof HeaderViewHolder) {
 
-            if (mCityDetail != null) {
+            final HeaderViewHolder vh = ((HeaderViewHolder) holder);
+            vh.tvName.setText(mCityDetail.getChinesename() + "\n" + mCityDetail.getEnglishname());
 
-                ArrayList<String> photos = mCityDetail.getPhotos();
-                final HeaderViewHolder vh = ((HeaderViewHolder) holder);
+            ArrayList<String> photos = mCityDetail.getPhotos();
+            if (CollectionUtil.isEmpty(photos))
+                return;
 
-                if (mPaletteColor == -1) {
+            if (mPaletteColor == -1) {
 
-                    Postprocessor processor = new BasePostprocessor() {
+                Postprocessor processor = new BasePostprocessor() {
 
-                        @Override
-                        public CloseableReference<Bitmap> process(final Bitmap sourceBitmap, PlatformBitmapFactory bitmapFactory) {
+                    @Override
+                    public CloseableReference<Bitmap> process(final Bitmap bitmap, PlatformBitmapFactory bitmapFactory) {
 
-                            Palette.generateAsync(sourceBitmap, new Palette.PaletteAsyncListener() {
+                        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
 
-                                @Override
-                                public void onGenerated(Palette palette) {
+                            @Override
+                            public void onGenerated(Palette palette) {
 
-                                    if (palette != null) {
+                                if (palette != null) {
 
-                                        Palette.Swatch vibrant = palette.getMutedSwatch();
-                                        if (vibrant != null) {
-
-                                            mPaletteColor = vibrant.getRgb();
-                                            mAttachedView.setBackgroundColor(mPaletteColor);
-                                            vh.sdvPhoto.setImageBitmap(sourceBitmap);
-                                        }
-                                    }
+                                    mPaletteColor = palette.getMutedColor(0X00000000);
+                                    mAttachedView.setBackgroundColor(mPaletteColor);
+                                    vh.sdvPhoto.setImageBitmap(bitmap);
                                 }
-                            });
-                            return null;
-                        }
+                            }
+                        });
+                        return null;
+                    }
 
-                        @Override
-                        public void process(Bitmap destBitmap, Bitmap sourceBitmap) {
+                    @Override
+                    public void process(Bitmap destBitmap, Bitmap sourceBitmap) {
 
-//                            super.process(destBitmap, sourceBitmap);
-                        }
+//                        super.process(destBitmap, sourceBitmap);
+                    }
 
-                        @Override
-                        public void process(Bitmap bitmap) {
+                    @Override
+                    public void process(Bitmap bitmap) {
 
-//                            super.process(bitmap);
-                        }
-                    };
-                    ImageRequest request = ImageRequestBuilder
-                            .newBuilderWithSource(Uri.parse(photos.get(0)))
-                            .setPostprocessor(processor)
-                            .build();
-                    PipelineDraweeController controller = (PipelineDraweeController) Fresco
-                            .newDraweeControllerBuilder()
-                            .setImageRequest(request)
-                            .setOldController(vh.sdvPhoto.getController())
-                            .build();
-                    vh.sdvPhoto.setController(controller);
-                } else {
+//                        super.process(bitmap);
+                    }
+                };
+                ImageRequest request = ImageRequestBuilder
+                        .newBuilderWithSource(Uri.parse(photos.get(0)))
+                        .setPostprocessor(processor)
+                        .build();
+                PipelineDraweeController controller = (PipelineDraweeController) Fresco
+                        .newDraweeControllerBuilder()
+                        .setImageRequest(request)
+                        .setOldController(vh.sdvPhoto.getController())
+                        .build();
+                vh.sdvPhoto.setController(controller);
+            } else {
 
+                if (!(vh.sdvPhoto.getDrawable() instanceof BitmapDrawable))
                     vh.sdvPhoto.setImageURI(Uri.parse(photos.get(0)));
-                }
-
-                vh.tvName.setText(mCityDetail.getChinesename() + "\n" + mCityDetail.getEnglishname());
-                vh.sdvSubPhoto1.setImageURI(Uri.parse(photos.get(1)));
-                vh.sdvSubPhoto2.setImageURI(Uri.parse(photos.get(2)));
-                vh.sdvSubPhoto3.setImageURI(Uri.parse(photos.get(3)));
-                vh.sdvSubPhoto4.setImageURI(Uri.parse(photos.get(4)));
             }
+            if (photos.size() > 1)
+                vh.sdvSubPhoto1.setImageURI(Uri.parse(photos.get(1)));
+            if (photos.size() > 2)
+                vh.sdvSubPhoto2.setImageURI(Uri.parse(photos.get(2)));
+            if (photos.size() > 3)
+                vh.sdvSubPhoto3.setImageURI(Uri.parse(photos.get(3)));
+            if (photos.size() > 4)
+                vh.sdvSubPhoto4.setImageURI(Uri.parse(photos.get(4)));
         } else if (holder instanceof ContentViewHolder) {
 
-            if (mCityDetail != null) {
-
-                ArrayList<Trip> trips = mCityDetail.getNew_trip();
-                int pos = position - mHeaderCount;
-                ContentViewHolder vh = ((ContentViewHolder) holder);
-                vh.sdvPhoto.setImageURI(Uri.parse(trips.get(pos).getPhoto()));
-                vh.tvTitle.setText(trips.get(pos).getTitle());
-                vh.sdvAvatar.setImageURI(Uri.parse(trips.get(pos).getAvatar()));
-                vh.tvName.setText(trips.get(pos).getUsername());
-            }
-        } else if (holder instanceof BottomViewHolder) {
-
+            ArrayList<Trip> trips = mCityDetail.getNew_trip();
+            int pos = position - mHeaderCount;
+            ContentViewHolder vh = ((ContentViewHolder) holder);
+            vh.sdvPhoto.setImageURI(Uri.parse(trips.get(pos).getPhoto()));
+            vh.tvTitle.setText(trips.get(pos).getTitle());
+            vh.sdvAvatar.setImageURI(Uri.parse(trips.get(pos).getAvatar()));
+            vh.tvName.setText(trips.get(pos).getUsername());
         }
     }
 
@@ -170,7 +170,7 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
         return new BottomViewHolder(view);
     }
 
-    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
+    public class HeaderViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.sdvPhoto)
         SimpleDraweeView sdvPhoto;
@@ -199,7 +199,7 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
         }
     }
 
-    public static class ContentViewHolder extends RecyclerView.ViewHolder {
+    public class ContentViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.sdvPhoto)
         SimpleDraweeView sdvPhoto;
@@ -224,7 +224,7 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
         }
     }
 
-    public static class BottomViewHolder extends RecyclerView.ViewHolder {
+    private class BottomViewHolder extends RecyclerView.ViewHolder {
 
         BottomViewHolder(View view) {
 

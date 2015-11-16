@@ -10,8 +10,7 @@
         android:id="@+id/sdvPhoto"
         android:layout_width="120dp"
         android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        fresco:placeholderImage="@mipmap/ic_launcher" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tvName"

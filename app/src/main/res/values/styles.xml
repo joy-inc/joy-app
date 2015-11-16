@@ -1,33 +1,21 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="ex_theme">
-        <item name="android:windowNoTitle">true</item>
+    <style name="theme_app" parent="lib_theme_base">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">?colorPrimary</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:windowBackground">?colorPrimary</item>
+        <item name="android:navigationBarColor" tools:targetApi="21">?colorPrimary</item>
+        <item name="android:textColorPrimary">@color/color_primary_text</item>
+        <item name="android:textColorSecondary">@color/color_secondary_text</item>
     </style>
 
-    <style name="ex_theme_dialog" parent="@style/ex_theme">
-        <item name="android:windowFrame">@null</item><!-- 边框 -->
-        <item name="android:windowIsFloating">true</item><!-- 是否浮现在activity之上 -->
-        <item name="android:windowIsTranslucent">false</item><!-- 半透明 -->
-        <item name="android:windowBackground">@android:color/transparent</item><!-- 背景透明 -->
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    <style name="theme_translucent" parent="theme_app">
+        <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="19">true</item>
     </style>
 
-    <!-- 对话框样式，带白色圆角背景 -->
-    <style name="qa_ex_theme_dialog" parent="@style/ex_theme_dialog">
-        <item name="android:windowBackground">@drawable/bg_card_item_round</item>
-    </style>
-
-    <style name="Card">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">180dp</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginRight">8dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-
-        <item name="cardBackgroundColor">@color/black_trans26</item>
-        <item name="cardCornerRadius">4dp</item>
-        <!--
-        <item name="cardElevation">@dimen/card_elevation</item>
-        -->
+    <style name="theme_translucent.toolbar" parent="theme_translucent">
+        <item name="colorPrimary">@color/transparent</item>
     </style>
 </resources>

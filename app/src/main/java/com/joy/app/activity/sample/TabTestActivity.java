@@ -25,6 +25,20 @@ public class TabTestActivity extends BaseTabActivity {
     }
 
     @Override
+    protected void initTitleView() {
+
+        super.initTitleView();
+        setTitleTextColor(getResources().getColor(R.color.color_accent));
+    }
+
+    @Override
+    protected void initContentView() {
+
+        super.initContentView();
+        setTabIndicatorHeight(DP_1_PX * 3);
+    }
+
+    @Override
     protected List<? extends BaseUiFragment> getFragments() {
 
         List<BaseUiFragment> fragments = new ArrayList<>();

@@ -33,11 +33,10 @@ public class ShareDialog extends AlertDialog implements View.OnClickListener {
 
     public ShareDialog(Activity activity, IShareInfo ishareInfo) {
 
-        super(activity, R.style.qa_ex_theme_dialog);
+        super(activity);
         mIShareInfo = ishareInfo;
         mShareHandle = new ShareHandler(activity, mSnsPostListener);
         initDialog();
-
     }
 
     /**

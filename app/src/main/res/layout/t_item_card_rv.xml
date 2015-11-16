@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Card">
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:transitionName="xxx"
+    cardview:cardBackgroundColor="@color/black_trans26"
+    cardview:cardCornerRadius="4dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvPhoto"
@@ -16,7 +24,6 @@
         android:background="?selectableItemBackground"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="19dp"
-        android:textStyle="bold" />
+        android:textSize="18dp" />
 
 </android.support.v7.widget.CardView>
