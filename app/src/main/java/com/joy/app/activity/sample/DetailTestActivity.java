@@ -1,6 +1,5 @@
 package com.joy.app.activity.sample;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -38,7 +37,6 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
      * @param act
      * @param view The view which starts the transition
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void startActivity(Activity act, View view, String... params) {
 
         if (act == null || view == null || params == null || params.length < 4)
@@ -50,7 +48,7 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
         intent.putExtra("cnname", params[2]);
         intent.putExtra("enname", params[3]);
 
-        if (isLollipopOrUpper()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
             act.startActivity(intent, options.toBundle());
