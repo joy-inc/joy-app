@@ -10,6 +10,7 @@ import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.adapter.sample.CityRvAdapter;
 import com.joy.app.bean.MainRoute;
 import com.joy.app.bean.sample.HotCityItem;
+import com.joy.app.httptask.MainHtpUtil;
 import com.joy.app.httptask.sample.TestHtpUtil;
 import com.joy.library.activity.frame.BaseHttpRvFragment;
 import com.joy.library.activity.frame.BaseUiFragment;
@@ -47,7 +48,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             @Override
             public void onItemViewClick(int position, View clickView, MainRoute hotCityItem) {
 
-                ToastUtil.showToast("open deatil"+hotCityItem.getName());
+                ToastUtil.showToast("open deatil"+hotCityItem.getCn_name());
             }
         });
         setAdapter(adapter);
@@ -56,7 +57,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     @Override
     protected ObjectRequest<List<MainRoute>> getObjectRequest() {
 
-        return new ObjectRequest(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
+        return new ObjectRequest(MainHtpUtil.getMainRouteList(1,10), HotCityItem.class);
     }
 
     @Override

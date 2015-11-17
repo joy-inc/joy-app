@@ -3,9 +3,13 @@ package com.joy.app.activity.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
+import com.joy.app.activity.sample.RvTestFragment;
+import com.joy.app.activity.setting.SettingActivity;
 import com.joy.library.activity.frame.BaseTabActivity;
 import com.joy.library.activity.frame.BaseUiActivity;
 import com.joy.library.activity.frame.BaseUiFragment;
@@ -31,9 +35,10 @@ public class MainActivity extends BaseTabActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
         mMainActivityBC = new MainActivityBC(this);
         mMainActivityHelper = new MainActivityHelperBC(this);
+        super.onCreate(savedInstanceState);
+
         mMainActivityHelper.onCreate(savedInstanceState);
         mMainActivityBC.onCreate(savedInstanceState);
 
@@ -65,15 +70,16 @@ public class MainActivity extends BaseTabActivity {
     }
 
     @Override
-
     protected void initData() {
 
+        super.initData();
         mMainActivityBC.initData();
     }
 
     @Override
     protected void initTitleView() {
 
+        super.initTitleView();
         setTitleTextColor(getResources().getColor(R.color.color_accent));
         mMainActivityBC.initTitleView();
     }
@@ -81,6 +87,7 @@ public class MainActivity extends BaseTabActivity {
     @Override
     protected void initContentView() {
 
+        super.initContentView();
         setTabIndicatorHeight(DP_1_PX * 3);
         mMainActivityBC.initContentView();
     }
@@ -89,9 +96,10 @@ public class MainActivity extends BaseTabActivity {
     protected List<? extends BaseUiFragment> getFragments() {
 
         List<BaseUiFragment> fragments = new ArrayList<>(3);
-        fragments.add(MainFragment.instantiate(this).setLableText(R.string.route));
-        fragments.add(TravelPlanFragment.instantiate(this).setLableText(R.string.travel_plan));
-        fragments.add(OrderFragment.instantiate(this).setLableText(R.string.order));
+        //        fragments.add(MainFragment.instantiate(this).setLableText(getString(R.string.route)));
+        fragments.add(RvTestFragment.instantiate(this).setLableText(getString(R.string.route)));
+        fragments.add(TravelPlanFragment.instantiate(this).setLableText(getString(R.string.travel_plan)));
+        fragments.add(OrderFragment.instantiate(this).setLableText(getString(R.string.order)));
         return fragments;
     }
 
@@ -110,6 +118,24 @@ public class MainActivity extends BaseTabActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            SettingActivity.startActivity(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public static void startActivity(Context context) {
 

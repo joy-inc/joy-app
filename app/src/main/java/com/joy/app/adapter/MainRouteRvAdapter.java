@@ -33,8 +33,8 @@ public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolde
 
         MainRoute route = getItem(position);
         if (route != null) {
-            holder.sdvPhoto.setImageURI(Uri.parse(route.getImageUrl()));
-            holder.tvName.setText(route.getTitle() + "\n" + route.getName());
+            holder.sdvPhoto.setImageURI(Uri.parse(route.getPic_url()));
+            holder.tvName.setText(route.getCn_name() + "\n" + route.getEn_name());
         }
     }
 

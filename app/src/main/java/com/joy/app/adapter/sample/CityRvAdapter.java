@@ -30,7 +30,7 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(inflate(parent, R.layout.item_main_route_adapter));
+        return new ViewHolder(inflate(parent, R.layout.t_item_card_rv));
     }
 
     public class ViewHolder extends ExRvViewHolder {
