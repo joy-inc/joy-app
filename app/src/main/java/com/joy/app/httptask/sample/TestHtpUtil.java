@@ -14,7 +14,7 @@ public class TestHtpUtil extends BaseHtpUtil {
      */
     public static String getHotCityListUrl() {
 
-        Map<String, String> params = getBaseParams();
+        Map<String, Object> params = getBaseParams();
         params.put("count", "200");// 默认200个
         return createGetUrl(URL_GET_SEARCH_HOT_CITY, params);
     }
@@ -26,7 +26,7 @@ public class TestHtpUtil extends BaseHtpUtil {
      */
     public static String getCityInfoUrl(String cityId) {
 
-        Map<String, String> params = getBaseParams();
+        Map<String, Object> params = getBaseParams();
         params.put("city_id", cityId);
         return createGetUrl(URL_GET_CITY_INFO, params);
     }

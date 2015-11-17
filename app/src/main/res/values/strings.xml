@@ -3,6 +3,9 @@
 
     <string name="app_name">JOY</string>
 
+    <string name="route">线路</string>
+    <string name="travel_plan">旅行计划</string>
+    <string name="order">订单</string>
     <!--<string name="list_2_detail">list_2_detail</string>-->
     <!--<string name="detail_2_fullscreen">detail_2_fullscreen</string>-->
 
