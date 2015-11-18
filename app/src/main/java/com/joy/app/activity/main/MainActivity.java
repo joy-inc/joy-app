@@ -95,12 +95,7 @@ public class MainActivity extends BaseTabActivity {
     @Override
     protected List<? extends BaseUiFragment> getFragments() {
 
-        List<BaseUiFragment> fragments = new ArrayList<>(3);
-        //        fragments.add(MainFragment.instantiate(this).setLableText(getString(R.string.route)));
-        fragments.add(RvTestFragment.instantiate(this).setLableText(getString(R.string.route)));
-        fragments.add(TravelPlanFragment.instantiate(this).setLableText(getString(R.string.travel_plan)));
-        fragments.add(OrderFragment.instantiate(this).setLableText(getString(R.string.order)));
-        return fragments;
+        return mMainActivityBC.getFragments();
     }
 
     @Override
