@@ -10,46 +10,17 @@
         <item name="android:textColorSecondary">@color/color_secondary_text</item>
     </style>
 
-    <style name="theme_translucent" parent="theme_app">
+    <style name="theme_app.translucent">
         <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
         <item name="android:windowTranslucentNavigation" tools:targetApi="19">true</item>
     </style>
 
-    <style name="theme_translucent.toolbar" parent="theme_translucent">
+    <style name="theme_app.translucent.toolbar">
         <item name="colorPrimary">@color/transparent</item>
     </style>
 
-    <!--设置界面的线性布局-->
-    <style name="setting_div">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:background">@color/ripple_material_dark</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
-
+    <style name="theme_app.translucent.toolbar.overlay">
+        <item name="overlay">true</item>
+        <!--<item name="android:minHeight">100dp</item>-->
     </style>
-    <!--设置界面的icon-->
-    <style name="setting_icon">
-        <item name="android:layout_width">30dp</item>
-        <item name="android:layout_height">30dp</item>
-        <item name="android:layout_marginLeft">30dp</item>
-    </style>
-
-    <!--设置界面的文本内容-->
-    <style name="setting_text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">12dp</item>
-    </style>
-    <!--设置界面的右剪头-->
-    <style name="setting_noun">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:src">@mipmap/ic_setting_noun</item>
-    </style>
-
 </resources>

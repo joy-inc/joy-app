@@ -31,6 +31,7 @@ public class MainActivityBC {
 
     //---activty的生命周期
     public void onCreate(Bundle savedInstanceState) {
+
         EventBus.getDefault().register(this);
     }
 
@@ -41,7 +42,9 @@ public class MainActivityBC {
     }
 
     public void onDestroy() {
+
         EventBus.getDefault().unregister(this);
+        mMainActivity = null;
     }
     //---activty的生命周期
     //--activity的页面处理
@@ -70,15 +73,13 @@ public class MainActivityBC {
      * 获取当前界面对应的fragment,如果没登录,就返回空白的列表
      * @return
      */
-    public List<? extends BaseUiFragment> getFragments(){
+    public List<? extends BaseUiFragment> getFragments() {
 
         List<BaseUiFragment> fragments = new ArrayList<>();
         //        fragments.add(MainFragment.instantiate(this).setLableText(getString(R.string.route)));
-        fragments.add(RvTestFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.route)));
-        fragments.add(TravelPlanFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.travel_plan)));
-        fragments.add(OrderFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.order)));
+        fragments.add(RvTestFragment.instantiate(mMainActivity).setLableText(R.string.route));
+        fragments.add(TravelPlanFragment.instantiate(mMainActivity).setLableText(R.string.travel_plan));
+        fragments.add(OrderFragment.instantiate(mMainActivity).setLableText(R.string.order));
         return fragments;
     }
-
-
 }
