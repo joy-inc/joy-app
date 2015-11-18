@@ -141,6 +141,9 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
         } else if (holder instanceof ContentViewHolder) {
 
             ArrayList<Trip> trips = mCityDetail.getNew_trip();
+            if (CollectionUtil.isEmpty(trips))
+                return;
+
             int pos = position - mHeaderCount;
             ContentViewHolder vh = ((ContentViewHolder) holder);
             vh.sdvPhoto.setImageURI(Uri.parse(trips.get(pos).getPhoto()));

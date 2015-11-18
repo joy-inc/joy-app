@@ -5,27 +5,37 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.joy.app.R;
 import com.joy.app.adapter.sample.CityDetailRvAdapter;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.httptask.sample.TestHtpUtil;
 import com.joy.library.activity.frame.BaseHttpRvActivity;
 import com.joy.library.httptask.frame.ObjectRequest;
+import com.joy.library.view.observablescrollview.ObservableRecyclerView;
+import com.joy.library.view.observablescrollview.ObservableScrollViewCallbacks;
+import com.joy.library.view.observablescrollview.ScrollState;
+import com.joy.library.view.observablescrollview.ScrollUtils;
+import com.joy.library.view.systembar.SystemBarTintManager;
 
 import java.util.ArrayList;
 
 /**
  * Created by KEVIN.DAI on 15/7/11.
  */
-public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
+public class DetailTestActivity2 extends BaseHttpRvActivity<CityDetail> implements ObservableScrollViewCallbacks {
+
+    private int mFlexibleHeight;
+    private SystemBarTintManager mTintManager;
 
     public static void startActivity(Activity act, String... params) {
 
         if (act == null || params == null || params.length < 4)
             return;
 
-        Intent intent = new Intent(act, DetailTestActivity.class);
+        Intent intent = new Intent(act, DetailTestActivity2.class);
         intent.putExtra("cityId", params[0]);
         intent.putExtra("photoUrl", params[1]);
         intent.putExtra("cnname", params[2]);
@@ -42,7 +52,7 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
         if (act == null || view == null || params == null || params.length < 4)
             return;
 
-        Intent intent = new Intent(act, DetailTestActivity.class);
+        Intent intent = new Intent(act, DetailTestActivity2.class);
         intent.putExtra("cityId", params[0]);
         intent.putExtra("photoUrl", params[1]);
         intent.putExtra("cnname", params[2]);
@@ -68,6 +78,8 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
     @Override
     protected void initData() {
 
+        mFlexibleHeight = 260 * DP_1_PX;
+
         Intent it = getIntent();
         CityDetail cityDetail = new CityDetail();
         cityDetail.setChinesename(it.getStringExtra("cnname"));
@@ -85,15 +97,28 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
     @Override
     protected void initTitleView() {
 
+        mTintManager = new SystemBarTintManager(this);
+        mTintManager.setStatusBarTintEnabled(true);
+        mTintManager.setStatusBarTintColor(R.color.black_trans54);
+
         setTitle(null);
         addTitleLeftBackView();
         getToolbarLp().topMargin = STATUS_BAR_HEIGHT;
+        setTitleBgColorResId(R.color.black_trans54);
     }
 
     @Override
     protected void initContentView() {
 
         setSwipeRefreshEnable(false);// 设置下拉刷新不可用
+    }
+
+    @Override
+    protected RecyclerView getDefaultRecyclerView() {
+
+        ObservableRecyclerView orv = (ObservableRecyclerView) inflateLayout(R.layout.lib_view_recycler_observable);
+        orv.setScrollViewCallbacks(this);
+        return orv;
     }
 
     @Override
@@ -114,5 +139,24 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
     protected void onHttpFailed(Object tag, String msg) {
 
         showToast(msg);
+    }
+
+    @Override
+    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+
+        float flexibleRange = mFlexibleHeight - STATUS_BAR_HEIGHT;
+        float fraction = ScrollUtils.getFloat(scrollY / flexibleRange, 0f, 1f);
+        mTintManager.setStatusBarAlpha(fraction);
+        getToolbar().getBackground().setAlpha((int) (fraction * 255));
+    }
+
+    @Override
+    public void onDownMotionEvent() {
+
+    }
+
+    @Override
+    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+
     }
 }

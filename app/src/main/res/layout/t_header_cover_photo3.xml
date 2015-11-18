@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.drawee.view.SimpleDraweeView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sdvPhoto"
+    android:layout_width="match_parent"
+    android:layout_height="260dp"
+    android:scaleType="centerCrop"
+    android:tint="@color/black_trans26"
+    android:transitionName="xxx" />

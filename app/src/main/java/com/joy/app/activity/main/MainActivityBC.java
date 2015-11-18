@@ -31,6 +31,7 @@ public class MainActivityBC {
 
     //---activty的生命周期
     public void onCreate(Bundle savedInstanceState) {
+
         EventBus.getDefault().register(this);
     }
 
@@ -41,7 +42,9 @@ public class MainActivityBC {
     }
 
     public void onDestroy() {
+
         EventBus.getDefault().unregister(this);
+        mMainActivity = null;
     }
 
     //---activty的生命周期
@@ -76,11 +79,16 @@ public class MainActivityBC {
     public List<? extends BaseUiFragment> getFragments() {
 
         List<BaseUiFragment> fragments = new ArrayList<>();
+<<<<<<< HEAD
         fragments.add(MainFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.route)));
         fragments.add(TravelPlanFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.travel_plan)));
         fragments.add(OrderFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.order)));
+=======
+        //        fragments.add(MainFragment.instantiate(this).setLableText(getString(R.string.route)));
+        fragments.add(RvTestFragment.instantiate(mMainActivity).setLableText(R.string.route));
+        fragments.add(TravelPlanFragment.instantiate(mMainActivity).setLableText(R.string.travel_plan));
+        fragments.add(OrderFragment.instantiate(mMainActivity).setLableText(R.string.order));
+>>>>>>> 7d1ac73737e4939254c95d4957d200f73239e35e
         return fragments;
     }
-
-
 }

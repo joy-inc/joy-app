@@ -14,7 +14,7 @@
         <activity
             android:name=".activity.main.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_translucent">
+            android:theme="@style/theme_app.translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +33,15 @@
         <activity
             android:name=".activity.sample.DetailTestActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_translucent.toolbar" />
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+        <activity
+            android:name=".activity.sample.DetailTestActivity2"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+        <activity
+            android:name=".activity.sample.DetailTestActivity3"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
         <activity
             android:name=".activity.sample.TabTestActivity"
             android:screenOrientation="portrait" />

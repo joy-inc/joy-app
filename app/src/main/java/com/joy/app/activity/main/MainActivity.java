@@ -8,13 +8,10 @@ import android.view.MenuItem;
 
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.activity.sample.RvTestFragment;
 import com.joy.app.activity.setting.SettingActivity;
 import com.joy.library.activity.frame.BaseTabActivity;
-import com.joy.library.activity.frame.BaseUiActivity;
 import com.joy.library.activity.frame.BaseUiFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +29,13 @@ public class MainActivity extends BaseTabActivity {
     private MainActivityHelperBC mMainActivityHelper;
     private long mLastPressedTime; //最后一次按返回的按钮
 
+    public static void startActivity(Context context) {
+
+        Intent intent = new Intent();
+        intent.setClass(context, MainActivity.class);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,7 +45,6 @@ public class MainActivity extends BaseTabActivity {
 
         mMainActivityHelper.onCreate(savedInstanceState);
         mMainActivityBC.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -66,7 +69,6 @@ public class MainActivity extends BaseTabActivity {
         super.onDestroy();
         mMainActivityHelper.onDestroy();
         mMainActivityBC.onDestroy();
-
     }
 
     @Override
@@ -130,12 +132,5 @@ public class MainActivity extends BaseTabActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public static void startActivity(Context context) {
-
-        Intent intent = new Intent();
-        intent.setClass(context, MainActivity.class);
-        context.startActivity(intent);
     }
 }
