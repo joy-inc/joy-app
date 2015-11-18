@@ -15,14 +15,14 @@ import java.util.Map;
  */
 public class BaseHtpUtil implements HtpApi {
 
-    protected static Map<String, String> getBaseParams() {
+    protected static Map<String, Object> getBaseParams() {
 
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         addDefaultParams(params);
         return params;
     }
 
-    protected static void addDefaultParams(Map<String, String> params) {
+    protected static void addDefaultParams(Map<String, Object> params) {
 
         params.put("client_id", "qyer_android");
         params.put("client_secret", "9fcaae8aefc4f9ac4915");
@@ -36,18 +36,18 @@ public class BaseHtpUtil implements HtpApi {
         params.put("app_installtime", AppUtil.getInstallAppTime() + "");
     }
 
-    protected static String createGetUrl(String url, Map<String, String> params) {
+    protected static String createGetUrl(String url, Map<String, Object> params) {
 
         if (params == null || params.size() == 0)
             return url;
 
         StringBuilder sb = new StringBuilder(url).append('?');
 
-        for (Map.Entry<String, String> entry : params.entrySet()) {
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
 
             sb.append(entry.getKey());
             sb.append('=');
-            sb.append(entry.getValue());
+            sb.append(String.valueOf(entry.getValue()));
             sb.append('&');
         }
         sb.deleteCharAt(sb.length() - 1);

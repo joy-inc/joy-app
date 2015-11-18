@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color_primary"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llUserInfoDiv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvUserHead"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:tint="@color/black_trans26"
+            fresco:placeholderImage="@mipmap/ic_user_def_head"
+            fresco:placeholderImageScaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/setting_no_login"
+            android:textColor="@android:color/white"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/tvLoginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="@string/setting_login_now"
+            android:textColor="@android:color/white"
+            android:textSize="12dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llApp"
+        style="@style/setting_div">
+
+        <ImageView
+            android:id="@+id/iconSetting1"
+            style="@style/setting_icon"
+            android:src="@mipmap/ic_setting_star"/>
+
+        <TextView
+            android:id="@+id/tvSetting1"
+            style="@style/setting_text"
+            android:text="@string/setting_no_login"
+            />
+
+        <ImageView
+            android:id="@+id/ivSetting1"
+            style="@style/setting_noun"/>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/line1"
+        layout="@layout/view_setting_line"/>
+
+    <LinearLayout
+        android:id="@+id/llRectangle"
+        style="@style/setting_div">
+
+        <ImageView
+            android:id="@+id/iconSetting2"
+            style="@style/setting_icon"
+            android:src="@mipmap/ic_setting_rectangle"/>
+
+        <TextView
+            android:id="@+id/tvSetting2"
+            style="@style/setting_text"
+            android:text="@string/setting_no_login"
+            />
+
+        <ImageView
+            android:id="@+id/ivSetting2"
+            style="@style/setting_noun"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llClean"
+        style="@style/setting_div"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:id="@+id/iconSetting3"
+            style="@style/setting_icon"
+            android:src="@mipmap/ic_setting_clean"/>
+
+        <TextView
+            android:id="@+id/tvSetting3"
+            style="@style/setting_text"
+            android:text="@string/setting_no_login"
+            />
+
+        <ImageView
+            android:id="@+id/ivSetting3"
+            style="@style/setting_noun"/>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/line1"
+        layout="@layout/view_setting_line"/>
+
+    <LinearLayout
+        android:id="@+id/llAbout"
+        style="@style/setting_div">
+
+        <ImageView
+            android:id="@+id/iconSetting4"
+            style="@style/setting_icon"
+            android:src="@mipmap/ic_setting_about"/>
+
+        <TextView
+            android:id="@+id/tvSetting4"
+            style="@style/setting_text"
+            android:text="@string/setting_no_login"
+            />
+
+        <ImageView
+            android:id="@+id/ivSetting4"
+            style="@style/setting_noun"/>
+    </LinearLayout>
+
+</LinearLayout>

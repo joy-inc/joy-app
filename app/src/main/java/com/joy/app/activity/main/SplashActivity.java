@@ -44,8 +44,8 @@ public class SplashActivity extends Activity {
             GuideSplashActivity.startActivity(this);
         } else {
 
-//            MainActivity.startActivity(this);
-            TabTestActivity.startActivity(this);
+            MainActivity.startActivity(this);
+//            TabTestActivity.startActivity(this);
         }
         finish();
     }

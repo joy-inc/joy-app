@@ -20,6 +20,7 @@ public class MainActivityHelperBC {
         mMainActivity = mainActivity;
     }
 
+    //--生命周期
     public void onCreate(Bundle savedInstanceState) {
 
     }
@@ -32,4 +33,6 @@ public class MainActivityHelperBC {
 
     public void onDestroy() {
     }
+
+    //--生命周期
 }

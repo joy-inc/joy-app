@@ -3,7 +3,14 @@
 
     <string name="app_name">JOY</string>
 
-    <!--<string name="list_2_detail">list_2_detail</string>-->
-    <!--<string name="detail_2_fullscreen">detail_2_fullscreen</string>-->
+    <string name="route">线路</string>
+    <string name="travel_plan">旅行计划</string>
+    <string name="order">订单</string>
+    <!--设置界面-->
+    <string name="setting_no_login">您还没有登录</string>
+    <string name="setting_title">个人</string>
+    <string name="setting_login_now">马上登录</string>
+    <!--设置界面-->
+
 
 </resources>
