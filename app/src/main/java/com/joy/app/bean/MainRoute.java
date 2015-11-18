@@ -9,20 +9,20 @@ import com.joy.library.utils.TextUtil;
  */
 public class MainRoute {
 
-    private int id = 0;
-    private String cn_name;//中文名称
-    private String en_name;//第二名称
-    private String tags;//标签
+    private String id = TextUtil.TEXT_EMPTY;
+    private String cn_name = TextUtil.TEXT_EMPTY;//中文名称
+    private String en_name = TextUtil.TEXT_EMPTY;//第二名称
+    private String tags = TextUtil.TEXT_EMPTY;//标签
     private int type = 1;//1城市 2专题
     private String place_url = TextUtil.TEXT_EMPTY;//旅游地的详情url
     private String pic_url = TextUtil.TEXT_EMPTY;//图片地址
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = TextUtil.filterNull(id);
     }
 
     public String getCn_name() {
@@ -71,5 +71,13 @@ public class MainRoute {
 
     public void setPic_url(String pic_url) {
         this.pic_url = TextUtil.filterNull(pic_url);
+    }
+
+    /**
+     * 判断是否是城市
+     * @return
+     */
+    public boolean isCity() {
+        return type == 1;
     }
 }

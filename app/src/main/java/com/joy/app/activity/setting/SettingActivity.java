@@ -15,6 +15,7 @@ import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.library.activity.frame.BaseUiActivity;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -37,6 +38,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.act_setting);
     }
 
@@ -51,13 +53,11 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     protected void initData() {
 
         EventBus.getDefault().register(this);
-        super.initData();
     }
 
     @Override
     protected void initTitleView() {
 
-        super.initTitleView();
         addTitleLeftBackView();
         setTitle(R.string.setting_title);
 
@@ -66,7 +66,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     @Override
     protected void initContentView() {
 
-        super.initContentView();
+        ButterKnife.bind(this);
         findViewById(R.id.llApp).setOnClickListener(this);
         findViewById(R.id.llRectangle).setOnClickListener(this);
         findViewById(R.id.llClean).setOnClickListener(this);

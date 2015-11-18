@@ -10,6 +10,10 @@
     <string name="setting_no_login">您还没有登录</string>
     <string name="setting_title">个人</string>
     <string name="setting_login_now">马上登录</string>
+    <string name="setting_app">评价Joy</string>
+    <string name="setting_rectangle">推荐给好友</string>
+    <string name="setting_clean">清楚所有缓存</string>
+    <string name="setting_about">关于</string>
     <!--设置界面-->
 
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.joy.app.BuildConfig;
 import com.joy.app.activity.sample.DetailTestActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.adapter.sample.CityRvAdapter;
@@ -18,6 +19,7 @@ import com.joy.library.adapter.frame.OnItemViewClickListener;
 import com.joy.library.httptask.frame.ObjectRequest;
 import com.joy.library.utils.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,7 +50,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             @Override
             public void onItemViewClick(int position, View clickView, MainRoute hotCityItem) {
 
-                ToastUtil.showToast("open deatil"+hotCityItem.getCn_name());
+                ToastUtil.showToast("open deatil" + hotCityItem.getCn_name());
             }
         });
         setAdapter(adapter);
@@ -57,7 +59,20 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     @Override
     protected ObjectRequest<List<MainRoute>> getObjectRequest() {
 
-        return new ObjectRequest(MainHtpUtil.getMainRouteList(1,10), HotCityItem.class);
+        ObjectRequest obj = new ObjectRequest(MainHtpUtil.getMainRouteList(1, 10), HotCityItem.class);
+        if (BuildConfig.DEBUG) {
+            List<MainRoute> list = new ArrayList<MainRoute>();
+            for(int i=0;i<20;i++){
+                MainRoute route=new MainRoute();
+                route.setPic_url("http://pic.qyer.com/album/user/495/23/RUBQQBkGYw/index/300x200");
+                route.setCn_name("第一名称" + i);
+                route.setEn_name("name" + i);
+                route.setPlace_url("http://www.qyer.com");
+                list.add(route);
+            }
+            obj.setData(list);
+        }
+        return obj;
     }
 
     @Override
