@@ -4,7 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.joy.app.bean.MainOrder;
 import com.joy.app.bean.MainRoute;
+import com.joy.app.bean.plan.PlanFolder;
+import com.joy.app.httptask.OrderHtpUtil;
+import com.joy.app.httptask.PlanHttpUtil;
 import com.joy.library.activity.frame.BaseHttpRvFragment;
 import com.joy.library.activity.frame.BaseUiFragment;
 import com.joy.library.httptask.frame.ObjectRequest;
@@ -18,7 +22,7 @@ import java.util.List;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-16
  */
-public class TravelPlanFragment extends BaseHttpRvFragment<List<MainRoute>> {
+public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
     public static TravelPlanFragment instantiate(Context context) {
 
@@ -26,7 +30,8 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<MainRoute>> {
     }
 
     @Override
-    protected ObjectRequest<List<MainRoute>> getObjectRequest() {
-        return null;
+    protected ObjectRequest<List<PlanFolder>> getObjectRequest() {
+
+        return new ObjectRequest(PlanHttpUtil.getUserPlanFolderUrl(getCurrentPageIndex(), 5), PlanFolder.class);
     }
 }
