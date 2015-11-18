@@ -1,14 +1,10 @@
 package com.joy.app.activity.main;
 
 import android.os.Bundle;
-import android.support.annotation.StringRes;
 
 import com.joy.app.R;
-import com.joy.app.activity.main.MainActivity;
-import com.joy.app.activity.sample.RvTestFragment;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.library.activity.frame.BaseUiFragment;
-import com.joy.library.httptask.frame.ObjectRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,16 +75,9 @@ public class MainActivityBC {
     public List<? extends BaseUiFragment> getFragments() {
 
         List<BaseUiFragment> fragments = new ArrayList<>();
-<<<<<<< HEAD
-        fragments.add(MainFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.route)));
-        fragments.add(TravelPlanFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.travel_plan)));
-        fragments.add(OrderFragment.instantiate(mMainActivity).setLableText(mMainActivity.getString(R.string.order)));
-=======
-        //        fragments.add(MainFragment.instantiate(this).setLableText(getString(R.string.route)));
-        fragments.add(RvTestFragment.instantiate(mMainActivity).setLableText(R.string.route));
+        fragments.add(MainFragment.instantiate(mMainActivity).setLableText(R.string.route));
         fragments.add(TravelPlanFragment.instantiate(mMainActivity).setLableText(R.string.travel_plan));
         fragments.add(OrderFragment.instantiate(mMainActivity).setLableText(R.string.order));
->>>>>>> 7d1ac73737e4939254c95d4957d200f73239e35e
         return fragments;
     }
 }
