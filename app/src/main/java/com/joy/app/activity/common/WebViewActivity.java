@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.ActivityUrlUtil;
 import com.joy.app.view.webview.BaseWebView;
 import com.joy.app.view.webview.WebViewBaseWidget;
@@ -15,19 +16,22 @@ import com.joy.app.view.webview.WebViewNativeWidget;
 import com.joy.library.activity.frame.BaseUiActivity;
 import com.joy.library.utils.LogMgr;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * 统一处理webview的展现
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-10
  */
-public class WebViewActivity extends BaseUiActivity  implements WebViewBaseWidget.WebViewListener {
+public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget.WebViewListener {
 
     private WebViewBaseWidget mWebViewWidget;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        registerUserLoginReceiver();
+        setContentFullScreenWebView(true);
     }
 
     @Override
@@ -38,32 +42,53 @@ public class WebViewActivity extends BaseUiActivity  implements WebViewBaseWidge
     }
 
     @Override
+    protected void initData() {
+
+        EventBus.getDefault().register(this);
+        mWebViewWidget.loadUrl(getIntent().getStringExtra("url"));
+    }
+
+    @Override
+    protected void initTitleView() {
+
+        setTitle(getIntent().getStringExtra("title"));
+        addTitleLeftBackView();
+    }
+
+    @Override
     protected void onDestroy() {
 
         super.onDestroy();
-        unregisterReceiver(mUserLoginReceiver);
+        EventBus.getDefault().unregister(this);
     }
 
-    protected void setContentFullScreenWebView(boolean isNativeMode){
+    /**
+     * 登录的回掉
+     *
+     * @param event
+     */
+    public void onEventMainThread(LoginStatusEvent event) {
 
-//        if(isNativeMode){
+        onUserLoginStatusChanged(event.isLogin());
+    }
 
-            setWebWidget(new WebViewNativeWidget(this));
-//        }else{
-//
-//            setWebWidget(new WebViewBaseWidget(this));
-//        }
+    /**
+     * 设置webview的实体类
+     * @param isNativeMode
+     */
+    protected void setContentFullScreenWebView(boolean isNativeMode) {
 
+        setWebWidget(new WebViewNativeWidget(this));
         setContentView(getWebWidget().getContentView());
     }
 
-    protected void setWebWidget(WebViewBaseWidget widget){
+    protected void setWebWidget(WebViewBaseWidget widget) {
 
         mWebViewWidget = widget;
         mWebViewWidget.setWebViewListener(this);
     }
 
-    public WebViewBaseWidget getWebWidget(){
+    public WebViewBaseWidget getWebWidget() {
 
         return mWebViewWidget;
     }
@@ -105,10 +130,10 @@ public class WebViewActivity extends BaseUiActivity  implements WebViewBaseWidge
     @Override
     public boolean onWebViewShouldOverrideUrlLoading(String url) {
 
-        if(LogMgr.isDebug())
+        if (LogMgr.isDebug())
             LogMgr.d("webviewActivity", "onWebViewShouldOverrideUrlLoading url  = " + url);
-
-        ActivityUrlUtil.startActivityByHttpUrl(this, url);
+        loadUrl(url);
+//        ActivityUrlUtil.startActivityByHttpUrl(this, url);
         return true;
     }
 
@@ -116,72 +141,60 @@ public class WebViewActivity extends BaseUiActivity  implements WebViewBaseWidge
         子类调用方法区--------------------------------------------------------------------------------
      */
 
-    public FrameLayout getFrameView(){
+    public FrameLayout getFrameView() {
 
         return mWebViewWidget.getContentView();
     }
 
-    public void setWebViewHtmlSourceEnable(boolean enable){
+    public void setWebViewHtmlSourceEnable(boolean enable) {
 
         mWebViewWidget.setWebViewHtmlSourceEnable(enable);
     }
 
-    public void setWebViewCacheMode(int cacheMode){
+    public void setWebViewCacheMode(int cacheMode) {
 
         mWebViewWidget.setWebViewCacheMode(cacheMode);
     }
 
-    public void setWebViewBuiltInZoomControls(boolean enabled){
+    public void setWebViewBuiltInZoomControls(boolean enabled) {
 
         mWebViewWidget.setWebViewBuiltInZoomControls(enabled);
     }
 
-    public void setWebViewOnTouchListener(View.OnTouchListener lisn){
+    public void setWebViewOnTouchListener(View.OnTouchListener lisn) {
 
         mWebViewWidget.setWebViewOnTouchListener(lisn);
     }
 
-    public void setWebViewOnScrollListener(BaseWebView.OnScrollListener lisn){
+    public void setWebViewOnScrollListener(BaseWebView.OnScrollListener lisn) {
 
         mWebViewWidget.setWebViewOnScrollListener(lisn);
     }
 
-    public void reloadUrl(){
+    public void reloadUrl() {
 
         mWebViewWidget.reloadUrl();
     }
 
-    public void loadUrl(String url){
+    public void loadUrl(String url) {
 
         mWebViewWidget.loadUrl(url);
     }
 
     public void onUserLoginStatusChanged(boolean isLogin) {
 
-        if(!isFinishing())
+        if (!isFinishing())
             mWebViewWidget.reloadUrlByLoginStateChanged();
     }
 
-    protected void registerUserLoginReceiver(){
 
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction(UserManager.INTENT_ACTION_USER_LOGIN);
-//        filter.addAction(UserManager.INTENT_ACTION_USER_LOGIN_OUT);
-//        registerReceiver(mUserLoginReceiver, filter);
+    public static void startActivity(Context context, String url, String title) {
+
+        Intent intent = new Intent();
+        intent.putExtra("url", url);
+        intent.putExtra("title", title);
+        intent.setClass(context, WebViewActivity.class);
+        context.startActivity(intent);
+
     }
-    private BroadcastReceiver mUserLoginReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-//            if(UserManager.INTENT_ACTION_USER_LOGIN.equals(intent.getAction())){
-//
-//                onUserLoginStatusChanged(true);
-//
-//            }else if(UserManager.INTENT_ACTION_USER_LOGIN_OUT.equals(intent.getAction())){
-//
-//                onUserLoginStatusChanged(false);
-//            }
-        }
-    };
 }

@@ -15,8 +15,14 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> {
 
 
     @Override
-    protected void invalidateContent(String datas) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    protected boolean invalidateContent(String datas) {
+
+        return true;
     }
 
     @Override

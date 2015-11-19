@@ -24,6 +24,10 @@
         <activity
             android:name=".activity.main.MainActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.common.WebViewActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.setting.SettingActivity"
             android:screenOrientation="portrait" />
