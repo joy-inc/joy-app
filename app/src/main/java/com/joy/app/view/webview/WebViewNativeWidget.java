@@ -2,21 +2,20 @@ package com.joy.app.view.webview;
 
 import android.animation.LayoutTransition;
 import android.app.Activity;
-import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
 import com.joy.app.R;
-import com.joy.app.utils.LoadingViewUtil;
 import com.joy.app.utils.StorageUtil;
-import com.joy.app.view.loadview.LoadingView;
 import com.joy.library.utils.DeviceUtil;
 import com.joy.library.utils.DimenCons;
 import com.joy.library.utils.ToastUtil;
 import com.joy.library.utils.ViewUtil;
+import com.joy.library.widget.JLoadingView;
 
 /**
  * 该类实现了仿原生加载url的切换界面
@@ -27,7 +26,7 @@ public class WebViewNativeWidget extends WebViewBaseWidget implements DimenCons,
 
     private WebView mWebView;
     private ImageView mIvTip;
-    private LoadingView mLoadingView;
+    private JLoadingView mLoadingView;
     private int mFailedImageResId;
 
     public WebViewNativeWidget(Activity activity){
@@ -59,15 +58,15 @@ public class WebViewNativeWidget extends WebViewBaseWidget implements DimenCons,
         //设置网络错误提示图和为空图
         mFailedImageResId = R.mipmap.ic_net_error;
 
-        mLoadingView = LoadingViewUtil.getLoadingViewBig(getActivity());
+        mLoadingView = JLoadingView.get(getActivity());
         mLoadingView.hide();//默认隐藏
 
         //add web view
-        frameView.addView(webview, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        frameView.addView(webview, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         //add tip view
-        frameView.addView(mIvTip, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        frameView.addView(mIvTip, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         //add loading view
-        frameView.addView(mLoadingView, new FrameLayout.LayoutParams(DP_1_PX*80, DP_1_PX*80, Gravity.CENTER));
+        frameView.addView(mLoadingView, JLoadingView.getLp());
 
         return frameView;
     }
@@ -98,7 +97,7 @@ public class WebViewNativeWidget extends WebViewBaseWidget implements DimenCons,
 
         ViewUtil.hideView(mWebView);
         ViewUtil.hideImageView(mIvTip);
-        mLoadingView.show(200);
+        mLoadingView.show();
     }
 
     @Override
