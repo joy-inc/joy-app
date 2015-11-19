@@ -25,6 +25,37 @@
         <item name="android:layout_marginRight">16dp</item>
     </style>
 
+    <style name="Line">
+    </style>
+
+    <style name="Line.Light">
+        <item name="android:background">@color/white_trans12</item>
+    </style>
+
+    <style name="Line.Dark">
+        <item name="android:background">@color/black_trans12</item>
+    </style>
+
+    <style name="Line.Light.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="Line.Light.Vertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Line.Dark.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="Line.Dark.Vertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
     <!--设置界面的线性布局-->
     <style name="setting_div">
         <item name="android:layout_width">match_parent</item>
