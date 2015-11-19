@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
@@ -91,6 +92,14 @@ public class MainActivity extends BaseTabActivity {
 
         super.initContentView();
         setTabIndicatorHeight(DP_1_PX * 3);
+        setFloatActionBtnEnable(R.drawable.abc_ic_search_api_mtrl_alpha, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                showToast("FloatActionBtn click");
+            }
+        });
         mMainActivityBC.initContentView();
     }
 

@@ -12,6 +12,7 @@ import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.httptask.sample.TestHtpUtil;
 import com.joy.library.activity.frame.BaseHttpRvActivity;
 import com.joy.library.httptask.frame.ObjectRequest;
+import com.joy.library.utils.CollectionUtil;
 
 import java.util.ArrayList;
 
@@ -103,11 +104,15 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
     }
 
     @Override
-    protected void invalidateContent(CityDetail datas) {
+    protected boolean invalidateContent(CityDetail datas) {
 
-        CityDetailRvAdapter adapter = ((CityDetailRvAdapter) getAdapter());
+        if (datas == null || CollectionUtil.isEmpty(datas.getNew_trip()))
+            return false;
+
+        CityDetailRvAdapter adapter = (CityDetailRvAdapter) getAdapter();
         adapter.setData(datas);
         adapter.notifyDataSetChanged();
+        return true;
     }
 
     @Override

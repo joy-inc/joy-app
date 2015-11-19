@@ -3,6 +3,7 @@ package com.joy.app.activity.main;
 import android.os.Bundle;
 
 import com.joy.app.R;
+import com.joy.app.activity.sample.RvTestFragment;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.library.activity.frame.BaseUiFragment;
 
@@ -75,7 +76,7 @@ public class MainActivityBC {
     public List<? extends BaseUiFragment> getFragments() {
 
         List<BaseUiFragment> fragments = new ArrayList<>();
-        fragments.add(MainFragment.instantiate(mMainActivity).setLableText(R.string.route));
+        fragments.add(RvTestFragment.instantiate(mMainActivity).setLableText(R.string.route));
         fragments.add(TravelPlanFragment.instantiate(mMainActivity).setLableText(R.string.travel_plan));
         fragments.add(OrderFragment.instantiate(mMainActivity).setLableText(R.string.order));
         return fragments;

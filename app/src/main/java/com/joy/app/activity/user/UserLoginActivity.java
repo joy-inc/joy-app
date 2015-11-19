@@ -2,7 +2,6 @@ package com.joy.app.activity.user;
 
 import android.os.Bundle;
 
-import com.joy.library.activity.frame.BaseHttpLvActivity;
 import com.joy.library.activity.frame.BaseHttpUiActivity;
 import com.joy.library.httptask.frame.ObjectRequest;
 
@@ -13,8 +12,6 @@ import com.joy.library.httptask.frame.ObjectRequest;
  */
 public class UserLoginActivity extends BaseHttpUiActivity<String> {
 
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -22,7 +19,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> {
     @Override
     protected boolean invalidateContent(String datas) {
 
-        return true;
+        return false;
     }
 
     @Override
