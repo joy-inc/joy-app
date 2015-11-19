@@ -15,7 +15,7 @@
         android:paddingLeft="15dp"
         android:paddingTop="16dp">
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:textColor="@color/black"
             android:textSize="16dp" />
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,11 +35,11 @@
             android:textSize="13dp" />
 
         <View
-            style="@style/view_split_hori_gray"
+            style="@style/Line.Dark.Horizontal"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="14dp" />
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:textSize="14dp" />
 
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:textSize="14dp" />
 
         <View
-            style="@style/view_split_hori_gray"
+            style="@style/Line.Dark.Horizontal"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="14dp" />
 
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp">
 
-            <TextView
+            <com.joy.library.widget.JTextView
                 android:id="@+id/tvOrderPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:textColor="@color/black_trans54"
                 android:textSize="11dp" />
 
-            <TextView
+            <com.joy.library.widget.JTextView
                 android:id="@+id/tvTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,14 +87,12 @@
                 android:textColor="@color/color_accent"
                 android:textSize="18dp" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/tvStatus"
-                style="@style/Widget.AppCompat.ActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@color/color_accent"
                 android:text="@string/pay"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
