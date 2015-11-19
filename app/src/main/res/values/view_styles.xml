@@ -59,4 +59,15 @@
         <item name="android:src">@drawable/ic_setting_noun</item>
     </style>
 
+    <!-- 水平分割线 -->
+    <style name="view_split_hori">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <!-- 黑色水平分割线 -->
+    <style name="view_split_hori_gray" parent="@style/view_split_hori">
+        <item name="android:background">@color/black_trans54</item>
+    </style>
+
 </resources>

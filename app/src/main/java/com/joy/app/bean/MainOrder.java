@@ -40,7 +40,7 @@ public class MainOrder {
      * 2:支付成功 订单处理中
      * 3:订单已确认
      */
-    private int status;
+    private String status;
 
     public String getOrder_id() {
 
@@ -92,12 +92,12 @@ public class MainOrder {
         this.total_price = total_price;
     }
 
-    public int getStatus() {
+    public String getStatus() {
 
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
 
         this.status = status;
     }

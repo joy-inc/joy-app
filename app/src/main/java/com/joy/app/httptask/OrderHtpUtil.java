@@ -18,14 +18,14 @@ public class OrderHtpUtil extends BaseHtpUtil {
      *
      * @return
      */
-    public static String getPoiDiscountlUrl(String poiId) {
+    public static String getPoiDiscountUrl(String poiId) {
 
         Map<String, Object> params = getBaseParams();
         params.put("poi_id", poiId);
         params.put("oauth_token", JoyApplication.getUserToken());
         params.put("screensize", DeviceUtil.getScreenHeight() + "");
 
-        return createGetUrl(URL_GET_POI_INFO, params);
+        return createGetUrl(URL_GET_POI_DISCOUNT, params);
     }
 
     /**
