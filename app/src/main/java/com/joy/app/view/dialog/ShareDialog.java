@@ -1,14 +1,10 @@
-package com.joy.app.view;
+package com.joy.app.view.dialog;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.joy.app.R;
 import com.joy.library.share.IShareInfo;
@@ -16,6 +12,7 @@ import com.joy.library.share.ShareHandler;
 import com.joy.library.share.ShareInfo;
 import com.joy.library.utils.DeviceUtil;
 import com.joy.library.utils.ToastUtil;
+import com.joy.library.widget.JDialog;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.bean.StatusCode;
@@ -26,7 +23,7 @@ import com.umeng.socialize.controller.listener.SocializeListeners;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-12
  */
-public class ShareDialog extends AlertDialog implements View.OnClickListener {
+public class ShareDialog extends JDialog implements View.OnClickListener {
 
     private IShareInfo mIShareInfo;
     private ShareHandler mShareHandle;

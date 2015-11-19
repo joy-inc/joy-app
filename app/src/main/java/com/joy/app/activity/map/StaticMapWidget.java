@@ -17,6 +17,7 @@ import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
+import com.joy.app.R;
 import com.joy.library.utils.ViewUtil;
 import com.joy.library.view.ExLayoutWidget;
 
@@ -26,8 +27,9 @@ import com.joy.library.view.ExLayoutWidget;
  */
 public class StaticMapWidget extends ExLayoutWidget {
 
-    View location;
+    View locationView;
     LinearLayout TileLayout;
+    RelativeLayout contentView;
     SimpleDraweeView map,Lmap,Rmap;
     SimpleDraweeView LTmap,CTmap,RTmap;
     SimpleDraweeView LBmap,CBmap,RBmap;
@@ -41,39 +43,30 @@ public class StaticMapWidget extends ExLayoutWidget {
     @Override
     protected View onCreateView(Activity activity, Object... args) {
 
-        TileLayout = new LinearLayout(activity);
-        RelativeLayout contentView = new RelativeLayout(activity);
+        contentView = (RelativeLayout)activity.getLayoutInflater().inflate(R.layout.view_static_map, null);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        contentView.addView(TileLayout,params);
-//        View contentView = activity.getLayoutInflater().inflate(R.layout.view_static_map, null);
-//        map = (SimpleDraweeView)contentView.findViewById(R.id.aiv_map);
-//        Lmap = (SimpleDraweeView)contentView.findViewById(R.id.aiv_map_left);
-//        Rmap = (SimpleDraweeView)contentView.findViewById(R.id.aiv_map_right);
-//        location = contentView.findViewById(R.id.tv_location);
-//        ViewUtil.goneView(location);
+        contentView.addView(TileLayout, params);
+        map = (SimpleDraweeView)contentView.findViewById(R.id.map_center);
+        Lmap =(SimpleDraweeView)contentView.findViewById(R.id.map_left);;
+        Rmap = (SimpleDraweeView)contentView.findViewById(R.id.map_right);;
         return contentView;
     }
 
-    public void invalidate(Location location){
+    public void invalidate(View icon,RelativeLayout.LayoutParams params){
+        if (contentView!=null){
+            contentView.removeView(locationView);
+        }
+        locationView = icon;
+        contentView.addView(icon, params);
+        ViewUtil.goneView(locationView);
+    }
 
+    public void setLocation(Location location){
         double lng = location.getLongitude();
         double lat = location.getLatitude();
         invalidate(lng, lat, 18);
     }
-    private void initView(){
-        int width = TileLayout.getWidth();
-        int height = TileLayout.getHeight();
-        if (width>0 && height>0){
-            int div =  width/height;
-            if (height > 400){//9张图
 
-            }else{//3三张图
-
-            }
-
-        }
-    }
-    
 
     public void invalidate( double lng, double lat,int Zoom){
         zoom = Zoom;
@@ -116,7 +109,7 @@ public class StaticMapWidget extends ExLayoutWidget {
 
         @Override
         public void onFinalImageSet(String s, ImageInfo o, Animatable animatable) {
-            ViewUtil.showView(location);
+            ViewUtil.showView(locationView);
         }
 
         @Override
