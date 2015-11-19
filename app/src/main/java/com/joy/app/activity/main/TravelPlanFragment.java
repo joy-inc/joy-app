@@ -3,8 +3,11 @@ package com.joy.app.activity.main;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.joy.app.BuildConfig;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.MainOrder;
@@ -14,9 +17,11 @@ import com.joy.app.httptask.OrderHtpUtil;
 import com.joy.app.httptask.PlanHttpUtil;
 import com.joy.library.activity.frame.BaseHttpRvFragment;
 import com.joy.library.activity.frame.BaseUiFragment;
+import com.joy.library.adapter.frame.ExRvAdapter;
 import com.joy.library.adapter.frame.OnItemViewClickListener;
 import com.joy.library.httptask.frame.ObjectRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,9 +60,35 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         setAdapter(adapter);
     }
 
+
+    @Override
+    protected void setAdapter(ExRvAdapter adapter) {
+
+        getRecyclerView().setLayoutManager(new GridLayoutManager(getActivity(),2));
+        getRecyclerView().setAdapter(adapter);
+    }
+
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest() {
 
-        return new ObjectRequest(PlanHttpUtil.getUserPlanFolderUrl(getCurrentPageIndex(), 5), PlanFolder.class);
+        ObjectRequest obj = new ObjectRequest(PlanHttpUtil.getUserPlanFolderUrl(getCurrentPageIndex(), 5), PlanFolder.class);
+        if (BuildConfig.DEBUG){
+            List<PlanFolder> data = new ArrayList<>();
+            for (int i = 0 ; i < 3 ; i ++){
+                PlanFolder folder = new PlanFolder();
+                folder.setId("10" + i);
+                folder.setFolder_name("文件夹" + i);
+                folder.setChildren_num(10 + i);
+                data.add(folder);
+            }
+            obj.setData(data);
+        }
+        return obj;
+    }
+
+    @Override
+    protected void onHttpFailed(Object tag, String msg) {
+
+        showToast("plan error: " + msg);
     }
 }

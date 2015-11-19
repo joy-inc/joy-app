@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @Description 行程规划文件夹    <br>
  */
 public class PlanFolder implements Serializable{
-    String id,folde_rname;
+    String id,folder_name;
     int children_num;
 
     public String getId() {
@@ -18,12 +18,12 @@ public class PlanFolder implements Serializable{
         this.id = id;
     }
 
-    public String getFolde_rname() {
-        return folde_rname;
+    public String getFolder_name() {
+        return folder_name;
     }
 
-    public void setFolde_rname(String folde_rname) {
-        this.folde_rname = folde_rname;
+    public void setFolder_name(String folder_name) {
+        this.folder_name = folder_name;
     }
 
     public int getChildren_num() {
