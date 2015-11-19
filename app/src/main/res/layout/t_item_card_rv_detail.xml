@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    cardBackgroundColor="@color/white"
-    cardCornerRadius="4dp"
+    style="@style/CardView.Light.margin_16dp"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="16dp">
+    android:layout_height="280dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvPhoto"

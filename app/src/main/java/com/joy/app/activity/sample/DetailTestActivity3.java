@@ -29,6 +29,7 @@ import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.httptask.sample.TestHtpUtil;
 import com.joy.library.activity.frame.BaseHttpRvActivity;
 import com.joy.library.httptask.frame.ObjectRequest;
+import com.joy.library.utils.CollectionUtil;
 import com.joy.library.view.observablescrollview.ObservableRecyclerView;
 import com.joy.library.view.observablescrollview.ObservableScrollViewCallbacks;
 import com.joy.library.view.observablescrollview.ScrollState;
@@ -191,11 +192,15 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
     }
 
     @Override
-    protected void invalidateContent(CityDetail datas) {
+    protected boolean invalidateContent(CityDetail datas) {
 
-        CityDetailRvAdapter3 adapter = ((CityDetailRvAdapter3) getAdapter());
+        if (datas == null || CollectionUtil.isEmpty(datas.getNew_trip()))
+            return false;
+
+        CityDetailRvAdapter3 adapter = (CityDetailRvAdapter3) getAdapter();
         adapter.setData(datas);
         adapter.notifyDataSetChanged();
+        return true;
     }
 
     @Override
