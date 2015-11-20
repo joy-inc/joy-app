@@ -11,64 +11,79 @@ import com.joy.app.bean.plan.PlanFolder;
 import com.joy.library.adapter.frame.ExAdapter;
 import com.joy.library.adapter.frame.ExRvAdapter;
 import com.joy.library.adapter.frame.ExRvViewHolder;
+import com.joy.library.utils.ViewUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 用户行程规划    <br>
  */
 public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder,PlanFolder> {
+
+    @Override
+    public int getItemCount() {
+        int count = super.getItemCount();
+        if (count == 0)return count;
+        else{
+            int num = count/2;
+            return count%2>0 ? num+1 : num;
+        }
+    }
+
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(inflate(parent, R.layout.item_main_order_adapter));
+        return new ViewHolder(inflate(parent, R.layout.item_plan_folder));
     }
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        PlanFolder data = getItem(position);
+        PlanFolder data = getLeftItem(position);
 
         if (data != null) {
 
-//            holder.tvId.setText(data.getOrder_id());
-//            holder.tvTitle.setText(data.getProduct_title());
-//            holder.tvType.setText(data.getProduct_type());
-//            holder.tvCount.setText(data.getCount());
-//            holder.tvTotalPrice.setText(data.getTotal_price());
-//            holder.tvStatus.setText(data.getStatus());
+            holder.tvLtitle.setText(data.getFolder_name());
         }
+        if (getRightItem(position)!= null){
+
+            holder.tvRtitle.setText(getRightItem(position).getFolder_name());
+            ViewUtil.showView(holder.Rcardview);
+        }else{
+            ViewUtil.hideView(holder.Rcardview);
+
+        }
+    }
+
+    private PlanFolder getLeftItem(int position){
+        int realPosition = position*2;
+        return getItem(realPosition);
+    }
+    private PlanFolder getRightItem(int position){
+        int realPosition = position*2+1;
+        return getItem(realPosition);
     }
 
     public class ViewHolder extends ExRvViewHolder {
 
-        @Bind(R.id.tvId)
-        TextView tvId;
+        @Bind(R.id.tv_title_left)
+        TextView tvLtitle;
 
-        @Bind(R.id.tvTitle)
-        TextView tvTitle;
+        @Bind(R.id.tv_title_right)
+        TextView tvRtitle;
 
-        @Bind(R.id.tvType)
-        TextView tvType;
+        @Bind(R.id.cv_right)
+        View Rcardview;
 
-        @Bind(R.id.tvCount)
-        TextView tvCount;
-
-        @Bind(R.id.tvTotalPrice)
-        TextView tvTotalPrice;
-
-        @Bind(R.id.tvStatus)
-        TextView tvStatus;
 
         public ViewHolder(final View itemView) {
 
             super(itemView);
             ButterKnife.bind(this, itemView);
-            tvTitle.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {

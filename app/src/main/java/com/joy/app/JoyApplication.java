@@ -1,6 +1,7 @@
 package com.joy.app;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.joy.app.utils.XiaomiUtil;
 import com.joy.app.utils.prefs.CommonPrefs;
 import com.joy.library.BaseApplication;
 import com.joy.library.share.ShareConstant;
@@ -22,6 +23,7 @@ public class JoyApplication extends BaseApplication {
 
         Fresco.initialize(getContext());
         initShareInfo();
+        XiaomiUtil.registerMiPush(this);
         if (BuildConfig.DEBUG) {
 
             LogMgr.turnOn();
