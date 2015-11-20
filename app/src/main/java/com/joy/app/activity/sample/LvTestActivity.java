@@ -11,7 +11,7 @@ import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.adapter.sample.CityLvAdapter;
 import com.joy.app.bean.sample.HotCityItem;
-import com.joy.app.httptask.sample.TestHtpUtil;
+import com.joy.app.utils.http.sample.TestHtpUtil;
 import com.joy.library.activity.frame.BaseHttpLvActivity;
 import com.joy.library.adapter.frame.OnItemViewClickListener;
 import com.joy.library.httptask.frame.ObjectRequest;

@@ -7,15 +7,11 @@ import android.view.View;
 
 import com.joy.app.BuildConfig;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.activity.sample.DetailTestActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
-import com.joy.app.adapter.sample.CityRvAdapter;
 import com.joy.app.bean.MainRoute;
 import com.joy.app.bean.sample.HotCityItem;
-import com.joy.app.httptask.MainHtpUtil;
-import com.joy.app.httptask.sample.TestHtpUtil;
+import com.joy.app.utils.http.MainHtpUtil;
 import com.joy.library.activity.frame.BaseHttpRvFragment;
-import com.joy.library.activity.frame.BaseUiFragment;
 import com.joy.library.adapter.frame.OnItemViewClickListener;
 import com.joy.library.httptask.frame.ObjectRequest;
 import com.joy.library.utils.ToastUtil;
@@ -52,7 +48,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             public void onItemViewClick(int position, View clickView, MainRoute hotCityItem) {
 
                 ToastUtil.showToast("open deatil" + hotCityItem.getCn_name());
-                WebViewActivity.startActivity(MainFragment.this.getContext(),hotCityItem.getPlace_url(),hotCityItem.getCn_name());
+                WebViewActivity.startActivity(MainFragment.this.getContext(), hotCityItem.getPlace_url(), hotCityItem.getCn_name());
             }
         });
         setAdapter(adapter);

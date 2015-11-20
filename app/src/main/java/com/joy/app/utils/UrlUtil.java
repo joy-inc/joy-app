@@ -1,7 +1,5 @@
 package com.joy.app.utils;
 
-import com.joy.app.httptask.sample.HtpApi;
-
 /**
  * 处理url相关的, 处理url分析,提取,组合
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
