@@ -7,7 +7,12 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+=======
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+>>>>>>> 88fd8618e36e202074cfc7c9d5ea62ae61c61974
     <!--小米-->
     <permission
         android:name="com.joy.app.permission.MIPUSH_RECEIVE"
@@ -60,8 +65,16 @@
             android:theme="@style/theme_app.translucent.toolbar.overlay"/>
         <activity
             android:name=".activity.sample.TabTestActivity"
+<<<<<<< HEAD
             android:screenOrientation="portrait"/>
 
+=======
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.discount.PoiDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay"/>
+>>>>>>> 88fd8618e36e202074cfc7c9d5ea62ae61c61974
 
         <!--小米-->
         <service
@@ -111,6 +124,7 @@
             </intent-filter>
         </receiver>
         <!--小米-->
+<<<<<<< HEAD
         <!--友盟-->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -127,6 +141,9 @@
         <!--友盟升级-->
 
         <!--友盟-->
+=======
+
+>>>>>>> 88fd8618e36e202074cfc7c9d5ea62ae61c61974
     </application>
 
 

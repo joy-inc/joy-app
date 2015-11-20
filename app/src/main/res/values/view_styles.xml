@@ -55,7 +55,10 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <style name="Widget.AppCompat.RatingBar.Joy"></style>
+    <style name="Widget.AppCompat.RatingBar.Joy">
+        <item name="android:progressDrawable">@drawable/src_ratingbar</item>
+        <item name="android:indeterminateDrawable">@drawable/src_ratingbar</item>
+    </style>
 
     <!--设置界面的线性布局-->
     <style name="setting_div">
