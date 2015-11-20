@@ -22,7 +22,7 @@
             fresco:placeholderImage="@drawable/ic_user_def_head"
             fresco:placeholderImageScaleType="fitXY"/>
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             android:textColor="@android:color/white"
             android:textSize="12dp"/>
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvLoginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_star"/>
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvSetting1"
             style="@style/setting_text"
             android:text="@string/setting_app"
@@ -72,7 +72,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_rectangle"/>
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvSetting2"
             style="@style/setting_text"
             android:text="@string/setting_rectangle"
@@ -93,7 +93,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_clean"/>
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvSetting3"
             style="@style/setting_text"
             android:text="@string/setting_clean"
@@ -101,6 +101,28 @@
 
         <ImageView
             android:id="@+id/ivSetting3"
+            style="@style/setting_noun"/>
+    </LinearLayout>
+
+    <include layout="@layout/view_setting_line"/>
+
+    <LinearLayout
+        android:id="@+id/llUpdate"
+        style="@style/setting_div">
+
+        <ImageView
+            android:id="@+id/iconSetting5"
+            style="@style/setting_icon"
+            android:src="@drawable/ic_setting_about"/>
+
+        <com.joy.library.widget.JTextView
+            android:id="@+id/tvSetting5"
+            style="@style/setting_text"
+            android:text="@string/setting_update"
+            />
+
+        <ImageView
+            android:id="@+id/ivSetting5"
             style="@style/setting_noun"/>
     </LinearLayout>
 
@@ -115,7 +137,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_about"/>
 
-        <TextView
+        <com.joy.library.widget.JTextView
             android:id="@+id/tvSetting4"
             style="@style/setting_text"
             android:text="@string/setting_about"
