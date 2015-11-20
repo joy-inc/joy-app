@@ -49,6 +49,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
 
+                showToast("~~" + position);
             }
         });
         setAdapter(adapter);
@@ -58,7 +59,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     @Override
     protected void setAdapter(ExRvAdapter adapter) {
 
-        getRecyclerView().setLayoutManager(new GridLayoutManager(getActivity(),2));
+        getRecyclerView().setLayoutManager(new GridLayoutManager(getActivity(), 2));
         getRecyclerView().setAdapter(adapter);
     }
 
@@ -68,7 +69,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         ObjectRequest obj = new ObjectRequest(PlanHttpUtil.getUserPlanFolderUrl(getCurrentPageIndex(), 5), PlanFolder.class);
         if (BuildConfig.DEBUG){
             List<PlanFolder> data = new ArrayList<>();
-            for (int i = 0 ; i < 3 ; i ++){
+            for (int i = 0 ; i < 5 ; i ++){
                 PlanFolder folder = new PlanFolder();
                 folder.setId("10" + i);
                 folder.setFolder_name("文件夹" + i);
