@@ -1,45 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/CardView.Light"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="200dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="8dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_left"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvBg"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/sdv_bg_left"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/tv_title_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_right"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_weight="1">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/sdv_bg_right"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/tv_title_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
+    <com.joy.library.widget.JTextView
+        android:id="@+id/jtvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+</android.support.v7.widget.CardView>
