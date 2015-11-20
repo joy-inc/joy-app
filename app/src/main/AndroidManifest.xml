@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <!--小米-->
     <permission android:name="com.xiaomi.mipushdemo.permission.MIPUSH_RECEIVE" android:protectionLevel="signature" />
@@ -57,7 +58,10 @@
         <activity
             android:name=".activity.sample.TabTestActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".activity.discount.PoiDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay"/>
 
         <!--小米-->
         <service
@@ -106,6 +110,7 @@
             </intent-filter>
         </receiver>
         <!--小米-->
+
     </application>
 
 
