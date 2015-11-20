@@ -40,7 +40,7 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
             @Override
             public void onItemViewClick(int position, View clickView, HotCityItem hotCityItem) {
 
-                DetailTestActivity.startActivity(getActivity(), clickView, hotCityItem.getId(), hotCityItem.getPhoto(), hotCityItem.getCnname(), hotCityItem.getEnname());
+                DetailTestActivity2.startActivity(getActivity(), clickView, hotCityItem.getId(), hotCityItem.getPhoto(), hotCityItem.getCnname(), hotCityItem.getEnname());
             }
         });
         setAdapter(adapter);

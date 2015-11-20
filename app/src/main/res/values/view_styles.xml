@@ -25,8 +25,7 @@
         <item name="android:layout_marginRight">16dp</item>
     </style>
 
-    <style name="Line">
-    </style>
+    <style name="Line"></style>
 
     <style name="Line.Light">
         <item name="android:background">@color/white_trans12</item>
@@ -55,6 +54,8 @@
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
     </style>
+
+    <style name="Widget.AppCompat.RatingBar.Joy"></style>
 
     <!--设置界面的线性布局-->
     <style name="setting_div">
