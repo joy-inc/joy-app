@@ -77,7 +77,7 @@ public class MainActivityBC {
 
         List<BaseUiFragment> fragments = new ArrayList<>();
         fragments.add(MainFragment.instantiate(mMainActivity).setLableText(R.string.route));
-        fragments.add(MainFragment.instantiate(mMainActivity).setLableText(R.string.travel_plan));
+        fragments.add(TravelPlanFragment.instantiate(mMainActivity).setLableText(R.string.travel_plan));
         fragments.add(OrderFragment.instantiate(mMainActivity).setLableText(R.string.order));
         return fragments;
     }

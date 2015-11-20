@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -27,7 +28,7 @@ import com.joy.library.view.ExLayoutWidget;
  */
 public class StaticMapWidget extends ExLayoutWidget {
 
-    View locationView;
+    ImageView locationView;
     LinearLayout TileLayout;
     RelativeLayout contentView;
     SimpleDraweeView map,Lmap,Rmap;
@@ -44,21 +45,17 @@ public class StaticMapWidget extends ExLayoutWidget {
     protected View onCreateView(Activity activity, Object... args) {
 
         contentView = (RelativeLayout)activity.getLayoutInflater().inflate(R.layout.view_static_map, null);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        contentView.addView(TileLayout, params);
         map = (SimpleDraweeView)contentView.findViewById(R.id.map_center);
         Lmap =(SimpleDraweeView)contentView.findViewById(R.id.map_left);;
         Rmap = (SimpleDraweeView)contentView.findViewById(R.id.map_right);;
+        locationView = (ImageView)contentView.findViewById(R.id.iv_center_icon);;
+        ViewUtil.goneView(locationView);
+
         return contentView;
     }
 
-    public void invalidate(View icon,RelativeLayout.LayoutParams params){
-        if (contentView!=null){
-            contentView.removeView(locationView);
-        }
-        locationView = icon;
-        contentView.addView(icon, params);
-        ViewUtil.goneView(locationView);
+    public void invalidate(int resource){
+        locationView.setImageResource(resource);
     }
 
     public void setLocation(Location location){
@@ -68,7 +65,7 @@ public class StaticMapWidget extends ExLayoutWidget {
     }
 
 
-    public void invalidate( double lng, double lat,int Zoom){
+    private void invalidate( double lng, double lat,int Zoom){
         zoom = Zoom;
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setControllerListener(maplistener)
