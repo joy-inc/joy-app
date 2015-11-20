@@ -11,7 +11,7 @@ import android.view.View;
 import com.joy.app.R;
 import com.joy.app.adapter.sample.CityDetailRvAdapter;
 import com.joy.app.bean.sample.CityDetail;
-import com.joy.app.httptask.sample.TestHtpUtil;
+import com.joy.app.utils.http.sample.TestHtpUtil;
 import com.joy.library.activity.frame.BaseHttpRvActivity;
 import com.joy.library.httptask.frame.ObjectRequest;
 import com.joy.library.utils.CollectionUtil;

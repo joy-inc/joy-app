@@ -1,4 +1,4 @@
-package com.joy.app.httptask.sample;
+package com.joy.app.utils.http;
 
 /**
  * 网络请求 api
@@ -6,7 +6,7 @@ package com.joy.app.httptask.sample;
 public interface HtpApi {
 
     String URL_BASE = "http://open.qyer.com";// base url
-    String JOY_URL_BASE = "http://api.joy.com/";// base url
+    String JOY_URL_BASE = "http://api.joy.com";// base url
 
 
 

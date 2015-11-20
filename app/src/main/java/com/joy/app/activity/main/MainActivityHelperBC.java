@@ -13,6 +13,16 @@ import com.joy.app.activity.main.MainActivity;
  */
 public class MainActivityHelperBC {
 
+    public static final String EXTRA_INTEGER_INTENT_TYPE = "intent_type";
+    public static final int VAL_INTEGER_INTENT_TYPE_NONE = 0;
+    public static final int VAL_INTEGER_INTENT_TYPE_PUSH = 1;
+    public static final int VAL_INTEGER_INTENT_TYPE_CHAT_SESSION = 2;
+    public static final int VAL_INTEGER_INTENT_TYPE_CHAT_ROOM = 3;
+    public static final int VAL_INTEGER_INTENT_TYPE_DISCUSS = 4;
+
+    public static final String EXTRA_STRING_INTENT_MSG_URL = "intent_url";
+    public static final String EXTRA_STRING_INTENT_MSG_ID = "intent_id";
+
     MainActivity mMainActivity;
 
     public MainActivityHelperBC(MainActivity mainActivity) {
@@ -32,6 +42,7 @@ public class MainActivityHelperBC {
     }
 
     public void onDestroy() {
+        mMainActivity = null;
     }
 
     //--生命周期

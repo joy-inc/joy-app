@@ -1,6 +1,4 @@
-package com.joy.app.httptask;
-
-import com.joy.app.httptask.sample.BaseHtpUtil;
+package com.joy.app.utils.http;
 
 import java.util.Map;
 
