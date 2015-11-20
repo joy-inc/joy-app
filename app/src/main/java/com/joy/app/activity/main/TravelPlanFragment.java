@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.joy.app.BuildConfig;
@@ -11,7 +12,6 @@ import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.utils.http.PlanHttpUtil;
 import com.joy.library.activity.frame.BaseHttpRvFragment;
-import com.joy.library.adapter.frame.ExRvAdapter;
 import com.joy.library.adapter.frame.OnItemViewClickListener;
 import com.joy.library.httptask.frame.ObjectRequest;
 
@@ -55,21 +55,19 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         setAdapter(adapter);
     }
 
-
     @Override
-    protected void setAdapter(ExRvAdapter adapter) {
+    protected RecyclerView.LayoutManager getDefaultLayoutManager() {
 
-        getRecyclerView().setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        getRecyclerView().setAdapter(adapter);
+        return new GridLayoutManager(getActivity(), 2);
     }
 
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest() {
 
         ObjectRequest obj = new ObjectRequest(PlanHttpUtil.getUserPlanFolderUrl(getCurrentPageIndex(), 5), PlanFolder.class);
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             List<PlanFolder> data = new ArrayList<>();
-            for (int i = 0 ; i < 5 ; i ++){
+            for (int i = 0; i < 5; i++) {
                 PlanFolder folder = new PlanFolder();
                 folder.setId("10" + i);
                 folder.setFolder_name("文件夹" + i);
