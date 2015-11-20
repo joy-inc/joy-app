@@ -1,8 +1,10 @@
 package com.joy.app.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.joy.app.activity.main.MainActivity;
+import com.joy.library.utils.ToastUtil;
 
 /**
  * 用于处理mainactivity的除了列表外的事件处理
@@ -33,6 +35,25 @@ public class MainActivityHelperBC {
     //--生命周期
     public void onCreate(Bundle savedInstanceState) {
 
+        //处理推送
+        delayStartActivityByPushIntent(mMainActivity.getIntent());
+    }
+
+    public void onNewIntent(Intent intent) {
+
+        delayStartActivityByPushIntent(intent);
+    }
+
+    /**
+     * 统一处理广播或者饿推送的事件
+     *
+     * @param intent
+     */
+    private void delayStartActivityByPushIntent(Intent intent) {
+
+        String id = intent.getStringExtra(EXTRA_STRING_INTENT_MSG_ID);
+        String url = intent.getStringExtra(EXTRA_STRING_INTENT_MSG_URL);
+        ToastUtil.showToast("push message id=" + id + " url= " + url);
     }
 
     public void onRestart() {

@@ -30,12 +30,6 @@ public class MainActivity extends BaseTabActivity {
     private MainActivityHelperBC mMainActivityHelper;
     private long mLastPressedTime; //最后一次按返回的按钮
 
-    public static void startActivity(Context context) {
-
-        Intent intent = new Intent();
-        intent.setClass(context, MainActivity.class);
-        context.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +40,13 @@ public class MainActivity extends BaseTabActivity {
 
         mMainActivityHelper.onCreate(savedInstanceState);
         mMainActivityBC.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+
+        super.onNewIntent(intent);
+        mMainActivityHelper.onNewIntent(intent);
     }
 
     @Override
@@ -142,4 +143,12 @@ public class MainActivity extends BaseTabActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public static void startActivity(Context context) {
+
+        Intent intent = new Intent();
+        intent.setClass(context, MainActivity.class);
+        context.startActivity(intent);
+    }
+
 }
