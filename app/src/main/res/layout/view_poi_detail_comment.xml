@@ -19,11 +19,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:shadowRadius="4dp"
+        android:layout_margin="23dp"
         android:gravity="center"
-        android:padding="12dp"
-        android:textColor="@color/color_accent"
+        android:paddingBottom="13dp"
+        android:paddingLeft="56dp"
+        android:paddingRight="56dp"
+        android:paddingTop="13dp"
         android:text="@string/see_all"
+        android:textColor="@color/color_accent"
         android:visibility="gone" />
 
 </LinearLayout>

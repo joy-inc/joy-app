@@ -5,8 +5,8 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="25dp"
-    android:paddingLeft="32dp"
-    android:paddingRight="32dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
     android:paddingTop="25dp">
 
 
@@ -21,50 +21,126 @@
 
     <com.joy.library.widget.JTextView
         android:id="@+id/tvIntroduce"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:maxLines="6"
+        style="@style/LongText.Light"
         android:layout_marginBottom="20dp"
-        android:lineSpacingExtra="3dp"
-        android:textColor="@color/black_trans54"
+        android:layout_marginTop="20dp"
         android:ellipsize="end"
-        android:textSize="13dp" />
+        android:maxLines="5" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/tvAllIntroduce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="13dp"
+        android:paddingLeft="56dp"
+        android:paddingRight="56dp"
+        android:paddingTop="13dp"
         android:text="@string/see_all"
-        android:textColor="@color/white" />
+        android:textColor="@color/color_accent"
+        android:textSize="12dp" />
 
     <View
-        style="@style/Line.Light.Horizontal"
-        android:layout_marginTop="16dp" />
+        style="@style/Line.Dark.Horizontal"
+        android:layout_marginBottom="23dp"
+        android:layout_marginTop="25dp" />
 
 
     <com.joy.library.widget.JTextView
         android:id="@+id/tvKnowTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:gravity="center"
         android:text="@string/need_know"
         android:textColor="@color/black_trans87"
         android:textSize="16dp" />
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdvKnow"
-        android:layout_width="360dp"
+    <com.joy.library.widget.JTextView
+        android:id="@+id/tvKnowTip"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop" />
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:text="@string/need_know_tip"
+        android:textColor="@color/black_trans54"
+        android:textSize="12dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:layout_marginTop="13dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/ic_poi_detail_know_cost"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/need_know_cost"
+            android:textColor="@color/black_trans54"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/ic_poi_detail_know_product"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/need_know_product"
+            android:textColor="@color/black_trans54"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/ic_poi_detail_know_use"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/need_know_use"
+            android:textColor="@color/black_trans54"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/ic_poi_detail_know_attention"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@string/need_know_attention"
+            android:textColor="@color/black_trans54"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="3dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_poi_detail_know_more" />
+    </LinearLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/tvAllKnow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="13dp"
+        android:paddingLeft="56dp"
+        android:paddingRight="56dp"
+        android:paddingTop="13dp"
         android:text="@string/see_all"
-        android:textColor="@color/white" />
+        android:textColor="@color/color_accent"
+        android:textSize="12dp" />
 
 </LinearLayout>
