@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.joy.app.activity.main.MainActivity;
+import com.joy.library.utils.TextUtil;
 import com.joy.library.utils.ToastUtil;
+import com.umeng.update.UmengUpdateAgent;
 
 /**
  * 用于处理mainactivity的除了列表外的事件处理
@@ -37,6 +39,9 @@ public class MainActivityHelperBC {
 
         //处理推送
         delayStartActivityByPushIntent(mMainActivity.getIntent());
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.update(mMainActivity);
+
     }
 
     public void onNewIntent(Intent intent) {
@@ -53,7 +58,9 @@ public class MainActivityHelperBC {
 
         String id = intent.getStringExtra(EXTRA_STRING_INTENT_MSG_ID);
         String url = intent.getStringExtra(EXTRA_STRING_INTENT_MSG_URL);
-        ToastUtil.showToast("push message id=" + id + " url= " + url);
+        if(!TextUtil.isEmpty(url)) {
+            ToastUtil.showToast("push message id=" + id + " url= " + url);
+        }
     }
 
     public void onRestart() {
