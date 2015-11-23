@@ -1,13 +1,15 @@
 package com.joy.app.activity.discount;
 
 import android.app.Activity;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 
 import com.joy.app.R;
-import com.joy.app.bean.sample.PoiDetail;
+import com.joy.app.adapter.CommentLlvAdapter;
+import com.joy.app.bean.CommentAll;
+import com.joy.app.view.LinearListView;
+import com.joy.library.utils.CollectionUtil;
 import com.joy.library.view.ExLayoutWidget;
-
-import java.util.ArrayList;
 
 /**
  * poi详情页的 点评列表部分
@@ -15,6 +17,10 @@ import java.util.ArrayList;
  * Created by xiaoyu.chen on 15/5/7.
  */
 public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnClickListener {
+
+    private CommentLlvAdapter adapter;
+    private LinearListView mLlvComment;
+    private AppCompatButton acbAllComment;
 
     public PoiDetailCommentWidget(Activity activity) {
 
@@ -24,33 +30,29 @@ public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnCli
     @Override
     protected View onCreateView(Activity activity, Object... args) {
 
-        initData();
-
         View contentView = activity.getLayoutInflater().inflate(R.layout.view_discount_poi_detail_comment, null);
 
-        initContentView(contentView);
+        mLlvComment = (LinearListView) contentView.findViewById(R.id.llvComment);
+        acbAllComment = (AppCompatButton) contentView.findViewById(R.id.acbAllComment);
+        acbAllComment.setOnClickListener(this);
+
+        adapter = new CommentLlvAdapter();
+        mLlvComment.setAdapter(adapter);
 
         return contentView;
     }
 
-    private void initData() {
-
-    }
-
-    private void initContentView(View contentView) {
-
-    }
-
-    protected void invalidate(final ArrayList<String> data) {
+    protected void invalidate(final CommentAll data) {
 
         if (data == null)
             return;
 
-        invalidateContent();
-    }
-
-    private void invalidateContent() {
-
+        if (CollectionUtil.size(data.getComments()) > 3) {
+            adapter.setData(data.getComments().subList(0, 3));
+        } else {
+            adapter.setData(data.getComments());
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override

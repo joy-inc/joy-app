@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_primary_dark"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatRatingBar
+        android:id="@+id/acRatingBar"
+        style="@style/Widget.AppCompat.RatingBar.Joy"
+        android:layout_width="wrap_content"
+        android:layout_height="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:numStars="5"
+        android:stepSize="0.5" />
+
+    <com.joy.library.widget.JTextView
+        android:id="@+id/tvComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="3dp"
+        android:textColor="@color/black_trans87"
+        android:textSize="13dp" />
+
+    <com.joy.library.widget.JTextView
+        android:id="@+id/tvCommentUserDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="3dp"
+        android:textColor="@color/black_trans54"
+        android:textSize="13dp" />
+
+
+</LinearLayout>

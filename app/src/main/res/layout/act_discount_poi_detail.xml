@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <com.joy.library.view.observablescrollview.ObservableScrollView
         android:layout_width="match_parent"
@@ -26,7 +26,6 @@
 
             <RelativeLayout
                 android:id="@+id/poiDetailHighDiv"
-                android:background="@color/material_blue_grey_800"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" />
@@ -35,7 +34,6 @@
 
             <RelativeLayout
                 android:id="@+id/poiDetailMapDiv"
-                android:background="@color/color_primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -43,7 +41,7 @@
 
             <RelativeLayout
                 android:id="@+id/poiDetailIntroduceDiv"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <!-- comment -->
