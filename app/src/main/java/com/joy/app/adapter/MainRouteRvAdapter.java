@@ -10,6 +10,7 @@ import com.joy.app.R;
 import com.joy.app.bean.MainRoute;
 import com.joy.library.adapter.frame.ExRvAdapter;
 import com.joy.library.adapter.frame.ExRvViewHolder;
+import com.joy.library.utils.ViewUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,8 +35,16 @@ public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolde
         MainRoute route = getItem(position);
         if (route != null) {
             holder.sdvPhoto.setImageURI(Uri.parse(route.getPic_url()));
-            holder.tvName.setText(route.getCn_name() + "\n" + route.getEn_name());
+            holder.tvName.setText(route.getCn_name());
+            holder.tvEnName.setText(route.getEn_name());
+            holder.tvTags.setText(route.getTags());
+            if (route.isCity()) {
+                ViewUtil.hideView(holder.tvTopic);
+            } else {
+                ViewUtil.showView(holder.tvTopic);
+            }
         }
+
     }
 
     public class ViewHolder extends ExRvViewHolder {
@@ -45,11 +54,19 @@ public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolde
         @Bind(R.id.tvName)
         TextView tvName;
 
+        @Bind(R.id.tvEnName)
+        TextView tvEnName;
+
+        @Bind(R.id.tvTags)
+        TextView tvTags;
+        @Bind(R.id.tvTopic)
+        TextView tvTopic;
+
         public ViewHolder(final View itemView) {
 
             super(itemView);
             ButterKnife.bind(this, itemView);
-            tvName.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
