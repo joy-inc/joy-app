@@ -6,25 +6,38 @@ import com.joy.library.utils.DeviceUtil;
 import java.util.Map;
 
 /**
- * 订单相关网络请求
+ * 商品及订单相关网络请求
  * <p/>
  * Created by xiaoyu.chen on 15/11/11.
  */
 public class OrderHtpUtil extends BaseHtpUtil {
 
     /**
-     * 获取目的地折扣详情
+     * 获取商品详情
      *
      * @return
      */
-    public static String getPoiDiscountUrl(String poiId) {
+    public static String getProductDetailUrl(String product_id) {
 
         Map<String, Object> params = getBaseParams();
-        params.put("poi_id", poiId);
-        params.put("oauth_token", JoyApplication.getUserToken());
-        params.put("screensize", DeviceUtil.getScreenHeight() + "");
+        params.put("product_id", product_id);
 
-        return createGetUrl(URL_GET_POI_DISCOUNT, params);
+        return createGetUrl(URL_GET_PRODUCT_DETAIL, params);
+    }
+
+    /**
+     * 获取商品评论列表
+     *
+     * @return
+     */
+    public static String getProductCommentListUrl(String product_id, int count, int page) {
+
+        Map<String, Object> params = getBaseParams();
+        params.put("product_id", product_id);
+        params.put("count", count +"");
+        params.put("page", page + "");
+
+        return createGetUrl(URL_GET_COMMENTS, params);
     }
 
     /**

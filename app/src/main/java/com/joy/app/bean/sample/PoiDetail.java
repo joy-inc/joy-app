@@ -13,7 +13,7 @@ public class PoiDetail {
 
     private static final long serialVersionUID = 1L;
 
-    private String id = TextUtil.TEXT_EMPTY;
+    private String product_id = TextUtil.TEXT_EMPTY;
     private String title = TextUtil.TEXT_EMPTY;
     private String sub_title = TextUtil.TEXT_EMPTY;
     private String comment_level = TextUtil.TEXT_EMPTY;
@@ -27,12 +27,12 @@ public class PoiDetail {
     private ArrayList<String> photos;
 
 
-    public String getId() {
-        return id;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
     public String getTitle() {

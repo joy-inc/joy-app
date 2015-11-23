@@ -94,4 +94,10 @@
         <item name="android:src">@drawable/ic_setting_noun</item>
     </style>
 
+    <!-- LinearLayout list view -->
+    <declare-styleable name="LinearListView">
+        <attr name="ll_divider" format="dimension" />
+        <attr name="ll_dividerDrawable" format="reference" />
+    </declare-styleable>
+
 </resources>

@@ -1,48 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/llCommentDiv"
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:gravity="center_vertical" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical" />
+    <com.joy.app.view.LinearListView
+        android:id="@+id/llvComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:background="@color/color_accent"
+        android:focusable="false"
+        android:listSelector="@android:color/transparent"
+        android:orientation="vertical"
+        android:scrollingCache="false" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!--<RecyclerView-->
-                <!--android:id="@+id/llvComment"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:divider="@null"-->
-                <!--android:focusable="false"-->
-                <!--android:listSelector="@android:color/transparent"-->
-                <!--android:orientation="vertical"-->
-                <!--android:scrollingCache="false" />-->
-
-            <LinearLayout
-                android:id="@+id/rvCommentCountDiv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/tvCountNum"
-                    android:text="@string/see_all"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"  />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/acbAllComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/see_all" />
 
 </LinearLayout>

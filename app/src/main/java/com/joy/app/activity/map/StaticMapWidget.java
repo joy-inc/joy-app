@@ -61,7 +61,7 @@ public class StaticMapWidget extends ExLayoutWidget {
     public void setLocation(Location location){
         double lng = location.getLongitude();
         double lat = location.getLatitude();
-        invalidate(lng, lat, 18);
+        invalidate(lng, lat, 15);
     }
 
 
