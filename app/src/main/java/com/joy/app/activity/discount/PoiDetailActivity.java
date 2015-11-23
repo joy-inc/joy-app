@@ -62,7 +62,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     protected void initData() {
 
         mId = TextUtil.filterNull(getIntent().getStringExtra("id"));
-        mId = "51";
     }
 
     @Override
