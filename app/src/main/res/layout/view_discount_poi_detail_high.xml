@@ -4,24 +4,25 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    android:paddingBottom="10dp"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
-    android:paddingTop="25dp">
+    android:paddingBottom="22dp"
+    android:paddingTop="22dp">
 
     <com.joy.library.widget.JTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/highlights"
-        android:textColor="@color/black"
+        android:textColor="@color/color_accent"
         android:textSize="16dp" />
 
-    <LinearLayout
-        android:id="@+id/tvHighDiv"
+    <com.joy.app.view.LinearListView
+        android:id="@+id/linearLv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:focusable="false"
+        android:listSelector="@android:color/transparent"
+        android:orientation="vertical"
+        android:scrollingCache="false" />
 
 
 </LinearLayout>

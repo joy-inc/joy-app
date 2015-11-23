@@ -94,10 +94,18 @@
         <item name="android:src">@drawable/ic_setting_noun</item>
     </style>
 
-    <!-- LinearLayout list view -->
-    <declare-styleable name="LinearListView">
-        <attr name="ll_divider" format="dimension" />
-        <attr name="ll_dividerDrawable" format="reference" />
-    </declare-styleable>
+    <!-- 长段说明文字 -->
+    <style name="LongText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+    <style name="LongText.Dark">
+        <item name="android:textColor">@color/black_trans87</item>
+    </style>
+    <style name="LongText.Light">
+        <item name="android:textColor">@color/black_trans54</item>
+    </style>
 
 </resources>
