@@ -3,30 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical" />
-
     <com.joy.app.view.LinearListView
-        android:id="@+id/llvComment"
+        android:id="@+id/linearLv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@null"
-        android:background="@color/color_accent"
         android:focusable="false"
         android:listSelector="@android:color/transparent"
         android:orientation="vertical"
         android:scrollingCache="false" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/acbAllComment"
+        android:id="@+id/acbSeeAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:shadowRadius="4dp"
         android:gravity="center"
-        android:text="@string/see_all" />
+        android:padding="12dp"
+        android:textColor="@color/color_accent"
+        android:text="@string/see_all"
+        android:visibility="gone" />
 
 </LinearLayout>

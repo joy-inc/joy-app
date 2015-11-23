@@ -1,4 +1,4 @@
-package com.joy.app.activity.discount;
+package com.joy.app.activity.poi;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -35,7 +35,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
     @Override
     protected View onCreateView(Activity activity, Object... args) {
 
-        View contentView = activity.getLayoutInflater().inflate(R.layout.view_discount_poi_detail_header, null);
+        View contentView = activity.getLayoutInflater().inflate(R.layout.view_poi_detail_header, null);
 
         initContentViews(contentView);
 
