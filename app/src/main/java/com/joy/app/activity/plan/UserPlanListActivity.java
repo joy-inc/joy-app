@@ -9,6 +9,7 @@ import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.BuildConfig;
+import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.bean.plan.PlanItem;
@@ -43,13 +44,12 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     @Override
     protected void initContentView() {
         super.initContentView();
-        UserPlanAdapter adapter = new UserPlanAdapter();
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
+        PlanListAdapter adapter = new PlanListAdapter();
+        adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanItem>() {
 
             @Override
-            public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
+            public void onItemViewClick(int position, View clickView, PlanItem planItem) {
 
-                showToast("~~" + position);
             }
         });
         setAdapter(adapter);

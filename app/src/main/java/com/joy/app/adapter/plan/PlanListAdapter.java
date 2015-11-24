@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 行程规划列表    <br>
  */
 public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder,PlanItem> {
     @Override

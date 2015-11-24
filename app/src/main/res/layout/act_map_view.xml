@@ -22,10 +22,11 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <android.support.v4.widget.ContentLoadingProgressBar
+            <ProgressBar
                 android:layout_centerInParent="true"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:indeterminate="false" />
         </RelativeLayout>
     </LinearLayout>
 
