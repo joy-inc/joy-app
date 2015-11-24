@@ -13,7 +13,6 @@ import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.bean.plan.PlanItem;
-import com.joy.app.bean.plan.PlanListItem;
 import com.joy.app.utils.http.PlanHttpUtil;
 
 import java.util.ArrayList;
