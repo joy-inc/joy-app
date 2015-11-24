@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.joy.app.R;
 import com.joy.app.bean.CommentItem;
-import com.joy.library.adapter.frame.ExRvAdapter;
-import com.joy.library.adapter.frame.ExRvViewHolder;
+import com.android.library.adapter.ExRvAdapter;
+import com.android.library.adapter.ExRvViewHolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

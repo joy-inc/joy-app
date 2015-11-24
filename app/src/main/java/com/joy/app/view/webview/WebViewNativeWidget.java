@@ -11,11 +11,11 @@ import android.widget.ImageView;
 
 import com.joy.app.R;
 import com.joy.app.utils.StorageUtil;
-import com.joy.library.utils.DeviceUtil;
-import com.joy.library.utils.DimenCons;
-import com.joy.library.utils.ToastUtil;
-import com.joy.library.utils.ViewUtil;
-import com.joy.library.widget.JLoadingView;
+import com.android.library.utils.DeviceUtil;
+import com.android.library.utils.DimenCons;
+import com.android.library.utils.ToastUtil;
+import com.android.library.utils.ViewUtil;
+import com.android.library.widget.JLoadingView;
 
 /**
  * 该类实现了仿原生加载url的切换界面
@@ -56,7 +56,7 @@ public class WebViewNativeWidget extends WebViewBaseWidget implements DimenCons,
         ViewUtil.hideImageView(mIvTip);
 
         //设置网络错误提示图和为空图
-        mFailedImageResId = R.mipmap.ic_net_error;
+        mFailedImageResId = R.drawable.ic_net_error;
 
         mLoadingView = JLoadingView.get(getActivity());
         mLoadingView.hide();//默认隐藏

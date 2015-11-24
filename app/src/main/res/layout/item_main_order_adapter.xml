@@ -15,7 +15,7 @@
         android:paddingLeft="15dp"
         android:paddingTop="16dp">
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:textColor="@color/black"
             android:textSize="16dp" />
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="14dp" />
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             android:textSize="14dp" />
 
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp">
 
-            <com.joy.library.widget.JTextView
+            <com.android.library.widget.JTextView
                 android:id="@+id/tvOrderPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:textColor="@color/black_trans54"
                 android:textSize="11dp" />
 
-            <com.joy.library.widget.JTextView
+            <com.android.library.widget.JTextView
                 android:id="@+id/tvTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

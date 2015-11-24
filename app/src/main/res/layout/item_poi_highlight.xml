@@ -6,13 +6,13 @@
     android:paddingRight="30dp"
     android:paddingTop="16dp">
 
-    <com.joy.library.widget.JTextView
+    <com.android.library.widget.JTextView
         android:id="@+id/tvTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/shape_point_small" />
 
-    <com.joy.library.widget.JTextView
+    <com.android.library.widget.JTextView
         android:id="@+id/tvHighDesc"
         style="@style/LongText.Light"
         android:layout_marginLeft="7dp"

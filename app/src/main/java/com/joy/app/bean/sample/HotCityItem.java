@@ -1,6 +1,6 @@
 package com.joy.app.bean.sample;
 
-import com.joy.library.utils.TextUtil;
+import com.android.library.utils.TextUtil;
 
 /**
  * 200个热门城市

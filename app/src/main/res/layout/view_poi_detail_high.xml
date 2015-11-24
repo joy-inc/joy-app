@@ -7,7 +7,7 @@
     android:paddingBottom="22dp"
     android:paddingTop="22dp">
 
-    <com.joy.library.widget.JTextView
+    <com.android.library.widget.JTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

@@ -10,8 +10,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.setting.SettingActivity;
-import com.joy.library.activity.frame.BaseTabActivity;
-import com.joy.library.activity.frame.BaseUiFragment;
+import com.android.library.activity.BaseTabActivity;
+import com.android.library.activity.BaseUiFragment;
 
 import java.util.List;
 

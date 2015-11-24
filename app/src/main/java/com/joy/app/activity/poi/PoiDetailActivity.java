@@ -24,11 +24,11 @@ import com.joy.app.bean.CommentItem;
 import com.joy.app.bean.CommentScores;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
-import com.joy.library.activity.frame.BaseHttpUiActivity;
-import com.joy.library.httptask.frame.ObjectRequest;
-import com.joy.library.utils.TextUtil;
-import com.joy.library.utils.ViewUtil;
-import com.joy.library.view.ExBaseWidget;
+import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.TextUtil;
+import com.android.library.utils.ViewUtil;
+import com.android.library.view.ExBaseWidget;
 
 import java.util.ArrayList;
 

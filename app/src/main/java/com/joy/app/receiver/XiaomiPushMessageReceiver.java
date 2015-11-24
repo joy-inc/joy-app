@@ -1,24 +1,15 @@
 package com.joy.app.receiver;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 
-import com.joy.app.bean.PushMessageBean;
-import com.joy.app.utils.JoyConstant;
 import com.joy.app.utils.XiaomiUtil;
-import com.joy.library.utils.DeviceUtil;
-import com.joy.library.utils.LogMgr;
+import com.android.library.utils.DeviceUtil;
+import com.android.library.utils.LogMgr;
 import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xiaomi.mipush.sdk.MiPushCommandMessage;
 import com.xiaomi.mipush.sdk.MiPushMessage;
 import com.xiaomi.mipush.sdk.PushMessageReceiver;
-
-import org.json.JSONObject;
 
 import java.util.List;
 

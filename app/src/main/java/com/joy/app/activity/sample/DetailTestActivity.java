@@ -10,9 +10,9 @@ import android.view.View;
 import com.joy.app.adapter.sample.CityDetailRvAdapter;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.utils.http.sample.TestHtpUtil;
-import com.joy.library.activity.frame.BaseHttpRvActivity;
-import com.joy.library.httptask.frame.ObjectRequest;
-import com.joy.library.utils.CollectionUtil;
+import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.CollectionUtil;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,5 @@
 package com.joy.app.activity.common;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,12 +8,11 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.joy.app.eventbus.LoginStatusEvent;
-import com.joy.app.utils.ActivityUrlUtil;
 import com.joy.app.view.webview.BaseWebView;
 import com.joy.app.view.webview.WebViewBaseWidget;
 import com.joy.app.view.webview.WebViewNativeWidget;
-import com.joy.library.activity.frame.BaseUiActivity;
-import com.joy.library.utils.LogMgr;
+import com.android.library.activity.BaseUiActivity;
+import com.android.library.utils.LogMgr;
 
 import de.greenrobot.event.EventBus;
 

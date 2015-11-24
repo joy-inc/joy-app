@@ -10,12 +10,12 @@ import com.joy.app.R;
 import com.joy.app.bean.CommentAll;
 import com.joy.app.bean.CommentItem;
 import com.joy.app.view.LinearListView;
-import com.joy.library.adapter.frame.ExAdapter;
-import com.joy.library.adapter.frame.ExViewHolder;
-import com.joy.library.adapter.frame.ExViewHolderBase;
-import com.joy.library.utils.CollectionUtil;
-import com.joy.library.utils.ViewUtil;
-import com.joy.library.view.ExLayoutWidget;
+import com.android.library.adapter.ExAdapter;
+import com.android.library.adapter.ExViewHolder;
+import com.android.library.adapter.ExViewHolderBase;
+import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.ViewUtil;
+import com.android.library.view.ExLayoutWidget;
 
 /**
  * poi详情页的 点评列表部分

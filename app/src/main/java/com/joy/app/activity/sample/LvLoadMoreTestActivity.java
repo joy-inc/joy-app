@@ -2,7 +2,6 @@ package com.joy.app.activity.sample;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,8 +10,8 @@ import com.joy.app.R;
 import com.joy.app.adapter.sample.LvLoadMoreAdapter;
 import com.joy.app.bean.sample.Special;
 import com.joy.app.utils.http.sample.TestHtpUtil;
-import com.joy.library.activity.frame.BaseHttpLvActivity;
-import com.joy.library.httptask.frame.ObjectRequest;
+import com.android.library.activity.BaseHttpLvActivity;
+import com.android.library.httptask.ObjectRequest;
 
 import java.util.List;
 

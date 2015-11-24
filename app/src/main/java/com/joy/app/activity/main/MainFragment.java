@@ -11,10 +11,10 @@ import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.bean.MainRoute;
 import com.joy.app.bean.sample.HotCityItem;
 import com.joy.app.utils.http.MainHtpUtil;
-import com.joy.library.activity.frame.BaseHttpRvFragment;
-import com.joy.library.adapter.frame.OnItemViewClickListener;
-import com.joy.library.httptask.frame.ObjectRequest;
-import com.joy.library.utils.ToastUtil;
+import com.android.library.activity.BaseHttpRvFragment;
+import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

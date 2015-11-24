@@ -3,7 +3,7 @@ package com.joy.app.utils.prefs;
 import android.content.Context;
 
 import com.joy.app.BuildConfig;
-import com.joy.library.utils.ExSharedPrefs;
+import com.android.library.utils.ExSharedPrefs;
 
 /**
  * app内关于app的一些信息记录

@@ -4,9 +4,9 @@ import android.os.Build;
 
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
-import com.joy.library.utils.AppUtil;
-import com.joy.library.utils.DeviceUtil;
-import com.joy.library.utils.LogMgr;
+import com.android.library.utils.AppUtil;
+import com.android.library.utils.DeviceUtil;
+import com.android.library.utils.LogMgr;
 
 import java.util.HashMap;
 import java.util.Map;

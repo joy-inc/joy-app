@@ -7,10 +7,10 @@ import android.widget.TextView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.view.LinearListView;
-import com.joy.library.adapter.frame.ExAdapter;
-import com.joy.library.adapter.frame.ExViewHolder;
-import com.joy.library.adapter.frame.ExViewHolderBase;
-import com.joy.library.view.ExLayoutWidget;
+import com.android.library.adapter.ExAdapter;
+import com.android.library.adapter.ExViewHolder;
+import com.android.library.adapter.ExViewHolderBase;
+import com.android.library.view.ExLayoutWidget;
 
 /**
  * 项目亮点

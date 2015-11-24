@@ -8,9 +8,9 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.MainRoute;
-import com.joy.library.adapter.frame.ExRvAdapter;
-import com.joy.library.adapter.frame.ExRvViewHolder;
-import com.joy.library.utils.ViewUtil;
+import com.android.library.adapter.ExRvAdapter;
+import com.android.library.adapter.ExRvViewHolder;
+import com.android.library.utils.ViewUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

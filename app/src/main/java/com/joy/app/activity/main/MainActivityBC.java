@@ -3,9 +3,8 @@ package com.joy.app.activity.main;
 import android.os.Bundle;
 
 import com.joy.app.R;
-import com.joy.app.activity.sample.RvTestFragment;
 import com.joy.app.eventbus.LoginStatusEvent;
-import com.joy.library.activity.frame.BaseUiFragment;
+import com.android.library.activity.BaseUiFragment;
 
 import java.util.ArrayList;
 import java.util.List;

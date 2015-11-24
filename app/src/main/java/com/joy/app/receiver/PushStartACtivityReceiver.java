@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.joy.app.activity.main.MainActivity;
-import com.joy.library.utils.ToastUtil;
+import com.android.library.utils.ToastUtil;
 
 /**
  * 下拉点击打开的事件回掉

@@ -5,14 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
-import com.joy.library.activity.frame.BaseUiActivity;
+import com.android.library.activity.BaseUiActivity;
 import com.umeng.update.UmengUpdateAgent;
 
 import butterknife.Bind;

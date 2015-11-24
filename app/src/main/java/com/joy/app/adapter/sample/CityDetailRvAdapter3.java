@@ -11,10 +11,10 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.bean.sample.Trip;
-import com.joy.library.adapter.frame.ExRvMultipleAdapter;
-import com.joy.library.utils.CollectionUtil;
-import com.joy.library.utils.DimenCons;
-import com.joy.library.utils.LogMgr;
+import com.android.library.adapter.ExRvMultipleAdapter;
+import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.DimenCons;
+import com.android.library.utils.LogMgr;
 
 import java.util.ArrayList;
 

@@ -27,7 +27,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.joy.library.widget.JTextView
+            <com.android.library.widget.JTextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
 
-            <com.joy.library.widget.JTextView
+            <com.android.library.widget.JTextView
                 android:id="@+id/tvEnName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         </LinearLayout>
 
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvTopic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:textSize="10dp"
             />
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvTags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

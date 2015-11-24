@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 
+import com.android.library.activity.BaseTabActivity;
+import com.android.library.activity.BaseUiFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.library.activity.frame.BaseTabActivity;
-import com.joy.library.activity.frame.BaseUiFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,22 +87,4 @@ public class TabTestActivity extends BaseTabActivity {
             JoyApplication.releaseForExitApp();
         }
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        int id = item.getItemId();
-//
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

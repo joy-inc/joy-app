@@ -7,49 +7,57 @@
 
     <!-- 分享到身边人 -->
 
-    <com.joy.library.widget.JTextView android:layout_margin="5dp"
+    <com.android.library.widget.JTextView
+        android:layout_margin="5dp"
         android:id="@+id/tvWeibo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到微博"/>
 
-    <com.joy.library.widget.JTextView android:layout_margin="5dp"
+    <com.android.library.widget.JTextView
+        android:layout_margin="5dp"
         android:id="@+id/tvWeixin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到微信"/>
 
-    <com.joy.library.widget.JTextView android:layout_margin="5dp"
+    <com.android.library.widget.JTextView
+        android:layout_margin="5dp"
         android:id="@+id/tvFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到朋友圈"/>
 
-    <com.joy.library.widget.JTextView android:layout_margin="5dp"
+    <com.android.library.widget.JTextView
+        android:layout_margin="5dp"
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="email"/>
 
-    <com.joy.library.widget.JTextView android:layout_margin="5dp"
+    <com.android.library.widget.JTextView
+        android:layout_margin="5dp"
         android:id="@+id/tvQq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享qq"/>
 
-    <com.joy.library.widget.JTextView android:layout_margin="5dp"
+    <com.android.library.widget.JTextView
+        android:layout_margin="5dp"
         android:id="@+id/tvQaZone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到qqZone"/>
 
-    <com.joy.library.widget.JTextView android:layout_margin="5dp"
+    <com.android.library.widget.JTextView
+        android:layout_margin="5dp"
         android:id="@+id/tvsms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到短信"/>
 
-    <com.joy.library.widget.JTextView android:layout_margin="5dp"
+    <com.android.library.widget.JTextView
+        android:layout_margin="5dp"
         android:id="@+id/tvShareMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

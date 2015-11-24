@@ -18,10 +18,10 @@ import android.widget.FrameLayout;
 import com.joy.app.JoyApplication;
 import com.joy.app.utils.ActivityUrlUtil;
 import com.joy.app.utils.UrlUtil;
-import com.joy.library.utils.DimenCons;
-import com.joy.library.utils.LogMgr;
-import com.joy.library.utils.TextUtil;
-import com.joy.library.view.ExLayoutWidget;
+import com.android.library.utils.DimenCons;
+import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
+import com.android.library.view.ExLayoutWidget;
 
 /**
  * QyerApp webView逻辑的组件基类

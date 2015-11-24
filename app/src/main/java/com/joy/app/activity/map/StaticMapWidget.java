@@ -3,11 +3,8 @@ package com.joy.app.activity.map;
 import android.app.Activity;
 import android.graphics.drawable.Animatable;
 import android.location.Location;
-import android.media.Image;
 import android.net.Uri;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -19,8 +16,8 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.joy.app.R;
-import com.joy.library.utils.ViewUtil;
-import com.joy.library.view.ExLayoutWidget;
+import com.android.library.utils.ViewUtil;
+import com.android.library.view.ExLayoutWidget;
 
 /**
  * @author litong  <br>
