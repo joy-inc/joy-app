@@ -77,5 +77,4 @@ public class JoyApplication extends BaseApplication {
         ShareConstant.getIns().setWeixinAppid("1");
         ShareConstant.getIns().setWeixinSecret("1");
     }
-
 }

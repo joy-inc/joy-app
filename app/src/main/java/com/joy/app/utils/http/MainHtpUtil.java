@@ -17,8 +17,8 @@ public class MainHtpUtil extends BaseHtpUtil {
     public static String getMainRouteList(int page, int count) {
 
         Map<String, Object> params = getBaseParams();
-        params.put("page", page);
-        params.put("count", count);
+        params.put(KEY_PAGE, page);
+        params.put(KEY_COUNT, count);
         return createGetUrl(URL_POST_MAIN_ROUTE_LIST, params);
     }
 }

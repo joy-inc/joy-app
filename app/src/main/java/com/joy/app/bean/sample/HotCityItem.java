@@ -1,6 +1,5 @@
 package com.joy.app.bean.sample;
 
-
 import com.joy.library.utils.TextUtil;
 
 /**

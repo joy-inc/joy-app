@@ -2,9 +2,10 @@ package com.joy.app.activity.sample;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.net.Uri;
+import android.view.View;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.library.activity.frame.BaseTabActivity;
@@ -28,14 +29,36 @@ public class TabTestActivity extends BaseTabActivity {
     protected void initTitleView() {
 
         super.initTitleView();
-        setTitleTextColor(getResources().getColor(R.color.color_accent));
+
+        setTitle(null);
+        setTitleLogo(R.drawable.ic_logo);
+
+        View v = inflateLayout(R.layout.view_avatar);
+        SimpleDraweeView sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
+        sdvAvatar.setImageURI(Uri.parse("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207"));
+        addTitleRightView(v, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
     protected void initContentView() {
 
         super.initContentView();
-        setTabIndicatorHeight(DP_1_PX * 3);
+        setTabTextColors(getResources().getColor(R.color.white_trans26), getResources().getColor(R.color.white));
+        setTabIndicatorColor(getResources().getColor(R.color.transparent));
+        setFloatActionBtnEnable(R.drawable.abc_ic_search_api_mtrl_alpha, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                showToast("FloatActionBtn click");
+            }
+        });
     }
 
     @Override
@@ -65,18 +88,21 @@ public class TabTestActivity extends BaseTabActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        int id = item.getItemId();
+//
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

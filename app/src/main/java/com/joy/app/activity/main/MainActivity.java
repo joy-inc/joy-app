@@ -2,11 +2,11 @@ package com.joy.app.activity.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.setting.SettingActivity;
@@ -30,6 +30,12 @@ public class MainActivity extends BaseTabActivity {
     private MainActivityHelperBC mMainActivityHelper;
     private long mLastPressedTime; //最后一次按返回的按钮
 
+    public static void startActivity(Context context) {
+
+        Intent intent = new Intent();
+        intent.setClass(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +90,21 @@ public class MainActivity extends BaseTabActivity {
     protected void initTitleView() {
 
         super.initTitleView();
-        setTitleLogo(R.drawable.ic_joebility);
+
         setTitle(null);
-        setTitleTextColor(getResources().getColor(R.color.color_accent));
+        setTitleLogo(R.drawable.ic_logo);
+
+        View v = inflateLayout(R.layout.view_avatar);
+        SimpleDraweeView sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
+        sdvAvatar.setImageURI(Uri.parse("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207"));
+        addTitleRightView(v, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                SettingActivity.startActivity(MainActivity.this);
+            }
+        });
         mMainActivityBC.initTitleView();
     }
 
@@ -95,14 +113,6 @@ public class MainActivity extends BaseTabActivity {
 
         super.initContentView();
         setTabIndicatorHeight(DP_1_PX * 3);
-        setFloatActionBtnEnable(R.drawable.abc_ic_search_api_mtrl_alpha, new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                showToast("FloatActionBtn click");
-            }
-        });
         mMainActivityBC.initContentView();
     }
 
@@ -126,34 +136,4 @@ public class MainActivity extends BaseTabActivity {
             JoyApplication.releaseForExitApp();
         }
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        if(JoyApplication.isLogin()){
-//            menu.findItem(R.id.action_login).seti
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_login) {
-            SettingActivity.startActivity(this);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public static void startActivity(Context context) {
-
-        Intent intent = new Intent();
-        intent.setClass(context, MainActivity.class);
-        context.startActivity(intent);
-    }
-
 }
