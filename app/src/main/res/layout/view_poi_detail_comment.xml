@@ -25,7 +25,7 @@
                 android:numStars="5"
                 android:stepSize="0.5" />
 
-            <com.joy.library.widget.JTextView
+            <com.android.library.widget.JTextView
                 android:id="@+id/tvPoiCommentNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
                 android:singleLine="true"
                 android:textSize="12dp" />
 
-            <com.joy.library.widget.JTextView
+            <com.android.library.widget.JTextView
                 android:id="@+id/tvCommentLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:textColor="@color/black_trans87"
                 android:textSize="43dp" />
 
-            <com.joy.library.widget.JTextView
+            <com.android.library.widget.JTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvCommentLevel"

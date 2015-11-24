@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
-import com.joy.library.view.ExLayoutWidget;
+import com.android.library.view.ExLayoutWidget;
 
 
 /**

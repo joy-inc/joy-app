@@ -1,11 +1,10 @@
 package com.joy.app.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.joy.library.utils.TextUtil;
+import com.android.library.utils.TextUtil;
 
 /**
  * 处理url打开对应的activity或者处理事件

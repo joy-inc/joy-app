@@ -2,8 +2,8 @@ package com.joy.app.activity.user;
 
 import android.os.Bundle;
 
-import com.joy.library.activity.frame.BaseHttpUiActivity;
-import com.joy.library.httptask.frame.ObjectRequest;
+import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.httptask.ObjectRequest;
 
 /**
  * 用户登录,注册入口

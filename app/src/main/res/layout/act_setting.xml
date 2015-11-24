@@ -22,7 +22,7 @@
             fresco:placeholderImage="@drawable/ic_user_def_head"
             fresco:placeholderImageScaleType="fitXY"/>
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             android:textColor="@android:color/white"
             android:textSize="12dp"/>
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvLoginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_star"/>
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvSetting1"
             style="@style/setting_text"
             android:text="@string/setting_app"
@@ -76,7 +76,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_rectangle"/>
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvSetting2"
             style="@style/setting_text"
             android:text="@string/setting_rectangle"
@@ -97,7 +97,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_clean"/>
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvSetting3"
             style="@style/setting_text"
             android:text="@string/setting_clean"
@@ -119,7 +119,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_about"/>
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvSetting5"
             style="@style/setting_text"
             android:text="@string/setting_update"
@@ -141,7 +141,7 @@
             style="@style/setting_icon"
             android:src="@drawable/ic_setting_about"/>
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvSetting4"
             style="@style/setting_text"
             android:text="@string/setting_about"

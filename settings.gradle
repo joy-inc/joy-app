@@ -1,1 +1,1 @@
-include ':joy-library-android:library', 'app'
+include ':joy-library-android:library-android', ':joy-library-android:library-joy', 'app'

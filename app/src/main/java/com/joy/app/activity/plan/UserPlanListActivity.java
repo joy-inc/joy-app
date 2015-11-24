@@ -1,10 +1,8 @@
 package com.joy.app.activity.plan;
 
 import com.joy.app.bean.plan.PlanListItem;
-import com.joy.library.activity.frame.BaseHttpRvActivity;
-import com.joy.library.httptask.frame.ObjectRequest;
-
-import java.util.List;
+import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.httptask.ObjectRequest;
 
 /**
  * @author litong  <br>

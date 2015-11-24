@@ -7,9 +7,9 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.HotCityItem;
-import com.joy.library.adapter.frame.ExAdapter;
-import com.joy.library.adapter.frame.ExViewHolder;
-import com.joy.library.adapter.frame.ExViewHolderBase;
+import com.android.library.adapter.ExAdapter;
+import com.android.library.adapter.ExViewHolder;
+import com.android.library.adapter.ExViewHolderBase;
 
 /**
  * Created by KEVIN.DAI on 15/7/10.

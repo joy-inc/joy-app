@@ -1,7 +1,7 @@
 package com.joy.app.activity.hotel;
 
-import com.joy.library.activity.frame.BaseHttpRvActivity;
-import com.joy.library.httptask.frame.ObjectRequest;
+import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.httptask.ObjectRequest;
 
 /**
  * @author litong  <br>

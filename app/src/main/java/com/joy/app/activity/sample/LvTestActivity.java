@@ -3,18 +3,16 @@ package com.joy.app.activity.sample;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
+import com.android.library.activity.BaseHttpLvActivity;
+import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.adapter.sample.CityLvAdapter;
 import com.joy.app.bean.sample.HotCityItem;
 import com.joy.app.utils.http.sample.TestHtpUtil;
-import com.joy.library.activity.frame.BaseHttpLvActivity;
-import com.joy.library.adapter.frame.OnItemViewClickListener;
-import com.joy.library.httptask.frame.ObjectRequest;
 
 import java.util.List;
 
@@ -87,20 +85,5 @@ public class LvTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
             super.onBackPressed();
             JoyApplication.releaseForExitApp();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        return super.onOptionsItemSelected(item);
     }
 }

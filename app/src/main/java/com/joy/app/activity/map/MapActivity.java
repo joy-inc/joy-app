@@ -2,7 +2,7 @@ package com.joy.app.activity.map;
 
 import android.os.Bundle;
 
-import com.joy.library.activity.frame.BaseUiActivity;
+import com.android.library.activity.BaseUiActivity;
 
 /**
  * @author litong  <br>

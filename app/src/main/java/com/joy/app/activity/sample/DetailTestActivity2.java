@@ -12,14 +12,14 @@ import com.joy.app.R;
 import com.joy.app.adapter.sample.CityDetailRvAdapter;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.utils.http.sample.TestHtpUtil;
-import com.joy.library.activity.frame.BaseHttpRvActivity;
-import com.joy.library.httptask.frame.ObjectRequest;
-import com.joy.library.utils.CollectionUtil;
-import com.joy.library.view.observablescrollview.ObservableRecyclerView;
-import com.joy.library.view.observablescrollview.ObservableScrollViewCallbacks;
-import com.joy.library.view.observablescrollview.ScrollState;
-import com.joy.library.view.observablescrollview.ScrollUtils;
-import com.joy.library.view.systembar.SystemBarTintManager;
+import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.CollectionUtil;
+import com.android.library.view.observablescrollview.ObservableRecyclerView;
+import com.android.library.view.observablescrollview.ObservableScrollViewCallbacks;
+import com.android.library.view.observablescrollview.ScrollState;
+import com.android.library.view.observablescrollview.ScrollUtils;
+import com.android.library.view.systembar.SystemBarTintManager;
 
 import java.util.ArrayList;
 

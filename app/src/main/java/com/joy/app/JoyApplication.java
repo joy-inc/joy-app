@@ -3,9 +3,9 @@ package com.joy.app;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.joy.app.utils.XiaomiUtil;
 import com.joy.app.utils.prefs.CommonPrefs;
-import com.joy.library.BaseApplication;
+import com.android.library.BaseApplication;
 import com.joy.library.share.ShareConstant;
-import com.joy.library.utils.LogMgr;
+import com.android.library.utils.LogMgr;
 
 /**
  * Created by KEVIN.DAI on 15/7/8.

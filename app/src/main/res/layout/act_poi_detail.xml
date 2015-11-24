@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.joy.library.view.observablescrollview.ObservableScrollView
+    <com.android.library.view.observablescrollview.ObservableScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/acbBook"
@@ -53,7 +53,7 @@
 
         </LinearLayout>
 
-    </com.joy.library.view.observablescrollview.ObservableScrollView>
+    </com.android.library.view.observablescrollview.ObservableScrollView>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/acbBook"

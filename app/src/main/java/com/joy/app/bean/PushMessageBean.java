@@ -1,6 +1,6 @@
 package com.joy.app.bean;
 
-import com.joy.library.utils.TextUtil;
+import com.android.library.utils.TextUtil;
 
 import java.io.Serializable;
 

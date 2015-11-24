@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.joy.app.BuildConfig;
-import com.joy.app.activity.main.MainActivity;
-import com.joy.library.utils.TextUtil;
-import com.joy.library.utils.ToastUtil;
+import com.android.library.utils.TextUtil;
+import com.android.library.utils.ToastUtil;
 import com.umeng.update.UmengUpdateAgent;
 
 /**

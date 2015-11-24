@@ -121,6 +121,7 @@
             </intent-filter>
         </receiver>
         <!--小米-->
+
         <!--友盟-->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -135,8 +136,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
         <!--友盟升级-->
-
         <!--友盟-->
+
     </application>
 
 

@@ -14,7 +14,7 @@
         android:scaleType="centerCrop" />
 
 
-    <com.joy.library.widget.JTextView
+    <com.android.library.widget.JTextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,7 +47,7 @@
             android:numStars="5"
             android:stepSize="0.5" />
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvPoiCommentNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
             android:singleLine="true"
             android:textSize="15dp" />
 
-        <com.joy.library.widget.JTextView
+        <com.android.library.widget.JTextView
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
