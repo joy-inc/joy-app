@@ -49,6 +49,13 @@ public class MainActivity extends BaseTabActivity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+
+        super.onNewIntent(intent);
+        mMainActivityHelper.onNewIntent(intent);
+    }
+
+    @Override
     protected void onRestart() {
 
         super.onRestart();

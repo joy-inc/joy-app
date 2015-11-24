@@ -55,7 +55,10 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <style name="Widget.AppCompat.RatingBar.Joy"></style>
+    <style name="Widget.AppCompat.RatingBar.Joy">
+        <item name="android:progressDrawable">@drawable/src_ratingbar</item>
+        <item name="android:indeterminateDrawable">@drawable/src_ratingbar</item>
+    </style>
 
     <!--设置界面的线性布局-->
     <style name="setting_div">
@@ -89,6 +92,20 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:src">@drawable/ic_setting_noun</item>
+    </style>
+
+    <!-- 长段说明文字 -->
+    <style name="LongText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+    <style name="LongText.Dark">
+        <item name="android:textColor">@color/black_trans87</item>
+    </style>
+    <style name="LongText.Light">
+        <item name="android:textColor">@color/black_trans54</item>
     </style>
 
 </resources>

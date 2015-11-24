@@ -7,49 +7,49 @@
 
     <!-- 分享到身边人 -->
 
-    <TextView android:layout_margin="5dp"
+    <com.joy.library.widget.JTextView android:layout_margin="5dp"
         android:id="@+id/tvWeibo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到微博"/>
 
-    <TextView android:layout_margin="5dp"
+    <com.joy.library.widget.JTextView android:layout_margin="5dp"
         android:id="@+id/tvWeixin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到微信"/>
 
-    <TextView android:layout_margin="5dp"
+    <com.joy.library.widget.JTextView android:layout_margin="5dp"
         android:id="@+id/tvFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到朋友圈"/>
 
-    <TextView android:layout_margin="5dp"
+    <com.joy.library.widget.JTextView android:layout_margin="5dp"
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="email"/>
 
-    <TextView android:layout_margin="5dp"
+    <com.joy.library.widget.JTextView android:layout_margin="5dp"
         android:id="@+id/tvQq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享qq"/>
 
-    <TextView android:layout_margin="5dp"
+    <com.joy.library.widget.JTextView android:layout_margin="5dp"
         android:id="@+id/tvQaZone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到qqZone"/>
 
-    <TextView android:layout_margin="5dp"
+    <com.joy.library.widget.JTextView android:layout_margin="5dp"
         android:id="@+id/tvsms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="分享到短信"/>
 
-    <TextView android:layout_margin="5dp"
+    <com.joy.library.widget.JTextView android:layout_margin="5dp"
         android:id="@+id/tvShareMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

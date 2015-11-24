@@ -13,7 +13,7 @@
         android:scaleType="centerCrop"/>
 
 
-    <TextView
+    <com.joy.library.widget.JTextView
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

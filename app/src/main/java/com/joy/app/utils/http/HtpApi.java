@@ -16,9 +16,9 @@ public interface HtpApi {
     String URL_GET_SPECIAL_LIST = URL_BASE + "/qyer/special/topic/special_list";// 获取专题列表
 
     // poi折扣====================================
-    String URL_GET_POI_INFO = URL_BASE + "/qyer/footprint/poi_detail";// 获取poi详情 //---临时
-    String URL_GET_POI_DISCOUNT = URL_BASE + "/poi/discount_detail";// 获取poi折扣详情接口
-    String URL_GET_ORDERS = URL_BASE + "/order/get_order_list";// 获取订单列表
+    String URL_GET_PRODUCT_DETAIL = URL_BASE + "/product/detail";// 获取poi折扣详情接口
+    String URL_GET_COMMENTS = URL_BASE + "/product/comment_list";// 获取商品评论列表
+    String URL_GET_ORDERS = URL_BASE + "/order/order_list";// 获取订单列表
 
     // 行程规划====================================
     String URL_POST_PLAN_ADD =JOY_URL_BASE + "/user/plan_add";//  添加我的旅行计划

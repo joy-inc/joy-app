@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 用户行程规划    <br>
  */
 public class UserPlanListActivity extends BaseHttpRvActivity<PlanListItem> {
 

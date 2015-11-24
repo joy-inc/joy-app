@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="16dp">
+
+    <com.joy.library.widget.JTextView
+        android:id="@+id/tvTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/shape_point_small" />
+
+    <com.joy.library.widget.JTextView
+        android:id="@+id/tvHighDesc"
+        style="@style/LongText.Light"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/tvTip"
+        android:gravity="top" />
+
+</RelativeLayout>

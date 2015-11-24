@@ -4,10 +4,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.bean.MainOrder;
 import com.joy.library.adapter.frame.ExRvAdapter;
 import com.joy.library.adapter.frame.ExRvViewHolder;
+import com.joy.library.utils.ViewUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,12 +35,18 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
 
         if (data != null) {
 
-            holder.tvId.setText(data.getOrder_id());
-            holder.tvTitle.setText(data.getProduct_title());
-            holder.tvType.setText(data.getProduct_type());
-            holder.tvCount.setText(data.getCount());
+            holder.tvId.setText(JoyApplication.getContext().getString(R.string.order_id, data.getOrder_id()));
+            holder.tvTitle.setText(JoyApplication.getContext().getString(R.string.order_title, data.getProduct_title()));
+            holder.tvType.setText(JoyApplication.getContext().getString(R.string.product_type, data.getProduct_type()));
+            holder.tvCount.setText(JoyApplication.getContext().getString(R.string.out_num, data.getCount()));
             holder.tvTotalPrice.setText(data.getTotal_price());
-            holder.tvStatus.setText(data.getStatus());
+
+            if ("0".equals(data.getStatus())) {
+                ViewUtil.showView(holder.tvStatus);
+                holder.tvStatus.setText(R.string.pay);
+            } else {
+                ViewUtil.hideView(holder.tvStatus);
+            }
         }
     }
 
@@ -66,7 +74,15 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
 
             super(itemView);
             ButterKnife.bind(this, itemView);
-            tvTitle.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
+                }
+            });
+            tvStatus.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
