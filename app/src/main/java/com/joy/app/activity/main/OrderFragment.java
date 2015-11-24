@@ -35,7 +35,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        executeRefresh();
+        executeCacheAndRefresh();
     }
 
     @Override

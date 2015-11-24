@@ -55,7 +55,8 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/acRatingBar"
             android:ellipsize="end"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textSize="15dp" />
 
         <com.joy.library.widget.JTextView
             android:id="@+id/tvPrice"

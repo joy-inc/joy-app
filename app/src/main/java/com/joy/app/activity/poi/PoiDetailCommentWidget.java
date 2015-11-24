@@ -24,6 +24,9 @@ import com.joy.library.view.ExLayoutWidget;
  */
 public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnClickListener {
 
+    private AppCompatRatingBar mAcRatingBar;
+    private TextView mTvPoiCommentNum;
+    private TextView tvCommentLevel;
     private CommentLlvAdapter adapter;
     private LinearListView mLinearLv;
     private AppCompatButton acbSeeAll;
@@ -40,6 +43,10 @@ public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnCli
 
         View contentView = activity.getLayoutInflater().inflate(R.layout.view_poi_detail_comment, null);
 
+        mAcRatingBar = (AppCompatRatingBar) contentView.findViewById(R.id.acRatingBar);
+        mTvPoiCommentNum = (TextView) contentView.findViewById(R.id.tvPoiCommentNum);
+        tvCommentLevel = (TextView) contentView.findViewById(R.id.tvCommentLevel);
+
         mLinearLv = (LinearListView) contentView.findViewById(R.id.linearLv);
         acbSeeAll = (AppCompatButton) contentView.findViewById(R.id.acbSeeAll);
         acbSeeAll.setOnClickListener(this);
@@ -49,8 +56,12 @@ public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnCli
 
     protected void invalidate(final CommentAll data) {
 
-        if (data == null)
+        if (data == null && data.getScores() != null && data.getComments() != null)
             return;
+
+        mAcRatingBar.setRating(Float.parseFloat(data.getScores().getComment_level()));
+        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, data.getScores().getComment_num()));
+        tvCommentLevel.setText(data.getScores().getComment_level());
 
         if (CollectionUtil.size(data.getComments()) > 3) {
             adapter.setData(data.getComments().subList(0, 3));

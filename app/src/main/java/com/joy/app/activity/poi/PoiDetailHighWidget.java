@@ -74,7 +74,7 @@ public class PoiDetailHighWidget extends ExLayoutWidget {
             @Override
             public int getConvertViewRid() {
 
-                return R.layout.item_product_highlight;
+                return R.layout.item_poi_highlight;
             }
 
             @Override
