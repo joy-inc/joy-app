@@ -21,8 +21,8 @@ public class OrderHtpUtil extends BaseHtpUtil {
 
         Map<String, Object> params = getBaseParams();
         params.put("poi_id", poiId);
-        params.put("oauth_token", JoyApplication.getUserToken());
-        params.put("screensize", DeviceUtil.getScreenHeight() + "");
+        params.put(KEY_USER_TOKEN, VALUE_USER_TOKEN);
+        params.put("screensize", DeviceUtil.getScreenHeight());
 
         return createGetUrl(URL_GET_POI_INFO, params);
     }
@@ -38,9 +38,9 @@ public class OrderHtpUtil extends BaseHtpUtil {
     public static String getOrderListUrl(String page, String count, String order_status) {
 
         Map<String, Object> params = getBaseParams();
-        params.put("oauth_token", JoyApplication.getUserToken());
-        params.put("page", page);
-        params.put("count", count);
+        params.put(KEY_USER_TOKEN, VALUE_USER_TOKEN);
+        params.put(KEY_PAGE, page);
+        params.put(KEY_COUNT, count);
         params.put("order_status", order_status);
 
         return createGetUrl(URL_GET_ORDERS, params);
