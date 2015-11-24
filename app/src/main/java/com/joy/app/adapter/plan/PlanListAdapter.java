@@ -1,14 +1,13 @@
 package com.joy.app.adapter.plan;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.library.adapter.ExRvAdapter;
+import com.android.library.adapter.ExRvViewHolder;
 import com.joy.app.R;
 import com.joy.app.bean.plan.PlanItem;
-import com.joy.library.adapter.frame.ExRvAdapter;
-import com.joy.library.adapter.frame.ExRvViewHolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
