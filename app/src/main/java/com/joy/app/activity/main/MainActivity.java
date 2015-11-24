@@ -84,6 +84,8 @@ public class MainActivity extends BaseTabActivity {
     protected void initTitleView() {
 
         super.initTitleView();
+        setTitleLogo(R.drawable.ic_joebility);
+        setTitle(null);
         setTitleTextColor(getResources().getColor(R.color.color_accent));
         mMainActivityBC.initTitleView();
     }
@@ -129,6 +131,9 @@ public class MainActivity extends BaseTabActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if(JoyApplication.isLogin()){
+//            menu.findItem(R.id.action_login).seti
+        }
         return true;
     }
 
@@ -137,7 +142,7 @@ public class MainActivity extends BaseTabActivity {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_login) {
             SettingActivity.startActivity(this);
             return true;
         }

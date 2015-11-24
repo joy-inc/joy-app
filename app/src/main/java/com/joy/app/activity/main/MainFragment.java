@@ -35,7 +35,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        executeRefresh();
+        executeCacheAndRefresh();
     }
 
     @Override
