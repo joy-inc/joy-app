@@ -65,7 +65,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.discount.PoiDetailActivity"
+            android:name=".activity.poi.PoiDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent.toolbar.overlay"/>
 

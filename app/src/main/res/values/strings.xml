@@ -27,6 +27,11 @@
     <string name="highlights">项目亮点</string>
     <string name="introduce">简介</string>
     <string name="need_know">购买须知</string>
+    <string name="need_know_tip">请仔细阅读相关内容</string>
+    <string name="need_know_cost">费用说明</string>
+    <string name="need_know_product">产品说明</string>
+    <string name="need_know_use">使用方法</string>
+    <string name="need_know_attention">注意事项</string>
     <string name="see_all">查看全部</string>
     <string name="book">立即预订</string>
     <string name="order_title">全网最低：%s</string>

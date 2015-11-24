@@ -1,4 +1,4 @@
-package com.joy.app.activity.discount;
+package com.joy.app.activity.poi;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -53,7 +53,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_discount_poi_detail);
+        setContentView(R.layout.act_poi_detail);
         executeRefresh();
         getCommentList();
     }
@@ -123,6 +123,37 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         if (mPoiDetail.getIs_book())
             ViewUtil.showView(mAcbBook);
 
+        if (BuildConfig.DEBUG) {
+
+            CommentAll data = new CommentAll();
+            CommentScores scores = new CommentScores();
+            scores.setComment_level("3.5");
+            scores.setComment_num("22");
+            scores.setFive("1");
+            scores.setFour("2");
+            scores.setThree("3");
+            scores.setTwo("4");
+            scores.setOne("5");
+
+            data.setScores(scores);
+
+            ArrayList<CommentItem> list = new ArrayList();
+
+            for (int i = 0; i < 7; i++) {
+                CommentItem item = new CommentItem();
+                item.setComment_id(i + "");
+                item.setComment("我是第 " + i + " 个来点评的诶！～");
+                item.setComment_level("2.5");
+                item.setComment_date("2015年11月19日");
+                item.setComment_user("小" + i);
+
+                list.add(item);
+            }
+            data.setComments(list);
+
+            mCommentWidget.invalidate(data);
+
+        }
         return true;
     }
 
@@ -242,7 +273,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         } else if (R.id.tvAllKnow == view.getId()) {
 
             showToast("查看全部购买须知");
-        } else if (R.id.acbAllComment == view.getId()) {
+        } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();
         }

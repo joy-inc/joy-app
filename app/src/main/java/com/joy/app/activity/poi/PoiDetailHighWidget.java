@@ -1,4 +1,4 @@
-package com.joy.app.activity.discount;
+package com.joy.app.activity.poi;
 
 import android.app.Activity;
 import android.view.View;
@@ -31,7 +31,7 @@ public class PoiDetailHighWidget extends ExLayoutWidget {
 
         mAdapter = new HighlightAdapter();
 
-        View contentView = activity.getLayoutInflater().inflate(R.layout.view_discount_poi_detail_high, null);
+        View contentView = activity.getLayoutInflater().inflate(R.layout.view_poi_detail_high, null);
 
         mLinearListview = (LinearListView) contentView.findViewById(R.id.linearLv);
 
@@ -65,13 +65,16 @@ public class PoiDetailHighWidget extends ExLayoutWidget {
 
                 String data = getItem(mPosition);
 
-                tvHighDesc.setText(data);
+                if (data != null) {
+
+                    tvHighDesc.setText(data);
+                }
             }
 
             @Override
             public int getConvertViewRid() {
 
-                return R.layout.item_product_highlight;
+                return R.layout.item_poi_highlight;
             }
 
             @Override

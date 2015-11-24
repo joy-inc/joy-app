@@ -2,34 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_primary_dark"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="20dp">
 
     <android.support.v7.widget.AppCompatRatingBar
         android:id="@+id/acRatingBar"
-        style="@style/Widget.AppCompat.RatingBar.Joy"
+        style="?android:ratingBarStyleSmall"
         android:layout_width="wrap_content"
-        android:layout_height="8dp"
+        android:layout_height="13dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:indeterminateDrawable="@drawable/src_ratingbar"
         android:numStars="5"
+        android:progressDrawable="@drawable/src_ratingbar"
         android:stepSize="0.5" />
 
     <com.joy.library.widget.JTextView
         android:id="@+id/tvComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         android:lineSpacingExtra="3dp"
         android:textColor="@color/black_trans87"
-        android:textSize="13dp" />
+        android:textSize="14dp" />
 
     <com.joy.library.widget.JTextView
         android:id="@+id/tvCommentUserDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="7dp"
         android:lineSpacingExtra="3dp"
         android:textColor="@color/black_trans54"
-        android:textSize="13dp" />
+        android:textSize="11dp" />
 
+    <View
+        style="@style/Line.Dark.Horizontal"
+        android:layout_marginTop="12dp" />
 
 </LinearLayout>
