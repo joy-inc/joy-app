@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.joy.library.utils.TextUtil;
+
 /**
  * 处理url打开对应的activity或者处理事件
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
@@ -71,10 +73,81 @@ public class ActivityUrlUtil {
         return false;
     }
 
-
-    public static boolean startActivityByHttpUrl(Context context, String url) {
-        return true;
+    public static int getUrlType(String url) {
+        if (TextUtil.isEmpty(url)) {
+            return -1;
+        }
+        if (checkUrl(url, URL_COUNTRY_TOPIC)) {
+            return TYPE_COUNTRY_TOPIC;
+        } else if (checkUrl(url, URL_CITY_TOPIC)) {
+            return TYPE_CITY_TOPIC;
+        } else if (checkUrl(url, URL_POI_DETAIL)) {
+            return TYPE_POI_DETAIL;
+        } else if (checkUrl(url, URL_HOLTER_DETAIL)) {
+            return TYPE_HOLTER_DETAIL;
+        } else if (checkUrl(url, URL_TICKETS)) {
+            return TYPE_TICKETS;
+        } else if (checkUrl(url, URL_VISA)) {
+            return TYPE_VISA;
+        } else if (checkUrl(url, URL_TRANSPORT)) {
+            return TYPE_TRANSPORT;
+        } else if (checkUrl(url, URL_WIFI)) {
+            return TYPE_WIFI;
+        } else if (checkUrl(url, URL_JOY)) {
+            return TYPE_JOY;
+        } else if (checkUrl(url, URL_HOLTER)) {
+            return TYPE_HOLTER;
+        } else if (checkUrl(url, URL_FOOD)) {
+            return TYPE_FOOD;
+        } else if (checkUrl(url, URL_SHOPPING)) {
+            return TYPE_SHOPPING;
+        } else if (checkUrl(url, URL_ROUTE)) {
+            return TYPE_ROUTE;
+        }
+        return -1;
     }
 
+    public static boolean startActivityByHttpUrl(Context context, String url) {
+
+        int urlType = getUrlType(url);
+        switch (urlType) {
+            case TYPE_COUNTRY_TOPIC:
+                return true;
+            case TYPE_CITY_TOPIC:
+                return true;
+            case TYPE_POI_DETAIL:
+                return true;
+            case TYPE_HOLTER_DETAIL:
+                return true;
+            case TYPE_TICKETS:
+                return true;
+            case TYPE_VISA:
+                return true;
+            case TYPE_TRANSPORT:
+                return true;
+            case TYPE_WIFI:
+                return true;
+            case TYPE_JOY:
+                return true;
+            case TYPE_HOLTER:
+                return true;
+            case TYPE_FOOD:
+                return true;
+            case TYPE_SHOPPING:
+                return true;
+            case TYPE_ROUTE:
+                return true;
+        }
+        return false;
+    }
+
+    private static boolean checkUrl(String url, String url1) {
+        if (url.startsWith("http") || url.startsWith("https")) {
+            if (url.indexOf(url1) > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
