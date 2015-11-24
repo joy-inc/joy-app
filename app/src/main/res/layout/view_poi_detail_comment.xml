@@ -20,16 +20,16 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/acbSeeAll"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="23dp"
+        android:background="@drawable/selector_bg_rectangle_accent"
         android:gravity="center"
-        android:paddingBottom="13dp"
         android:paddingLeft="56dp"
         android:paddingRight="56dp"
-        android:paddingTop="13dp"
         android:text="@string/see_all"
         android:textColor="@color/color_accent"
+        android:textSize="12dp"
         android:visibility="gone" />
 
 </LinearLayout>
