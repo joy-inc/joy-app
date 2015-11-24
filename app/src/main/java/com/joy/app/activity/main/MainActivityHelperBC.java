@@ -3,6 +3,7 @@ package com.joy.app.activity.main;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.joy.app.BuildConfig;
 import com.joy.app.activity.main.MainActivity;
 import com.joy.library.utils.TextUtil;
 import com.joy.library.utils.ToastUtil;
@@ -39,8 +40,10 @@ public class MainActivityHelperBC {
 
         //处理推送
         delayStartActivityByPushIntent(mMainActivity.getIntent());
-        UmengUpdateAgent.setUpdateOnlyWifi(false);
-        UmengUpdateAgent.update(mMainActivity);
+        if(!BuildConfig.DEBUG) {
+            UmengUpdateAgent.setUpdateOnlyWifi(false);
+            UmengUpdateAgent.update(mMainActivity);
+        }
 
     }
 

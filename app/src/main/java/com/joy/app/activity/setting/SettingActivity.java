@@ -68,6 +68,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     protected void initContentView() {
 
         ButterKnife.bind(this);
+
         findViewById(R.id.llApp).setOnClickListener(this);
         findViewById(R.id.llRectangle).setOnClickListener(this);
         findViewById(R.id.llClean).setOnClickListener(this);
