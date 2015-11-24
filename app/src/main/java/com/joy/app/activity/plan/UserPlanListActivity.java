@@ -5,15 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.httptask.ObjectRequest;
 import com.joy.app.BuildConfig;
+import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.bean.plan.PlanItem;
 import com.joy.app.bean.plan.PlanListItem;
 import com.joy.app.utils.http.PlanHttpUtil;
-import com.joy.library.activity.frame.BaseHttpRvActivity;
-import com.joy.library.adapter.frame.OnItemViewClickListener;
-import com.joy.library.httptask.frame.ObjectRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +45,12 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     @Override
     protected void initContentView() {
         super.initContentView();
-        UserPlanAdapter adapter = new UserPlanAdapter();
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
+        PlanListAdapter adapter = new PlanListAdapter();
+        adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanItem>() {
 
             @Override
-            public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
+            public void onItemViewClick(int position, View clickView, PlanItem planItem) {
 
-                showToast("~~" + position);
             }
         });
         setAdapter(adapter);

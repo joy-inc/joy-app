@@ -5,17 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.library.adapter.ExRvAdapter;
+import com.android.library.adapter.ExRvViewHolder;
 import com.joy.app.R;
 import com.joy.app.bean.plan.PlanItem;
-import com.joy.library.adapter.frame.ExRvAdapter;
-import com.joy.library.adapter.frame.ExRvViewHolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 行程规划列表    <br>
  */
 public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder,PlanItem> {
     @Override
