@@ -1,0 +1,50 @@
+package com.joy.app.adapter.plan;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.joy.app.R;
+import com.joy.app.bean.plan.PlanItem;
+import com.joy.library.adapter.frame.ExRvAdapter;
+import com.joy.library.adapter.frame.ExRvViewHolder;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+/**
+ * @author litong  <br>
+ * @Description XXXXXX    <br>
+ */
+public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder,PlanItem> {
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(inflate(parent, R.layout.item_plan_folder));
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
+    }
+
+    public class ViewHolder extends ExRvViewHolder {
+
+        @Bind(R.id.jtvTitle)
+        TextView tvLtitle;
+
+        public ViewHolder(final View itemView) {
+
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
+                }
+            });
+        }
+    }
+}

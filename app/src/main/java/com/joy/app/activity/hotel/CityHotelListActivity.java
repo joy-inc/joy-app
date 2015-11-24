@@ -5,7 +5,7 @@ import com.joy.library.httptask.frame.ObjectRequest;
 
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 城市酒店列表    <br>
  */
 public class CityHotelListActivity extends BaseHttpRvActivity {
     @Override

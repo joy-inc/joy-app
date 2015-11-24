@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_poi_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        />
+    <com.joy.library.widget.JTextView
+        android:id="@+id/jtv_cnname"
+        android:layout_alignRight="@+id/sdv_poi_photo"
+        android:textColor="@color/white"
+        android:text="12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.joy.library.widget.JTextView
+        android:id="@+id/jtv_enname"
+        android:layout_alignRight="@+id/sdv_poi_photo"
+        android:layout_alignBottom="@id/jtv_cnname"
+        android:text="123"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
