@@ -1,5 +1,7 @@
 package com.joy.app.utils.http;
 
+import com.joy.app.JoyApplication;
+
 import java.util.Map;
 
 /**
@@ -46,7 +48,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
     public static String getOrderListUrl(String page, String count, String order_status) {
 
         Map<String, Object> params = getBaseParams();
-        params.put(KEY_USER_TOKEN, VALUE_USER_TOKEN);
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         params.put(KEY_PAGE, page);
         params.put(KEY_COUNT, count);
         params.put("order_status", order_status);
