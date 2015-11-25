@@ -9,14 +9,20 @@ import android.widget.RelativeLayout;
 
 import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.DensityUtil;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
+import com.joy.app.adapter.order.OrderDetailAdapter;
+import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.bean.poi.OrderDetail;
+import com.joy.app.bean.sample.Special;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.PlanHttpUtil;
+import com.joy.app.utils.http.sample.TestHtpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +33,23 @@ import java.util.List;
  */
 public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
     String Url;
+    View PayButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showPayButton();
+        executeRefresh();
     }
+
+    @Override
+    protected void initContentView() {
+        super.initContentView();
+
+        OrderDetailAdapter adapter = new OrderDetailAdapter();
+        setAdapter(adapter);
+    }
+
     private void showPayButton(){
+        if (PayButton != null)return;
         FrameLayout root = getRootView();
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         RelativeLayout layout = new RelativeLayout(this);
@@ -46,18 +63,64 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
             }
         });
         layout.addView(tv,tvpaParams);
+        PayButton = layout;
         root.addView(layout,params);
+    }
+
+    private void removePayButton(){
+        if (PayButton == null)return;
+        getRootView().removeView(PayButton);
+        PayButton = null;
     }
 
     @Override
     protected List<?> getListInvalidateContent(OrderDetail orderDetail) {
+        if (orderDetail.isUnpayState()){
+            showPayButton();
+        }else{
+            removePayButton();
+        }
+        switch (orderDetail.getStatus()){
+            case 0://待支付
+                orderDetail.setOrderInfor(getString(R.string.order_detail_create_infor));
+                orderDetail.setOrderTitle(getString(R.string.order_detail_create_title));
+                break;
+            case 1://订单过期或被取消
+                orderDetail.setOrderInfor(getString(R.string.order_detail_create_infor));
+                orderDetail.setOrderTitle(getString(R.string.order_detail_create_title));
+                break;
+            case 2://支付成功 订单处理中
+                orderDetail.setOrderInfor(getString(R.string.order_detail_create_infor));
+                orderDetail.setOrderTitle(getString(R.string.order_detail_create_title));
+                break;
+            case 3://订单已确认
+                orderDetail.setOrderInfor(getString(R.string.order_detail_create_infor));
+                orderDetail.setOrderTitle(getString(R.string.order_detail_create_title));
+                break;
+            default://默认
+                orderDetail.setOrderInfor(getString(R.string.order_detail_create_infor));
+                orderDetail.setOrderTitle(getString(R.string.order_detail_create_title));
+
+        }
         ArrayList<OrderDetail> list= new ArrayList<OrderDetail>();
         list.add(orderDetail);
-        return super.getListInvalidateContent(orderDetail);
+        getAdapter().clear();
+        return list;
     }
 
     private void SendPayMassage(){
 
+    }
+    private void SendCancelMassage(){
+        ObjectRequest<Object> req = new ObjectRequest<>(OrderHtpUtil.getCancelOrderUrl(Url), Object.class);
+        req.setResponseListener(new ObjectResponse<Object>() {
+
+            @Override
+            public void onSuccess(Object tag, Object obj) {
+
+            }
+        });
+        addRequest2QueueNoCache(req, req.getIdentifier());
     }
 
     @Override

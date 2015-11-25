@@ -1,5 +1,9 @@
 package com.joy.app.bean.poi;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
+
 import java.io.Serializable;
 
 /**
@@ -23,6 +27,7 @@ public class OrderDetail implements Serializable {
     String order_id,product_title,selected_item,contact_name,contact_phone,contact_email;
     int count,status;
     float total_price;
+    String orderInfor,orderTitle;
 
     public String getOrder_id() {
         return order_id;
@@ -98,5 +103,32 @@ public class OrderDetail implements Serializable {
 
     public String getTotal_price_Str() {
         return "￥"+total_price;
+    }
+
+    public boolean isUnpayState(){
+        return getStatus() == 0;
+    }
+
+    public String getOrderInfor() {
+        return orderInfor;
+    }
+
+    public void setOrderInfor(String orderInfor) {
+        this.orderInfor = orderInfor;
+    }
+
+    public String getOrderTitle() {
+        return orderTitle;
+    }
+
+    public void setOrderTitle(String orderTitle) {
+        this.orderTitle = orderTitle;
+    }
+
+    public CharSequence getFormatCountStr(){
+
+        SpannableString spannableString = new SpannableString("x"+getCount());
+        spannableString.setSpan(new RelativeSizeSpan(0.50f), 0 , 1 ,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString;
     }
 }
