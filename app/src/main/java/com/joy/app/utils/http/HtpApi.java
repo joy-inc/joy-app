@@ -21,6 +21,9 @@ public interface HtpApi {
     String URL_GET_OPTIONS = URL_BASE + "/product/option_list";// 获取商品项目列表
     String URL_GET_ORDERS = URL_BASE + "/order/order_list";// 获取订单列表
 
+    String URL_POST_ORDER_DETAIL = JOY_URL_BASE + "/order/detail";// 获取订单
+    String URL_POST_ORDER_CANCEL = JOY_URL_BASE + "/order/cancel";// 取消订单
+
     // 行程规划====================================
     String URL_POST_PLAN_ADD =JOY_URL_BASE + "/user/plan_add";//  添加我的旅行计划
     String URL_POST_PLAN_FOLDER =JOY_URL_BASE + "/user/plan_folders";//  我的旅行计划文件夹列表

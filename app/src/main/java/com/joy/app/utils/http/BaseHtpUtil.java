@@ -2,11 +2,10 @@ package com.joy.app.utils.http;
 
 import android.os.Build;
 
-import com.joy.app.BuildConfig;
-import com.joy.app.JoyApplication;
 import com.android.library.utils.AppUtil;
 import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.LogMgr;
+import com.joy.app.BuildConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +18,6 @@ public class BaseHtpUtil implements HtpApi {
     protected static final String KEY_PAGE = "page";
     protected static final String KEY_COUNT = "count";
     protected static final String KEY_USER_TOKEN = "user_token";
-    protected static final String VALUE_USER_TOKEN = JoyApplication.getUserToken();
 
     protected static Map<String, Object> getBaseParams() {
 

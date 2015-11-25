@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.android.library.activity.BaseHttpLvFragment;
+import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.httptask.ObjectRequest;
 import com.joy.app.R;
 import com.joy.app.adapter.sample.CityLvAdapter;
 import com.joy.app.bean.sample.HotCityItem;
 import com.joy.app.utils.http.sample.TestHtpUtil;
-import com.android.library.activity.BaseHttpLvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
-import com.android.library.httptask.ObjectRequest;
 
 import java.util.List;
 
@@ -35,6 +35,8 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
     @Override
     protected void initContentView() {
 
+        setLoadMoreEnable(false);
+
         CityLvAdapter adapter = new CityLvAdapter();
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<HotCityItem>() {
 
@@ -48,7 +50,7 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
     }
 
     @Override
-    protected ObjectRequest<List<HotCityItem>> getObjectRequest() {
+    protected ObjectRequest<List<HotCityItem>> getObjectRequest(int pageIndex, int pageLimit) {
 
         return new ObjectRequest(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
     }

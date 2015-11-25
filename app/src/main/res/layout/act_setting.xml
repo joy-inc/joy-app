@@ -5,12 +5,17 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llUserInfoDiv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="80dp" >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdUserBG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            fresco:placeholderImageScaleType="fitXY"/>
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/sdvUserHead"
@@ -23,27 +28,28 @@
             fresco:placeholderImageScaleType="fitXY"/>
 
         <com.android.library.widget.JTextView
-            android:id="@+id/tvInfo"
+            android:id="@+id/tvInfo" android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/setting_no_login"
+            android:layout_toRightOf="@id/sdvUserHead"
             android:textColor="@android:color/white"
             android:textSize="12dp"/>
 
         <com.android.library.widget.JTextView
-            android:id="@+id/tvLoginButton"
+            android:id="@+id/tvLoginButton" android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:background="@drawable/shape_bg_oval_accent"
             android:padding="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="@string/setting_login_now"
             android:textColor="@android:color/white"
             android:textSize="12dp"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/llApp"
@@ -152,4 +158,32 @@
             style="@style/setting_noun"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/llLoginOut"
+        style="@style/setting_div"
+        android:layout_marginTop="15dp"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/iconSetting6"
+            style="@style/setting_icon"
+            android:src="@drawable/ic_setting_loginout"/>
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvSetting6"
+            style="@style/setting_text"
+            android:text="@string/setting_loginout"
+            />
+
+    </LinearLayout>
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/tvVersion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:gravity="center|bottom"
+        android:paddingBottom="10dp"
+        android:textColor="@color/white_trans26"
+        android:textSize="12dp"/>
 </LinearLayout>
