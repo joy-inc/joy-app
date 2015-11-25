@@ -1,4 +1,4 @@
-package com.joy.app.adapter;
+package com.joy.app.adapter.poi;
 
 import android.support.v7.widget.AppCompatRatingBar;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.joy.app.R;
-import com.joy.app.bean.CommentItem;
+import com.joy.app.bean.poi.CommentItem;
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
 
