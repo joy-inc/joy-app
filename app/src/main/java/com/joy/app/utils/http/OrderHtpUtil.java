@@ -63,6 +63,18 @@ public class OrderHtpUtil extends BaseHtpUtil {
     }
 
     /**
+     * 获取商品项目列表
+     *
+     * @return
+     */
+    public static String getProductOptionListUrl(String product_id) {
+
+        Map<String, Object> params = getBaseParams();
+        params.put("product_id", product_id);
+        return createGetUrl(URL_GET_OPTIONS, params);
+    }
+
+    /**
      * 通过用户ID获取用户订单列表
      *
      * @param page         页数	默认1

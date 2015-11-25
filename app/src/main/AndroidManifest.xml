@@ -1,22 +1,23 @@
-<manifest package="com.joy.app"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.joy.app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <!--小米-->
+    <!-- 小米 -->
     <permission
         android:name="com.joy.app.permission.MIPUSH_RECEIVE"
-        android:protectionLevel="signature"/>
-    <uses-permission android:name="com.joy.app.permission.MIPUSH_RECEIVE"/>
-    <!--小米-->
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.joy.app.permission.MIPUSH_RECEIVE" />
 
+    <!-- 小米 -->
     <application
         android:name=".JoyApplication"
         android:allowBackup="true"
@@ -28,26 +29,24 @@
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.main.MainActivity"
             android:launchMode="singleTask"
-
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.common.WebViewActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.setting.SettingActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sample.LvTestActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sample.LvLoadMoreTestActivity"
             android:label="Lv LoadMore"
@@ -55,43 +54,47 @@
         <activity
             android:name=".activity.sample.DetailTestActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay"/>
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
         <activity
             android:name=".activity.sample.DetailTestActivity2"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay"/>
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
         <activity
             android:name=".activity.sample.DetailTestActivity3"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay"/>
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
         <activity
             android:name=".activity.sample.TabTestActivity"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.poi.PoiDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay"/>
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+        <activity
+            android:name=".activity.poi.OrderBookActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
 
-        <!--小米-->
+        <!-- 小米 -->
         <service
             android:name="com.xiaomi.push.service.XMPushService"
             android:enabled="true"
-            android:process=":pushservice"/>
+            android:process=":pushservice" />
         <service
             android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
         <service
             android:name="com.xiaomi.mipush.sdk.MessageHandleService"
-            android:enabled="true"/>
-        <!--注：此service必须在2.2.5版本以后（包括2.2.5版本）加入-->
+            android:enabled="true" />
+        <!-- 注：此service必须在2.2.5版本以后（包括2.2.5版本）加入 -->
         <receiver
             android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
         <receiver
@@ -99,46 +102,45 @@
             android:exported="false"
             android:process=":pushservice">
             <intent-filter>
-                <action android:name="com.xiaomi.push.PING_TIMER"/>
+                <action android:name="com.xiaomi.push.PING_TIMER" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.joy.app.receiver.XiaomiPushMessageReceiver"
+            android:name=".receiver.XiaomiPushMessageReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE"/>
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED"/>
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.xiaomi.mipush.ERROR"/>
+                <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
         <receiver android:name=".receiver.PushStartACtivityReceiver">
             <intent-filter>
-                <action android:name="com.joy.app.receiver.PushStartACtivityReceiver"/>
+                <action android:name="com.joy.app.receiver.PushStartACtivityReceiver" />
             </intent-filter>
         </receiver>
-        <!--小米-->
+        <!-- 小米 -->
 
-        <!--友盟-->
+
+        <!-- 友盟 -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="533e4f4056240b5a19000d36"/>
-        <!--友盟升级-->
+            android:value="533e4f4056240b5a19000d36" />
+        <!-- 友盟升级 -->
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService">
-        </service>
+            android:process=":DownloadingService"></service>
+
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
-        </activity>
-        <!--友盟升级-->
-        <!--友盟-->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+        <!-- 友盟升级 -->
+        <!-- 友盟 -->
 
     </application>
-
 
 </manifest>

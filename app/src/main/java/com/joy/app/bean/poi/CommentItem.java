@@ -1,4 +1,4 @@
-package com.joy.app.bean;
+package com.joy.app.bean.poi;
 
 import com.android.library.utils.TextUtil;
 
