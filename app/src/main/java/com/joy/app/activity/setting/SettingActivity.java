@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.library.utils.ViewUtil;
+import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.joy.app.BuildConfig;
+import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.android.library.activity.BaseUiActivity;
@@ -27,6 +31,9 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
 
     @Bind(R.id.sdvUserHead)
     SimpleDraweeView mUserHead;
+
+    @Bind(R.id.sdUserBG)
+    SimpleDraweeView mUserBG;
 
     @Bind(R.id.tvInfo)
     TextView mInfo;
@@ -72,6 +79,17 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
         findViewById(R.id.llRectangle).setOnClickListener(this);
         findViewById(R.id.llClean).setOnClickListener(this);
         findViewById(R.id.llAbout).setOnClickListener(this);
+        View loginOut = findViewById(R.id.llLoginOut);
+        loginOut.setOnClickListener(this);
+        if (JoyApplication.isLogin()) {
+            ViewUtil.showView(loginOut);
+            ViewUtil.hideView(mLoginButton);
+            mUserBG.setImageURI(Uri.parse(JoyApplication.getUserToken()));
+        }
+        JTextView version = (JTextView) findViewById(R.id.tvVersion);
+        version.setText(getString(R.string.setting_version, BuildConfig.VERSION_NAME));
+
+
         mLoginButton.setOnClickListener(this);
     }
 
@@ -99,20 +117,25 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
 
                 UmengUpdateAgent.forceUpdate(SettingActivity.this);
                 break;
+            case R.id.llLoginOut:
+                loginOut();
+                break;
         }
     }
 
     /**
      * 登录的回掉
+     *
      * @param event
      */
     public void onEventMainThread(LoginStatusEvent event) {
-//        EventBus.getDefault().post( new LoginStatusEvent("FirstEvent btn clicked"));
+        //        EventBus.getDefault().post( new LoginStatusEvent("FirstEvent btn clicked"));
     }
+
     /**
      * 打开市场
      */
-    private void openAppMarket(){
+    private void openAppMarket() {
         try {
 
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -124,6 +147,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
+
     /**
      * 推荐分享,打开推荐界面
      */
@@ -152,8 +176,15 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
 
     }
 
-    public static void startActivity(Context context){
+    /**
+     * 登出
+     */
+    private void loginOut(){
+        //// TODO: 15/11/25 登出成功后要改变按钮的状态 
+    }
 
-        context.startActivity(new Intent(context,SettingActivity.class));
+    public static void startActivity(Context context) {
+
+        context.startActivity(new Intent(context, SettingActivity.class));
     }
 }

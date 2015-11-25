@@ -19,6 +19,8 @@
     <string name="setting_clean">清楚所有缓存</string>
     <string name="setting_about">关于</string>
     <string name="setting_update">检查更新</string>
+    <string name="setting_loginout">退出登录</string>
+    <string name="setting_version">Version :%s</string>
     <!--设置界面-->
 
     <!-- 详情、商品 -->
