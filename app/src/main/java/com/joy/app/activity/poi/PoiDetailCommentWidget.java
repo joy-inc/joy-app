@@ -4,18 +4,20 @@ import android.app.Activity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.joy.app.R;
-import com.joy.app.bean.CommentAll;
-import com.joy.app.bean.CommentItem;
-import com.joy.app.view.LinearListView;
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
+import com.joy.app.R;
+import com.joy.app.bean.CommentAll;
+import com.joy.app.bean.CommentItem;
+import com.joy.app.bean.CommentScores;
+import com.joy.app.view.LinearListView;
 
 /**
  * poi详情页的 点评列表部分
@@ -24,12 +26,10 @@ import com.android.library.view.ExLayoutWidget;
  */
 public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnClickListener {
 
-    private AppCompatRatingBar mAcRatingBar;
-    private TextView mTvPoiCommentNum;
-    private TextView tvCommentLevel;
-    private CommentLlvAdapter adapter;
+    private CommentLlvAdapter mAdapter;
     private LinearListView mLinearLv;
-    private AppCompatButton acbSeeAll;
+    private AppCompatButton mAcbSeeAll;
+    private CommentScoresWidget mScoreWidget;
 
     public PoiDetailCommentWidget(Activity activity) {
 
@@ -39,39 +39,37 @@ public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnCli
     @Override
     protected View onCreateView(Activity activity, Object... args) {
 
-        adapter = new CommentLlvAdapter();
+        mAdapter = new CommentLlvAdapter();
 
         View contentView = activity.getLayoutInflater().inflate(R.layout.view_poi_detail_comment, null);
 
-        mAcRatingBar = (AppCompatRatingBar) contentView.findViewById(R.id.acRatingBar);
-        mTvPoiCommentNum = (TextView) contentView.findViewById(R.id.tvPoiCommentNum);
-        tvCommentLevel = (TextView) contentView.findViewById(R.id.tvCommentLevel);
+        LinearLayout rootDiv = (LinearLayout) contentView.findViewById(R.id.llRootDiv);
+        mScoreWidget = new CommentScoresWidget(getActivity());
+        rootDiv.addView(mScoreWidget.getContentView(), 0);
 
         mLinearLv = (LinearListView) contentView.findViewById(R.id.linearLv);
-        acbSeeAll = (AppCompatButton) contentView.findViewById(R.id.acbSeeAll);
-        acbSeeAll.setOnClickListener(this);
+        mAcbSeeAll = (AppCompatButton) contentView.findViewById(R.id.acbSeeAll);
+        mAcbSeeAll.setOnClickListener(this);
 
         return contentView;
     }
 
     protected void invalidate(final CommentAll data) {
 
-        if (data == null && data.getScores() != null && data.getComments() != null)
+        if (data == null && data.getComments() != null)
             return;
 
-        mAcRatingBar.setRating(Float.parseFloat(data.getScores().getComment_level()));
-        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, data.getScores().getComment_num()));
-        tvCommentLevel.setText(data.getScores().getComment_level());
+        mScoreWidget.invalidate(data.getScores());
 
         if (CollectionUtil.size(data.getComments()) > 3) {
-            adapter.setData(data.getComments().subList(0, 3));
-            ViewUtil.showView(acbSeeAll);
+            mAdapter.setData(data.getComments().subList(0, 3));
+            ViewUtil.showView(mAcbSeeAll);
         } else {
-            adapter.setData(data.getComments());
-            ViewUtil.goneView(acbSeeAll);
+            mAdapter.setData(data.getComments());
+            ViewUtil.goneView(mAcbSeeAll);
         }
-        mLinearLv.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        mLinearLv.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -122,9 +120,6 @@ public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnCli
                     tvCommentUserDate.setText(data.getComment_user() + " - " + data.getComment_date());
                 }
             }
-
         }
-
     }
-
 }

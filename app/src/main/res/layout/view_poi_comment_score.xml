@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/scoreDiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="20dp"
+        android:paddingTop="24dp">
+
+        <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/acRatingBar"
+            style="@style/Widget.AppCompat.RatingBar.Joy"
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:numStars="5"
+            android:stepSize="0.5" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvPoiCommentNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/acRatingBar"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="12dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvCommentLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/acRatingBar"
+            android:textColor="@color/black_trans87"
+            android:textSize="43dp" />
+
+        <com.android.library.widget.JTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCommentLevel"
+            android:text="平均分"
+            android:textColor="@color/color_accent"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/scoreDiv"
+        android:orientation="vertical"
+        android:paddingRight="40dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textColor="@color/black_trans54"
+                android:textSize="10dp" />
+
+            <ProgressBar
+                android:id="@+id/score5"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv5Count"
+                android:layout_toRightOf="@+id/tv5" />
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv5Count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/color_accent"
+                android:textSize="10dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:textColor="@color/black_trans54"
+                android:textSize="10dp" />
+
+            <ProgressBar
+                android:id="@+id/score4"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv4Count"
+                android:layout_toRightOf="@+id/tv4" />
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv4Count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/color_accent"
+                android:textSize="10dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textColor="@color/black_trans54"
+                android:textSize="10dp" />
+
+            <ProgressBar
+                android:id="@+id/score3"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv3Count"
+                android:layout_toRightOf="@+id/tv3" />
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv3Count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/color_accent"
+                android:textSize="10dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textColor="@color/black_trans54"
+                android:textSize="10dp" />
+
+            <ProgressBar
+                android:id="@+id/score2"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv2Count"
+                android:layout_toRightOf="@+id/tv2" />
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv2Count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/color_accent"
+                android:textSize="10dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/black_trans54"
+                android:textSize="10dp" />
+
+            <ProgressBar
+                android:id="@+id/score1"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv1Count"
+                android:layout_toRightOf="@+id/tv1" />
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv1Count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/color_accent"
+                android:textSize="10dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

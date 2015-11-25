@@ -108,4 +108,15 @@
         <item name="android:textColor">@color/black_trans54</item>
     </style>
 
+    <style name="Base.Widget.AppCompat.ProgressBar.Horizontal.Scores">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminateDrawable">@drawable/layer_poi_comment_score</item>
+        <item name="android:progressDrawable">@drawable/layer_poi_comment_score</item>
+        <item name="android:maxHeight">5dp</item>
+        <item name="android:minHeight">5dp</item>
+    </style>
+
 </resources>

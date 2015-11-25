@@ -4,6 +4,7 @@
     <string name="app_name">JOY</string>
 
     <string name="route">线路</string>
+    <string name="destination">目的地</string>
     <string name="travel_plan">旅行计划</string>
     <string name="order">订单</string>
     <string name="booking">预订</string>

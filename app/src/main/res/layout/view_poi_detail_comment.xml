@@ -1,65 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llRootDiv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:paddingTop="24dp">
-
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/acRatingBar"
-                style="@style/Widget.AppCompat.RatingBar.Joy"
-                android:layout_width="wrap_content"
-                android:layout_height="13dp"
-                android:numStars="5"
-                android:stepSize="0.5" />
-
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvPoiCommentNum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/acRatingBar"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:textSize="12dp" />
-
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvCommentLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/acRatingBar"
-                android:textColor="@color/black_trans87"
-                android:textSize="43dp" />
-
-            <com.android.library.widget.JTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCommentLevel"
-                android:text="平均分"
-                android:textColor="@color/color_accent"
-                android:textSize="12dp" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-        </LinearLayout>
-    </RelativeLayout>
 
     <View style="@style/Line.Dark.Horizontal" />
 
@@ -75,16 +20,16 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/acbSeeAll"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="23dp"
+        android:background="@drawable/selector_bg_rectangle_accent"
         android:gravity="center"
-        android:paddingBottom="13dp"
         android:paddingLeft="56dp"
         android:paddingRight="56dp"
-        android:paddingTop="13dp"
         android:text="@string/see_all"
         android:textColor="@color/color_accent"
+        android:textSize="12dp"
         android:visibility="gone" />
 
 </LinearLayout>
