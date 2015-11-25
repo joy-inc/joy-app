@@ -1,5 +1,7 @@
 package com.joy.app.utils.http;
 
+import com.joy.app.JoyApplication;
+
 import java.util.Map;
 
 /**
@@ -8,6 +10,31 @@ import java.util.Map;
  * Created by xiaoyu.chen on 15/11/11.
  */
 public class OrderHtpUtil extends BaseHtpUtil {
+
+    /**
+     * 获取商品详情
+     *
+     * @return
+     */
+    public static String getOrderDetailUrl(String order_id) {
+
+        Map<String, Object> params = getBaseParams();
+        params.put("order_id", order_id);
+        params.put("user_token", JoyApplication.getUserToken());
+        return createGetUrl(URL_POST_ORDER_DETAIL, params);
+    }
+    /**
+     * 删除订单
+     *
+     * @return
+     */
+    public static String getCancelOrderUrl(String order_id) {
+
+        Map<String, Object> params = getBaseParams();
+        params.put("order_id", order_id);
+        params.put("user_token", JoyApplication.getUserToken());
+        return createGetUrl(URL_POST_ORDER_CANCEL, params);
+    }
 
     /**
      * 获取商品详情

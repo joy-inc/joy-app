@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder,PlanItem> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflate(parent, R.layout.item_plan_folder));
+        return new ViewHolder(inflate(parent, R.layout.item_plan_list));
     }
 
     @Override
