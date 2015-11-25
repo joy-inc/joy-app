@@ -35,6 +35,8 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
     @Override
     protected void initContentView() {
 
+        setLoadMoreEnable(false);
+
         CityLvAdapter adapter = new CityLvAdapter();
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<HotCityItem>() {
 
@@ -57,11 +59,5 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
     protected void onHttpFailed(Object tag, String msg) {
 
         showToast("error: " + msg);
-    }
-
-    @Override
-    protected boolean isLoadMoreEnable(int dataSize) {
-
-        return false;
     }
 }
