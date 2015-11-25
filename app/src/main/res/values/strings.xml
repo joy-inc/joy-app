@@ -44,6 +44,8 @@
     <string name="order_price">订单金额：</string>
     <string name="pay">立即支付</string>
     <!--订单-->
+
+    <string name="order_detail_title">订单状态</string>
     <string name="order_detail_id">订单编号</string>
     <string name="order_detail_item">所选项目</string>
     <string name="order_detail_name">联系人</string>

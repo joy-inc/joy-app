@@ -41,6 +41,14 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
     }
 
     @Override
+    protected void initTitleView() {
+        super.initTitleView();
+        addTitleLeftBackView();
+        addTitleMiddleView(R.string.order_detail_title);
+        //TODO 右边的点点点图标
+    }
+
+    @Override
     protected void initContentView() {
         super.initContentView();
 
