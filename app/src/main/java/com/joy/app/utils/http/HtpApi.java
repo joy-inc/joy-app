@@ -18,6 +18,7 @@ public interface HtpApi {
     // poi折扣====================================
     String URL_GET_PRODUCT_DETAIL = URL_BASE + "/product/detail";// 获取poi折扣详情接口
     String URL_GET_COMMENTS = URL_BASE + "/product/comment_list";// 获取商品评论列表
+    String URL_GET_OPTIONS = URL_BASE + "/product/option_list";// 获取商品项目列表
     String URL_GET_ORDERS = URL_BASE + "/order/order_list";// 获取订单列表
 
     // 行程规划====================================
