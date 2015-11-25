@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/color_grey"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdvPhoto"
+    <com.android.library.view.observablescrollview.ObservableScrollView
         android:layout_width="match_parent"
-        android:layout_height="240dp" />
+        android:layout_height="match_parent"
+        android:background="@color/color_grey"
+        android:layout_above="@+id/view">
 
-    <com.android.library.widget.JTextView
-        android:id="@+id/tvTitle"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/sdvPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="240dp" />
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/sdvPhoto"
+                android:layout_margin="16dp"
+                android:textColor="@color/white"
+                android:textSize="17dp" />
+
+            <com.joy.app.view.LinearListView
+                android:id="@+id/linearLv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sdvPhoto"
+                android:focusable="false"
+                android:listSelector="@android:color/transparent"
+                android:orientation="vertical"
+                android:scrollingCache="false" />
+
+        </RelativeLayout>
+    </com.android.library.view.observablescrollview.ObservableScrollView>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/sdvPhoto"
-        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_accent"
+        android:padding="16dp"
         android:textColor="@color/white"
         android:textSize="17dp" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvSelect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_below="@+id/sdvPhoto" />
-
-    <com.joy.app.view.LinearListView
-        android:id="@+id/linearLv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sdvPhoto" />
 
 </RelativeLayout>

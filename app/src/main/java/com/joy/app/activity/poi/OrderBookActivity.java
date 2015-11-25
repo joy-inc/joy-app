@@ -105,7 +105,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
                 ArrayList list = new ArrayList();
 
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < 8; j++) {
                     LevelOptions options = new LevelOptions();
                     options.setOption_id(i + "" + j);
                     options.setContent("类型为" + i + ", 内容为可选字符串的 " + j + " 日游观光游船");

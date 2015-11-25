@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
+import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.LogMgr;
 import com.joy.app.R;
 import com.joy.app.bean.poi.LevelOptions;
@@ -31,76 +32,16 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
         }
     }
 
-    class OrderOptionAdapter extends ExAdapter<LevelOptions> {
+    @Override
+    public int getViewTypeCount() {
 
-        @Override
-        protected ExViewHolder getViewHolder(int position) {
-
-            return new DataHolder();
-        }
-
-        class DataHolder extends ExViewHolderBase {
-
-            TextView tvContent;
-            TextView tvDesc;
-            TextView tvPrice;
-            TextView tvCount;
-            AppCompatButton acbMinus;
-            AppCompatButton acbPlus;
-
-            @Override
-            public void invalidateConvertView() {
-
-                LevelOptions data = getItem(mPosition);
-
-                if (data != null) {
-
-                    tvContent.setText(data.getContent());
-                    tvDesc.setText(data.getDescribe());
-                    tvPrice.setText(data.getLocalPrice());
-                    tvCount.setText(data.getLocalCount());
-                }
-            }
-
-            @Override
-            public int getConvertViewRid() {
-
-                return R.layout.item_poi_level_option;
-            }
-
-            @Override
-            public void initConvertView(View convertView) {
-
-                tvContent = (TextView) convertView.findViewById(R.id.tvContent);
-                tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
-                tvPrice = (TextView) convertView.findViewById(R.id.tvPrice);
-                tvCount = (TextView) convertView.findViewById(R.id.tvCount);
-                acbMinus = (AppCompatButton) convertView.findViewById(R.id.acbMinus);
-                acbPlus = (AppCompatButton) convertView.findViewById(R.id.acbPlus);
-
-                acbMinus.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if (LogMgr.isDebug())
-                            LogMgr.d("ContentViewHolder", "onClick-->acbMinus position = " + mPosition);
-                    }
-                });
-
-                acbPlus.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if (LogMgr.isDebug())
-                            LogMgr.d("ContentViewHolder", "onClick-->acbPlus position = " + mPosition);
-                    }
-                });
-            }
-        }
+        return 3;
     }
 
     @Override
-    public int getViewTypeCount() {
+    public int getCount() {
+
+        LogMgr.w("~~size" + CollectionUtil.size(getData()));
 
         return 3;
     }
@@ -227,6 +168,75 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
 
             tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
             linearLv = (LinearListView) convertView.findViewById(R.id.linearLv);
+        }
+    }
+
+
+    class OrderOptionAdapter extends ExAdapter<LevelOptions> {
+
+        @Override
+        protected ExViewHolder getViewHolder(int position) {
+
+            return new DataHolder();
+        }
+
+        class DataHolder extends ExViewHolderBase {
+
+            TextView tvContent;
+            TextView tvDesc;
+            TextView tvPrice;
+            TextView tvCount;
+            AppCompatButton acbMinus;
+            AppCompatButton acbPlus;
+
+            @Override
+            public void invalidateConvertView() {
+
+                LevelOptions data = getItem(mPosition);
+
+                if (data != null) {
+
+                    tvContent.setText(data.getContent());
+                    tvDesc.setText(data.getDescribe());
+                    tvPrice.setText(data.getLocalPrice());
+                    tvCount.setText(data.getLocalCount());
+                }
+            }
+
+            @Override
+            public int getConvertViewRid() {
+
+                return R.layout.item_poi_level_option;
+            }
+
+            @Override
+            public void initConvertView(View convertView) {
+
+                tvContent = (TextView) convertView.findViewById(R.id.tvContent);
+                tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
+                tvPrice = (TextView) convertView.findViewById(R.id.tvPrice);
+                tvCount = (TextView) convertView.findViewById(R.id.tvCount);
+                acbMinus = (AppCompatButton) convertView.findViewById(R.id.acbMinus);
+                acbPlus = (AppCompatButton) convertView.findViewById(R.id.acbPlus);
+
+                acbMinus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (LogMgr.isDebug())
+                            LogMgr.d("ContentViewHolder", "onClick-->acbMinus position = " + mPosition);
+                    }
+                });
+
+                acbPlus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (LogMgr.isDebug())
+                            LogMgr.d("ContentViewHolder", "onClick-->acbPlus position = " + mPosition);
+                    }
+                });
+            }
         }
     }
 }
