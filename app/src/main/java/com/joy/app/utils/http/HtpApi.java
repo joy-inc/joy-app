@@ -20,8 +20,9 @@ public interface HtpApi {
     String URL_POST_PRODUCT_DETAIL = JOY_URL_BASE + "/product/detail";// 获取poi折扣详情接口
     String URL_POST_COMMENTS = JOY_URL_BASE + "/product/comment_list";// 获取商品评论列表
     String URL_POST_OPTIONS = JOY_URL_BASE + "/product/option_list";// 获取商品项目列表
-    String URL_POST_ORDERS = JOY_URL_BASE + "/order/order_list";// 获取订单列表
-
+    String URL_POST_CONTACT = JOY_URL_BASE + "/product/contact_info";// 获取联系人信息
+    String URL_POST_ORDER_LIST = JOY_URL_BASE + "/order/order_list";// 获取订单列表
+    String URL_POST_ORDER_CREATE = JOY_URL_BASE + "/order/create";// 创建订单
     String URL_POST_ORDER_DETAIL = JOY_URL_BASE + "/order/detail";// 获取订单
     String URL_POST_ORDER_CANCEL = JOY_URL_BASE + "/order/cancel";// 取消订单
 

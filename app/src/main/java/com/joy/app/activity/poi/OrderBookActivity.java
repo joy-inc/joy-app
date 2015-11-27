@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -37,6 +38,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private SimpleDraweeView sdvPhoto;
     private TextView tvTitle;
     private LinearListView linearLv;
+    private ProductLevelAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,20 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         sdvPhoto = (SimpleDraweeView) findViewById(R.id.sdvPhoto);
         linearLv = (LinearListView) findViewById(R.id.linearLv);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
+
+        mAdapter = new ProductLevelAdapter();
+        mAdapter.setOnItemViewClickListener(new OnItemViewClickListener() {
+
+            @Override
+            public void onItemViewClick(int position, View clickView, Object o) {
+
+                ProductLevels data = mAdapter.getItem(position);
+                if (data != null) {
+
+                    showToast(data.getLevel_id());
+                }
+            }
+        });
     }
 
     @Override
@@ -79,17 +95,23 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         sdvPhoto.setImageURI(Uri.parse(mPhotoUrl));
         tvTitle.setText(mTitle);
 
-        ProductLevelAdapter adapter = new ProductLevelAdapter();
-        adapter.setData(product.getLevels());
-        linearLv.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        mAdapter.setData(product.getLevels());
+        linearLv.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        // // TODO: 15/11/26 选择日期、项目后 重置金额
     }
 
     @Override
     protected ObjectRequest<Product> getObjectRequest() {
 
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getProductOptionListUrl(mId), PoiDetail.class);
+        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getProductOptionListUrl(mId), PoiDetail.class);
 
         if (BuildConfig.DEBUG) {
 
@@ -105,11 +127,11 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
                 ArrayList list = new ArrayList();
 
-                for (int j = 0; j < 8; j++) {
+                for (int j = 0; j < 2; j++) {
                     LevelOptions options = new LevelOptions();
                     options.setOption_id(i + "" + j);
-                    options.setContent("类型为" + i + ", 内容为可选字符串的 " + j + " 日游观光游船");
-                    options.setDescribe("只有类型3才加减数量＝" + j);
+                    options.setContent("成人" + i + ", 儿童" + j);
+                    options.setDescribe("13-99岁 " + j);
 
                     list.add(options);
                 }

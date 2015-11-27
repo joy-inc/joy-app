@@ -120,7 +120,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
 
     }
     private void SendCancelMassage(){
-        ObjectRequest<Object> req = new ObjectRequest<>(OrderHtpUtil.getCancelOrderUrl(Url), Object.class);
+        ObjectRequest<Object> req = ObjectRequest.get(OrderHtpUtil.getCancelOrderUrl(Url), Object.class);
         req.setResponseListener(new ObjectResponse<Object>() {
 
             @Override
@@ -133,7 +133,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
 
     @Override
     protected ObjectRequest<OrderDetail> getObjectRequest() {
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getOrderDetailUrl(Url), OrderDetail.class);
+        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getOrderDetailUrl(Url), OrderDetail.class);
         return obj ;
     }
 }
