@@ -160,7 +160,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     @Override
     protected ObjectRequest<PoiDetail> getObjectRequest() {
 
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getProductDetailUrl(mId), PoiDetail.class);
+        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getProductDetailUrl(mId), PoiDetail.class);
 
         if (BuildConfig.DEBUG) {
 
@@ -199,7 +199,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
     private void getCommentList() {
 
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getProductCommentListUrl(mId, 10, 1), CommentAll.class);
+        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getProductCommentListUrl(mId, 10, 1), CommentAll.class);
 
         if (BuildConfig.DEBUG) {
 

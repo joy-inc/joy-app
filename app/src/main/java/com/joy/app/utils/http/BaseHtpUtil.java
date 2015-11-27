@@ -5,10 +5,13 @@ import android.os.Build;
 import com.android.library.utils.AppUtil;
 import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.LogMgr;
+import com.android.library.utils.ParamsUtil;
+import com.android.library.utils.SortComparator;
 import com.joy.app.BuildConfig;
+import com.joy.app.utils.ChannelUtil;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by KEVIN.DAI on 15/7/10.
@@ -19,46 +22,39 @@ public class BaseHtpUtil implements HtpApi {
     protected static final String KEY_COUNT = "count";
     protected static final String KEY_USER_TOKEN = "user_token";
 
-    protected static Map<String, Object> getBaseParams() {
+    protected static Map<String, String> getBaseParams() {
 
-        Map<String, Object> params = new HashMap<>();
+        Map<String, String> params = new TreeMap<>(new SortComparator());
         addDefaultParams(params);
         return params;
     }
 
-    protected static void addDefaultParams(Map<String, Object> params) {
+    private static void addDefaultParams(Map<String, String> params) {
 
-        params.put("client_id", "qyer_android");
-        params.put("client_secret", "9fcaae8aefc4f9ac4915");
-        params.put("v", "1");
-        params.put("track_user_id", "");
-        params.put("track_deviceid", DeviceUtil.getIMEI());
+        params.put("track_client_id", "android");
+        params.put("track_device_id", DeviceUtil.getIMEI());
         params.put("track_app_version", BuildConfig.VERSION_NAME);
-        params.put("track_app_channel", "");
+        params.put("track_app_channel", ChannelUtil.getChannel());
         params.put("track_device_info", Build.DEVICE);
         params.put("track_os", "Android" + Build.VERSION.RELEASE);
-        params.put("app_installtime", AppUtil.getInstallAppTime() + "");
+        params.put("app_installtime", AppUtil.getInstallTime() + "");
+        params.put("lat", "");// 纬度
+        params.put("lon", "");// 经度
+        params.put("user_token", "");
+
+        //-----------------------------------------------------------------------
+        // TODO joy接口ok就干掉
+//        params.put("client_id", "qyer_android");
+//        params.put("client_secret", "9fcaae8aefc4f9ac4915");
+        //-----------------------------------------------------------------------
     }
 
-    protected static String createGetUrl(String url, Map<String, Object> params) {
+    protected static String createUrl(String url, Map<String, String> params) {
 
-        if (params == null || params.size() == 0)
-            return url;
+        String requestUrl = new StringBuilder(url).append('?').append(ParamsUtil.createUrl(params)).toString();
 
-        StringBuilder sb = new StringBuilder(url).append('?');
-
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-
-            sb.append(entry.getKey());
-            sb.append('=');
-            sb.append(String.valueOf(entry.getValue()));
-            sb.append('&');
-        }
-        sb.deleteCharAt(sb.length() - 1);
-
-        String requestUrl = sb.toString();
         if (LogMgr.isDebug())
-            LogMgr.d("BaseHtpUtil", "~~get: " + requestUrl);
+            LogMgr.d("BaseHtpUtil", "~~" + requestUrl);
 
         return requestUrl;
     }

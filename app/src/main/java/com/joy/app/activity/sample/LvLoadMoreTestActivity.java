@@ -59,6 +59,6 @@ public class LvLoadMoreTestActivity extends BaseHttpLvActivity<List<Special>> {
     @Override
     protected ObjectRequest<List<Special>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        return new ObjectRequest(TestHtpUtil.getSpecialListUrl(pageIndex, pageLimit), Special.class);
+        return ObjectRequest.get(TestHtpUtil.getSpecialListUrl(pageIndex, pageLimit), Special.class);
     }
 }
