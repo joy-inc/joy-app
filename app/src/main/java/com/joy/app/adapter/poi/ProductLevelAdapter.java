@@ -1,14 +1,17 @@
 package com.joy.app.adapter.poi;
 
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
+import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
 import com.joy.app.R;
 import com.joy.app.bean.poi.LevelOptions;
 import com.joy.app.bean.poi.ProductLevels;
@@ -41,9 +44,7 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
     @Override
     public int getCount() {
 
-        LogMgr.w("~~size" + CollectionUtil.size(getData()));
-
-        return 3;
+        return CollectionUtil.size(getData());
     }
 
     @Override
@@ -103,6 +104,13 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
 
             tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
             tvContent = (TextView) convertView.findViewById(R.id.tvContent);
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LogMgr.w("click date");
+                    callbackOnItemViewClickListener(mPosition, v);
+                }
+            });
         }
     }
 
@@ -133,6 +141,14 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
 
             tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
             tvContent = (TextView) convertView.findViewById(R.id.tvContent);
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    LogMgr.w("click contnt");
+                    callbackOnItemViewClickListener(mPosition, v);
+                }
+            });
         }
     }
 
@@ -140,6 +156,9 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
 
         private TextView tvTitle;
         private LinearListView linearLv;
+        private OrderOptionAdapter adapter;
+
+        private final int MAX_COUNT = 99;
 
         @Override
         public void invalidateConvertView() {
@@ -149,9 +168,7 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
             if (data != null) {
                 tvTitle.setText(data.getTitle());
 
-                OrderOptionAdapter adapter = new OrderOptionAdapter();
                 adapter.setData(data.getOptions());
-
                 linearLv.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
@@ -168,6 +185,38 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
 
             tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
             linearLv = (LinearListView) convertView.findViewById(R.id.linearLv);
+            adapter = new OrderOptionAdapter();
+            adapter.setOnItemViewClickListener(new OnItemViewClickListener() {
+
+                @Override
+                public void onItemViewClick(int position, View clickView, Object o) {
+
+                    LogMgr.w("加、减号");
+                    LevelOptions data = adapter.getItem(position);
+
+                    int count = Integer.parseInt(adapter.getItem(position).getLocalCount());
+
+                    if (clickView.getId() == R.id.acbMinus) {
+
+                        if (count > 1) {
+                            count = count - 1;
+                            adapter.getItem(position).setLocalCount(count + "");
+                            adapter.notifyDataSetChanged();
+                        } else {
+//                            showToast(R.string.toast_buy_num_no_zero); // todo
+                        }
+
+
+                    } else if(clickView.getId() == R.id.acbPlus) {
+
+                        if (count < MAX_COUNT) {
+                            count = count + 1;
+                            adapter.getItem(position).setLocalCount(count + "");
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -186,8 +235,8 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
             TextView tvDesc;
             TextView tvPrice;
             TextView tvCount;
-            AppCompatButton acbMinus;
-            AppCompatButton acbPlus;
+            TextView acbMinus;
+            TextView acbPlus;
 
             @Override
             public void invalidateConvertView() {
@@ -198,6 +247,12 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
 
                     tvContent.setText(data.getContent());
                     tvDesc.setText(data.getDescribe());
+
+                    if (TextUtil.isEmpty(data.getLocalPrice()))
+                        data.setLocalPrice("0");
+                    if (TextUtil.isEmpty(data.getLocalCount()))
+                        data.setLocalCount("1");
+
                     tvPrice.setText(data.getLocalPrice());
                     tvCount.setText(data.getLocalCount());
                 }
@@ -216,15 +271,14 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
                 tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
                 tvPrice = (TextView) convertView.findViewById(R.id.tvPrice);
                 tvCount = (TextView) convertView.findViewById(R.id.tvCount);
-                acbMinus = (AppCompatButton) convertView.findViewById(R.id.acbMinus);
-                acbPlus = (AppCompatButton) convertView.findViewById(R.id.acbPlus);
+                acbMinus = (TextView) convertView.findViewById(R.id.acbMinus);
+                acbPlus = (TextView) convertView.findViewById(R.id.acbPlus);
 
                 acbMinus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        if (LogMgr.isDebug())
-                            LogMgr.d("ContentViewHolder", "onClick-->acbMinus position = " + mPosition);
+                        callbackOnItemViewClickListener(mPosition, v);
                     }
                 });
 
@@ -232,8 +286,7 @@ public class ProductLevelAdapter extends ExAdapter<ProductLevels> {
                     @Override
                     public void onClick(View v) {
 
-                        if (LogMgr.isDebug())
-                            LogMgr.d("ContentViewHolder", "onClick-->acbPlus position = " + mPosition);
+                        callbackOnItemViewClickListener(mPosition, v);
                     }
                 });
             }

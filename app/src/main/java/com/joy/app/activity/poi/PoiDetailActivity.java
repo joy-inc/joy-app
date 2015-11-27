@@ -29,6 +29,7 @@ import com.joy.app.bean.poi.CommentItem;
 import com.joy.app.bean.poi.CommentScores;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
+import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ import java.util.ArrayList;
 public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements View.OnClickListener, ExBaseWidget.OnWidgetViewClickListener {
 
     private String mId;
+    private String mPhotoUrl;
+    private String mTopicId;
     private PoiDetail mPoiDetail;
 
     private TextView mAcbBook;
@@ -62,6 +65,8 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     protected void initData() {
 
         mId = TextUtil.filterNull(getIntent().getStringExtra("id"));
+        mPhotoUrl = TextUtil.filterNull(getIntent().getStringExtra("id"));
+        mTopicId = TextUtil.filterNull(getIntent().getStringExtra("id"));
     }
 
     @Override
@@ -160,7 +165,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     @Override
     protected ObjectRequest<PoiDetail> getObjectRequest() {
 
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getProductDetailUrl(mId), PoiDetail.class);
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_PRODUCT_DETAIL, PoiDetail.class, OrderHtpUtil.getProductDetailUrl(mId));
 
         if (BuildConfig.DEBUG) {
 
@@ -170,6 +175,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             data.setDescription("07:00从酒店或集合地搭乘玻璃天窗全景豪华旅游巴士 开始米尔福德峡湾一日游。\n\n09:00沿着瓦卡蒂普湖穿过金斯顿到达蒂阿瑙, 这里拥有 令人窒息的风景，激动人心的河流，您将有时…");
 
             ArrayList<String> photos = new ArrayList<>();
+            photos.add("http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280");
             photos.add("http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280");
 
             data.setLat("36.0655402");
@@ -199,7 +205,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
     private void getCommentList() {
 
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getProductCommentListUrl(mId, 10, 1), CommentAll.class);
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 10, 1));
 
         if (BuildConfig.DEBUG) {
 
@@ -328,7 +334,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
      * @param view The view which starts the transition
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void startActivity(Activity act, View view, String photoUrl, String id) {
+    public static void startActivity(Activity act, View view, String photoUrl, String id, String topicId) {
 
         if (act == null || view == null)
             return;
@@ -336,6 +342,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         Intent intent = new Intent(act, PoiDetailActivity.class);
         intent.putExtra("photoUrl", photoUrl);
         intent.putExtra("id", id);
+        intent.putExtra("topicId", topicId);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 

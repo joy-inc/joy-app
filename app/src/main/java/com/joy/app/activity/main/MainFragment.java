@@ -15,6 +15,7 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.ToastUtil;
+import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +58,10 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     @Override
     protected ObjectRequest<List<MainRoute>> getObjectRequest() {
 
-        ObjectRequest obj = null;//  ReqFactory.new(MainHttpUtil.getMainRouteList(1, 10), HotCityItem.class);
+
+        ObjectRequest req = ReqFactory.newPost(MainHttpUtil.URL_POST_MAIN_ROUTE_LIST, MainRoute.class, MainHttpUtil.getMainRouteList(getPageIndex(), getPageLimit()));
         if (BuildConfig.DEBUG) {
-            List<MainRoute> list = new ArrayList<MainRoute>();
+            List<MainRoute> list = new ArrayList<>();
             for (int i = 0; i < 20; i++) {
                 MainRoute route = new MainRoute();
                 route.setPic_url("http://pic.qyer.com/album/user/495/23/RUBQQBkGYw/index/300x200");
@@ -70,9 +72,9 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
                 route.setPlace_url("http://www.qq.com");
                 list.add(route);
             }
-            obj.setData(list);
+            req.setData(list);
         }
-        return obj;
+        return req;
     }
 
     @Override

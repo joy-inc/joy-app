@@ -1,13 +1,16 @@
 package com.joy.app.adapter.plan;
 
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.joy.app.R;
-import com.joy.app.bean.plan.PlanFolder;
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
+import com.android.library.widget.JTextView;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.joy.app.R;
+import com.joy.app.bean.plan.PlanFolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,6 +20,7 @@ import butterknife.ButterKnife;
  * @Description 用户行程规划    <br>
  */
 public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, PlanFolder> {
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,14 +35,21 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
 
         if (data != null) {
 
-            holder.tvLtitle.setText(data.getFolder_name());
+            holder.initData(data);
         }
     }
 
     public class ViewHolder extends ExRvViewHolder {
 
-        @Bind(R.id.jtvTitle)
-        TextView tvLtitle;
+        @Bind(R.id.sdvBg)
+        SimpleDraweeView mPhoto;
+
+        @Bind(R.id.jtv_number)
+        TextView mCount;
+
+        @Bind(R.id.jtv_Title)
+        TextView mTtile;
+
 
         public ViewHolder(final View itemView) {
 
@@ -53,5 +64,13 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
                 }
             });
         }
+
+        public void initData(PlanFolder folder) {
+            mPhoto.setImageURI(Uri.parse(folder.getPic_url()));
+            mCount.setText(folder.getChildren_num() + "");
+            mTtile.setText(folder.getFolder_name());
+        }
+
+
     }
 }

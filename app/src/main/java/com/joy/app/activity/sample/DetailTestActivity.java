@@ -100,7 +100,7 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
     @Override
     protected ObjectRequest<CityDetail> getObjectRequest() {
 
-        return new ObjectRequest(TestHtpUtil.getCityInfoUrl(getIntent().getStringExtra("cityId")), CityDetail.class);
+        return ObjectRequest.get(TestHtpUtil.getCityInfoUrl(getIntent().getStringExtra("cityId")), CityDetail.class);
     }
 
     @Override

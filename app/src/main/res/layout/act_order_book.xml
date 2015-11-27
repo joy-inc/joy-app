@@ -7,8 +7,8 @@
     <com.android.library.view.observablescrollview.ObservableScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_grey"
-        android:layout_above="@+id/view">
+        android:layout_above="@+id/llTotalDiv"
+        android:background="@color/color_grey">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -43,14 +43,6 @@
         </RelativeLayout>
     </com.android.library.view.observablescrollview.ObservableScrollView>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/color_accent"
-        android:padding="16dp"
-        android:textColor="@color/white"
-        android:textSize="17dp" />
+    <include layout="@layout/view_order_bottom_total_price" />
 
 </RelativeLayout>

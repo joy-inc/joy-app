@@ -78,6 +78,10 @@
             android:name=".activity.poi.OrderBookActivity"
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent.toolbar.overlay" />
+        <activity
+            android:name=".activity.poi.OrderBookProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
 
 
         <!-- 小米 -->

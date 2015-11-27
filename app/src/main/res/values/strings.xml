@@ -43,6 +43,24 @@
     <string name="out_num">出行人数：%s</string>
     <string name="order_price">订单金额：</string>
     <string name="pay">立即支付</string>
+    <string name="name">姓名</string>
+    <string name="phone">电话</string>
+    <string name="email">邮箱</string>
+    <string name="order_input_right_contact">请确保填写正确的联系方式</string>
+
+    <string name="toast_over_limit">您选择的商品数量已超上限，请重新选择</string>
+    <string name="toast_input_date">请填写日期</string>
+    <string name="toast_input_name">请填写姓名</string>
+    <string name="toast_input_phone">请填写手机号码</string>
+    <string name="toast_input_email">请填写邮箱地址</string>
+    <string name="toast_email_error">您填写的邮箱地址格式不正确，请重新填写</string>
+    <string name="toast_phone_error">您填写的手机号码格式不正确，请重新填写</string>
+    <string name="toast_pay_success">订单支付成功</string>
+    <string name="toast_pay_failed">订单支付失败</string>
+    <string name="toast_cannot_delete">该订单正在处理中，暂时无法删除</string>
+
+    <string name="alert_drop_content">您已填写的内容将丢失，确定返回？</string>
+    <string name="alert_order_delete">确定删除订单？</string>
     <!--订单-->
 
     <string name="order_detail_title">订单状态</string>
@@ -65,6 +83,9 @@
     <string name="order_detail_finish_title">订单已确认，购买成功</string>
     <string name="order_detail_finish_infor">请查收确认邮件，如有更多问题请咨询微信号</string>
 
+    <!--行程规划-->
+
+    <string name="plan_folder_things">things to do</string>
 
     <!--日历-->
     <string name="sans_serif" translatable="false">sans-serif</string>

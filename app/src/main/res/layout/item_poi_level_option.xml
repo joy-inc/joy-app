@@ -2,39 +2,80 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:paddingLeft="20dp">
 
     <View style="@style/Line.Dark.Horizontal" />
 
-    <com.android.library.widget.JTextView
-        android:id="@+id/tvContent"
+    <LinearLayout
+        android:id="@+id/llContentDiv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
-    <com.android.library.widget.JTextView
-        android:id="@+id/tvDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_trans87"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_trans54"
+            android:textSize="11dp" />
+    </LinearLayout>
 
     <com.android.library.widget.JTextView
         android:id="@+id/tvPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tvX"
+        android:layout_toRightOf="@+id/llContentDiv"
+        android:gravity="right"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="19dp" />
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/tvX"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tvCount"
+        android:text="x"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textColor="@color/color_accent" />
 
     <com.android.library.widget.JTextView
         android:id="@+id/tvCount"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/acbMinus"
+        android:textColor="@color/color_accent"
+        android:textSize="17dp" />
 
-    <android.support.v7.widget.AppCompatButton
+    <TextView
         android:id="@+id/acbMinus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/acbPlus" />
+        android:layout_centerVertical="true"
+        android:layout_margin="15dp"
+        android:layout_toLeftOf="@+id/acbPlus"
+        android:background="@drawable/ic_poi_order_minus" />
 
-    <android.support.v7.widget.AppCompatButton
+    <TextView
         android:id="@+id/acbPlus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_poi_order_plus" />
 </RelativeLayout>
