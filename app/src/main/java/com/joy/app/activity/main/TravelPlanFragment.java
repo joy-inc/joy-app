@@ -64,7 +64,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest() {
 
-        ObjectRequest obj = new ObjectRequest(PlanHttpUtil.getUserPlanFolderUrl(getPageIndex(), 5), PlanFolder.class);
+        ObjectRequest obj = ObjectRequest.get(PlanHttpUtil.getUserPlanFolderUrl(getPageIndex(), 5), PlanFolder.class);
         if (BuildConfig.DEBUG) {
             List<PlanFolder> data = new ArrayList<>();
             for (int i = 0; i < 5; i++) {

@@ -52,7 +52,7 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
     @Override
     protected ObjectRequest<List<HotCityItem>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        return new ObjectRequest(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
+        return ObjectRequest.get(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
     }
 
     @Override

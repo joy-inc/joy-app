@@ -58,7 +58,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     @Override
     protected ObjectRequest<List<MainOrder>> getObjectRequest() {
 
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getOrderListUrl("1", "5", "0"), MainOrder.class);
+        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getOrderListUrl("1", "5", "0"), MainOrder.class);
 
         if (BuildConfig.DEBUG) {
             List<MainOrder> list = new ArrayList<MainOrder>();

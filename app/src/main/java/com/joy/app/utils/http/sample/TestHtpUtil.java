@@ -16,9 +16,9 @@ public class TestHtpUtil extends BaseHtpUtil {
      */
     public static String getHotCityListUrl() {
 
-        Map<String, Object> params = getBaseParams();
+        Map<String, String> params = getBaseParams();
         params.put(KEY_COUNT, "200");// 默认200个
-        return createGetUrl(URL_GET_SEARCH_HOT_CITY, params);
+        return createUrl(URL_GET_SEARCH_HOT_CITY, params);
     }
 
     /**
@@ -29,9 +29,9 @@ public class TestHtpUtil extends BaseHtpUtil {
      */
     public static String getCityInfoUrl(String cityId) {
 
-        Map<String, Object> params = getBaseParams();
+        Map<String, String> params = getBaseParams();
         params.put("city_id", cityId);
-        return createGetUrl(URL_GET_CITY_INFO, params);
+        return createUrl(URL_GET_CITY_INFO, params);
     }
 
     /**
@@ -43,9 +43,9 @@ public class TestHtpUtil extends BaseHtpUtil {
      */
     public static String getSpecialListUrl(int pageIndex, int pageLimit) {
 
-        Map<String, Object> params = getBaseParams();
-        params.put(KEY_PAGE, pageIndex);
-        params.put(KEY_COUNT, pageLimit);
-        return createGetUrl(URL_GET_SPECIAL_LIST, params);
+        Map<String, String> params = getBaseParams();
+        params.put(KEY_PAGE, pageIndex+"");
+        params.put(KEY_COUNT, pageLimit+"");
+        return createUrl(URL_GET_SPECIAL_LIST, params);
     }
 }

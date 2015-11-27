@@ -18,9 +18,9 @@ public class OrderHtpUtil extends BaseHtpUtil {
      */
     public static String getProductDetailUrl(String product_id) {
 
-        Map<String, Object> params = getBaseParams();
+        Map<String, String> params = getBaseParams();
         params.put("product_id", product_id);
-        return createGetUrl(URL_GET_PRODUCT_DETAIL, params);
+        return createUrl(URL_GET_PRODUCT_DETAIL, params);
     }
 
     /**
@@ -30,11 +30,11 @@ public class OrderHtpUtil extends BaseHtpUtil {
      */
     public static String getProductCommentListUrl(String product_id, int count, int page) {
 
-        Map<String, Object> params = getBaseParams();
+        Map<String, String> params = getBaseParams();
         params.put("product_id", product_id);
-        params.put(KEY_COUNT, count);
-        params.put(KEY_PAGE, page);
-        return createGetUrl(URL_GET_COMMENTS, params);
+        params.put(KEY_COUNT, count+"");
+        params.put(KEY_PAGE, page+"");
+        return createUrl(URL_GET_COMMENTS, params);
     }
 
     /**
@@ -47,11 +47,11 @@ public class OrderHtpUtil extends BaseHtpUtil {
      */
     public static String getOrderListUrl(String page, String count, String order_status) {
 
-        Map<String, Object> params = getBaseParams();
+        Map<String, String> params = getBaseParams();
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         params.put(KEY_PAGE, page);
         params.put(KEY_COUNT, count);
         params.put("order_status", order_status);
-        return createGetUrl(URL_GET_ORDERS, params);
+        return createUrl(URL_GET_ORDERS, params);
     }
 }
