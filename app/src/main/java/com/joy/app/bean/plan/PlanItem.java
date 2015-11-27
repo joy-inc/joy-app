@@ -5,14 +5,15 @@ package com.joy.app.bean.plan;
  * @Description 旅行规划    <br>
  */
 public class PlanItem {
-//    "plan_id":"bTwr5b0c8Ow=",
-//            "cn_name":"伏见稻荷大社",
-//            "en_name":"fjdhds",
-//            "poi_name":"京都古寺",
+//            "plan_id":"zluoqRYxTZY=",
+//            "cn_name":"清水寺",
+//            "en_name":"qingshuisi",
+//            "price":"134.8",
+//            "before_day":"3",
 //            "pic_url" :"http://xx.com/photo...",
-//            "lon" : "33.22",
-//            "lat" : "101.33",
-    String plan_id,cn_name,en_name,poi_name,pic_url,lon,lat;
+//            "lon" : "23.22",
+//            "lat" : "144.33",
+    String plan_id,cn_name,en_name,before_day,price,pic_url,lon,lat;
 
     public String getPlan_id() {
         return plan_id;
@@ -38,14 +39,6 @@ public class PlanItem {
         this.en_name = en_name;
     }
 
-    public String getPoi_name() {
-        return poi_name;
-    }
-
-    public void setPoi_name(String poi_name) {
-        this.poi_name = poi_name;
-    }
-
     public String getPic_url() {
         return pic_url;
     }
@@ -68,5 +61,21 @@ public class PlanItem {
 
     public void setLat(String lat) {
         this.lat = lat;
+    }
+
+    public String getBefore_day() {
+        return before_day;
+    }
+
+    public void setBefore_day(String before_day) {
+        this.before_day = before_day;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

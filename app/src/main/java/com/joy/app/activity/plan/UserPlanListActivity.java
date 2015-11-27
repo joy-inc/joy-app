@@ -65,9 +65,10 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
                 PlanItem folder = new PlanItem();
                 folder.setCn_name("中文名" + i);
                 folder.setEn_name("英文名" + i);
-                folder.setPic_url("");
+                folder.setPic_url("http://pic.qyer.com/album/user/1294/6/QEtcRhoBYkw/index/680x400");
+                folder.setBefore_day("2");
+                folder.setPrice("123.34");
                 folder.setPlan_id("id" + i);
-                folder.setPoi_name("poi名字"+1);
                 list.add(folder);
             }
             obj.setData(list);

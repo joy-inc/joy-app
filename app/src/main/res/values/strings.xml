@@ -65,6 +65,9 @@
     <string name="order_detail_finish_title">订单已确认，购买成功</string>
     <string name="order_detail_finish_infor">请查收确认邮件，如有更多问题请咨询微信号</string>
 
+    <!--行程规划-->
+
+    <string name="plan_folder_things">things to do</string>
 
 
 </resources>
