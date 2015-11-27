@@ -17,9 +17,13 @@ public interface HtpApi {
     String URL_POST_MAIN_ROUTE_LIST = JOY_URL_BASE + "/homepage/index_list";//首页的路线
 
     // poi折扣====================================
-    String URL_GET_PRODUCT_DETAIL = JOY_URL_BASE + "/product/detail";// 获取poi折扣详情接口
-    String URL_GET_COMMENTS = JOY_URL_BASE + "/product/comment_list";// 获取商品评论列表
-    String URL_GET_ORDERS = JOY_URL_BASE + "/order/order_list";// 获取订单列表
+    String URL_POST_PRODUCT_DETAIL = JOY_URL_BASE + "/product/detail";// 获取poi折扣详情接口
+    String URL_POST_COMMENTS = JOY_URL_BASE + "/product/comment_list";// 获取商品评论列表
+    String URL_POST_OPTIONS = JOY_URL_BASE + "/product/option_list";// 获取商品项目列表
+    String URL_POST_ORDERS = JOY_URL_BASE + "/order/order_list";// 获取订单列表
+
+    String URL_POST_ORDER_DETAIL = JOY_URL_BASE + "/order/detail";// 获取订单
+    String URL_POST_ORDER_CANCEL = JOY_URL_BASE + "/order/cancel";// 取消订单
 
     // 行程规划====================================
     String URL_POST_PLAN_ADD = JOY_URL_BASE + "/user/plan_add";//  添加我的旅行计划

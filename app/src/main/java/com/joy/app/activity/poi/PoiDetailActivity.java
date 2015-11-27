@@ -16,19 +16,19 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.joy.app.BuildConfig;
-import com.joy.app.R;
-import com.joy.app.activity.map.StaticMapWidget;
-import com.joy.app.bean.CommentAll;
-import com.joy.app.bean.CommentItem;
-import com.joy.app.bean.CommentScores;
-import com.joy.app.bean.sample.PoiDetail;
-import com.joy.app.utils.http.OrderHtpUtil;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
+import com.joy.app.BuildConfig;
+import com.joy.app.R;
+import com.joy.app.activity.map.StaticMapWidget;
+import com.joy.app.bean.poi.CommentAll;
+import com.joy.app.bean.poi.CommentItem;
+import com.joy.app.bean.poi.CommentScores;
+import com.joy.app.bean.sample.PoiDetail;
+import com.joy.app.utils.http.OrderHtpUtil;
 
 import java.util.ArrayList;
 
@@ -260,7 +260,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         if (R.id.acbBook == view.getId()) {
 
-            showToast("立即预订");
+            OrderBookActivity.startActivity(this, view,mPoiDetail.getProduct_id(), mPoiDetail.getPhotos().get(0), mPoiDetail.getTitle());
         } else if (R.id.btnAddToPlan == view.getId()) {
 
             showToast("加入旅行计划");

@@ -14,9 +14,8 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
-import com.joy.app.bean.CommentAll;
-import com.joy.app.bean.CommentItem;
-import com.joy.app.bean.CommentScores;
+import com.joy.app.bean.poi.CommentAll;
+import com.joy.app.bean.poi.CommentItem;
 import com.joy.app.view.LinearListView;
 
 /**

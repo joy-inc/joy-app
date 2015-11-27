@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
-import com.joy.app.bean.CommentScores;
+import com.joy.app.bean.poi.CommentScores;
 
 /**
  * 五星评分
