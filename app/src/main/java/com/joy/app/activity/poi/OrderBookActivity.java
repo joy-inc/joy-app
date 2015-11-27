@@ -89,7 +89,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     @Override
     protected ObjectRequest<Product> getObjectRequest() {
 
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getProductOptionListUrl(mId), PoiDetail.class);
+        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getProductOptionListUrl(mId), PoiDetail.class);
 
         if (BuildConfig.DEBUG) {
 

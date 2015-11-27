@@ -1,28 +1,20 @@
 package com.joy.app.activity.poi;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.android.library.activity.BaseHttpRvActivity;
-import com.android.library.activity.BaseHttpUiActivity;
-import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.DensityUtil;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.adapter.order.OrderDetailAdapter;
-import com.joy.app.adapter.plan.UserPlanAdapter;
-import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.bean.poi.OrderDetail;
-import com.joy.app.bean.sample.Special;
 import com.joy.app.utils.http.OrderHtpUtil;
-import com.joy.app.utils.http.PlanHttpUtil;
-import com.joy.app.utils.http.sample.TestHtpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +112,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
 
     }
     private void SendCancelMassage(){
-        ObjectRequest<Object> req = new ObjectRequest<>(OrderHtpUtil.getCancelOrderUrl(Url), Object.class);
+        ObjectRequest<Object> req = ObjectRequest.get(OrderHtpUtil.getCancelOrderUrl(Url), Object.class);
         req.setResponseListener(new ObjectResponse<Object>() {
 
             @Override
@@ -133,7 +125,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
 
     @Override
     protected ObjectRequest<OrderDetail> getObjectRequest() {
-        ObjectRequest obj = new ObjectRequest(OrderHtpUtil.getOrderDetailUrl(Url), OrderDetail.class);
+        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getOrderDetailUrl(Url), OrderDetail.class);
         return obj ;
     }
 }

@@ -18,10 +18,10 @@ public class OrderHtpUtil extends BaseHtpUtil {
      */
     public static String getOrderDetailUrl(String order_id) {
 
-        Map<String, Object> params = getBaseParams();
+        Map<String, String> params = getBaseParams();
         params.put("order_id", order_id);
         params.put("user_token", JoyApplication.getUserToken());
-        return createGetUrl(URL_POST_ORDER_DETAIL, params);
+        return createUrl(URL_POST_ORDER_DETAIL, params);
     }
     /**
      * 删除订单
@@ -30,10 +30,10 @@ public class OrderHtpUtil extends BaseHtpUtil {
      */
     public static String getCancelOrderUrl(String order_id) {
 
-        Map<String, Object> params = getBaseParams();
+        Map<String, String> params = getBaseParams();
         params.put("order_id", order_id);
         params.put("user_token", JoyApplication.getUserToken());
-        return createGetUrl(URL_POST_ORDER_CANCEL, params);
+        return createUrl(URL_POST_ORDER_CANCEL, params);
     }
 
     /**
@@ -45,7 +45,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
 
         Map<String, String> params = getBaseParams();
         params.put("product_id", product_id);
-        return createUrl(URL_GET_PRODUCT_DETAIL, params);
+        return createUrl(URL_POST_PRODUCT_DETAIL, params);
     }
 
     /**
@@ -59,7 +59,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
         params.put("product_id", product_id);
         params.put(KEY_COUNT, count+"");
         params.put(KEY_PAGE, page+"");
-        return createUrl(URL_GET_COMMENTS, params);
+        return createUrl(URL_POST_COMMENTS, params);
     }
 
     /**
@@ -69,9 +69,9 @@ public class OrderHtpUtil extends BaseHtpUtil {
      */
     public static String getProductOptionListUrl(String product_id) {
 
-        Map<String, Object> params = getBaseParams();
+        Map<String, String> params = getBaseParams();
         params.put("product_id", product_id);
-        return createGetUrl(URL_GET_OPTIONS, params);
+        return createUrl(URL_POST_OPTIONS, params);
     }
 
     /**
@@ -89,6 +89,6 @@ public class OrderHtpUtil extends BaseHtpUtil {
         params.put(KEY_PAGE, page);
         params.put(KEY_COUNT, count);
         params.put("order_status", order_status);
-        return createUrl(URL_GET_ORDERS, params);
+        return createUrl(URL_POST_ORDERS, params);
     }
 }
