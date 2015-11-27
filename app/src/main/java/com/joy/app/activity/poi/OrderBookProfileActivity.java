@@ -18,6 +18,7 @@ import com.joy.app.R;
 import com.joy.app.bean.poi.OrderContacts;
 import com.joy.app.bean.poi.OrderDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
+import com.joy.app.utils.http.ReqFactory;
 
 /**
  * 预订
@@ -154,12 +155,12 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     @Override
     protected ObjectRequest getObjectRequest() {
 
-        return ObjectRequest.get(OrderHtpUtil.getContactUrl(), OrderContacts.class);
+        return ReqFactory.newPost(OrderHtpUtil.URL_POST_CONTACT, OrderContacts.class, OrderHtpUtil.getContactUrl());
     }
 
     private void createOrder(OrderContacts userinfo) {
 
-        ObjectRequest<OrderDetail> req = ObjectRequest.get(OrderHtpUtil.getCreateOrderUrl(mOrderItem, userinfo), OrderDetail.class);
+        ObjectRequest<OrderDetail> req = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_CREATE, OrderDetail.class, OrderHtpUtil.getCreateOrderUrl(mOrderItem, userinfo));
         req.setResponseListener(new ObjectResponse<OrderDetail>() {
 
             @Override

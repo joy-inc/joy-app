@@ -22,6 +22,7 @@ import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
+import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.view.LinearListView;
 
 import java.util.ArrayList;
@@ -111,7 +112,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     @Override
     protected ObjectRequest<Product> getObjectRequest() {
 
-        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getProductOptionListUrl(mId), PoiDetail.class);
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_OPTIONS, Product.class, OrderHtpUtil.getProductOptionListUrl(mId));
 
         if (BuildConfig.DEBUG) {
 

@@ -29,6 +29,7 @@ import com.joy.app.bean.poi.CommentItem;
 import com.joy.app.bean.poi.CommentScores;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
+import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 
@@ -164,7 +165,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     @Override
     protected ObjectRequest<PoiDetail> getObjectRequest() {
 
-        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getProductDetailUrl(mId), PoiDetail.class);
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_PRODUCT_DETAIL, PoiDetail.class, OrderHtpUtil.getProductDetailUrl(mId));
 
         if (BuildConfig.DEBUG) {
 
@@ -204,7 +205,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
     private void getCommentList() {
 
-        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getProductCommentListUrl(mId, 10, 1), CommentAll.class);
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 10, 1));
 
         if (BuildConfig.DEBUG) {
 

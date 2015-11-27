@@ -12,6 +12,7 @@ import com.joy.app.utils.http.OrderHtpUtil;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     @Override
     protected ObjectRequest<List<MainOrder>> getObjectRequest() {
 
-        ObjectRequest obj = ObjectRequest.get(OrderHtpUtil.getOrderListUrl("1", "5", "0"), MainOrder.class);
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl("1", "5", "0"));
 
         if (BuildConfig.DEBUG) {
             List<MainOrder> list = new ArrayList<MainOrder>();
