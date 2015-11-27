@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:calendar="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/div_ll_week"
+            android:background="@color/selected_day_background"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/day_style"
+                android:text="@string/sunday" />
+
+            <TextView
+                style="@style/day_style"
+                android:text="@string/monday" />
+
+            <TextView
+                style="@style/day_style"
+                android:text="@string/tuesday" />
+
+            <TextView
+                style="@style/day_style"
+                android:text="@string/wednesday" />
+
+            <TextView
+                style="@style/day_style"
+                android:text="@string/thursday" />
+
+            <TextView
+                style="@style/day_style"
+                android:text="@string/friday" />
+
+            <TextView
+                style="@style/day_style"
+                android:text="@string/saturday" />
+        </LinearLayout>
+
+        <com.joy.app.view.dateView.DayPickerView
+            android:id="@+id/dyPickerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            calendar:showMonthCount="12"
+            calendar:colorMonthName="@color/black_trans87"
+            calendar:textSizeMonth="10dp"
+            calendar:colorLink="@color/calendar_link_color"
+            calendar:colorPreviousDay="@color/calendar_day_color"
+            calendar:colorNormalDay="@color/black_trans87"
+            calendar:calendarDayHeight="64dp"
+            calendar:textSizeDay="14dp"
+            calendar:textSizeInfo="10dp"
+            calendar:enablePreviousDay="false"
+            calendar:colorSelectedDayText="@android:color/white"
+            calendar:headerMonthHeight="30dp"
+            calendar:selectTextToTop="8dp"
+            calendar:canSelectBeforeOneToday="true"
+            calendar:textStartStr="@string/calendar_in"
+            calendar:textEndStr="@string/calendar_out"
+            calendar:textWeekend="@string/calendar_weekend"
+            calendar:colorCurrentDay="@color/black_trans87"
+            calendar:drawRoundRect="true" />
+
+    </LinearLayout>
+
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/qtvDay"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black_trans87"
+        android:textSize="10dp"
+        android:background="@android:color/white"
+        android:layout_height="30dp"
+        android:layout_marginTop="36dp" />
+
+    <!--<View-->
+        <!--android:visibility="invisible"-->
+
+        <!--android:id="@+id/vLink"-->
+        <!--style="@style/qa_view_split_hori_gray"-->
+        <!--android:layout_alignBottom="@id/qtvDay"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentRight="true" />-->
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/qtvChoseTip"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:textSize="16dp"
+        android:background="@drawable/calendar_toast"
+        android:layout_height="wrap_content"
+        android:text="@string/calendar_chose_satrt"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp" />
+</RelativeLayout>

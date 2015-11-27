@@ -9,10 +9,13 @@ import android.view.View;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
+import com.joy.app.activity.common.HolterDayPickerActivity;
 import com.joy.app.activity.setting.SettingActivity;
 import com.android.library.activity.BaseTabActivity;
 import com.android.library.activity.BaseUiFragment;
+import com.joy.app.view.dateView.SimpleMonthAdapter;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -46,6 +49,12 @@ public class MainActivity extends BaseTabActivity {
 
         mMainActivityHelper.onCreate(savedInstanceState);
         mMainActivityBC.onCreate(savedInstanceState);
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(2016,1,2);
+
+        Calendar calendar1=Calendar.getInstance();
+        calendar1.set(2016,1,3);
+        HolterDayPickerActivity.startHotelDayPickerForResult(this,true,calendar.getTimeInMillis(),calendar1.getTimeInMillis(),1);
     }
 
     @Override

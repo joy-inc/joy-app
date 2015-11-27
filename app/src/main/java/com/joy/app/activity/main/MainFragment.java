@@ -10,7 +10,7 @@ import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.bean.MainRoute;
 import com.joy.app.bean.sample.HotCityItem;
-import com.joy.app.utils.http.MainHtpUtil;
+import com.joy.app.utils.http.MainHttpUtil;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
@@ -57,7 +57,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     @Override
     protected ObjectRequest<List<MainRoute>> getObjectRequest() {
 
-        ObjectRequest obj = new ObjectRequest(MainHtpUtil.getMainRouteList(1, 10), HotCityItem.class);
+        ObjectRequest obj = null;//  ReqFactory.new(MainHttpUtil.getMainRouteList(1, 10), HotCityItem.class);
         if (BuildConfig.DEBUG) {
             List<MainRoute> list = new ArrayList<MainRoute>();
             for (int i = 0; i < 20; i++) {

@@ -32,4 +32,8 @@ public interface HtpApi {
     String URL_POST_PLAN_FOLDER_MODIFY =JOY_URL_BASE + "/user/plan_folder_modify";//  我的文件夹修改接口
     String URL_POST_PLAN_FOLDER_DELETE =JOY_URL_BASE + "/user/plan_folder_delete";//  我的文件夹删除接口
 
+
+    //公共的,设置的
+    String URL_HOLIDAYINFO =   "http://open.qyer.com/qyer/hotel/get_holidays_info";// 日历信息
+
 }
