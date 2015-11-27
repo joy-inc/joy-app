@@ -55,11 +55,6 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         setAdapter(adapter);
     }
 
-    @Override
-    protected RecyclerView.LayoutManager getDefaultLayoutManager() {
-
-        return new GridLayoutManager(getActivity(), 2);
-    }
 
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest() {
@@ -70,6 +65,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
             for (int i = 0; i < 5; i++) {
                 PlanFolder folder = new PlanFolder();
                 folder.setId("10" + i);
+                folder.setPic_url("http://pic2.qyer.com/album/1f0/87/1840431/index/680x400");
                 folder.setFolder_name("文件夹" + i);
                 folder.setChildren_num(10 + i);
                 data.add(folder);

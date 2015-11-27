@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @Description 行程规划文件夹    <br>
  */
 public class PlanFolder implements Serializable{
-    String id,folder_name;
+    String id,folder_name,pic_url;
     int children_num;
 
     public String getId() {
@@ -32,6 +32,14 @@ public class PlanFolder implements Serializable{
 
     public void setChildren_num(int children_num) {
         this.children_num = children_num;
+    }
+
+    public String getPic_url() {
+        return pic_url;
+    }
+
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
     }
 
     //            "id": "JmwMFx+4+5o=",

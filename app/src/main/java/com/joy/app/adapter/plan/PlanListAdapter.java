@@ -29,8 +29,8 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder,Plan
 
     public class ViewHolder extends ExRvViewHolder {
 
-        @Bind(R.id.jtvTitle)
-        TextView tvLtitle;
+//        @Bind(R.id.jtvTitle)
+//        TextView tvLtitle;
 
         public ViewHolder(final View itemView) {
 
