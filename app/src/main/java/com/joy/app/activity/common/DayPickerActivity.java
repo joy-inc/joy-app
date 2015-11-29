@@ -8,24 +8,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.library.activity.BaseUiActivity;
-import com.android.library.httptask.ObjectRequest;
-import com.android.library.httptask.ObjectResponse;
-import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.ExSharedPrefs;
 import com.android.library.utils.ViewUtil;
-import com.android.volley.VolleyError;
-import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.bean.HolidayInfo;
-import com.joy.app.utils.http.SettingHttpUitl;
 import com.joy.app.view.dateView.DatePickerController;
 import com.joy.app.view.dateView.DayPickerView;
 import com.joy.app.view.dateView.SimpleMonthAdapter;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,7 +26,7 @@ import java.util.Map;
  * 4.请传入背景颜色值
  * Created by Eric on 15/4/7.
  */
-public class HolterDayPickerActivity extends BaseUiActivity implements DatePickerController {
+public class DayPickerActivity extends BaseUiActivity implements DatePickerController {
     //用户选择的开始日期
     public static final String REQ_EXTRA_KEY_BEGIN_DATE = "beginDate";
     //用户结束的日期
@@ -71,6 +61,7 @@ public class HolterDayPickerActivity extends BaseUiActivity implements DatePicke
     //结束时间的区间
     private static final String EXTRA_KEY_LONG_SECTION_END_TIME = "section_end_time";
 
+
     //传入的颜色
 
     private int mColor = -1;
@@ -79,7 +70,7 @@ public class HolterDayPickerActivity extends BaseUiActivity implements DatePicke
     private DayPickerView mDayPickerView;
     private TextView mChoseTip;
     private TextView mDayShow;//当前的拉动的月份信息
-    private boolean mGetCach = true;
+    private boolean isOrderType = false;
     private Map<String, String> mDayInfo = new HashMap<String, String>();
 
     @Override
@@ -123,52 +114,63 @@ public class HolterDayPickerActivity extends BaseUiActivity implements DatePicke
     protected void initContentView() {
 
         findViewById(R.id.div_ll_week).setBackgroundResource(mColor);
+        mChoseTip = (TextView) findViewById(R.id.qtvChoseTip);
+
         mDayPickerView = (DayPickerView) findViewById(R.id.dyPickerView);
         mDayShow = (TextView) findViewById(R.id.qtvDay);
         String startTip = getResources().getString(getIntent().getIntExtra(EXTRA_KEY_INTEGER_START_TIP, 0));
         String endTip = getResources().getString(getIntent().getIntExtra(EXTRA_KEY_INTEGER_END_TIP, 0));
         mDayPickerView.setController(this);
-        mDayPickerView.setChoseText(startTip, endTip);
+        //        mDayPickerView.setChoseText(startTip, endTip);
         mDayPickerView.setSelectBackgroundColor(getIntent().getIntExtra(EXTRA_KEY_INTEGER_DAY_SELECT_COLOR, 0));
         mDayPickerView.setStartChose(isStartClick);
 
         //设置默认的月份值
         long begin = getIntent().getLongExtra(EXTRA_KEY_LONG_INTIME, 0);
         long end = getIntent().getLongExtra(EXTRA_KEY_LONG_OUTTIME, 0);
-        Calendar calendarBegin = Calendar.getInstance();
-        calendarBegin.setTimeInMillis(begin);
-        int startMonth = calendarBegin.get(Calendar.MONTH);
-        mDayPickerView.setStartTime(calendarBegin.get(Calendar.YEAR), startMonth, calendarBegin.get(Calendar.DAY_OF_MONTH));
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.setTimeInMillis(end);
-        mDayPickerView.setEndTime(calendarEnd.get(Calendar.YEAR), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.DAY_OF_MONTH));
+        Calendar calendarBegin = null;
+        int startMonth = 0;
+        if (begin > 0) {
+            calendarBegin = Calendar.getInstance();
+            calendarBegin.setTimeInMillis(begin);
+            startMonth = calendarBegin.get(Calendar.MONTH);
+            mDayPickerView.setStartTime(calendarBegin.get(Calendar.YEAR), startMonth, calendarBegin.get(Calendar.DAY_OF_MONTH));
 
+        }
+        if (end > 0) {
+            Calendar calendarEnd = Calendar.getInstance();
+            calendarEnd.setTimeInMillis(end);
+            mDayPickerView.setEndTime(calendarEnd.get(Calendar.YEAR), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.DAY_OF_MONTH));
+        }
         long sectionStart = getIntent().getLongExtra(EXTRA_KEY_LONG_SECTION_START_TIME, 0);
         long sectionEnd = getIntent().getLongExtra(EXTRA_KEY_LONG_SECTION_END_TIME, 0);
-        if (sectionStart > 0&&sectionEnd>0) {
+        if (sectionStart > 0 && sectionEnd > 0) {
+            isOrderType = true;
             Calendar sectionStartTimeCalendar = Calendar.getInstance();
             sectionStartTimeCalendar.setTimeInMillis(sectionStart);
 
             Calendar sectionEndTimeCalendar = Calendar.getInstance();
-            sectionEndTimeCalendar.setTimeInMillis(sectionStart);
+            sectionEndTimeCalendar.setTimeInMillis(sectionEnd);
 
             mDayPickerView.setSectionDay(sectionStartTimeCalendar.getTimeInMillis(), sectionEndTimeCalendar.getTimeInMillis());
-
+            ViewUtil.hideView(mChoseTip);
         }
 
         //设置当前显示的月份
         Calendar today = Calendar.getInstance();
         int position = 0;
-        if (calendarBegin.get(Calendar.YEAR) > today.get(Calendar.YEAR)) {
-            position = (12 - today.get(Calendar.MONTH)) + startMonth;
-        } else {
-            position = startMonth - today.get(Calendar.MONTH);
-        }
-        if (position > 0 && position < mDayPickerView.getAdapter().getItemCount()) {
-            mDayPickerView.scrollToPosition(position);
+        if (calendarBegin != null) {
+            if (calendarBegin.get(Calendar.YEAR) > today.get(Calendar.YEAR)) {
+                position = (12 - today.get(Calendar.MONTH)) + startMonth;
+            } else {
+                position = startMonth - today.get(Calendar.MONTH);
+            }
+            if (position > 0 && position < mDayPickerView.getAdapter().getItemCount()) {
+                mDayPickerView.scrollToPosition(position);
+            }
         }
         //设置toas的显示内容
-        mChoseTip = (TextView) findViewById(R.id.qtvChoseTip);
+
         if (isStartClick) {
             mChoseTip.setText(getIntent().getIntExtra(EXTRA_KEY_INTEGER_START_TOAST, 0));
         } else {
@@ -204,23 +206,33 @@ public class HolterDayPickerActivity extends BaseUiActivity implements DatePicke
     @Override
     public void onDayOfMonthSelected(SimpleMonthAdapter.CalendarDay calendarDay) {
 
-        if (calendarDay != null) {
+        if (calendarDay != null && !isOrderType) {
             mChoseTip.setText(getIntent().getIntExtra(EXTRA_KEY_INTEGER_END_TOAST, 0));
         }
     }
 
     @Override
     public void onDateRangeSelected(SimpleMonthAdapter.SelectedDays<SimpleMonthAdapter.CalendarDay> selectedDays) {
-
-        if (selectedDays != null && selectedDays.getFirst() != null && selectedDays.getLast() != null) {
-            Intent intent = new Intent();
-            long begin = selectedDays.getFirst().getDate().getTime();
-            long end = selectedDays.getLast().getMaxDayDate().getTime();
-            intent.putExtra(REQ_EXTRA_KEY_BEGIN_DATE, begin);
-            intent.putExtra(REQ_EXTRA_KEY_END_DATE, end);
-            setResult(RESULT_OK, intent);
+        if (isOrderType) {
+            if (selectedDays != null && selectedDays.getFirst() != null) {
+                Intent intent = new Intent();
+                long begin = selectedDays.getFirst().getDate().getTime();
+                intent.putExtra(REQ_EXTRA_KEY_BEGIN_DATE, begin);
+                intent.putExtra(REQ_EXTRA_KEY_END_DATE, 0);
+                setResult(RESULT_OK, intent);
+                time2Finish();
+            }
+        } else {
+            if (selectedDays != null && selectedDays.getFirst() != null && selectedDays.getLast() != null) {
+                Intent intent = new Intent();
+                long begin = selectedDays.getFirst().getDate().getTime();
+                long end = selectedDays.getLast().getMaxDayDate().getTime();
+                intent.putExtra(REQ_EXTRA_KEY_BEGIN_DATE, begin);
+                intent.putExtra(REQ_EXTRA_KEY_END_DATE, end);
+                setResult(RESULT_OK, intent);
+            }
+            time2Finish();
         }
-        time2Finish();
     }
 
     @Override
@@ -268,7 +280,7 @@ public class HolterDayPickerActivity extends BaseUiActivity implements DatePicke
     public static void startActivityForResult(Activity activity, boolean startClick, long inTime, long outTime, int startToastResId, int endToastResId, int startTipResId, int endTipResId, int titleResId, int titleColorResid, int statusColorResId, int selectRecColorResId, int requestCode, int sameDayResId, boolean isClose, long sectionStartTime, long sectionEndTime) {
 
         Intent intent = new Intent();
-        intent.setClass(activity, HolterDayPickerActivity.class);
+        intent.setClass(activity, DayPickerActivity.class);
         intent.putExtra(EXTRA_KEY_BOOLEAN_START, startClick);
         intent.putExtra(EXTRA_KEY_LONG_INTIME, inTime);
         intent.putExtra(EXTRA_KEY_LONG_OUTTIME, outTime);
@@ -295,9 +307,9 @@ public class HolterDayPickerActivity extends BaseUiActivity implements DatePicke
         startActivityForResult(activity, startClick, inTime, outTime, R.string.calendar_chose_satrt, R.string.calendar_chose_out, R.string.calendar_in, R.string.calendar_out, R.string.day_picker_title, R.color.qa_bg_title_bar_main_hotel, R.color.qa_bg_status_bar_main_hotel, R.color.selected_day_background, requestCode, 0, true, 0, 0);
     }
 
-    public static void startOrderDayPickerForResult(Activity activity, boolean startClick, long beginTime, long endTime, long selectTime, int requestCode) {
+    public static void startOrderDayPickerForResult(Activity activity, long beginTime, long endTime, long selectTime, int requestCode) {
 
-        startActivityForResult(activity, startClick, selectTime, 0, R.string.calendar_chose_satrt, R.string.calendar_chose_out, R.string.calendar_in, R.string.calendar_out, R.string.day_picker_title, R.color.qa_bg_title_bar_main_hotel, R.color.qa_bg_status_bar_main_hotel, R.color.selected_day_background, requestCode, 0, true, beginTime, endTime);
+        startActivityForResult(activity, true, selectTime, 0, R.string.calendar_chose_satrt, R.string.calendar_chose_out, R.string.calendar_in, R.string.calendar_out, R.string.day_picker_title, R.color.qa_bg_title_bar_main_hotel, R.color.qa_bg_status_bar_main_hotel, R.color.selected_day_background, requestCode, 0, true, beginTime, endTime);
     }
 
 }

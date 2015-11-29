@@ -11,7 +11,7 @@
 
     <!--默认的日历控件颜色.保留是为了以后移植使用-->
     <color name="normal_day">#ff999999</color>
-    <color name="selected_day_background">#7385EA</color>
+    <color name="selected_day_background">#f9617c</color>
     <color name="selected_day_text">#fff2f2f2</color>
     <color name="calendar_weekend_color">#FE7562</color>
     <color name="select_link">#7FFFFFFF</color>
@@ -23,7 +23,7 @@
     <color name="calendar_day_color">#42000000</color>
     <color name="calendar_panter_day_color">#CC40C895</color>
 
-    <color name="qa_bg_title_bar_main_hotel">#FF3F51B5</color><!-- 酒店 -->
-    <color name="qa_bg_status_bar_main_hotel">#FF37479F</color><!-- 酒店 -->
+    <color name="qa_bg_title_bar_main_hotel">#f9617c</color><!-- 酒店 -->
+    <color name="qa_bg_status_bar_main_hotel">#f9617c</color><!-- 酒店 -->
 
 </resources>

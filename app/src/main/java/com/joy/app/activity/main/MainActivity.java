@@ -9,13 +9,13 @@ import android.view.View;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.activity.common.HolterDayPickerActivity;
-import com.joy.app.activity.setting.SettingActivity;
+import com.joy.app.activity.common.DayPickerActivity;
 import com.android.library.activity.BaseTabActivity;
 import com.android.library.activity.BaseUiFragment;
-import com.joy.app.view.dateView.SimpleMonthAdapter;
+import com.joy.app.activity.setting.SettingActivity;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,12 +49,7 @@ public class MainActivity extends BaseTabActivity {
 
         mMainActivityHelper.onCreate(savedInstanceState);
         mMainActivityBC.onCreate(savedInstanceState);
-        Calendar calendar=Calendar.getInstance();
-        calendar.set(2016,1,2);
 
-        Calendar calendar1=Calendar.getInstance();
-        calendar1.set(2016,1,3);
-        HolterDayPickerActivity.startHotelDayPickerForResult(this,true,calendar.getTimeInMillis(),calendar1.getTimeInMillis(),1);
     }
 
     @Override
@@ -111,7 +106,15 @@ public class MainActivity extends BaseTabActivity {
             @Override
             public void onClick(View v) {
 
-                SettingActivity.startActivity(MainActivity.this);
+                                SettingActivity.startActivity(MainActivity.this);
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(new Date());
+//                calendar.add(Calendar.DAY_OF_MONTH, 2);
+//                Calendar calendar1 = Calendar.getInstance();
+//                calendar1.setTime(new Date());
+//                calendar1.add(Calendar.MONTH, 3);
+//                DayPickerActivity.startHotelDayPickerForResult(MainActivity.this,true,0,0,1);
+//                DayPickerActivity.startOrderDayPickerForResult(MainActivity.this, calendar.getTimeInMillis(), calendar1.getTimeInMillis(), 0, 1);
             }
         });
         mMainActivityBC.initTitleView();

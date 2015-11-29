@@ -98,6 +98,7 @@ class SimpleMonthView extends View {
     protected Paint mMonthTitleBGPaint;
     protected Paint mMonthTitlePaint;
     protected Paint mSelectedCirclePaint;
+    protected Paint mTodayStrokePaint;//今天的空心圆
     protected Paint mLinkColorPaint;
     protected Paint mMonthDayStringPaint;
     protected Paint mSelectPoint;
@@ -265,10 +266,16 @@ class SimpleMonthView extends View {
     }
 
     private void drawMonthTitle(Canvas canvas) {
+
+        RectF rectF = new RectF(0, 0, mWidth, MONTH_HEADER_SIZE);
+        canvas.drawRoundRect(rectF, 0, 0, mSelectedCirclePaint);
+
+
         int x = (mWidth + 2 * mPadding) / 2;
         int y = MONTH_HEADER_SIZE / 2 + MONTH_LABEL_TEXT_SIZE / 2;
         StringBuilder stringBuilder = new StringBuilder(getMonthAndYearString().toLowerCase());
         stringBuilder.setCharAt(0, Character.toUpperCase(stringBuilder.charAt(0)));
+
         canvas.drawText(stringBuilder.toString(), x, y, mMonthTitlePaint);
         drawLink(canvas, MONTH_HEADER_SIZE);
     }
@@ -292,7 +299,7 @@ class SimpleMonthView extends View {
 
     private void onDayClick(SimpleMonthAdapter.CalendarDay calendarDay) {
         if (mOnDayClickListener != null && mCanSelect) {
-            //        if (mOnDayClickListener != null && (isPrevDayEnabled || prevDay(calendarDay.day, today))) {
+            //        if (mOnDayClickListener != null && (isPrevDayEnabled || checkDay(calendarDay.day, today))) {
             if (hasChoseStart() && hasChoseEnd()) {
                 if (mInType == START_CLICK || mInType == END_CLICK) {
                     mSelectedLastDay = -1;
@@ -308,16 +315,24 @@ class SimpleMonthView extends View {
                 }
             }
             if (hasChoseStart() == false) {
-                if (isPrevDayEnabled || !prevDay(calendarDay.day, today) || isLastCanChoseDay(calendarDay.day)) {
-                    mOnDayClickListener.onDayClick(this, calendarDay);
+                if (mStartSectionTime > 0) {
+                    if (checkDay(calendarDay.day, calendarDay.year, calendarDay.month, calendarDay.day)) {
+                        mOnDayClickListener.onDayClick(this, calendarDay);
+                    }
+                } else {
+                    if (isPrevDayEnabled || !checkDay(calendarDay.day, today) || isLastCanChoseDay(calendarDay.day)) {
+                        mOnDayClickListener.onDayClick(this, calendarDay);
+                    }
                 }
             } else {
-                int day = mSelectedBeginDay;
-                if (!TextUtil.isEmpty(mSameDay)) {
-                    day--;
-                }
-                if (isPrevDayEnabled || !pervThatDay(calendarDay, mSelectedBeginYear, mSelectedBeginMonth, day)) { //如果大于开始时间
-                    mOnDayClickListener.onDayClick(this, calendarDay);
+                if (mStartSectionTime <= 0) {
+                    int day = mSelectedBeginDay;
+                    if (!TextUtil.isEmpty(mSameDay)) {
+                        day--;
+                    }
+                    if (isPrevDayEnabled || !pervThatDay(calendarDay, mSelectedBeginYear, mSelectedBeginMonth, day)) { //如果大于开始时间
+                        mOnDayClickListener.onDayClick(this, calendarDay);
+                    }
                 }
             }
 
@@ -328,17 +343,18 @@ class SimpleMonthView extends View {
         return (mYear == time.year) && (mMonth == time.month) && (monthDay == time.monthDay);
     }
 
-    private boolean prevDay(int monthDay, Time time) {
-        return prevDay(monthDay, time.year, time.month, time.monthDay);
+    private boolean checkDay(int monthDay, Time time) {
+        return checkDay(monthDay, time.year, time.month, time.monthDay);
     }
 
-    private boolean prevDay(int monthDay, int toYear, int toMonth, int toDay) {
+    private boolean checkDay(int monthDay, int toYear, int toMonth, int toDay) {
         if (mEndSectionTime > 0 && mStartSectionTime > 0) {
-            //            这里判断是否在可选日期内, 根据类型来判断
-            boolean prevDay = ((mStartSectionYear < toYear)) || (mStartSectionYear == toYear && mStartSectionMonth < toMonth) || (mStartSectionMonth == toMonth && mStartSectionDay < toDay);
-            boolean bigDay = ((mEndSectionYear > toYear)) || (mEndSectionYear == toYear && mEndSectionMonth > toMonth) || (mEndSectionMonth == toMonth && mEndSectionDay > toDay);
-            return prevDay || bigDay;
-
+            Calendar cNow = Calendar.getInstance();
+            cNow.set(toYear, toMonth, toDay);
+            if (cNow.getTimeInMillis() >= mStartSectionTime && cNow.getTimeInMillis() <= mEndSectionTime) {
+                return true;
+            } else
+                return false;
         }
         return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mMonth == toMonth && monthDay < toDay);
     }
@@ -357,13 +373,22 @@ class SimpleMonthView extends View {
         return ((day.year < toYear)) || (day.year == toYear && day.month < toMonth) || (day.month == toMonth && day.day <= toDay);
     }
 
+
     //type 0开始 1结束 2中间
     private void drawSelRec(Canvas canvas, int dayOffset, int linkCount, int oneWidth, int type) {
 
         float itemWidth = mWidth / 7;
         float startWidth = itemWidth * dayOffset;
+        oneWidth += 2;
+        int oWidth = oneWidth;
+        if (type != 2) {
+            oWidth /= 2;
+            if (type == 0) {
+                startWidth += oneWidth;
+            }
+        }
         float startHeight = DAY_SELECTED_CIRCLE_SIZE * (linkCount - 1) + MONTH_HEADER_SIZE + LINK_SIZE * (linkCount - 1); //因为从从link_size下开始画所以这里不进行-1
-        RectF rectF = new RectF(startWidth, startHeight, startWidth + oneWidth * 2, startHeight + DAY_SELECTED_CIRCLE_SIZE);
+        RectF rectF = new RectF(startWidth, startHeight, startWidth + oWidth * 2, startHeight + DAY_SELECTED_CIRCLE_SIZE);
         canvas.drawRoundRect(rectF, 0, 0, mSelectedCirclePaint);
 
         if (mDrawSelectedLink) {
@@ -387,7 +412,6 @@ class SimpleMonthView extends View {
                 canvas.drawCircle(type == 0 ? linkStartX - pointSize : linkEndX - pointSize, linkY, mSelectPointR, mSelectPoint);
             }
         }
-        //--画圆
     }
 
 
@@ -411,17 +435,72 @@ class SimpleMonthView extends View {
             boolean isHasBegin = mMonth == mSelectedBeginMonth && mSelectedBeginDay == day && mSelectedBeginYear == mYear;
             boolean isHasEnd = mMonth == mSelectedLastMonth && mSelectedLastDay == day && mSelectedLastYear == mYear;
             boolean isInSelecDay = false;
+
+            boolean isToday = (mMonth == today.month && mYear == today.year && day == today.monthDay);
+
+            if (isToday) { //画空心圆
+                int dyOffset = 0;
+                float drOffset = 0;
+                if (linkCount == 1) {
+                    dyOffset = -LINK_SIZE;
+                } else if (linkCount == 2) {
+                    //                    dyOffset = LINK_SIZE * (linkCount - 1);
+
+                } else if (linkCount == 3) {
+                    dyOffset = LINK_SIZE;
+                    //                    drOffset += (LINK_SIZE / 2);
+
+                } else if (linkCount == 4) {
+                    dyOffset = LINK_SIZE * 2;
+                    //                    drOffset += LINK_SIZE;
+                } else {
+                    dyOffset = LINK_SIZE;
+                    drOffset = LINK_SIZE * 2;
+                }//我也不想这样加的了.~~~为啥会偏移..在最后一行会少了原本的高度距离,但整个view的高度是对的.所以咯.
+                float dy = y - (MINI_DAY_NUMBER_TEXT_SIZE / 2) + dyOffset;
+                //                float dr = (MONTH_HEADER_SIZE - LINK_SIZE * linkCount) / 2 + drOffset;
+                float dr = DAY_SELECTED_CIRCLE_SIZE / 2 - drOffset;
+                canvas.drawCircle(x, dy, dr, mTodayStrokePaint);
+            }
             //画了选中的日期
             if (isHasBegin || isHasEnd) {
                 isInSelecDay = true;
-                if (mDrawRect) {
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1);
-                } else
-                    canvas.drawCircle(x, y - MINI_DAY_NUMBER_TEXT_SIZE / 3, DAY_SELECTED_CIRCLE_SIZE, mSelectedCirclePaint);
                 int drawSeY = 0;
                 if (!TextUtils.isEmpty(mStartText) || !TextUtils.isEmpty(mEndText)) {
                     drawSeY = y + mSelectTextToTop + MINI_DAY_NUMBER_TEXT_SIZE / 2;
                     //                    drawSeY = DAY_SELECTED_CIRCLE_SIZE * (linkCount - 1) + MONTH_HEADER_SIZE + LINK_SIZE * (linkCount - 1) + mSelectTextToTop + MINI_DAY_NUMBER_TEXT_SIZE;
+                }
+                //                if (mDrawRect) {
+                //                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1);
+                //                } else
+                int dyOffset = 0;
+                float drOffset = 0;
+                if (linkCount == 1) {
+                    dyOffset = -LINK_SIZE;
+                } else if (linkCount == 2) {
+                    //                    dyOffset = LINK_SIZE * (linkCount - 1);
+
+                } else if (linkCount == 3) {
+                    dyOffset = LINK_SIZE;
+                    //                    drOffset += (LINK_SIZE / 2);
+
+                } else if (linkCount == 4) {
+                    dyOffset = LINK_SIZE * 2;
+                    //                    drOffset += LINK_SIZE;
+                } else {
+                    dyOffset = LINK_SIZE;
+                    drOffset = LINK_SIZE * 2;
+                }//我也不想这样加的了.~~~为啥会偏移..在最后一行会少了原本的高度距离,但整个view的高度是对的.所以咯.
+                float dy = y - (MINI_DAY_NUMBER_TEXT_SIZE / 2) + dyOffset;
+                //                float dr = (MONTH_HEADER_SIZE - LINK_SIZE * linkCount) / 2 + drOffset;
+                float dr = DAY_SELECTED_CIRCLE_SIZE / 2 - drOffset;
+                canvas.drawCircle(x, dy, dr, mSelectedCirclePaint);
+                //                drawSelRec(canvas, dayOffset, linkCount, oneWidth/2, isHasBegin ? 0 : 1);
+
+                if (mStartSectionTime <= 0) {
+                    //画区间
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1);
+
                 }
 
                 if (isHasBegin && isHasEnd && !TextUtil.isEmpty(mSameDay) && mSelectedBeginYear == mSelectedLastYear && mSelectedBeginMonth == mSelectedLastMonth && mSelectedBeginDay == mSelectedLastDay) {
@@ -440,7 +519,8 @@ class SimpleMonthView extends View {
             //画了选中的日期
 
             //确定日期的颜色
-            String dayInfo = mDatePickerController.getDayInfo(mYear, mMonth + 1, day);
+
+            String dayInfo = mDatePickerController.getDayInfo(mYear, mMonth + 1, day); //获取节假日信息
 
             int paintColor = 0;
             //确定颜色的基本颜色
@@ -510,16 +590,25 @@ class SimpleMonthView extends View {
 
             //判断日期是否不可选颜色,1.小于今天的是否可用 2.是否在开始的时间前
             if (hasChoseStart()) { //分开写判断,好维护
-                if (mInType == END_CLICK && prevDay(day, mSelectedBeginYear, mSelectedBeginMonth, mSelectedBeginDay)) {
-                    mMonthNumPaint.setColor(mPreviousDayColor);
-                } else if (mInType == START_CLICK && hasChoseEnd() && prevDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
-                    mMonthNumPaint.setColor(mPreviousDayColor);
-                } else if (!hasChoseEnd() && prevDay(day, mSelectedBeginYear, mSelectedBeginMonth, mSelectedBeginDay)) {
-                    mMonthNumPaint.setColor(mPreviousDayColor);
+                if (mStartSectionTime > 0) {
+                    if (!checkDay(day, mYear, mMonth, day)) {
+                        mMonthNumPaint.setColor(mPreviousDayColor);
+                    }
+                } else {
+                    if (mInType == END_CLICK && checkDay(day, mSelectedBeginYear, mSelectedBeginMonth, mSelectedBeginDay)) {
+                        mMonthNumPaint.setColor(mPreviousDayColor);
+                    } else if (mInType == START_CLICK && hasChoseEnd() &&
+                            checkDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
+                        mMonthNumPaint.setColor(mPreviousDayColor);
+                    } else if (!hasChoseEnd() && checkDay(day, mSelectedBeginYear, mSelectedBeginMonth, mSelectedBeginDay)) {
+                        mMonthNumPaint.setColor(mPreviousDayColor);
+                    }
                 }
-            } else if (!isPrevDayEnabled && prevDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
-                //                else if (!isPrevDayEnabled && today.month >= mMonth && today.year >= mYear && prevDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
+            } else if (!isPrevDayEnabled && checkDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
+                //                else if (!isPrevDayEnabled && today.month >= mMonth && today.year >= mYear && checkDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
                 mMonthNumPaint.setColor(mPreviousDayColor); //前天的都置灰
+            } else if (mStartSectionTime > 0 && !checkDay(day, mYear, mMonth, day)) {
+                mMonthNumPaint.setColor(mPreviousDayColor);
             }
 
 
@@ -572,10 +661,10 @@ class SimpleMonthView extends View {
 
     protected void initView() {
         mMonthTitlePaint = new Paint();
-        mMonthTitlePaint.setFakeBoldText(true);
+        //        mMonthTitlePaint.setFakeBoldText(true);
         mMonthTitlePaint.setAntiAlias(true);
         mMonthTitlePaint.setTextSize(MONTH_LABEL_TEXT_SIZE);
-        mMonthTitlePaint.setTypeface(Typeface.create(mMonthTitleTypeface, Typeface.BOLD));
+        //        mMonthTitlePaint.setTypeface(Typeface.create(mMonthTitleTypeface, Typeface.BOLD));
         mMonthTitlePaint.setColor(mMonthTextColor);
         mMonthTitlePaint.setTextAlign(Align.CENTER);
         mMonthTitlePaint.setStyle(Style.FILL);
@@ -593,6 +682,14 @@ class SimpleMonthView extends View {
         mSelectedCirclePaint.setColor(mSelectedDaysColor);
         mSelectedCirclePaint.setTextAlign(Align.CENTER);
         mSelectedCirclePaint.setStyle(Style.FILL);
+
+        mTodayStrokePaint = new Paint();
+        mTodayStrokePaint.setFakeBoldText(true);
+        mTodayStrokePaint.setAntiAlias(true);
+        mTodayStrokePaint.setColor(mSelectedDaysColor);
+        mTodayStrokePaint.setTextAlign(Align.CENTER);
+        mTodayStrokePaint.setStyle(Style.STROKE);
+        mTodayStrokePaint.setStrokeWidth((float) 2.0); //線寬
 
         mMonthDayLabelPaint = new Paint();
         mMonthDayLabelPaint.setAntiAlias(true);
@@ -733,7 +830,7 @@ class SimpleMonthView extends View {
                 mToday = day;
             }
 
-            mIsPrev = prevDay(day, today);
+            //            mIsPrev = checkDay(day, today);
         }
 
         mNumRows = calculateNumRows();
@@ -741,6 +838,7 @@ class SimpleMonthView extends View {
 
     /**
      * 设置可选的开始和结束的时间区间
+     *
      * @param startTime
      * @param endtime
      */
@@ -754,7 +852,7 @@ class SimpleMonthView extends View {
             mEndSectionMonth = tmp.get(Calendar.MONTH);
             mEndSectionDay = tmp.get(Calendar.DAY_OF_MONTH);
         }
-        mStartSectionTime =startTime;
+        mStartSectionTime = startTime;
         if (mStartSectionTime > 0) {
             Calendar tmp = Calendar.getInstance();
 

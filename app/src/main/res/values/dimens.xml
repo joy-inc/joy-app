@@ -13,4 +13,7 @@
     <dimen name="select_point_r">3dip</dimen>
     <dimen name="select_link_size">2dip</dimen>
     <!-- 日历控件的间距默认值-->
+    <dimen name="pickerday_month_height">48dp</dimen>
+    <dimen name="pickerday_week_height">43dp</dimen>
+
 </resources>

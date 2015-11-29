@@ -17,7 +17,7 @@ public class SettingHttpUitl extends BaseHtpUtil {
      */
     public static String getHolidayInfo() {
 
-        Map<String, Object> params = getBaseParams();
-        return createGetUrl(URL_HOLIDAYINFO, params);
+        Map<String, String> params = getBaseParams();
+        return createUrl(URL_HOLIDAYINFO, params);
     }
 }

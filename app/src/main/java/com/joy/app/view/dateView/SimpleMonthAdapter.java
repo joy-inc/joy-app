@@ -29,12 +29,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
 
 
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.joy.app.R;
 
@@ -110,6 +112,9 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
             year -= 1;
         }
         month = (tmpFirstMonth + (position % MONTHS_IN_YEAR)) % MONTHS_IN_YEAR;
+        //        if (mStartTime > 0) {
+        //            month--;
+        //        }
         year = position / MONTHS_IN_YEAR + year + ((tmpFirstMonth + (position % MONTHS_IN_YEAR)) / MONTHS_IN_YEAR);
 
         int selectedFirstDay = -1;
@@ -147,8 +152,8 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         drawingParams.put(SimpleMonthView.VIEW_LASTDAY_YEAR, calendar1.get(Calendar.YEAR));
         drawingParams.put(SimpleMonthView.VIEW_LASTDAY_MONTH, calendar1.get(Calendar.MONTH));
         drawingParams.put(SimpleMonthView.VIEW_LASTDAY_DAY, calendar1.get(Calendar.DAY_OF_MONTH));
-        v.setMonthParams(drawingParams);
         v.setSectionDay(mStartTime, mEndTime);
+        v.setMonthParams(drawingParams);
         v.setCanSelect(mCanSelect);
         v.invalidate();
 
@@ -174,7 +179,7 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
     @Override
     public int getItemCount() {
 
-        return 1;
+        return mShowMonthCount;
     }
 
     public void setItemCount(int count) {
@@ -251,30 +256,48 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         mStartTime = startTime;
         mEndTime = endtime;
 
-        calendar.setTimeInMillis(mStartTime);
-        firstMonth = calendar.get(Calendar.MONTH);
-        int showCount = (int) ((mEndTime - mStartTime) / (1000 * 3600 * 24 * 30));
+        //        calendar.setTimeInMillis(mStartTime);
+        //        firstMonth = calendar.get(Calendar.MONTH);
+        Calendar c1 = Calendar.getInstance();
+        c1.setTimeInMillis(mEndTime);
+
+        int showCount = 1;
+        int year = c1.get(Calendar.YEAR) - calendar.get(Calendar.YEAR);
+        if (year > 0) {
+            showCount = c1.get(Calendar.MONTH) + (12 - calendar.get(Calendar.MONTH)) + (year - 1) * 12;
+        }
+        //          showCount = ((int)(mEndTime / 1000) - (int)(calendar.getTimeInMillis() / 1000)) / 3600 / (24 * 30);
+        //        int showCount1 = (int) ((mEndTime - calendar.getTimeInMillis()) / (1000 * 3600 * 24 * 30));
+        //        LogMgr.d("showCount="+showCount+"   showCount1="+showCount1);
         if (showCount < 1)
             showCount = 1;
+        else {
+            showCount++;
+        }
         setItemCount(showCount);
     }
 
     public void setSelectedDay(CalendarDay calendarDay) {
 
-        if (selectedDays.getFirst() != null && selectedDays.getLast() == null) {
-            selectedDays.setLast(calendarDay);
-            isStart = false;//改变这值是为了告诉控件画得类型不一样了.
-            if (selectedDays.getFirst().month < calendarDay.month) {
-                for (int i = 0; i < selectedDays.getFirst().month - calendarDay.month - 1; ++i)
-                    mController.onDayOfMonthSelected(new CalendarDay(selectedDays.getFirst().year, selectedDays.getFirst().month + i, selectedDays.getFirst().day));
-            }
+        if (mStartTime > 0 && mEndTime > 0) {
+            selectedDays.setFirst(calendarDay);
             mController.onDateRangeSelected(selectedDays);
-        } else if (selectedDays.getLast() != null) {
-            selectedDays.setFirst(calendarDay);
-            selectedDays.setLast(null);
-        } else
-            selectedDays.setFirst(calendarDay);
 
+        } else {
+            if (selectedDays.getFirst() != null && selectedDays.getLast() == null) {
+                selectedDays.setLast(calendarDay);
+                isStart = false;//改变这值是为了告诉控件画得类型不一样了.
+                if (selectedDays.getFirst().month < calendarDay.month) {
+                    for (int i = 0; i < selectedDays.getFirst().month - calendarDay.month - 1; ++i)
+                        mController.onDayOfMonthSelected(new CalendarDay(selectedDays.getFirst().year, selectedDays.getFirst().month + i, selectedDays.getFirst().day));
+                }
+                mController.onDateRangeSelected(selectedDays);
+            } else if (selectedDays.getLast() != null) {
+                selectedDays.setFirst(calendarDay);
+                selectedDays.setLast(null);
+            } else
+                selectedDays.setFirst(calendarDay);
+        }
         notifyDataSetChanged();
     }
 
