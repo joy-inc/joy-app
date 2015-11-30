@@ -89,7 +89,7 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override

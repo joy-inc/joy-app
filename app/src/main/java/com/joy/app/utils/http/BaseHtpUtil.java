@@ -44,8 +44,8 @@ public class BaseHtpUtil implements HtpApi {
 
         //-----------------------------------------------------------------------
         // TODO joy接口ok就干掉
-//        params.put("client_id", "qyer_android");
-//        params.put("client_secret", "9fcaae8aefc4f9ac4915");
+        params.put("client_id", "qyer_android");
+        params.put("client_secret", "9fcaae8aefc4f9ac4915");
         //-----------------------------------------------------------------------
     }
 
@@ -54,7 +54,7 @@ public class BaseHtpUtil implements HtpApi {
         String requestUrl = new StringBuilder(url).append('?').append(ParamsUtil.createUrl(params)).toString();
 
         if (LogMgr.isDebug())
-            LogMgr.d("BaseHtpUtil", "~~" + requestUrl);
+            LogMgr.d("BaseHtpUtil", "~~get: " + requestUrl);
 
         return requestUrl;
     }

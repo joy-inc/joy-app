@@ -10,6 +10,7 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.adapter.sample.CityRvAdapter;
 import com.joy.app.bean.sample.HotCityItem;
+import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.utils.http.sample.TestHtpUtil;
 
 import java.util.List;
@@ -28,7 +29,10 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        executeRefresh();
+        executeCacheAndRefresh();
+//        executeCacheOnly();
+//        executeRefreshOnly();
+//        executeRefreshAndCache();
 
 //        ObjectRequest<List<Special>> req = new ObjectRequest<>(TestHtpUtil.getSpecialListUrl(getPageIndex(), getPageLimit()), Special.class);
 //        req.setResponseListener(new ObjectResponse<List<Special>>() {
@@ -38,7 +42,7 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
 //
 //            }
 //        });
-//        addRequest2QueueNoCache(req, req.getIdentifier());
+//        addRequestNoCache(req);
     }
 
     @Override
@@ -59,8 +63,7 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
     @Override
     protected ObjectRequest<List<HotCityItem>> getObjectRequest() {
 
-//        return new ObjectRequest(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
-        return ObjectRequest.get(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
+        return ReqFactory.newGet(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
     }
 
     @Override

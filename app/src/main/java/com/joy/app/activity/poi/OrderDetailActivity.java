@@ -30,7 +30,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override
@@ -121,7 +121,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
 
             }
         });
-        addRequest2QueueNoCache(req, req.getIdentifier());
+        addRequestNoCache(req);
     }
 
     @Override

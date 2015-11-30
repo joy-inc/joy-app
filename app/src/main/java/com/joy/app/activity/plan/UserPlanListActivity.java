@@ -32,7 +32,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override

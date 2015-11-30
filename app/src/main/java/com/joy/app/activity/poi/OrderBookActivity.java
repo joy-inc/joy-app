@@ -46,7 +46,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_order_book);
-        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override
