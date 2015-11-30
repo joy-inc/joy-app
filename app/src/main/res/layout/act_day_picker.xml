@@ -14,7 +14,7 @@
             android:id="@+id/div_ll_week"
             android:layout_width="match_parent"
             android:layout_height="@dimen/pickerday_week_height"
-            android:background="@drawable/ic_rectangle_white"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -57,9 +57,11 @@
             calendar:canSelectBeforeOneToday="true"
             calendar:colorCurrentDay="@color/black_trans87"
             calendar:colorLink="@color/calendar_link_color"
-            calendar:colorMonthName="@color/white"
+            calendar:colorMonthName="@color/text_pink"
+            calendar:colorMonthBackground="@color/calendar_month_background_color"
             calendar:colorNormalDay="@color/black_trans87"
             calendar:colorPreviousDay="@color/calendar_day_color"
+            calendar:selectPadding="2dp"
             calendar:colorSelectedDayText="@android:color/white"
             calendar:colorWeekend="@color/black_trans87"
             calendar:drawRoundRect="true"

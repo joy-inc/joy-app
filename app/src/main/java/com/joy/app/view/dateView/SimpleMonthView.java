@@ -87,7 +87,7 @@ class SimpleMonthView extends View {
     protected static int MONTH_DAY_LABEL_TEXT_SIZE;
     protected static int MONTH_HEADER_SIZE;
     protected static int MONTH_LABEL_TEXT_SIZE;
-
+    protected static int SELECT_REC_PADDING;//选择框的上下间距
     protected int mPadding = 0;
 
     private String mDayOfWeekTypeface;
@@ -174,6 +174,7 @@ class SimpleMonthView extends View {
     protected int mSelectLinkSize = 0; //选择的线的大小
     protected int mSelectLinkColor = 0;//选择的线的颜色
     protected String mSameDay = TextUtil.TEXT_EMPTY;//同一天的字符串
+
     //用户点击进入的模式
     protected int mInType = -1;
     protected boolean mCanSelect = true;//用于如果用户选了结束日期,就不能进行再次选择
@@ -196,7 +197,7 @@ class SimpleMonthView extends View {
         mDayNumColor = typedArray.getColor(R.styleable.DayPickerView_colorNormalDay, resources.getColor(R.color.normal_day));
         mPreviousDayColor = typedArray.getColor(R.styleable.DayPickerView_colorPreviousDay, resources.getColor(R.color.normal_day));
         mSelectedDaysColor = typedArray.getColor(R.styleable.DayPickerView_colorSelectedDayBackground, resources.getColor(R.color.selected_day_background));
-        mMonthTitleBGColor = typedArray.getColor(R.styleable.DayPickerView_colorSelectedDayText, resources.getColor(R.color.selected_day_text));
+        mMonthTitleBGColor = typedArray.getColor(R.styleable.DayPickerView_colorMonthBackground, resources.getColor(R.color.selected_day_text));
         mSelectDayTextColor = typedArray.getColor(R.styleable.DayPickerView_colorSelectedDayText, resources.getColor(R.color.selected_day_text));
         mWeekendColor = typedArray.getColor(R.styleable.DayPickerView_colorWeekend, resources.getColor(R.color.calendar_weekend_color));
         mLinkColor = typedArray.getColor(R.styleable.DayPickerView_colorLink, -1);
@@ -212,6 +213,7 @@ class SimpleMonthView extends View {
         MONTH_DAY_LABEL_TEXT_SIZE = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_textSizeDayName, resources.getDimensionPixelSize(R.dimen.text_size_day_name));
         MONTH_HEADER_SIZE = typedArray.getDimensionPixelOffset(R.styleable.DayPickerView_headerMonthHeight, resources.getDimensionPixelOffset(R.dimen.header_month_height));
         DAY_SELECTED_CIRCLE_SIZE = mRowHeight = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_calendarDayHeight, MIN_HEIGHT);
+        SELECT_REC_PADDING = typedArray.getDimensionPixelOffset(R.styleable.DayPickerView_selectPadding, 0);
         //        DAY_SELECTED_CIRCLE_SIZE = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_selectedDayRadius, resources.getDimensionPixelOffset(R.dimen.selected_day_radius));
         //        mRowHeight = ((typedArray.getDimensionPixelSize(R.styleable.DayPickerView_calendarHeight, resources.getDimensionPixelOffset(R.dimen.calendar_height)) - MONTH_HEADER_SIZE) / 6);
 
@@ -268,7 +270,7 @@ class SimpleMonthView extends View {
     private void drawMonthTitle(Canvas canvas) {
 
         RectF rectF = new RectF(0, 0, mWidth, MONTH_HEADER_SIZE);
-        canvas.drawRoundRect(rectF, 0, 0, mSelectedCirclePaint);
+        canvas.drawRoundRect(rectF, 0, 0, mMonthTitleBGPaint);
 
 
         int x = (mWidth + 2 * mPadding) / 2;
@@ -373,10 +375,7 @@ class SimpleMonthView extends View {
         return ((day.year < toYear)) || (day.year == toYear && day.month < toMonth) || (day.month == toMonth && day.day <= toDay);
     }
 
-
-    //type 0开始 1结束 2中间
-    private void drawSelRec(Canvas canvas, int dayOffset, int linkCount, int oneWidth, int type) {
-
+    private void drawSelRec(Canvas canvas, int dayOffset, int linkCount, int oneWidth, int type, int paddingHeight, int paddingBootm,float top) {
         float itemWidth = mWidth / 7;
         float startWidth = itemWidth * dayOffset;
         oneWidth += 2;
@@ -387,8 +386,8 @@ class SimpleMonthView extends View {
                 startWidth += oneWidth;
             }
         }
-        float startHeight = DAY_SELECTED_CIRCLE_SIZE * (linkCount - 1) + MONTH_HEADER_SIZE + LINK_SIZE * (linkCount - 1); //因为从从link_size下开始画所以这里不进行-1
-        RectF rectF = new RectF(startWidth, startHeight, startWidth + oWidth * 2, startHeight + DAY_SELECTED_CIRCLE_SIZE);
+        float startHeight = DAY_SELECTED_CIRCLE_SIZE * (linkCount - 1) + MONTH_HEADER_SIZE + LINK_SIZE * (linkCount - 1) + paddingHeight; //因为从从link_size下开始画所以这里不进行-1
+        RectF rectF = new RectF(startWidth, startHeight-top, startWidth + oWidth * 2, startHeight + DAY_SELECTED_CIRCLE_SIZE - paddingHeight * 2 - paddingBootm);
         canvas.drawRoundRect(rectF, 0, 0, mSelectedCirclePaint);
 
         if (mDrawSelectedLink) {
@@ -437,7 +436,16 @@ class SimpleMonthView extends View {
             boolean isInSelecDay = false;
 
             boolean isToday = (mMonth == today.month && mYear == today.year && day == today.monthDay);
+            int paddintBottom = 0;
+            float topOffset=0;
+            if(linkCount==5){
+                paddintBottom = SELECT_REC_PADDING+LINK_SIZE;
+            }else if(linkCount>5){
+                paddintBottom = SELECT_REC_PADDING+LINK_SIZE*2;
 
+                topOffset=SELECT_REC_PADDING/2 ;
+//                paddintBottom = SELECT_REC_PADDING+LINK_SIZE*2;
+            }
             if (isToday) { //画空心圆
                 int dyOffset = 0;
                 float drOffset = 0;
@@ -453,13 +461,13 @@ class SimpleMonthView extends View {
                 } else if (linkCount == 4) {
                     dyOffset = LINK_SIZE * 2;
                     //                    drOffset += LINK_SIZE;
-                } else {
+                } else   {
                     dyOffset = LINK_SIZE;
                     drOffset = LINK_SIZE * 2;
                 }//我也不想这样加的了.~~~为啥会偏移..在最后一行会少了原本的高度距离,但整个view的高度是对的.所以咯.
                 float dy = y - (MINI_DAY_NUMBER_TEXT_SIZE / 2) + dyOffset;
                 //                float dr = (MONTH_HEADER_SIZE - LINK_SIZE * linkCount) / 2 + drOffset;
-                float dr = DAY_SELECTED_CIRCLE_SIZE / 2 - drOffset;
+                float dr = DAY_SELECTED_CIRCLE_SIZE / 2 - drOffset - SELECT_REC_PADDING - SELECT_REC_PADDING;
                 canvas.drawCircle(x, dy, dr, mTodayStrokePaint);
             }
             //画了选中的日期
@@ -488,18 +496,19 @@ class SimpleMonthView extends View {
                     dyOffset = LINK_SIZE * 2;
                     //                    drOffset += LINK_SIZE;
                 } else {
+
                     dyOffset = LINK_SIZE;
                     drOffset = LINK_SIZE * 2;
-                }//我也不想这样加的了.~~~为啥会偏移..在最后一行会少了原本的高度距离,但整个view的高度是对的.所以咯.
+                } //我也不想这样加的了.~~~为啥会偏移..在最后一行会少了原本的高度距离,但整个view的高度是对的.所以咯.
                 float dy = y - (MINI_DAY_NUMBER_TEXT_SIZE / 2) + dyOffset;
                 //                float dr = (MONTH_HEADER_SIZE - LINK_SIZE * linkCount) / 2 + drOffset;
-                float dr = DAY_SELECTED_CIRCLE_SIZE / 2 - drOffset;
+                float dr = DAY_SELECTED_CIRCLE_SIZE / 2 - drOffset - SELECT_REC_PADDING;
                 canvas.drawCircle(x, dy, dr, mSelectedCirclePaint);
                 //                drawSelRec(canvas, dayOffset, linkCount, oneWidth/2, isHasBegin ? 0 : 1);
 
                 if (mStartSectionTime <= 0) {
                     //画区间
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1, SELECT_REC_PADDING, paddintBottom,topOffset);
 
                 }
 
@@ -556,7 +565,7 @@ class SimpleMonthView extends View {
                     ((mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedBeginMonth && day < mSelectedBeginDay) || (mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedLastMonth && day > mSelectedLastDay)))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom,topOffset);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -565,7 +574,7 @@ class SimpleMonthView extends View {
                     (((mSelectedBeginMonth < mSelectedLastMonth && mMonth == mSelectedBeginMonth && day < mSelectedBeginDay) || (mSelectedBeginMonth < mSelectedLastMonth && mMonth == mSelectedLastMonth && day > mSelectedLastDay)) || ((mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedBeginMonth && day > mSelectedBeginDay) || (mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedLastMonth && day < mSelectedLastDay))))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom,topOffset);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -573,7 +582,7 @@ class SimpleMonthView extends View {
             if ((mSelectedBeginDay != -1 && mSelectedLastDay != -1 && mSelectedBeginYear == mSelectedLastYear && mYear == mSelectedBeginYear) && ((mMonth > mSelectedBeginMonth && mMonth < mSelectedLastMonth && mSelectedBeginMonth < mSelectedLastMonth) || (mMonth < mSelectedBeginMonth && mMonth > mSelectedLastMonth && mSelectedBeginMonth > mSelectedLastMonth))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom,topOffset);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
 
@@ -582,7 +591,7 @@ class SimpleMonthView extends View {
             if ((mSelectedBeginDay != -1 && mSelectedLastDay != -1 && mSelectedBeginYear != mSelectedLastYear) && ((mSelectedBeginYear < mSelectedLastYear && ((mMonth > mSelectedBeginMonth && mYear == mSelectedBeginYear) || (mMonth < mSelectedLastMonth && mYear == mSelectedLastYear))) || (mSelectedBeginYear > mSelectedLastYear && ((mMonth < mSelectedBeginMonth && mYear == mSelectedBeginYear) || (mMonth > mSelectedLastMonth && mYear == mSelectedLastYear))))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom,topOffset);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }

@@ -22,6 +22,7 @@
     <color name="calendar_link_color">#cccccc</color>
     <color name="calendar_day_color">#42000000</color>
     <color name="calendar_panter_day_color">#CC40C895</color>
+    <color name="calendar_month_background_color">#f5f5f5</color>
 
     <color name="qa_bg_title_bar_main_hotel">#f9617c</color><!-- 酒店 -->
     <color name="qa_bg_status_bar_main_hotel">#f9617c</color><!-- 酒店 -->

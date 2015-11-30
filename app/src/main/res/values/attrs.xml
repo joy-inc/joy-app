@@ -9,6 +9,7 @@
         <attr name="colorPreviousDay" format="color"/>
         <attr name="colorNormalDay" format="color" />
         <attr name="colorMonthName" format="color" />
+        <attr name="colorMonthBackground" format="color" />
         <attr name="colorDayName" format="color" />
         <attr name="textSizeDay" format="dimension"/>
         <attr name="textSizeMonth" format="dimension" />
@@ -32,6 +33,7 @@
         <attr name="selectPointR" format="dimension"/><!--选择的圆的半径-->
         <attr name="colorSelectPoint" format="color"/>
         <attr name="selectLinkSize" format="dimension"/>
+        <attr name="selectPadding" format="dimension"/><!--选择框的上下间距-->
         <attr name="colorSelectLink" format="color"/>
         <attr name="firstMonth" format="enum">
             <enum name="january" value="0" />

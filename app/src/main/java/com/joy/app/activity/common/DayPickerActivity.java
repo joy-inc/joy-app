@@ -231,7 +231,7 @@ public class DayPickerActivity extends BaseUiActivity implements DatePickerContr
                 intent.putExtra(REQ_EXTRA_KEY_END_DATE, end);
                 setResult(RESULT_OK, intent);
             }
-            time2Finish();
+//            time2Finish();
         }
     }
 
