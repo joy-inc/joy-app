@@ -9,6 +9,10 @@
     <color name="text_pink">#f9617c</color>
 
 
+    <!--登录-->
+    <color name="color_login_bg_dark">#5c303d</color>
+    <color name="color_login_bg">#412d45</color>
+
     <!--默认的日历控件颜色.保留是为了以后移植使用-->
     <color name="normal_day">#ff999999</color>
     <color name="selected_day_background">#f9617c</color>
