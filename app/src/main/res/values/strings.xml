@@ -105,6 +105,7 @@
     <string name="calendar_in">入住</string>
     <string name="calendar_out">离开</string>
     <string name="calendar_weekend">班</string>
+    <string name="picker_title">出发日期</string>
     <!--日历-->
 
 </resources>
