@@ -35,11 +35,11 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     @Bind(R.id.sdUserBG)
     SimpleDraweeView mUserBG;
 
-    @Bind(R.id.tvInfo)
-    TextView mInfo;
+    @Bind(R.id.tvLoginInfo)
+    TextView mLoginInfo;
 
-    @Bind(R.id.tvLoginButton)
-    TextView mLoginButton;
+    @Bind(R.id.tvName)
+    TextView mUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,18 +79,23 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
         findViewById(R.id.llRectangle).setOnClickListener(this);
         findViewById(R.id.llClean).setOnClickListener(this);
         findViewById(R.id.llAbout).setOnClickListener(this);
+        findViewById(R.id.llLoginDiv).setOnClickListener(this);
+        mUserHead.setOnClickListener(this);
         View loginOut = findViewById(R.id.llLoginOut);
         loginOut.setOnClickListener(this);
+
         if (JoyApplication.isLogin()) {
             ViewUtil.showView(loginOut);
-            ViewUtil.hideView(mLoginButton);
-            mUserBG.setImageURI(Uri.parse(JoyApplication.getUserToken()));
+            ViewUtil.showView(mUserName);
+            //            mUserName.setText(JoyApplication.geu);
+            //// TODO: 15/11/30 确认好user对象
+//            mUserHead.setImageURI(Uri.parse(JoyApplication.getUserToken()));
+            ViewUtil.goneView(mLoginInfo);
         }
         JTextView version = (JTextView) findViewById(R.id.tvVersion);
         version.setText(getString(R.string.setting_version, BuildConfig.VERSION_NAME));
 
 
-        mLoginButton.setOnClickListener(this);
     }
 
 
@@ -110,7 +115,10 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
             case R.id.llAbout:
                 about();
                 break;
-            case R.id.tvLoginButton:
+            case R.id.sdvUserHead:
+                openImageDialog();
+                break;
+            case R.id.llLoginDiv:
                 showLoginActivity();
                 break;
             case R.id.llUpdate:
@@ -149,6 +157,13 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     }
 
     /**
+     * 显示拍照的对话框
+     */
+    private void openImageDialog() {
+
+    }
+
+    /**
      * 推荐分享,打开推荐界面
      */
     private void rectangle() {
@@ -174,13 +189,19 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
      */
     private void showLoginActivity() {
 
+        if (!JoyApplication.isLogin()) {
+
+        }
     }
 
     /**
      * 登出
      */
-    private void loginOut(){
-        //// TODO: 15/11/25 登出成功后要改变按钮的状态 
+    private void loginOut() {
+        //// TODO: 15/11/25 登出成功后要改变按钮的状态
+        ViewUtil.goneView(mUserName);
+        ViewUtil.showView(mLoginInfo);
+//        mUserHead.set//设置默认值
     }
 
     public static void startActivity(Context context) {

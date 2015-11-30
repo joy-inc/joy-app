@@ -7,4 +7,5 @@ package com.joy.app.bean;
  */
 public class User {
 
+
 }

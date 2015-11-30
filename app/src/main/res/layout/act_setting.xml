@@ -17,7 +17,7 @@
             android:scaleType="centerCrop"
             fresco:placeholderImageScaleType="fitXY"/>
 
-        <LinearLayout
+        <LinearLayout android:id="@+id/llLoginDiv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -34,7 +34,7 @@
                 fresco:placeholderImageScaleType="fitXY"/>
 
             <com.android.library.widget.JTextView
-                android:id="@+id/tvInfo"
+                android:id="@+id/tvLoginInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

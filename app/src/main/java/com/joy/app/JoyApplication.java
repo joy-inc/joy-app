@@ -1,6 +1,7 @@
 package com.joy.app;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.joy.app.bean.User;
 import com.joy.app.utils.XiaomiUtil;
 import com.joy.app.utils.prefs.CommonPrefs;
 import com.android.library.BaseApplication;
@@ -12,6 +13,7 @@ import com.android.library.utils.LogMgr;
  */
 public class JoyApplication extends BaseApplication {
 
+    User mUser;
     @Override
     public void onCreate() {
 
