@@ -12,7 +12,6 @@ import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
-import com.android.volley.VolleyError;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderContacts;
@@ -43,7 +42,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_order_book_profile);
-        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override
@@ -170,12 +169,12 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             }
 
             @Override
-            public void onError(Object tag, VolleyError error) {
+            public void onError(Object tag, String msg) {
 
-                showToast("创建订单失败啦～～"+error.getMessage());
+                showToast("创建订单失败啦～～"+msg);
             }
         });
-        addRequest2QueueNoCache(req, req.getIdentifier());
+        addRequestNoCache(req);
 
     }
 }

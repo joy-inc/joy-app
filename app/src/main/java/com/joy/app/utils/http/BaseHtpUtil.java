@@ -2,12 +2,14 @@ package com.joy.app.utils.http;
 
 import android.os.Build;
 
+import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.AppUtil;
 import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.ParamsUtil;
 import com.android.library.utils.SortComparator;
 import com.joy.app.BuildConfig;
+import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.utils.ChannelUtil;
 
 import java.util.Map;
@@ -44,8 +46,8 @@ public class BaseHtpUtil implements HtpApi {
 
         //-----------------------------------------------------------------------
         // TODO joy接口ok就干掉
-//        params.put("client_id", "qyer_android");
-//        params.put("client_secret", "9fcaae8aefc4f9ac4915");
+        params.put("client_id", "qyer_android");
+        params.put("client_secret", "9fcaae8aefc4f9ac4915");
         //-----------------------------------------------------------------------
     }
 
@@ -54,8 +56,17 @@ public class BaseHtpUtil implements HtpApi {
         String requestUrl = new StringBuilder(url).append('?').append(ParamsUtil.createUrl(params)).toString();
 
         if (LogMgr.isDebug())
-            LogMgr.d("BaseHtpUtil", "~~" + requestUrl);
+            LogMgr.d("BaseHtpUtil", "~~get: " + requestUrl);
 
         return requestUrl;
+    }
+
+    protected  static ObjectRequest createPostRequest(String url, Map<String, String> params,Class calss){
+
+       return ReqFactory.newPost(url, calss,params);
+    }
+    protected  static ObjectRequest createGetRequest(String url, Map<String, String> params,Class calss){
+
+       return ReqFactory.newGet(createUrl(url,params), calss);
     }
 }

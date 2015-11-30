@@ -3,17 +3,17 @@ package com.joy.app.activity.main;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.joy.app.BuildConfig;
+import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.utils.http.PlanHttpUtil;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,20 +36,20 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        executeRefresh();
+//        executeRefresh();
     }
 
     @Override
     protected void initContentView() {
 
         super.initContentView();
-        UserPlanAdapter adapter = new UserPlanAdapter();
+        final UserPlanAdapter adapter = new UserPlanAdapter();
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
 
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
 
-                showToast("~~" + position);
+                UserPlanListActivity.startActivityById(getActivity(),adapter.getItem(position).getId());
             }
         });
         setAdapter(adapter);
@@ -59,7 +59,8 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest() {
 
-        ObjectRequest obj = ObjectRequest.get(PlanHttpUtil.getUserPlanFolderUrl(getPageIndex(), 5), PlanFolder.class);
+        ObjectRequest obj = PlanHttpUtil.getUserPlanFolderRequest(PlanFolder.class,getPageIndex(), 5);
+
         if (BuildConfig.DEBUG) {
             List<PlanFolder> data = new ArrayList<>();
             for (int i = 0; i < 5; i++) {

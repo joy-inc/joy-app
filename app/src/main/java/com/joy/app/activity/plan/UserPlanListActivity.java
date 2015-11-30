@@ -32,7 +32,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     @Override
     protected ObjectRequest<List<PlanItem>> getObjectRequest() {
 
-        ObjectRequest obj = ObjectRequest.get(PlanHttpUtil.getUserPlanListUrl(mFolderID), PlanFolder.class);
+        ObjectRequest obj = PlanHttpUtil.getUserPlanListRequest(mFolderID, PlanFolder.class);
         if (BuildConfig.DEBUG) {
             ArrayList<PlanItem>list = new ArrayList<>();
             for (int i = 0; i < 5; i++) {

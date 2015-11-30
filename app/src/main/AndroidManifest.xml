@@ -83,6 +83,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent.toolbar.overlay" />
 
+        <!--行程规划-->
+        <activity
+            android:name=".activity.plan.UserPlanListActivity"
+            android:screenOrientation="portrait"/>
 
         <!-- 小米 -->
         <service

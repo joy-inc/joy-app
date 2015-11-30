@@ -29,7 +29,7 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override

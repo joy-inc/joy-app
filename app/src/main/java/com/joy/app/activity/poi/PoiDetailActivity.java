@@ -57,7 +57,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_poi_detail);
-        executeRefresh();
+        executeRefreshOnly();
         getCommentList();
     }
 
@@ -240,7 +240,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         }
 
-//        addRequest2Queue(obj, obj.getIdentifier(), false);
+//        addRequestNoCache(obj);
 //        obj.setResponseListener(new ObjectResponseListener() {
 //            @Override
 //            public void onSuccess(Object tag, Object o) {
@@ -248,7 +248,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 //            }
 //
 //            @Override
-//            public void onError(Object tag, VolleyError error) {
+//            public void onError(Object tag, String msg) {
 //
 //            }
 //        });
