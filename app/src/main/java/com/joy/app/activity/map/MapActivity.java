@@ -64,6 +64,6 @@ public abstract class MapActivity extends BaseUiActivity {
 
     @Override
     protected void initContentView() {
-        mResourceProxy = new OsmResourceImpl.java(act);
+//        mResourceProxy = new OsmResourceImpl.java(act);
     }
 }
