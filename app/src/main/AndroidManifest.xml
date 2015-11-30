@@ -46,6 +46,15 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".activity.user.UserLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.RegistInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.RegistPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.common.DayPickerActivity"
             android:screenOrientation="portrait" />
         <activity
