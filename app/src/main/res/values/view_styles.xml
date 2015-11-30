@@ -65,7 +65,7 @@
     <!--设置界面的线性布局-->
     <style name="setting_div">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">45dp</item>
         <item name="android:background">@color/ripple_material_dark</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
@@ -73,8 +73,8 @@
 
     <!--设置界面的icon-->
     <style name="setting_icon">
-        <item name="android:layout_width">30dp</item>
-        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
         <item name="android:layout_marginLeft">30dp</item>
     </style>
 

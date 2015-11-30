@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/llUserInfoDiv"
         android:layout_width="match_parent"
-        android:layout_height="80dp" >
+        android:layout_height="140dp">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/sdUserBG"
@@ -17,38 +17,42 @@
             android:scaleType="centerCrop"
             fresco:placeholderImageScaleType="fitXY"/>
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/sdvUserHead"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:scaleType="centerCrop"
-            android:tint="@color/black_trans26"
-            fresco:placeholderImage="@drawable/ic_user_def_head"
-            fresco:placeholderImageScaleType="fitXY"/>
-
-        <com.android.library.widget.JTextView
-            android:id="@+id/tvInfo" android:layout_centerVertical="true"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/setting_no_login"
-            android:layout_toRightOf="@id/sdvUserHead"
-            android:textColor="@android:color/white"
-            android:textSize="12dp"/>
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <com.android.library.widget.JTextView
-            android:id="@+id/tvLoginButton" android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/shape_bg_oval_accent"
-            android:padding="5dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:text="@string/setting_login_now"
-            android:textColor="@android:color/white"
-            android:textSize="12dp"/>
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/sdvUserHead"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:tint="@color/black_trans26"
+                fresco:placeholderImage="@drawable/ic_user_def_head"
+                fresco:placeholderImageScaleType="fitXY"/>
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tvInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/setting_no_login"
+                android:textColor="@android:color/white"
+                android:textSize="12dp"/>
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/white"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
@@ -123,7 +127,7 @@
         <ImageView
             android:id="@+id/iconSetting5"
             style="@style/setting_icon"
-            android:src="@drawable/ic_setting_about"/>
+            android:src="@drawable/ic_setting_update"/>
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvSetting5"
