@@ -44,6 +44,10 @@
         <activity
             android:name=".activity.setting.SettingActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.common.DayPickerActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sample.LvTestActivity"
             android:screenOrientation="portrait" />
@@ -78,6 +82,11 @@
             android:name=".activity.poi.OrderBookProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent.toolbar.overlay" />
+
+        <!--行程规划-->
+        <activity
+            android:name=".activity.plan.UserPlanListActivity"
+            android:screenOrientation="portrait"/>
 
         <!-- 小米 -->
         <service

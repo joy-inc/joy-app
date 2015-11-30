@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 日历控件属性 -->
+    <declare-styleable name="DayPickerView">
+        <attr name="colorCurrentDay" format="color"/>
+        <attr name="colorSelectedDayBackground" format="color"/>
+        <attr name="colorSelectedDayText" format="color"/>
+        <attr name="colorPreviousDay" format="color"/>
+        <attr name="colorNormalDay" format="color" />
+        <attr name="colorMonthName" format="color" />
+        <attr name="colorMonthBackground" format="color" />
+        <attr name="colorDayName" format="color" />
+        <attr name="textSizeDay" format="dimension"/>
+        <attr name="textSizeMonth" format="dimension" />
+        <attr name="textSizeDayName" format="dimension" />
+        <attr name="textSizeInfo" format="dimension" />
+        <attr name="headerMonthHeight" format="dimension" />
+        <!--<attr name="selectedDayRadius" format="dimension" />-->
+        <attr name="calendarHeight" format="dimension" />
+        <attr name="calendarDayHeight" format="dimension" />
+        <attr name="enablePreviousDay" format="boolean" />
+        <attr name="currentDaySelected" format="boolean" />
+        <attr name="drawRoundRect" format="boolean" />
+        <attr name="showMonthCount" format="integer" />
+        <attr name="colorWeekend" format="color" />
+        <attr name="colorLink" format="color"/>
+        <attr name="textStartStr" format="string" />
+        <attr name="textEndStr" format="string"/>
+        <attr name="textWeekend" format="string"/><!--周末如果显示什么字为上班的标示-->
+        <attr name="selectTextToTop" format="dimension" />
+        <attr name="canSelectBeforeOneToday" format="boolean"/>
+        <attr name="selectPointR" format="dimension"/><!--选择的圆的半径-->
+        <attr name="colorSelectPoint" format="color"/>
+        <attr name="selectLinkSize" format="dimension"/>
+        <attr name="selectPadding" format="dimension"/><!--选择框的上下间距-->
+        <attr name="colorSelectLink" format="color"/>
+        <attr name="firstMonth" format="enum">
+            <enum name="january" value="0" />
+            <enum name="february" value="1" />
+            <enum name="march" value="2" />
+            <enum name="april" value="3" />
+            <enum name="may" value="4" />
+            <enum name="june" value="5" />
+            <enum name="july" value="6" />
+            <enum name="august" value="7" />
+            <enum name="september" value="8" />
+            <enum name="october" value="9" />
+            <enum name="november" value="10" />
+            <enum name="december" value="11" />
+        </attr>
+        <attr name="lastMonth" format="enum">
+            <enum name="january" value="0" />
+            <enum name="february" value="1" />
+            <enum name="march" value="2" />
+            <enum name="april" value="3" />
+            <enum name="may" value="4" />
+            <enum name="june" value="5" />
+            <enum name="july" value="6" />
+            <enum name="august" value="7" />
+            <enum name="september" value="8" />
+            <enum name="october" value="9" />
+            <enum name="november" value="10" />
+            <enum name="december" value="11" />
+        </attr>
+    </declare-styleable>
+</resources>

@@ -1,32 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/white">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv_poi_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerVertical="true"
         app:placeholderImage="@drawable/ic_def_avatar"
         android:scaleType="centerCrop"
         />
-    <com.joy.library.widget.JTextView
-        android:id="@+id/jtv_cnname"
-        android:layout_alignRight="@+id/sdv_poi_photo"
-        android:textColor="@color/white"
-        android:text="12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <com.joy.library.widget.JTextView
-        android:id="@+id/jtv_enname"
-        android:layout_alignRight="@+id/sdv_poi_photo"
-        android:layout_alignBottom="@id/jtv_cnname"
-        android:text="123"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_cnname"
+            android:textColor="@color/black_trans54"
+            android:text="东京银座"
+            android:textSize="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/sdv_poi_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_enname"
+            android:text="Tokyo Ginza"
+            android:textSize="14dp"
+            android:layout_toRightOf="@+id/sdv_poi_photo"
+            android:layout_below="@+id/jtv_cnname"
+            android:textColor="@color/black_trans35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.android.library.widget.JTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123"
+            android:textColor="@color/text_pink"
+            android:layout_alignBottom="@+id/sdv_poi_photo"
+            android:layout_toRightOf="@+id/sdv_poi_photo"/>
+
 </RelativeLayout>
