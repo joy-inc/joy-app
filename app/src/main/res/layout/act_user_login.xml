@@ -1,7 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_login_bg">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_login_bg">
 
-</LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="140dp"
+                android:src="@drawable/ic_login_logo"/>
+
+            <com.android.library.widget.JTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/login_info"
+                android:textColor="@color/white"
+                android:textSize="14dp"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/ivColose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+
+        android:src="@drawable/ic_close"/>
+
+    <com.android.library.widget.JTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/ivColose"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/ivColose"
+        android:gravity="center"
+
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/regist"
+        android:textColor="@color/text_pink"
+        android:textSize="18dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/llWeibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivWeibo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_weibo"/>
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tvWeibo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/weibo"
+                android:textColor="@color/white_trans80"
+                android:textSize="16dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llWechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivWechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_wechat"/>
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tvWechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/wechat"
+                android:textColor="@color/white_trans80"
+                android:textSize="16dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
