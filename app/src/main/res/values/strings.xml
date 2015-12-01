@@ -10,6 +10,11 @@
     <string name="booking">预订</string>
 
     <string name="topic">专题</string>
+    <!--登录注册-->
+    <string name="regist">注册</string>
+    <string name="login_info">幸福啪啪啪</string>
+    <string name="weibo">微博</string>
+    <string name="wechat">微信</string>
     <!--设置界面-->
     <string name="setting_no_login">您还没有登录</string>
     <string name="setting_title">个人</string>
