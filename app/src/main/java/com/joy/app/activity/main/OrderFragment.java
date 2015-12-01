@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.joy.app.BuildConfig;
+import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.utils.http.OrderHtpUtil;
@@ -50,6 +51,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
             public void onItemViewClick(int position, View clickView, MainOrder data) {
 
                 showToast(data.getOrder_id()+" To Order Detail --- from OrderFragment" + clickView.getId());
+                PoiDetailActivity.startActivity(getActivity(), clickView, "http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280", "51");
             }
         });
         setAdapter(adapter);

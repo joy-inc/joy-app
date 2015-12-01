@@ -86,6 +86,7 @@
     <!--行程规划-->
 
     <string name="plan_folder_things">things to do</string>
+    <string name="comment_all">全部点评</string>
 
     <!--日历-->
     <string name="sans_serif" translatable="false">sans-serif</string>

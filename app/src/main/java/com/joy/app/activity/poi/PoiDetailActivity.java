@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
@@ -42,7 +44,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
     private String mId;
     private String mPhotoUrl;
-    private String mTopicId;
     private PoiDetail mPoiDetail;
 
     private TextView mAcbBook;
@@ -65,8 +66,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     protected void initData() {
 
         mId = TextUtil.filterNull(getIntent().getStringExtra("id"));
-        mPhotoUrl = TextUtil.filterNull(getIntent().getStringExtra("id"));
-        mTopicId = TextUtil.filterNull(getIntent().getStringExtra("id"));
+        mPhotoUrl = TextUtil.filterNull(getIntent().getStringExtra("photoUrl"));
     }
 
     @Override
@@ -128,37 +128,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         if (mPoiDetail.getIs_book())
             ViewUtil.showView(mAcbBook);
 
-        if (BuildConfig.DEBUG) {
-
-            CommentAll data = new CommentAll();
-            CommentScores scores = new CommentScores();
-            scores.setComment_level("3.5");
-            scores.setComment_num("22");
-            scores.setFive("1");
-            scores.setFour("2");
-            scores.setThree("3");
-            scores.setTwo("4");
-            scores.setOne("5");
-
-            data.setScores(scores);
-
-            ArrayList<CommentItem> list = new ArrayList();
-
-            for (int i = 0; i < 7; i++) {
-                CommentItem item = new CommentItem();
-                item.setComment_id(i + "");
-                item.setComment("我是第 " + i + " 个来点评的诶！～");
-                item.setComment_level("2.5");
-                item.setComment_date("2015年11月19日");
-                item.setComment_user("小" + i);
-
-                list.add(item);
-            }
-            data.setComments(list);
-
-            mCommentWidget.invalidate(data);
-
-        }
         return true;
     }
 
@@ -170,6 +139,8 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         if (BuildConfig.DEBUG) {
 
             PoiDetail data = new PoiDetail();
+            data.setProduct_id(mId);
+            data.setTitle("米尔福峡湾一日游(邮轮、自助、午餐、皮划艇)");
             data.setComment_level("2.5");
             data.setComment_num("19");
             data.setDescription("07:00从酒店或集合地搭乘玻璃天窗全景豪华旅游巴士 开始米尔福德峡湾一日游。\n\n09:00沿着瓦卡蒂普湖穿过金斯顿到达蒂阿瑙, 这里拥有 令人窒息的风景，激动人心的河流，您将有时…");
@@ -188,7 +159,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             data.setHighlights(list);
             data.setIs_book("1");
             data.setPrice("700-800");
-            data.setTitle("米尔福峡湾一日游(邮轮、自助、午餐、皮划艇)");
 
             obj.setData(data);
         }
@@ -205,7 +175,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
     private void getCommentList() {
 
-        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 10, 1));
+        ObjectRequest<CommentAll> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 3, 1));
 
         if (BuildConfig.DEBUG) {
 
@@ -240,18 +210,15 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         }
 
-//        addRequestNoCache(obj);
-//        obj.setResponseListener(new ObjectResponseListener() {
-//            @Override
-//            public void onSuccess(Object tag, Object o) {
-//
-//            }
-//
-//            @Override
-//            public void onError(Object tag, String msg) {
-//
-//            }
-//        });
+        obj.setResponseListener(new ObjectResponse<CommentAll>() {
+
+            @Override
+            public void onSuccess(Object tag, CommentAll data) {
+
+                mCommentWidget.invalidate(data);
+            }
+        });
+        addRequestNoCache(obj);
     }
 
 
@@ -265,8 +232,11 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     public void onClick(View view) {
 
         if (R.id.acbBook == view.getId()) {
+            LogMgr.w("id=" +mPoiDetail.getProduct_id());
+            LogMgr.w("mPhotoUrl=" +mPhotoUrl);
+            LogMgr.w("title=" +mPoiDetail.getTitle());
 
-            OrderBookActivity.startActivity(this, view,mPoiDetail.getProduct_id(), mPoiDetail.getPhotos().get(0), mPoiDetail.getTitle());
+            OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
         } else if (R.id.btnAddToPlan == view.getId()) {
 
             showToast("加入旅行计划");
@@ -290,7 +260,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
      */
     private void startAllCommentActivity() {
 
-        showToast("open all comments activity");
+        CommentActivity.startActivity(this, mId);
     }
 
     private void startPoiMapWithSinglePoi() {
@@ -334,7 +304,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
      * @param view The view which starts the transition
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void startActivity(Activity act, View view, String photoUrl, String id, String topicId) {
+    public static void startActivity(Activity act, View view, String photoUrl, String id) {
 
         if (act == null || view == null)
             return;
@@ -342,7 +312,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         Intent intent = new Intent(act, PoiDetailActivity.class);
         intent.putExtra("photoUrl", photoUrl);
         intent.putExtra("id", id);
-        intent.putExtra("topicId", topicId);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 

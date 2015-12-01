@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
@@ -63,7 +64,7 @@ public class CommentScoresWidget extends ExLayoutWidget {
         return contentView;
     }
 
-    protected void invalidate(final CommentScores data) {
+    public void invalidate(final CommentScores data) {
 
         if (data == null)
             return;
@@ -73,17 +74,17 @@ public class CommentScoresWidget extends ExLayoutWidget {
         tvCommentLevel.setText(data.getComment_level());
 
         setMaxValue(data.getComment_num());
-        score5.setProgress(parseInt(data.getFive(), 0));
-        score4.setProgress(parseInt(data.getFour(), 0));
-        score3.setProgress(parseInt(data.getThree(), 0));
-        score2.setProgress(parseInt(data.getTwo(), 0));
-        score1.setProgress(parseInt(data.getOne(), 0));
+        score5.setProgress(MathUtil.parseInt(data.getFive(), 0));
+        score4.setProgress(MathUtil.parseInt(data.getFour(), 0));
+        score3.setProgress(MathUtil.parseInt(data.getThree(), 0));
+        score2.setProgress(MathUtil.parseInt(data.getTwo(), 0));
+        score1.setProgress(MathUtil.parseInt(data.getOne(), 0));
 
-//        tv5Count.setText(parseInt(data.getFive(), 0));
-//        tv4Count.setText(parseInt(data.getFour(), 0));
-//        tv3Count.setText(parseInt(data.getThree(), 0));
-//        tv2Count.setText(parseInt(data.getTwo(), 0));
-//        tv1Count.setText(parseInt(data.getOne(), 0));
+//        tv5Count.setText(MathUtil.parseInt(data.getFive(), 0));
+//        tv4Count.setText(MathUtil.parseInt(data.getFour(), 0));
+//        tv3Count.setText(MathUtil.parseInt(data.getThree(), 0));
+//        tv2Count.setText(MathUtil.parseInt(data.getTwo(), 0));
+//        tv1Count.setText(MathUtil.parseInt(data.getOne(), 0));
         // todo why 资源找不到？
     }
 
@@ -99,13 +100,5 @@ public class CommentScoresWidget extends ExLayoutWidget {
         score3.setMax(maxValue);
         score2.setMax(maxValue);
         score1.setMax(maxValue);
-    }
-
-    private int parseInt(String value, int defaultValue) {
-
-        if (TextUtil.isEmpty(value))
-            return defaultValue;
-        else
-            return Integer.parseInt(value);
     }
 }
