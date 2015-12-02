@@ -1,8 +1,11 @@
 package com.joy.app.activity.map;
 
+import android.graphics.Paint;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -20,6 +23,7 @@ import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.activity.map.osmutil.GoogleTileSource;
+import com.joy.app.activity.map.osmutil.OsmResourceImpl;
 import com.joy.app.activity.map.osmutil.QyerMapOverlayItem;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.utils.QaAnimUtil;
@@ -29,10 +33,13 @@ import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.util.TileSystem;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -154,7 +161,13 @@ public abstract class MapActivity extends BaseUiActivity {
         return overLayitem;
     }
 
-    protected void showMap() {
+    protected void addMarkers(List<MapPoiDetail> list){
+        for (MapPoiDetail detail : list){
+            addPoi(detail);
+        }
+    }
+
+    protected void showMarkers() {
         ItemizedIconOverlay mOverlay = new ItemizedIconOverlay<QyerMapOverlayItem>(mOverlayItems,
                 new ItemizedIconOverlay.OnItemGestureListener<QyerMapOverlayItem>() {
                     @Override
@@ -178,7 +191,6 @@ public abstract class MapActivity extends BaseUiActivity {
         }
         mapview.getOverlays().add(mOverlay);
         //TODO loaction
-
     }
 
 
@@ -205,6 +217,76 @@ public abstract class MapActivity extends BaseUiActivity {
         showInfoBar();
         updatePoiInfoView(item.getDataObject());
     }
+
+    public void showAllMarker(){
+        setMoveCameraAndZoomByOverlay(mOverlayItems);
+    }
+
+    public void setMoveCameraAndZoomByOverlay(List <QyerMapOverlayItem> list){
+
+        ArrayList<Double> latListSort = new ArrayList<>();
+        ArrayList<Double> lngListSort = new ArrayList<>();
+        for (QyerMapOverlayItem item :list){
+            latListSort.add(item.getPoint().getLatitude());
+            lngListSort.add(item.getPoint().getLongitude());
+        }
+        setMoveCameraAndZoom(latListSort,lngListSort);
+    }
+
+    public void setMoveCameraAndZoomByPoi(List<MapPoiDetail> list){
+
+        ArrayList<Double> latListSort = new ArrayList<>();
+        ArrayList<Double> lngListSort = new ArrayList<>();
+        for (MapPoiDetail item :list){
+            latListSort.add(item.getLatitude());
+            lngListSort.add(item.getLongitude());
+        }
+        setMoveCameraAndZoom(latListSort,lngListSort);
+    }
+
+    protected void setMoveCameraAndZoom( List<Double> latListSort,List<Double> lngListSort){
+
+        Collections.sort(latListSort, new LatComparator());
+        Collections.sort(lngListSort, new LatComparator());
+
+        double maxX = latListSort.get(0);
+        double minX = latListSort.get(latListSort.size() - 1);
+        double maxY = lngListSort.get(0);
+        double minY = lngListSort.get(lngListSort.size() - 1);
+
+        double[] middle = new double[] { (maxX + minX) / 2, (maxY + minY) / 2 };
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int mWidth = metrics.widthPixels;
+        int mHeight = metrics.heightPixels;
+
+        float xLimit = mWidth / 2 - mWidth * 0.1f;
+        float yLimit = mHeight / 2 - mHeight * 0.05f;
+
+        int minLevel = 0;
+        for (int i = 18; i >= 1; --i) {
+            Point pCenter = TileSystem.LatLongToPixelXY(middle[0], middle[1],
+                    i, null);
+            Point pMin = TileSystem.LatLongToPixelXY(minX, minY, i, null);
+            Point pMax = TileSystem.LatLongToPixelXY(maxX, maxY, i, null);
+
+            if ((Math.abs(pCenter.x - pMin.x) < xLimit && Math.abs(pCenter.y
+                    - pMin.y) < yLimit)
+                    && (Math.abs(pMax.x - pCenter.x) < xLimit && Math
+                    .abs(pMax.y - pCenter.y) < yLimit)) {
+                minLevel = i;
+                break;
+            }
+        }
+
+        mapview.getController().setZoom(minLevel);
+
+        mapview.getController().animateTo(new GeoPoint(middle[0], middle[1]));
+
+        latListSort.clear();
+        lngListSort.clear();
+    }
+
 
     protected void showInfoBar() {
         if (llContent.getVisibility() != View.VISIBLE) {
@@ -257,6 +339,22 @@ public abstract class MapActivity extends BaseUiActivity {
             poiMapPathBtn.setAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
             poiMapPathBtn.setVisibility(View.VISIBLE);
             poiMapLocationBar.startAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
+        }
+    }
+
+    private class LatComparator implements Comparator<Double> {
+
+        @Override
+        public int compare(Double lhs, Double rhs) {
+            // an integer < 0 if lhs is less than rhs, 0 if they are equal, and
+            // > 0 if lhs is greater than rhs.
+            if (lhs < rhs) {
+                return 1;
+            } else if (lhs > rhs) {
+                return -1;
+            } else {
+                return 0;
+            }
         }
     }
 }
