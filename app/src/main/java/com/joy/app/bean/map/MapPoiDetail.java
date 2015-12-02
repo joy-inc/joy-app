@@ -3,15 +3,16 @@ package com.joy.app.bean.map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.android.library.utils.TextUtil;
+
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 地图扎点    <br>
  */
 public class MapPoiDetail implements Parcelable {
-    String mEnName,mCnName,mPhotoUrl;
-    int icon_nor,icon_press;
-    double latitude,longitude;
-
+    String mEnName, mCnName, mPhotoUrl;
+    int icon_nor, icon_press;
+    double latitude, longitude;
 
 
     public String getmEnName() {
@@ -71,6 +72,12 @@ public class MapPoiDetail implements Parcelable {
     }
 
 
+    public boolean isShow() {
+        if (longitude == 0 || latitude == 0 || icon_nor == 0)
+            return false;
+        else return true;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -109,4 +116,6 @@ public class MapPoiDetail implements Parcelable {
             return new MapPoiDetail[size];
         }
     };
+
+
 }

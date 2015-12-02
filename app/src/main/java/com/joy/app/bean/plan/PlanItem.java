@@ -72,7 +72,7 @@ public class PlanItem {
     }
 
     public String getPrice() {
-        return price;
+        return ""+price+"起";
     }
 
     public void setPrice(String price) {

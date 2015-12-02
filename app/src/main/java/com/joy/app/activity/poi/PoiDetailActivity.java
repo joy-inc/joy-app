@@ -23,6 +23,7 @@ import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
+import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.map.StaticMapWidget;
 import com.joy.app.bean.poi.CommentAll;
 import com.joy.app.bean.poi.CommentItem;
@@ -117,11 +118,8 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mHighWidget.invalidate(mPoiDetail);
 
         mMapWidget.invalidate(R.drawable.ic_star_light_small);
-        LocationManager locMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = locMan.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        location.setLatitude(Double.parseDouble(mPoiDetail.getLat()));
-        location.setLongitude(Double.parseDouble(mPoiDetail.getLon()));
-        mMapWidget.setLocation(location);
+
+        mMapWidget.setLocation(Double.parseDouble(mPoiDetail.getLat()),Double.parseDouble(mPoiDetail.getLon()));
 
         mIntroduceWidget.invalidate(mPoiDetail);
 
@@ -282,6 +280,9 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();
+        } else if (R.id.rl_mapview == view.getId()) {
+
+            startMapActivity();
         }
     }
 
@@ -290,6 +291,14 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
      */
     private void startAllCommentActivity() {
 
+        showToast("open all comments activity");
+    }
+    /**
+     * 打开地图页
+     */
+    private void startMapActivity() {
+
+        SinglePoiMapActivity.startActivityByPoiDetail(this,mPoiDetail);
         showToast("open all comments activity");
     }
 

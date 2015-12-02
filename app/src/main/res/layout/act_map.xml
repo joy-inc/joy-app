@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <org.osmdroid.views.MapView
-        android:id="@+id/mapview"
+    <FrameLayout
+        android:id="@+id/maplayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <LinearLayout
-        android:id="@+id/ll_map_infor"
+        android:id="@+id/ll_map_bottom"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:visibility="visible"
@@ -40,6 +40,25 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/ic_def_avatar"
                 android:visibility="visible" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/poi_map_path_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_circle_btn"
+            >
+            <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_user_def_head"
+            android:visibility="visible" />
+
         </RelativeLayout>
         <LinearLayout
             android:id="@+id/ll_content"

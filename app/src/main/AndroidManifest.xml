@@ -96,6 +96,11 @@
         <activity
             android:name=".activity.plan.UserPlanListActivity"
             android:screenOrientation="portrait"/>
+        <!--地图-->
+        <activity
+            android:name=".activity.map.SinglePoiMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay"/>
 
         <!-- 小米 -->
         <service

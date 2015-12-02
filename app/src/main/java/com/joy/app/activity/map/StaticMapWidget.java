@@ -23,7 +23,7 @@ import com.android.library.view.ExLayoutWidget;
  * @author litong  <br>
  * @Description 静态图    <br>
  */
-public class StaticMapWidget extends ExLayoutWidget {
+public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListener {
 
     ImageView locationView;
     LinearLayout TileLayout;
@@ -42,6 +42,7 @@ public class StaticMapWidget extends ExLayoutWidget {
     protected View onCreateView(Activity activity, Object... args) {
 
         contentView = (RelativeLayout)activity.getLayoutInflater().inflate(R.layout.view_static_map, null);
+        contentView.setOnClickListener(this);
         map = (SimpleDraweeView)contentView.findViewById(R.id.map_center);
         Lmap =(SimpleDraweeView)contentView.findViewById(R.id.map_left);;
         Rmap = (SimpleDraweeView)contentView.findViewById(R.id.map_right);;
@@ -58,6 +59,9 @@ public class StaticMapWidget extends ExLayoutWidget {
     public void setLocation(Location location){
         double lng = location.getLongitude();
         double lat = location.getLatitude();
+        invalidate(lng, lat, 15);
+    }
+    public void setLocation(double lng, double lat){
         invalidate(lng, lat, 15);
     }
 
@@ -93,6 +97,11 @@ public class StaticMapWidget extends ExLayoutWidget {
     }
     private String getRightPath(int x,int y,int zoom){
         return "http://mt2.google.cn/vt/lyrs=m@285000000&hl=zh-CN&gl=CN&src=app&expIds=201527&rlbl=1&z="+zoom+"&x="+(x+1)+"&y="+y+"&s=Gali";
+    }
+
+    @Override
+    public void onClick(View v) {
+        callbackWidgetViewClickListener(v);
     }
 
     ControllerListener maplistener = new BaseControllerListener<ImageInfo>() {

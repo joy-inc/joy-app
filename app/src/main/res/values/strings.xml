@@ -91,6 +91,7 @@
     <!--行程规划-->
 
     <string name="plan_folder_things">things to do</string>
+    <string name="plan_list_before_day">需提前%s天预定</string>
 
     <!--日历-->
     <string name="sans_serif" translatable="false">sans-serif</string>
