@@ -1,6 +1,5 @@
 package com.joy.app.activity.map;
 
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,9 +21,9 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
-import com.joy.app.activity.map.osmutil.GoogleTileSource;
-import com.joy.app.activity.map.osmutil.OsmResourceImpl;
-import com.joy.app.activity.map.osmutil.QyerMapOverlayItem;
+import com.joy.app.utils.map.GoogleTileSource;
+import com.joy.app.utils.map.OsmResourceImpl;
+import com.joy.app.utils.map.QyerMapOverlayItem;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.utils.QaAnimUtil;
 

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.joy.app.R;
-import com.joy.app.activity.map.osmutil.QyerMapOverlayItem;
+import com.joy.app.utils.map.QyerMapOverlayItem;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.sample.PoiDetail;
 

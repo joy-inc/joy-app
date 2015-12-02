@@ -1,4 +1,4 @@
-package com.joy.app.activity.map.osmutil;
+package com.joy.app.utils.map;
 
 import com.joy.app.bean.map.MapPoiDetail;
 
