@@ -79,7 +79,7 @@ public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnCli
 
     // ============= 内部类：LinearListView的adapter ==============
 
-    class CommentLlvAdapter extends ExAdapter<CommentItem> {
+    private class CommentLlvAdapter extends ExAdapter<CommentItem> {
 
         @Override
         protected ExViewHolder getViewHolder(int position) {

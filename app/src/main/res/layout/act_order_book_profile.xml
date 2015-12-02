@@ -4,191 +4,201 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <com.android.library.view.observablescrollview.ObservableScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/llTotalDiv"
-        android:background="@color/color_grey"
-        android:orientation="vertical">
-
+        android:layout_above="@+id/include"
+        android:background="@color/color_grey">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center_vertical">
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/sdvPhoto"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
-                android:scaleType="centerCrop" />
-
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/llTotalDiv"
             android:orientation="vertical">
 
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvProfileTitle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:paddingBottom="13dp"
-                android:paddingTop="13dp"
-                android:text="填写主要联系人信息"
-                android:textColor="@color/black_trans54"
-                android:textSize="13dp" />
+                android:background="@color/white"
+                android:gravity="center_vertical">
 
-            <View
-                style="@style/Line.Dark.Horizontal"
-                android:layout_alignLeft="@+id/tvProfileTitle"
-                android:layout_below="@+id/tvProfileTitle" />
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvPhoto"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:scaleType="centerCrop" />
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
 
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvNameTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvProfileTitle"
-                android:layout_below="@+id/tvProfileTitle"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/name"
-                android:textColor="@color/black_trans87" />
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/etName"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvNameTitle"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:layout_toRightOf="@+id/tvNameTitle"
-                android:background="@null"
-                android:ellipsize="end"
-                android:gravity="center_vertical|right"
-                android:hint="输入联系人姓名"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/black_trans26"
-                android:textSize="14dp" />
-
-            <View
-                style="@style/Line.Dark.Horizontal"
-                android:layout_alignLeft="@+id/tvProfileTitle"
-                android:layout_below="@+id/tvNameTitle" />
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:orientation="vertical">
 
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvPhoneTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvProfileTitle"
-                android:layout_below="@+id/tvNameTitle"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp"
-                android:gravity="center_vertical"
-                android:text="@string/phone"
-                android:textColor="@color/black_trans87" />
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvProfileTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:paddingBottom="13dp"
+                    android:paddingTop="13dp"
+                    android:text="填写主要联系人信息"
+                    android:textColor="@color/black_trans54"
+                    android:textSize="13dp" />
 
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/etPhone"
+                <View
+                    style="@style/Line.Dark.Horizontal"
+                    android:layout_alignLeft="@+id/tvProfileTitle"
+                    android:layout_below="@+id/tvProfileTitle" />
+
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvNameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tvProfileTitle"
+                    android:layout_below="@+id/tvProfileTitle"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="24dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/name"
+                    android:textColor="@color/black_trans87" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tvNameTitle"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/tvNameTitle"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:hint="输入联系人姓名"
+                    android:singleLine="true"
+                    android:textColor="@color/black_trans54"
+                    android:textColorHint="@color/black_trans26"
+                    android:textSize="14dp" />
+
+                <View
+                    style="@style/Line.Dark.Horizontal"
+                    android:layout_alignLeft="@+id/tvProfileTitle"
+                    android:layout_below="@+id/tvNameTitle" />
+
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvPhoneTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tvProfileTitle"
+                    android:layout_below="@+id/tvNameTitle"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/phone"
+                    android:textColor="@color/black_trans87" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tvPhoneTitle"
+                    android:layout_alignLeft="@+id/etName"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:hint="输入联系人"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:textColor="@color/black_trans54"
+                    android:textColorHint="@color/black_trans26"
+                    android:textSize="14dp" />
+
+                <View
+                    style="@style/Line.Dark.Horizontal"
+                    android:layout_alignLeft="@+id/tvProfileTitle"
+                    android:layout_below="@+id/tvPhoneTitle" />
+
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvEmailTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tvProfileTitle"
+                    android:layout_below="@+id/tvPhoneTitle"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/email"
+                    android:textColor="@color/black_trans87" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tvEmailTitle"
+                    android:layout_alignLeft="@+id/tvProfileTitle"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:hint="输入邮箱以便确认信息"
+                    android:singleLine="true"
+                    android:textColor="@color/black_trans54"
+                    android:textColorHint="@color/black_trans26"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvPhoneTitle"
-                android:layout_alignLeft="@+id/etName"
-                android:layout_marginRight="20dp"
-                android:background="@null"
-                android:ellipsize="end"
-                android:gravity="center_vertical|right"
-                android:hint="输入联系人"
-                android:inputType="phone"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/black_trans26"
-                android:textSize="14dp" />
+                android:gravity="center">
 
-            <View
-                style="@style/Line.Dark.Horizontal"
-                android:layout_alignLeft="@+id/tvProfileTitle"
-                android:layout_below="@+id/tvPhoneTitle" />
+                <com.android.library.widget.JTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color_accent"
+                    android:textSize="12dp" />
 
+                <com.android.library.widget.JTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/order_input_right_contact"
+                    android:textSize="12dp" />
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvEmailTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvProfileTitle"
-                android:layout_below="@+id/tvPhoneTitle"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp"
-                android:gravity="center_vertical"
-                android:text="@string/email"
-                android:textColor="@color/black_trans87" />
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvEmailTitle"
-                android:layout_alignLeft="@+id/tvProfileTitle"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="16dp"
-                android:background="@null"
-                android:ellipsize="end"
-                android:gravity="center_vertical|right"
-                android:hint="输入邮箱以便确认信息"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/black_trans26"
-                android:textSize="14dp" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <com.android.library.widget.JTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:textColor="@color/color_accent"
-                android:textSize="12dp" />
-
-            <com.android.library.widget.JTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center_horizontal"
-                android:text="@string/order_input_right_contact"
-                android:textSize="12dp" />
+            </LinearLayout>
 
         </LinearLayout>
+    </com.android.library.view.observablescrollview.ObservableScrollView>
 
-    </LinearLayout>
-
-    <include layout="@layout/view_order_bottom_total_price" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/view_order_bottom_total_price" />
 
 </RelativeLayout>

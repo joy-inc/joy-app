@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="20dp">
+    android:paddingLeft="26dp">
 
     <android.support.v7.widget.AppCompatRatingBar
         android:id="@+id/acRatingBar"
@@ -22,7 +22,7 @@
         android:id="@+id/tvComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="26dp"
         android:layout_marginTop="10dp"
         android:lineSpacingExtra="3dp"
         android:textColor="@color/black_trans87"

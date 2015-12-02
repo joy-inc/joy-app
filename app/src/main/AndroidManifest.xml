@@ -89,8 +89,10 @@
             android:theme="@style/theme_app.translucent.toolbar.overlay" />
         <activity
             android:name=".activity.poi.OrderBookProfileActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.poi.CommentActivity"
+            android:screenOrientation="portrait" />
 
         <!--行程规划-->
         <activity

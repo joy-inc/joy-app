@@ -125,4 +125,20 @@ public class OrderHtpUtil extends BaseHtpUtil {
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         return params;
     }
+
+    /**
+     * 添加联系人信息
+     *
+     * @return
+     */
+    public static Map<String, String> getContactAddUrl(OrderContacts data) {
+
+        Map<String, String> params = getBaseParams();
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
+        params.put("contact_id", data.getContact_id());
+        params.put("contact_name", data.getName());
+        params.put("contact_phone", data.getPhone());
+        params.put("contact_email", data.getEmail());
+        return params;
+    }
 }

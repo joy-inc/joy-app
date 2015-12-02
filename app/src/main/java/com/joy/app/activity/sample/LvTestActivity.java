@@ -31,9 +31,6 @@ public class LvTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        executeRefresh();
-//        executeRefreshAndCache();
-//        executeCache();
         executeCacheAndRefresh();
     }
 

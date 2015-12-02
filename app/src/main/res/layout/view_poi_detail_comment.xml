@@ -6,8 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <View style="@style/Line.Dark.Horizontal" />
-
     <com.joy.app.view.LinearListView
         android:id="@+id/linearLv"
         android:layout_width="match_parent"

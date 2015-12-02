@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,7 +21,6 @@ import com.joy.app.adapter.poi.ProductLevelAdapter;
 import com.joy.app.bean.poi.LevelOptions;
 import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
-import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.view.LinearListView;
@@ -35,11 +35,15 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private String mId;
     private String mPhotoUrl;
     private String mTitle;
+    private String mOrderItem = TextUtil.TEXT_EMPTY;
 
     private SimpleDraweeView sdvPhoto;
     private TextView tvTitle;
     private LinearListView linearLv;
     private ProductLevelAdapter mAdapter;
+
+    private TextView mTvPrice;
+    private AppCompatButton mAcbNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,17 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
                 }
             }
         });
+
+        mTvPrice = (TextView) findViewById(R.id.tvTotalPrice);
+        mAcbNext = (AppCompatButton) findViewById(R.id.acbNext);
+        mAcbNext.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                OrderBookProfileActivity.startActivity(OrderBookActivity.this, v, mPhotoUrl, mTitle, mTvPrice.getText().toString(), mOrderItem);
+            }
+        });
     }
 
     @Override
@@ -99,6 +114,8 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         mAdapter.setData(product.getLevels());
         linearLv.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+
+        mTvPrice.setText("0");
         return true;
     }
 

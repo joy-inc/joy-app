@@ -30,9 +30,6 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
 
         super.onActivityCreated(savedInstanceState);
         executeCacheAndRefresh();
-//        executeCacheOnly();
-//        executeRefreshOnly();
-//        executeRefreshAndCache();
 
 //        ObjectRequest<List<Special>> req = new ObjectRequest<>(TestHtpUtil.getSpecialListUrl(getPageIndex(), getPageLimit()), Special.class);
 //        req.setResponseListener(new ObjectResponse<List<Special>>() {

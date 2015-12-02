@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.android.library.activity.BaseHttpRvFragment;
+import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.httptask.ObjectRequest;
 import com.joy.app.BuildConfig;
 import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.utils.http.PlanHttpUtil;
-import com.android.library.activity.BaseHttpRvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
-import com.android.library.httptask.ObjectRequest;
-import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-//        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override

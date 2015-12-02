@@ -1,6 +1,10 @@
 package com.joy.app.activity.poi;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -80,6 +84,20 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
                 checkProfileThenSubmit();
             }
         });
+
+        mSdvPhoto.setImageURI(Uri.parse(mPhotoUrl));
+        mTvTitle.setText(mTitle);
+        mTvPrice.setText(mTotalPrice);
+    }
+
+    @Override
+    protected void showNoContentTip() {
+    }
+
+    @Override
+    protected void showFailedTip() {
+
+//        super.showFailedTip();
     }
 
     @Override
@@ -87,17 +105,12 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
 
         mContact = data;
 
-        mSdvPhoto.setImageURI(Uri.parse(mPhotoUrl));
-        mTvTitle.setText(mTitle);
-
         if (!data.isEmpty()) {
 
             mEtName.setText(data.getName());
             mEtPhone.setText(data.getPhone());
             mEtEmail.setText(data.getEmail());
         }
-
-        mTvPrice.setText(mTotalPrice);
 
         return true;
     }
@@ -141,11 +154,12 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             }
 
             OrderContacts userinfo = new OrderContacts();
-            userinfo.setContact_id(mContact.getContact_id());
+            userinfo.setContact_id(mContact == null ? "0" : mContact.getContact_id());
             userinfo.setEmail(email);
             userinfo.setPhone(phone);
             userinfo.setName(name);
 
+            addContact(userinfo);
             createOrder(userinfo);
 
         } while (false);
@@ -154,7 +168,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     @Override
     protected ObjectRequest getObjectRequest() {
 
-        return ReqFactory.newPost(OrderHtpUtil.URL_POST_CONTACT, OrderContacts.class, OrderHtpUtil.getContactUrl());
+        return ReqFactory.newPost(OrderHtpUtil.URL_POST_CONTACT_GET, OrderContacts.class, OrderHtpUtil.getContactUrl());
     }
 
     private void createOrder(OrderContacts userinfo) {
@@ -171,10 +185,41 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             @Override
             public void onError(Object tag, String msg) {
 
-                showToast("创建订单失败啦～～"+msg);
+                showToast("创建订单失败啦～～" + msg);
             }
         });
         addRequestNoCache(req);
 
+    }
+
+    private void addContact(OrderContacts data) {
+
+        ObjectRequest<OrderContacts> request = ReqFactory.newPost(OrderHtpUtil.URL_POST_CONTACT_ADD, OrderContacts.class, OrderHtpUtil.getContactAddUrl(data));
+        addRequestNoCache(request);
+    }
+
+    /**
+     * @param act
+     * @param view The view which starts the transition
+     */
+    public static void startActivity(Activity act, View view, String... params) {
+
+        if (act == null || view == null || params == null || params.length < 4)
+            return;
+
+        Intent intent = new Intent(act, OrderBookProfileActivity.class);
+        intent.putExtra("photoUrl", params[0]);
+        intent.putExtra("title", params[1]);
+        intent.putExtra("price", params[2]);
+        intent.putExtra("item", params[3]);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
+            act.startActivity(intent, options.toBundle());
+        } else {
+
+            act.startActivity(intent);
+        }
     }
 }
