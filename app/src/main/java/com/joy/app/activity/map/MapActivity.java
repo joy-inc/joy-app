@@ -11,16 +11,24 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.LogMgr;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
-import com.joy.app.activity.map.osmutil.GoogleTileSource;
-import com.joy.app.activity.map.osmutil.QyerMapOverlayItem;
+import com.joy.app.activity.poi.PoiDetailActivity;
+import com.joy.app.utils.map.GoogleTileSource;
+import com.joy.app.utils.map.MapUtil;
+import com.joy.app.utils.map.OsmDirectOverlay;
+import com.joy.app.utils.map.OsmResourceImpl;
+import com.joy.app.utils.map.JoyMapOverlayItem;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.utils.QaAnimUtil;
 
@@ -31,8 +39,12 @@ import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.OverlayItem;
 
+import java.net.IDN;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -42,26 +54,20 @@ import butterknife.ButterKnife;
  * @author litong  <br>
  * @Description 地图基本功能    <br>
  */
-public abstract class MapActivity extends BaseUiActivity {
+public abstract class MapActivity extends BaseUiActivity implements View.OnClickListener, AMapLocationListener {
 
     List<MapPoiDetail> data;
 
     private ResourceProxy mResourceProxy;
     protected MapView mapview;
-    private ArrayList<QyerMapOverlayItem> mOverlayItems;
-
+    private ArrayList<JoyMapOverlayItem> mOverlayItems;
+    private OsmDirectOverlay mLocationOverlay;
+    private boolean isLocation = false;
+    private AMapLocationClient locationClient = null;
+    private JoyMapOverlayItem selectMark;
 
     @Bind(R.id.maplayout)
     FrameLayout maplayout;
-
-    @Bind(R.id.location_progress)
-    ProgressBar locationProgress;
-
-    @Bind(R.id.poi_map_iv_my_location)
-    ImageView poiMapIvMyLocation;
-
-    @Bind(R.id.poi_map_location_bar)
-    RelativeLayout poiMapLocationBar;
 
     @Bind(R.id.sdv_photo)
     SimpleDraweeView sdvPhoto;
@@ -72,15 +78,15 @@ public abstract class MapActivity extends BaseUiActivity {
     @Bind(R.id.jtv_enname)
     JTextView jtvEnname;
 
-
     @Bind(R.id.iv_path)
     ImageView ivPath;
 
+
+    @Bind(R.id.poi_map_location_bar)
+    RelativeLayout poiMapLocationBar;
+
     @Bind(R.id.ll_content)
     LinearLayout llContent;
-
-    @Bind(R.id.ll_map_bottom)
-    LinearLayout llMapBottom;
 
     @Bind(R.id.poi_map_path_btn)
     RelativeLayout poiMapPathBtn;
@@ -100,7 +106,13 @@ public abstract class MapActivity extends BaseUiActivity {
 
     @Override
     protected void initTitleView() {
-        addTitleLeftBackView();
+
+        addTitleLeftView(R.drawable.ic_map_back_btn, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -114,6 +126,12 @@ public abstract class MapActivity extends BaseUiActivity {
         maplayout.addView(mapview, mapParams);
         mapview.setMultiTouchControls(true);
 
+        ivPath.setOnClickListener(this);
+        poiMapPathBtn.setOnClickListener(this);
+        poiMapLocationBar.setOnClickListener(this);
+        llContent.setOnClickListener(this);
+        locationClient = new AMapLocationClient(getApplicationContext());
+        MapUtil.initAccuracyLocation(locationClient, this);
     }
 
     protected void clearCurrMap() {
@@ -123,43 +141,31 @@ public abstract class MapActivity extends BaseUiActivity {
         mOverlayItems.clear();
     }
 
-    private void addRouterLine() {
-//		if (mLocationPoint == null || CollectionUtil.isEmpty(mRouteList)){
-//			return;
-//		}
-//        PathOverlay line = new PathOverlay(0xff40c8c8, mAct);
-//        if (mLocationPoint != null)
-//            line.addPoint(mLocationPoint);
-////		mRouteList.add(0, mLocationPoint);
-//        for (GeoPoint point : mRouteList){
-//            line.addPoint(point);
-//        }
-//        line.getPaint().setStrokeWidth(7);
-//        IMapController mMapController = mOsmv.getController();
-//        mMapController.setCenter(mRouteList.get(0));
-//        mOsmv.getOverlays().add(line);
-//        mOsmv.setMaxZoomLevel(mOsmv.getMaxZoomLevel()-2);//OSM Droid缩放超过18，划线的时候会出错
-//		mOsmv.invalidate();
-    }
-
-    protected QyerMapOverlayItem addPoi(MapPoiDetail poi) {
+    protected JoyMapOverlayItem addPoi(MapPoiDetail poi) {
         if (poi == null || !poi.isShow())
             return null;
-        QyerMapOverlayItem overLayitem = new QyerMapOverlayItem(poi.getmCnName(),
+        JoyMapOverlayItem overLayitem = new JoyMapOverlayItem(poi.getmCnName(),
                 poi.getmEnName(), new GeoPoint(poi.getLatitude(), poi.getLongitude()));
 
         overLayitem.setMarker(ContextCompat.getDrawable(this, poi.getIcon_nor()));
         overLayitem.setDataObject(poi);
         mOverlayItems.add(overLayitem);
         return overLayitem;
+
     }
 
-    protected void showMap() {
-        ItemizedIconOverlay mOverlay = new ItemizedIconOverlay<QyerMapOverlayItem>(mOverlayItems,
-                new ItemizedIconOverlay.OnItemGestureListener<QyerMapOverlayItem>() {
+    protected void addMarkers(List<MapPoiDetail> list) {
+        for (MapPoiDetail detail : list) {
+            addPoi(detail);
+        }
+    }
+
+    protected void showMarkers() {
+        ItemizedIconOverlay mOverlay = new ItemizedIconOverlay<JoyMapOverlayItem>(mOverlayItems,
+                new ItemizedIconOverlay.OnItemGestureListener<JoyMapOverlayItem>() {
                     @Override
                     public boolean onItemSingleTapUp(final int index,
-                                                     final QyerMapOverlayItem item) {
+                                                     final JoyMapOverlayItem item) {
 
                         selectPosition(index, item);
 
@@ -168,7 +174,7 @@ public abstract class MapActivity extends BaseUiActivity {
 
                     @Override
                     public boolean onItemLongPress(final int index,
-                                                   final QyerMapOverlayItem item) {
+                                                   final JoyMapOverlayItem item) {
                         return false;
                     }
                 }, mResourceProxy);
@@ -178,13 +184,12 @@ public abstract class MapActivity extends BaseUiActivity {
         }
         mapview.getOverlays().add(mOverlay);
         //TODO loaction
-
     }
 
 
-    protected void selectPosition(int position, QyerMapOverlayItem item) {
+    protected void selectPosition(int position, JoyMapOverlayItem item) {
         for (int i = 0; i < mOverlayItems.size(); i++) {
-            QyerMapOverlayItem tempitem = mOverlayItems.get(i);
+            JoyMapOverlayItem tempitem = mOverlayItems.get(i);
             MapPoiDetail poiDetail = tempitem.getDataObject();
             if (position == i) {
                 tempitem.setSelected(true);
@@ -201,9 +206,14 @@ public abstract class MapActivity extends BaseUiActivity {
         if (item == null) {
             item = mOverlayItems.get(position);
         }
-
+        selectMark = item;
         showInfoBar();
         updatePoiInfoView(item.getDataObject());
+    }
+
+    public void showAllMarker() {
+
+        MapUtil.setMoveCameraAndZoomByOverlay(mOverlayItems, mapview);
     }
 
     protected void showInfoBar() {
@@ -252,11 +262,104 @@ public abstract class MapActivity extends BaseUiActivity {
         }
     }
 
-    protected void showPathBtn(){
-        if ( poiMapPathBtn.getVisibility() == View.VISIBLE ){
+    protected void showPathBtn() {
+        if (poiMapPathBtn.getVisibility() == View.VISIBLE) {
             poiMapPathBtn.setAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
             poiMapPathBtn.setVisibility(View.VISIBLE);
             poiMapLocationBar.startAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
+        }
+    }
+
+    private void updateLocation(AMapLocation aMapLocation) {
+
+        double mLatitude = aMapLocation.getLatitude();
+        double mLongitude = aMapLocation.getLongitude();
+        GeoPoint mLocationPoint = new GeoPoint(mLatitude, mLongitude);
+
+        if (mLocationOverlay == null) {
+            mLocationOverlay = new OsmDirectOverlay(this,
+                    new DefaultResourceProxyImpl(this));
+            mLocationOverlay.setEnabled(true);
+            mLocationOverlay.setLocation(mLocationPoint);
+            mapview.getOverlays().add(mLocationOverlay);
+            mapview.getController().animateTo(mLocationPoint);
+        } else {
+            mLocationOverlay.setLocation(mLocationPoint);
+        }
+    }
+
+    private void startGetLocation() {
+        if (isLocation) return;
+        isLocation = true;
+        locationClient.startLocation();
+    }
+
+    private void startPoiDetailActivity() {
+        if (selectMark == null || selectMark.getDataObject() == null )return;
+        PoiDetailActivity.startActivity(this,selectMark.getDataObject().getmId());
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_path:
+            case R.id.poi_map_path_btn: // poiMapPathBtn
+                MapUtil.startMapApp(this, selectMark.getDataObject());
+                return;
+            case R.id.poi_map_location_bar: //poiMapLocationBar
+
+                startGetLocation();
+                return;
+            case R.id.ll_content: //llContent;
+                startPoiDetailActivity();
+                return;
+            default:
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (locationClient != null && isLocation) {
+            locationClient.startLocation();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (locationClient != null) {
+            locationClient.stopLocation();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (locationClient != null) {
+            locationClient.onDestroy();
+            locationClient = null;
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        //高德定位回调
+        if (aMapLocation != null) {
+            if (aMapLocation.getErrorCode() == 0) {
+                updateLocation(aMapLocation);
+                if (LogMgr.isDebug())
+                    MapUtil.showLocationInfor(aMapLocation);
+
+            } else {
+                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                if (LogMgr.isDebug()) {
+                    LogMgr.e("AmapError", "location Error, ErrCode:"
+                            + aMapLocation.getErrorCode() + ", errInfo:"
+                            + aMapLocation.getErrorInfo());
+                }
+            }
         }
     }
 }

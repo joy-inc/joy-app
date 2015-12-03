@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.android.library.utils.TextUtil;
+import com.android.library.widget.JTextView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
@@ -28,6 +30,7 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
     ImageView locationView;
     LinearLayout TileLayout;
     RelativeLayout contentView;
+    JTextView addressView;
     SimpleDraweeView map,Lmap,Rmap;
     SimpleDraweeView LTmap,CTmap,RTmap;
     SimpleDraweeView LBmap,CBmap,RBmap;
@@ -47,6 +50,7 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
         Lmap =(SimpleDraweeView)contentView.findViewById(R.id.map_left);;
         Rmap = (SimpleDraweeView)contentView.findViewById(R.id.map_right);;
         locationView = (ImageView)contentView.findViewById(R.id.iv_center_icon);;
+        addressView = (JTextView)contentView.findViewById(R.id.jtv_addreess);;
         ViewUtil.goneView(locationView);
 
         return contentView;
@@ -61,8 +65,19 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
         double lat = location.getLatitude();
         invalidate(lng, lat, 15);
     }
-    public void setLocation(double lng, double lat){
+    public void setLocation(double lng, double lat,String address){
+
+        showAddress(address);
         invalidate(lng, lat, 15);
+    }
+
+    public void showAddress(String address){
+        if (addressView == null || TextUtil.isEmpty(address)){
+            ViewUtil.hideView(addressView);
+            return;
+        }
+        addressView.setText(address);
+        ViewUtil.showView(addressView);
     }
 
 

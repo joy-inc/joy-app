@@ -8,7 +8,9 @@ import android.view.View;
 import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.TextUtil;
 import com.joy.app.BuildConfig;
+import com.joy.app.JoyApplication;
 import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.bean.plan.PlanItem;
@@ -24,9 +26,10 @@ import java.util.List;
 public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     private String mFolderID;
 
-    public static void startActivityById(Activity act ,String FolderID){
+    public static void startActivityById(Activity act ,String FolderID,String mFolderName){
         Intent intent = new Intent(act,UserPlanListActivity.class);
         intent.putExtra("FolderID",FolderID);
+        intent.putExtra("mFolderName",mFolderName);
         act.startActivity(intent);
     }
     @Override
@@ -37,7 +40,15 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
 
     @Override
     protected void initData() {
+
         mFolderID =  getIntent().getStringExtra("FolderID");
+    }
+
+    @Override
+    protected void initTitleView() {
+        addTitleLeftBackView();
+        addTitleMiddleView(((JoyApplication)getApplication()).getUserNameStr()+"的"+ TextUtil.filterEmpty(getIntent().getStringExtra("mFolderName"),"行程规划"));
+        addTitleRightView();
     }
 
     @Override

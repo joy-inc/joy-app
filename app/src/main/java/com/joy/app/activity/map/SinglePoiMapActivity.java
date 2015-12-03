@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.joy.app.R;
-import com.joy.app.activity.map.osmutil.QyerMapOverlayItem;
+import com.joy.app.utils.map.JoyMapOverlayItem;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.sample.PoiDetail;
-
-import org.osmdroid.views.MapView;
 
 /**
  * @author litong  <br>
@@ -16,6 +14,7 @@ import org.osmdroid.views.MapView;
  */
 public class SinglePoiMapActivity extends MapActivity {
     MapPoiDetail mapPoiDetail;
+
     public static void startActivityByPoiDetail(Activity activity, PoiDetail poiDetail){
         Intent intent = new Intent(activity,SinglePoiMapActivity.class);
         intent.putExtra("PoiDetail",poiDetail);
@@ -40,8 +39,8 @@ public class SinglePoiMapActivity extends MapActivity {
     protected void initContentView() {
         super.initContentView();
         clearCurrMap();
-        QyerMapOverlayItem item = addPoi(mapPoiDetail);
-        showMap();
+        JoyMapOverlayItem item = addPoi(mapPoiDetail);
+        showMarkers();
         mapview.getController().setCenter(item.getPoint());
         mapview.getController().setZoom(15);
         showPathBtn();

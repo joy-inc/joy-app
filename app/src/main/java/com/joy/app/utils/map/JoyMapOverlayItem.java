@@ -1,4 +1,4 @@
-package com.joy.app.activity.map.osmutil;
+package com.joy.app.utils.map;
 
 import com.joy.app.bean.map.MapPoiDetail;
 
@@ -9,15 +9,15 @@ import org.osmdroid.views.overlay.OverlayItem;
  * @author litong  <br>
  * @Description XXXXXX    <br>
  */
-public class QyerMapOverlayItem extends OverlayItem {
+public class JoyMapOverlayItem extends OverlayItem {
     MapPoiDetail dataObject;//数据
     boolean isSelected = false;//是否选中
 
-    public QyerMapOverlayItem(String aTitle, String aSnippet, IGeoPoint aGeoPoint) {
+    public JoyMapOverlayItem(String aTitle, String aSnippet, IGeoPoint aGeoPoint) {
         super(aTitle, aSnippet, aGeoPoint);
     }
 
-    public QyerMapOverlayItem(String aUid, String aTitle, String aDescription, IGeoPoint aGeoPoint) {
+    public JoyMapOverlayItem(String aUid, String aTitle, String aDescription, IGeoPoint aGeoPoint) {
         super(aUid, aTitle, aDescription, aGeoPoint);
     }
 

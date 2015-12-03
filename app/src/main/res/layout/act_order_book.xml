@@ -30,15 +30,12 @@
                 android:textColor="@color/white"
                 android:textSize="17dp" />
 
-            <com.joy.app.view.LinearListView
-                android:id="@+id/linearLv"
+            <LinearLayout
+                android:id="@+id/llContentDiv"
+                android:layout_below="@+id/sdvPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/sdvPhoto"
-                android:focusable="false"
-                android:listSelector="@android:color/transparent"
-                android:orientation="vertical"
-                android:scrollingCache="false" />
+                android:orientation="vertical" />
 
         </RelativeLayout>
     </com.android.library.view.observablescrollview.ObservableScrollView>

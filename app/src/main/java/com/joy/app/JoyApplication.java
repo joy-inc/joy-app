@@ -87,6 +87,15 @@ public class JoyApplication extends BaseApplication {
     public static void setUser(User user) {
         mUser = user;
     }
+    /**
+     * 直接获取显示的用户名
+     *
+     * @return
+     */
+    public static String getUserNameStr() {
+
+        return "";
+    }
 
     /**
      * 初始化分享的常量信息
