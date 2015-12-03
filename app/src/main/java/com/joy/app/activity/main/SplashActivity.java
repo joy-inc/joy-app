@@ -21,6 +21,18 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.t_act_splash);
         delayStartMainActivity();
+        initUser();
+    }
+
+    /**
+     * 这里把用户的数据进行提取
+     */
+    private void initUser() {
+
+        if (JoyApplication.getUser() == null) {
+            //这界面以后,就通过islogin来判断是否登录了.
+            JoyApplication.setUser(JoyApplication.getCommonPrefs().getUser());
+        }
     }
 
     private void delayStartMainActivity() {
@@ -44,9 +56,9 @@ public class SplashActivity extends Activity {
         } else {
 
             MainActivity.startActivity(this);
-//            TabTestActivity.startActivity(this);
-//            LvTestActivity.startActivity(this);
-//            LvLoadMoreTestActivity.startActivity(this);
+            //            TabTestActivity.startActivity(this);
+            //            LvTestActivity.startActivity(this);
+            //            LvLoadMoreTestActivity.startActivity(this);
         }
         finish();
     }

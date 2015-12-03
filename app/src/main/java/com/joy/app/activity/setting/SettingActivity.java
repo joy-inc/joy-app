@@ -6,16 +6,24 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.library.httptask.ObjectRequest;
+import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.TextUtil;
+import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
+import com.joy.app.activity.user.UserLoginActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.android.library.activity.BaseUiActivity;
+import com.joy.app.utils.http.ReqFactory;
+import com.joy.app.utils.http.sample.UserHttpUtil;
 import com.umeng.update.UmengUpdateAgent;
 
 import butterknife.Bind;
@@ -30,16 +38,16 @@ import de.greenrobot.event.EventBus;
 public class SettingActivity extends BaseUiActivity implements View.OnClickListener {
 
     @Bind(R.id.sdvUserHead)
-    SimpleDraweeView mUserHead;
-
-    @Bind(R.id.sdUserBG)
-    SimpleDraweeView mUserBG;
+    ImageView mUserHead;
 
     @Bind(R.id.tvLoginInfo)
     TextView mLoginInfo;
 
     @Bind(R.id.tvName)
     TextView mUserName;
+
+    @Bind(R.id.llLoginOut)
+    View mLoinOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,23 +89,33 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
         findViewById(R.id.llAbout).setOnClickListener(this);
         findViewById(R.id.llLoginDiv).setOnClickListener(this);
         mUserHead.setOnClickListener(this);
-        View loginOut = findViewById(R.id.llLoginOut);
-        loginOut.setOnClickListener(this);
-
-        if (JoyApplication.isLogin()) {
-            ViewUtil.showView(loginOut);
-            ViewUtil.showView(mUserName);
-            //            mUserName.setText(JoyApplication.geu);
-            //// TODO: 15/11/30 确认好user对象
-//            mUserHead.setImageURI(Uri.parse(JoyApplication.getUserToken()));
-            ViewUtil.goneView(mLoginInfo);
-        }
+        mLoinOut.setOnClickListener(this);
+        handleUserLogin();
         JTextView version = (JTextView) findViewById(R.id.tvVersion);
         version.setText(getString(R.string.setting_version, BuildConfig.VERSION_NAME));
 
 
     }
 
+
+    /**
+     * 处理用户登录没有登录的状态
+     */
+    private void handleUserLogin() {
+
+        if (JoyApplication.isLogin()) {
+            ViewUtil.showView(mLoinOut);
+            ViewUtil.showView(mUserName);
+            mUserName.setText(JoyApplication.getUser().getNickname());
+            mUserHead.setImageResource(R.drawable.ic_joy_login);
+            ViewUtil.goneView(mLoginInfo);
+        } else {
+            ViewUtil.goneView(mLoinOut);
+            ViewUtil.goneView(mUserName);
+            ViewUtil.showView(mLoginInfo);
+            mUserHead.setImageResource(R.drawable.ic_user_def_head);
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -137,7 +155,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
      * @param event
      */
     public void onEventMainThread(LoginStatusEvent event) {
-        //        EventBus.getDefault().post( new LoginStatusEvent("FirstEvent btn clicked"));
+        handleUserLogin();
     }
 
     /**
@@ -190,7 +208,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     private void showLoginActivity() {
 
         if (!JoyApplication.isLogin()) {
-
+            UserLoginActivity.startActivity(this);
         }
     }
 
@@ -198,10 +216,34 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
      * 登出
      */
     private void loginOut() {
-        //// TODO: 15/11/25 登出成功后要改变按钮的状态
-        ViewUtil.goneView(mUserName);
-        ViewUtil.showView(mLoginInfo);
-//        mUserHead.set//设置默认值
+
+        //网络请求,发广播
+        //// TODO: 15/12/3 是否需要启动进度条
+        ObjectRequest req = ReqFactory.newPost(UserHttpUtil.URL_USER_LOGIN_OUT, String.class, UserHttpUtil.userLoginOut(JoyApplication.getUserToken()));
+        req.setData("");
+        req.setResponseListener(new ObjectResponse() {
+
+            @Override
+            public void onSuccess(Object tag, Object o) {
+
+                ToastUtil.showToast(R.string.login_login_out_success);
+                JoyApplication.setUser(null);
+                JoyApplication.getCommonPrefs().clearUser();
+                EventBus.getDefault().post(new LoginStatusEvent(true, null));
+
+            }
+
+            @Override
+            public void onError(Object tag, String msg) {
+                super.onError(tag, msg);
+                if (TextUtil.isEmpty(msg)) {
+                    ToastUtil.showToast(R.string.request_error);
+                } else {
+                    ToastUtil.showToast(msg);
+                }
+            }
+        });
+        JoyApplication.getRequestQueue().add(req);
     }
 
     public static void startActivity(Context context) {

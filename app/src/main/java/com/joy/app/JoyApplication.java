@@ -1,5 +1,6 @@
 package com.joy.app;
 
+import com.android.library.utils.TextUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.joy.app.bean.User;
 import com.joy.app.utils.XiaomiUtil;
@@ -13,7 +14,8 @@ import com.android.library.utils.LogMgr;
  */
 public class JoyApplication extends BaseApplication {
 
-    User mUser;
+    private static User mUser;
+
     @Override
     public void onCreate() {
 
@@ -37,7 +39,7 @@ public class JoyApplication extends BaseApplication {
 
     public static void releaseForExitApp() {
 
-//        Fresco.shutDown();
+        //        Fresco.shutDown();
         release();
         CommonPrefs.releaseInstance();
     }
@@ -54,7 +56,7 @@ public class JoyApplication extends BaseApplication {
      */
     public static boolean isLogin() {
 
-        return false;
+        return !TextUtil.isEmpty(getUserToken());
     }
 
     /**
@@ -64,13 +66,32 @@ public class JoyApplication extends BaseApplication {
      */
     public static String getUserToken() {
 
-        return "";
+        if (mUser != null) {
+            return mUser.getToken();
+        } return "";
+    }
+
+    /**
+     * 获取用户对象
+     */
+    public static User getUser() {
+
+        return mUser;
+    }
+
+    /**
+     * 设置用户对象
+     *
+     * @param user
+     */
+    public static void setUser(User user) {
+        mUser = user;
     }
 
     /**
      * 初始化分享的常量信息
      */
-    private void initShareInfo(){
+    private void initShareInfo() {
 
         ShareConstant.getIns().setQqZoneAppid("1");
         ShareConstant.getIns().setQqZoneKey("1");

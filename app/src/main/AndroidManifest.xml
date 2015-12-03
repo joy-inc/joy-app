@@ -47,12 +47,9 @@
 
         <activity
             android:name=".activity.user.UserLoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.user.RegistInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.user.RegistPhoneActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/theme_app.translucent.toolbar.overlay"
+            android:label=""
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.common.DayPickerActivity"

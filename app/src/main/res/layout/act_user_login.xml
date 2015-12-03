@@ -1,116 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_login_bg">
+<RelativeLayout
+    android:id="@+id/rlDiv"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_login_bg">
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/ivLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="140dp"
-                android:src="@drawable/ic_login_logo"/>
-
-            <com.android.library.widget.JTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ivLogo"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:text="@string/login_info"
-                android:textColor="@color/white"
-                android:textSize="14dp"/>
-        </RelativeLayout>
-
-    </ScrollView>
 
     <ImageView
-        android:id="@+id/ivColose"
+        android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-
-        android:src="@drawable/ic_close"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/ic_login_logo"/>
 
     <com.android.library.widget.JTextView
+        android:id="@+id/tvInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/ivColose"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/ivColose"
-        android:gravity="center"
-
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/regist"
-        android:textColor="@color/text_pink"
-        android:textSize="18dp"/>
+        android:layout_below="@id/ivLogo"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/login_info"
+        android:textColor="@color/white"
+        android:textSize="14dp"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/llLoginDiv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/llWeibo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/ivWeibo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_weibo"/>
-
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvWeibo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/weibo"
-                android:textColor="@color/white_trans80"
-                android:textSize="16dp"/>
-        </LinearLayout>
+        android:layout_below="@id/ivLogo"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
 
 
         <LinearLayout
-            android:id="@+id/llWechat"
-            android:layout_width="wrap_content"
+            android:id="@+id/llInputDiv"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:background="@drawable/shape_bg_rectangle_white"
+            android:orientation="vertical"
+            android:paddingLeft="15dp">
 
-            <ImageView
-                android:id="@+id/ivWechat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_wechat"/>
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:background="@null"
+                android:hint="@string/login_phone_hint"
+                android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                />
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvWechat"
-                android:layout_width="wrap_content"
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black_trans15"/>
+
+            <LinearLayout
+                android:id="@+id/llCodeDiv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/wechat"
-                android:textColor="@color/white_trans80"
-                android:textSize="16dp"/>
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etCode"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="@string/login_code_hint"
+                    android:inputType="number"
+                    android:maxLength="11"
+
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    />
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvGetCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionGo"
+                    android:textStyle="bold"
+                    android:paddingRight="12dp"
+                    android:text="@string/login_get_code"
+                    android:textColor="@color/text_pink"
+                    android:textSize="14dp"/>
+            </LinearLayout>
         </LinearLayout>
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvButton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:enabled="false"
+            android:background="@drawable/shape_bg_rectangle_dark"
+            android:gravity="center"
+            android:text="@string/login_button"
+            android:textColor="@color/white"
+            android:textSize="14dp"/>
     </LinearLayout>
 </RelativeLayout>
