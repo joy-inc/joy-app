@@ -48,7 +48,8 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     protected void initTitleView() {
         addTitleLeftBackView();
         addTitleMiddleView(((JoyApplication)getApplication()).getUserNameStr()+"的"+ TextUtil.filterEmpty(getIntent().getStringExtra("mFolderName"),"行程规划"));
-        addTitleRightView();
+//        addTitleRightView();
+        addTitleLeftBackView();
     }
 
     @Override
