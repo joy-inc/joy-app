@@ -13,7 +13,15 @@ public class MapPoiDetail implements Parcelable {
     String mEnName, mCnName, mPhotoUrl;
     int icon_nor, icon_press;
     double latitude, longitude;
+    String mId;
 
+    public String getmId() {
+        return mId;
+    }
+
+    public void setmId(String mId) {
+        this.mId = mId;
+    }
 
     public String getmEnName() {
         return mEnName;
@@ -78,6 +86,7 @@ public class MapPoiDetail implements Parcelable {
         else return true;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -92,6 +101,7 @@ public class MapPoiDetail implements Parcelable {
         dest.writeInt(this.icon_press);
         dest.writeDouble(this.latitude);
         dest.writeDouble(this.longitude);
+        dest.writeString(this.mId);
     }
 
     public MapPoiDetail() {
@@ -105,9 +115,10 @@ public class MapPoiDetail implements Parcelable {
         this.icon_press = in.readInt();
         this.latitude = in.readDouble();
         this.longitude = in.readDouble();
+        this.mId = in.readString();
     }
 
-    public static final Parcelable.Creator<MapPoiDetail> CREATOR = new Parcelable.Creator<MapPoiDetail>() {
+    public static final Creator<MapPoiDetail> CREATOR = new Creator<MapPoiDetail>() {
         public MapPoiDetail createFromParcel(Parcel source) {
             return new MapPoiDetail(source);
         }
@@ -116,6 +127,4 @@ public class MapPoiDetail implements Parcelable {
             return new MapPoiDetail[size];
         }
     };
-
-
 }

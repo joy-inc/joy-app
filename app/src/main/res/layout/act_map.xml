@@ -1,115 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <FrameLayout
         android:id="@+id/maplayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
     <LinearLayout
         android:id="@+id/ll_map_bottom"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:visibility="visible">
+
         <RelativeLayout
             android:id="@+id/poi_map_location_bar"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="right"
             android:layout_marginBottom="15dp"
-            android:visibility="visible"
             android:layout_marginRight="15dp"
-            android:background="@drawable/bg_circle_btn"
-            >
-            <ProgressBar
-                android:id="@+id/location_progress"
-                android:layout_height="25dp"
-                android:layout_width="25dp"
-                android:layout_centerInParent="true"
-                android:visibility="gone"/>
+            android:background="@drawable/ic_map_location_btn"
+            android:visibility="visible"/>
 
-
-            <ImageView
-                android:id="@+id/poi_map_iv_my_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerInside"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_def_avatar"
-                android:visibility="visible" />
-        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/poi_map_path_btn"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="right"
             android:layout_marginBottom="15dp"
-            android:visibility="gone"
             android:layout_marginRight="15dp"
-            android:background="@drawable/bg_circle_btn"
-            >
-            <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_user_def_head"
-            android:visibility="visible" />
+            android:background="@drawable/ic_map_path_btn"
+            android:visibility="gone"/>
 
-        </RelativeLayout>
         <LinearLayout
             android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="102dp"
-            android:padding="15dp"
-            android:visibility="gone"
             android:background="@color/white_trans80"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:visibility="gone">
+
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/sdv_photo"
-                android:layout_gravity="center_vertical"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_gravity="center_vertical"
                 android:scaleType="centerCrop"
-                app:placeholderImageScaleType="centerCrop"
-                app:placeholderImage="@drawable/ic_poi_detail_know_attention"
-                />
+                app:placeholderImage="@drawable/ic_def_square"
+                app:placeholderImageScaleType="centerCrop" />
+
             <RelativeLayout
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:padding="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
                     <com.android.library.widget.JTextView
                         android:id="@+id/jtv_cnname"
-                        android:text="东京"
-                        android:textSize="16dp"
-                        android:textColor="@color/black_trans80"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="东京"
+                        android:textColor="@color/black_trans80"
+                        android:textSize="16dp" />
+
                     <com.android.library.widget.JTextView
                         android:id="@+id/jtv_enname"
-                        android:text="tokyo"
-                        android:textSize="14dp"
-                        android:textColor="@color/black_trans40"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="tokyo"
+                        android:textColor="@color/black_trans40"
+                        android:textSize="14dp" />
                 </LinearLayout>
+
                 <ImageView
                     android:id="@+id/iv_path"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_def_avatar"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_map_path" />
             </RelativeLayout>
 
         </LinearLayout>

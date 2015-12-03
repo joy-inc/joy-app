@@ -332,4 +332,10 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         }
     }
 
+    public static void startActivity(Activity act, String id){
+        Intent intent = new Intent(act, PoiDetailActivity.class);
+        intent.putExtra("id", id);
+        act.startActivity(intent);
+    }
+
 }
