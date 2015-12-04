@@ -9,15 +9,15 @@ import java.util.Map;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-26
  */
-public class SettingHttpUitl extends BaseHtpUtil {
+public class SettingHttpUtil extends BaseHtpUtil {
 
     /**
      * 获取假期信息
      * @return
      */
-    public static String getHolidayInfo() {
-
-        Map<String, String> params = getBaseParams();
-        return createUrl(URL_HOLIDAYINFO, params);
-    }
+//    public static String getHolidayInfo() {
+//
+//        Map<String, String> params = getBaseParams();
+//        return createUrl(URL_HOLIDAYINFO, params);
+//    }
 }

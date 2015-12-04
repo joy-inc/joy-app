@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.joy.app.R;
-import com.joy.app.utils.map.QyerMapOverlayItem;
+import com.joy.app.utils.map.JoyMapOverlayItem;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.sample.PoiDetail;
 
@@ -39,7 +39,7 @@ public class SinglePoiMapActivity extends MapActivity {
     protected void initContentView() {
         super.initContentView();
         clearCurrMap();
-        QyerMapOverlayItem item = addPoi(mapPoiDetail);
+        JoyMapOverlayItem item = addPoi(mapPoiDetail);
         showMarkers();
         mapview.getController().setCenter(item.getPoint());
         mapview.getController().setZoom(15);

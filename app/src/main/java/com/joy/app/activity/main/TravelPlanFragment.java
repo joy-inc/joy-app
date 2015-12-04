@@ -51,7 +51,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
                 if (position == 0 ){
                     SinglePoiMapActivity.startActivityByPoiDetail(getActivity(),null);
                 }else{
-                    UserPlanListActivity.startActivityById(getActivity(),adapter.getItem(position).getId());
+                    UserPlanListActivity.startActivityById(getActivity(),"",adapter.getItem(position).getId());
                 }
             }
         });

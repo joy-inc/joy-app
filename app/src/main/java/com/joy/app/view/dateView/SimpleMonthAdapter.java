@@ -271,9 +271,9 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         //        LogMgr.d("showCount="+showCount+"   showCount1="+showCount1);
         if (showCount < 1)
             showCount = 1;
-        else {
-            showCount++;
-        }
+//        else {
+//            showCount++;
+//        }
         setItemCount(showCount);
     }
 

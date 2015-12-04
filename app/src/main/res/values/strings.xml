@@ -9,12 +9,24 @@
     <string name="order">订单</string>
     <string name="booking">预订</string>
 
+    <!--公共的一些toast-->
+    <string name="request_error">网络请求错误</string>
+
+
     <string name="topic">专题</string>
     <!--登录注册-->
-    <string name="regist">注册</string>
     <string name="login_info">幸福啪啪啪</string>
-    <string name="weibo">微博</string>
-    <string name="wechat">微信</string>
+    <string name="login_button">注册/登录</string>
+    <string name="login_phone_hint">输入手机号码</string>
+    <string name="login_code_hint">验证码</string>
+    <string name="login_get_code">获取验证码</string>
+    <string name="login_reget_code">重新获取 %d</string>
+    <string name="login_no_phone">请输入正确的电话号码</string>
+    <string name="login_phone_code_success">请查看短信</string>
+    <string name="login_login_out_success">登出成功</string>
+    <string name="login_phone_empty">请输入电话号码</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_code_empty">请输入验证码</string>
     <!--设置界面-->
     <string name="setting_no_login">您还没有登录</string>
     <string name="setting_title">个人</string>
