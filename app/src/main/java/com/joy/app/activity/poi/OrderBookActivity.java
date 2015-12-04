@@ -7,19 +7,26 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.adapter.ExAdapter;
+import com.android.library.adapter.ExViewHolder;
+import com.android.library.adapter.ExViewHolderBase;
+import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
+import com.android.library.view.dialogplus.DialogPlus;
+import com.android.library.view.dialogplus.ListHolder;
+import com.android.library.view.dialogplus.OnItemClickListener;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
@@ -27,7 +34,6 @@ import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
-import com.joy.app.view.dateView.DatePickerController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,13 +115,34 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         mSubjectWidget.setOnBookItemClickListener(new BookSubjectWidget.OnBookItemClickListener() {
 
             @Override
-            public void onClickBookItem(int position, List<LevelOptions> options) {
-                // todo open date picker activity for result
-                Intent intent = new Intent(OrderBookActivity.this, PoiDetailActivity.class);
-                intent.putExtra("position", position);
-                startActivityForResult(intent, 1);
+            public void onClickBookItem(int position, final List<LevelOptions> options) {
 
                 mSelectPosition = position;
+
+                if (CollectionUtil.isNotEmpty(options)) {
+
+                    // 默认第一个被选中
+                    final DialogSubjectAdapter adapter = new DialogSubjectAdapter(options);
+                    adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
+
+                        @Override
+                        public void onItemViewClick(int position, View clickView, LevelOptions options) {
+
+                            adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
+                            adapter.notifyDataSetChanged();
+
+                        }
+                    });
+
+                    DialogPlus dialog = DialogPlus.newDialog(OrderBookActivity.this)
+                            .setContentHolder(new ListHolder())
+                            .setHeader(R.layout.t_tv_dialog)
+                            .setFooter(R.layout.t_btn_dialog)
+                            .setCancelable(true)
+                            .setAdapter(adapter)
+                            .create();
+                    dialog.show();
+                }
             }
         });
     }
@@ -152,7 +179,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
             List<ProductLevels> list1 = new ArrayList<>();
             List<ProductLevels> list2 = new ArrayList<>();
-//            List<ProductLevels> list3 = new ArrayList<>();
             ProductLevels data3 = null;
 
             for (ProductLevels data : product.getLevels()) {
@@ -167,14 +193,12 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
                 } else if ("3".equals(data.getType())) {
 
-//                    list3.add(data);
                     data3 = data;
                 }
             }
 
             mDateWidget.invalidate(list1);
             mSubjectWidget.invalidate(list2);
-//            mCountWidget.invalidate(list3);
             mCountWidget.invalidate(data3);
         }
 
@@ -208,12 +232,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         for (LevelOptions data : mCountWidget.getSelectId()) {
 
-            String itemStr = createDateSubjectStr();
-
-            itemStr = itemStr + "_" + data.getOption_id() + "-" + data.getLocalCount();
-
-//            list.add(itemStr);
-            list.add(data.getOption_id() +"-" + data.getLocalCount());
+            list.add(data.getOption_id() + "-" + data.getLocalCount());
         }
 
         if (CollectionUtil.isEmpty(list))
@@ -281,7 +300,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     protected void onHttpFailed(Object tag, String msg) {
 
         showToast(msg);
-        LogMgr.e("xxx","~~"+msg);
+        LogMgr.e("xxx", "~~" + msg);
     }
 
     /**
@@ -305,6 +324,48 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         } else {
 
             act.startActivity(intent);
+        }
+    }
+
+    private class DialogSubjectAdapter extends ExAdapter<LevelOptions> {
+
+        public DialogSubjectAdapter(List<LevelOptions> data) {
+
+            super(data);
+        }
+
+        @Override
+        protected ExViewHolder getViewHolder(int position) {
+
+            return new DataViewHolder();
+        }
+
+        private class DataViewHolder extends ExViewHolderBase {
+
+            private TextView tvTitle;
+            private AppCompatCheckBox acCheckBox;
+
+            @Override
+            public int getConvertViewRid() {
+
+                return R.layout.item_order_dialog_subject;
+            }
+
+            @Override
+            public void initConvertView(View convertView) {
+
+                tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+                acCheckBox = (AppCompatCheckBox) convertView.findViewById(R.id.acCheckBox);
+            }
+
+            @Override
+            public void invalidateConvertView() {
+
+                LevelOptions data = getItem(mPosition);
+
+                tvTitle.setText(data.getContent());
+                acCheckBox.setChecked(data.isLocalCheck());
+            }
         }
     }
 

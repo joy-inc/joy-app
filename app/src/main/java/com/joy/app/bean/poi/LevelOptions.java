@@ -17,6 +17,7 @@ public class LevelOptions {
 
     private String localPrice = TextUtil.TEXT_EMPTY;
     private String localCount = TextUtil.TEXT_EMPTY;
+    private boolean localCheck;
 
     public String getOption_id() {
         return option_id;
@@ -72,5 +73,13 @@ public class LevelOptions {
 
     public void setLocalCount(String localCount) {
         this.localCount = localCount;
+    }
+
+    public boolean isLocalCheck() {
+        return localCheck;
+    }
+
+    public void setLocalCheck(boolean localCheck) {
+        this.localCheck = localCheck;
     }
 }
