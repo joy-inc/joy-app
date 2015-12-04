@@ -49,7 +49,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
         addTitleLeftBackView();
         addTitleMiddleView(((JoyApplication)getApplication()).getUserNameStr()+"的"+ TextUtil.filterEmpty(getIntent().getStringExtra("mFolderName"),"行程规划"));
 //        addTitleRightView();
-        addTitleLeftBackView();
+
     }
 
     @Override
@@ -72,14 +72,14 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
         ObjectRequest obj = PlanHttpUtil.getUserPlanListRequest(mFolderID, PlanFolder.class);
         if (BuildConfig.DEBUG) {
             ArrayList<PlanItem>list = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 8; i++) {
 
                 PlanItem folder = new PlanItem();
                 folder.setCn_name("中文名" + i);
                 folder.setEn_name("英文名" + i);
                 folder.setPic_url("http://pic.qyer.com/album/user/1294/6/QEtcRhoBYkw/index/680x400");
                 folder.setBefore_day("2");
-                folder.setPrice("123.34");
+                folder.setPrice((12.34*8)+"");
                 folder.setPlan_id("id" + i);
                 list.add(folder);
             }

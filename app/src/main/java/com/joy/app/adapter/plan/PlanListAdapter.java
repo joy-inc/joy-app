@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
+import com.android.library.utils.TextUtil;
+import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -26,12 +28,7 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
         return new ViewHolder(inflate(parent, R.layout.item_plan_list));
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-    }
-
-    public class ViewHolder extends ExRvViewHolder {
+    public class ViewHolder extends ExRvViewHolder<PlanItem> {
 
         @Bind(R.id.sdv_poi_photo)
         SimpleDraweeView sdvPoiPhoto;
@@ -65,12 +62,19 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
             contentView = itemView;
         }
 
-        public void initData(PlanItem item){
-            sdvPoiPhoto.setImageURI(Uri.parse(item.getPic_url()));
-            jtvCnname.setText(item.getCn_name());
-            jtvEnname.setText(item.getEn_name());
-            jtvPrice.setText(item.getPrice());
-            jtvDay.setText(jtvDay.getContext().getString(R.string.plan_list_before_day,item.getBefore_day()));
+
+        @Override
+        protected void invalidateItemView(int position, PlanItem planItem) {
+            sdvPoiPhoto.setImageURI(Uri.parse(planItem.getPic_url()));
+            jtvCnname.setText(planItem.getCn_name());
+            jtvEnname.setText(planItem.getEn_name());
+            jtvPrice.setText(planItem.getPrice());
+            if (planItem.hasBefore_day()){
+                jtvDay.setText(jtvDay.getContext().getString(R.string.plan_list_before_day,planItem.getBefore_day()));
+                ViewUtil.showView(jtvDay);
+            }else{
+                ViewUtil.hideView(jtvDay);
+            }
         }
     }
 }

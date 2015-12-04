@@ -28,18 +28,7 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
         return new ViewHolder(inflate(parent, R.layout.item_plan_folder));
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        PlanFolder data = getItem(position);
-
-        if (data != null) {
-
-            holder.initData(data);
-        }
-    }
-
-    public class ViewHolder extends ExRvViewHolder {
+    public class ViewHolder extends ExRvViewHolder<PlanFolder> {
 
         @Bind(R.id.sdvBg)
         SimpleDraweeView mPhoto;
@@ -71,6 +60,12 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
             mTtile.setText(folder.getFolder_name());
         }
 
+        @Override
+        protected void invalidateItemView(int position, PlanFolder planFolder) {
+            mPhoto.setImageURI(Uri.parse(planFolder.getPic_url()));
+            mCount.setText(planFolder.getChildren_num() + "");
+            mTtile.setText(planFolder.getFolder_name());
+        }
 
     }
 }
