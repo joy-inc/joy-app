@@ -4,12 +4,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.joy.app.JoyApplication;
-import com.joy.app.R;
-import com.joy.app.bean.MainOrder;
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.utils.ViewUtil;
+import com.joy.app.R;
+import com.joy.app.bean.MainOrder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,36 +19,13 @@ import butterknife.ButterKnife;
  */
 public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolder, MainOrder> {
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         return new ViewHolder(inflate(parent, R.layout.item_main_order_adapter));
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        MainOrder data = getItem(position);
-
-        if (data != null) {
-
-            holder.tvId.setText(JoyApplication.getContext().getString(R.string.order_id, data.getOrder_id()));
-            holder.tvTitle.setText(JoyApplication.getContext().getString(R.string.order_title, data.getProduct_title()));
-            holder.tvType.setText(JoyApplication.getContext().getString(R.string.product_type, data.getProduct_type()));
-            holder.tvCount.setText(JoyApplication.getContext().getString(R.string.out_num, data.getCount()));
-            holder.tvTotalPrice.setText(data.getTotal_price());
-
-            if ("0".equals(data.getStatus())) {
-                ViewUtil.showView(holder.tvStatus);
-                holder.tvStatus.setText(R.string.pay);
-            } else {
-                ViewUtil.hideView(holder.tvStatus);
-            }
-        }
-    }
-
-    public class ViewHolder extends ExRvViewHolder {
+    public class ViewHolder extends ExRvViewHolder<MainOrder> {
 
         @Bind(R.id.tvId)
         TextView tvId;
@@ -90,6 +65,28 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
                     callbackOnItemViewClickListener(getLayoutPosition(), itemView);
                 }
             });
+        }
+
+        @Override
+        protected void invalidateItemView(int position, MainOrder mainOrder) {
+
+            if (mainOrder != null) {
+
+                tvId.setText(getString(R.string.order_id, mainOrder.getOrder_id()));
+                tvTitle.setText(getString(R.string.order_title, mainOrder.getProduct_title()));
+                tvType.setText(getString(R.string.product_type, mainOrder.getProduct_type()));
+                tvCount.setText(getString(R.string.out_num, mainOrder.getCount()));
+                tvTotalPrice.setText(mainOrder.getTotal_price());
+
+                if ("0".equals(mainOrder.getStatus())) {
+
+                    showView(tvStatus);
+                    tvStatus.setText(R.string.pay);
+                } else {
+
+                    hideView(tvStatus);
+                }
+            }
         }
     }
 }

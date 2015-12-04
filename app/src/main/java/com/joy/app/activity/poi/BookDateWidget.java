@@ -25,6 +25,18 @@ public class BookDateWidget extends ExLayoutWidget {
     private LinearListView mLinearLv;
     private LevelAdapter mAdapter;
 
+    private String mDateTime;
+
+    public String getmDateTime() {
+
+        return mDateTime;
+    }
+
+    public void setmDateTime(String mDateTime) {
+
+        this.mDateTime = mDateTime;
+    }
+
     public BookDateWidget(Activity activity) {
 
         super(activity);
@@ -51,11 +63,8 @@ public class BookDateWidget extends ExLayoutWidget {
 
     protected void invalidate(List<ProductLevels> listData) {
 
-        if (!CollectionUtil.isEmpty(listData)) {
-
-            mAdapter = new LevelAdapter(listData);
-            mLinearLv.setAdapter(mAdapter);
-        }
+        mAdapter = new LevelAdapter(listData);
+        mLinearLv.setAdapter(mAdapter);
     }
 
     private void callbackOnItemClick(int position) {
@@ -84,8 +93,11 @@ public class BookDateWidget extends ExLayoutWidget {
 
         String ids = TextUtil.TEXT_EMPTY;
 
-        for (ProductLevels data : mAdapter.getData()) {
-            ids = ids + (TextUtil.isEmpty(ids) ? data.getLocalSelectId() : "_" + data.getLocalSelectId());
+        if (CollectionUtil.isNotEmpty(mAdapter.getData())) {
+
+            for (ProductLevels data : mAdapter.getData()) {
+                ids = ids + (TextUtil.isEmpty(ids) ? data.getLocalSelectId() : "_" + data.getLocalSelectId());
+            }
         }
 
         return ids;

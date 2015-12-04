@@ -98,14 +98,10 @@ public class CityDetailRvAdapter3 extends ExRvMultipleAdapter {
 
     public class ContentViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.sdvPhoto)
-        SimpleDraweeView sdvPhoto;
-        @Bind(R.id.tvTitle)
-        TextView tvTitle;
-        @Bind(R.id.sdvAvatar)
-        SimpleDraweeView sdvAvatar;
-        @Bind(R.id.tvName)
-        TextView tvName;
+        @Bind(R.id.sdvPhoto)  SimpleDraweeView sdvPhoto;
+        @Bind(R.id.sdvAvatar) SimpleDraweeView sdvAvatar;
+        @Bind(R.id.tvTitle)   TextView tvTitle;
+        @Bind(R.id.tvName)    TextView tvName;
 
         ContentViewHolder(View view) {
 

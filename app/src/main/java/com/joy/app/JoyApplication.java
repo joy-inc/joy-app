@@ -94,7 +94,9 @@ public class JoyApplication extends BaseApplication {
      */
     public static String getUserNameStr() {
 
-        return "";
+        if (mUser != null) {
+            return mUser.getNickname();
+        } return "";
     }
 
     /**

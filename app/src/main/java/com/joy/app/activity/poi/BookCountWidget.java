@@ -9,6 +9,7 @@ import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
@@ -59,7 +60,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
                     if (data != null) {
 
-                        int count = Integer.parseInt(data.getLocalCount());
+                        int count = MathUtil.parseInt(data.getLocalCount(), 0);
 
                         if (clickView.getId() == R.id.acbMinus) {
 

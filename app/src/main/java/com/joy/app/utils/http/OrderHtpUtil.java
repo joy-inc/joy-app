@@ -46,6 +46,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
     public static Map<String, String> getProductDetailUrl(String product_id) {
 
         Map<String, String> params = getBaseParams();
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         params.put("product_id", product_id);
         return params;
     }
@@ -84,12 +85,12 @@ public class OrderHtpUtil extends BaseHtpUtil {
      * @param order_status 不传时返回全部，0:待支付 1:处理中 2:已完成
      * @return
      */
-    public static Map<String, String> getOrderListUrl(String page, String count, String order_status) {
+    public static Map<String, String> getOrderListUrl(int page, int count, String order_status) {
 
         Map<String, String> params = getBaseParams();
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
-        params.put(KEY_PAGE, page);
-        params.put(KEY_COUNT, count);
+        params.put(KEY_PAGE, page+"");
+        params.put(KEY_COUNT, count+"");
         params.put("order_status", order_status);
         return params;
     }
@@ -102,10 +103,11 @@ public class OrderHtpUtil extends BaseHtpUtil {
      * @param data 联系人信息
      * @return
      */
-    public static Map<String, String> getCreateOrderUrl(String item, OrderContacts data) {
+    public static Map<String, String> getCreateOrderUrl(String item, String dateTime, OrderContacts data) {
 
         Map<String, String> params = getBaseParams();
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
+        params.put("travel_date", dateTime);
         params.put("item", item);
         params.put("contact_id", data.getContact_id());
         params.put("contact_name", data.getName());

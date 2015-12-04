@@ -51,18 +51,17 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
                 if (position == 0 ){
                     SinglePoiMapActivity.startActivityByPoiDetail(getActivity(),null);
                 }else{
-                    UserPlanListActivity.startActivityById(getActivity(),"",adapter.getItem(position).getId());
+                    UserPlanListActivity.startActivityById(getActivity(),adapter.getItem(position).getFolder_name(),adapter.getItem(position).getId());
                 }
             }
         });
         setAdapter(adapter);
     }
 
-
     @Override
-    protected ObjectRequest<List<PlanFolder>> getObjectRequest() {
+    protected ObjectRequest<List<PlanFolder>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = PlanHttpUtil.getUserPlanFolderRequest(PlanFolder.class,getPageIndex(), 5);
+        ObjectRequest obj = PlanHttpUtil.getUserPlanFolderRequest(PlanFolder.class,pageLimit, pageIndex);
 
         if (BuildConfig.DEBUG) {
             List<PlanFolder> data = new ArrayList<>();
