@@ -2,8 +2,11 @@ package com.joy.app.utils.prefs;
 
 import android.content.Context;
 
+import com.alibaba.fastjson.JSON;
+import com.android.library.utils.TextUtil;
 import com.joy.app.BuildConfig;
 import com.android.library.utils.ExSharedPrefs;
+import com.joy.app.bean.User;
 
 /**
  * app内关于app的一些信息记录
@@ -13,6 +16,7 @@ import com.android.library.utils.ExSharedPrefs;
 public class CommonPrefs {
 
     private static final String KEY_VERSION_CODE = "version_code";//版本号
+    private static final String KEY_USER = "uesr";
     private static CommonPrefs mSettingPrefs;
     private ExSharedPrefs mExSharedPrefs;
 
@@ -62,5 +66,43 @@ public class CommonPrefs {
 
         if (isNewVersion())
             mExSharedPrefs.putInt(KEY_VERSION_CODE, BuildConfig.VERSION_CODE);
+    }
+
+    /**
+     * 写user
+     *
+     * @param user
+     */
+    public void writeUser(User user) {
+
+        mExSharedPrefs.putString(KEY_USER, JSON.toJSONString(user));
+    }
+
+    /**
+     * 清除登录信息
+     */
+    public void clearUser(){
+        mExSharedPrefs.putString(KEY_USER, "");
+
+    }
+
+    /**
+     * 获取保存的用户对象
+     *
+     * @return
+     */
+    public User getUser() {
+
+        try {
+
+            String json = mExSharedPrefs.getString(KEY_USER);
+            if (TextUtil.isEmpty(json)) {
+                return null;
+            }
+            return JSON.parseObject(json, User.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

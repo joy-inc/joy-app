@@ -8,36 +8,42 @@
     <RelativeLayout
         android:id="@+id/llUserInfoDiv"
         android:layout_width="match_parent"
-        android:layout_height="140dp">
+        android:layout_height="wrap_content">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <ImageView
             android:id="@+id/sdUserBG"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            fresco:placeholderImageScaleType="fitXY"/>
+            android:src="@drawable/bg_setting"/>
 
-        <LinearLayout android:id="@+id/llLoginDiv"
+        <LinearLayout
+            android:id="@+id/llLoginDiv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <ImageView
                 android:id="@+id/sdvUserHead"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:tint="@color/black_trans26"
-                fresco:placeholderImage="@drawable/ic_user_def_head"
-                fresco:placeholderImageScaleType="fitXY"/>
+                android:src="@drawable/ic_user_def_head"
+                />
 
             <com.android.library.widget.JTextView
                 android:id="@+id/tvLoginInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/shape_bg_oval_accent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
                 android:text="@string/setting_no_login"
                 android:textColor="@android:color/white"
                 android:textSize="12dp"/>

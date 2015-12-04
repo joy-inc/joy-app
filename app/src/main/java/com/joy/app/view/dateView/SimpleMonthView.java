@@ -41,6 +41,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.joy.app.R;
 
@@ -350,6 +351,9 @@ class SimpleMonthView extends View {
     }
 
     private boolean checkDay(int monthDay, int toYear, int toMonth, int toDay) {
+        if(toYear==2016 && (toMonth==10||toMonth==11)&&toDay==1){
+            LogMgr.d("sdfsdf");
+        }
         if (mEndSectionTime > 0 && mStartSectionTime > 0) {
             Calendar cNow = Calendar.getInstance();
             cNow.set(toYear, toMonth, toDay);
@@ -359,6 +363,10 @@ class SimpleMonthView extends View {
                 return false;
         }
         return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mMonth == toMonth && monthDay < toDay);
+    }
+    private boolean checkPreDay(int monthDay, int toYear, int toMonth, int toDay){
+        return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mMonth == toMonth && monthDay < toDay);
+
     }
 
     //当设置了可以选择昨天的日期,这里就是判断是否昨天的可选
@@ -375,7 +383,7 @@ class SimpleMonthView extends View {
         return ((day.year < toYear)) || (day.year == toYear && day.month < toMonth) || (day.month == toMonth && day.day <= toDay);
     }
 
-    private void drawSelRec(Canvas canvas, int dayOffset, int linkCount, int oneWidth, int type, int paddingHeight, int paddingBootm,float top) {
+    private void drawSelRec(Canvas canvas, int dayOffset, int linkCount, int oneWidth, int type, int paddingHeight, int paddingBootm, float top) {
         float itemWidth = mWidth / 7;
         float startWidth = itemWidth * dayOffset;
         oneWidth += 2;
@@ -387,7 +395,7 @@ class SimpleMonthView extends View {
             }
         }
         float startHeight = DAY_SELECTED_CIRCLE_SIZE * (linkCount - 1) + MONTH_HEADER_SIZE + LINK_SIZE * (linkCount - 1) + paddingHeight; //因为从从link_size下开始画所以这里不进行-1
-        RectF rectF = new RectF(startWidth, startHeight-top, startWidth + oWidth * 2, startHeight + DAY_SELECTED_CIRCLE_SIZE - paddingHeight * 2 - paddingBootm);
+        RectF rectF = new RectF(startWidth, startHeight - top, startWidth + oWidth * 2, startHeight + DAY_SELECTED_CIRCLE_SIZE - paddingHeight * 2 - paddingBootm);
         canvas.drawRoundRect(rectF, 0, 0, mSelectedCirclePaint);
 
         if (mDrawSelectedLink) {
@@ -437,14 +445,14 @@ class SimpleMonthView extends View {
 
             boolean isToday = (mMonth == today.month && mYear == today.year && day == today.monthDay);
             int paddintBottom = 0;
-            float topOffset=0;
-            if(linkCount==5){
-                paddintBottom = SELECT_REC_PADDING+LINK_SIZE;
-            }else if(linkCount>5){
-                paddintBottom = SELECT_REC_PADDING+LINK_SIZE*2;
+            float topOffset = 0;
+            if (linkCount == 5) {
+                paddintBottom = SELECT_REC_PADDING + LINK_SIZE;
+            } else if (linkCount > 5) {
+                paddintBottom = SELECT_REC_PADDING + LINK_SIZE * 2;
 
-                topOffset=SELECT_REC_PADDING/2 ;
-//                paddintBottom = SELECT_REC_PADDING+LINK_SIZE*2;
+                topOffset = SELECT_REC_PADDING / 2;
+                //                paddintBottom = SELECT_REC_PADDING+LINK_SIZE*2;
             }
             if (isToday) { //画空心圆
                 int dyOffset = 0;
@@ -461,7 +469,7 @@ class SimpleMonthView extends View {
                 } else if (linkCount == 4) {
                     dyOffset = LINK_SIZE * 2;
                     //                    drOffset += LINK_SIZE;
-                } else   {
+                } else {
                     dyOffset = LINK_SIZE;
                     drOffset = LINK_SIZE * 2;
                 }//我也不想这样加的了.~~~为啥会偏移..在最后一行会少了原本的高度距离,但整个view的高度是对的.所以咯.
@@ -508,7 +516,7 @@ class SimpleMonthView extends View {
 
                 if (mStartSectionTime <= 0) {
                     //画区间
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1, SELECT_REC_PADDING, paddintBottom,topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1, SELECT_REC_PADDING, paddintBottom, topOffset);
 
                 }
 
@@ -565,7 +573,7 @@ class SimpleMonthView extends View {
                     ((mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedBeginMonth && day < mSelectedBeginDay) || (mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedLastMonth && day > mSelectedLastDay)))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom,topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom, topOffset);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -574,7 +582,7 @@ class SimpleMonthView extends View {
                     (((mSelectedBeginMonth < mSelectedLastMonth && mMonth == mSelectedBeginMonth && day < mSelectedBeginDay) || (mSelectedBeginMonth < mSelectedLastMonth && mMonth == mSelectedLastMonth && day > mSelectedLastDay)) || ((mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedBeginMonth && day > mSelectedBeginDay) || (mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedLastMonth && day < mSelectedLastDay))))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom,topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom, topOffset);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -582,7 +590,7 @@ class SimpleMonthView extends View {
             if ((mSelectedBeginDay != -1 && mSelectedLastDay != -1 && mSelectedBeginYear == mSelectedLastYear && mYear == mSelectedBeginYear) && ((mMonth > mSelectedBeginMonth && mMonth < mSelectedLastMonth && mSelectedBeginMonth < mSelectedLastMonth) || (mMonth < mSelectedBeginMonth && mMonth > mSelectedLastMonth && mSelectedBeginMonth > mSelectedLastMonth))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom,topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom, topOffset);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
 
@@ -591,7 +599,7 @@ class SimpleMonthView extends View {
             if ((mSelectedBeginDay != -1 && mSelectedLastDay != -1 && mSelectedBeginYear != mSelectedLastYear) && ((mSelectedBeginYear < mSelectedLastYear && ((mMonth > mSelectedBeginMonth && mYear == mSelectedBeginYear) || (mMonth < mSelectedLastMonth && mYear == mSelectedLastYear))) || (mSelectedBeginYear > mSelectedLastYear && ((mMonth < mSelectedBeginMonth && mYear == mSelectedBeginYear) || (mMonth > mSelectedLastMonth && mYear == mSelectedLastYear))))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom,topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom, topOffset);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -613,10 +621,10 @@ class SimpleMonthView extends View {
                         mMonthNumPaint.setColor(mPreviousDayColor);
                     }
                 }
-            } else if (!isPrevDayEnabled && checkDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
+            } else if (mStartSectionTime <= 0 && !isPrevDayEnabled && checkDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
                 //                else if (!isPrevDayEnabled && today.month >= mMonth && today.year >= mYear && checkDay(day, today.year, today.month, today.monthDay) && !isLastCanChoseDay(day)) {
                 mMonthNumPaint.setColor(mPreviousDayColor); //前天的都置灰
-            } else if (mStartSectionTime > 0 && !checkDay(day, mYear, mMonth, day)) {
+            } else if (mStartSectionTime > 0 && (!checkDay(day, mYear, mMonth, day) || checkPreDay(day, today.year, today.month, today.monthDay))) {
                 mMonthNumPaint.setColor(mPreviousDayColor);
             }
 

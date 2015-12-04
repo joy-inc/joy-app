@@ -1,4 +1,4 @@
-package com.joy.app.activity.map;
+package com.joy.app.utils.map;
 
 
 
@@ -15,15 +15,10 @@ import com.joy.app.R;
 public class OsmResourceImpl extends DefaultResourceProxyImpl {
 
 	private final Context mContext;
-	private boolean point = false;
+
 	public OsmResourceImpl(final Context pContext) {
 		super(pContext);
 		mContext = pContext;
-	}
-	public OsmResourceImpl(final Context pContext,boolean ispoint) {
-		super(pContext);
-		mContext = pContext;
-		point = ispoint;
 	}
 
 	@Override

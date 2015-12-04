@@ -2,21 +2,23 @@ package com.joy.app.activity.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.activity.common.DayPickerActivity;
 import com.android.library.activity.BaseTabActivity;
 import com.android.library.activity.BaseUiFragment;
+import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.activity.setting.SettingActivity;
+import com.joy.app.eventbus.LoginStatusEvent;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 专题列表
@@ -32,6 +34,7 @@ public class MainActivity extends BaseTabActivity {
     private MainActivityBC mMainActivityBC;
     private MainActivityHelperBC mMainActivityHelper;
     private long mLastPressedTime; //最后一次按返回的按钮
+    private SimpleDraweeView mSimpleDraweeView;
 
     public static void startActivity(Context context) {
 
@@ -79,6 +82,7 @@ public class MainActivity extends BaseTabActivity {
     protected void onDestroy() {
 
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         mMainActivityHelper.onDestroy();
         mMainActivityBC.onDestroy();
     }
@@ -87,6 +91,7 @@ public class MainActivity extends BaseTabActivity {
     protected void initData() {
 
         super.initData();
+        EventBus.getDefault().register(this);
         mMainActivityBC.initData();
     }
 
@@ -99,26 +104,27 @@ public class MainActivity extends BaseTabActivity {
         setTitleLogo(R.drawable.ic_logo);
 
         View v = inflateLayout(R.layout.view_avatar);
-        SimpleDraweeView sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
-        sdvAvatar.setImageURI(Uri.parse("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207"));
+        mSimpleDraweeView = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
+        handleUserLogin();
         addTitleRightView(v, new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                                SettingActivity.startActivity(MainActivity.this);
-//                Calendar calendar = Calendar.getInstance();
-//                calendar.setTime(new Date());
-//                calendar.add(Calendar.DAY_OF_MONTH, 2);
-//                Calendar calendar1 = Calendar.getInstance();
-//                calendar1.setTime(new Date());
-//                calendar1.add(Calendar.MONTH, 3);
-//                DayPickerActivity.startHotelDayPickerForResult(MainActivity.this,true,0,0,1);
-//                DayPickerActivity.startOrderDayPickerForResult(MainActivity.this, calendar.getTimeInMillis(), calendar1.getTimeInMillis(), 0, 1);
+                SettingActivity.startActivity(MainActivity.this);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new Date());
+                //                calendar.add(Calendar.DAY_OF_MONTH, 2);
+                //                Calendar calendar1 = Calendar.getInstance();
+                //                calendar1.setTime(new Date());
+                //                calendar1.add(Calendar.MONTH, 3);
+                //                DayPickerActivity.startHotelDayPickerForResult(MainActivity.this,true,0,0,1);
+//                DayPickerActivity.startOrderDayPickerForResult(MainActivity.this, 1446351132l * 1000, 1477973532l * 1000, 0, 1);
             }
         });
         mMainActivityBC.initTitleView();
     }
+
 
     @Override
     protected void initContentView() {
@@ -148,4 +154,28 @@ public class MainActivity extends BaseTabActivity {
             JoyApplication.releaseForExitApp();
         }
     }
+
+    /**
+     * 登录的回掉
+     *
+     * @param event
+     */
+    public void onEventMainThread(LoginStatusEvent event) {
+        handleUserLogin();
+    }
+
+    /**
+     *
+     */
+    private void handleUserLogin() {
+
+        if (JoyApplication.isLogin()) {
+            mSimpleDraweeView.setImageResource(R.drawable.ic_joy_login);
+        } else {
+            mSimpleDraweeView.setImageResource(R.drawable.ic_main_def_user_head);
+
+        }
+    }
+
+
 }

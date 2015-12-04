@@ -16,6 +16,7 @@ public class ProductLevels {
     private ArrayList<LevelOptions> options;
 
     private String localContent = TextUtil.TEXT_EMPTY;
+    private String localSelectId = TextUtil.TEXT_EMPTY;
 
     public String getLevel_id() {
         return level_id;
@@ -55,5 +56,13 @@ public class ProductLevels {
 
     public void setLocalContent(String localContent) {
         this.localContent = localContent;
+    }
+
+    public String getLocalSelectId() {
+        return localSelectId;
+    }
+
+    public void setLocalSelectId(String localSelectId) {
+        this.localSelectId = localSelectId;
     }
 }

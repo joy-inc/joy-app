@@ -11,6 +11,8 @@ public class LevelOptions {
 
     private String option_id = TextUtil.TEXT_EMPTY;
     private String content = TextUtil.TEXT_EMPTY;
+    private String start_time = TextUtil.TEXT_EMPTY;
+    private String end_time = TextUtil.TEXT_EMPTY;
     private String describe = TextUtil.TEXT_EMPTY;
 
     private String localPrice = TextUtil.TEXT_EMPTY;
@@ -30,6 +32,22 @@ public class LevelOptions {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public String getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
     }
 
     public String getDescribe() {

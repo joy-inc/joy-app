@@ -36,11 +36,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <com.android.library.widget.JTextView
+            android:id="@+id/jtv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123"
-            android:textColor="@color/text_pink"
             android:layout_alignBottom="@+id/sdv_poi_photo"
             android:layout_toRightOf="@+id/sdv_poi_photo"/>
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_day"
+            android:layout_alignBottom="@+id/sdv_poi_photo"
+            android:layout_toRightOf="@+id/jtv_price"
+            android:text="123"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 </RelativeLayout>

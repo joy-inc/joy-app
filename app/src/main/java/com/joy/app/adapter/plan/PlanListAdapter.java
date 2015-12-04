@@ -1,20 +1,24 @@
 package com.joy.app.adapter.plan;
 
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
+import com.android.library.widget.JTextView;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.plan.PlanItem;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * @author litong  <br>
  * @Description 行程规划列表    <br>
  */
-public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder,PlanItem> {
+public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, PlanItem> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -24,8 +28,11 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder,Plan
 
     public class ViewHolder extends ExRvViewHolder<PlanItem> {
 
-//        @Bind(R.id.jtvTitle)
-//        TextView tvLtitle;
+        @Bind(R.id.sdv_poi_photo)   SimpleDraweeView sdvPoiPhoto;
+        @Bind(R.id.jtv_cnname)      JTextView jtvCnname;
+        @Bind(R.id.jtv_enname)      JTextView jtvEnname;
+        @Bind(R.id.jtv_price)       JTextView jtvPrice;
+        @Bind(R.id.jtv_day)         JTextView jtvDay;
 
         public ViewHolder(final View itemView) {
 
@@ -44,6 +51,11 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder,Plan
         @Override
         protected void invalidateItemView(int position, PlanItem planItem) {
 
+            sdvPoiPhoto.setImageURI(Uri.parse(planItem.getPic_url()));
+            jtvCnname.setText(planItem.getCn_name());
+            jtvEnname.setText(planItem.getEn_name());
+            jtvPrice.setText(planItem.getPrice());
+            jtvDay.setText(jtvDay.getContext().getString(R.string.plan_list_before_day, planItem.getBefore_day()));
         }
     }
 }

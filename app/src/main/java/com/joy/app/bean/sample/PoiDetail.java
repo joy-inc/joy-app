@@ -1,5 +1,8 @@
 package com.joy.app.bean.sample;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.android.library.utils.TextUtil;
 
 import java.util.ArrayList;
@@ -9,7 +12,7 @@ import java.util.ArrayList;
  * <p/>
  * Created by xiaoyu.chen on 15/11/11.
  */
-public class PoiDetail {
+public class PoiDetail implements Parcelable {
 
     private static final long serialVersionUID = 1L;
 
@@ -122,4 +125,53 @@ public class PoiDetail {
     public void setPhotos(ArrayList<String> photos) {
         this.photos = photos;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.product_id);
+        dest.writeString(this.title);
+        dest.writeString(this.sub_title);
+        dest.writeString(this.comment_level);
+        dest.writeString(this.comment_num);
+        dest.writeString(this.price);
+        dest.writeString(this.lat);
+        dest.writeString(this.lon);
+        dest.writeStringList(this.highlights);
+        dest.writeString(this.description);
+        dest.writeString(this.is_book);
+        dest.writeStringList(this.photos);
+    }
+
+    public PoiDetail() {
+    }
+
+    protected PoiDetail(Parcel in) {
+        this.product_id = in.readString();
+        this.title = in.readString();
+        this.sub_title = in.readString();
+        this.comment_level = in.readString();
+        this.comment_num = in.readString();
+        this.price = in.readString();
+        this.lat = in.readString();
+        this.lon = in.readString();
+        this.highlights = in.createStringArrayList();
+        this.description = in.readString();
+        this.is_book = in.readString();
+        this.photos = in.createStringArrayList();
+    }
+
+    public static final Parcelable.Creator<PoiDetail> CREATOR = new Parcelable.Creator<PoiDetail>() {
+        public PoiDetail createFromParcel(Parcel source) {
+            return new PoiDetail(source);
+        }
+
+        public PoiDetail[] newArray(int size) {
+            return new PoiDetail[size];
+        }
+    };
 }

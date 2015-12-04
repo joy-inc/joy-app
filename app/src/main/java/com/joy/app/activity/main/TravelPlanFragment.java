@@ -9,6 +9,7 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.BuildConfig;
+import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
@@ -47,8 +48,11 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
-
-                UserPlanListActivity.startActivityById(getActivity(),adapter.getItem(position).getId());
+                if (position == 0 ){
+                    SinglePoiMapActivity.startActivityByPoiDetail(getActivity(),null);
+                }else{
+                    UserPlanListActivity.startActivityById(getActivity(),"",adapter.getItem(position).getId());
+                }
             }
         });
         setAdapter(adapter);

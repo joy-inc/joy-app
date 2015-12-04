@@ -1,13 +1,7 @@
 package com.joy.app.activity.poi;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +19,7 @@ import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
+import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.map.StaticMapWidget;
 import com.joy.app.bean.poi.CommentAll;
 import com.joy.app.bean.poi.CommentItem;
@@ -117,11 +112,8 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mHighWidget.invalidate(mPoiDetail);
 
         mMapWidget.invalidate(R.drawable.ic_star_light_small);
-        LocationManager locMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = locMan.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        location.setLatitude(Double.parseDouble(mPoiDetail.getLat()));
-        location.setLongitude(Double.parseDouble(mPoiDetail.getLon()));
-        mMapWidget.setLocation(location);
+
+        mMapWidget.setLocation(Double.parseDouble(mPoiDetail.getLat()),Double.parseDouble(mPoiDetail.getLon()),"我是地址");
 
         mIntroduceWidget.invalidate(mPoiDetail);
 
@@ -252,6 +244,9 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();
+        } else if (R.id.rl_mapview == view.getId()) {
+
+            startMapActivity();
         }
     }
 
@@ -261,6 +256,14 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     private void startAllCommentActivity() {
 
         CommentActivity.startActivity(this, mId);
+    }
+    /**
+     * 打开地图页
+     */
+    private void startMapActivity() {
+
+        SinglePoiMapActivity.startActivityByPoiDetail(this,mPoiDetail);
+        showToast("open all comments activity");
     }
 
     private void startPoiMapWithSinglePoi() {
@@ -303,7 +306,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
      * @param act
      * @param view The view which starts the transition
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void startActivity(Activity act, View view, String photoUrl, String id) {
 
         if (act == null || view == null)
@@ -313,14 +316,20 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         intent.putExtra("photoUrl", photoUrl);
         intent.putExtra("id", id);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
-            act.startActivity(intent, options.toBundle());
-        } else {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
+//            act.startActivity(intent, options.toBundle());
+//        } else {
 
             act.startActivity(intent);
-        }
+//        }
     }
 
+    public static void startActivity(Activity act, String id){
+
+        Intent intent = new Intent(act, PoiDetailActivity.class);
+        intent.putExtra("id", id);
+        act.startActivity(intent);
+    }
 }
