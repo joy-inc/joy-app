@@ -58,7 +58,7 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
     }
 
     @Override
-    protected ObjectRequest<List<HotCityItem>> getObjectRequest() {
+    protected ObjectRequest<List<HotCityItem>> getObjectRequest(int pageIndex, int pageLimit) {
 
         return ReqFactory.newGet(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
     }

@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.plan.PlanFolder;
@@ -21,25 +20,13 @@ import butterknife.ButterKnife;
  */
 public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, PlanFolder> {
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         return new ViewHolder(inflate(parent, R.layout.item_plan_folder));
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        PlanFolder data = getItem(position);
-
-        if (data != null) {
-
-            holder.initData(data);
-        }
-    }
-
-    public class ViewHolder extends ExRvViewHolder {
+    public class ViewHolder extends ExRvViewHolder<PlanFolder> {
 
         @Bind(R.id.sdvBg)
         SimpleDraweeView mPhoto;
@@ -65,12 +52,12 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
             });
         }
 
-        public void initData(PlanFolder folder) {
-            mPhoto.setImageURI(Uri.parse(folder.getPic_url()));
-            mCount.setText(folder.getChildren_num() + "");
-            mTtile.setText(folder.getFolder_name());
+        @Override
+        protected void invalidateItemView(int position, PlanFolder planFolder) {
+
+            mPhoto.setImageURI(Uri.parse(planFolder.getPic_url()));
+            mCount.setText(planFolder.getChildren_num() + "");
+            mTtile.setText(planFolder.getFolder_name());
         }
-
-
     }
 }

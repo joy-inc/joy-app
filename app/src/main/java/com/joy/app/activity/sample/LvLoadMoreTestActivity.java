@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.library.activity.BaseHttpLvActivity;
+import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -46,6 +47,7 @@ public class LvLoadMoreTestActivity extends BaseHttpLvActivity<List<Special>> {
             @Override
             public void onClick(View v) {
 
+                showToast("avatar");
             }
         });
     }
@@ -53,7 +55,16 @@ public class LvLoadMoreTestActivity extends BaseHttpLvActivity<List<Special>> {
     @Override
     protected void initContentView() {
 
-        setAdapter(new LvLoadMoreAdapter());
+        LvLoadMoreAdapter adapter = new LvLoadMoreAdapter();
+        adapter.setOnItemViewClickListener(new OnItemViewClickListener<Special>() {
+
+            @Override
+            public void onItemViewClick(int position, View clickView, Special special) {
+
+                showToast(special.getTitle());
+            }
+        });
+        setAdapter(adapter);
     }
 
     @Override

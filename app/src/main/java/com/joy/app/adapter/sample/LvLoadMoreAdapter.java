@@ -4,12 +4,15 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.joy.app.R;
-import com.joy.app.bean.sample.Special;
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.joy.app.R;
+import com.joy.app.bean.sample.Special;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by KEVIN.DAI on 15/11/23.
@@ -22,10 +25,10 @@ public class LvLoadMoreAdapter extends ExAdapter<Special> {
         return new ViewHolder();
     }
 
-    private class ViewHolder extends ExViewHolderBase {
+    public class ViewHolder extends ExViewHolderBase {
 
-        private SimpleDraweeView sdvPhoto;
-        private TextView tvName;
+        @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
+        @Bind(R.id.tvName)   TextView tvName;
 
         @Override
         public int getConvertViewRid() {
@@ -36,8 +39,7 @@ public class LvLoadMoreAdapter extends ExAdapter<Special> {
         @Override
         public void initConvertView(View convertView) {
 
-            sdvPhoto = (SimpleDraweeView) convertView.findViewById(R.id.sdvPhoto);
-            tvName = (TextView) convertView.findViewById(R.id.tvName);
+            ButterKnife.bind(this, convertView);
             convertView.setOnClickListener(new View.OnClickListener() {
 
                 @Override

@@ -7,12 +7,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
-import com.joy.app.adapter.sample.CityDetailRvAdapter;
-import com.joy.app.bean.sample.CityDetail;
-import com.joy.app.utils.http.sample.TestHtpUtil;
 import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.CollectionUtil;
+import com.joy.app.adapter.sample.CityDetailRvAdapter;
+import com.joy.app.bean.sample.CityDetail;
+import com.joy.app.utils.http.sample.TestHtpUtil;
 
 import java.util.ArrayList;
 
@@ -98,7 +98,7 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
     }
 
     @Override
-    protected ObjectRequest<CityDetail> getObjectRequest() {
+    protected ObjectRequest<CityDetail> getObjectRequest(int pageIndex, int pageLimit) {
 
         return ObjectRequest.get(TestHtpUtil.getCityInfoUrl(getIntent().getStringExtra("cityId")), CityDetail.class);
     }

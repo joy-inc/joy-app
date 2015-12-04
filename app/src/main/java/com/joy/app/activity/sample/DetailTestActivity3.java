@@ -186,7 +186,7 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
     }
 
     @Override
-    protected ObjectRequest<CityDetail> getObjectRequest() {
+    protected ObjectRequest<CityDetail> getObjectRequest(int pageIndex, int pageLimit) {
 
         return ObjectRequest.get(TestHtpUtil.getCityInfoUrl(getIntent().getStringExtra("cityId")), CityDetail.class);
     }

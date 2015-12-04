@@ -1,5 +1,14 @@
 package com.joy.app.bean.plan;
 
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+
+import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
+
 /**
  * @author litong  <br>
  * @Description 旅行规划    <br>
@@ -66,13 +75,32 @@ public class PlanItem {
     public String getBefore_day() {
         return before_day;
     }
+    public Boolean hasBefore_day() {
+        try{
+            if (TextUtil.isEmpty(before_day)||Integer.parseInt(before_day) == 0){
+                return false;
+            }
+        }catch (NumberFormatException e){
+            return true;
+        }catch (Exception other ){
+            return false;
+        }
+        return true;
+    }
 
     public void setBefore_day(String before_day) {
         this.before_day = before_day;
     }
 
-    public String getPrice() {
-        return ""+price+"起";
+    public SpannableString getPrice() {
+        String str = "￥"+price+" 起";
+        LogMgr.i("price:"+str);
+        SpannableString spannableString = new SpannableString(str);
+        spannableString.setSpan(new RelativeSizeSpan(0.5f),0,1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(new RelativeSizeSpan(0.75f),str.length()-1,str.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#D9f9617c")),0,str.length()-1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
     }
 
     public void setPrice(String price) {

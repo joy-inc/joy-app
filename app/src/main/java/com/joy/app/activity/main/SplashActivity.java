@@ -56,9 +56,10 @@ public class SplashActivity extends Activity {
         } else {
 
             MainActivity.startActivity(this);
-            //            TabTestActivity.startActivity(this);
-            //            LvTestActivity.startActivity(this);
-            //            LvLoadMoreTestActivity.startActivity(this);
+//            TabTestActivity.startActivity(this);
+//            LvTestActivity.startActivity(this);
+//            LvLoadMoreTestActivity.startActivity(this);
+//            RvLoadMoreTestActivity.startActivity(this);
         }
         finish();
     }

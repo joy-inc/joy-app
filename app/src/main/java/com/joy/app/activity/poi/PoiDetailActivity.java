@@ -1,16 +1,8 @@
 package com.joy.app.activity.poi;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -20,23 +12,17 @@ import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.map.StaticMapWidget;
 import com.joy.app.bean.poi.CommentAll;
-import com.joy.app.bean.poi.CommentItem;
-import com.joy.app.bean.poi.CommentScores;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
-
-import java.util.ArrayList;
 
 /**
  * 目的地详折扣情页(下订单的唯一入口)
@@ -75,7 +61,16 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     @Override
     protected void initTitleView() {
 
+        setTitle(null);
         addTitleLeftBackView();
+        addTitleRightView(R.drawable.abc_ic_menu_share_mtrl_alpha, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                showPoiShareDialog();
+            }
+        });
     }
 
     @Override
@@ -121,7 +116,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         mMapWidget.invalidate(R.drawable.ic_star_light_small);
 
-        mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0),MathUtil.parseDouble(mPoiDetail.getLon(), 0),"我是地址");
+        mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), "我是地址");
 
         mIntroduceWidget.invalidate(mPoiDetail);
 
@@ -173,7 +168,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         if (R.id.acbBook == view.getId()) {
 
-            if(CollectionUtil.isNotEmpty(mPoiDetail.getPhotos()) && TextUtil.isEmpty(mPhotoUrl))
+            if (CollectionUtil.isNotEmpty(mPoiDetail.getPhotos()) && TextUtil.isEmpty(mPhotoUrl))
                 mPhotoUrl = mPoiDetail.getPhotos().get(0);
 
             OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
@@ -182,7 +177,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             showToast("加入旅行计划");
         } else if (R.id.poiDetailMapDiv == view.getId()) {
 
-            startPoiMapWithSinglePoi();
+            startMapActivity();
         } else if (R.id.tvAllIntroduce == view.getId()) {
 
             showToast("查看全部简介");
@@ -192,9 +187,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();
-        } else if (R.id.rl_mapview == view.getId()) {
-
-            startMapActivity();
         }
     }
 
@@ -205,20 +197,16 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         CommentActivity.startActivity(this, mId);
     }
+
     /**
      * 打开地图页
      */
     private void startMapActivity() {
 
-        SinglePoiMapActivity.startActivityByPoiDetail(this,mPoiDetail);
-        showToast("open all comments activity");
-    }
-
-    private void startPoiMapWithSinglePoi() {
-
         if (mPoiDetail != null) {
 
-            showToast("show map of poi");
+            SinglePoiMapActivity.startActivityByPoiDetail(this, mPoiDetail);
+            showToast("open all comments activity");
         }
     }
 
@@ -230,26 +218,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_poi_detail, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_share) {
-            showPoiShareDialog();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public static void startActivity(Activity act, String id) {
 
         if (act == null || TextUtil.isEmpty(id))
@@ -258,29 +226,5 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         Intent intent = new Intent(act, PoiDetailActivity.class);
         intent.putExtra("id", id);
         act.startActivity(intent);
-    }
-
-    /**
-     * @param act
-     * @param view The view which starts the transition
-     */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void startActivity(Activity act, View view, String photoUrl, String id) {
-
-        if (act == null || view == null)
-            return;
-
-        Intent intent = new Intent(act, PoiDetailActivity.class);
-        intent.putExtra("photoUrl", photoUrl);
-        intent.putExtra("id", id);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
-            act.startActivity(intent, options.toBundle());
-        } else {
-
-            act.startActivity(intent);
-        }
     }
 }
