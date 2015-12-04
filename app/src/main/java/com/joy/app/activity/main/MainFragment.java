@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.joy.app.BuildConfig;
-import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.adapter.MainRouteRvAdapter;
-import com.joy.app.bean.MainRoute;
-import com.joy.app.bean.sample.HotCityItem;
-import com.joy.app.utils.http.MainHttpUtil;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.ToastUtil;
+import com.joy.app.BuildConfig;
+import com.joy.app.activity.common.WebViewActivity;
+import com.joy.app.adapter.MainRouteRvAdapter;
+import com.joy.app.bean.MainRoute;
+import com.joy.app.utils.http.MainHttpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
@@ -56,10 +55,10 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     }
 
     @Override
-    protected ObjectRequest<List<MainRoute>> getObjectRequest() {
+    protected ObjectRequest<List<MainRoute>> getObjectRequest(int pageIndex, int pageLimit) {
 
 
-        ObjectRequest req = ReqFactory.newPost(MainHttpUtil.URL_POST_MAIN_ROUTE_LIST, MainRoute.class, MainHttpUtil.getMainRouteList(getPageIndex(), getPageLimit()));
+        ObjectRequest req = ReqFactory.newPost(MainHttpUtil.URL_POST_MAIN_ROUTE_LIST, MainRoute.class, MainHttpUtil.getMainRouteList(pageIndex, pageLimit));
         if (BuildConfig.DEBUG) {
             List<MainRoute> list = new ArrayList<>();
             for (int i = 0; i < 20; i++) {

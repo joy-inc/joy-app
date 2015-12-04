@@ -5,12 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.library.adapter.ExRvAdapter;
+import com.android.library.adapter.ExRvViewHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.MainRoute;
-import com.android.library.adapter.ExRvAdapter;
-import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.utils.ViewUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,32 +21,13 @@ import butterknife.ButterKnife;
  */
 public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolder, MainRoute> {
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         return new ViewHolder(inflate(parent, R.layout.item_main_route_adapter));
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        MainRoute route = getItem(position);
-        if (route != null) {
-            holder.sdvPhoto.setImageURI(Uri.parse(route.getPic_url()));
-            holder.tvName.setText(route.getCn_name());
-            holder.tvEnName.setText(route.getEn_name());
-            holder.tvTags.setText(route.getTags());
-            if (route.isCity()) {
-                ViewUtil.hideView(holder.tvTopic);
-            } else {
-                ViewUtil.showView(holder.tvTopic);
-            }
-        }
-
-    }
-
-    public class ViewHolder extends ExRvViewHolder {
+    public class ViewHolder extends ExRvViewHolder<MainRoute> {
 
         @Bind(R.id.sdvPhoto)
         SimpleDraweeView sdvPhoto;
@@ -74,6 +54,25 @@ public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolde
                     callbackOnItemViewClickListener(getLayoutPosition(), itemView);
                 }
             });
+        }
+
+        @Override
+        protected void invalidateItemView(int position, MainRoute mainRoute) {
+
+            if (mainRoute != null) {
+
+                sdvPhoto.setImageURI(Uri.parse(mainRoute.getPic_url()));
+                tvName.setText(mainRoute.getCn_name());
+                tvEnName.setText(mainRoute.getEn_name());
+                tvTags.setText(mainRoute.getTags());
+                if (mainRoute.isCity()) {
+
+                    hideView(tvTopic);
+                } else {
+
+                    showView(tvTopic);
+                }
+            }
         }
     }
 }

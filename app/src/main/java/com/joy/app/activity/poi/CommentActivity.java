@@ -10,7 +10,6 @@ import com.android.library.utils.TextUtil;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.adapter.poi.CommentRvAdapter;
-import com.joy.app.adapter.sample.CityDetailRvAdapter3;
 import com.joy.app.bean.poi.CommentAll;
 import com.joy.app.bean.poi.CommentItem;
 import com.joy.app.bean.poi.CommentScores;
@@ -73,9 +72,9 @@ public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
     }
 
     @Override
-    protected ObjectRequest<CommentAll> getObjectRequest() {
+    protected ObjectRequest<CommentAll> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 20, 1));// todo 有分页
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, pageLimit, pageIndex));// todo 有分页
 
         if (BuildConfig.DEBUG) {
 

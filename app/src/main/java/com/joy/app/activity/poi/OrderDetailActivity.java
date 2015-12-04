@@ -125,8 +125,8 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
     }
 
     @Override
-    protected ObjectRequest<OrderDetail> getObjectRequest() {
-        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_DETAIL, OrderDetail.class, OrderHtpUtil.getOrderDetailUrl(Url));
-        return obj ;
+    protected ObjectRequest<OrderDetail> getObjectRequest(int pageIndex, int pageLimit) {
+
+        return ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_DETAIL, OrderDetail.class, OrderHtpUtil.getOrderDetailUrl(Url));
     }
 }

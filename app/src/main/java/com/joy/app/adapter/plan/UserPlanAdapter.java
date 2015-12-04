@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.plan.PlanFolder;
@@ -20,7 +19,6 @@ import butterknife.ButterKnife;
  * @Description 用户行程规划    <br>
  */
 public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, PlanFolder> {
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,18 +52,12 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
             });
         }
 
-        public void initData(PlanFolder folder) {
-            mPhoto.setImageURI(Uri.parse(folder.getPic_url()));
-            mCount.setText(folder.getChildren_num() + "");
-            mTtile.setText(folder.getFolder_name());
-        }
-
         @Override
         protected void invalidateItemView(int position, PlanFolder planFolder) {
+
             mPhoto.setImageURI(Uri.parse(planFolder.getPic_url()));
             mCount.setText(planFolder.getChildren_num() + "");
             mTtile.setText(planFolder.getFolder_name());
         }
-
     }
 }

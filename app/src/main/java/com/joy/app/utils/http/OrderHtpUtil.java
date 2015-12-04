@@ -84,12 +84,12 @@ public class OrderHtpUtil extends BaseHtpUtil {
      * @param order_status 不传时返回全部，0:待支付 1:处理中 2:已完成
      * @return
      */
-    public static Map<String, String> getOrderListUrl(String page, String count, String order_status) {
+    public static Map<String, String> getOrderListUrl(int page, int count, String order_status) {
 
         Map<String, String> params = getBaseParams();
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
-        params.put(KEY_PAGE, page);
-        params.put(KEY_COUNT, count);
+        params.put(KEY_PAGE, page+"");
+        params.put(KEY_COUNT, count+"");
         params.put("order_status", order_status);
         return params;
     }
