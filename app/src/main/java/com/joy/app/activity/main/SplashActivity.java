@@ -67,7 +67,7 @@ public class SplashActivity extends Activity {
             finish();
         } catch (Exception ex) {
             ex.printStackTrace();
-            MainActivity.startActivity(this);
+            GuideSplashActivity.startActivity(this);
         }
     }
 }
