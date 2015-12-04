@@ -59,9 +59,9 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
 
     @Override
-    protected ObjectRequest<List<MainOrder>> getObjectRequest() {
+    protected ObjectRequest<List<MainOrder>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl("1", "5", "0"));
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl(pageIndex, pageLimit, "0"));
 
         if (BuildConfig.DEBUG) {
             List<MainOrder> list = new ArrayList<MainOrder>();

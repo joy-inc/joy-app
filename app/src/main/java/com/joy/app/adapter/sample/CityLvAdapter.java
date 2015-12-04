@@ -11,6 +11,9 @@ import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by KEVIN.DAI on 15/7/10.
  */
@@ -22,10 +25,10 @@ public class CityLvAdapter extends ExAdapter<HotCityItem> {
         return new ViewHolder();
     }
 
-    private class ViewHolder extends ExViewHolderBase {
+    public class ViewHolder extends ExViewHolderBase {
 
-        private SimpleDraweeView sdvPhoto;
-        private TextView tvName;
+        @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
+        @Bind(R.id.tvName)   TextView tvName;
 
         @Override
         public int getConvertViewRid() {
@@ -36,8 +39,7 @@ public class CityLvAdapter extends ExAdapter<HotCityItem> {
         @Override
         public void initConvertView(View convertView) {
 
-            sdvPhoto = (SimpleDraweeView) convertView.findViewById(R.id.sdvPhoto);
-            tvName = (TextView) convertView.findViewById(R.id.tvName);
+            ButterKnife.bind(this, convertView);
             convertView.setOnClickListener(new View.OnClickListener() {
 
                 @Override

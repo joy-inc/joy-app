@@ -55,7 +55,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     }
 
     @Override
-    protected ObjectRequest<List<PlanItem>> getObjectRequest() {
+    protected ObjectRequest<List<PlanItem>> getObjectRequest(int pageIndex, int pageLimit) {
 
         ObjectRequest obj = PlanHttpUtil.getUserPlanListRequest(mFolderID, PlanFolder.class);
         if (BuildConfig.DEBUG) {

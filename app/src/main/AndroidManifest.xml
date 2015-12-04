@@ -65,6 +65,10 @@
             android:label="Lv LoadMore"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.sample.RvLoadMoreTestActivity"
+            android:label="Rv LoadMore"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.sample.DetailTestActivity"
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent.toolbar.overlay" />

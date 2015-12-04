@@ -20,20 +20,12 @@ import butterknife.ButterKnife;
 public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCityItem> {
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        HotCityItem data = getItem(position);
-        holder.sdvPhoto.setImageURI(Uri.parse(data.getPhoto()));
-        holder.tvName.setText(data.getCnname() + "\n" + data.getEnname());
-    }
-
-    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         return new ViewHolder(inflate(parent, R.layout.t_item_card_rv));
     }
 
-    public class ViewHolder extends ExRvViewHolder {
+    public class ViewHolder extends ExRvViewHolder<HotCityItem> {
 
         @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
         @Bind(R.id.tvName)   TextView         tvName;
@@ -50,6 +42,13 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
                     callbackOnItemViewClickListener(getLayoutPosition(), itemView);
                 }
             });
+        }
+
+        @Override
+        protected void invalidateItemView(int position, HotCityItem hotCityItem) {
+
+            sdvPhoto.setImageURI(Uri.parse(hotCityItem.getPhoto()));
+            tvName.setText(hotCityItem.getCnname() + "\n" + hotCityItem.getEnname());
         }
     }
 }
