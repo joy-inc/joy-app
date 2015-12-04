@@ -35,8 +35,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-//        executeCacheAndRefresh();// todo 要缓存
-        executeRefreshOnly();
+        executeCacheAndRefresh();
     }
 
     @Override
@@ -50,7 +49,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
             public void onItemViewClick(int position, View clickView, MainOrder data) {
 
                 showToast(data.getOrder_id() + " To Order Detail --- from OrderFragment" + clickView.getId());
-                PoiDetailActivity.startActivity(getActivity(), clickView, "http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280", "28");
+                PoiDetailActivity.startActivity(getActivity(), "28");
             }
         });
         setAdapter(adapter);
