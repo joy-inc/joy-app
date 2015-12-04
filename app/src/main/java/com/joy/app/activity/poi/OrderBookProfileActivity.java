@@ -197,12 +197,14 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             public void onSuccess(Object tag, OrderDetail data) {
 
                 showToast("创建订单成功");
+                OrderPayActivity.startActivity(OrderBookProfileActivity.this, data.getOrder_id(), data);
             }
 
             @Override
             public void onError(Object tag, String msg) {
 
-                showToast("创建订单失败啦～～" + msg);
+                super.onError(tag, msg);
+                showToast(msg);
             }
         });
         addRequestNoCache(req);
