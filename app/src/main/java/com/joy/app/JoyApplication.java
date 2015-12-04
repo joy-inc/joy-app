@@ -66,9 +66,11 @@ public class JoyApplication extends BaseApplication {
      */
     public static String getUserToken() {
 
-        if (mUser != null) {
-            return mUser.getToken();
-        } return "";
+//        if (mUser != null) {
+//            return mUser.getToken();
+//        } return "";
+//
+        return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb";
     }
 
     /**

@@ -2,78 +2,80 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:calendar="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
 
     <LinearLayout
+        android:id="@+id/div_ll_week"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pickerday_week_height"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/pickerday_left_right"
+        android:layout_marginRight="@dimen/pickerday_left_right">
+
+        <TextView
+            style="@style/day_style"
+            android:text="@string/sunday"
+            android:textColor="@color/text_pink"/>
+
+        <TextView
+            style="@style/day_style"
+            android:text="@string/monday"/>
+
+        <TextView
+            style="@style/day_style"
+            android:text="@string/tuesday"/>
+
+        <TextView
+            style="@style/day_style"
+            android:text="@string/wednesday"/>
+
+        <TextView
+            style="@style/day_style"
+            android:text="@string/thursday"/>
+
+        <TextView
+            style="@style/day_style"
+            android:text="@string/friday"/>
+
+        <TextView
+            style="@style/day_style"
+
+            android:text="@string/saturday"
+            android:textColor="@color/text_pink"/>
+    </LinearLayout>
+
+    <com.joy.app.view.dateView.DayPickerView
+        android:id="@+id/dyPickerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/div_ll_week"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/pickerday_week_height"
-            android:background="@color/white"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/day_style"
-                android:text="@string/sunday"
-                android:textColor="@color/text_pink"/>
-
-            <TextView
-                style="@style/day_style"
-                android:text="@string/monday"/>
-
-            <TextView
-                style="@style/day_style"
-                android:text="@string/tuesday"/>
-
-            <TextView
-                style="@style/day_style"
-                android:text="@string/wednesday"/>
-
-            <TextView
-                style="@style/day_style"
-                android:text="@string/thursday"/>
-
-            <TextView
-                style="@style/day_style"
-                android:text="@string/friday"/>
-
-            <TextView
-                style="@style/day_style"
-                android:text="@string/saturday"
-                android:textColor="@color/text_pink"/>
-        </LinearLayout>
-
-        <com.joy.app.view.dateView.DayPickerView
-            android:id="@+id/dyPickerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            calendar:colorSelectedDayBackground="@color/text_pink"
-            calendar:calendarDayHeight="50dp"
-            calendar:canSelectBeforeOneToday="true"
-            calendar:colorCurrentDay="@color/black_trans87"
-            calendar:colorLink="@color/calendar_link_color"
-            calendar:colorMonthName="@color/text_pink"
-            calendar:colorMonthBackground="@color/calendar_month_background_color"
-            calendar:colorNormalDay="@color/black_trans87"
-            calendar:colorPreviousDay="@color/calendar_day_color"
-            calendar:selectPadding="2dp"
-            calendar:colorSelectedDayText="@android:color/white"
-            calendar:colorWeekend="@color/black_trans87"
-            calendar:drawRoundRect="true"
-            calendar:enablePreviousDay="false"
-            calendar:headerMonthHeight="@dimen/pickerday_month_height"
-            calendar:selectTextToTop="8dp"
-            calendar:showMonthCount="12"
-            calendar:textSizeDay="14dp"
-            calendar:textSizeInfo="10dp"
-            calendar:textSizeMonth="16dp"/>
-
-    </LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/div_ll_week"
+        calendar:calendarDayHeight="50dp"
+        calendar:canSelectBeforeOneToday="true"
+        calendar:colorCurrentDay="@color/black_trans87"
+        calendar:colorLink="@color/calendar_link_color"
+        calendar:colorMonthBackground="@color/calendar_month_background_color"
+        calendar:colorMonthName="@color/text_pink"
+        calendar:colorNormalDay="@color/black_trans87"
+        calendar:colorPreviousDay="@color/calendar_day_color"
+        calendar:colorSelectedDayBackground="@color/text_pink"
+        calendar:colorSelectedDayText="@android:color/white"
+        calendar:colorWeekend="@color/black_trans87"
+        calendar:drawRoundRect="true"
+        calendar:enablePreviousDay="false"
+        calendar:headerMonthHeight="@dimen/pickerday_month_height"
+        calendar:selectPadding="5dp"
+        calendar:selectPaddingLeftRigt="@dimen/pickerday_left_right"
+        calendar:selectTextToTop="8dp"
+        calendar:showMonthCount="12"
+        calendar:textSizeDay="14dp"
+        calendar:textSizeInfo="10dp"
+        calendar:textSizeMonth="16dp"/>
 
 
     <com.android.library.widget.JTextView
@@ -84,8 +86,7 @@
         android:background="@color/text_pink"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="16dp"
-        android:visibility="invisible"/>
+        android:textSize="16dp"/>
 
     <!--<View-->
     <!--android:visibility="invisible"-->
@@ -99,7 +100,6 @@
 
     <com.android.library.widget.JTextView
         android:id="@+id/qtvChoseTip"
-        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -111,5 +111,6 @@
         android:paddingRight="40dp"
         android:text="@string/calendar_chose_satrt"
         android:textColor="@android:color/white"
-        android:textSize="16dp"/>
+        android:textSize="16dp"
+        android:visibility="invisible"/>
 </RelativeLayout>
