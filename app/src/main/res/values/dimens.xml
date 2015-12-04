@@ -15,5 +15,6 @@
     <!-- 日历控件的间距默认值-->
     <dimen name="pickerday_month_height">48dp</dimen>
     <dimen name="pickerday_week_height">43dp</dimen>
+    <dimen name="pickerday_left_right">20dp</dimen>
 
 </resources>

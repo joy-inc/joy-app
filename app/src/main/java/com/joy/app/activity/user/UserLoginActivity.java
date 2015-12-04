@@ -194,7 +194,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
      */
     private void toLogin() {
 
-        if (TextUtil.isEmpty(mSubmitPhone)) {
+        if (TextUtil.isEmpty(mSubmitPhone) ) {
             ToastUtil.showToast(R.string.login_phone_empty);
             return;
         }

@@ -34,6 +34,7 @@
         <attr name="colorSelectPoint" format="color"/>
         <attr name="selectLinkSize" format="dimension"/>
         <attr name="selectPadding" format="dimension"/><!--选择框的上下间距-->
+        <attr name="selectPaddingLeftRigt" format="dimension"/><!--选择框的左右间距-->
         <attr name="colorSelectLink" format="color"/>
         <attr name="firstMonth" format="enum">
             <enum name="january" value="0" />

@@ -89,7 +89,9 @@ class SimpleMonthView extends View {
     protected static int MONTH_HEADER_SIZE;
     protected static int MONTH_LABEL_TEXT_SIZE;
     protected static int SELECT_REC_PADDING;//选择框的上下间距
-    protected int mPadding = 0;
+    protected static int SELECT_REC_PADDING_LEFT_RIGHT;//选择框的左右间距
+
+    //    protected int mPadding = 0;
 
     private String mDayOfWeekTypeface;
     private String mMonthTitleTypeface;
@@ -215,6 +217,7 @@ class SimpleMonthView extends View {
         MONTH_HEADER_SIZE = typedArray.getDimensionPixelOffset(R.styleable.DayPickerView_headerMonthHeight, resources.getDimensionPixelOffset(R.dimen.header_month_height));
         DAY_SELECTED_CIRCLE_SIZE = mRowHeight = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_calendarDayHeight, MIN_HEIGHT);
         SELECT_REC_PADDING = typedArray.getDimensionPixelOffset(R.styleable.DayPickerView_selectPadding, 0);
+        SELECT_REC_PADDING_LEFT_RIGHT = typedArray.getDimensionPixelOffset(R.styleable.DayPickerView_selectPaddingLeftRigt, 0);
         //        DAY_SELECTED_CIRCLE_SIZE = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_selectedDayRadius, resources.getDimensionPixelOffset(R.dimen.selected_day_radius));
         //        mRowHeight = ((typedArray.getDimensionPixelSize(R.styleable.DayPickerView_calendarHeight, resources.getDimensionPixelOffset(R.dimen.calendar_height)) - MONTH_HEADER_SIZE) / 6);
 
@@ -256,17 +259,17 @@ class SimpleMonthView extends View {
         return (dividend + (remainder > 0 ? 1 : 0));
     }
 
-    private void drawMonthDayLabels(Canvas canvas) {
-        int y = MONTH_HEADER_SIZE - (MONTH_DAY_LABEL_TEXT_SIZE / 2);
-        int dayWidthHalf = (mWidth - mPadding * 2) / (mNumDays * 2);
-
-        for (int i = 0; i < mNumDays; i++) {
-            int calendarDay = (i + mWeekStart) % mNumDays;
-            int x = (2 * i + 1) * dayWidthHalf + mPadding;
-            mDayLabelCalendar.set(Calendar.DAY_OF_WEEK, calendarDay);
-            canvas.drawText(mDateFormatSymbols.getShortWeekdays()[mDayLabelCalendar.get(Calendar.DAY_OF_WEEK)].toUpperCase(Locale.getDefault()), x, y, mMonthDayLabelPaint);
-        }
-    }
+    //    private void drawMonthDayLabels(Canvas canvas) {
+    //        int y = MONTH_HEADER_SIZE - (MONTH_DAY_LABEL_TEXT_SIZE / 2);
+    //        int dayWidthHalf = (mWidth - mPadding * 2) / (mNumDays * 2);
+    //
+    //        for (int i = 0; i < mNumDays; i++) {
+    //            int calendarDay = (i + mWeekStart) % mNumDays;
+    //            int x = (2 * i + 1) * dayWidthHalf + mPadding;
+    //            mDayLabelCalendar.set(Calendar.DAY_OF_WEEK, calendarDay);
+    //            canvas.drawText(mDateFormatSymbols.getShortWeekdays()[mDayLabelCalendar.get(Calendar.DAY_OF_WEEK)].toUpperCase(Locale.getDefault()), x, y, mMonthDayLabelPaint);
+    //        }
+    //    }
 
     private void drawMonthTitle(Canvas canvas) {
 
@@ -274,7 +277,8 @@ class SimpleMonthView extends View {
         canvas.drawRoundRect(rectF, 0, 0, mMonthTitleBGPaint);
 
 
-        int x = (mWidth + 2 * mPadding) / 2;
+        int x = mWidth / 2;
+        //        int x = (mWidth + 2 * mPadding) / 2;
         int y = MONTH_HEADER_SIZE / 2 + MONTH_LABEL_TEXT_SIZE / 2;
         StringBuilder stringBuilder = new StringBuilder(getMonthAndYearString().toLowerCase());
         stringBuilder.setCharAt(0, Character.toUpperCase(stringBuilder.charAt(0)));
@@ -351,9 +355,6 @@ class SimpleMonthView extends View {
     }
 
     private boolean checkDay(int monthDay, int toYear, int toMonth, int toDay) {
-        if(toYear==2016 && (toMonth==10||toMonth==11)&&toDay==1){
-            LogMgr.d("sdfsdf");
-        }
         if (mEndSectionTime > 0 && mStartSectionTime > 0) {
             Calendar cNow = Calendar.getInstance();
             cNow.set(toYear, toMonth, toDay);
@@ -364,7 +365,8 @@ class SimpleMonthView extends View {
         }
         return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mMonth == toMonth && monthDay < toDay);
     }
-    private boolean checkPreDay(int monthDay, int toYear, int toMonth, int toDay){
+
+    private boolean checkPreDay(int monthDay, int toYear, int toMonth, int toDay) {
         return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mMonth == toMonth && monthDay < toDay);
 
     }
@@ -383,19 +385,25 @@ class SimpleMonthView extends View {
         return ((day.year < toYear)) || (day.year == toYear && day.month < toMonth) || (day.month == toMonth && day.day <= toDay);
     }
 
-    private void drawSelRec(Canvas canvas, int dayOffset, int linkCount, int oneWidth, int type, int paddingHeight, int paddingBootm, float top) {
-        float itemWidth = mWidth / 7;
-        float startWidth = itemWidth * dayOffset;
-        oneWidth += 2;
-        int oWidth = oneWidth;
+    private void drawSelRec(Canvas canvas, int dayOffset, int linkCount, int oneWidth, int type, float middleY, float height) {
+        //        float itemWidth = mWidth  / 7;
+        //        float itemWidth = (mWidth-(mPadding*2))   / 7;
+        //        oneWidth += 2;
+
+        float startWidth = oneWidth * dayOffset + SELECT_REC_PADDING_LEFT_RIGHT;
+        float right = startWidth + oneWidth;
+
         if (type != 2) {
-            oWidth /= 2;
             if (type == 0) {
-                startWidth += oneWidth;
+                startWidth += oneWidth / 2;
+                right = startWidth + oneWidth / 2 + 2;
+            } else if (type == 1) {
+                right = startWidth + oneWidth / 2;
             }
         }
-        float startHeight = DAY_SELECTED_CIRCLE_SIZE * (linkCount - 1) + MONTH_HEADER_SIZE + LINK_SIZE * (linkCount - 1) + paddingHeight; //因为从从link_size下开始画所以这里不进行-1
-        RectF rectF = new RectF(startWidth, startHeight - top, startWidth + oWidth * 2, startHeight + DAY_SELECTED_CIRCLE_SIZE - paddingHeight * 2 - paddingBootm);
+        float startHeight = middleY - height;
+        float bottom = middleY + height;
+        RectF rectF = new RectF(startWidth, startHeight, right, bottom);
         canvas.drawRoundRect(rectF, 0, 0, mSelectedCirclePaint);
 
         if (mDrawSelectedLink) {
@@ -431,52 +439,24 @@ class SimpleMonthView extends View {
 
         int linkCount = 1;
         int y = (mRowHeight + MINI_DAY_NUMBER_TEXT_SIZE) / 2 + LINK_SIZE + MONTH_HEADER_SIZE; //获得当前数字的Y坐标
-        int paddingDay = (mWidth - 2 * mPadding) / (2 * mNumDays);
+        int paddingDay = (mWidth - 2 * SELECT_REC_PADDING_LEFT_RIGHT) / (2 * mNumDays);
+        //        int paddingDay = (mWidth - 2 * mPadding) / (2 * mNumDays);
         int dayOffset = findDayOffset();
         int day = 1;
+        float drawCircle = DAY_SELECTED_CIRCLE_SIZE / 2 - SELECT_REC_PADDING;
 
-        int oneWidth = paddingDay + mPadding;
+        int oneWidth = (mWidth - 2 * SELECT_REC_PADDING_LEFT_RIGHT) / mNumDays;
 
         while (day <= mNumCells) {
-            int x = paddingDay * (1 + dayOffset * 2) + mPadding;
+            float drawYMiddle = y - (MINI_DAY_NUMBER_TEXT_SIZE / 2);
+            int x = paddingDay * (1 + dayOffset * 2) + SELECT_REC_PADDING_LEFT_RIGHT;
             boolean isHasBegin = mMonth == mSelectedBeginMonth && mSelectedBeginDay == day && mSelectedBeginYear == mYear;
             boolean isHasEnd = mMonth == mSelectedLastMonth && mSelectedLastDay == day && mSelectedLastYear == mYear;
             boolean isInSelecDay = false;
 
             boolean isToday = (mMonth == today.month && mYear == today.year && day == today.monthDay);
-            int paddintBottom = 0;
-            float topOffset = 0;
-            if (linkCount == 5) {
-                paddintBottom = SELECT_REC_PADDING + LINK_SIZE;
-            } else if (linkCount > 5) {
-                paddintBottom = SELECT_REC_PADDING + LINK_SIZE * 2;
-
-                topOffset = SELECT_REC_PADDING / 2;
-                //                paddintBottom = SELECT_REC_PADDING+LINK_SIZE*2;
-            }
             if (isToday) { //画空心圆
-                int dyOffset = 0;
-                float drOffset = 0;
-                if (linkCount == 1) {
-                    dyOffset = -LINK_SIZE;
-                } else if (linkCount == 2) {
-                    //                    dyOffset = LINK_SIZE * (linkCount - 1);
-
-                } else if (linkCount == 3) {
-                    dyOffset = LINK_SIZE;
-                    //                    drOffset += (LINK_SIZE / 2);
-
-                } else if (linkCount == 4) {
-                    dyOffset = LINK_SIZE * 2;
-                    //                    drOffset += LINK_SIZE;
-                } else {
-                    dyOffset = LINK_SIZE;
-                    drOffset = LINK_SIZE * 2;
-                }//我也不想这样加的了.~~~为啥会偏移..在最后一行会少了原本的高度距离,但整个view的高度是对的.所以咯.
-                float dy = y - (MINI_DAY_NUMBER_TEXT_SIZE / 2) + dyOffset;
-                //                float dr = (MONTH_HEADER_SIZE - LINK_SIZE * linkCount) / 2 + drOffset;
-                float dr = DAY_SELECTED_CIRCLE_SIZE / 2 - drOffset - SELECT_REC_PADDING - SELECT_REC_PADDING;
-                canvas.drawCircle(x, dy, dr, mTodayStrokePaint);
+                canvas.drawCircle(x, drawYMiddle, drawCircle, mTodayStrokePaint);
             }
             //画了选中的日期
             if (isHasBegin || isHasEnd) {
@@ -484,39 +464,12 @@ class SimpleMonthView extends View {
                 int drawSeY = 0;
                 if (!TextUtils.isEmpty(mStartText) || !TextUtils.isEmpty(mEndText)) {
                     drawSeY = y + mSelectTextToTop + MINI_DAY_NUMBER_TEXT_SIZE / 2;
-                    //                    drawSeY = DAY_SELECTED_CIRCLE_SIZE * (linkCount - 1) + MONTH_HEADER_SIZE + LINK_SIZE * (linkCount - 1) + mSelectTextToTop + MINI_DAY_NUMBER_TEXT_SIZE;
                 }
-                //                if (mDrawRect) {
-                //                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1);
-                //                } else
-                int dyOffset = 0;
-                float drOffset = 0;
-                if (linkCount == 1) {
-                    dyOffset = -LINK_SIZE;
-                } else if (linkCount == 2) {
-                    //                    dyOffset = LINK_SIZE * (linkCount - 1);
-
-                } else if (linkCount == 3) {
-                    dyOffset = LINK_SIZE;
-                    //                    drOffset += (LINK_SIZE / 2);
-
-                } else if (linkCount == 4) {
-                    dyOffset = LINK_SIZE * 2;
-                    //                    drOffset += LINK_SIZE;
-                } else {
-
-                    dyOffset = LINK_SIZE;
-                    drOffset = LINK_SIZE * 2;
-                } //我也不想这样加的了.~~~为啥会偏移..在最后一行会少了原本的高度距离,但整个view的高度是对的.所以咯.
-                float dy = y - (MINI_DAY_NUMBER_TEXT_SIZE / 2) + dyOffset;
-                //                float dr = (MONTH_HEADER_SIZE - LINK_SIZE * linkCount) / 2 + drOffset;
-                float dr = DAY_SELECTED_CIRCLE_SIZE / 2 - drOffset - SELECT_REC_PADDING;
-                canvas.drawCircle(x, dy, dr, mSelectedCirclePaint);
-                //                drawSelRec(canvas, dayOffset, linkCount, oneWidth/2, isHasBegin ? 0 : 1);
+                canvas.drawCircle(x, drawYMiddle, drawCircle, mSelectedCirclePaint); //画圆
 
                 if (mStartSectionTime <= 0) {
                     //画区间
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1, SELECT_REC_PADDING, paddintBottom, topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, isHasBegin ? 0 : 1, drawYMiddle, drawCircle);
 
                 }
 
@@ -573,7 +526,7 @@ class SimpleMonthView extends View {
                     ((mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedBeginMonth && day < mSelectedBeginDay) || (mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedLastMonth && day > mSelectedLastDay)))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom, topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType,  drawYMiddle, drawCircle);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -582,7 +535,7 @@ class SimpleMonthView extends View {
                     (((mSelectedBeginMonth < mSelectedLastMonth && mMonth == mSelectedBeginMonth && day < mSelectedBeginDay) || (mSelectedBeginMonth < mSelectedLastMonth && mMonth == mSelectedLastMonth && day > mSelectedLastDay)) || ((mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedBeginMonth && day > mSelectedBeginDay) || (mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedLastMonth && day < mSelectedLastDay))))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom, topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType,  drawYMiddle, drawCircle);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -590,7 +543,7 @@ class SimpleMonthView extends View {
             if ((mSelectedBeginDay != -1 && mSelectedLastDay != -1 && mSelectedBeginYear == mSelectedLastYear && mYear == mSelectedBeginYear) && ((mMonth > mSelectedBeginMonth && mMonth < mSelectedLastMonth && mSelectedBeginMonth < mSelectedLastMonth) || (mMonth < mSelectedBeginMonth && mMonth > mSelectedLastMonth && mSelectedBeginMonth > mSelectedLastMonth))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom, topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, drawYMiddle, drawCircle);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
 
@@ -599,7 +552,7 @@ class SimpleMonthView extends View {
             if ((mSelectedBeginDay != -1 && mSelectedLastDay != -1 && mSelectedBeginYear != mSelectedLastYear) && ((mSelectedBeginYear < mSelectedLastYear && ((mMonth > mSelectedBeginMonth && mYear == mSelectedBeginYear) || (mMonth < mSelectedLastMonth && mYear == mSelectedLastYear))) || (mSelectedBeginYear > mSelectedLastYear && ((mMonth < mSelectedBeginMonth && mYear == mSelectedBeginYear) || (mMonth > mSelectedLastMonth && mYear == mSelectedLastYear))))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, SELECT_REC_PADDING, paddintBottom, topOffset);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType,  drawYMiddle, drawCircle);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -662,13 +615,14 @@ class SimpleMonthView extends View {
     }
 
     public SimpleMonthAdapter.CalendarDay getDayFromLocation(float x, float y) {
-        int padding = mPadding;
-        if ((x < padding) || (x > mWidth - mPadding)) {
+        //        int padding = mPadding;
+        int padding = SELECT_REC_PADDING_LEFT_RIGHT;
+        if ((x < padding) || (x > mWidth - padding)) {
             return null;
         }
 
         int yDay = (int) (y - MONTH_HEADER_SIZE) / mRowHeight;
-        int day = 1 + ((int) ((x - padding) * mNumDays / (mWidth - padding - mPadding)) - findDayOffset()) + yDay * mNumDays;
+        int day = 1 + ((int) ((x - padding) * mNumDays / (mWidth - padding - padding)) - findDayOffset()) + yDay * mNumDays;
 
         if (mMonth > 11 || mMonth < 0 || CalendarUtils.getDaysInMonth(mMonth, mYear) < day || day < 1)
             return null;

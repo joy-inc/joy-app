@@ -112,14 +112,14 @@ public class MainActivity extends BaseTabActivity {
             public void onClick(View v) {
 
                 SettingActivity.startActivity(MainActivity.this);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(new Date());
+                //                Calendar calendar = Calendar.getInstance();
+                //                calendar.setTime(new Date());
                 //                calendar.add(Calendar.DAY_OF_MONTH, 2);
                 //                Calendar calendar1 = Calendar.getInstance();
                 //                calendar1.setTime(new Date());
                 //                calendar1.add(Calendar.MONTH, 3);
-                //                DayPickerActivity.startHotelDayPickerForResult(MainActivity.this,true,0,0,1);
-//                DayPickerActivity.startOrderDayPickerForResult(MainActivity.this, 1446351132l * 1000, 1477973532l * 1000, 0, 1);
+                //                                DayPickerActivity.startHotelDayPickerForResult(MainActivity.this,true,0,0,1);
+                //                DayPickerActivity.startOrderDayPickerForResult(MainActivity.this, 1446351132l * 1000, 1477973532l * 1000, 0, 1);
             }
         });
         mMainActivityBC.initTitleView();
