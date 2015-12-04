@@ -42,7 +42,7 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
         if (data == null)
             return;
 
-        tvIntroduce.setText(data.getDescription());
+        tvIntroduce.setText(data.getIntroduction());
     }
 
     @Override

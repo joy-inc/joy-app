@@ -5,17 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.joy.app.BuildConfig;
+import com.android.library.activity.BaseHttpRvFragment;
+import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.httptask.ObjectRequest;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.utils.http.OrderHtpUtil;
-import com.android.library.activity.BaseHttpRvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
-import com.android.library.httptask.ObjectRequest;
 import com.joy.app.utils.http.ReqFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +35,8 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        executeCacheAndRefresh();
+//        executeCacheAndRefresh();// todo 要缓存
+        executeRefreshOnly();
     }
 
     @Override
@@ -50,8 +49,8 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
             @Override
             public void onItemViewClick(int position, View clickView, MainOrder data) {
 
-                showToast(data.getOrder_id()+" To Order Detail --- from OrderFragment" + clickView.getId());
-                PoiDetailActivity.startActivity(getActivity(), clickView, "http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280", "51");
+                showToast(data.getOrder_id() + " To Order Detail --- from OrderFragment" + clickView.getId());
+                PoiDetailActivity.startActivity(getActivity(), clickView, "http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280", "28");
             }
         });
         setAdapter(adapter);
@@ -63,21 +62,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl("1", "5", "0"));
 
-        if (BuildConfig.DEBUG) {
-            List<MainOrder> list = new ArrayList<MainOrder>();
-            for (int i = 0; i < 20; i++) {
-                MainOrder data = new MainOrder();
-                data.setOrder_id(i + "");
-                data.setProduct_title("【元旦假期】杭州直飞东京/大阪 " + i + " 天往返含税机票");
-                data.setProduct_type("杭州-东阪/阪东往返");
-                data.setStatus("0");
-                data.setTotal_price("¥188.00");
-                data.setCount(i + " 成人");
-                list.add(data);
-            }
-            obj.setData(list);
-        }
-
         return obj;
     }
 
@@ -85,6 +69,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     protected void onHttpFailed(Object tag, String msg) {
 
         super.onHttpFailed(tag, msg);
-        showToast("onHttpFailed --- in OrderFragment");
+        showToast(msg);
     }
 }

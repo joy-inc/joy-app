@@ -69,7 +69,7 @@ public class CommentScoresWidget extends ExLayoutWidget {
         if (data == null)
             return;
 
-        mAcRatingBar.setRating(Float.parseFloat(data.getComment_level()));
+        mAcRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
         mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, data.getComment_num()));
         tvCommentLevel.setText(data.getComment_level());
 
@@ -93,7 +93,7 @@ public class CommentScoresWidget extends ExLayoutWidget {
         int maxValue = 0;
 
         if (!TextUtil.isEmpty(commentCount))
-            maxValue = Integer.parseInt(commentCount);
+            maxValue = MathUtil.parseInt(commentCount, 0);
 
         score5.setMax(maxValue);
         score4.setMax(maxValue);

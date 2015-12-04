@@ -25,7 +25,7 @@ public class PoiDetail implements Parcelable {
     private String lat = TextUtil.TEXT_EMPTY;
     private String lon = TextUtil.TEXT_EMPTY;
     private ArrayList<String> highlights;
-    private String description = TextUtil.TEXT_EMPTY;
+    private String introduction = TextUtil.TEXT_EMPTY;
     private String is_book = TextUtil.TEXT_EMPTY;
     private ArrayList<String> photos;
 
@@ -102,12 +102,12 @@ public class PoiDetail implements Parcelable {
         this.highlights = highlights;
     }
 
-    public String getDescription() {
-        return description;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     public boolean getIs_book() {
@@ -142,7 +142,7 @@ public class PoiDetail implements Parcelable {
         dest.writeString(this.lat);
         dest.writeString(this.lon);
         dest.writeStringList(this.highlights);
-        dest.writeString(this.description);
+        dest.writeString(this.introduction);
         dest.writeString(this.is_book);
         dest.writeStringList(this.photos);
     }
@@ -160,7 +160,7 @@ public class PoiDetail implements Parcelable {
         this.lat = in.readString();
         this.lon = in.readString();
         this.highlights = in.createStringArrayList();
-        this.description = in.readString();
+        this.introduction = in.readString();
         this.is_book = in.readString();
         this.photos = in.createStringArrayList();
     }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.android.library.adapter.ExRvMultipleAdapter;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.DimenCons;
+import com.android.library.utils.MathUtil;
 import com.joy.app.R;
 import com.joy.app.activity.poi.CommentScoresWidget;
 import com.joy.app.bean.poi.CommentItem;
@@ -68,7 +69,7 @@ public class CommentRvAdapter extends ExRvMultipleAdapter {
 
             CommentItem data = datas.get(pos);
 
-            vh.acRatingBar.setRating(Float.parseFloat(data.getComment_level()));
+            vh.acRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
             vh.tvComment.setText(data.getComment());
             vh.tvCommentUserDate.setText(data.getComment_user() + " - " + data.getComment_date());
         }

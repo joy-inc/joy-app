@@ -15,8 +15,10 @@ import android.widget.TextView;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderContacts;
 import com.joy.app.bean.poi.OrderDetail;
@@ -33,6 +35,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     private String mTitle;
     private String mTotalPrice;
     private String mOrderItem;
+    private String mDateTime;
 
     private SimpleDraweeView mSdvPhoto;
     private TextView mTvTitle;
@@ -56,6 +59,9 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
         mTitle = TextUtil.filterNull(getIntent().getStringExtra("title"));
         mTotalPrice = TextUtil.filterNull(getIntent().getStringExtra("price"));
         mOrderItem = TextUtil.filterNull(getIntent().getStringExtra("item"));
+        mDateTime = TextUtil.filterNull(getIntent().getStringExtra("time"));
+
+        LogMgr.w("itemids====" + mOrderItem);
     }
 
     @Override
@@ -104,7 +110,6 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     protected boolean invalidateContent(OrderContacts data) {
 
         mContact = data;
-
         if (!data.isEmpty()) {
 
             mEtName.setText(data.getName());
@@ -168,12 +173,24 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     @Override
     protected ObjectRequest getObjectRequest() {
 
-        return ReqFactory.newPost(OrderHtpUtil.URL_POST_CONTACT_GET, OrderContacts.class, OrderHtpUtil.getContactUrl());
+        ObjectRequest<OrderContacts> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_CONTACT_GET, OrderContacts.class, OrderHtpUtil.getContactUrl());
+
+        if (BuildConfig.DEBUG) {
+
+            OrderContacts data = new OrderContacts();
+            data.setContact_id("11");
+            data.setName("plmkk");
+            data.setPhone("18611111111");
+            data.setEmail("plmkk@test.com");
+            obj.setData(data);
+        }
+
+        return obj;
     }
 
     private void createOrder(OrderContacts userinfo) {
 
-        ObjectRequest<OrderDetail> req = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_CREATE, OrderDetail.class, OrderHtpUtil.getCreateOrderUrl(mOrderItem, userinfo));
+        ObjectRequest<OrderDetail> req = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_CREATE, OrderDetail.class, OrderHtpUtil.getCreateOrderUrl(mOrderItem, mDateTime, userinfo));
         req.setResponseListener(new ObjectResponse<OrderDetail>() {
 
             @Override
@@ -195,6 +212,20 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     private void addContact(OrderContacts data) {
 
         ObjectRequest<OrderContacts> request = ReqFactory.newPost(OrderHtpUtil.URL_POST_CONTACT_ADD, OrderContacts.class, OrderHtpUtil.getContactAddUrl(data));
+        request.setResponseListener(new ObjectResponse<OrderContacts>() {
+
+            @Override
+            public void onSuccess(Object tag, OrderContacts orderContacts) {
+
+            }
+
+            @Override
+            public void onError(Object tag, String msg) {
+
+                super.onError(tag, msg);
+                showToast(msg);
+            }
+        });
         addRequestNoCache(request);
     }
 
@@ -204,7 +235,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
      */
     public static void startActivity(Activity act, View view, String... params) {
 
-        if (act == null || view == null || params == null || params.length < 4)
+        if (act == null || view == null || params == null || params.length < 5)
             return;
 
         Intent intent = new Intent(act, OrderBookProfileActivity.class);
@@ -212,6 +243,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
         intent.putExtra("title", params[1]);
         intent.putExtra("price", params[2]);
         intent.putExtra("item", params[3]);
+        intent.putExtra("time", params[4]);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 

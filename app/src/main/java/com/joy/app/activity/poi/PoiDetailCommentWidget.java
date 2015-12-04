@@ -11,6 +11,7 @@ import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
 import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.MathUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
@@ -114,7 +115,7 @@ public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnCli
 
                 if (data != null) {
 
-                    acRatingBar.setRating(Float.parseFloat(data.getComment_level()));
+                    acRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
                     tvComment.setText(data.getComment());
                     tvCommentUserDate.setText(data.getComment_user() + " - " + data.getComment_date());
                 }
