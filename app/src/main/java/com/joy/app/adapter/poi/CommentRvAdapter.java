@@ -1,7 +1,6 @@
 package com.joy.app.adapter.poi;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -30,12 +29,12 @@ public class CommentRvAdapter extends ExRvMultipleAdapter {
     private CommentScores mScore;
     private Activity mActivity;
 
-    public CommentRvAdapter(Context context, Activity activity) {
+    public CommentRvAdapter(Activity act) {
 
-        super(context);
+        super(act);
         mHeaderCount = 1;
         mBottomCount = 1;
-        mActivity = activity;
+        mActivity = act;
     }
 
     public void setScoreData(CommentScores data) {

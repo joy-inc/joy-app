@@ -31,7 +31,7 @@ import com.joy.app.utils.http.ReqFactory;
 import java.util.ArrayList;
 
 /**
- * 目的地详折扣情页(下订单的唯一入口)
+ * 目的地折扣详情页(下订单的唯一入口)
  * <p/>
  * Created by xiaoyu.chen on 15/11/11.
  */

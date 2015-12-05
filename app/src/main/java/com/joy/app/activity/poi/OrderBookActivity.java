@@ -303,14 +303,14 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         intent.putExtra("photoUrl", params[1]);
         intent.putExtra("title", params[2]);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
-            act.startActivity(intent, options.toBundle());
-        } else {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
+//            act.startActivity(intent, options.toBundle());
+//        } else {
 
             act.startActivity(intent);
-        }
+//        }
     }
 
 }

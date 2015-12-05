@@ -26,8 +26,6 @@ public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
 
     private String mId;
 
-    private CommentRvAdapter mAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,30 +42,21 @@ public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
     @Override
     protected void initTitleView() {
 
-        setTitleText(R.string.comment_all);
-//        setTitle(R.string.comment_all);
         addTitleLeftBackView();
+        addTitleMiddleView(R.string.comment_all);
     }
 
     @Override
     protected void initContentView() {
 
-        mAdapter = new CommentRvAdapter(this, this);
-        setAdapter(mAdapter);
+        setAdapter(new CommentRvAdapter(this));
         getRecyclerView().setBackgroundResource(R.color.white);
-    }
-
-    @Override
-    protected boolean invalidateContent(CommentAll commentAll) {
-
-        mAdapter.setScoreData(commentAll.getScores());
-
-        return super.invalidateContent(commentAll);
     }
 
     @Override
     protected List<CommentItem> getListInvalidateContent(CommentAll commentAll) {
 
+        ((CommentRvAdapter) getAdapter()).setScoreData(commentAll.getScores());
         return commentAll.getComments();
     }
 
@@ -92,7 +81,7 @@ public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
 
             ArrayList<CommentItem> list = new ArrayList();
 
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < 20; i++) {
                 CommentItem item = new CommentItem();
                 item.setComment_id(i + "");
                 item.setComment("我是第 " + i + " 个来点评的诶！～");

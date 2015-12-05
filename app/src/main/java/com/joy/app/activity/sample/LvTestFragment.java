@@ -29,13 +29,12 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
+        setLoadMoreEnable(false);
         executeRefreshOnly();
     }
 
     @Override
     protected void initContentView() {
-
-        setLoadMoreEnable(false);
 
         CityLvAdapter adapter = new CityLvAdapter();
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<HotCityItem>() {

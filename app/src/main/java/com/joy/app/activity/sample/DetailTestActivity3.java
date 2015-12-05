@@ -116,7 +116,6 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
         mTintManager.setStatusBarTintColor(R.color.black_trans54);
 
         addTitleLeftBackView();
-        getToolbarLp().topMargin = STATUS_BAR_HEIGHT;
         setTitleBgColorResId(R.color.black_trans54);
     }
 

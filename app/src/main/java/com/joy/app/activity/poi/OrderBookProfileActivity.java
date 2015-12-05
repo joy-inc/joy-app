@@ -62,6 +62,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     protected void initTitleView() {
 
         addTitleLeftBackView();
+        addTitleMiddleView(R.string.booking);
     }
 
     @Override
@@ -213,13 +214,13 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
         intent.putExtra("price", params[2]);
         intent.putExtra("item", params[3]);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
-            act.startActivity(intent, options.toBundle());
-        } else {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
+//            act.startActivity(intent, options.toBundle());
+//        } else {
 
             act.startActivity(intent);
-        }
+//        }
     }
 }
