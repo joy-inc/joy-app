@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 
     <!-- 小米 -->
     <permission
@@ -117,6 +118,9 @@
         <service
             android:name="com.xiaomi.mipush.sdk.MessageHandleService"
             android:enabled="true" />
+        <!--高德地图-->
+        <service android:name="com.amap.api.location.APSService"/>
+
         <!-- 注：此service必须在2.2.5版本以后（包括2.2.5版本）加入 -->
         <receiver
             android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
@@ -154,8 +158,8 @@
             </intent-filter>
         </receiver>
         <!-- 小米 -->
-
-
+        <!--高德-->
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="c19de3bd5c51a7f01937e3a8a6e95182"/>      
         <!-- 友盟 -->
         <meta-data
             android:name="UMENG_APPKEY"

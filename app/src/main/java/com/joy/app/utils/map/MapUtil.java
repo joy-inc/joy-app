@@ -12,7 +12,9 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.android.library.utils.LogMgr;
+import com.joy.app.R;
 import com.joy.app.bean.map.MapPoiDetail;
+import com.joy.app.bean.plan.PlanItem;
 import com.joy.app.bean.sample.PoiDetail;
 
 import org.osmdroid.util.GeoPoint;
@@ -141,6 +143,21 @@ public class MapUtil {
 
         latListSort.clear();
         lngListSort.clear();
+    }
+
+    public static synchronized ArrayList<MapPoiDetail> getMapContent(List<PlanItem> list ){
+        ArrayList<MapPoiDetail> content = new ArrayList<>();
+        for (PlanItem item:list){
+            MapPoiDetail detail = new MapPoiDetail();
+            detail.setIcon_nor(R.drawable.ic_map_poi);
+            detail.setIcon_press(R.drawable.ic_map_poi_pressed);
+            detail.setmCnName(item.getCn_name());
+            detail.setmEnName(item.getEn_name());
+            detail.setLatitude(Double.parseDouble(item.getLat()));
+            detail.setLongitude(Double.parseDouble(item.getLon()));
+            content.add(detail);
+        }
+        return content;
     }
 
     public static void initAccuracyLocation(AMapLocationClient locationClient, AMapLocationListener listener) {
