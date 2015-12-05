@@ -9,19 +9,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.library.activity.BaseUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.user.UserLoginActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
-import com.android.library.activity.BaseUiActivity;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.utils.http.sample.UserHttpUtil;
 import com.umeng.update.UmengUpdateAgent;
@@ -74,8 +73,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     protected void initTitleView() {
 
         addTitleLeftBackView();
-        setTitle(R.string.setting_title);
-
+        addTitleMiddleView(R.string.setting_title);
     }
 
     @Override

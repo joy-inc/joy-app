@@ -49,7 +49,6 @@
             android:name=".activity.user.UserLoginActivity"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/theme_app.translucent.toolbar.overlay"
-            android:label=""
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.common.DayPickerActivity"
@@ -59,11 +58,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sample.LvLoadMoreTestActivity"
-            android:label="Lv LoadMore"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sample.RvLoadMoreTestActivity"
-            android:label="Rv LoadMore"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.sample.DetailTestActivity"

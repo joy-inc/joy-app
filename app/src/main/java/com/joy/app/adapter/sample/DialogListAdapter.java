@@ -26,7 +26,7 @@ public class DialogListAdapter extends ExAdapter {
         @Override
         public int getConvertViewRid() {
 
-            return R.layout.t_item_dialog;
+            return R.layout.t_dialog_item;
         }
 
         @Override

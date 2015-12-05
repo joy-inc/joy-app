@@ -40,6 +40,12 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
     }
 
     @Override
+    protected void initTitleView() {
+
+        setTitle("rv loadmore sample");
+    }
+
+    @Override
     protected void initContentView() {
 
         setAdapter(new RvLoadMoreAdapter());
@@ -48,10 +54,10 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                DialogPlus dialog = DialogPlus.newDialog(RvLoadMoreTestActivity.this)
+                DialogPlus.newDialog(RvLoadMoreTestActivity.this)
                         .setContentHolder(new ListHolder())
-                        .setHeader(R.layout.t_tv_dialog)
-                        .setFooter(R.layout.t_btn_dialog)
+                        .setHeader(R.layout.t_dialog_header)
+                        .setFooter(R.layout.t_dialog_footer)
                         .setCancelable(true)
                         .setAdapter(new DialogListAdapter())
                         .setOnItemClickListener(new OnItemClickListener() {
@@ -61,9 +67,7 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
 
                                 showToast("~~" + position);
                             }
-                        })
-                        .create();
-                dialog.show();
+                        }).create().show();
             }
         });
     }

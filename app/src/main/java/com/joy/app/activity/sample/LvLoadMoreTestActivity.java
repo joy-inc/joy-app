@@ -39,6 +39,8 @@ public class LvLoadMoreTestActivity extends BaseHttpLvActivity<List<Special>> {
     @Override
     protected void initTitleView() {
 
+        setTitle("lv loadmore sample");
+
         View v = inflateLayout(R.layout.view_avatar);
         SimpleDraweeView sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
         sdvAvatar.setImageURI(Uri.parse("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207"));
