@@ -81,7 +81,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
         }else{
             removePayButton();
         }
-        switch (orderDetail.getStatus()){
+        switch (orderDetail.getOrder_status()){
             case 0://待支付
                 orderDetail.setOrderInfor(getString(R.string.order_detail_create_infor));
                 orderDetail.setOrderTitle(getString(R.string.order_detail_create_title));

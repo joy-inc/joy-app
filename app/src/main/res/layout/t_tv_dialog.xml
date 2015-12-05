@@ -10,6 +10,6 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:text="可选项目"
-        android:textColor="@color/black_trans54"
-        android:textSize="20dp" />
+        android:textColor="@color/black_trans60"
+        android:textSize="16dp" />
 </RelativeLayout>
