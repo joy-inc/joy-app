@@ -9,7 +9,7 @@ import java.util.Map;
  * @author litong  <br>
  * @Description 我的行程规划    <br>
  */
-public class PlanHttpUtil extends BaseHtpUtil{
+public class PlanHtpUtil extends BaseHtpUtil{
 
     /**
      *添加旅行计划

@@ -13,7 +13,7 @@ import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
-import com.joy.app.utils.http.PlanHttpUtil;
+import com.joy.app.utils.http.PlanHtpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = PlanHttpUtil.getUserPlanFolderRequest(PlanFolder.class,pageLimit, pageIndex);
+        ObjectRequest obj = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class,pageLimit, pageIndex);
 
         if (BuildConfig.DEBUG) {
             List<PlanFolder> data = new ArrayList<>();

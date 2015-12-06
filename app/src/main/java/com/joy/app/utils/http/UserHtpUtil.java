@@ -1,4 +1,4 @@
-package com.joy.app.utils.http.sample;
+package com.joy.app.utils.http;
 
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;
@@ -12,7 +12,7 @@ import java.util.Map;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-12-03
  */
-public class UserHttpUtil extends BaseHtpUtil {
+public class UserHtpUtil extends BaseHtpUtil {
 
     /**
      * 获取验证码

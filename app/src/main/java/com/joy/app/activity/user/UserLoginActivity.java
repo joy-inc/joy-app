@@ -1,38 +1,28 @@
 package com.joy.app.activity.user;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.widget.AppCompatEditText;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
-import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
-import com.android.library.utils.ViewUtil;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.bean.User;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.ReqFactory;
-import com.joy.app.utils.http.sample.UserHttpUtil;
+import com.joy.app.utils.http.UserHtpUtil;
 
 import java.util.Date;
 
@@ -203,7 +193,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
             ToastUtil.showToast(R.string.login_code_empty);
             return;
         }
-        ObjectRequest<User> req = ReqFactory.newPost(UserHttpUtil.URL_USER_LOGIN, User.class, UserHttpUtil.userLogin(mSubmitPhone, code));
+        ObjectRequest<User> req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN, User.class, UserHtpUtil.userLogin(mSubmitPhone, code));
         User u = new User();
         u.setUser_id("ssss");
         u.setMobile("18888888888");
@@ -256,7 +246,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
         }
         mTvButton.setEnabled(false);
         //// TODO: 15/12/3 是否需要启动进度条
-        ObjectRequest req = ReqFactory.newPost(UserHttpUtil.URL_USER_GETCODE, String.class, UserHttpUtil.getCode(mSubmitPhone));
+        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mSubmitPhone));
         req.setData("");
         req.setResponseListener(new ObjectResponse() {
 

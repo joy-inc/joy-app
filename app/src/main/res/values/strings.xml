@@ -5,7 +5,7 @@
 
     <string name="route">线路</string>
     <string name="destination">目的地</string>
-    <string name="travel_plan">旅行计划</string>
+    <string name="travel_plan">旅行规划</string>
     <string name="order">订单</string>
     <string name="booking">预订</string>
 
@@ -127,4 +127,12 @@
     <string name="picker_title">出发日期</string>
     <!--日历-->
 
+    <!-- city -->
+    <string name="recommend_route">推荐路线</string>
+    <string-array name="city_fun">
+        <item>怎么玩</item>
+        <item>住在哪</item>
+        <item>吃什么</item>
+        <item>值得买</item>
+    </string-array>
 </resources>

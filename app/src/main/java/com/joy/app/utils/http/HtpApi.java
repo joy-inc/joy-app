@@ -42,4 +42,8 @@ public interface HtpApi {
     String URL_USER_GETCODE = JOY_URL_BASE + "account/send_signup_mobile_code";//获取验证码
     String URL_USER_LOGIN = JOY_URL_BASE + "/account/compatible_mobile_login";//获取登录
     String URL_USER_LOGIN_OUT = JOY_URL_BASE + "/account/logout";//登出
+
+    // city
+    String URL_POST_CITY = JOY_URL_BASE + "/place/index_page";
+    String URL_POST_CITY_FUN = JOY_URL_BASE + "/place/cityfun";
 }

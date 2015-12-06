@@ -9,7 +9,7 @@ import java.util.Map;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-26
  */
-public class SettingHttpUtil extends BaseHtpUtil {
+public class SettingHtpUtil extends BaseHtpUtil {
 
     /**
      * 获取假期信息

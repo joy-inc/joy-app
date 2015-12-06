@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/CardView.Light"
+    android:layout_width="match_parent"
+    android:layout_height="215dp"
+    android:layout_marginBottom="15dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:tint="@color/black_trans26" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtvDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:scaleX="0.6"
+            android:scaleY="1.2"
+            android:text="14"
+            android:textColor="@color/color_accent"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <com.android.library.widget.JImageView
+            style="@style/Line.Dark.Vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="2"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="新西兰米尔福德峡湾一日游的很多行程之一"
+            android:textColor="@color/black_trans54"
+            android:textSize="15dp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

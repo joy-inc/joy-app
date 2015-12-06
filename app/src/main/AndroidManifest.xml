@@ -71,6 +71,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent.toolbar.overlay" />
         <activity
+            android:name=".activity.city.CityActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+        <activity
+            android:name=".activity.city.CityFunActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.sample.DetailTestActivity3"
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent.toolbar.overlay" />

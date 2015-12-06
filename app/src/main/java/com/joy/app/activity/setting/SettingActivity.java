@@ -22,7 +22,7 @@ import com.joy.app.R;
 import com.joy.app.activity.user.UserLoginActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.ReqFactory;
-import com.joy.app.utils.http.sample.UserHttpUtil;
+import com.joy.app.utils.http.UserHtpUtil;
 import com.umeng.update.UmengUpdateAgent;
 
 import butterknife.Bind;
@@ -217,7 +217,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
 
         //网络请求,发广播
         //// TODO: 15/12/3 是否需要启动进度条
-        ObjectRequest req = ReqFactory.newPost(UserHttpUtil.URL_USER_LOGIN_OUT, String.class, UserHttpUtil.userLoginOut(JoyApplication.getUserToken()));
+        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN_OUT, String.class, UserHtpUtil.userLoginOut(JoyApplication.getUserToken()));
         req.setData("");
         req.setResponseListener(new ObjectResponse() {
 

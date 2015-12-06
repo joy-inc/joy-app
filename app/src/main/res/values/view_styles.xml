@@ -30,11 +30,11 @@
     </style>
 
     <style name="Line.Light">
-        <item name="android:background">@color/white_trans12</item>
+        <item name="android:background">@color/white_trans26</item>
     </style>
 
     <style name="Line.Dark">
-        <item name="android:background">@color/black_trans12</item>
+        <item name="android:background">@color/black_trans26</item>
     </style>
 
     <style name="Line.Light.Horizontal">

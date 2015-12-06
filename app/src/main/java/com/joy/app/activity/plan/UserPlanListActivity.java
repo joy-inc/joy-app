@@ -14,7 +14,7 @@ import com.joy.app.JoyApplication;
 import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.bean.plan.PlanItem;
-import com.joy.app.utils.http.PlanHttpUtil;
+import com.joy.app.utils.http.PlanHtpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +46,8 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
 
     @Override
     protected void initTitleView() {
-        addTitleLeftBackView();
-        addTitleMiddleView(((JoyApplication)getApplication()).getUserNameStr()+"的"+ TextUtil.filterEmpty(getIntent().getStringExtra("mFolderName"),"行程规划"));
-//        addTitleRightView();
+
+        addTitleMiddleView((JoyApplication.getUserNameStr() + "的" + TextUtil.filterEmpty(getIntent().getStringExtra("mFolderName"), "行程规划")));
         addTitleLeftBackView();
     }
 
@@ -69,7 +68,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
     @Override
     protected ObjectRequest<List<PlanItem>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = PlanHttpUtil.getUserPlanListRequest(mFolderID, PlanFolder.class);
+        ObjectRequest obj = PlanHtpUtil.getUserPlanListRequest(mFolderID, PlanFolder.class);
         if (BuildConfig.DEBUG) {
             ArrayList<PlanItem>list = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
