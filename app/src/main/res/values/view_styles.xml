@@ -119,4 +119,21 @@
         <item name="android:minHeight">5dp</item>
     </style>
 
+    <!-- 日期选择的星期几样式-->
+    <style name="day_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black_trans87</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="share_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:gravity">center_vertical</item>
+
+    </style>
 </resources>
