@@ -62,7 +62,7 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
+                    callbackOnItemViewClickListener(getLayoutPosition(), tvStatus);
                 }
             });
         }

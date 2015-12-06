@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,8 +26,9 @@ import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
-import com.android.library.view.dialogplus.OnItemClickListener;
+import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
@@ -118,31 +120,16 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             public void onClickBookItem(int position, final List<LevelOptions> options) {
 
                 mSelectPosition = position;
+                startSubjectPickerDialog(options);
 
-                if (CollectionUtil.isNotEmpty(options)) {
+            }
+        });
+        mCountWidget.setOnBookItemClickListener(new BookCountWidget.OnBookItemClickListener() {
 
-                    // 默认第一个被选中
-                    final DialogSubjectAdapter adapter = new DialogSubjectAdapter(options);
-                    adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
+            @Override
+            public void onClickBookItem() {
 
-                        @Override
-                        public void onItemViewClick(int position, View clickView, LevelOptions options) {
-
-                            adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
-                            adapter.notifyDataSetChanged();
-
-                        }
-                    });
-
-                    DialogPlus dialog = DialogPlus.newDialog(OrderBookActivity.this)
-                            .setContentHolder(new ListHolder())
-                            .setHeader(R.layout.t_tv_dialog)
-                            .setFooter(R.layout.t_btn_dialog)
-                            .setCancelable(true)
-                            .setAdapter(adapter)
-                            .create();
-                    dialog.show();
-                }
+                refreshTotalPrice();
             }
         });
     }
@@ -199,7 +186,9 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
             mDateWidget.invalidate(list1);
             mSubjectWidget.invalidate(list2);
+            mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.invalidate(data3);
+
         }
 
         return CollectionUtil.isNotEmpty(product.getLevels());
@@ -216,29 +205,70 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         }
     }
 
-    private void checkAndStartProfileActivity(View v) {
+    private void startSubjectPickerDialog(final List<LevelOptions> options) {
 
-        if (mDateWidget.isAllSelect()) {
-            mOrderItem = createOrderItemStr();
-            OrderBookProfileActivity.startActivity(OrderBookActivity.this, v, mPhotoUrl, mTitle, mTvPrice.getText().toString(), mOrderItem, mDateWidget.getmDateTime());
-        } else {
-            showToast(R.string.toast_input_date);
+        if (CollectionUtil.isNotEmpty(options)) {
+
+            final DialogSubjectAdapter adapter = new DialogSubjectAdapter();
+            options.get(0).setLocalCheck(false);
+            adapter.setData(options);
+            adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
+
+                @Override
+                public void onItemViewClick(int position, View clickView, LevelOptions option) {
+
+                    options.get(0).setLocalCheck(adapter.getItem(0).isLocalCheck());
+                    adapter.setData(options);
+                    adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
+                    adapter.notifyDataSetChanged();
+
+                }
+            });
+
+            DialogPlus dialog = DialogPlus.newDialog(OrderBookActivity.this)
+                    .setContentHolder(new ListHolder())
+                    .setHeader(R.layout.t_tv_dialog)
+                    .setFooter(R.layout.t_btn_dialog)
+                    .setCancelable(true)
+                    .setAdapter(adapter)
+                    .create();
+            dialog.getFooterView().setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    if (CollectionUtil.isNotEmpty(adapter.getData())) {
+                        for (LevelOptions data : adapter.getData()) {
+                            LogMgr.w("~~~~" + data.isLocalCheck());
+                        }
+
+                        mCountWidget.setDateSubjectIds(createDateSubjectStr());
+                        mCountWidget.resetUnitPrice();
+                    }
+                }
+            });
+            dialog.show();
         }
     }
 
-    private String createOrderItemStr() {
+    private void checkAndStartProfileActivity(View v) {
 
-        List<String> list = new ArrayList<>();
+        do {
 
-        for (LevelOptions data : mCountWidget.getSelectId()) {
+            if (!mDateWidget.isAllSelect()) {
+                showToast(R.string.toast_input_date);
+                break;
+            }
 
-            list.add(data.getOption_id() + "-" + data.getLocalCount());
-        }
+            if (CollectionUtil.isEmpty(mCountWidget.getSelectId())) {
+                showToast("请选择产品数量");
+                break;
+            }
 
-        if (CollectionUtil.isEmpty(list))
-            return TextUtil.TEXT_EMPTY;
+            mOrderItem = mCountWidget.createOrderItemStr();
+            OrderBookProfileActivity.startActivity(OrderBookActivity.this, v, mPhotoUrl, mTitle, mTvPrice.getText().toString(), mOrderItem, mDateWidget.getmDateTime());
 
-        return list.toString().trim().replace("[", "").replace("]", "");
+        } while (false);
     }
 
     private String createDateSubjectStr() {
@@ -255,7 +285,15 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void refreshTotalPrice() {
 
+        Float totalPrice = 0f;
+        for (int i = 0; i < CollectionUtil.size(mCountWidget.getSelectId()); i++) {
 
+            LevelOptions data = mCountWidget.getSelectId().get(i);
+            Float itemTotalPrice = MathUtil.parseFloat(data.getLocalPrice(), 0) * MathUtil.parseInt(data.getLocalCount(), 0);
+            totalPrice = totalPrice + itemTotalPrice;
+        }
+
+        mTvPrice.setText(String.valueOf(totalPrice));
     }
 
     @Override
@@ -265,25 +303,18 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         if (resultCode != RESULT_OK)
             return;
 
-
-        // TODO: 15/11/26 选择日期、项目后 重置金额
-        // 假装么接收日期选择参数
-
         int position = mSelectPosition;
-        LevelOptions options = new LevelOptions();
-        options.setOption_id("11");
-        options.setContent("成人");
-        options.setDescribe("8-13岁");
 
         if (requestCode == REQ_CODE_DATE) {
 
             long time = data.getLongExtra("beginDate", 0);
+            LevelOptions options = mDateWidget.getDataItem(position);
             options.setContent(TimeUtil.getSimpleTypeChineseText(time));
             mDateWidget.resetSelectValue(position, options);
             mDateWidget.setmDateTime(String.valueOf(time));
-        } else if (requestCode == 1) {
-            options.setOption_id("21");
-            mSubjectWidget.resetSelectValue(position, options);
+            mCountWidget.setDateSubjectIds(createDateSubjectStr());
+            mCountWidget.resetUnitPrice();
+            refreshTotalPrice();
         }
     }
 
@@ -293,6 +324,47 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_OPTIONS, Product.class, OrderHtpUtil.getProductOptionListUrl(mId));
 
+        if (BuildConfig.DEBUG) {
+
+            Product data = new Product();
+            ArrayList listdata = new ArrayList();
+            ProductLevels levels = null;
+            for (int i = 0; i < 3; i++) {
+                levels = new ProductLevels();
+
+                levels.setLevel_id((i + 1) + "");
+
+                if (i == 0) {
+                    levels.setType(1 + "");
+                    levels.setTitle("出发日期");
+                } else if (i == 1) {
+                    levels.setType(2 + "");
+                    levels.setTitle("可选项目");
+                } else if (i == 2) {
+                    levels.setType(3 + "");
+                    levels.setTitle("产品数量选择");
+                }
+
+                ArrayList list = new ArrayList();
+
+                for (int j = 0; j < 2; j++) {
+                    LevelOptions options = new LevelOptions();
+                    options.setOption_id(i + "" + j);
+                    options.setContent(i + "" + j + " 成人");
+                    options.setDescribe("13-99岁 " + j);
+
+                    list.add(options);
+                }
+
+                levels.setOptions(list);
+                listdata.add(levels);
+            }
+
+            data.setLevels(listdata);
+
+            obj.setData(data);
+        }
+
         return obj;
     }
 
@@ -301,6 +373,28 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         showToast(msg);
         LogMgr.e("xxx", "~~" + msg);
+    }
+
+
+    private void showAlertDialog() {
+
+//        JDialog dialog = new JDialog(this);
+//        dialog.setTitle(R.string.alert_drop_content);
+//        dialog.create();
+//        dialog.show();
+
+        showToast(R.string.alert_drop_content);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            showAlertDialog();
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 
     /**
@@ -329,11 +423,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private class DialogSubjectAdapter extends ExAdapter<LevelOptions> {
 
-        public DialogSubjectAdapter(List<LevelOptions> data) {
-
-            super(data);
-        }
-
         @Override
         protected ExViewHolder getViewHolder(int position) {
 
@@ -356,6 +445,14 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
                 tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
                 acCheckBox = (AppCompatCheckBox) convertView.findViewById(R.id.acCheckBox);
+                convertView.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        callbackOnItemViewClickListener(mPosition, v);
+                    }
+                });
             }
 
             @Override
