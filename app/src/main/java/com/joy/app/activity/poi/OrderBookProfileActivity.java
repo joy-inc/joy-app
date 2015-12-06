@@ -191,11 +191,38 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     private void createOrder(OrderContacts userinfo) {
 
         ObjectRequest<OrderDetail> req = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_CREATE, OrderDetail.class, OrderHtpUtil.getCreateOrderUrl(mOrderItem, mDateTime, userinfo));
+
+        if (BuildConfig.DEBUG) {
+
+            OrderDetail data = new OrderDetail();
+            data.setOrder_id("201511120001");
+            data.setTravel_date("2015年11月12日");
+            data.setProduct_title("米尔福德峡湾一日游（观光游轮+自助午餐+皮划艇）");
+            data.setSelected_item("7:30 皇后镇出发 中文导游");
+            data.setCount(2);
+            data.setContact_name("plmkk");
+            data.setContact_phone("18611111111");
+            data.setContact_email("plmkk@test.com");
+            data.setTotal_price(1097);
+            data.setOrder_status(0);
+            data.setProduct_photo("http://pic.qyer.com/album/user/1363/58/QEpTQR8PZEg/index/680x");
+
+            req.setData(data);
+        }
+
         req.setResponseListener(new ObjectResponse<OrderDetail>() {
+
+            @Override
+            public void onPre() {
+
+                super.onPre();
+                showLoading();
+            }
 
             @Override
             public void onSuccess(Object tag, OrderDetail data) {
 
+                hideLoading();
                 showToast("创建订单成功");
                 OrderPayActivity.startActivity(OrderBookProfileActivity.this, data.getOrder_id(), data);
             }
@@ -203,6 +230,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             @Override
             public void onError(Object tag, String msg) {
 
+                hideLoading();
                 super.onError(tag, msg);
                 showToast(msg);
             }
