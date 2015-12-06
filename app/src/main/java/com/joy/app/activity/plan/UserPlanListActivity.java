@@ -32,6 +32,8 @@ import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.bean.plan.PlanItem;
 import com.joy.app.utils.http.PlanHttpUtil;
 import com.joy.app.utils.map.MapUtil;
+import com.joy.app.utils.plan.FolderRequestListener;
+import com.joy.app.utils.plan.PlanUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,7 @@ import java.util.Objects;
  * @author litong  <br>
  * @Description 用户行程规划    <br>
  */
-public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
+public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> implements FolderRequestListener {
     private String mFolderID;
     public static void startActivityById(Activity act ,String FolderID,String mFolderName){
         Intent intent = new Intent(act,UserPlanListActivity.class);
@@ -69,7 +71,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
         addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                planUtil.showDeleteDialog(mFolderID);
             }
         });
         addTitleRightView(R.drawable.ic_plan_map, new View.OnClickListener() {
@@ -80,6 +82,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
             }
         });
     }
+    PlanUtil planUtil ;
 
     @Override
     protected void initContentView() {
@@ -93,44 +96,18 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> {
             }
         });
         setAdapter(adapter);
-    }
-    DialogPlus dialog;
-    public void showDialog(){
-        dialog = DialogPlus.newDialog(this)
-                .setContentHolder(new ViewHolder(R.layout.dialog_plan_del))
-                .setCancelable(true)
-                .setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(DialogPlus dialog, View view) {
-                       if (view.getId() == R.id.jtv_cancel){
-                           dialog.dismiss();
-                       }else if(view.getId() == R.id.jtv_del){
-                           delFolder();
-                       }
-                    }
-                })
-                .create();
-        dialog.show();
+        planUtil = new PlanUtil(this,this);
     }
 
-    private void delFolder(){
-        ObjectRequest<Object> req = PlanHttpUtil.getUserPlanFolderDeleteRequest(mFolderID, Object.class);
-        req.setResponseListener(new ObjectResponse<Object>() {
+    @Override
+    public void onSuccess(dialog_category category, Object obj) {
+        showToast("删除成功");
+        finish();
+    }
 
-            @Override
-            public void onSuccess(Object tag, Object object) {
-               showToast("删除成功");
+    @Override
+    public void onfaild(dialog_category category, String msg) {
 
-                finish();
-            }
-
-            @Override
-            public void onError(Object tag, String msg) {
-                super.onError(tag, msg);
-                showToast(msg);
-            }
-        });
-        addRequestNoCache(req);
     }
 
     @Override
