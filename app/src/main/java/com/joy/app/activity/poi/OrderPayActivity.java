@@ -6,7 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.library.activity.BaseHttpUiActivity;
@@ -59,8 +62,14 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     @Bind(R.id.jtv_order_total)
     TextView jtvOrderTotal;
 
+    @Bind(R.id.rlWeChatDiv)
+    RelativeLayout rlWeChatDiv;
+
     @Bind(R.id.accbWechat)
     AppCompatCheckBox accbWechat;
+
+    @Bind(R.id.rlAlipayDiv)
+    RelativeLayout rlAlipayDiv;
 
     @Bind(R.id.accbAlipay)
     AppCompatCheckBox accbAlipay;
@@ -110,7 +119,51 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
             @Override
             public void onClick(View v) {
-                // todo ping++ pay
+
+                if (accbWechat.isChecked()) {
+                    //todo ping++ wechat pay
+                    showToast("wechat");
+                } else if (accbAlipay.isChecked()) {
+                    //todo ping++ alipay pay
+                    showToast("alipay");
+                } else {
+                    showToast("请选择支付方式");
+                }
+            }
+        });
+        rlWeChatDiv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                accbWechat.setChecked(!accbWechat.isChecked());
+            }
+        });
+        rlAlipayDiv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                accbAlipay.setChecked(!accbAlipay.isChecked());
+            }
+        });
+        accbWechat.setChecked(true);
+        accbWechat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked)
+                    accbAlipay.setChecked(false);
+            }
+        });
+        accbAlipay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked)
+                    accbWechat.setChecked(false);
             }
         });
     }

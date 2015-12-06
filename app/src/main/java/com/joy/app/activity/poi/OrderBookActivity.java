@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
+import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
@@ -371,6 +373,28 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         showToast(msg);
         LogMgr.e("xxx", "~~" + msg);
+    }
+
+
+    private void showAlertDialog() {
+
+//        JDialog dialog = new JDialog(this);
+//        dialog.setTitle(R.string.alert_drop_content);
+//        dialog.create();
+//        dialog.show();
+
+        showToast(R.string.alert_drop_content);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            showAlertDialog();
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 
     /**
