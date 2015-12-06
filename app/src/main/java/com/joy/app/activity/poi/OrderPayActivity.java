@@ -76,7 +76,6 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_order_pay);
-        ButterKnife.bind(this);
 
         if (mOrderDetail == null)
             executeRefreshOnly();
@@ -105,6 +104,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     protected void initContentView() {
 
         super.initContentView();
+        ButterKnife.bind(this);
         acbNext.setText(R.string.pay);
         acbNext.setOnClickListener(new View.OnClickListener() {
 

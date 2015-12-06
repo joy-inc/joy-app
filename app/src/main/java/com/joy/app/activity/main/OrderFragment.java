@@ -8,12 +8,14 @@ import android.view.View;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.joy.app.BuildConfig;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,6 +62,21 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     protected ObjectRequest<List<MainOrder>> getObjectRequest(int pageIndex, int pageLimit) {
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl(pageIndex, pageLimit, "0"));
+
+        if (BuildConfig.DEBUG) {
+            List<MainOrder> list = new ArrayList<MainOrder>();
+            for (int i = 0; i < 20; i++) {
+                MainOrder data = new MainOrder();
+                data.setOrder_id(i + "");
+                data.setProduct_title("【元旦假期】杭州直飞东京/大阪 " + i + " 天往返含税机票");
+                data.setProduct_type("杭州-东阪/阪东往返");
+                data.setStatus("0");
+                data.setTotal_price("¥188.00");
+                data.setCount(i + " 成人");
+                list.add(data);
+            }
+            obj.setData(list);
+        }
 
         return obj;
     }

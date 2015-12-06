@@ -9,11 +9,13 @@ import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
 import com.joy.app.bean.poi.LevelOptions;
+import com.joy.app.bean.poi.ProductItems;
 import com.joy.app.bean.poi.ProductLevels;
 import com.joy.app.view.LinearListView;
 
@@ -28,6 +30,7 @@ public class BookCountWidget extends ExLayoutWidget {
     private TextView tvTitle;
     private LinearListView mLinearLv;
     private LevelAdapter mAdapter;
+    private String mDateSubjectIds = TextUtil.TEXT_EMPTY;
 
     public BookCountWidget(Activity activity) {
 
@@ -65,16 +68,19 @@ public class BookCountWidget extends ExLayoutWidget {
                         if (clickView.getId() == R.id.acbMinus) {
 
                             callbackOnChildMinusClick(position, count);
+                            mOnBookItemClickListener.onClickBookItem();
 
                         } else if (clickView.getId() == R.id.acbPlus) {
 
                             callbackOnChildPlusClick(position, count);
+                            mOnBookItemClickListener.onClickBookItem();
                         }
                     }
                 }
             });
 
             mLinearLv.setAdapter(mAdapter);
+            resetUnitPrice();
         }
     }
 
@@ -84,6 +90,7 @@ public class BookCountWidget extends ExLayoutWidget {
             count = count - 1;
             mAdapter.getItem(position).setLocalCount(count + "");
             ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvCount)).setText(count + "");
+            refreshUnitPrice(position, getUnitPrice(mAdapter.getItem(position).getOption_id()));
         }
     }
 
@@ -95,6 +102,7 @@ public class BookCountWidget extends ExLayoutWidget {
             count = count + 1;
             mAdapter.getItem(position).setLocalCount(count + "");
             ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvCount)).setText(count + "");
+            refreshUnitPrice(position, getUnitPrice(mAdapter.getItem(position).getOption_id()));
         }
     }
 
@@ -113,6 +121,80 @@ public class BookCountWidget extends ExLayoutWidget {
         }
 
         return list;
+    }
+
+    protected String createOrderItemStr() {
+
+        if (CollectionUtil.isNotEmpty(getSelectId())) {
+
+            List<String> list = new ArrayList<>();
+
+            for (LevelOptions data : getSelectId()) {
+
+                ProductItems item = getItemObject("_" + data.getOption_id());
+                if (item != null)
+                    list.add(item.getItem_id() + "-" + data.getLocalCount());
+            }
+
+            if (CollectionUtil.isEmpty(list))
+                return TextUtil.TEXT_EMPTY;
+
+            return list.toString().trim().replace("[", "").replace("]", "");
+
+        } else {
+            return TextUtil.TEXT_EMPTY;
+        }
+    }
+
+    private ProductItems getItemObject(String key) {
+
+        key = mDateSubjectIds + key;
+
+        LogMgr.w("item Key~~:" + key);
+
+        //todo get the item_id by key from json:items{}
+        ProductItems data = new ProductItems();
+        data.setItem_id("1111");
+        data.setPrice("213.2");
+
+        return data;
+    }
+
+    // 重新选择日期、项目时，重置每个产品的单价
+    protected void resetUnitPrice() {
+
+        if (CollectionUtil.isNotEmpty(mAdapter.getData())) {
+
+            for (int i = 0; i < mAdapter.getCount(); i++) {
+
+                ProductItems item = getItemObject("_" + mAdapter.getItem(i).getOption_id());
+
+                if (item != null)
+                    refreshUnitPrice(i, item.getPrice());
+                else
+                    refreshUnitPrice(i, "0");// 找不到匹配项，金额置0
+            }
+        }
+    }
+
+    private void refreshUnitPrice(int position, String unitPrice) {
+
+        mAdapter.getItem(position).setLocalPrice(unitPrice);
+        ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvPrice)).setText(unitPrice);
+    }
+
+    private String getUnitPrice(String optionId) {
+
+        ProductItems data = getItemObject(mDateSubjectIds + "_" + optionId);
+        if (data != null)
+            return data.getPrice();
+
+        return "0";
+    }
+
+    protected void setDateSubjectIds(String dateSubjectIds) {
+
+        mDateSubjectIds = dateSubjectIds;
     }
 
 // =================================
@@ -205,8 +287,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
     public interface OnBookItemClickListener {
 
-        void onClickBookItem(int position, List<LevelOptions> options);
-
+        void onClickBookItem();
     }
 
     public void setOnBookItemClickListener(OnBookItemClickListener onBookItemClickListener) {

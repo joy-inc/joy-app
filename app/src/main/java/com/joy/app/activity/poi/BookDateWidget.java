@@ -103,6 +103,12 @@ public class BookDateWidget extends ExLayoutWidget {
         return ids;
     }
 
+    public LevelOptions getDataItem(int position) {
+
+        //todo 如果一个日期选择只包含一个option对象 一个option Id
+        return mAdapter.getItem(position).getOptions().get(0);
+    }
+
 // =================================
 
     private class LevelAdapter extends ExAdapter<ProductLevels> {
