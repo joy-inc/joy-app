@@ -9,6 +9,8 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.BuildConfig;
+import com.joy.app.R;
+import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
@@ -50,8 +52,13 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
             @Override
             public void onItemViewClick(int position, View clickView, MainOrder data) {
 
-                showToast(data.getOrder_id() + " To Order Detail --- from OrderFragment" + clickView.getId());
-                PoiDetailActivity.startActivity(getActivity(), "28");
+                if (clickView.getId() == R.id.tvStatus) {
+                    OrderPayActivity.startActivity(getActivity(), data.getOrder_id(), null);
+                } else {
+
+                    showToast(data.getOrder_id() + " To Order Detail --- from OrderFragment" + clickView.getId());
+                    PoiDetailActivity.startActivity(getActivity(), "28");
+                }
             }
         });
         setAdapter(adapter);
