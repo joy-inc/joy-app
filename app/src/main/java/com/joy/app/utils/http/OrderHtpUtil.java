@@ -155,7 +155,6 @@ public class OrderHtpUtil extends BaseHtpUtil {
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         params.put("order_id", order_id);
         params.put("channel", channel);
-        params.put("amount", "100");// todo
         return params;
     }
 

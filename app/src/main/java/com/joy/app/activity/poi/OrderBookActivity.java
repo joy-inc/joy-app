@@ -1,6 +1,7 @@
 package com.joy.app.activity.poi;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
+import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
@@ -321,47 +323,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_OPTIONS, Product.class, OrderHtpUtil.getProductOptionListUrl(mId));
 
-        if (BuildConfig.DEBUG) {
-
-            Product data = new Product();
-            ArrayList listdata = new ArrayList();
-            ProductLevels levels = null;
-            for (int i = 0; i < 3; i++) {
-                levels = new ProductLevels();
-
-                levels.setLevel_id((i + 1) + "");
-
-                if (i == 0) {
-                    levels.setType(1 + "");
-                    levels.setTitle("出发日期");
-                } else if (i == 1) {
-                    levels.setType(2 + "");
-                    levels.setTitle("可选项目");
-                } else if (i == 2) {
-                    levels.setType(3 + "");
-                    levels.setTitle("产品数量选择");
-                }
-
-                ArrayList list = new ArrayList();
-
-                for (int j = 0; j < 2; j++) {
-                    LevelOptions options = new LevelOptions();
-                    options.setOption_id(i + "" + j);
-                    options.setContent(i + "" + j + " 成人");
-                    options.setDescribe("13-99岁 " + j);
-
-                    list.add(options);
-                }
-
-                levels.setOptions(list);
-                listdata.add(levels);
-            }
-
-            data.setLevels(listdata);
-
-            obj.setData(data);
-        }
-
         return obj;
     }
 
@@ -375,12 +336,14 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void showAlertDialog() {
 
-//        JDialog dialog = new JDialog(this);
-//        dialog.setTitle(R.string.alert_drop_content);
-//        dialog.create();
-//        dialog.show();
+        new JDialog.Builder(this).setTitle(R.string.alert_drop_content).setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
 
-        showToast(R.string.alert_drop_content);
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                finish();
+            }
+        }).create().show();
     }
 
     @Override
@@ -408,14 +371,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         intent.putExtra("photoUrl", params[1]);
         intent.putExtra("title", params[2]);
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
-//            act.startActivity(intent, options.toBundle());
-//        } else {
-
-            act.startActivity(intent);
-//        }
+        act.startActivity(intent);
     }
 
     private class DialogSubjectAdapter extends ExAdapter<LevelOptions> {
@@ -430,6 +386,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
             private TextView tvTitle;
             private AppCompatCheckBox acCheckBox;
+            private View vDivider;
 
             @Override
             public int getConvertViewRid() {
@@ -442,6 +399,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
                 tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
                 acCheckBox = (AppCompatCheckBox) convertView.findViewById(R.id.acCheckBox);
+                vDivider = convertView.findViewById(R.id.vDivider);
                 convertView.setOnClickListener(new View.OnClickListener() {
 
                     @Override
@@ -459,6 +417,10 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
                 tvTitle.setText(data.getContent());
                 acCheckBox.setChecked(data.isLocalCheck());
+                if (mPosition == 0)
+                    goneView(vDivider);
+                else
+                    showView(vDivider);
             }
         }
     }

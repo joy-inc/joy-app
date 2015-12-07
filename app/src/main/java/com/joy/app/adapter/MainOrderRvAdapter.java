@@ -1,11 +1,14 @@
 package com.joy.app.adapter;
 
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.MainOrder;
 
@@ -27,8 +30,8 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
 
     public class ViewHolder extends ExRvViewHolder<MainOrder> {
 
-        @Bind(R.id.tvId)
-        TextView tvId;
+        @Bind(R.id.sdvPhoto)
+        SimpleDraweeView sdvPhoto;
 
         @Bind(R.id.tvTitle)
         TextView tvTitle;
@@ -36,14 +39,32 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
         @Bind(R.id.tvType)
         TextView tvType;
 
+        @Bind(R.id.tvDepartureDate)
+        TextView tvDepartureDate;
+
         @Bind(R.id.tvCount)
         TextView tvCount;
+
+        @Bind(R.id.rvStatus0Div)
+        RelativeLayout rvStatus0Div;
+
+        @Bind(R.id.rvStatus1Div)
+        RelativeLayout rvStatus1Div;
+
+        @Bind(R.id.rvStatus2Div)
+        RelativeLayout rvStatus2Div;
+
+        @Bind(R.id.rvStatus3Div)
+        RelativeLayout rvStatus3Div;
 
         @Bind(R.id.tvTotalPrice)
         TextView tvTotalPrice;
 
-        @Bind(R.id.tvStatus)
-        TextView tvStatus;
+        @Bind(R.id.acbPay)
+        TextView acbPay;
+
+        @Bind(R.id.acbCommenton)
+        TextView acbCommenton;
 
         public ViewHolder(final View itemView) {
 
@@ -57,12 +78,20 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
                     callbackOnItemViewClickListener(getLayoutPosition(), itemView);
                 }
             });
-            tvStatus.setOnClickListener(new View.OnClickListener() {
+            acbPay.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), tvStatus);
+                    callbackOnItemViewClickListener(getLayoutPosition(), acbPay);
+                }
+            });
+            acbCommenton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    callbackOnItemViewClickListener(getLayoutPosition(), acbCommenton);
                 }
             });
         }
@@ -72,19 +101,46 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
 
             if (mainOrder != null) {
 
-                tvId.setText(getString(R.string.order_id, mainOrder.getOrder_id()));
-                tvTitle.setText(getString(R.string.order_title, mainOrder.getProduct_title()));
-                tvType.setText(getString(R.string.product_type, mainOrder.getProduct_type()));
-                tvCount.setText(getString(R.string.out_num, mainOrder.getCount()));
-                tvTotalPrice.setText(mainOrder.getTotal_price());
+                sdvPhoto.setImageURI(Uri.parse(mainOrder.getProduct_photo()));
+                tvTitle.setText(mainOrder.getProduct_title());
+                tvType.setText(mainOrder.getSelected_item());
+                tvDepartureDate.setText(mainOrder.getTravel_date());
+                tvCount.setText(mainOrder.getCount() + "个");
+                tvTotalPrice.setText("¥ " + mainOrder.getTotal_price());
 
-                if ("0".equals(mainOrder.getStatus())) {
+                if ("0".equals(mainOrder.getOrder_status())) {
 
-                    showView(tvStatus);
-                    tvStatus.setText(R.string.pay);
+                    showView(rvStatus0Div);
+                    hideView(rvStatus1Div);
+                    hideView(rvStatus2Div);
+                    hideView(rvStatus3Div);
+
+                } else if ("1".equals(mainOrder.getOrder_status())) {
+
+                    hideView(rvStatus0Div);
+                    showView(rvStatus1Div);
+                    hideView(rvStatus2Div);
+                    hideView(rvStatus3Div);
+
+                } else if ("2".equals(mainOrder.getOrder_status())) {
+
+                    hideView(rvStatus0Div);
+                    hideView(rvStatus1Div);
+                    showView(rvStatus2Div);
+                    hideView(rvStatus3Div);
+
+                } else if ("3".equals(mainOrder.getOrder_status())) {
+
+                    hideView(rvStatus0Div);
+                    hideView(rvStatus1Div);
+                    hideView(rvStatus2Div);
+                    showView(rvStatus3Div);
                 } else {
 
-                    hideView(tvStatus);
+                    hideView(rvStatus0Div);
+                    hideView(rvStatus1Div);
+                    hideView(rvStatus2Div);
+                    hideView(rvStatus3Div);
                 }
             }
         }
