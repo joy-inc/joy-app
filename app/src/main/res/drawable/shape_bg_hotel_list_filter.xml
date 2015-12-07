@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <corners android:radius="2dip" />
+
+    <solid android:color="@color/pink_dark" />
+
+
+
+</shape><!-- From: file:/Users/litong/Documents/qyer_app_android/QyerApp/res/drawable/shape_bg_hotel_list_filter.xml -->

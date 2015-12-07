@@ -65,4 +65,27 @@
             <enum name="december" value="11" />
         </attr>
     </declare-styleable>
+    <!--双向seekBar-->
+    <declare-styleable name="SeekBarPressure">
+        <attr name="minValue" format="float" />
+        <attr name="maxValue" format="float" />
+        <attr name="duration" format="float" />
+        <attr name="lwidth" format="dimension">
+            <enum name="fill_parent" value="-1" />
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="lheight" format="dimension">
+            <enum name="fill_parent" value="-1" />
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="circleRadius" format="dimension" />
+    </declare-styleable>
+    <!-- 自动换行ViewGroup add by Daisw -->
+    <declare-styleable name="AutoChangeLineViewGroup">
+        <attr name="horSpacing" format="dimension"/>
+        <attr name="verSpacing" format="dimension"/>
+        <attr name="showLines" format="integer"/>
+    </declare-styleable>
 </resources>

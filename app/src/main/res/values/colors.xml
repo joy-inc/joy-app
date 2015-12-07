@@ -32,5 +32,6 @@
 
     <color name="qa_bg_title_bar_main_hotel">#f9617c</color><!-- 酒店 -->
     <color name="qa_bg_status_bar_main_hotel">#f9617c</color><!-- 酒店 -->
+    <color name="qa_bg_split_line">#eeeeee</color>
 
 </resources>

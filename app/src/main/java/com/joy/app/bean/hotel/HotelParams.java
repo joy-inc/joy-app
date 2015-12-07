@@ -12,7 +12,9 @@ public class HotelParams implements Parcelable {
 
     String cityId;
     String checkIn;//入住时间	2004-02-12
+    long checkInMills;//入住时间
     String checkOut;//离开时间	2004-02-13
+    long checkOutMills;//离开时间
     String From_key;//aid	booking跟踪来源
     String hotel;//酒店名
     String star_ids;//过滤星级
@@ -38,6 +40,7 @@ public class HotelParams implements Parcelable {
     }
 
     public void setCheckIn(long checkIn) {
+        checkInMills = checkIn;
         this.checkIn = TimeUtil.getSimpleTime(checkIn);
     }
 
@@ -50,6 +53,7 @@ public class HotelParams implements Parcelable {
     }
 
     public void setCheckOut(long checkOut) {
+        checkOutMills = checkOut;
         this.checkOut = TimeUtil.getSimpleTime(checkOut);
     }
 
@@ -109,6 +113,26 @@ public class HotelParams implements Parcelable {
         this.facilities_ids = facilities_ids;
     }
 
+    public long getCheckInMills() {
+        return checkInMills;
+    }
+
+    public void setCheckInMills(long checkInMills) {
+        this.checkInMills = checkInMills;
+        this.checkIn = TimeUtil.getSimpleTime(checkInMills);
+    }
+
+    public long getCheckOutMills() {
+        return checkOutMills;
+
+    }
+
+    public void setCheckOutMills(long checkOutMills) {
+        this.checkOutMills = checkOutMills;
+        this.checkOut = TimeUtil.getSimpleTime(checkOutMills);
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -118,7 +142,9 @@ public class HotelParams implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.cityId);
         dest.writeString(this.checkIn);
+        dest.writeLong(this.checkInMills);
         dest.writeString(this.checkOut);
+        dest.writeLong(this.checkOutMills);
         dest.writeString(this.From_key);
         dest.writeString(this.hotel);
         dest.writeString(this.star_ids);
@@ -134,7 +160,9 @@ public class HotelParams implements Parcelable {
     protected HotelParams(Parcel in) {
         this.cityId = in.readString();
         this.checkIn = in.readString();
+        this.checkInMills = in.readLong();
         this.checkOut = in.readString();
+        this.checkOutMills = in.readLong();
         this.From_key = in.readString();
         this.hotel = in.readString();
         this.star_ids = in.readString();
@@ -144,7 +172,7 @@ public class HotelParams implements Parcelable {
         this.area_id = in.readInt();
     }
 
-    public static final Parcelable.Creator<HotelParams> CREATOR = new Parcelable.Creator<HotelParams>() {
+    public static final Creator<HotelParams> CREATOR = new Creator<HotelParams>() {
         public HotelParams createFromParcel(Parcel source) {
             return new HotelParams(source);
         }

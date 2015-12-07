@@ -98,6 +98,20 @@ public class HotelTimeUtil {
 
         return days;
     }
+    /**
+     * 计算2个Calendar对象之间相差多少天
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public static int getDaysBettweenCalendar(long start, long end) {
+
+        long time =end - start;
+        int days = new Long(time / (1000 * 60 * 60 * 24)).intValue();
+
+        return days;
+    }
 
     //获取明天和后天的long
     //[0] 明天

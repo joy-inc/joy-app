@@ -129,6 +129,8 @@
     <string name="calendar_weekend">班</string>
     <string name="picker_title">出发日期</string>
     <!--日历-->
+    <!--筛选-->
+    <string name="more_then_5">最多添加5个筛选条件</string>
 
     <!-- city -->
     <string name="recommend_route">推荐路线</string>
