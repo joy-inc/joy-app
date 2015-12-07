@@ -120,7 +120,7 @@ public class MainActivity extends BaseTabActivity {
                 //                Calendar calendar1 = Calendar.getInstance();
                 //                calendar1.setTime(new Date());
                 //                calendar1.add(Calendar.MONTH, 3);
-                //                                DayPickerActivity.startHotelDayPickerForResult(MainActivity.this,true,0,0,1);
+                //                                DayPickerActivity.s123tartHotelDayPickerForResult(MainActivity.this,true,0,0,1);
                 //                DayPickerActivity.startOrderDayPickerForResult(MainActivity.this, 1446351132l * 1000, 1477973532l * 1000, 0, 1);
             }
         });

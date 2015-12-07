@@ -45,7 +45,7 @@ import de.greenrobot.event.EventBus;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-17
  */
-public class UserLoginActivity extends BaseUiActivity implements View.OnClickListener {
+public class UserLoginActivity extends BaseHttpUiActivity<String> implements View.OnClickListener {
 
 
     @Bind(R.id.tvInfo)
@@ -207,6 +207,8 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
             ToastUtil.showToast(R.string.login_code_empty);
             return;
         }
+        showLoading();
+
         ObjectRequest<User> req = ReqFactory.newPost(UserHttpUtil.URL_USER_LOGIN, User.class, UserHttpUtil.userLogin(mSubmitPhone, code));
 //        User u = new User();
 //        u.setUser_id("ssss");
@@ -228,6 +230,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
                     JoyApplication.setUser(u);
                     EventBus.getDefault().post(new LoginStatusEvent(true, u));
                     ToastUtil.showToast(R.string.login_success);
+                    hideLoading();
                     finish();
                 } else {
                     onError(null, "");
@@ -237,6 +240,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
             @Override
             public void onError(Object tag, String msg) {
                 super.onError(tag, msg);
+                hideLoading();
                 if (TextUtil.isEmpty(msg)) {
                     ToastUtil.showToast(R.string.request_error);
                 } else {
@@ -259,7 +263,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
             return;
         }
         mTvButton.setEnabled(false);
-        //// TODO: 15/12/3 是否需要启动进度条
+        showLoading();
         ObjectRequest req = ReqFactory.newPost(UserHttpUtil.URL_USER_GETCODE, String.class, UserHttpUtil.getCode(mSubmitPhone));
 //        req.setData("");
         req.setResponseListener(new ObjectResponse() {
@@ -272,6 +276,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
 
                 mTvButton.setEnabled(true);
                 mTvButton.setBackgroundResource(R.drawable.selector_bg_rectangle_accent_fill);
+                hideLoading();
             }
 
             @Override
@@ -283,10 +288,20 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
                     ToastUtil.showToast(msg);
                 }
                 mTvButton.setEnabled(true);
-
+                hideLoading();
             }
         });
         JoyApplication.getRequestQueue().add(req);
+    }
+
+    @Override
+    protected boolean invalidateContent(String s) {
+        return false;
+    }
+
+    @Override
+    protected ObjectRequest<String> getObjectRequest() {
+        return null;
     }
 
     /* 定义一个倒计时的内部类 */

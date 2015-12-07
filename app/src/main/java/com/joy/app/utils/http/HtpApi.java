@@ -41,7 +41,7 @@ public interface HtpApi {
     //公共的,设置的
     //    String URL_HOLIDAYINFO =   "http://open.qyer.com/qyer/hotel/get_holidays_info";// 日历信息
     //用户============================================
-    String URL_USER_GETCODE = JOY_URL_BASE + "account/send_signup_mobile_code";//获取验证码
+    String URL_USER_GETCODE = JOY_URL_BASE + "/account/send_signup_mobile_code";//获取验证码
     String URL_USER_LOGIN = JOY_URL_BASE + "/account/compatible_mobile_login";//获取登录
     String URL_USER_LOGIN_OUT = JOY_URL_BASE + "/account/logout";//登出
 }
