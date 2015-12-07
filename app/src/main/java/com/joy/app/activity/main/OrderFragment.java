@@ -56,7 +56,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                     OrderPayActivity.startActivity(getActivity(), data.getOrder_id(), null);
                 } else {
 
-                    showToast(data.getOrder_id() + " To Order Detail --- from OrderFragment" + clickView.getId());
                     PoiDetailActivity.startActivity(getActivity(), "28");
                 }
             }

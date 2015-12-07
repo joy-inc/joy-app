@@ -12,7 +12,7 @@
 
     <style name="theme_app.translucent">
         <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
-        <item name="android:windowTranslucentNavigation" tools:targetApi="19">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="19">false</item>
     </style>
 
     <style name="theme_app.translucent.toolbar">

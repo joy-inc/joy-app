@@ -120,7 +120,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
         super.initTitleView();
         addTitleLeftBackView();
-        setTitleText(R.string.booking);
+        addTitleMiddleView(R.string.booking);
     }
 
     @Override

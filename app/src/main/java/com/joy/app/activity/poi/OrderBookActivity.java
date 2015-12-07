@@ -1,6 +1,7 @@
 package com.joy.app.activity.poi;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
+import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
@@ -375,12 +377,14 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void showAlertDialog() {
 
-//        JDialog dialog = new JDialog(this);
-//        dialog.setTitle(R.string.alert_drop_content);
-//        dialog.create();
-//        dialog.show();
+        new JDialog.Builder(this).setTitle(R.string.alert_drop_content).setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
 
-        showToast(R.string.alert_drop_content);
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                finish();
+            }
+        }).create().show();
     }
 
     @Override
@@ -430,6 +434,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
             private TextView tvTitle;
             private AppCompatCheckBox acCheckBox;
+            private View vDivider;
 
             @Override
             public int getConvertViewRid() {
@@ -442,6 +447,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
                 tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
                 acCheckBox = (AppCompatCheckBox) convertView.findViewById(R.id.acCheckBox);
+                vDivider = convertView.findViewById(R.id.vDivider);
                 convertView.setOnClickListener(new View.OnClickListener() {
 
                     @Override
@@ -459,6 +465,10 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
                 tvTitle.setText(data.getContent());
                 acCheckBox.setChecked(data.isLocalCheck());
+                if (mPosition == 0)
+                    goneView(vDivider);
+                else
+                    showView(vDivider);
             }
         }
     }
