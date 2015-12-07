@@ -94,7 +94,9 @@ public class JoyApplication extends BaseApplication {
      */
     public static String getUserNameStr() {
 
-        return "";
+        if (mUser != null) {
+            return mUser.getNickname();
+        } return "";
     }
 
     /**
@@ -102,11 +104,8 @@ public class JoyApplication extends BaseApplication {
      */
     private void initShareInfo() {
 
-        ShareConstant.getIns().setQqZoneAppid("1");
-        ShareConstant.getIns().setQqZoneKey("1");
-        ShareConstant.getIns().setQqZoneUrl("http://www.qq.com");
 
-        ShareConstant.getIns().setWeixinAppid("1");
-        ShareConstant.getIns().setWeixinSecret("1");
+        ShareConstant.getIns().setWeixinAppid("wx4f5cdafa5eaf4ca0");
+        ShareConstant.getIns().setWeixinSecret("d4624c36b6795d1d99dcf0547af5443d");
     }
 }

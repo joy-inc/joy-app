@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="13dp"
+        android:paddingLeft="26dp"
+        android:paddingRight="31dp"
+        android:paddingTop="13dp">
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/acCheckBox"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:textColor="@color/text_grey_dark"
+            android:textSize="12dp" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/acCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/selector_bg_checkbox"
+            android:checked="true" />
+    </RelativeLayout>
+
+    <View
+        style="@style/Line.Dark.Horizontal"
+        android:layout_marginLeft="26dp" />
+</LinearLayout>

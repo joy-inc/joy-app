@@ -26,6 +26,8 @@ public interface HtpApi {
     String URL_POST_ORDER_CREATE = JOY_URL_BASE + "/order/create";// 创建订单
     String URL_POST_ORDER_DETAIL = JOY_URL_BASE + "/order/detail";// 获取订单
     String URL_POST_ORDER_CANCEL = JOY_URL_BASE + "/order/cancel";// 取消订单
+    String URL_POST_ORDER_PAY_CREATE_CHARGE = JOY_URL_BASE + "/order/create_charge";// 创建Ping++支付凭证
+    String URL_POST_ORDER_PAY_CALLBACK = JOY_URL_BASE + "/order/pay_callback";// Ping++支付成功后调用的Webhooks通知接口
 
     // 行程规划====================================
     String URL_POST_PLAN_ADD = JOY_URL_BASE + "/user/plan_add";//  添加我的旅行计划
@@ -35,6 +37,10 @@ public interface HtpApi {
     String URL_POST_PLAN_FOLDER_MODIFY = JOY_URL_BASE + "/user/plan_folder_modify";//  我的文件夹修改接口
     String URL_POST_PLAN_FOLDER_DELETE = JOY_URL_BASE + "/user/plan_folder_delete";//  我的文件夹删除接口
 
+    //酒店============
+    String URL_POST_HOTEL_LIST = JOY_URL_BASE + "/place/cityfun";//  城市玩乐
+    String URL_GET_HOTEL_LIST = QYER_URL_BASE + "/qyer/hotel/search_list";// 请求酒店列表 
+    String URL_GET_SEARCH_FILTERS = QYER_URL_BASE + "/qyer/hotel/search_filters"; //酒店筛选条件列表
 
     //公共的,设置的
     //    String URL_HOLIDAYINFO =   "http://open.qyer.com/qyer/hotel/get_holidays_info";// 日历信息

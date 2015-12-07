@@ -24,8 +24,6 @@ import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.utils.http.UserHtpUtil;
 
-import java.util.Date;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -71,7 +69,11 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mDecorView.getViewTreeObserver().removeOnGlobalLayoutListener(mLayoutListener);
+        try {
+            mDecorView.getViewTreeObserver().removeOnGlobalLayoutListener(mLayoutListener);
+        }catch (Exception ex){
+
+        }
     }
 
     @Override
@@ -184,7 +186,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
      */
     private void toLogin() {
 
-        if (TextUtil.isEmpty(mSubmitPhone)) {
+        if (TextUtil.isEmpty(mSubmitPhone) ) {
             ToastUtil.showToast(R.string.login_phone_empty);
             return;
         }
@@ -194,13 +196,13 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
             return;
         }
         ObjectRequest<User> req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN, User.class, UserHtpUtil.userLogin(mSubmitPhone, code));
-        User u = new User();
-        u.setUser_id("ssss");
-        u.setMobile("18888888888");
-        u.setCreate_time(new Date().getTime() / 1000);
-        u.setNickname("liulong");
-        u.setToken("sadfasdfas");
-        req.setData(u);
+//        User u = new User();
+//        u.setUser_id("ssss");
+//        u.setMobile("18888888888");
+//        u.setCreate_time(new Date().getTime() / 1000);
+//        u.setNickname("liulong");
+//        u.setToken("sadfasdfas");
+//        req.setData(u);
         req.setResponseListener(new ObjectResponse<User>() {
 
 
@@ -247,7 +249,7 @@ public class UserLoginActivity extends BaseUiActivity implements View.OnClickLis
         mTvButton.setEnabled(false);
         //// TODO: 15/12/3 是否需要启动进度条
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mSubmitPhone));
-        req.setData("");
+//        req.setData("");
         req.setResponseListener(new ObjectResponse() {
 
             @Override

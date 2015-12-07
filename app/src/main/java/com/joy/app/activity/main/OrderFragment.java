@@ -5,14 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.android.library.activity.BaseHttpRvFragment;
+import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.httptask.ObjectRequest;
 import com.joy.app.BuildConfig;
+import com.joy.app.R;
+import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.utils.http.OrderHtpUtil;
-import com.android.library.activity.BaseHttpRvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
-import com.android.library.httptask.ObjectRequest;
 import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
@@ -50,8 +52,13 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
             @Override
             public void onItemViewClick(int position, View clickView, MainOrder data) {
 
-                showToast(data.getOrder_id()+" To Order Detail --- from OrderFragment" + clickView.getId());
-                PoiDetailActivity.startActivity(getActivity(), clickView, "http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280", "51");
+                if (clickView.getId() == R.id.tvStatus) {
+                    OrderPayActivity.startActivity(getActivity(), data.getOrder_id(), null);
+                } else {
+
+                    showToast(data.getOrder_id() + " To Order Detail --- from OrderFragment" + clickView.getId());
+                    PoiDetailActivity.startActivity(getActivity(), "28");
+                }
             }
         });
         setAdapter(adapter);
@@ -85,6 +92,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     protected void onHttpFailed(Object tag, String msg) {
 
         super.onHttpFailed(tag, msg);
-        showToast("onHttpFailed --- in OrderFragment");
+        showToast(msg);
     }
 }

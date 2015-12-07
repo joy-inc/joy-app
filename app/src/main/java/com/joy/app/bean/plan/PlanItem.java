@@ -1,11 +1,20 @@
 package com.joy.app.bean.plan;
 
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+
+import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
+
 /**
  * @author litong  <br>
  * @Description 旅行规划    <br>
  */
 public class PlanItem {
-//            "plan_id":"zluoqRYxTZY=",
+//            "product_id":"zluoqRYxTZY=",
 //            "cn_name":"清水寺",
 //            "en_name":"qingshuisi",
 //            "price":"134.8",
@@ -13,14 +22,21 @@ public class PlanItem {
 //            "pic_url" :"http://xx.com/photo...",
 //            "lon" : "23.22",
 //            "lat" : "144.33",
-    String plan_id,cn_name,en_name,before_day,price,pic_url,lon,lat;
+    String product_id = TextUtil.TEXT_EMPTY,
+        cn_name = TextUtil.TEXT_EMPTY,
+        en_name = TextUtil.TEXT_EMPTY,
+        before_day = TextUtil.TEXT_EMPTY,
+        price = TextUtil.TEXT_EMPTY,
+        pic_url = TextUtil.TEXT_EMPTY,
+        lon = TextUtil.TEXT_EMPTY,
+        lat = TextUtil.TEXT_EMPTY;
 
-    public String getPlan_id() {
-        return plan_id;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setPlan_id(String plan_id) {
-        this.plan_id = plan_id;
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
     public String getCn_name() {
@@ -52,7 +68,7 @@ public class PlanItem {
     }
 
     public void setLon(String lon) {
-        this.lon = lon;
+        this.lon = TextUtil.filterEmpty(lon,"0");
     }
 
     public String getLat() {
@@ -60,19 +76,38 @@ public class PlanItem {
     }
 
     public void setLat(String lat) {
-        this.lat = lat;
+        this.lat = TextUtil.filterEmpty(lat,"0");
     }
 
     public String getBefore_day() {
         return before_day;
+    }
+    public Boolean hasBefore_day() {
+        try{
+            if (TextUtil.isEmpty(before_day)||Integer.parseInt(before_day) == 0){
+                return false;
+            }
+        }catch (NumberFormatException e){
+            return true;
+        }catch (Exception other ){
+            return false;
+        }
+        return true;
     }
 
     public void setBefore_day(String before_day) {
         this.before_day = before_day;
     }
 
-    public String getPrice() {
-        return ""+price+"起";
+    public SpannableString getPrice() {
+        String str = "￥"+price+" 起";
+        LogMgr.i("price:"+str);
+        SpannableString spannableString = new SpannableString(str);
+        spannableString.setSpan(new RelativeSizeSpan(0.5f),0,1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(new RelativeSizeSpan(0.75f),str.length()-1,str.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#D9f9617c")),0,str.length()-1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
     }
 
     public void setPrice(String price) {

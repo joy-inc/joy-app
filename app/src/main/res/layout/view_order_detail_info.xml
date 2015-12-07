@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llTitleDiv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvPhoto"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="16dp"
+        android:background="@color/black_trans12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.android.library.widget.JTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_detail_id"
+            android:textColor="@color/black_trans87"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_order_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1234"
+            android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="16dp"
+        android:background="@color/black_trans12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.android.library.widget.JTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_detail_item"
+            android:textColor="@color/black_trans87"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_order_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:lines="1"
+            android:text="1234"
+            android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_order_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="x2"
+            android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="16dp"
+        android:background="@color/black_trans12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.android.library.widget.JTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_detail_name"
+            android:textColor="@color/black_trans87"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_order_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1234"
+            android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="16dp"
+        android:background="@color/black_trans12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.android.library.widget.JTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_detail_phone"
+            android:textColor="@color/black_trans87"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_order_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1234"
+            android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="16dp"
+        android:background="@color/black_trans12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.android.library.widget.JTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_detail_email"
+            android:textColor="@color/black_trans87"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_order_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1234"
+            android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="16dp"
+        android:background="@color/black_trans12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.android.library.widget.JTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_detail_total_price"
+            android:textColor="@color/black_trans87"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_order_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1234"
+            android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+    </LinearLayout>
+</LinearLayout>

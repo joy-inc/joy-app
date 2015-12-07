@@ -3,6 +3,7 @@ package com.joy.app.activity.map;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.android.library.utils.CollectionUtil;
 import com.joy.app.bean.map.MapPoiDetail;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ListPoiMapActivity extends MapActivity {
     List data;
     public static void startActivityByPoiList(Activity activity, ArrayList<MapPoiDetail> list){
+        if (CollectionUtil.isEmpty(list))return;
         Intent intent = new Intent(activity,ListPoiMapActivity.class);
         intent.putParcelableArrayListExtra("data",list);
         activity.startActivity(intent);

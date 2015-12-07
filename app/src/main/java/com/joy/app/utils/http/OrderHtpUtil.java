@@ -46,6 +46,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
     public static Map<String, String> getProductDetailUrl(String product_id) {
 
         Map<String, String> params = getBaseParams();
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         params.put("product_id", product_id);
         return params;
     }
@@ -102,10 +103,11 @@ public class OrderHtpUtil extends BaseHtpUtil {
      * @param data 联系人信息
      * @return
      */
-    public static Map<String, String> getCreateOrderUrl(String item, OrderContacts data) {
+    public static Map<String, String> getCreateOrderUrl(String item, String dateTime, OrderContacts data) {
 
         Map<String, String> params = getBaseParams();
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
+        params.put("travel_date", dateTime);
         params.put("item", item);
         params.put("contact_id", data.getContact_id());
         params.put("contact_name", data.getName());
@@ -139,6 +141,34 @@ public class OrderHtpUtil extends BaseHtpUtil {
         params.put("contact_name", data.getName());
         params.put("contact_phone", data.getPhone());
         params.put("contact_email", data.getEmail());
+        return params;
+    }
+
+    /**
+     * 生成ping++ 支付凭证
+     *
+     * @return
+     */
+    public static Map<String, String> getOrderPayCreateCharge(String order_id, String channel) {
+
+        Map<String, String> params = getBaseParams();
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
+        params.put("order_id", order_id);
+        params.put("channel", channel);
+        params.put("amount", "100");// todo
+        return params;
+    }
+
+    /**
+     * 支付成功后的回调接口
+     *
+     * @return
+     */
+    public static Map<String, String> getOrderPayCallback() {
+
+        Map<String, String> params = getBaseParams();
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
+        // todo
         return params;
     }
 }

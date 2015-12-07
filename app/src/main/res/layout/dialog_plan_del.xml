@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/jtv_del"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@color/black_trans12"
+        android:text="删除旅行规划" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/jtv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@color/black_trans12"
+        android:text="取消" />
+
+</LinearLayout>

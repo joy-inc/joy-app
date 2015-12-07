@@ -133,4 +133,10 @@
         <item name="android:textColor">@color/black_trans87</item>
         <item name="android:textSize">12dp</item>
     </style>
+
+    <style name="share_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 </resources>

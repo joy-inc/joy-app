@@ -25,6 +25,18 @@ public class BookDateWidget extends ExLayoutWidget {
     private LinearListView mLinearLv;
     private LevelAdapter mAdapter;
 
+    private String mDateTime;
+
+    public String getmDateTime() {
+
+        return mDateTime;
+    }
+
+    public void setmDateTime(String mDateTime) {
+
+        this.mDateTime = mDateTime;
+    }
+
     public BookDateWidget(Activity activity) {
 
         super(activity);
@@ -51,11 +63,8 @@ public class BookDateWidget extends ExLayoutWidget {
 
     protected void invalidate(List<ProductLevels> listData) {
 
-        if (!CollectionUtil.isEmpty(listData)) {
-
-            mAdapter = new LevelAdapter(listData);
-            mLinearLv.setAdapter(mAdapter);
-        }
+        mAdapter = new LevelAdapter(listData);
+        mLinearLv.setAdapter(mAdapter);
     }
 
     private void callbackOnItemClick(int position) {
@@ -84,11 +93,20 @@ public class BookDateWidget extends ExLayoutWidget {
 
         String ids = TextUtil.TEXT_EMPTY;
 
-        for (ProductLevels data : mAdapter.getData()) {
-            ids = ids + (TextUtil.isEmpty(ids) ? data.getLocalSelectId() : "_" + data.getLocalSelectId());
+        if (CollectionUtil.isNotEmpty(mAdapter.getData())) {
+
+            for (ProductLevels data : mAdapter.getData()) {
+                ids = ids + (TextUtil.isEmpty(ids) ? data.getLocalSelectId() : "_" + data.getLocalSelectId());
+            }
         }
 
         return ids;
+    }
+
+    public LevelOptions getDataItem(int position) {
+
+        //todo 如果一个日期选择只包含一个option对象 一个option Id
+        return mAdapter.getItem(position).getOptions().get(0);
     }
 
 // =================================

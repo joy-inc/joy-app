@@ -89,8 +89,9 @@
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="26dp"
                 android:layout_alignParentRight="true"
+                android:background="@drawable/shape_bg_oval_accent"
                 android:layout_centerVertical="true"
                 android:text="@string/pay"
                 android:textColor="@color/white"

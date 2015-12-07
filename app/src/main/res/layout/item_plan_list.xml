@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:layout_height="120dp"
+    android:paddingLeft="10dp"
     android:background="@color/white">
 
     <com.facebook.drawee.view.SimpleDraweeView
@@ -11,8 +11,10 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerVertical="true"
-        app:placeholderImage="@drawable/ic_def_avatar"
+        app:placeholderImage="@drawable/ic_def_square"
+        app:placeholderImageScaleType="centerCrop"
         android:scaleType="centerCrop"
+        android:layout_marginRight="15dp"
         />
 
 
@@ -22,6 +24,7 @@
             android:text="东京银座"
             android:textSize="16dp"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/sdv_poi_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -35,19 +38,30 @@
             android:textColor="@color/black_trans35"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <com.android.library.widget.JTextView
-            android:id="@+id/jtv_price"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="123"
+            android:gravity="center_vertical"
             android:layout_alignBottom="@+id/sdv_poi_photo"
-            android:layout_toRightOf="@+id/sdv_poi_photo"/>
-        <com.android.library.widget.JTextView
-            android:id="@+id/jtv_day"
-            android:layout_alignBottom="@+id/sdv_poi_photo"
-            android:layout_toRightOf="@+id/jtv_price"
-            android:text="123"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+            android:layout_toRightOf="@+id/sdv_poi_photo">
+            <com.android.library.widget.JTextView
+                android:id="@+id/jtv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123"
+                android:textSize="24dp"
+                android:paddingRight="10dp" />
+            <com.android.library.widget.JTextView
+                android:id="@+id/jtv_day"
+                android:text="123"
+                android:textSize="14dp"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_bg_rectangle_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    <View
+        android:layout_alignParentBottom="true"
+        style="@style/Line.Dark.Horizontal"/>
 </RelativeLayout>

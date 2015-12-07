@@ -3,8 +3,6 @@ package com.joy.app.activity.poi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -13,7 +11,8 @@ import android.widget.TextView;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
-import com.android.library.utils.LogMgr;
+import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
@@ -67,7 +66,16 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     @Override
     protected void initTitleView() {
 
+        setTitle(null);
         addTitleLeftBackView();
+        addTitleRightView(R.drawable.abc_ic_menu_share_mtrl_alpha, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                showPoiShareDialog();
+            }
+        });
     }
 
     @Override
@@ -113,7 +121,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         mMapWidget.invalidate(R.drawable.ic_star_light_small);
 
-        mMapWidget.setLocation(Double.parseDouble(mPoiDetail.getLat()),Double.parseDouble(mPoiDetail.getLon()),"我是地址");
+        mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), "我是地址");
 
         mIntroduceWidget.invalidate(mPoiDetail);
 
@@ -131,11 +139,9 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         if (BuildConfig.DEBUG) {
 
             PoiDetail data = new PoiDetail();
-            data.setProduct_id(mId);
-            data.setTitle("米尔福峡湾一日游(邮轮、自助、午餐、皮划艇)");
             data.setComment_level("2.5");
             data.setComment_num("19");
-            data.setDescription("07:00从酒店或集合地搭乘玻璃天窗全景豪华旅游巴士 开始米尔福德峡湾一日游。\n\n09:00沿着瓦卡蒂普湖穿过金斯顿到达蒂阿瑙, 这里拥有 令人窒息的风景，激动人心的河流，您将有时…");
+            data.setIntroduction("07:00从酒店或集合地搭乘玻璃天窗全景豪华旅游巴士 开始米尔福德峡湾一日游。\n\n09:00沿着瓦卡蒂普湖穿过金斯顿到达蒂阿瑙, 这里拥有 令人窒息的风景，激动人心的河流，您将有时…");
 
             ArrayList<String> photos = new ArrayList<>();
             photos.add("http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280");
@@ -151,6 +157,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             data.setHighlights(list);
             data.setIs_book("1");
             data.setPrice("700-800");
+            data.setTitle("米尔福峡湾一日游(邮轮、自助、午餐、皮划艇)");
 
             obj.setData(data);
         }
@@ -224,17 +231,17 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     public void onClick(View view) {
 
         if (R.id.acbBook == view.getId()) {
-            LogMgr.w("id=" +mPoiDetail.getProduct_id());
-            LogMgr.w("mPhotoUrl=" +mPhotoUrl);
-            LogMgr.w("title=" +mPoiDetail.getTitle());
+
+            if (CollectionUtil.isNotEmpty(mPoiDetail.getPhotos()) && TextUtil.isEmpty(mPhotoUrl))
+                mPhotoUrl = mPoiDetail.getPhotos().get(0);
 
             OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
         } else if (R.id.btnAddToPlan == view.getId()) {
 
             showToast("加入旅行计划");
-        } else if (R.id.poiDetailMapDiv == view.getId()) {
+        } else if (R.id.rl_mapview == view.getId()) {
 
-            startPoiMapWithSinglePoi();
+            startMapActivity();
         } else if (R.id.tvAllIntroduce == view.getId()) {
 
             showToast("查看全部简介");
@@ -244,9 +251,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();
-        } else if (R.id.rl_mapview == view.getId()) {
-
-            startMapActivity();
         }
     }
 
@@ -257,20 +261,16 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         CommentActivity.startActivity(this, mId);
     }
+
     /**
      * 打开地图页
      */
     private void startMapActivity() {
 
-        SinglePoiMapActivity.startActivityByPoiDetail(this,mPoiDetail);
-        showToast("open all comments activity");
-    }
-
-    private void startPoiMapWithSinglePoi() {
-
         if (mPoiDetail != null) {
 
-            showToast("show map of poi");
+            SinglePoiMapActivity.startActivityByPoiDetail(this, mPoiDetail);
+            showToast("open all comments activity");
         }
     }
 
@@ -282,51 +282,10 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public static void startActivity(Activity act, String id) {
 
-        getMenuInflater().inflate(R.menu.menu_poi_detail, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_share) {
-            showPoiShareDialog();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * @param act
-     * @param view The view which starts the transition
-     */
-//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void startActivity(Activity act, View view, String photoUrl, String id) {
-
-        if (act == null || view == null)
+        if (act == null || TextUtil.isEmpty(id))
             return;
-
-        Intent intent = new Intent(act, PoiDetailActivity.class);
-        intent.putExtra("photoUrl", photoUrl);
-        intent.putExtra("id", id);
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
-//            act.startActivity(intent, options.toBundle());
-//        } else {
-
-            act.startActivity(intent);
-//        }
-    }
-
-    public static void startActivity(Activity act, String id){
 
         Intent intent = new Intent(act, PoiDetailActivity.class);
         intent.putExtra("id", id);

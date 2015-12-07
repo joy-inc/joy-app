@@ -60,4 +60,13 @@ public class OrderContacts {
         return TextUtil.isEmptyTrim(name) && TextUtil.isEmptyTrim(phone) && TextUtil.isEmptyTrim(email);
     }
 
+    @Override
+    public String toString() {
+        return "OrderContacts{" +
+                "contact_id='" + contact_id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

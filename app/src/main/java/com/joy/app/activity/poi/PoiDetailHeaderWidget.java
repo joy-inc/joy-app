@@ -6,10 +6,11 @@ import android.support.v7.widget.AppCompatRatingBar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.library.utils.MathUtil;
+import com.android.library.view.ExLayoutWidget;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
-import com.android.library.view.ExLayoutWidget;
 
 
 /**
@@ -69,7 +70,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
 
         mTvTitle.setText(mPoiDetail.getTitle());
         mTvPrice.setText(getActivity().getResources().getString(R.string.unit, mPoiDetail.getPrice()));
-        mAcRatingBar.setRating(Float.parseFloat(mPoiDetail.getComment_level()));
+        mAcRatingBar.setRating(MathUtil.parseFloat(mPoiDetail.getComment_level(), 0));
         mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, mPoiDetail.getComment_num()));
 
     }

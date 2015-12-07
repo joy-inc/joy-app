@@ -31,7 +31,11 @@ public class SplashActivity extends Activity {
 
         if (JoyApplication.getUser() == null) {
             //这界面以后,就通过islogin来判断是否登录了.
-            JoyApplication.setUser(JoyApplication.getCommonPrefs().getUser());
+            try {
+                JoyApplication.setUser(JoyApplication.getCommonPrefs().getUser());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -49,18 +53,22 @@ public class SplashActivity extends Activity {
     }
 
     private void finishToEnterActivity() {
+        try {
+            if (JoyApplication.getCommonPrefs().isNewVersion()) {
 
-        if (JoyApplication.getCommonPrefs().isNewVersion()) {
+                GuideSplashActivity.startActivity(this);
+            } else {
 
-            GuideSplashActivity.startActivity(this);
-        } else {
-
+                MainActivity.startActivity(this);
+                //            TabTestActivity.startActivity(this);
+                //            LvTestActivity.startActivity(this);
+                //            LvLoadMoreTestActivity.startActivity(this);
+            }
+            finish();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             MainActivity.startActivity(this);
-//            TabTestActivity.startActivity(this);
-//            LvTestActivity.startActivity(this);
-//            LvLoadMoreTestActivity.startActivity(this);
-//            RvLoadMoreTestActivity.startActivity(this);
+            finish();
         }
-        finish();
     }
 }
