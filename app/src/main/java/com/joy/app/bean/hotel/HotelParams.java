@@ -4,25 +4,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.android.library.utils.TimeUtil;
-
-import java.io.Serializable;
-
 /**
  * @author litong  <br>
  * @Description 酒店筛选    <br>
  */
 public class HotelParams implements Parcelable {
 
-    String cityId,
-            checkIn,//入住时间	2004-02-12
-            checkOut,//离开时间	2004-02-13
-            From_key,//aid	booking跟踪来源
-            hotel,//酒店名
-            star_ids,//过滤星级
-            price_rangs,//价格区间	逗号分割高低价格
-            facilities_ids;//过滤标签
-    int Orderby,//排序方式 默认智能排序
-            area_id;//区域id
+    String cityId;
+    String checkIn;//入住时间	2004-02-12
+    String checkOut;//离开时间	2004-02-13
+    String From_key;//aid	booking跟踪来源
+    String hotel;//酒店名
+    String star_ids;//过滤星级
+    String price_rangs;//价格区间	逗号分割高低价格
+    String facilities_ids;//过滤标签
+    int Orderby;//排序方式 默认智能排序
+    int area_id;//区域id
 
     public String getCityId() {
         return cityId;
@@ -39,6 +36,7 @@ public class HotelParams implements Parcelable {
     public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
+
     public void setCheckIn(long checkIn) {
         this.checkIn = TimeUtil.getSimpleTime(checkIn);
     }
@@ -50,6 +48,7 @@ public class HotelParams implements Parcelable {
     public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
+
     public void setCheckOut(long checkOut) {
         this.checkOut = TimeUtil.getSimpleTime(checkOut);
     }

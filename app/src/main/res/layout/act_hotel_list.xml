@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/fl_content"
@@ -8,10 +9,130 @@
         android:layout_height="match_parent"/>
 
     <LinearLayout
-        android:id="@+id/ll_fiter_bar"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="wrap_content"
+        android:id="@+id/llFooterView"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:background="@color/pink_dark"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:orientation="horizontal"
+            >
+            <RelativeLayout
+                android:id="@+id/rl_select_time"
+                android:layout_width="154dp"
+                android:background="@color/black"
+                android:layout_height="fill_parent">
+                <com.android.library.widget.JTextView
+                    android:id="@+id/qtv_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="入住"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="13dp" />
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/qtv_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="离开"
+                    android:textColor="@color/white"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="13dp" />
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/qtv_start_date"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/qtv_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3月9日"
+                    android:textColor="@color/text_pink"
+                    android:layout_marginLeft="10dp" />
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/qtv_end_date"
+                    android:layout_toRightOf="@+id/qtv_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3月12日"
+                    android:textColor="@color/text_pink"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp" />
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/qtv_total_nights"
+                    android:layout_toRightOf="@+id/qtv_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="共12晚"
+                    android:layout_marginBottom="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:background="@color/pink_dark"
+                android:id="@+id/ll_hotel_filter"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_map_poi" />
+
+                <com.android.library.widget.JTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="3dp"
+                    android:text="筛选" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="2px"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/white" />
+
+
+            <LinearLayout
+                android:background="@color/pink_dark"
+                android:id="@+id/ll_hotel_list_sort"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_map_poi" />
+
+                <com.android.library.widget.JTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="3dp"
+                    android:text="排序" />
+
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -124,7 +124,7 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
             case R.id.jimHotel:
 
 //                CityFunActivity.startActivity(this, mPlaceId, 2);
-                CityHotelListActivity.startActivity(this,"","","");
+                CityHotelListActivity.startActivity(this,"cityid","酒店名","fromkey");
                 break;
             case R.id.jimFood:
 

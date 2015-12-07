@@ -6,17 +6,16 @@ import android.support.v4.app.Fragment;
 
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.httptask.ObjectRequest;
-import com.facebook.cache.disk.DiskStorageCache;
 import com.joy.app.adapter.hotel.HotelListAdapter;
 import com.joy.app.bean.hotel.HotelList;
 import com.joy.app.bean.hotel.HotelParams;
-import com.joy.app.utils.http.HotelHttpUtil;
+import com.joy.app.utils.http.HotelHtpUtil;
 
 import java.util.List;
 
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 酒店列表    <br>
  */
 public class HotelListFragment extends BaseHttpRvFragment<HotelList> {
     HotelParams params ;
@@ -58,6 +57,6 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> {
 
     @Override
     protected ObjectRequest<HotelList> getObjectRequest(int pageIndex, int pageLimit) {
-        return HotelHttpUtil.getHotelListRequest(params,pageIndex,pageLimit,HotelList.class);
+        return HotelHtpUtil.getHotelListRequest(params,pageIndex,pageLimit,HotelList.class);
     }
 }
