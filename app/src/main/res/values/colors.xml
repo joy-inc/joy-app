@@ -4,7 +4,7 @@
     <color name="color_primary_dark">#252525</color>
     <color name="color_accent">#fa617d</color>
     <color name="color_primary_text">@color/white</color>
-    <color name="color_secondary_text">@color/white</color>
+    <color name="color_secondary_text">@color/white_trans87</color>
     <color name="color_grey">#f5f5f5</color>
     <color name="text_pink">#f9617c</color>
     <color name="text_grey_dark">#666666</color>

@@ -30,7 +30,6 @@ public class TabTestActivity extends BaseTabActivity {
 
         super.initTitleView();
 
-        setTitle(null);
         setTitleLogo(R.drawable.ic_logo);
 
         View v = inflateLayout(R.layout.view_avatar);

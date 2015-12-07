@@ -47,7 +47,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     @Override
     protected void initData() {
         mWebViewShare = new WebViewShare();
-        mWebViewShare.setInfo(getIntent().getStringExtra("url"));
+        mWebViewShare.setInfo("http://www.qq.com");
         EventBus.getDefault().register(this);
         mWebViewWidget.loadUrl(getIntent().getStringExtra("url"));
 

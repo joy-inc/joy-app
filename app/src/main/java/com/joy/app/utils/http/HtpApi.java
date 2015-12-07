@@ -37,6 +37,10 @@ public interface HtpApi {
     String URL_POST_PLAN_FOLDER_MODIFY = JOY_URL_BASE + "/user/plan_folder_modify";//  我的文件夹修改接口
     String URL_POST_PLAN_FOLDER_DELETE = JOY_URL_BASE + "/user/plan_folder_delete";//  我的文件夹删除接口
 
+    //酒店============
+    String URL_POST_HOTEL_LIST = JOY_URL_BASE + "/place/cityfun";//  城市玩乐
+    String URL_GET_HOTEL_LIST = QYER_URL_BASE + "/qyer/hotel/search_list";// 请求酒店列表 
+    String URL_GET_SEARCH_FILTERS = QYER_URL_BASE + "/qyer/hotel/search_filters"; //酒店筛选条件列表
 
     //公共的,设置的
     //    String URL_HOLIDAYINFO =   "http://open.qyer.com/qyer/hotel/get_holidays_info";// 日历信息
@@ -44,4 +48,8 @@ public interface HtpApi {
     String URL_USER_GETCODE = JOY_URL_BASE + "/account/send_signup_mobile_code";//获取验证码
     String URL_USER_LOGIN = JOY_URL_BASE + "/account/compatible_mobile_login";//获取登录
     String URL_USER_LOGIN_OUT = JOY_URL_BASE + "/account/logout";//登出
+
+    // city
+    String URL_POST_CITY = JOY_URL_BASE + "/place/index_page";
+    String URL_POST_CITY_FUN = JOY_URL_BASE + "/place/cityfun";
 }

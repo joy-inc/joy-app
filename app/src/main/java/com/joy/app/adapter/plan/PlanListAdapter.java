@@ -11,7 +11,12 @@ import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
+import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.plan.PlanItem;
+import com.joy.app.utils.map.MapUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,6 +26,22 @@ import butterknife.ButterKnife;
  * @Description 行程规划列表    <br>
  */
 public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, PlanItem> {
+    ArrayList<MapPoiDetail> content;
+
+    @Override
+    public void setData(List<PlanItem> data) {
+        super.setData(data);
+        copyData();
+    }
+
+    private void copyData(){
+        CopyThread copyThread= new CopyThread();
+        copyThread.start();
+    }
+
+    public ArrayList<MapPoiDetail> getContent() {
+        return content;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -65,6 +86,14 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
                 ViewUtil.hideView(jtvDay);
             }
 
+        }
+    }
+
+    class CopyThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            content = MapUtil.getMapContent(getData());
         }
     }
 }

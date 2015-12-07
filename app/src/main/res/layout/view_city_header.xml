@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:scaleType="centerCrop"
+        android:tint="@color/black_trans50" />
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/jtvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sdvPhoto"
+        android:layout_alignLeft="@id/sdvPhoto"
+        android:layout_alignRight="@id/sdvPhoto"
+        android:layout_alignTop="@id/sdvPhoto"
+        android:gravity="center"
+        android:textColor="@color/white_trans75"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:id="@+id/llDiv0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sdvPhoto"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <com.android.library.widget.JImageView
+            android:id="@+id/jimTicket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_ticket" />
+
+        <com.android.library.widget.JImageView
+            android:id="@+id/jimVisa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_visa" />
+
+        <com.android.library.widget.JImageView
+            android:id="@+id/jimAirpalne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_airplane" />
+
+        <com.android.library.widget.JImageView
+            android:id="@+id/jimWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_wifi" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDiv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llDiv0"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.android.library.widget.JImageView
+            android:id="@+id/jimPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_play"
+            android:tint="@color/black_trans26" />
+
+        <com.android.library.widget.JImageView
+            android:id="@+id/jimFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_food"
+            android:tint="@color/black_trans26" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDiv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llDiv1"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <com.android.library.widget.JImageView
+            android:id="@+id/jimShop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_shop"
+            android:tint="@color/black_trans26" />
+
+        <com.android.library.widget.JImageView
+            android:id="@+id/jimHotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_hotel"
+            android:tint="@color/black_trans26" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/llDiv2"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.android.library.widget.JImageView
+            style="@style/Line.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <com.android.library.widget.JTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/recommend_route"
+            android:textColor="@color/white_trans87"
+            android:textSize="15dp" />
+
+        <com.android.library.widget.JImageView
+            style="@style/Line.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+</RelativeLayout>

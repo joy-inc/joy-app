@@ -86,9 +86,7 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
     @Override
     protected void initTitleView() {
 
-        setTitle(null);
         addTitleLeftBackView();
-        getToolbarLp().topMargin = STATUS_BAR_HEIGHT;
     }
 
     @Override

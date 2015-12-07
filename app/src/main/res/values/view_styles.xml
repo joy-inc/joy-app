@@ -25,14 +25,16 @@
         <item name="android:layout_marginRight">16dp</item>
     </style>
 
-    <style name="Line"></style>
+    <style name="Line">
+
+    </style>
 
     <style name="Line.Light">
-        <item name="android:background">@color/white_trans12</item>
+        <item name="android:background">@color/white_trans26</item>
     </style>
 
     <style name="Line.Dark">
-        <item name="android:background">@color/black_trans12</item>
+        <item name="android:background">@color/black_trans26</item>
     </style>
 
     <style name="Line.Light.Horizontal">
@@ -86,7 +88,7 @@
         <item name="android:textSize">12dp</item>
     </style>
 
-    <!--设置界面的右剪头-->
+    <!--设置界面的右箭头-->
     <style name="setting_noun">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -101,9 +103,11 @@
         <item name="android:lineSpacingExtra">3dp</item>
         <item name="android:textSize">12dp</item>
     </style>
+
     <style name="LongText.Dark">
         <item name="android:textColor">@color/black_trans87</item>
     </style>
+
     <style name="LongText.Light">
         <item name="android:textColor">@color/black_trans54</item>
     </style>
@@ -134,6 +138,5 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:gravity">center_vertical</item>
-
     </style>
 </resources>

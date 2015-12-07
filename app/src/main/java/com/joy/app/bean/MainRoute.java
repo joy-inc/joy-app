@@ -9,7 +9,7 @@ import com.android.library.utils.TextUtil;
  */
 public class MainRoute {
 
-    private String id = TextUtil.TEXT_EMPTY;
+    private String place_id = TextUtil.TEXT_EMPTY;
     private String cn_name = TextUtil.TEXT_EMPTY;//中文名称
     private String en_name = TextUtil.TEXT_EMPTY;//第二名称
     private String tags = TextUtil.TEXT_EMPTY;//标签
@@ -17,12 +17,13 @@ public class MainRoute {
     private String place_url = TextUtil.TEXT_EMPTY;//旅游地的详情url
     private String pic_url = TextUtil.TEXT_EMPTY;//图片地址
 
-    public String getId() {
-        return id;
+
+    public String getPlace_id() {
+        return place_id;
     }
 
-    public void setId(String id) {
-        this.id = TextUtil.filterNull(id);
+    public void setPlace_id(String place_id) {
+        this.place_id = TextUtil.filterNull(place_id);
     }
 
     public String getCn_name() {
@@ -75,6 +76,7 @@ public class MainRoute {
 
     /**
      * 判断是否是城市
+     *
      * @return
      */
     public boolean isCity() {

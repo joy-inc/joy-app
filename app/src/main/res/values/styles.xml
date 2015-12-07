@@ -21,7 +21,5 @@
 
     <style name="theme_app.translucent.toolbar.overlay">
         <item name="overlay">true</item>
-        <!--<item name="android:minHeight">100dp</item>-->
     </style>
-
 </resources>

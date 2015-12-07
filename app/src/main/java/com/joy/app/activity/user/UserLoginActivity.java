@@ -1,40 +1,32 @@
 package com.joy.app.activity.user;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
-import com.android.library.utils.ViewUtil;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.bean.User;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.ReqFactory;
-import com.joy.app.utils.http.sample.UserHttpUtil;
-
-import java.util.Date;
+import com.joy.app.utils.http.UserHtpUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -79,6 +71,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
     }
 
     @Override
+    @TargetApi(16)
     protected void onDestroy() {
         super.onDestroy();
         try {
@@ -113,6 +106,28 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         mTvGetCode.setOnClickListener(this);
         mTvButton.setOnClickListener(this);
 
+        mEtCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtil.isEmpty(mEtCode.getText().toString())){
+                    mTvButton.setEnabled(false);
+                    mTvButton.setBackgroundResource(R.drawable.shape_bg_rectangle_dark);
+                }else{
+                    mTvButton.setEnabled(true);
+                    mTvButton.setBackgroundResource(R.drawable.selector_bg_rectangle_accent_fill);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     ViewTreeObserver.OnGlobalLayoutListener mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -209,7 +224,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         }
         showLoading();
 
-        ObjectRequest<User> req = ReqFactory.newPost(UserHttpUtil.URL_USER_LOGIN, User.class, UserHttpUtil.userLogin(mSubmitPhone, code));
+        ObjectRequest<User> req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN, User.class, UserHtpUtil.userLogin(mSubmitPhone, code));
 //        User u = new User();
 //        u.setUser_id("ssss");
 //        u.setMobile("18888888888");
@@ -264,7 +279,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         }
         mTvButton.setEnabled(false);
         showLoading();
-        ObjectRequest req = ReqFactory.newPost(UserHttpUtil.URL_USER_GETCODE, String.class, UserHttpUtil.getCode(mSubmitPhone));
+        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mSubmitPhone));
 //        req.setData("");
         req.setResponseListener(new ObjectResponse() {
 
@@ -274,8 +289,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
                 ToastUtil.showToast(R.string.login_phone_code_success);
                 startCountdown(60);
 
-                mTvButton.setEnabled(true);
-                mTvButton.setBackgroundResource(R.drawable.selector_bg_rectangle_accent_fill);
+
                 hideLoading();
             }
 

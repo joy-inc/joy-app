@@ -7,7 +7,7 @@ import java.util.Map;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-16
  */
-public class MainHttpUtil extends BaseHtpUtil {
+public class MainHtpUtil extends BaseHtpUtil {
 
     /**
      * 获取首页的目标列表

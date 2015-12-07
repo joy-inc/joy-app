@@ -1,10 +1,8 @@
 package com.joy.app.activity.poi;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -26,7 +24,6 @@ import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
-import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
@@ -227,8 +224,8 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
             DialogPlus dialog = DialogPlus.newDialog(OrderBookActivity.this)
                     .setContentHolder(new ListHolder())
-                    .setHeader(R.layout.t_tv_dialog)
-                    .setFooter(R.layout.t_btn_dialog)
+                    .setHeader(R.layout.view_header_dialog_orderbook)
+                    .setFooter(R.layout.view_footer_dialog_orderbook)
                     .setCancelable(true)
                     .setAdapter(adapter)
                     .create();
@@ -411,14 +408,14 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         intent.putExtra("photoUrl", params[1]);
         intent.putExtra("title", params[2]);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
-            act.startActivity(intent, options.toBundle());
-        } else {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
+//            act.startActivity(intent, options.toBundle());
+//        } else {
 
             act.startActivity(intent);
-        }
+//        }
     }
 
     private class DialogSubjectAdapter extends ExAdapter<LevelOptions> {
