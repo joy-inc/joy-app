@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -129,6 +131,17 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        mEtCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId==KeyEvent.ACTION_DOWN|| actionId== EditorInfo.IME_ACTION_DONE){
+                    toLogin();
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -284,7 +297,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         mTvButton.setEnabled(false);
         showLoading();
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mSubmitPhone));
-        //        req.setData("");
+                req.setData("");
         req.setResponseListener(new ObjectResponse() {
 
             @Override

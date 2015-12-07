@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
+import com.joy.app.utils.ActivityUrlUtil;
 import com.joy.app.utils.share.WebViewShare;
 import com.joy.app.view.dialog.ShareDialog;
 import com.joy.app.view.webview.BaseWebView;
@@ -157,8 +158,10 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
         if (LogMgr.isDebug())
             LogMgr.d("webviewActivity", "onWebViewShouldOverrideUrlLoading url  = " + url);
-        loadUrl(url);
-        //        ActivityUrlUtil.startActivityByHttpUrl(this, url);
+        if (!ActivityUrlUtil.startActivityByHttpUrl(this, url)) {
+            loadUrl(url);
+
+        }
         return true;
     }
 
@@ -217,11 +220,13 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
      */
     public static void startActivity(Context context, String url, String title) {
 
-        startActivity(context,url,title,0);
+        startActivity(context, url, title, 0);
 
     }
+
     /**
      * 有分享的调用这
+     *
      * @param context
      * @param url
      * @param title

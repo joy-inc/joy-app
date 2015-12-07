@@ -111,6 +111,7 @@ public class ActivityUrlUtil {
         int urlType = getUrlType(url);
         switch (urlType) {
             case TYPE_COUNTRY_TOPIC:
+
                 return true;
             case TYPE_CITY_TOPIC:
                 return true;
@@ -148,5 +149,24 @@ public class ActivityUrlUtil {
         }
         return false;
     }
+
+    /**
+     * 获取url对应的key数值
+     *
+     * @param url
+     * @param key
+     * @return
+     */
+    public static String getQueryParameter(String url, String key) {
+
+        try {
+            Uri uri = Uri.parse(url);
+            String value = uri.getQueryParameter(key);
+            return value;
+        } catch (Exception ex) {
+            return "";
+        }
+    }
+
 
 }
