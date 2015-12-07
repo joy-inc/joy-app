@@ -54,11 +54,8 @@
     <string name="need_know_attention">注意事项</string>
     <string name="see_all">查看全部</string>
     <string name="book">立即预订</string>
-    <string name="order_title">全网最低：%s</string>
-    <string name="order_id">订单号：%s</string>
-    <string name="product_type">产品类型：%s</string>
-    <string name="out_num">出行人数：%s</string>
-    <string name="order_price">订单金额：</string>
+    <string name="buy_count">购买数量</string>
+    <string name="departure_date">出发日期</string>
     <string name="pay">立即支付</string>
     <string name="name">姓名</string>
     <string name="phone">电话</string>
@@ -103,6 +100,7 @@
     <string name="order_detail_finish_title">订单已确认，购买成功</string>
     <string name="order_detail_finish_infor">请查收确认邮件，如有更多问题请咨询微信号</string>
     <string name="comment_all">全部点评</string>
+    <string name="commenton">立即点评</string>
 
     <!--行程规划-->
 

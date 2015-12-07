@@ -16,18 +16,13 @@ import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.map.StaticMapWidget;
 import com.joy.app.bean.poi.CommentAll;
-import com.joy.app.bean.poi.CommentItem;
-import com.joy.app.bean.poi.CommentScores;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
-
-import java.util.ArrayList;
 
 /**
  * 目的地折扣详情页(下订单的唯一入口)
@@ -136,32 +131,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_PRODUCT_DETAIL, PoiDetail.class, OrderHtpUtil.getProductDetailUrl(mId));
 
-        if (BuildConfig.DEBUG) {
-
-            PoiDetail data = new PoiDetail();
-            data.setComment_level("2.5");
-            data.setComment_num("19");
-            data.setIntroduction("07:00从酒店或集合地搭乘玻璃天窗全景豪华旅游巴士 开始米尔福德峡湾一日游。\n\n09:00沿着瓦卡蒂普湖穿过金斯顿到达蒂阿瑙, 这里拥有 令人窒息的风景，激动人心的河流，您将有时…");
-
-            ArrayList<String> photos = new ArrayList<>();
-            photos.add("http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280");
-            photos.add("http://pic.qyer.com/public/supplier/jd/2015/09/01/14410893435110/420x280");
-
-            data.setLat("36.0655402");
-            data.setLon("128.0650211");
-            data.setPhotos(photos);
-            ArrayList<String> list = new ArrayList<>();
-            list.add("新西兰峡湾国家公园著名的峡湾，被誉为世界 第八大美景。");
-            list.add("坐船欣赏倒映海中的山峰和从山崖泻下的瀑布，更有机会看到海豹。");
-            list.add("乘顶棚是玻璃天窗的奢华长途客车，饱览94号公路上的湖光山色。");
-            data.setHighlights(list);
-            data.setIs_book("1");
-            data.setPrice("700-800");
-            data.setTitle("米尔福峡湾一日游(邮轮、自助、午餐、皮划艇)");
-
-            obj.setData(data);
-        }
-
         return obj;
     }
 
@@ -175,39 +144,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     private void getCommentList() {
 
         ObjectRequest<CommentAll> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 3, 1));
-
-        if (BuildConfig.DEBUG) {
-
-            CommentAll data = new CommentAll();
-            CommentScores scores = new CommentScores();
-            scores.setComment_level("3.5");
-            scores.setComment_num("22");
-            scores.setFive("1");
-            scores.setFour("2");
-            scores.setThree("3");
-            scores.setTwo("4");
-            scores.setOne("5");
-
-            data.setScores(scores);
-
-            ArrayList<CommentItem> list = new ArrayList();
-
-            for (int i = 0; i < 7; i++) {
-                CommentItem item = new CommentItem();
-                item.setComment_id(i + "");
-                item.setComment("我是第 " + i + " 个来点评的诶！～");
-                item.setComment_level("2.5");
-                item.setComment_date("2015年11月19日");
-                item.setComment_user("小" + i);
-
-                list.add(item);
-            }
-            data.setComments(list);
-            obj.setData(data);
-
-            mCommentWidget.invalidate(data);
-
-        }
 
         obj.setResponseListener(new ObjectResponse<CommentAll>() {
 
