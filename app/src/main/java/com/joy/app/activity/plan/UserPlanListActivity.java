@@ -114,7 +114,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
                 folder.setEn_name("英文名" + i);
                 folder.setPic_url("http://pic.qyer.com/album/user/1294/6/QEtcRhoBYkw/index/680x400");
                 folder.setBefore_day("2");
-                folder.setPrice((12.34*i)+"");
+                folder.setPrice((3*i)+"");
                 list.add(folder);
             }
             obj.setData(list);

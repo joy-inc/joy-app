@@ -6,13 +6,12 @@ import android.os.Bundle;
 
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.TimeUtil;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.HotelParams;
 import com.joy.app.bean.hotel.HotelSearchFilters;
 import com.joy.app.utils.Consts;
 import com.joy.app.utils.hotel.HotelTimeUtil;
-import com.joy.app.utils.http.HotelHttpUtil;
+import com.joy.app.utils.http.HotelHtpUtil;
 
 /**
  * @author litong  <br>
@@ -21,6 +20,7 @@ import com.joy.app.utils.http.HotelHttpUtil;
 public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters> {
     HotelSearchFilters hotelSearchFilters;
     HotelParams params;
+    HotelListFragment hotelListFragment;
     /**
      * @param activity
      * @param cityId
@@ -63,6 +63,19 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     }
 
     @Override
+    protected void initTitleView() {
+        addTitleLeftBackView();
+        addTitleMiddleView(getIntent().getStringExtra("cityName")+"酒店");
+    }
+
+    @Override
+    protected void initContentView() {
+        super.initContentView();
+        hotelListFragment = HotelListFragment.instantiate(this,params);
+        addFragment(R.id.fl_content,hotelListFragment);
+    }
+
+    @Override
     protected boolean invalidateContent(HotelSearchFilters hotelSearchFilters) {
         this.hotelSearchFilters = hotelSearchFilters;
         return true;
@@ -71,6 +84,6 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     @Override
     protected ObjectRequest getObjectRequest() {
 
-        return HotelHttpUtil.getFilterRequest(HotelSearchFilters.class);
+        return HotelHtpUtil.getFilterRequest(HotelSearchFilters.class);
     }
 }

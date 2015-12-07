@@ -6,18 +6,19 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.joy.app.bean.hotel.HotelParams;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author litong  <br>
  * @Description 酒店    <br>
  */
-public class HotelHttpUtil extends BaseHtpUtil {
+public class HotelHtpUtil extends BaseHtpUtil {
 
-    public static ObjectRequest getHotelListRequest(Bundle hotelParams, int page, int count, Class clazz) {
+    public static ObjectRequest getHotelListRequest(HotelParams hotelParams, int page, int count, Class clazz) {
 
         Map<String, String> params = getBaseParams();
-//        params.put("checkin", hotelParams.getCheckIn()); 
+//        params.put("checkin",hotelParams.getCheckIn()); 
 //        params.put("checkout", hotelParams.getCheckOut()); 
 //        params.put("from_key", hotelParams.getFrom_key()); 
 //        params.put("orderby", String.valueOf(hotelParams.getOrderby())); 
