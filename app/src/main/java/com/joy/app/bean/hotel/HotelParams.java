@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author litong  <br>
  * @Description 酒店筛选    <br>
  */
-public class HotelParams implements Serializable {
+public class HotelParams implements Parcelable {
 
     String cityId,
             checkIn,//入住时间	2004-02-12
@@ -110,4 +110,48 @@ public class HotelParams implements Serializable {
         this.facilities_ids = facilities_ids;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.cityId);
+        dest.writeString(this.checkIn);
+        dest.writeString(this.checkOut);
+        dest.writeString(this.From_key);
+        dest.writeString(this.hotel);
+        dest.writeString(this.star_ids);
+        dest.writeString(this.price_rangs);
+        dest.writeString(this.facilities_ids);
+        dest.writeInt(this.Orderby);
+        dest.writeInt(this.area_id);
+    }
+
+    public HotelParams() {
+    }
+
+    protected HotelParams(Parcel in) {
+        this.cityId = in.readString();
+        this.checkIn = in.readString();
+        this.checkOut = in.readString();
+        this.From_key = in.readString();
+        this.hotel = in.readString();
+        this.star_ids = in.readString();
+        this.price_rangs = in.readString();
+        this.facilities_ids = in.readString();
+        this.Orderby = in.readInt();
+        this.area_id = in.readInt();
+    }
+
+    public static final Parcelable.Creator<HotelParams> CREATOR = new Parcelable.Creator<HotelParams>() {
+        public HotelParams createFromParcel(Parcel source) {
+            return new HotelParams(source);
+        }
+
+        public HotelParams[] newArray(int size) {
+            return new HotelParams[size];
+        }
+    };
 }

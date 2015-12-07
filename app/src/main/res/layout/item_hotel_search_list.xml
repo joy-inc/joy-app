@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_gravity="center_horizontal|top">
+
+
+        <View
+            android:id="@+id/topline"
+            style="@style/Line.Dark.Horizontal"
+            android:layout_alignParentBottom="true"/>
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/fl_image_container"
+            android:layout_height="wrap_content">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/iv_hotel_item_Photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:placeholderImage="@drawable/ic_def_square"
+                app:placeholderImageScaleType="centerCrop"
+                android:scaleType="centerCrop" />
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_infos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/fl_image_container"
+            android:orientation="vertical">
+
+            <com.android.library.widget.JTextView
+                android:paddingTop="14dp"
+                android:id="@+id/tv_hotel_city_cnname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="50dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="银河大酒店"
+                android:textColor="@color/black_trans87"
+                android:textStyle="normal" />
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv_hotel_city_enname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxEms="20"
+                android:singleLine="true"
+                android:text="Jinyu Holiday Hotel Hongkong" />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_infos"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@id/fl_image_container"
+            android:layout_toRightOf="@id/fl_image_container"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_toLeftOf="@+id/linearLayout">
+
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv_hotel_city_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:text="五星级 "/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/fl_image_container"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout">
+
+            <com.android.library.widget.JTextView
+                android:id="@+id/tv_hotel_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="286"
+                android:textColor="@color/text_pink" />
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

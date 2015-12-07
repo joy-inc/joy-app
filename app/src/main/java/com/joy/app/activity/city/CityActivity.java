@@ -15,6 +15,7 @@ import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
+import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.joy.app.adapter.city.CityAdapter;
 import com.joy.app.bean.city.City;
 import com.joy.app.utils.http.CityHtpUtil;
@@ -122,7 +123,8 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
                 break;
             case R.id.jimHotel:
 
-                CityFunActivity.startActivity(this, mPlaceId, 2);
+//                CityFunActivity.startActivity(this, mPlaceId, 2);
+                CityHotelListActivity.startActivity(this,"","","");
                 break;
             case R.id.jimFood:
 

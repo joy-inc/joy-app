@@ -21,6 +21,7 @@ import com.joy.app.utils.http.HotelHttpUtil;
 public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters> {
     HotelSearchFilters hotelSearchFilters;
     HotelParams params;
+    HotelListFragment hotelListFragment;
     /**
      * @param activity
      * @param cityId
@@ -60,6 +61,19 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         params.setFrom_key(getIntent().getStringExtra("fromKey"));
         params.setCheckIn(getIntent().getLongExtra("startDay",System.currentTimeMillis()));
         params.setCheckOut(getIntent().getLongExtra("endDay",System.currentTimeMillis()));
+    }
+
+    @Override
+    protected void initTitleView() {
+        addTitleLeftBackView();
+        addTitleMiddleView(getIntent().getStringExtra("cityName")+"酒店");
+    }
+
+    @Override
+    protected void initContentView() {
+        super.initContentView();
+        hotelListFragment = HotelListFragment.instantiate(this,params);
+        addFragment(R.id.fl_content,hotelListFragment);
     }
 
     @Override
