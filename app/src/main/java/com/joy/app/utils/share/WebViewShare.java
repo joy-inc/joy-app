@@ -24,6 +24,7 @@ public class WebViewShare implements IShareInfo {
 
     @Override
     public ShareInfo getShareInfo(ShareType platform) {
+
         ShareInfo shareInfo = new ShareInfo();
         shareInfo.setContent("要分享的url" + url);
         shareInfo.setMediaResId(R.drawable.ic_joy_login);

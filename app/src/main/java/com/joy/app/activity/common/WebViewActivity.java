@@ -26,9 +26,15 @@ import de.greenrobot.event.EventBus;
  */
 public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget.WebViewListener {
 
+    //--大于100有分享的意思
+    public static final int TYPE_CITY = 101;//城市详情
+
+    public static final int TYPE_ABOUT = 1;//关于界面
+
     private WebViewBaseWidget mWebViewWidget;
     private ShareDialog mShareDialog;
     private WebViewShare mWebViewShare;
+    private int mType = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
         mWebViewShare.setInfo("http://www.qq.com");
         EventBus.getDefault().register(this);
         mWebViewWidget.loadUrl(getIntent().getStringExtra("url"));
-
+        mType = getIntent().getIntExtra("type", 0);
     }
 
     @Override
@@ -58,17 +64,19 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
         setTitle(getIntent().getStringExtra("title"));
         addTitleLeftBackView();
-        addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mShareDialog == null) {
 
-                    mShareDialog = new ShareDialog(WebViewActivity.this, mWebViewShare);
+        if (mType > 100) {
+            addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mShareDialog == null) {
+
+                        mShareDialog = new ShareDialog(WebViewActivity.this, mWebViewShare);
+                    }
+                    mShareDialog.show();
                 }
-                mShareDialog.show();
-            }
-        });
-
+            });
+        }
     }
 
     @Override
@@ -204,12 +212,27 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
             mWebViewWidget.reloadUrlByLoginStateChanged();
     }
 
-
+    /**
+     * 不需要分享的调这
+     */
     public static void startActivity(Context context, String url, String title) {
+
+        startActivity(context,url,title,0);
+
+    }
+    /**
+     * 有分享的调用这
+     * @param context
+     * @param url
+     * @param title
+     * @param type
+     */
+    public static void startActivity(Context context, String url, String title, int type) {
 
         Intent intent = new Intent();
         intent.putExtra("url", url);
         intent.putExtra("title", title);
+        intent.putExtra("type", type);
         intent.setClass(context, WebViewActivity.class);
         context.startActivity(intent);
 

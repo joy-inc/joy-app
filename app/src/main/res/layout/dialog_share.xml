@@ -2,45 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="@color/white"
               android:orientation="vertical">
 
 
     <!-- 分享到身边人 -->
 
     <com.android.library.widget.JTextView
-        android:id="@+id/tvWeibo"
-        style="@style/share_text"
-        android:text="分享到微博"/>
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/share_to"
+        android:textColor="@color/black"
+        android:textSize="16dp"/>
 
-    <com.android.library.widget.JTextView
-        android:id="@+id/tvWeixin"
-        style="@style/share_text"
+    <View
+        android:id="@+id/v1"
+        style="@style/Line.Black15"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        />
 
-        android:text="分享到微信"/>
+    <LinearLayout
+        android:id="@+id/llDiv1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-    <com.android.library.widget.JTextView
-        android:id="@+id/tvFriend"
-        style="@style/share_text"
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvWeibo"
+            style="@style/share_text"
+            android:drawableTop="@drawable/ic_share_weibo"
+            android:text="@string/weibo"/>
 
-        android:text="分享到朋友圈"/>
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvWeixin"
+            style="@style/share_text"
 
-    <!--<com.android.library.widget.JTextView-->
-        <!--android:id="@+id/tvEmail"-->
-        <!--style="@style/share_text"-->
+            android:drawableTop="@drawable/ic_share_wechat"
 
-        <!--android:text="email"/>-->
+            android:text="@string/wechat"/>
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvFriend"
+            style="@style/share_text"
+
+            android:drawableTop="@drawable/ic_share_wechat_circle"
+
+            android:text="@string/wechat_circle"/>
 
 
+    </LinearLayout>
 
-    <!--<com.android.library.widget.JTextView-->
-        <!--android:id="@+id/tvsms"-->
-        <!--style="@style/share_text"-->
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-        <!--android:text="分享到短信"/>-->
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvShareMore"
+            style="@style/share_text"
 
-    <com.android.library.widget.JTextView
-        android:id="@+id/tvShareMore"
-        style="@style/share_text"
+            android:drawableTop="@drawable/ic_share_more"
+            android:text="@string/more"/>
 
-        android:text="更多分享"/>
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvmore1"
+            style="@style/share_text"
+            android:drawableTop="@drawable/ic_share_weibo"
+            android:text="@string/weibo"
+            android:visibility="invisible"/>
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvmore2"
+            style="@style/share_text"
+            android:drawableTop="@drawable/ic_share_wechat"
+
+            android:text="@string/wechat"
+
+            android:visibility="invisible"/>
+
+
+    </LinearLayout>
 </LinearLayout>

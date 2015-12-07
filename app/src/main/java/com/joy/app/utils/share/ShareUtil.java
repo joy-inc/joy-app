@@ -21,7 +21,7 @@ public class ShareUtil {
      * @return
      */
     public static String getWeiboPaht(){
-        File file = new File(StorageUtil.getQyerTempDir(), "share_img_for_weibo.jpeg");
+        File file = new File(StorageUtil.getQyerTempDir(), "share_img_for_weibo");
         if(file.exists()){
             return file.getAbsolutePath();
         }
