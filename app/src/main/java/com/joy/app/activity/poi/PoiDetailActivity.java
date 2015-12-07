@@ -17,6 +17,7 @@ import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
 import com.joy.app.R;
+import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.map.StaticMapWidget;
 import com.joy.app.bean.poi.CommentAll;
@@ -183,7 +184,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             showToast("查看全部简介");
         } else if (R.id.tvAllKnow == view.getId()) {
 
-            showToast("查看全部购买须知");
+            WebViewActivity.startActivity(PoiDetailActivity.this, mPoiDetail.getPurchase_info(), "");
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();
