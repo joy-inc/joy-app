@@ -10,7 +10,6 @@ import com.android.library.utils.ParamsUtil;
 import com.android.library.utils.SortComparator;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
-import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.utils.ChannelUtil;
 
 import java.util.Map;

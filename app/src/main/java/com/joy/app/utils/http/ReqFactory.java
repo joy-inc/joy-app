@@ -17,8 +17,8 @@ import java.util.TreeMap;
 public class ReqFactory {
 
     private static final String PRIVATE_KEY = "AD7A1775466A6A137E9F2322A330598AE51A922AB9308919AA8CA0B3154F9EDD";
-    private static final String KEY_API_AUTH = "api_auth";
-    private static final String KEY_USER_TOKEN = "user_token";
+    private static final String KEY_API_AUTH = "api-auth";
+    private static final String KEY_USER_TOKEN = "user-token";
 
     public static ObjectRequest newGet(String fullUrl, Class clazz) {
 

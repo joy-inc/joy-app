@@ -27,7 +27,6 @@ import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
 import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
@@ -38,6 +37,7 @@ import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商品项目选择页
@@ -161,6 +161,8 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     @Override
     protected boolean invalidateContent(Product product) {
 
+        mCountWidget.setProduct(product);
+
         if (CollectionUtil.isNotEmpty(product.getLevels())) {
 
             List<ProductLevels> list1 = new ArrayList<>();
@@ -187,7 +189,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             mSubjectWidget.invalidate(list2);
             mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.invalidate(data3);
-
         }
 
         return CollectionUtil.isNotEmpty(product.getLevels());
@@ -323,46 +324,46 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_OPTIONS, Product.class, OrderHtpUtil.getProductOptionListUrl(mId));
 
-        if (BuildConfig.DEBUG) {
-
-            Product data = new Product();
-            ArrayList listdata = new ArrayList();
-            ProductLevels levels = null;
-            for (int i = 0; i < 3; i++) {
-                levels = new ProductLevels();
-
-                levels.setLevel_id((i + 1) + "");
-
-                if (i == 0) {
-                    levels.setType(1 + "");
-                    levels.setTitle("出发日期");
-                } else if (i == 1) {
-                    levels.setType(2 + "");
-                    levels.setTitle("可选项目");
-                } else if (i == 2) {
-                    levels.setType(3 + "");
-                    levels.setTitle("产品数量选择");
-                }
-
-                ArrayList list = new ArrayList();
-
-                for (int j = 0; j < 2; j++) {
-                    LevelOptions options = new LevelOptions();
-                    options.setOption_id(i + "" + j);
-                    options.setContent(i + "" + j + " 成人");
-                    options.setDescribe("13-99岁 " + j);
-
-                    list.add(options);
-                }
-
-                levels.setOptions(list);
-                listdata.add(levels);
-            }
-
-            data.setLevels(listdata);
-
-            obj.setData(data);
-        }
+//        if (BuildConfig.DEBUG) {
+//
+//            Product data = new Product();
+//            ArrayList listdata = new ArrayList();
+//            ProductLevels levels = null;
+//            for (int i = 0; i < 3; i++) {
+//                levels = new ProductLevels();
+//
+//                levels.setLevel_id((i + 1) + "");
+//
+//                if (i == 0) {
+//                    levels.setType(1 + "");
+//                    levels.setTitle("出发日期");
+//                } else if (i == 1) {
+//                    levels.setType(2 + "");
+//                    levels.setTitle("可选项目");
+//                } else if (i == 2) {
+//                    levels.setType(3 + "");
+//                    levels.setTitle("产品数量选择");
+//                }
+//
+//                ArrayList list = new ArrayList();
+//
+//                for (int j = 0; j < 2; j++) {
+//                    LevelOptions options = new LevelOptions();
+//                    options.setOption_id(i + "" + j);
+//                    options.setContent(i + "" + j + " 成人");
+//                    options.setDescribe("13-99岁 " + j);
+//
+//                    list.add(options);
+//                }
+//
+//                levels.setOptions(list);
+//                listdata.add(levels);
+//            }
+//
+//            data.setLevels(listdata);
+//
+//            obj.setData(data);
+//        }
 
         return obj;
     }

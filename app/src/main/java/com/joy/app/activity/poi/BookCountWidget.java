@@ -9,13 +9,12 @@ import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
 import com.joy.app.bean.poi.LevelOptions;
-import com.joy.app.bean.poi.ProductItems;
+import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
 import com.joy.app.view.LinearListView;
 
@@ -31,6 +30,13 @@ public class BookCountWidget extends ExLayoutWidget {
     private LinearListView mLinearLv;
     private LevelAdapter mAdapter;
     private String mDateSubjectIds = TextUtil.TEXT_EMPTY;
+
+    private Product mProduct;
+
+    public void setProduct(Product product){
+
+        mProduct = product;
+    }
 
     public BookCountWidget(Activity activity) {
 
@@ -90,7 +96,7 @@ public class BookCountWidget extends ExLayoutWidget {
             count = count - 1;
             mAdapter.getItem(position).setLocalCount(count + "");
             ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvCount)).setText(count + "");
-            refreshUnitPrice(position, getUnitPrice(mAdapter.getItem(position).getOption_id()));
+//            refreshUnitPrice(position, getUnitPrice(mAdapter.getItem(position).getOption_id()));
         }
     }
 
@@ -102,7 +108,7 @@ public class BookCountWidget extends ExLayoutWidget {
             count = count + 1;
             mAdapter.getItem(position).setLocalCount(count + "");
             ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvCount)).setText(count + "");
-            refreshUnitPrice(position, getUnitPrice(mAdapter.getItem(position).getOption_id()));
+//            refreshUnitPrice(position, getUnitPrice(mAdapter.getItem(position).getOption_id()));
         }
     }
 
@@ -131,7 +137,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
             for (LevelOptions data : getSelectId()) {
 
-                ProductItems item = getItemObject("_" + data.getOption_id());
+                Product.Item item = getItemObject("_" + data.getOption_id());
                 if (item != null)
                     list.add(item.getItem_id() + "-" + data.getLocalCount());
             }
@@ -146,18 +152,9 @@ public class BookCountWidget extends ExLayoutWidget {
         }
     }
 
-    private ProductItems getItemObject(String key) {
+    private Product.Item getItemObject(String key) {
 
-        key = mDateSubjectIds + key;
-
-        LogMgr.w("item Key~~:" + key);
-
-        //todo get the item_id by key from json:items{}
-        ProductItems data = new ProductItems();
-        data.setItem_id("1111");
-        data.setPrice("213.2");
-
-        return data;
+        return mProduct.getItems().get(mDateSubjectIds + key);
     }
 
     // 重新选择日期、项目时，重置每个产品的单价
@@ -167,7 +164,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
             for (int i = 0; i < mAdapter.getCount(); i++) {
 
-                ProductItems item = getItemObject("_" + mAdapter.getItem(i).getOption_id());
+                Product.Item item = getItemObject("_" + mAdapter.getItem(i).getOption_id());
 
                 if (item != null)
                     refreshUnitPrice(i, item.getPrice());
@@ -185,7 +182,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
     private String getUnitPrice(String optionId) {
 
-        ProductItems data = getItemObject(mDateSubjectIds + "_" + optionId);
+        Product.Item data = getItemObject(mDateSubjectIds + "_" + optionId);
         if (data != null)
             return data.getPrice();
 

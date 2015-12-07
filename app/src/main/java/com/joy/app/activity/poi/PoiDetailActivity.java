@@ -139,6 +139,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         if (BuildConfig.DEBUG) {
 
             PoiDetail data = new PoiDetail();
+            data.setProduct_id("28");
             data.setComment_level("2.5");
             data.setComment_num("19");
             data.setIntroduction("07:00从酒店或集合地搭乘玻璃天窗全景豪华旅游巴士 开始米尔福德峡湾一日游。\n\n09:00沿着瓦卡蒂普湖穿过金斯顿到达蒂阿瑙, 这里拥有 令人窒息的风景，激动人心的河流，您将有时…");
