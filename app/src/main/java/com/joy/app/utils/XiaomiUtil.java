@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Process;
 import android.support.v4.app.NotificationCompat;
 
@@ -194,7 +195,7 @@ public class XiaomiUtil {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         Intent intent = getIntentByPush(context, uri, messageId);
         builder.setContentIntent(PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
-        //        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_qyer_white_60));
+        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_tran_white_logo));
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setTicker(pushMessage.getTitle());
         builder.setContentTitle(pushMessage.getTitle());

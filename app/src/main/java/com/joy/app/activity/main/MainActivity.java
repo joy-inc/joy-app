@@ -111,16 +111,7 @@ public class MainActivity extends BaseTabActivity {
             @Override
             public void onClick(View v) {
 
-                WebViewActivity.startActivity(MainActivity.this,"http://m.qyer.com/z/zt/localhaidao&source=app&campaign=appshouye&category=ht2-localhaidao/?source=app&client_id=qyer_android&track_user_id=&track_deviceid=000000000000000&track_app_version=6.8.2","专题");
-//                SettingActivity.startActivity(MainActivity.this);
-                //                Calendar calendar = Calendar.getInstance();
-                //                calendar.setTime(new Date());
-                //                calendar.add(Calendar.DAY_OF_MONTH, 2);
-                //                Calendar calendar1 = Calendar.getInstance();
-                //                calendar1.setTime(new Date());
-                //                calendar1.add(Calendar.MONTH, 3);
-                //                                DayPickerActivity.s123tartHotelDayPickerForResult(MainActivity.this,true,0,0,1);
-                //                DayPickerActivity.startOrderDayPickerForResult(MainActivity.this, 1446351132l * 1000, 1477973532l * 1000, 0, 1);
+                SettingActivity.startActivity(MainActivity.this);
             }
         });
         mMainActivityBC.initTitleView();

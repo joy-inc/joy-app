@@ -37,7 +37,6 @@ import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 商品项目选择页
@@ -364,7 +363,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 //
 //            obj.setData(data);
 //        }
-
         return obj;
     }
 
@@ -413,14 +411,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         intent.putExtra("photoUrl", params[1]);
         intent.putExtra("title", params[2]);
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act, view, view.getTransitionName());
-//            act.startActivity(intent, options.toBundle());
-//        } else {
-
-            act.startActivity(intent);
-//        }
+        act.startActivity(intent);
     }
 
     private class DialogSubjectAdapter extends ExAdapter<LevelOptions> {

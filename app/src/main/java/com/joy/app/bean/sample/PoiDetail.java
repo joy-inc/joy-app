@@ -28,6 +28,7 @@ public class PoiDetail implements Parcelable {
     private String introduction = TextUtil.TEXT_EMPTY;
     private String is_book = TextUtil.TEXT_EMPTY;
     private ArrayList<String> photos;
+    private String purchase_info = TextUtil.TEXT_EMPTY;
 
 
     public String getProduct_id() {
@@ -124,6 +125,14 @@ public class PoiDetail implements Parcelable {
 
     public void setPhotos(ArrayList<String> photos) {
         this.photos = photos;
+    }
+
+    public String getPurchase_info() {
+        return purchase_info;
+    }
+
+    public void setPurchase_info(String purchase_info) {
+        this.purchase_info = purchase_info;
     }
 
     @Override

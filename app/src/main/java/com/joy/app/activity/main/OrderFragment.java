@@ -8,7 +8,6 @@ import android.view.View;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
@@ -17,7 +16,6 @@ import com.joy.app.bean.MainOrder;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,10 +50,14 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
             @Override
             public void onItemViewClick(int position, View clickView, MainOrder data) {
 
-                if (clickView.getId() == R.id.tvStatus) {
+                if (clickView.getId() == R.id.acbPay) {
                     OrderPayActivity.startActivity(getActivity(), data.getOrder_id(), null);
+                } else if (clickView.getId() == R.id.acbCommenton) {
+                    showToast("to commenton");
+                    // todo commenton edit
                 } else {
 
+                    showToast(data.getOrder_id() + " To Order Detail");
                     PoiDetailActivity.startActivity(getActivity(), "28");
                 }
             }
