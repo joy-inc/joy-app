@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
+import com.joy.app.utils.share.WebViewShare;
+import com.joy.app.view.dialog.ShareDialog;
 import com.joy.app.view.webview.BaseWebView;
 import com.joy.app.view.webview.WebViewBaseWidget;
 import com.joy.app.view.webview.WebViewNativeWidget;
@@ -24,6 +27,8 @@ import de.greenrobot.event.EventBus;
 public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget.WebViewListener {
 
     private WebViewBaseWidget mWebViewWidget;
+    private ShareDialog mShareDialog;
+    private WebViewShare mWebViewShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +46,11 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
     @Override
     protected void initData() {
-
+        mWebViewShare = new WebViewShare();
+        mWebViewShare.setInfo(getIntent().getStringExtra("url"));
         EventBus.getDefault().register(this);
         mWebViewWidget.loadUrl(getIntent().getStringExtra("url"));
+
     }
 
     @Override
@@ -51,6 +58,17 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
         setTitle(getIntent().getStringExtra("title"));
         addTitleLeftBackView();
+        addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mShareDialog == null) {
+
+                    mShareDialog = new ShareDialog(WebViewActivity.this, mWebViewShare);
+                }
+                mShareDialog.show();
+            }
+        });
+
     }
 
     @Override
@@ -72,6 +90,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
     /**
      * 设置webview的实体类
+     *
      * @param isNativeMode
      */
     protected void setContentFullScreenWebView(boolean isNativeMode) {
@@ -131,7 +150,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
         if (LogMgr.isDebug())
             LogMgr.d("webviewActivity", "onWebViewShouldOverrideUrlLoading url  = " + url);
         loadUrl(url);
-//        ActivityUrlUtil.startActivityByHttpUrl(this, url);
+        //        ActivityUrlUtil.startActivityByHttpUrl(this, url);
         return true;
     }
 
