@@ -76,7 +76,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         super.onDestroy();
         try {
             mDecorView.getViewTreeObserver().removeOnGlobalLayoutListener(mLayoutListener);
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
         }
     }
@@ -114,12 +114,15 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtil.isEmpty(mEtCode.getText().toString())){
-                    mTvButton.setEnabled(false);
-                    mTvButton.setBackgroundResource(R.drawable.shape_bg_rectangle_dark);
-                }else{
+                if (!TextUtil.isEmpty(mEtCode.getText().toString()) && !TextUtil.isEmpty(mSubmitPhone)) {
+
                     mTvButton.setEnabled(true);
                     mTvButton.setBackgroundResource(R.drawable.selector_bg_rectangle_accent_fill);
+
+                } else {
+                    mTvButton.setEnabled(false);
+                    mTvButton.setBackgroundResource(R.drawable.shape_bg_rectangle_dark);
+
                 }
             }
 
@@ -213,7 +216,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
      */
     private void toLogin() {
 
-        if (TextUtil.isEmpty(mSubmitPhone) ) {
+        if (TextUtil.isEmpty(mSubmitPhone)) {
             ToastUtil.showToast(R.string.login_phone_empty);
             return;
         }
@@ -225,13 +228,13 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         showLoading();
 
         ObjectRequest<User> req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN, User.class, UserHtpUtil.userLogin(mSubmitPhone, code));
-//        User u = new User();
-//        u.setUser_id("ssss");
-//        u.setMobile("18888888888");
-//        u.setCreate_time(new Date().getTime() / 1000);
-//        u.setNickname("liulong");
-//        u.setToken("sadfasdfas");
-//        req.setData(u);
+        //        User u = new User();
+        //        u.setUser_id("ssss");
+        //        u.setMobile("18888888888");
+        //        u.setCreate_time(new Date().getTime() / 1000);
+        //        u.setNickname("liulong");
+        //        u.setToken("sadfasdfas");
+        //        req.setData(u);
         req.setResponseListener(new ObjectResponse<User>() {
 
 
@@ -272,15 +275,16 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
     private void getCode() {
 
 
-        mSubmitPhone = mEtPhone.getText().toString();
-        if (TextUtil.isEmpty(mSubmitPhone) || mSubmitPhone.length() < 11) {
+        String tmp = mEtPhone.getText().toString();
+        if (TextUtil.isEmpty(tmp) || tmp.length() < 11) {
             showToast(R.string.login_no_phone);
             return;
         }
+        mSubmitPhone = tmp;
         mTvButton.setEnabled(false);
         showLoading();
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mSubmitPhone));
-//        req.setData("");
+        //        req.setData("");
         req.setResponseListener(new ObjectResponse() {
 
             @Override

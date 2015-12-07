@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
@@ -19,10 +20,13 @@ import com.android.library.widget.JTextView;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
+import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.user.UserLoginActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.utils.http.UserHtpUtil;
+import com.joy.app.utils.share.SettingShare;
+import com.joy.app.view.dialog.ShareDialog;
 import com.umeng.update.UmengUpdateAgent;
 
 import butterknife.Bind;
@@ -34,7 +38,7 @@ import de.greenrobot.event.EventBus;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-17
  */
-public class SettingActivity extends BaseUiActivity implements View.OnClickListener {
+public class SettingActivity extends BaseHttpUiActivity<String> implements View.OnClickListener {
 
     @Bind(R.id.sdvUserHead)
     ImageView mUserHead;
@@ -47,6 +51,10 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
 
     @Bind(R.id.llLoginOut)
     View mLoinOut;
+
+    private SettingShare mShare;
+
+    private ShareDialog mShareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +94,6 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
         findViewById(R.id.llClean).setOnClickListener(this);
         findViewById(R.id.llAbout).setOnClickListener(this);
         findViewById(R.id.llLoginDiv).setOnClickListener(this);
-        mUserHead.setOnClickListener(this);
         mLoinOut.setOnClickListener(this);
         handleUserLogin();
         JTextView version = (JTextView) findViewById(R.id.tvVersion);
@@ -131,9 +138,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
             case R.id.llAbout:
                 about();
                 break;
-            case R.id.sdvUserHead:
-                openImageDialog();
-                break;
+
             case R.id.llLoginDiv:
                 showLoginActivity();
                 break;
@@ -172,18 +177,20 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
         }
     }
 
-    /**
-     * 显示拍照的对话框
-     */
-    private void openImageDialog() {
-
-    }
 
     /**
      * 推荐分享,打开推荐界面
      */
     private void rectangle() {
 
+        if (mShare == null) {
+            mShare = new SettingShare();
+        }
+        if (mShareDialog == null) {
+            mShareDialog = new ShareDialog(this, mShare);
+
+        }
+        mShareDialog.show();
     }
 
     /**
@@ -191,6 +198,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
      */
     private void clean() {
 
+        ToastUtil.showToast(R.string.setting_clean_success);
     }
 
     /**
@@ -198,6 +206,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
      */
     private void about() {
 
+        WebViewActivity.startActivity(this, "http://www.qyer.com", getString(R.string.setting_about), WebViewActivity.TYPE_ABOUT);
     }
 
     /**
@@ -216,9 +225,8 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     private void loginOut() {
 
         //网络请求,发广播
-        //// TODO: 15/12/3 是否需要启动进度条
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN_OUT, String.class, UserHtpUtil.userLoginOut(JoyApplication.getUserToken()));
-        req.setData("");
+        showLoading();
         req.setResponseListener(new ObjectResponse() {
 
             @Override
@@ -228,7 +236,7 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
                 JoyApplication.setUser(null);
                 JoyApplication.getCommonPrefs().clearUser();
                 EventBus.getDefault().post(new LoginStatusEvent(true, null));
-
+                hideLoading();
             }
 
             @Override
@@ -239,6 +247,8 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
                 } else {
                     ToastUtil.showToast(msg);
                 }
+                hideLoading();
+
             }
         });
         JoyApplication.getRequestQueue().add(req);
@@ -247,5 +257,15 @@ public class SettingActivity extends BaseUiActivity implements View.OnClickListe
     public static void startActivity(Context context) {
 
         context.startActivity(new Intent(context, SettingActivity.class));
+    }
+
+    @Override
+    protected boolean invalidateContent(String s) {
+        return false;
+    }
+
+    @Override
+    protected ObjectRequest<String> getObjectRequest() {
+        return null;
     }
 }

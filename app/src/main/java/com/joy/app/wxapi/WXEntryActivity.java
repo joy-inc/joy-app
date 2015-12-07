@@ -3,6 +3,7 @@ package com.joy.app.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.library.utils.LogMgr;
 import com.joy.library.share.ShareConstant;
@@ -44,13 +45,13 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onReq(BaseReq baseReq) {
-        LogMgr.d("WXEntryActivity onReq " + baseReq.toString());
+        Log.d("WXEntryActivity"," onReq " + baseReq.toString());
         finish();
     }
 
     @Override
     public void onResp(BaseResp baseResp) {
-        LogMgr.d("WXEntryActivity onResp " + baseResp.errStr + " " + baseResp.errCode);
+        Log.d("WXEntryActivity"," onResp " + baseResp.errStr + " " + baseResp.errCode);
         finish();
 
     }

@@ -8,10 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
-        android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="16dp">
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="187dp"
+            android:scaleType="centerCrop" />
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvTitle"
@@ -19,24 +22,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:ellipsize="end"
-            android:singleLine="true"
-            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="3dp"
+            android:maxLines="2"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp"
+            android:paddingTop="11dp"
+            android:textColor="@color/black_trans70"
             android:textSize="16dp" />
-
-        <com.android.library.widget.JTextView
-            android:id="@+id/tvId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/black_trans54"
-            android:textSize="13dp" />
-
-        <View
-            style="@style/Line.Dark.Horizontal"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="14dp" />
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvType"
@@ -44,59 +37,198 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:ellipsize="end"
+            android:paddingBottom="8dp"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp"
+            android:paddingTop="8dp"
             android:singleLine="true"
-            android:textColor="@color/black_trans87"
+            android:textColor="@color/text_pink"
             android:textSize="14dp" />
 
-
-        <com.android.library.widget.JTextView
-            android:id="@+id/tvCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="7dp"
-            android:textColor="@color/black_trans87"
-            android:textSize="14dp" />
 
         <View
             style="@style/Line.Dark.Horizontal"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="14dp" />
+            android:layout_marginBottom="10dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/vLineVertical"
+                android:orientation="vertical"
+                android:paddingLeft="11dp">
+
+                <com.android.library.widget.JTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/departure_date"
+                    android:textColor="@color/color_accent"
+                    android:textSize="12dp" />
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvDepartureDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+
+            </LinearLayout>
+
+
+            <View
+                android:id="@+id/vLineVertical"
+                style="@style/Line.Dark.Vertical"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/vLineVertical"
+                android:orientation="vertical"
+                android:paddingLeft="11dp">
+
+                <com.android.library.widget.JTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buy_count"
+                    android:textColor="@color/color_accent"
+                    android:textSize="12dp" />
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            style="@style/Line.Dark.Horizontal"
+            android:layout_marginTop="10dp" />
 
         <RelativeLayout
             android:id="@+id/rvStatusDiv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp">
+            android:layout_height="wrap_content">
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvOrderPrice"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/rvStatus0Div"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/order_price"
-                android:textColor="@color/black_trans54"
-                android:textSize="11dp" />
+                android:padding="12dp">
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tvTotalPrice"
-                android:layout_width="wrap_content"
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvTotalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/color_accent"
+                    android:textSize="18dp" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/acbPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/shape_bg_oval_accent"
+                    android:text="@string/pay"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rvStatus1Div"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvOrderPrice"
-                android:layout_marginTop="2dp"
-                android:textColor="@color/color_accent"
-                android:textSize="18dp" />
+                android:background="@color/color_grey"
+                android:padding="12dp">
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/tvStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="26dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/shape_bg_oval_accent"
-                android:layout_centerVertical="true"
-                android:text="@string/pay"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
+                <com.android.library.widget.JTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/order_detail_cancel_title"
+                    android:textColor="@color/text_grey_dark"
+                    android:textSize="14dp" />
 
+                <android.support.v7.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="15dp"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rvStatus2Div"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_grey"
+                android:padding="12dp">
+
+                <com.android.library.widget.JTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/order_detail_paied_title"
+                    android:textColor="@color/text_pink"
+                    android:textSize="14dp" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="15dp"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rvStatus3Div"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_accent"
+                android:padding="12dp">
+
+                <com.android.library.widget.JTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@+id/acbCommenton"
+                    android:drawableLeft="@drawable/ic_order_confirm"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/order_detail_finish_title"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/acbCommenton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/shape_bg_oval_while"
+                    android:text="@string/commenton"
+                    android:textColor="@color/color_accent"
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
         </RelativeLayout>
 
     </LinearLayout>
