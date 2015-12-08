@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -58,7 +57,6 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
         mOrderItem = TextUtil.filterNull(getIntent().getStringExtra("item"));
         mDateTime = TextUtil.filterNull(getIntent().getStringExtra("time"));
 
-        LogMgr.w("itemids====" + mOrderItem);
     }
 
     @Override

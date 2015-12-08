@@ -29,7 +29,6 @@ public interface HtpApi {
     String URL_POST_ORDER_DETAIL = JOY_URL_BASE + "/order/detail";// 获取订单
     String URL_POST_ORDER_CANCEL = JOY_URL_BASE + "/order/cancel";// 取消订单
     String URL_POST_ORDER_PAY_CREATE_CHARGE = JOY_URL_BASE + "/order/create_charge";// 创建Ping++支付凭证
-    String URL_POST_ORDER_PAY_CALLBACK = JOY_URL_BASE + "/order/pay_callback";// Ping++支付成功后调用的Webhooks通知接口
 
     // 行程规划====================================
     String URL_POST_PLAN_ADD = JOY_URL_BASE + "/user/plan_add";//  添加我的旅行计划
