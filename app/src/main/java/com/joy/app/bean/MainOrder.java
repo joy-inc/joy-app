@@ -20,6 +20,11 @@ public class MainOrder {
     private String travel_date = TextUtil.TEXT_EMPTY;
 
     /**
+     * 产品id
+     */
+    private String product_id = TextUtil.TEXT_EMPTY;
+
+    /**
      * 订购产品
      */
     private String product_title = TextUtil.TEXT_EMPTY;
@@ -66,6 +71,14 @@ public class MainOrder {
 
     public void setTravel_date(String travel_date) {
         this.travel_date = travel_date;
+    }
+
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
     public String getProduct_title() {

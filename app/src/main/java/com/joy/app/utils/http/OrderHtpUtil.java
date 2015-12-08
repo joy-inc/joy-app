@@ -170,4 +170,19 @@ public class OrderHtpUtil extends BaseHtpUtil {
         // todo
         return params;
     }
+
+    /**
+     * 发布点评
+     *
+     * @return
+     */
+    public static Map<String, String> getCommentAdd(String product_id, String comment_level, String comment) {
+
+        Map<String, String> params = getBaseParams();
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
+        params.put("product_id", product_id);
+        params.put("comment_level", comment_level);
+        params.put("comment", comment);
+        return params;
+    }
 }

@@ -6,7 +6,8 @@ package com.joy.app.utils.http;
 public interface HtpApi {
 
     String QYER_URL_BASE = "http://open.qyer.com";// base url
-    String JOY_URL_BASE = "http://api.joy.com";// base url
+//    String JOY_URL_BASE = "http://api.joy.com";// base url
+    String JOY_URL_BASE = "http://api.joy.4awork.com";// base url
 
     // sample
     String URL_GET_SEARCH_HOT_CITY = QYER_URL_BASE + "/qyer/hotel/hot_city_list";// 200热门城市
@@ -19,6 +20,7 @@ public interface HtpApi {
     // poi折扣====================================
     String URL_POST_PRODUCT_DETAIL = JOY_URL_BASE + "/product/detail";// 获取poi折扣详情接口
     String URL_POST_COMMENTS = JOY_URL_BASE + "/product/comment_list";// 获取商品评论列表
+    String URL_POST_COMMENT_ADD = JOY_URL_BASE + "/product/add_comment";// poi折扣评论接口
     String URL_POST_OPTIONS = JOY_URL_BASE + "/product/option_list";// 获取商品项目列表
     String URL_POST_CONTACT_GET = JOY_URL_BASE + "/product/contact_info";// 获取联系人信息
     String URL_POST_CONTACT_ADD = JOY_URL_BASE + "/product/add_contact";// 添加联系人信息

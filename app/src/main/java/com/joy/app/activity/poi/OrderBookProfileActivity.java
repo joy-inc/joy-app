@@ -185,7 +185,6 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             @Override
             public void onPre() {
 
-                super.onPre();
                 showLoading();
             }
 
@@ -201,7 +200,6 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             public void onError(Object tag, String msg) {
 
                 hideLoading();
-                super.onError(tag, msg);
                 showToast(msg);
             }
         });

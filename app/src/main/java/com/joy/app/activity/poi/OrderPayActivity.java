@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
@@ -214,12 +215,23 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
         ObjectRequest<OrderCharge> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_PAY_CREATE_CHARGE, OrderCharge.class, OrderHtpUtil.getOrderPayCreateCharge(mId, channel));
 
+        if (BuildConfig.DEBUG) {
+            OrderCharge data = new OrderCharge();
+            data.setAmount(100);
+            data.setAmount_refunded(1);
+            data.setApp("joy.com");
+            data.setChannel(channel);
+            data.setId("1111111");
+        }
+
         obj.setResponseListener(new ObjectResponse<OrderCharge>() {
 
             @Override
             public void onSuccess(Object tag, OrderCharge orderCharge) {
 
-                startPaymentActivity("服务器返回的charge json 串");// todo json 字符串
+                String json = JSON.toJSONString(orderCharge);
+                LogMgr.e("orderPay", "json: " + json);
+                startPaymentActivity("charge");
             }
 
             @Override

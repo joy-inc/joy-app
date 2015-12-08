@@ -111,6 +111,10 @@
     <string name="order_detail_finish_infor">请查收确认邮件，如有更多问题请咨询微信号</string>
     <string name="comment_all">全部点评</string>
     <string name="commenton">立即点评</string>
+    <string name="commenton_score">在你心目中的分数</string>
+    <string name="commenton_place">点评一下这个地方</string>
+    <string name="commenton_submit">提交</string>
+    <string name="commenton_success">点评成功</string>
 
     <!--行程规划-->
 
