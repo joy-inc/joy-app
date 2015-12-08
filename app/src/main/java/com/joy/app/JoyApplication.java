@@ -20,7 +20,11 @@ public class JoyApplication extends BaseApplication {
     public void onCreate() {
 
         super.onCreate();
-        initApplication();
+        try {
+            initApplication();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void initApplication() {
@@ -66,10 +70,11 @@ public class JoyApplication extends BaseApplication {
      */
     public static String getUserToken() {
 
-//        if (mUser != null) {
-//            return mUser.getToken();
-//        } return "";
-        return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb";
+        if (mUser != null) {
+            return mUser.getToken();
+        }
+        return "";
+        //        return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb";
     }
 
     /**
@@ -88,6 +93,7 @@ public class JoyApplication extends BaseApplication {
     public static void setUser(User user) {
         mUser = user;
     }
+
     /**
      * 直接获取显示的用户名
      *
@@ -97,7 +103,8 @@ public class JoyApplication extends BaseApplication {
 
         if (mUser != null) {
             return mUser.getNickname();
-        } return "";
+        }
+        return "";
     }
 
     /**

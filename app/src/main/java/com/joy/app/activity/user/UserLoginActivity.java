@@ -297,7 +297,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         mTvButton.setEnabled(false);
         showLoading();
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mSubmitPhone));
-                req.setData("");
+//                req.setData("");
         req.setResponseListener(new ObjectResponse() {
 
             @Override
