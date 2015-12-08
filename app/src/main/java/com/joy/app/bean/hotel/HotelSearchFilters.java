@@ -8,65 +8,45 @@ import java.util.List;
  */
 public class HotelSearchFilters {
     //价格区间
-    private List<Item> prices;
+    private List<FilterItems> prices;
     //星级
-    private List<Item> stars;
+    private List<FilterItems> stars;
     //设施
-    private List<Item> facilities;
+    private List<FilterItems> facilities;
     //排序
-    private List<Item> orderby;
+    private List<FilterItems> orderby;
 
-    public List<Item> getPrices() {
+    public List<FilterItems> getPrices() {
         return prices;
     }
 
-    public void setPrices(List<Item> prices) {
+    public void setPrices(List<FilterItems> prices) {
         this.prices = prices;
     }
 
-    public List<Item> getStars() {
+    public List<FilterItems> getStars() {
         return stars;
     }
 
-    public void setStars(List<Item> stars) {
+    public void setStars(List<FilterItems> stars) {
         this.stars = stars;
     }
 
-    public List<Item> getFacilities() {
+    public List<FilterItems> getFacilities() {
         return facilities;
     }
 
-    public void setFacilities(List<Item> facilities) {
+    public void setFacilities(List<FilterItems> facilities) {
         this.facilities = facilities;
     }
 
-    public List<Item> getOrderby() {
+    public List<FilterItems> getOrderby() {
         return orderby;
     }
 
-    public void setOrderby(List<Item> orderby) {
+    public void setOrderby(List<FilterItems> orderby) {
         this.orderby = orderby;
     }
 
-    class Item {
-        String name;
-        int value;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        public void setValue(int value) {
-            this.value = value;
-        }
-    }
 }
 

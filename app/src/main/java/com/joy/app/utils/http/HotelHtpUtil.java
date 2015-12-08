@@ -18,9 +18,12 @@ public class HotelHtpUtil extends BaseHtpUtil {
     public static ObjectRequest getHotelListRequest(HotelParams hotelParams, int page, int count, Class clazz) {
 
         Map<String, String> params = getBaseParams();
-        params.put("checkin",hotelParams.getCheckIn());
-        params.put("checkout", hotelParams.getCheckOut());
-        params.put("from_key", hotelParams.getFrom_key());
+        //必传参数
+        params.put("city_id",hotelParams.getCityId());//城市id
+        params.put("checkin",hotelParams.getCheckIn());//入住时间
+        params.put("checkout", hotelParams.getCheckOut());//离开时间
+        params.put("from_key", hotelParams.getFrom_key());//aid
+        //可选参数
         params.put("orderby", String.valueOf(hotelParams.getOrderby()));
         if (TextUtil.isNotEmpty(hotelParams.getHotel())){
             params.put("hotel",hotelParams.getHotel());
@@ -54,6 +57,20 @@ public class HotelHtpUtil extends BaseHtpUtil {
         Map<String, String> params = getBaseParams();
 
         return createGetRequest(URL_GET_SEARCH_FILTERS, params, clazz);
+
+    }
+
+    /**
+     *
+     *
+     * @return
+     */
+    public static ObjectRequest getAutoCompleteRequest(String city_id ,String keyword,Class clazz) {
+
+        Map<String, String> params = getBaseParams();
+        params.put("city_id", city_id);
+        params.put("keyword", keyword);
+        return createGetRequest(URL_GET_SEARCH_HOTEL_AUTOCOMPLATE, params, clazz);
 
     }
 }

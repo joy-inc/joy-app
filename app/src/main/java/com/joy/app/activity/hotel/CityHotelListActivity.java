@@ -8,12 +8,19 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExBaseWidget;
 import com.android.library.view.dialogplus.DialogPlus;
+import com.android.library.view.dialogplus.ListHolder;
+import com.android.library.view.dialogplus.OnClickListener;
+import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
+import com.joy.app.adapter.hotel.HotelSortAdapter;
+import com.joy.app.bean.hotel.FilterItems;
 import com.joy.app.bean.hotel.HotelParams;
 import com.joy.app.bean.hotel.HotelSearchFilters;
 import com.joy.app.utils.Consts;
@@ -64,18 +71,21 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (REQ_DAY_PICK == requestCode) {
+        if (REQ_DAY_PICK == requestCode && resultCode == RESULT_OK) {
+
             long start = data.getLongExtra(DayPickerActivity.REQ_EXTRA_KEY_BEGIN_DATE, 0);
             long end = data.getLongExtra(DayPickerActivity.REQ_EXTRA_KEY_END_DATE, 0);
             footer.initDate(start, end);
-        } else if (REQ_FILTER == requestCode) {
+            params.setCheckInMills(start);
+            params.setCheckOutMills(end);
+            hotelListFragment.reLoadHotelList(params);
+        } else if (REQ_FILTER == requestCode && resultCode == RESULT_OK) {
             String facilities = data.getStringExtra(HotelSearchFilterActivity.EX_KEY_HOTEL__FACILITIES_TYPE_STR);
             String price[] = data.getStringArrayExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_PRICES_TYPE);
             String star = data.getStringExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_STAR_TYPE_STR);
             params.setFacilities_ids(facilities);
             params.setStar_ids(star);
-            //TODO
-//            params.setPrice_rangs();
+            params.setPrice_rangs(price);
         }
     }
 
@@ -83,6 +93,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_hotel_list);
+        executeRefreshOnly();
     }
 
     @Override
@@ -111,41 +122,26 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         addFragment(R.id.fl_content, hotelListFragment);
     }
 
-
+    DialogPlus mDialog;
     private void showDialog() {
-
-//        final DialogPlus mDialog = new DialogPlus.newDialog(this);
-//        mDialog.setTitleText(getString(R.string.sort));
-//        mDialog.setTitleColor(getResources().getColor(R.color.hotel_search_line));
-//        HotelListSortTypeAdapter adapter = new HotelListSortTypeAdapter(mSortTypes, mLastSelectedOrder);
-//
-//        // 设置list最大高度
-//        if (adapter.getCount() > 6)
-//            mDialog.setListHeight(DensityUtil.dip2px(6 * 46 + 14));
-//
-//        mDialog.setAdapter(adapter);
-//        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//                mIsShowDialog = false;
-//            }
-//        });
-//
-//        mDialog.setListOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                //排序刷新列表
-//                if(mSortTypes == null)
-//                    return;
-//
-//                mLastSelectedOrder = mSortTypes.get(position);
-//                mDialog.dismiss();
-//                executeFrameRefresh();
-//            }
-//        });
-//
-//        mDialog.show();
-//        mIsShowDialog = true;
+        HotelSortAdapter adapter = new HotelSortAdapter();
+        adapter.setData(hotelSearchFilters.getOrderby());
+        adapter.setSelect(params.getOrderby());
+        adapter.setOnItemViewClickListener(new OnItemViewClickListener<FilterItems>() {
+            @Override
+            public void onItemViewClick(int position, View clickView, FilterItems filterItems) {
+                LogMgr.i("filterItems:"+filterItems);
+                params.setOrderby(filterItems.getValue());
+                mDialog.dismiss();
+                hotelListFragment.reLoadHotelList(params);
+            }
+        });
+        mDialog = DialogPlus.newDialog(this)
+                .setContentHolder(new ListHolder())
+                .setCancelable(true)
+                .setAdapter(adapter)
+                .create();
+        mDialog.show();
     }
 
     @Override
@@ -168,9 +164,10 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
                 break;
             case R.id.ll_hotel_filter:
                 //TODO
-//                HotelSearchFilterActivity.startActivityForResult(this,REQ_FILTER,hotelSearchFilters.getFacilities(),hotelSearchFilters.getStars(),params.ge);
+                HotelSearchFilterActivity.startActivityForResult(this,REQ_FILTER,hotelSearchFilters.getFacilities(),hotelSearchFilters.getStars(),params.getFacilities_ids(),params.getStar_ids(),params.getPrice());
+                break;
             case R.id.ll_hotel_list_sort:
-
+                showDialog();
             default:
 
         }

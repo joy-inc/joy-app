@@ -9,6 +9,7 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.BuildConfig;
+import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.activity.sample.RvLoadMoreTestActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
@@ -49,7 +50,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
                 if (position == 0){
-                    RvLoadMoreTestActivity.startActivity(getActivity());
+                    CityHotelListActivity.startActivity(getActivity(),"50","香港","app_joy_android");
                     return;
                 }
                 UserPlanListActivity.startActivityById(getActivity(), adapter.getItem(position).getFolder_name(), adapter.getItem(position).getId());

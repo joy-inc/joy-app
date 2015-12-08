@@ -1,10 +1,12 @@
 package com.joy.app.bean.hotel;
 
+import java.io.Serializable;
+
 /**
  * @author litong  <br>
  * @Description XXXXXX    <br>
  */
-public class FilterItems {
+public class FilterItems implements Serializable {
 
     String name;
     int value;
@@ -23,5 +25,10 @@ public class FilterItems {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "name:"+ name+" value:"+value;
     }
 }

@@ -22,4 +22,9 @@
     <style name="theme_app.translucent.toolbar.overlay">
         <item name="overlay">true</item>
     </style>
+
+    <!-- 对话框样式，带白色圆角背景 -->
+    <style name="qa_ex_theme_dialog" parent="@style/ex_theme_dialog">
+        <item name="android:windowBackground">@drawable/bg_search_gray</item>
+    </style>
 </resources>

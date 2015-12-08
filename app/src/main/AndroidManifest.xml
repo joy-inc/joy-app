@@ -120,14 +120,30 @@
 
         <!--行程规划-->
         <activity
-            android:name=".activity.plan.UserPlanListActivity"
-            android:screenOrientation="portrait"/>
+        android:name=".activity.plan.UserPlanListActivity"
+        android:screenOrientation="portrait"/>
+
+
         <!--地图-->
         <activity
             android:name=".activity.map.SinglePoiMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.translucent.toolbar.overlay"/>
+        <activity
+            android:name=".activity.map.ListPoiMapActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay"/>
+        <!--酒店-->
+        <activity android:name=".activity.hotel.CityHotelListActivity"
+            android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.hotel.HotelSearchFilterActivity"
+            android:theme="@style/ex_theme_dialog"
+            android:screenOrientation="portrait"/>
+        <!--android:theme="@style//"-->
+
+        <activity android:name=".activity.hotel.SearchHotelActivity"
+            android:screenOrientation="portrait"/>
         <!-- 小米 -->
         <service
             android:name="com.xiaomi.push.service.XMPushService"

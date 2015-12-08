@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvMultipleAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.adapter.ExViewHolder;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -25,65 +24,13 @@ import butterknife.ButterKnife;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class HotelListAdapter extends ExRvMultipleAdapter {
-
-    public HotelListAdapter(Context context) {
-        super(context);
-    }
-
+public class SearchHotelListAdapter extends ExRvAdapter<SearchHotelListAdapter.ViewHolder,HotelEntity> {
 
     @Override
-    public RecyclerView.ViewHolder onCreateHeaderView(ViewGroup parent) {
-        return new HeaderViewHolder(inflate(parent, R.layout.item_hotel_header));
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateContentView(ViewGroup parent) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(inflate(parent, R.layout.item_hotel_search_list));
     }
 
-    @Override
-    public RecyclerView.ViewHolder onCreateBottomView(ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public int getContentItemCount() {
-        return CollectionUtil.isEmpty(getData()) ? 0 : getData().size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof ViewHolder){
-            int pos = position - mHeaderCount;
-            ((ViewHolder) holder).invalidateItemView(pos,(HotelEntity) getData().get(pos));
-        }
-    }
-
-    public class HeaderViewHolder extends ExRvViewHolder<Object>{
-
-        public HeaderViewHolder(final View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
-                }
-            });
-        }
-
-        @Override
-        protected void invalidateItemView(int position, Object o) {
-
-        }
-    }
     public class ViewHolder extends ExRvViewHolder<HotelEntity>  {
         @Bind(R.id.topline)
         View topline;

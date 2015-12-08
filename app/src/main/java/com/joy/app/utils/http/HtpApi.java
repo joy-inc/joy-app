@@ -41,6 +41,7 @@ public interface HtpApi {
     String URL_POST_HOTEL_LIST = JOY_URL_BASE + "/place/cityfun";//  城市玩乐
     String URL_GET_HOTEL_LIST = QYER_URL_BASE + "/qyer/hotel/search_list";// 请求酒店列表 
     String URL_GET_SEARCH_FILTERS = QYER_URL_BASE + "/qyer/hotel/search_filters"; //酒店筛选条件列表
+    String URL_GET_SEARCH_HOTEL_AUTOCOMPLATE = QYER_URL_BASE + "/qyer/hotel/search_autocomplate";//搜索酒店联想
 
     //公共的,设置的
     //    String URL_HOLIDAYINFO =   "http://open.qyer.com/qyer/hotel/get_holidays_info";// 日历信息

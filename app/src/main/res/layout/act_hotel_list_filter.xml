@@ -4,13 +4,16 @@
     android:id="@+id/llFilterRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <com.android.library.widget.JTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="42dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
+        android:textSize="16dp"
         android:text="筛选" />
 
     <ScrollView
@@ -31,17 +34,18 @@
 
             <com.joy.app.view.hotel.SeekBarPressure
                 android:id="@+id/sbDistance"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
                 android:layout_marginTop="16dp"
                 app:duration="0.5"
                 app:lheight="3dp"
                 app:circleRadius="9dp"
                 app:maxValue="5.0"
                 app:minValue="1.0"
-                app:lwidth="275dp" />
+                app:lwidth="320dp" />
 
 
             <LinearLayout

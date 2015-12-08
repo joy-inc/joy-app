@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.android.library.widget.JTextView
+        android:id="@+id/jtv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:gravity="center_vertical"
+        android:text="123"/>
+    <View
+        style="@style/Line.Dark.Horizontal"
+        android:background="@color/black_trans30"/>
+</LinearLayout>

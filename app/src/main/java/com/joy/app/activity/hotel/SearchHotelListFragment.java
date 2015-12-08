@@ -3,17 +3,15 @@ package com.joy.app.activity.hotel;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.LogMgr;
-import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.hotel.HotelListAdapter;
-import com.joy.app.adapter.sample.CityDetailRvAdapter;
+import com.joy.app.adapter.hotel.SearchHotelListAdapter;
 import com.joy.app.bean.hotel.HotelEntity;
 import com.joy.app.bean.hotel.HotelList;
 import com.joy.app.bean.hotel.HotelParams;
@@ -25,13 +23,13 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener{
+public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener{
     HotelParams params ;
 
-    public static HotelListFragment instantiate(Context context,HotelParams hotelParams) {
+    public static SearchHotelListFragment instantiate(Context context, HotelParams hotelParams) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("data", hotelParams );
-        return (HotelListFragment) Fragment.instantiate(context, HotelListFragment.class.getName(), bundle);
+        return (SearchHotelListFragment) Fragment.instantiate(context, SearchHotelListFragment.class.getName(), bundle);
     }
 
     @Override
@@ -49,17 +47,17 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
     @Override
     protected void initContentView() {
         super.initContentView();
-        HotelListAdapter adapter = new HotelListAdapter(getActivity());
-        adapter.setHeaderCount(1);
+        SearchHotelListAdapter adapter = new SearchHotelListAdapter();
         adapter.setOnItemViewClickListener(this);
         setAdapter(adapter);
     }
 
-    public void reLoadHotelList(HotelParams hotelParams){
-        params = hotelParams;
-        getAdapter().getData().clear();
-        getAdapter().notifyDataSetChanged();
-        executeRefreshOnly();
+    public void reLoadHotelList(String keyword){
+        if (params.setHotel(keyword)){
+            getAdapter().getData().clear();
+            getAdapter().notifyDataSetChanged();
+            executeRefreshOnly();
+        }
     }
 
     @Override
@@ -75,6 +73,7 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
 
     @Override
     protected List<?> getListInvalidateContent(HotelList hotelList) {
+
         return hotelList.getHotel();
     }
 

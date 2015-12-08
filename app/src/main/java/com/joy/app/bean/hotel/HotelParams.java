@@ -3,6 +3,7 @@ package com.joy.app.bean.hotel;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
 /**
  * @author litong  <br>
@@ -22,6 +23,7 @@ public class HotelParams implements Parcelable {
     String facilities_ids;//过滤标签
     int Orderby;//排序方式 默认智能排序
     int area_id;//区域id
+    String[] price;
 
     public String getCityId() {
         return cityId;
@@ -85,8 +87,10 @@ public class HotelParams implements Parcelable {
         return hotel;
     }
 
-    public void setHotel(String hotel) {
+    public boolean setHotel(String hotel) {
+        if (TextUtil.isNotEmpty(this.hotel) && this.hotel.equals(hotel))return false;
         this.hotel = hotel;
+        return true;
     }
 
     public String getStar_ids() {
@@ -103,6 +107,22 @@ public class HotelParams implements Parcelable {
 
     public void setPrice_rangs(String price_rangs) {
         this.price_rangs = price_rangs;
+    }
+    public void setPrice_rangs(String[] price_rangs) {
+        price = price_rangs;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String str : price_rangs){
+            stringBuilder.append(str);
+            stringBuilder.append(",");
+        }
+        this.price_rangs = stringBuilder.toString().substring(0, stringBuilder.length()-1);
+    }
+
+    public String[] getPrice() {
+        if (price == null){
+            price = new String[]{"0","不限"};
+        }
+        return price;
     }
 
     public String getFacilities_ids() {

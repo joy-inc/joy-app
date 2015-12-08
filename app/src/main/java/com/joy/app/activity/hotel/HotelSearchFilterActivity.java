@@ -6,9 +6,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,7 +25,6 @@ import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.FilterItems;
-import com.joy.app.bean.hotel.HotelSearchFilters;
 import com.joy.app.view.hotel.AutoChangeLineViewGroup;
 import com.joy.app.view.hotel.SeekBarPressure;
 
@@ -35,7 +37,7 @@ import java.util.List;
  *
  * @author xinghai.qi on 2015/4/15.
  */
-public class HotelSearchFilterActivity extends BaseUiActivity implements View.OnClickListener {
+public class HotelSearchFilterActivity extends Activity implements View.OnClickListener {
 
     public static final String EX_KEY_HOTEL_FACILITIES_TYPE = "ex_hotel_facilities_types";
     public static final String EX_KEY_HOTEL_PRICES_TYPE = "ex_hotel_prices_types";
@@ -70,10 +72,16 @@ public class HotelSearchFilterActivity extends BaseUiActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+//        RelativeLayout contnet = new RelativeLayout(this);
+//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//        setContentView(contnet,params);
+//        contnet.addView(View.inflate(this,R.layout.act_hotel_list_filter,null));
         setContentView(R.layout.act_hotel_list_filter);
+        initData();
+        initContentView();
     }
 
-    @Override
+
     protected void initData() {
 
         mTypesData = (List<FilterItems>) getIntent().getSerializableExtra(EX_KEY_HOTEL_FACILITIES_TYPE);
@@ -109,16 +117,13 @@ public class HotelSearchFilterActivity extends BaseUiActivity implements View.On
         mThemeSelector = R.drawable.selector_bg_hotel_list_filter;
     }
 
-    @Override
-    protected void initTitleView() {
-    }
-
-    @Override
     protected void initContentView() {
-
-        int width = DeviceUtil.getScreenWidth() - DensityUtil.dip2px(32.0f);
+        int width = DeviceUtil.getScreenWidth();
         int height = DeviceUtil.getScreenHeight() - DensityUtil.dip2px(156.0f);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, height);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+        params.gravity = Gravity.BOTTOM;
         LinearLayout llRoot = (LinearLayout) findViewById(R.id.llFilterRoot);
         llRoot.setLayoutParams(params);
         TextView tvDone = (TextView) findViewById(R.id.tvDone);
@@ -159,8 +164,6 @@ public class HotelSearchFilterActivity extends BaseUiActivity implements View.On
     private void initSeekBar() {
 
         mSbDistance = (SeekBarPressure) findViewById(R.id.sbDistance);
-
-
         mSbDistance.setProgressLowInt(getProgress(mPrice[0]));
 
         int highProgress = getProgress(mPrice[1]);
@@ -177,7 +180,6 @@ public class HotelSearchFilterActivity extends BaseUiActivity implements View.On
                                           int mprogressHigh, double max, double min) {
                 mPrice[0] = getPrice(mprogressLow);
                 mPrice[1] = getPrice(mprogressHigh);
-                ;
                 changeClearView();
             }
         });
@@ -395,7 +397,7 @@ public class HotelSearchFilterActivity extends BaseUiActivity implements View.On
     private void changeClearView() {
 
         if (0 == getProgress(mPrice[0]) && 5 == getProgress(mPrice[1]) && mCheckedNum == 0 && mCheckedStarNum == 0) {
-            tvClear.setTextColor(getResources().getColorStateList(R.color.black_trans54));
+            tvClear.setTextColor(getResources().getColorStateList(R.color.white_trans26));
         } else {
             tvClear.setTextColor(getResources().getColorStateList(mThemeColor));
         }

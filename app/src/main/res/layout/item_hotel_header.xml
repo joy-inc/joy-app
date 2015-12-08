@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:padding="10dp"
+    android:background="@color/white">
+
+    <com.android.library.widget.JTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawableLeft="@drawable/ic_search_icon"
+        android:text="输入酒店名称"
+        android:textSize="12dp"
+        android:textColor="@color/black_trans45"
+        android:background="@drawable/bg_search_gray"/>
+</RelativeLayout>

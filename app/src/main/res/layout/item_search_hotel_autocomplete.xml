@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingLeft="51dp"
+    android:paddingRight="12dp">
+
+    <TextView
+        android:id="@+id/tv_cnname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:text="香港"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/tv_enname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:text="HongKong"
+        android:textSize="10dp" />
+
+    <View
+        android:id="@+id/vline"
+        android:background="@color/black_trans30"
+        style="@style/Line.Dark.Horizontal" />
+
+</LinearLayout>

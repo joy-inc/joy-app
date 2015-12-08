@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/ll_history"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.android.library.widget.JTextView
+            android:text="历史记录"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_history_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_history_clear"/>
+    </LinearLayout>
+    <com.android.library.widget.JTextView
+        android:id="@+id/jtv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="123"
+        android:padding="10dp"/>
+    <View
+        android:background="@color/black_trans30"
+        style="@style/Line.Light.Horizontal" />
+
+</LinearLayout>
