@@ -277,11 +277,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         return itemStr;
     }
 
-    private void refreshUnitPrice() {
-
-
-    }
-
     private void refreshTotalPrice() {
 
         Float totalPrice = 0f;
@@ -310,7 +305,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             LevelOptions options = mDateWidget.getDataItem(position);
             options.setContent(TimeUtil.getSimpleTypeChineseText(time));
             mDateWidget.resetSelectValue(position, options);
-            mDateWidget.setmDateTime(String.valueOf(time));
+            mDateWidget.setmDateTime(String.valueOf(time / 1000));
             mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.resetUnitPrice();
             refreshTotalPrice();
@@ -323,46 +318,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_OPTIONS, Product.class, OrderHtpUtil.getProductOptionListUrl(mId));
 
-//        if (BuildConfig.DEBUG) {
-//
-//            Product data = new Product();
-//            ArrayList listdata = new ArrayList();
-//            ProductLevels levels = null;
-//            for (int i = 0; i < 3; i++) {
-//                levels = new ProductLevels();
-//
-//                levels.setLevel_id((i + 1) + "");
-//
-//                if (i == 0) {
-//                    levels.setType(1 + "");
-//                    levels.setTitle("出发日期");
-//                } else if (i == 1) {
-//                    levels.setType(2 + "");
-//                    levels.setTitle("可选项目");
-//                } else if (i == 2) {
-//                    levels.setType(3 + "");
-//                    levels.setTitle("产品数量选择");
-//                }
-//
-//                ArrayList list = new ArrayList();
-//
-//                for (int j = 0; j < 2; j++) {
-//                    LevelOptions options = new LevelOptions();
-//                    options.setOption_id(i + "" + j);
-//                    options.setContent(i + "" + j + " 成人");
-//                    options.setDescribe("13-99岁 " + j);
-//
-//                    list.add(options);
-//                }
-//
-//                levels.setOptions(list);
-//                listdata.add(levels);
-//            }
-//
-//            data.setLevels(listdata);
-//
-//            obj.setData(data);
-//        }
         return obj;
     }
 
@@ -370,7 +325,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     protected void onHttpFailed(Object tag, String msg) {
 
         showToast(msg);
-        LogMgr.e("xxx", "~~" + msg);
     }
 
 

@@ -138,9 +138,9 @@ public class OrderHtpUtil extends BaseHtpUtil {
         Map<String, String> params = getBaseParams();
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         params.put("contact_id", data.getContact_id());
-        params.put("contact_name", data.getName());
-        params.put("contact_phone", data.getPhone());
-        params.put("contact_email", data.getEmail());
+        params.put("name", data.getName());
+        params.put("phone", data.getPhone());
+        params.put("email", data.getEmail());
         return params;
     }
 
@@ -155,19 +155,6 @@ public class OrderHtpUtil extends BaseHtpUtil {
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         params.put("order_id", order_id);
         params.put("channel", channel);
-        return params;
-    }
-
-    /**
-     * 支付成功后的回调接口
-     *
-     * @return
-     */
-    public static Map<String, String> getOrderPayCallback() {
-
-        Map<String, String> params = getBaseParams();
-        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
-        // todo
         return params;
     }
 
