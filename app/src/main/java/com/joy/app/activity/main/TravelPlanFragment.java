@@ -45,14 +45,11 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         super.initContentView();
         final UserPlanAdapter adapter = new UserPlanAdapter();
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
-
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
-                if (position == 0){
-                    RvLoadMoreTestActivity.startActivity(getActivity());
-                    return;
-                }
-                UserPlanListActivity.startActivityById(getActivity(), adapter.getItem(position).getFolder_name(), adapter.getItem(position).getId());
+                if (planFolder != null)
+                    UserPlanListActivity.startActivityById(getActivity(), planFolder.getFolder_id(), planFolder.getFolder_name());
+
             }
         });
         setAdapter(adapter);
@@ -61,20 +58,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class,pageLimit, pageIndex);
-
-        if (BuildConfig.DEBUG) {
-            List<PlanFolder> data = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                PlanFolder folder = new PlanFolder();
-                folder.setId("10" + i);
-                folder.setPic_url("http://pic2.qyer.com/album/1f0/87/1840431/index/680x400");
-                folder.setFolder_name("文件夹" + i);
-                folder.setChildren_num(10 + i);
-                data.add(folder);
-            }
-            obj.setData(data);
-        }
+        ObjectRequest obj = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class, pageLimit, pageIndex);
         return obj;
     }
 

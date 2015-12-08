@@ -1,21 +1,23 @@
 package com.joy.app.bean.plan;
 
+import com.android.library.utils.TextUtil;
+
 import java.io.Serializable;
 
 /**
  * @author litong  <br>
  * @Description 行程规划文件夹    <br>
  */
-public class PlanFolder implements Serializable{
-    String id,folder_name,pic_url;
+public class PlanFolder implements Serializable {
+    String folder_id, folder_name, pic_url;
     int children_num;
 
-    public String getId() {
-        return id;
+    public String getFolder_id() {
+        return folder_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setFolder_id(String folder_id) {
+        this.folder_id = TextUtil.filterNull(folder_id);
     }
 
     public String getFolder_name() {
@@ -23,7 +25,7 @@ public class PlanFolder implements Serializable{
     }
 
     public void setFolder_name(String folder_name) {
-        this.folder_name = folder_name;
+        this.folder_name = TextUtil.filterNull(folder_name);
     }
 
     public int getChildren_num() {
@@ -39,10 +41,10 @@ public class PlanFolder implements Serializable{
     }
 
     public void setPic_url(String pic_url) {
-        this.pic_url = pic_url;
+        this.pic_url = TextUtil.filterNull(pic_url);
     }
 
     //            "id": "JmwMFx+4+5o=",
-//            "folder_name": "好玩的",
-//            "children_num": 4,
+    //            "folder_name": "好玩的",
+    //            "children_num": 4,
 }

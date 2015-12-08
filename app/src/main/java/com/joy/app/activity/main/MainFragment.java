@@ -65,21 +65,6 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
 
 
         ObjectRequest req = ReqFactory.newPost(MainHtpUtil.URL_POST_MAIN_ROUTE_LIST, MainRoute.class, MainHtpUtil.getMainRouteList(pageIndex, pageLimit));
-        //        if (BuildConfig.DEBUG) {
-        //            List<MainRoute> list = new ArrayList<>();
-        //            for (int i = 0; i < 20; i++) {
-        //                MainRoute route = new MainRoute();
-        //                route.setId("xxx");
-        //                route.setPic_url("http://pic.qyer.com/album/user/495/23/RUBQQBkGYw/index/300x200");
-        //                route.setCn_name("第一名称" + i);
-        //                route.setEn_name("name" + i);
-        //                route.setTags("日式,美食,旅游,日式,美食,旅游" + i);
-        //                route.setType((i + 1) / 2 == 0 ? 1 : 2);
-        //                route.setPlace_url("http://www.qq.com");
-        //                list.add(route);
-        //            }
-        //            req.setData(list);
-        //        }
         return req;
     }
 
