@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author litong  <br>
  * @Description 行程规划文件夹    <br>
  */
-public class PlanFolder implements Serializable {
+public class PlanFolder {
     String folder_id, folder_name, pic_url;
     int children_num;
 

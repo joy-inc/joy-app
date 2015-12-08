@@ -26,18 +26,14 @@ import butterknife.ButterKnife;
  * @Description 行程规划列表    <br>
  */
 public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, PlanItem> {
-    ArrayList<MapPoiDetail> content;
+    ArrayList<MapPoiDetail> content = new ArrayList<>();
 
     @Override
     public void setData(List<PlanItem> data) {
         super.setData(data);
-        copyData();
+        content = MapUtil.getMapContent(data);
     }
 
-    private void copyData(){
-        CopyThread copyThread= new CopyThread();
-        copyThread.start();
-    }
 
     public ArrayList<MapPoiDetail> getContent() {
         return content;
@@ -51,11 +47,16 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
 
     public class ViewHolder extends ExRvViewHolder<PlanItem> {
 
-        @Bind(R.id.sdv_poi_photo)   SimpleDraweeView sdvPoiPhoto;
-        @Bind(R.id.jtv_cnname)      JTextView jtvCnname;
-        @Bind(R.id.jtv_enname)      JTextView jtvEnname;
-        @Bind(R.id.jtv_price)       JTextView jtvPrice;
-        @Bind(R.id.jtv_day)         JTextView jtvDay;
+        @Bind(R.id.sdv_poi_photo)
+        SimpleDraweeView sdvPoiPhoto;
+        @Bind(R.id.jtv_cnname)
+        JTextView jtvCnname;
+        @Bind(R.id.jtv_enname)
+        JTextView jtvEnname;
+        @Bind(R.id.jtv_price)
+        JTextView jtvPrice;
+        @Bind(R.id.jtv_day)
+        JTextView jtvDay;
 
         public ViewHolder(final View itemView) {
 
@@ -79,21 +80,21 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
             jtvEnname.setText(planItem.getEn_name());
             jtvPrice.setText(planItem.getPrice());
 
-            if (planItem.hasBefore_day()){
-                jtvDay.setText(jtvDay.getContext().getString(R.string.plan_list_before_day,planItem.getBefore_day()));
+            if (planItem.hasBefore_day()) {
+                jtvDay.setText(jtvDay.getContext().getString(R.string.plan_list_before_day, planItem.getBefore_day()));
                 ViewUtil.showView(jtvDay);
-            }else{
+            } else {
                 ViewUtil.hideView(jtvDay);
             }
 
         }
     }
 
-    class CopyThread extends Thread{
-        @Override
-        public void run() {
-            super.run();
-            content = MapUtil.getMapContent(getData());
-        }
-    }
+    //    class CopyThread extends Thread{
+    //        @Override
+    //        public void run() {
+    //            super.run();
+    //            content = MapUtil.getMapContent(getData());
+    //        }
+    //    }
 }
