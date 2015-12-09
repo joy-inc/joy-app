@@ -3,8 +3,10 @@ package com.joy.app.activity.hotel;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 
 import com.android.library.activity.BaseHttpRvFragment;
+import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;
@@ -20,8 +22,9 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店搜索联想    <br>
  */
-public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> {
+public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> implements RecyclerAdapter.OnItemClickListener {
     String id ,keyword;
+    OnItemViewClickListener clickListener;
 
     public static AutoCompleteFragment instantiate(Context context, String id,String keyword) {
         Bundle bundle = new Bundle();
@@ -47,7 +50,15 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> {
     protected void initContentView() {
         super.initContentView();
         AutoCompleteAdapter autoCompleteAdapter = new AutoCompleteAdapter();
+        if (clickListener != null){
+            autoCompleteAdapter.setOnItemViewClickListener(clickListener);
+        }
         setAdapter(autoCompleteAdapter);
+    }
+
+    public void setClickListener(OnItemViewClickListener clickListener) {
+        this.clickListener = clickListener;
+
     }
 
     public void reloadAutoComplete(String keyword){
@@ -55,6 +66,11 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> {
         this.keyword = keyword;
         getAdapter().clear();
         executeRefreshOnly();
+    }
+
+    @Override
+    public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+
     }
 
     @Override
