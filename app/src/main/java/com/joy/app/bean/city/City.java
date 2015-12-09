@@ -18,7 +18,7 @@ public class City {
      */
 
     private String place_id;
-    private int city_id;
+    private String city_id;
     private String cn_name;
     private String en_name;
     private String pic_url;
@@ -31,7 +31,7 @@ public class City {
         this.place_id = place_id;
     }
 
-    public void setCity_id(int city_id) {
+    public void setCity_id(String city_id) {
         this.city_id = city_id;
     }
 
@@ -67,7 +67,7 @@ public class City {
         return place_id;
     }
 
-    public int getCity_id() {
+    public String getCity_id() {
         return city_id;
     }
 

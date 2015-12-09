@@ -53,4 +53,5 @@ public interface HtpApi {
     // city
     String URL_POST_CITY = JOY_URL_BASE + "/place/index_page";
     String URL_POST_CITY_FUN = JOY_URL_BASE + "/place/cityfun";
+    String URL_POST_CITY_ROUTE = JOY_URL_BASE + "/place/route_list";
 }

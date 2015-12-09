@@ -21,7 +21,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
 
         Map<String, String> params = getBaseParams();
         params.put("order_id", order_id);
-        params.put("user_token", JoyApplication.getUserToken());
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         return params;
     }
 
@@ -34,7 +34,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
 
         Map<String, String> params = getBaseParams();
         params.put("order_id", order_id);
-        params.put("user_token", JoyApplication.getUserToken());
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         return params;
     }
 

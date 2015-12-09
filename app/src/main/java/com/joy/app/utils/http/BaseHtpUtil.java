@@ -42,7 +42,7 @@ public class BaseHtpUtil implements HtpApi {
         params.put("app_installtime", AppUtil.getInstallTime() + "");
         params.put("lat", "");// 纬度
         params.put("lon", "");// 经度
-        params.put("user_token", JoyApplication.getUserToken());
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 
         //-----------------------------------------------------------------------
         // TODO joy接口ok就干掉

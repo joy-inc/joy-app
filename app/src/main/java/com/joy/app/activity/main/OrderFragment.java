@@ -76,15 +76,13 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     protected ObjectRequest<List<MainOrder>> getObjectRequest(int pageIndex, int pageLimit) {
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl(pageIndex, pageLimit, "0"));
-
         return obj;
     }
 
     @Override
     protected void onHttpFailed(Object tag, String msg) {
 
-        super.onHttpFailed(tag, msg);
-        showToast(msg);
+        showToast("OrderFragment error: " + msg);
     }
 
     private void showCommentonDialog(final String productId) {

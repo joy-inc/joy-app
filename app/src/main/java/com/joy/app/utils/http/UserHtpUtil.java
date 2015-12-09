@@ -51,7 +51,7 @@ public class UserHtpUtil extends BaseHtpUtil {
     public static Map<String,String>userLoginOut(String token){
 
         Map<String, String> params = getBaseParams();
-        params.put("user_token", token);
+        params.put(KEY_USER_TOKEN, token);
         return params;
     }
 }
