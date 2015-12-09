@@ -100,7 +100,8 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
 
         View headerView = inflateLayout(R.layout.view_city_header);
         SimpleDraweeView sdvHeader = (SimpleDraweeView) headerView.findViewById(R.id.sdvPhoto);
-        sdvHeader.setImageURI(Uri.parse(city.getPic_url()));
+        if (TextUtil.isNotEmpty(city.getPic_url()))
+            sdvHeader.setImageURI(Uri.parse(city.getPic_url()));
         JTextView jtvName = (JTextView) headerView.findViewById(R.id.jtvName);
         jtvName.setText(mCity.getCn_name() + "\n" + mCity.getEn_name());
         headerView.findViewById(R.id.jimTicket).setOnClickListener(this);
