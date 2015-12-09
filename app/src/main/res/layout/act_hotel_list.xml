@@ -79,25 +79,20 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:background="@color/pink_dark"
                 android:id="@+id/ll_hotel_filter"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center">
 
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/ic_map_poi" />
 
                 <com.android.library.widget.JTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:layout_marginLeft="3dp"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_hotel_filter"
                     android:text="筛选" />
 
             </LinearLayout>
@@ -110,25 +105,21 @@
 
 
             <LinearLayout
-                android:background="@color/pink_dark"
                 android:id="@+id/ll_hotel_list_sort"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center">
 
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/ic_map_poi" />
 
                 <com.android.library.widget.JTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:layout_marginLeft="3dp"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_hotel_sort"
                     android:text="排序" />
 
             </LinearLayout>

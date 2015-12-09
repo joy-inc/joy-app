@@ -150,7 +150,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             case R.id.jimHotel:
 
                 if (mCity != null)
-                    CityHotelListActivity.startActivity(this, mCity.getCity_id(), mCity.getCn_name(), "fromkey");
+                    CityHotelListActivity.startActivity(this, mCity.getCity_id(), mCity.getCn_name(), "app_joy_android");
                 break;
             case R.id.jimFood:
 

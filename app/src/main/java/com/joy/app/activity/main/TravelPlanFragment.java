@@ -1,6 +1,8 @@
 package com.joy.app.activity.main;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -30,6 +32,14 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Activity.RESULT_OK) {
+            executeRefreshOnly();
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
@@ -46,7 +56,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
 
                 if (planFolder != null)
-                    UserPlanListActivity.startActivityById(getActivity(), planFolder.getFolder_id(), planFolder.getFolder_name());
+                    UserPlanListActivity.startActivityById(getActivity(), planFolder.getFolder_id(), planFolder.getFolder_name(), 1);
             }
         });
         setAdapter(adapter);

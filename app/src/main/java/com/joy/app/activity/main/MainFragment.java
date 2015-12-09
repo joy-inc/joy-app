@@ -8,7 +8,9 @@ import android.view.View;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.TextUtil;
 import com.joy.app.activity.city.CityActivity;
+import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.bean.MainRoute;
 import com.joy.app.utils.http.MainHtpUtil;
@@ -45,11 +47,14 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             public void onItemViewClick(int position, View clickView, MainRoute mainRoute) {
 
                 if (mainRoute != null) {
-//                    if (mainRoute.isCity()) {
-                        CityActivity.startActivity(getActivity(), mainRoute.getPlace_id());
-//                    } else {
-//                        WebViewActivity.startActivity(getActivity(), mainRoute.getPlace_url(), mainRoute.getCn_name());
-//                    }
+                    if (mainRoute.isCity()) {
+                        String cityId = mainRoute.getCityId();
+                        if (!TextUtil.isEmpty(cityId)) {
+                            CityActivity.startActivity(getActivity(), cityId);
+                        }
+                    } else {
+                        WebViewActivity.startActivity(getActivity(), mainRoute.getPlace_url(), mainRoute.getCn_name());
+                    }
                 }
             }
         });
