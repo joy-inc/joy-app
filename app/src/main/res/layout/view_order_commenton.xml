@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.android.library.widget.JTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="点评"
+        android:textColor="@color/black_trans60"
+        android:textSize="16dp" />
+
+    <View style="@style/Line.Dark.Horizontal" />
+
+    <com.android.library.widget.JTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/commenton_score"
+        android:textColor="@color/black_trans40"
+        android:textSize="14dp" />
+
+    <android.support.v7.widget.AppCompatRatingBar
+        android:id="@+id/acRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginBottom="8dp"
+        android:numStars="5"
+        android:progressDrawable="@drawable/src_ratingbar_big"
+        android:stepSize="1" />
+
+    <View
+        style="@style/Line.Dark.Horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+    <com.android.library.widget.JTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="9dp"
+        android:paddingTop="14dp"
+        android:text="@string/commenton_place"
+        android:textColor="@color/black_trans40"
+        android:textSize="14dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingLeft="19dp"
+        android:paddingRight="19dp">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/acetContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_grey"
+            android:gravity="left|top"
+            android:lines="4"
+            android:padding="8dp"
+            android:textColor="@color/black_trans70"
+            android:textSize="14dp" />
+
+    </LinearLayout>
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/tvSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_accent"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp"
+        android:text="@string/commenton_submit"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
+
+</LinearLayout>

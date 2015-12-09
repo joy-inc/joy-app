@@ -7,6 +7,7 @@ public interface HtpApi {
 
     String QYER_URL_BASE = "http://open.qyer.com";// base url
     String JOY_URL_BASE = "http://api.joy.com";// base url
+//    String JOY_URL_BASE = "http://api.joy.4awork.com";// base url
 
     // sample
     String URL_GET_SEARCH_HOT_CITY = QYER_URL_BASE + "/qyer/hotel/hot_city_list";// 200热门城市
@@ -19,6 +20,7 @@ public interface HtpApi {
     // poi折扣====================================
     String URL_POST_PRODUCT_DETAIL = JOY_URL_BASE + "/product/detail";// 获取poi折扣详情接口
     String URL_POST_COMMENTS = JOY_URL_BASE + "/product/comment_list";// 获取商品评论列表
+    String URL_POST_COMMENT_ADD = JOY_URL_BASE + "/product/add_comment";// poi折扣评论接口
     String URL_POST_OPTIONS = JOY_URL_BASE + "/product/option_list";// 获取商品项目列表
     String URL_POST_CONTACT_GET = JOY_URL_BASE + "/product/contact_info";// 获取联系人信息
     String URL_POST_CONTACT_ADD = JOY_URL_BASE + "/product/add_contact";// 添加联系人信息
@@ -27,7 +29,6 @@ public interface HtpApi {
     String URL_POST_ORDER_DETAIL = JOY_URL_BASE + "/order/detail";// 获取订单
     String URL_POST_ORDER_CANCEL = JOY_URL_BASE + "/order/cancel";// 取消订单
     String URL_POST_ORDER_PAY_CREATE_CHARGE = JOY_URL_BASE + "/order/create_charge";// 创建Ping++支付凭证
-    String URL_POST_ORDER_PAY_CALLBACK = JOY_URL_BASE + "/order/pay_callback";// Ping++支付成功后调用的Webhooks通知接口
 
     // 行程规划====================================
     String URL_POST_PLAN_ADD = JOY_URL_BASE + "/user/plan_add";//  添加我的旅行计划
@@ -53,4 +54,5 @@ public interface HtpApi {
     // city
     String URL_POST_CITY = JOY_URL_BASE + "/place/index_page";
     String URL_POST_CITY_FUN = JOY_URL_BASE + "/place/cityfun";
+    String URL_POST_CITY_ROUTE = JOY_URL_BASE + "/place/route_list";
 }

@@ -30,4 +30,13 @@ public class CityHtpUtil extends BaseHtpUtil {
         params.put(KEY_PAGE, page + "");
         return params;
     }
+
+    public static Map<String, String> getCityRouteParams(String placeId, int count, int page) {
+
+        Map<String, String> params = getBaseParams();
+        params.put("place_id", placeId);
+        params.put(KEY_COUNT, count + "");
+        params.put(KEY_PAGE, page + "");
+        return params;
+    }
 }

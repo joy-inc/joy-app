@@ -16,6 +16,7 @@ import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
+import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.map.SinglePoiMapActivity;
@@ -24,6 +25,8 @@ import com.joy.app.bean.poi.CommentAll;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
+
+import java.util.ArrayList;
 
 /**
  * 目的地折扣详情页(下订单的唯一入口)

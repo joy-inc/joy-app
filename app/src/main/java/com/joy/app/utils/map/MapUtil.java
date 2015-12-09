@@ -38,13 +38,9 @@ public class MapUtil {
         if (mCurrItem == null) {
             return;
         }
-        Intent i = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("http://ditu.google.cn/maps?hl=zh&mrt=loc&q="
-                        + mCurrItem.getLat() + "," + mCurrItem.getLon()));
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                & Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        i.setClassName("com.google.android.apps.maps",
-                "com.google.android.maps.MapsActivity");
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ditu.google.cn/maps?hl=zh&mrt=loc&q=" + mCurrItem.getLat() + "," + mCurrItem.getLon()));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK & Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        i.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
         mAct.startActivity(i);
     }
 
@@ -52,20 +48,15 @@ public class MapUtil {
         if (mCurrItem == null) {
             return;
         }
-        Intent i = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("http://ditu.google.cn/maps?hl=zh&mrt=loc&q="
-                        + mCurrItem.getLatitude() + "," + mCurrItem.getLongitude()));
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                & Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        i.setClassName("com.google.android.apps.maps",
-                "com.google.android.maps.MapsActivity");
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ditu.google.cn/maps?hl=zh&mrt=loc&q=" + mCurrItem.getLatitude() + "," + mCurrItem.getLongitude()));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK & Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        i.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
         mAct.startActivity(i);
     }
 
     public static void startMapApp(Activity mAct, PoiDetail mCurrItem) {
 
-        Uri uri = Uri.parse("geo:" + mCurrItem.getLat() + ","
-                + mCurrItem.getLon() + "?q=" + mCurrItem.getLat() + "," + mCurrItem.getLon());
+        Uri uri = Uri.parse("geo:" + mCurrItem.getLat() + "," + mCurrItem.getLon() + "?q=" + mCurrItem.getLat() + "," + mCurrItem.getLon());
 
         Intent it = new Intent(Intent.ACTION_VIEW, uri);
         mAct.startActivity(it);
@@ -73,8 +64,7 @@ public class MapUtil {
 
     public static void startMapApp(Activity mAct, MapPoiDetail mCurrItem) {
 
-        Uri uri = Uri.parse("geo:" + mCurrItem.getLatitude() + ","
-                + mCurrItem.getLongitude() + "?q=" + mCurrItem.getLatitude() + "," + mCurrItem.getLongitude());
+        Uri uri = Uri.parse("geo:" + mCurrItem.getLatitude() + "," + mCurrItem.getLongitude() + "?q=" + mCurrItem.getLatitude() + "," + mCurrItem.getLongitude());
 
         Intent it = new Intent(Intent.ACTION_VIEW, uri);
         mAct.startActivity(it);
@@ -123,15 +113,11 @@ public class MapUtil {
 
         int minLevel = 0;
         for (int i = 18; i >= 1; --i) {
-            Point pCenter = TileSystem.LatLongToPixelXY(middle[0], middle[1],
-                    i, null);
+            Point pCenter = TileSystem.LatLongToPixelXY(middle[0], middle[1], i, null);
             Point pMin = TileSystem.LatLongToPixelXY(minX, minY, i, null);
             Point pMax = TileSystem.LatLongToPixelXY(maxX, maxY, i, null);
 
-            if ((Math.abs(pCenter.x - pMin.x) < xLimit && Math.abs(pCenter.y
-                    - pMin.y) < yLimit)
-                    && (Math.abs(pMax.x - pCenter.x) < xLimit && Math
-                    .abs(pMax.y - pCenter.y) < yLimit)) {
+            if ((Math.abs(pCenter.x - pMin.x) < xLimit && Math.abs(pCenter.y - pMin.y) < yLimit) && (Math.abs(pMax.x - pCenter.x) < xLimit && Math.abs(pMax.y - pCenter.y) < yLimit)) {
                 minLevel = i;
                 break;
             }
@@ -145,16 +131,17 @@ public class MapUtil {
         lngListSort.clear();
     }
 
-    public static synchronized ArrayList<MapPoiDetail> getMapContent(List<PlanItem> list ){
+    public static ArrayList<MapPoiDetail> getMapContent(List<PlanItem> list) {
         ArrayList<MapPoiDetail> content = new ArrayList<>();
-        for (PlanItem item:list){
+        //        for (PlanItem item : list) {
+        for (int i = 0; i < list.size(); i++) {
             MapPoiDetail detail = new MapPoiDetail();
             detail.setIcon_nor(R.drawable.ic_map_poi);
             detail.setIcon_press(R.drawable.ic_map_poi_pressed);
-            detail.setmCnName(item.getCn_name());
-            detail.setmEnName(item.getEn_name());
-            detail.setLatitude(Double.parseDouble(item.getLat()));
-            detail.setLongitude(Double.parseDouble(item.getLon()));
+            detail.setmCnName(list.get(i).getCn_name());
+            detail.setmEnName(list.get(i).getEn_name());
+            detail.setLatitude(Double.parseDouble(list.get(i).getLat()));
+            detail.setLongitude(Double.parseDouble(list.get(i).getLon()));
             content.add(detail);
         }
         return content;
@@ -181,32 +168,32 @@ public class MapUtil {
         locationClient.setLocationListener(listener);
     }
 
-    public static void showLocationInfor(AMapLocation aMapLocation){
+    public static void showLocationInfor(AMapLocation aMapLocation) {
         LogMgr.i("定位成功回调信息，设置相关消息");
-        LogMgr.i("获取当前定位结果来源，如网络定位结果，详见定位类型表:"+aMapLocation.getLocationType());
-        LogMgr.i("获取经度:"+aMapLocation.getLatitude()+" 获取纬度:"+aMapLocation.getLongitude()+" 获取精度信息:"+aMapLocation.getAccuracy());
+        LogMgr.i("获取当前定位结果来源，如网络定位结果，详见定位类型表:" + aMapLocation.getLocationType());
+        LogMgr.i("获取经度:" + aMapLocation.getLatitude() + " 获取纬度:" + aMapLocation.getLongitude() + " 获取精度信息:" + aMapLocation.getAccuracy());
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(aMapLocation.getTime());
-        LogMgr.i("定位时间："+df.format(date));
+        LogMgr.i("定位时间：" + df.format(date));
 
-        LogMgr.i("地址："+aMapLocation.getAddress());
-        LogMgr.i("国家信息："+aMapLocation.getCountry() +" 省信息:"+aMapLocation.getProvince()+" 城市信息:"+aMapLocation.getCity());
+        LogMgr.i("地址：" + aMapLocation.getAddress());
+        LogMgr.i("国家信息：" + aMapLocation.getCountry() + " 省信息:" + aMapLocation.getProvince() + " 城市信息:" + aMapLocation.getCity());
 
         //定位成功回调信息，设置相关消息
-//        aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-//        aMapLocation.getLatitude();//获取经度
-//        aMapLocation.getLongitude();//获取纬度
-//        aMapLocation.getAccuracy();//获取精度信息
+        //        aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+        //        aMapLocation.getLatitude();//获取经度
+        //        aMapLocation.getLongitude();//获取纬度
+        //        aMapLocation.getAccuracy();//获取精度信息
 
-//        aMapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果
-//        aMapLocation.getCountry();//国家信息
-//        aMapLocation.getProvince();//省信息
-//        aMapLocation.getCity();//城市信息
-//        aMapLocation.getDistrict();//城区信息
-//        aMapLocation.getRoad();//街道信息
-//        aMapLocation.getCityCode();//城市编码
-//        aMapLocation.getAdCode();//地区编码
+        //        aMapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果
+        //        aMapLocation.getCountry();//国家信息
+        //        aMapLocation.getProvince();//省信息
+        //        aMapLocation.getCity();//城市信息
+        //        aMapLocation.getDistrict();//城区信息
+        //        aMapLocation.getRoad();//街道信息
+        //        aMapLocation.getCityCode();//城市编码
+        //        aMapLocation.getAdCode();//地区编码
     }
 
     private static class LatComparator implements Comparator<Double> {

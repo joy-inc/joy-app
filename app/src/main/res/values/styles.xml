@@ -4,7 +4,7 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">?colorPrimary</item>
         <item name="colorAccent">@color/color_accent</item>
-        <item name="android:windowBackground">?colorPrimary</item>
+        <item name="android:windowBackground">@color/color_primary</item>
         <item name="android:navigationBarColor" tools:targetApi="21">?colorPrimary</item>
         <item name="android:textColorPrimary">@color/color_primary_text</item>
         <item name="android:textColorSecondary">@color/color_secondary_text</item>

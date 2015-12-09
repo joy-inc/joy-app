@@ -21,7 +21,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
 
         Map<String, String> params = getBaseParams();
         params.put("order_id", order_id);
-        params.put("user_token", JoyApplication.getUserToken());
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         return params;
     }
 
@@ -34,7 +34,7 @@ public class OrderHtpUtil extends BaseHtpUtil {
 
         Map<String, String> params = getBaseParams();
         params.put("order_id", order_id);
-        params.put("user_token", JoyApplication.getUserToken());
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         return params;
     }
 
@@ -138,9 +138,9 @@ public class OrderHtpUtil extends BaseHtpUtil {
         Map<String, String> params = getBaseParams();
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
         params.put("contact_id", data.getContact_id());
-        params.put("contact_name", data.getName());
-        params.put("contact_phone", data.getPhone());
-        params.put("contact_email", data.getEmail());
+        params.put("name", data.getName());
+        params.put("phone", data.getPhone());
+        params.put("email", data.getEmail());
         return params;
     }
 
@@ -159,15 +159,17 @@ public class OrderHtpUtil extends BaseHtpUtil {
     }
 
     /**
-     * 支付成功后的回调接口
+     * 发布点评
      *
      * @return
      */
-    public static Map<String, String> getOrderPayCallback() {
+    public static Map<String, String> getCommentAdd(String product_id, String comment_level, String comment) {
 
         Map<String, String> params = getBaseParams();
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
-        // todo
+        params.put("product_id", product_id);
+        params.put("comment_level", comment_level);
+        params.put("comment", comment);
         return params;
     }
 }

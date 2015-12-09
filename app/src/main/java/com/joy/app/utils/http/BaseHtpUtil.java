@@ -10,7 +10,6 @@ import com.android.library.utils.ParamsUtil;
 import com.android.library.utils.SortComparator;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
-import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.utils.ChannelUtil;
 
 import java.util.Map;
@@ -43,7 +42,7 @@ public class BaseHtpUtil implements HtpApi {
         params.put("app_installtime", AppUtil.getInstallTime() + "");
         params.put("lat", "");// 纬度
         params.put("lon", "");// 经度
-        params.put("user_token", JoyApplication.getUserToken());
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 
         //-----------------------------------------------------------------------
         // TODO joy接口ok就干掉

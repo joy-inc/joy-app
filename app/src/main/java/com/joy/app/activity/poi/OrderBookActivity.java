@@ -27,7 +27,6 @@ import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
 import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
@@ -161,6 +160,8 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     @Override
     protected boolean invalidateContent(Product product) {
 
+        mCountWidget.setProduct(product);
+
         if (CollectionUtil.isNotEmpty(product.getLevels())) {
 
             List<ProductLevels> list1 = new ArrayList<>();
@@ -187,7 +188,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             mSubjectWidget.invalidate(list2);
             mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.invalidate(data3);
-
         }
 
         return CollectionUtil.isNotEmpty(product.getLevels());
@@ -277,11 +277,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         return itemStr;
     }
 
-    private void refreshUnitPrice() {
-
-
-    }
-
     private void refreshTotalPrice() {
 
         Float totalPrice = 0f;
@@ -310,7 +305,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             LevelOptions options = mDateWidget.getDataItem(position);
             options.setContent(TimeUtil.getSimpleTypeChineseText(time));
             mDateWidget.resetSelectValue(position, options);
-            mDateWidget.setmDateTime(String.valueOf(time));
+            mDateWidget.setmDateTime(String.valueOf(time / 1000));
             mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.resetUnitPrice();
             refreshTotalPrice();
@@ -330,7 +325,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     protected void onHttpFailed(Object tag, String msg) {
 
         showToast(msg);
-        LogMgr.e("xxx", "~~" + msg);
     }
 
 

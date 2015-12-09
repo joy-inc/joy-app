@@ -8,15 +8,12 @@ import android.view.View;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.joy.app.BuildConfig;
 import com.joy.app.activity.city.CityActivity;
-import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.bean.MainRoute;
 import com.joy.app.utils.http.MainHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,8 +47,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
                 if (mainRoute != null) {
 //                    if (mainRoute.isCity()) {
                         CityActivity.startActivity(getActivity(), mainRoute.getPlace_id());
-//                    }
-                        // else {
+//                    } else {
 //                        WebViewActivity.startActivity(getActivity(), mainRoute.getPlace_url(), mainRoute.getCn_name());
 //                    }
                 }
@@ -63,29 +59,13 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     @Override
     protected ObjectRequest<List<MainRoute>> getObjectRequest(int pageIndex, int pageLimit) {
 
-
         ObjectRequest req = ReqFactory.newPost(MainHtpUtil.URL_POST_MAIN_ROUTE_LIST, MainRoute.class, MainHtpUtil.getMainRouteList(pageIndex, pageLimit));
-        //        if (BuildConfig.DEBUG) {
-        //            List<MainRoute> list = new ArrayList<>();
-        //            for (int i = 0; i < 20; i++) {
-        //                MainRoute route = new MainRoute();
-        //                route.setId("xxx");
-        //                route.setPic_url("http://pic.qyer.com/album/user/495/23/RUBQQBkGYw/index/300x200");
-        //                route.setCn_name("第一名称" + i);
-        //                route.setEn_name("name" + i);
-        //                route.setTags("日式,美食,旅游,日式,美食,旅游" + i);
-        //                route.setType((i + 1) / 2 == 0 ? 1 : 2);
-        //                route.setPlace_url("http://www.qq.com");
-        //                list.add(route);
-        //            }
-        //            req.setData(list);
-        //        }
         return req;
     }
 
     @Override
     protected void onHttpFailed(Object tag, String msg) {
 
-        showToast("error: " + msg);
+        showToast("MainFragment error: " + msg);
     }
 }

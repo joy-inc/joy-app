@@ -9,27 +9,29 @@ import android.view.View;
 
 import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
+import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.joy.app.adapter.city.CityAdapter;
 import com.joy.app.bean.city.City;
+import com.joy.app.bean.city.CityRoute;
 import com.joy.app.utils.http.CityHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by KEVIN.DAI on 15/12/5.
  */
-public class CityActivity extends BaseHttpRvActivity<List<City>> implements View.OnClickListener {
+public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements View.OnClickListener {
 
     private String mPlaceId;
+    private City mCity;
 
     public static void startActivity(Activity act, String placeId) {
 
@@ -45,7 +47,8 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        executeRefreshOnly();
+        executeRefreshOnly();// recommend route
+        executeCityDetail();// city detail
     }
 
     @Override
@@ -58,6 +61,7 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
     protected void initTitleView() {
 
         addTitleLeftBackView();
+        // todo add mapview
     }
 
     @Override
@@ -66,7 +70,6 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
         setSwipeRefreshEnable(false);
         getRecyclerView().setBackgroundResource(R.color.color_primary);
         setAdapter(new CityAdapter());
-        addHeaderView(generateHeaderView());
         setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
 
             @Override
@@ -77,13 +80,29 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
         });
     }
 
-    private View generateHeaderView() {
+    private void executeCityDetail() {
+
+        ObjectRequest<City> cityReq = ReqFactory.newPost(CityHtpUtil.URL_POST_CITY, City.class, CityHtpUtil.getCityParams(mPlaceId));
+        cityReq.setResponseListener(new ObjectResponse<City>() {
+
+            @Override
+            public void onSuccess(Object tag, City city) {
+
+                onSuccessCallback(city);
+            }
+        });
+        addRequestNoCache(cityReq);
+    }
+
+    private void onSuccessCallback(City city) {// generate header view
+
+        mCity = city;
 
         View headerView = inflateLayout(R.layout.view_city_header);
         SimpleDraweeView sdvHeader = (SimpleDraweeView) headerView.findViewById(R.id.sdvPhoto);
-        sdvHeader.setImageURI(Uri.parse("http://pic.qyer.com/album/user/495/23/RUBQQBkGYw/index/300x200"));
+        sdvHeader.setImageURI(Uri.parse(city.getPic_url()));
         JTextView jtvName = (JTextView) headerView.findViewById(R.id.jtvName);
-        jtvName.setText("京都\nKYOTO");
+        jtvName.setText(mCity.getCn_name() + "\n" + mCity.getEn_name());
         headerView.findViewById(R.id.jimTicket).setOnClickListener(this);
         headerView.findViewById(R.id.jimVisa).setOnClickListener(this);
         headerView.findViewById(R.id.jimAirpalne).setOnClickListener(this);
@@ -92,7 +111,9 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
         headerView.findViewById(R.id.jimFood).setOnClickListener(this);
         headerView.findViewById(R.id.jimShop).setOnClickListener(this);
         headerView.findViewById(R.id.jimHotel).setOnClickListener(this);
-        return headerView;
+
+        addHeaderView(headerView);
+        showContentView();// todo
     }
 
     @Override
@@ -102,19 +123,23 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
 
             case R.id.jimTicket:
 
-                showToast("ticket");
+                if (mCity != null)
+                    WebViewActivity.startActivity(this, mCity.getTicket_url(), "");
                 break;
             case R.id.jimVisa:
 
-                showToast("visa");
+                if (mCity != null)
+                    WebViewActivity.startActivity(this, mCity.getVisa_url(), "");
                 break;
             case R.id.jimAirpalne:
 
-                showToast("airplane");
+                if (mCity != null)
+                    WebViewActivity.startActivity(this, mCity.getTraffic_url(), "");
                 break;
             case R.id.jimWifi:
 
-                showToast("wifi");
+                if (mCity != null)
+                    WebViewActivity.startActivity(this, mCity.getWifi_url(), "");
                 break;
 
             case R.id.jimPlay:
@@ -123,8 +148,8 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
                 break;
             case R.id.jimHotel:
 
-//                CityFunActivity.startActivity(this, mPlaceId, 2);
-                CityHotelListActivity.startActivity(this,"cityid","酒店名","fromkey");
+                if (mCity != null)
+                    CityHotelListActivity.startActivity(this, mCity.getCity_id(), mCity.getCn_name(), "fromkey");
                 break;
             case R.id.jimFood:
 
@@ -138,25 +163,18 @@ public class CityActivity extends BaseHttpRvActivity<List<City>> implements View
     }
 
     @Override
-    protected ObjectRequest<List<City>> getObjectRequest(int pageIndex, int pageLimit) {
+    protected ObjectRequest<List<CityRoute>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest<List<City>> req = ReqFactory.newPost(CityHtpUtil.URL_POST_CITY, City.class, CityHtpUtil.getCityParams(""));
+        return ReqFactory.newPost(CityHtpUtil.URL_POST_CITY_ROUTE, CityRoute.class, CityHtpUtil.getCityRouteParams(mPlaceId, pageLimit, pageIndex));
+    }
 
-        if (BuildConfig.DEBUG) {
+    @Override
+    protected void onHttpFailed(Object tag, String msg) {
 
-            List<City> cities = new ArrayList<>(5);
-            City city;
-            for (int i = 0; i < 5; i++) {
+        showToast("CityActivity error: " + msg);
+    }
 
-                city = new City();
-                city.setPic_url("http://pic2.qyer.com/album/1f0/87/1840431/index/680x400");
-                city.setCn_name("京都");
-                city.setEn_name("KYOTO");
-                cities.add(city);
-            }
-            req.setData(cities);
-        }
-
-        return req;
+    @Override
+    protected void showNoContentTip() {
     }
 }
