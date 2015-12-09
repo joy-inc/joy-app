@@ -1,5 +1,7 @@
 package com.joy.app.activity.poi;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +29,23 @@ import java.util.List;
 public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
     String Url;
     View PayButton;
+
+    public static void startActivity(Activity act, String url) {
+        Intent intent = new Intent(act,OrderDetailActivity.class);
+        intent.putExtra("DATA",url);
+        act.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         executeRefreshOnly();
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        Url = getIntent().getStringExtra("DATA");
     }
 
     @Override

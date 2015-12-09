@@ -7,11 +7,13 @@ import android.support.v4.app.Fragment;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
+import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.joy.app.adapter.hotel.AutoCompleteAdapter;
 import com.joy.app.bean.hotel.AutoComplete;
 import com.joy.app.bean.hotel.HotelParams;
 import com.joy.app.utils.http.HotelHtpUtil;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ import java.util.List;
  */
 public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> {
     String id ,keyword;
-
+    RecyclerAdapter.OnItemClickListener
     public static AutoCompleteFragment instantiate(Context context, String id,String keyword) {
         Bundle bundle = new Bundle();
         bundle.putString("cityID", TextUtil.filterNull(id) );
@@ -62,6 +64,6 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> {
 
     @Override
     protected ObjectRequest<AutoComplete> getObjectRequest(int pageIndex, int pageLimit) {
-        return HotelHtpUtil.getAutoCompleteRequest(id,keyword,AutoComplete.class);
+        return HotelHtpUtil.getAutoCompleteRequest(id, URLEncoder.encode(keyword),AutoComplete.class);
     }
 }

@@ -177,8 +177,9 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
                 searchHotelListFragment = SearchHotelListFragment.instantiate(this,params);
             }
             addFragment(R.id.fl_content,searchHotelListFragment);
+        }else{
+            searchHotelListFragment.reLoadHotelList(keyowrd);
         }
-        searchHotelListFragment.reLoadHotelList(keyowrd);
         saveHistoryData(keyowrd);
     }
     private void removeSearchContent(){

@@ -52,7 +52,8 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     public static void startActivity(Activity activity, String cityId, String cityName, String fromKey) {
 
         long[] days = HotelTimeUtil.getLastOffsetDay(Consts.MONTH_DAY_OFFSET);
-        startActivity(activity, cityId, cityName, fromKey, days[0], days[1]);
+
+        startActivity(activity, TextUtil.filterEmpty(cityId,"50"), TextUtil.filterEmpty(cityName,"香港"), fromKey, days[0], days[1]);
     }
 
     public static void startActivity(Activity activity, String cityId, String cityName, String fromKey, long startDay, long endDay) {
