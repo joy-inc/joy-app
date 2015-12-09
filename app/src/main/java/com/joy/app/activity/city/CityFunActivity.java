@@ -9,14 +9,12 @@ import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.adapter.city.CityFunAdapter;
 import com.joy.app.bean.city.CityFun;
 import com.joy.app.utils.http.CityHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,25 +80,6 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
     @Override
     protected ObjectRequest<CityFun> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest<CityFun> req = ReqFactory.newPost(CityHtpUtil.URL_POST_CITY_FUN, CityFun.class, CityHtpUtil.getCityFunParams(mPlaceId, mType, pageLimit, pageIndex));
-        if (BuildConfig.DEBUG) {
-
-            CityFun cityFun = new CityFun();
-            cityFun.setDescription("总体描述...");
-            CityFun.ListEntity entity;
-            List<CityFun.ListEntity> entities = new ArrayList<>(5);
-            for (int i = 0; i < 5; i++) {
-
-                entity = new CityFun.ListEntity();
-                entity.setPic_url("http://pic2.qyer.com/album/user/725/20/RktQQBoDYQ/index/300x200");
-                entity.setRecommend("拉面是日本人生活中必不可少的一道美味，日本拉面非常讲究汤底，东京以酱油底、豚骨汤底最为常见。东京拉面的新流行。");
-                entity.setTopic_name("浅草寺晴空塔与周边");
-                entity.setEn_name("Sensoji Temple/SKYTREE");
-                entities.add(entity);
-            }
-            cityFun.setList(entities);
-            req.setData(cityFun);
-        }
-        return req;
+        return ReqFactory.newPost(CityHtpUtil.URL_POST_CITY_FUN, CityFun.class, CityHtpUtil.getCityFunParams(mPlaceId, mType, pageLimit, pageIndex));
     }
 }
