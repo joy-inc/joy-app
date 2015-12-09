@@ -27,12 +27,12 @@ import java.util.List;
  * @Description 订单详情页    <br>
  */
 public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
-    String Url;
+    String order_id;
     View PayButton;
 
-    public static void startActivity(Activity act, String url) {
+    public static void startActivity(Activity act, String orderId) {
         Intent intent = new Intent(act,OrderDetailActivity.class);
-        intent.putExtra("DATA",url);
+        intent.putExtra("DATA",orderId);
         act.startActivity(intent);
     }
 
@@ -45,7 +45,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
     @Override
     protected void initData() {
         super.initData();
-        Url = getIntent().getStringExtra("DATA");
+        order_id = getIntent().getStringExtra("DATA");
     }
 
     @Override
@@ -128,7 +128,7 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
 
     }
     private void SendCancelMassage(){
-        ObjectRequest<Object> req = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_CANCEL, Object.class, OrderHtpUtil.getCancelOrderUrl(Url));
+        ObjectRequest<Object> req = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_CANCEL, Object.class, OrderHtpUtil.getCancelOrderUrl(order_id));
         req.setResponseListener(new ObjectResponse<Object>() {
 
             @Override
@@ -142,6 +142,6 @@ public class OrderDetailActivity extends BaseHttpRvActivity<OrderDetail> {
     @Override
     protected ObjectRequest<OrderDetail> getObjectRequest(int pageIndex, int pageLimit) {
 
-        return ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_DETAIL, OrderDetail.class, OrderHtpUtil.getOrderDetailUrl(Url));
+        return ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_DETAIL, OrderDetail.class, OrderHtpUtil.getOrderDetailUrl(order_id));
     }
 }

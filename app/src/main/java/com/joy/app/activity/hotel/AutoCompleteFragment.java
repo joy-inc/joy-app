@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> {
     String id ,keyword;
-    RecyclerAdapter.OnItemClickListener
+
     public static AutoCompleteFragment instantiate(Context context, String id,String keyword) {
         Bundle bundle = new Bundle();
         bundle.putString("cityID", TextUtil.filterNull(id) );
