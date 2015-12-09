@@ -1,6 +1,7 @@
 package com.joy.app.bean;
 
 import com.android.library.utils.TextUtil;
+import com.joy.app.BuildConfig;
 
 /**
  * 用户登录信息
@@ -48,8 +49,11 @@ public class User {
     }
 
     public String getToken() {
-//        return token;
-        return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb";
+        if (BuildConfig.DEBUG) {
+            return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb";
+
+        }
+        return token;
     }
 
     public void setToken(String token) {
