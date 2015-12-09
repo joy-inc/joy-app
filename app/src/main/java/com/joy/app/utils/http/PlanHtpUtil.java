@@ -19,7 +19,7 @@ public class PlanHtpUtil extends BaseHtpUtil{
     public static ObjectRequest getUserPlanAddRequest(String poiId, String folderId,Class clazz) {
 
         Map<String, String> params = getBaseParams();
-        params.put("poiid", poiId);
+        params.put("product_id", poiId);
         params.put("folder", folderId);
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 

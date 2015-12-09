@@ -12,6 +12,7 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.widget.JRecyclerView;
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
 
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 添加进规划    <br>
  */
 public class AddPoiToFloderActivity extends Activity {
     @Bind(R.id.jrv_list)
@@ -42,10 +43,11 @@ public class AddPoiToFloderActivity extends Activity {
     JTextView jtvButton;
 
     String PoiId;
+    String FolderName;
 
-    public static void startActivity(Activity activity,String PoiId){
-        Intent intent = new Intent(activity,AddPoiToFloderActivity.class);
-        intent.putExtra("PoiId",PoiId);
+    public static void startActivity(Activity activity, String PoiId) {
+        Intent intent = new Intent(activity, AddPoiToFloderActivity.class);
+        intent.putExtra("PoiId", PoiId);
         activity.startActivity(intent);
     }
 
@@ -62,6 +64,7 @@ public class AddPoiToFloderActivity extends Activity {
     private void initData() {
         PoiId = getIntent().getStringExtra("PoiId");
     }
+
     private void initContent() {
         jtvButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,41 +75,70 @@ public class AddPoiToFloderActivity extends Activity {
         getFolderData();
     }
 
-    private void showEmpty(){
+    private void showEmpty() {
         ViewUtil.goneView(rlLoading);
         ViewUtil.showView(jtvEmpty);
         ViewUtil.goneView(jrvList);
 
     }
-    private void showList(List<PlanFolder> planFolders){
+
+    private void showList(List<PlanFolder> planFolders) {
         ViewUtil.goneView(rlLoading);
         ViewUtil.goneView(jtvEmpty);
         ViewUtil.showView(jrvList);
 
         jrvList.setLayoutManager(new LinearLayoutManager(this));
-        PlanFolderAdapter adapter= new PlanFolderAdapter();
+        PlanFolderAdapter adapter = new PlanFolderAdapter();
+        adapter.setName(FolderName);
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
-
+                if (planFolder.getFolder_name().equals(FolderName))return;
+                addPoi(planFolder);
             }
         });
         adapter.setData(planFolders);
         jrvList.setAdapter(adapter);
     }
 
-    private void showDialog(){
+    private void showCreateDialog() {
 
     }
 
-    private void getFolderData() {
-        ObjectRequest<List<PlanFolder>> req = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class,200,1);
+    private void resultData(PlanFolder folder) {
+
+    }
+
+    private void addPoi(final PlanFolder folde) {
+        ObjectRequest<List<PlanFolder>> req = PlanHtpUtil.getUserPlanAddRequest(PoiId, folde.getId(), PlanFolder.class, );
         req.setResponseListener(new ObjectResponse<List<PlanFolder>>() {
             @Override
             public void onSuccess(Object tag, List<PlanFolder> planFolders) {
-                if(CollectionUtil.isEmpty(planFolders)){
+                Intent intent = new Intent();
+                intent.putExtra("data", folde);
+                setResult(RESULT_OK, intent);
+                finish();
+
+            }
+
+            @Override
+            public void onError(Object tag, String msg) {
+                super.onError(tag, msg);
+                ToastUtil.showToast(msg);
+            }
+        });
+
+        addRequestNoCache(req);
+    }
+
+    private void getFolderData() {
+        ObjectRequest<List<PlanFolder>> req = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class, 200, 1);
+        req.setResponseListener(new ObjectResponse<List<PlanFolder>>() {
+            @Override
+            public void onSuccess(Object tag, List<PlanFolder> planFolders) {
+                if (CollectionUtil.isEmpty(planFolders)) {
                     showEmpty();
-                }else{
+                } else {
                     showList(planFolders);
                 }
             }
@@ -121,27 +153,28 @@ public class AddPoiToFloderActivity extends Activity {
         addRequestNoCache(req);
     }
 
-    private void createFolder(String mName){
+    private void createFolder(String mName) {
         ObjectRequest<Object> req = PlanHtpUtil.getUserPlanFolderCreateRequest(mName, Object.class);
         req.setResponseListener(new ObjectResponse<Object>() {
 
             @Override
             public void onSuccess(Object tag, Object object) {
 
+                getFolderData();
             }
 
             @Override
             public void onError(Object tag, String msg) {
                 super.onError(tag, msg);
-
+                ToastUtil.showToast(msg);
             }
         });
 
         addRequestNoCache(req);
     }
 
-    private void addRequestNoCache(ObjectRequest<?> req){
-        req.setTag( req.getIdentifier());
+    private void addRequestNoCache(ObjectRequest<?> req) {
+        req.setTag(req.getIdentifier());
         req.setShouldCache(false);
         BaseApplication.getRequestQueue().add(req);
     }
