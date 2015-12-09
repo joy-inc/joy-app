@@ -37,6 +37,14 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
 
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    callbackOnItemViewClickListener(getLayoutPosition(), v);
+                }
+            });
         }
 
         @Override

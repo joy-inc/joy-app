@@ -9,7 +9,7 @@ import com.android.library.adapter.ExRvViewHolder;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
-import com.joy.app.bean.city.City;
+import com.joy.app.bean.city.CityRoute;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 /**
  * Created by KEVIN.DAI on 15/12/5.
  */
-public class CityAdapter extends ExRvAdapter<CityAdapter.ViewHolder, City> {
+public class CityRouteAdapter extends ExRvAdapter<CityRouteAdapter.ViewHolder, CityRoute> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -25,7 +25,7 @@ public class CityAdapter extends ExRvAdapter<CityAdapter.ViewHolder, City> {
         return new ViewHolder(inflate(parent, R.layout.item_city_route));
     }
 
-    public class ViewHolder extends ExRvViewHolder<City> {
+    public class ViewHolder extends ExRvViewHolder<CityRoute> {
 
         @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
         @Bind(R.id.jtvDays)  JTextView        jtvDays;
@@ -35,14 +35,22 @@ public class CityAdapter extends ExRvAdapter<CityAdapter.ViewHolder, City> {
 
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    callbackOnItemViewClickListener(getLayoutPosition(), v);
+                }
+            });
         }
 
         @Override
-        protected void invalidateItemView(int position, City city) {
+        protected void invalidateItemView(int position, CityRoute cityRoute) {
 
-            sdvPhoto.setImageURI(Uri.parse(city.getPic_url()));
-            jtvDays.setText(10 + position + "");
-            jtvTitle.setText("新西兰米尔福德峡湾一日游的很多行程之一");
+            sdvPhoto.setImageURI(Uri.parse(cityRoute.getPic_url()));
+            jtvDays.setText(cityRoute.getRoute_day());
+            jtvTitle.setText(cityRoute.getRoute_name());
         }
     }
 }

@@ -226,8 +226,12 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
 
         //网络请求,发广播
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN_OUT, String.class, UserHtpUtil.userLoginOut(JoyApplication.getUserToken()));
-        showLoading();
         req.setResponseListener(new ObjectResponse() {
+
+            @Override
+            public void onPre() {
+                showLoading();
+            }
 
             @Override
             public void onSuccess(Object tag, Object o) {
@@ -241,7 +245,6 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
 
             @Override
             public void onError(Object tag, String msg) {
-                super.onError(tag, msg);
                 if (TextUtil.isEmpty(msg)) {
                     ToastUtil.showToast(R.string.request_error);
                 } else {
@@ -251,7 +254,7 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
 
             }
         });
-        JoyApplication.getRequestQueue().add(req);
+        addRequestNoCache(req);
     }
 
     public static void startActivity(Context context) {

@@ -4,20 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
-import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.hotel.CityHotelListActivity;
-import com.joy.app.adapter.city.CityAdapter;
+import com.joy.app.adapter.city.CityRouteAdapter;
 import com.joy.app.bean.city.City;
 import com.joy.app.bean.city.CityRoute;
 import com.joy.app.utils.http.CityHtpUtil;
@@ -69,13 +68,14 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
 
         setSwipeRefreshEnable(false);
         getRecyclerView().setBackgroundResource(R.color.color_primary);
-        setAdapter(new CityAdapter());
-        setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+        setAdapter(new CityRouteAdapter());
+        getAdapter().setOnItemViewClickListener(new OnItemViewClickListener<CityRoute>() {
 
             @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+            public void onItemViewClick(int position, View clickView, CityRoute cityRoute) {
 
-                showToast("~~" + position);
+                if (cityRoute != null)
+                    WebViewActivity.startActivity(CityActivity.this, cityRoute.getRoute_url(), cityRoute.getRoute_name());
             }
         });
     }
