@@ -3,13 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.android.library.widget.JTextView
-        android:id="@+id/jtv_title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="20dp"
-        android:gravity="center_vertical"
-        android:text="123"/>
+        android:layout_height="50dp">
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:text="123"/>
+        <ImageView
+            android:id="@+id/iv_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_pink_finish"/>
+    </RelativeLayout>
     <View
         style="@style/Line.Dark.Horizontal"
         android:background="@color/black_trans30"/>

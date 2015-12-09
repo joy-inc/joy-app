@@ -67,7 +67,7 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
         LogMgr.i("position:"+position);
         if (position != 0 ){
             HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position -1);
-            WebViewActivity.startActivity(getActivity(),hotelEntity.getLink(),"hotel");
+            WebViewActivity.startActivity(getActivity(),hotelEntity.getLink(),"");
         }else{
             SearchHotelActivity.startActivity(getActivity(),params.getCityId(),params.getCheckIn(),params.getCheckOut(),params.getFrom_key());
         }

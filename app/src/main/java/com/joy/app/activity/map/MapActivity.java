@@ -107,12 +107,8 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     @Override
     protected void initTitleView() {
 
-        addTitleLeftView(R.drawable.ic_map_back_btn, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        addTitleLeftBackView();
+        setTitle("");
     }
 
     @Override

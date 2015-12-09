@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.library.BaseApplication;
+import com.android.library.activity.BaseUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
@@ -130,7 +131,7 @@ public class AddPoiToFloderActivity extends Activity {
         jrvList.setLayoutManager(new LinearLayoutManager(this));
         if (adapter != null){
             adapter = new PlanFolderAdapter();
-            adapter.setName(FolderName);
+            adapter.setName(PoiId);
             adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
                 @Override
                 public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
