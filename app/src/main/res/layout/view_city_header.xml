@@ -12,12 +12,8 @@
 
     <com.android.library.widget.JTextView
         android:id="@+id/jtvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/sdvPhoto"
-        android:layout_alignLeft="@id/sdvPhoto"
-        android:layout_alignRight="@id/sdvPhoto"
-        android:layout_alignTop="@id/sdvPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
         android:gravity="center"
         android:textColor="@color/white_trans75"
         android:textSize="20dp" />

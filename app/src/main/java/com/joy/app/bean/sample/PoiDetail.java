@@ -12,23 +12,24 @@ import java.util.ArrayList;
  * <p/>
  * Created by xiaoyu.chen on 15/11/11.
  */
-public class PoiDetail implements Parcelable {
-
-    private static final long serialVersionUID = 1L;
+public class PoiDetail {
 
     private String product_id = TextUtil.TEXT_EMPTY;
     private String title = TextUtil.TEXT_EMPTY;
     private String sub_title = TextUtil.TEXT_EMPTY;
-    private String comment_level = TextUtil.TEXT_EMPTY;
-    private String comment_num = TextUtil.TEXT_EMPTY;
-    private String price = TextUtil.TEXT_EMPTY;
+    private String comment_level = TextUtil.TEXT_EMPTY;//评论星级
+    private String comment_num = TextUtil.TEXT_EMPTY;//评论数
+    private String price = TextUtil.TEXT_EMPTY;//价格范围	格式：200-300
     private String lat = TextUtil.TEXT_EMPTY;
     private String lon = TextUtil.TEXT_EMPTY;
-    private ArrayList<String> highlights;
-    private String introduction = TextUtil.TEXT_EMPTY;
-    private String is_book = TextUtil.TEXT_EMPTY;
-    private ArrayList<String> photos;
-    private String purchase_info = TextUtil.TEXT_EMPTY;
+    private String folder_name	 = TextUtil.TEXT_EMPTY;//收藏的文件夹名称
+    private String folder_id = TextUtil.TEXT_EMPTY;//收藏文件夹的id
+    private ArrayList<String> highlights;//项目亮点
+    private String introduction = TextUtil.TEXT_EMPTY;//项目简介
+    private String is_book = TextUtil.TEXT_EMPTY;//是否可预订 1可 0否
+    private String booking_before = TextUtil.TEXT_EMPTY;//提前几天预订
+    private ArrayList<String> photos;//图片地址
+    private String purchase_info = TextUtil.TEXT_EMPTY;//购买须知url
 
 
     public String getProduct_id() {
@@ -135,52 +136,28 @@ public class PoiDetail implements Parcelable {
         this.purchase_info = purchase_info;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getFolder_name() {
+        return folder_name;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.product_id);
-        dest.writeString(this.title);
-        dest.writeString(this.sub_title);
-        dest.writeString(this.comment_level);
-        dest.writeString(this.comment_num);
-        dest.writeString(this.price);
-        dest.writeString(this.lat);
-        dest.writeString(this.lon);
-        dest.writeStringList(this.highlights);
-        dest.writeString(this.introduction);
-        dest.writeString(this.is_book);
-        dest.writeStringList(this.photos);
+    public void setFolder_name(String folder_name) {
+        this.folder_name = folder_name;
     }
 
-    public PoiDetail() {
+    public String getFolder_id() {
+        return folder_id;
     }
 
-    protected PoiDetail(Parcel in) {
-        this.product_id = in.readString();
-        this.title = in.readString();
-        this.sub_title = in.readString();
-        this.comment_level = in.readString();
-        this.comment_num = in.readString();
-        this.price = in.readString();
-        this.lat = in.readString();
-        this.lon = in.readString();
-        this.highlights = in.createStringArrayList();
-        this.introduction = in.readString();
-        this.is_book = in.readString();
-        this.photos = in.createStringArrayList();
+    public void setFolder_id(String folder_id) {
+        this.folder_id = folder_id;
     }
 
-    public static final Parcelable.Creator<PoiDetail> CREATOR = new Parcelable.Creator<PoiDetail>() {
-        public PoiDetail createFromParcel(Parcel source) {
-            return new PoiDetail(source);
-        }
+    public String getBooking_before() {
+        return booking_before;
+    }
 
-        public PoiDetail[] newArray(int size) {
-            return new PoiDetail[size];
-        }
-    };
+    public void setBooking_before(String booking_before) {
+        this.booking_before = booking_before;
+    }
+
 }

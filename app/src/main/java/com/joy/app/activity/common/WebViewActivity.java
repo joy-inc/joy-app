@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.android.library.activity.BaseUiActivity;
+import com.android.library.utils.LogMgr;
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.ActivityUrlUtil;
@@ -15,8 +17,6 @@ import com.joy.app.view.dialog.ShareDialog;
 import com.joy.app.view.webview.BaseWebView;
 import com.joy.app.view.webview.WebViewBaseWidget;
 import com.joy.app.view.webview.WebViewNativeWidget;
-import com.android.library.activity.BaseUiActivity;
-import com.android.library.utils.LogMgr;
 
 import de.greenrobot.event.EventBus;
 
@@ -63,8 +63,8 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     @Override
     protected void initTitleView() {
 
-        setTitle(getIntent().getStringExtra("title"));
         addTitleLeftBackView();
+        addTitleMiddleView(getIntent().getStringExtra("title"));
 
         if (mType > 100) {
             addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
