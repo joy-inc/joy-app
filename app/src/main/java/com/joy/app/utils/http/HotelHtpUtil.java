@@ -6,6 +6,7 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.joy.app.bean.hotel.HotelParams;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class HotelHtpUtil extends BaseHtpUtil {
         //可选参数
         params.put("orderby", String.valueOf(hotelParams.getOrderby()));
         if (TextUtil.isNotEmpty(hotelParams.getHotel())){
-            params.put("hotel",hotelParams.getHotel());
+            params.put("hotel", URLEncoder.encode(hotelParams.getHotel()));
         }
         if (hotelParams.getArea_id() != 0){
             params.put("area_id",String.valueOf(hotelParams.getArea_id()));

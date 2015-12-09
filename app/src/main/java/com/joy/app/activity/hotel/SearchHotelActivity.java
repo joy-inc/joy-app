@@ -157,6 +157,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
         }
         historyAdapter.setData(JoyShareUtil.getData(this,getClass().getSimpleName(),SHARE_fILE));
         ViewUtil.showView(jrvHistory);
+        state = history_state;
     }
 
     private void removeHistory(){
@@ -165,6 +166,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
 
     private void clearHistoryData(){
         historyAdapter.getData().clear();
+        historyAdapter.notifyDataSetChanged();
         JoyShareUtil.clearData(this,getClass().getSimpleName());
     }
 
@@ -177,8 +179,10 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
                 searchHotelListFragment = SearchHotelListFragment.instantiate(this,params);
             }
             addFragment(R.id.fl_content,searchHotelListFragment);
+            state = resultcontent_state;
+        }else{
+            searchHotelListFragment.reLoadHotelList(keyowrd);
         }
-        searchHotelListFragment.reLoadHotelList(keyowrd);
         saveHistoryData(keyowrd);
     }
     private void removeSearchContent(){
@@ -195,8 +199,10 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
             removeHistory();
             if (autoCompleteFragment == null){
                 autoCompleteFragment = AutoCompleteFragment.instantiate(this,cityId,keyowrd);
+                autoCompleteFragment.setClickListener(this);
             }
             addFragment(R.id.fl_content,autoCompleteFragment);
+            state = autocomplete_state;
         }else{
             autoCompleteFragment.reloadAutoComplete(keyowrd);
         }

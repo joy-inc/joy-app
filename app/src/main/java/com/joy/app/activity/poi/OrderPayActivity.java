@@ -5,19 +5,15 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.RelativeLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -77,17 +73,8 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     @Bind(R.id.jtv_order_total)
     TextView jtvOrderTotal;
 
-    @Bind(R.id.rlWeChatDiv)
-    RelativeLayout rlWeChatDiv;
-
-    @Bind(R.id.accbWechat)
-    AppCompatCheckBox accbWechat;
-
-    @Bind(R.id.rlAlipayDiv)
-    RelativeLayout rlAlipayDiv;
-
-    @Bind(R.id.accbAlipay)
-    AppCompatCheckBox accbAlipay;
+    @Bind(R.id.acrgPayment)
+    RadioGroup acrgPayment;
 
     @Bind(R.id.tvTotalPrice)
     TextView tvTotalPrice;
@@ -95,11 +82,13 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     @Bind(R.id.acbNext)
     AppCompatButton acbNext;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_order_pay);
+        ButterKnife.bind(this);
 
         if (mOrderDetail == null)
             executeRefreshOnly();
@@ -135,48 +124,17 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             @Override
             public void onClick(View v) {
 
-                if (accbWechat.isChecked()) {
-                    startPay(CHANNEL_WECHAT);
-                } else if (accbAlipay.isChecked()) {
-                    startPay(CHANNEL_ALIPAY);
+                if (acrgPayment.getCheckedRadioButtonId() == R.id.acrbWeChat) {
+
+                    getOrderChargeToPay(CHANNEL_WECHAT);
+
+                } else if (acrgPayment.getCheckedRadioButtonId() == R.id.acrbAlipay) {
+
+                    getOrderChargeToPay(CHANNEL_ALIPAY);
+
                 } else {
                     showToast("请选择支付方式");
                 }
-            }
-        });
-        rlWeChatDiv.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                accbWechat.setChecked(!accbWechat.isChecked());
-            }
-        });
-        rlAlipayDiv.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                accbAlipay.setChecked(!accbAlipay.isChecked());
-            }
-        });
-        accbWechat.setChecked(true);
-        accbWechat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked)
-                    accbAlipay.setChecked(false);
-            }
-        });
-        accbAlipay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked)
-                    accbWechat.setChecked(false);
             }
         });
     }
@@ -210,7 +168,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         return obj;
     }
 
-    private void startPay(String channel) {
+    private void getOrderChargeToPay(String channel) {
 
         ObjectRequest<OrderCharge> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_PAY_CREATE_CHARGE, OrderCharge.class, OrderHtpUtil.getOrderPayCreateCharge(mId, channel));
 
@@ -220,14 +178,12 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             public void onSuccess(Object tag, OrderCharge orderCharge) {
 
                 String jsonCharge = JSON.toJSONString(orderCharge);
-                LogMgr.e("orderPay", "json: " + jsonCharge);
                 startPaymentActivity(jsonCharge);
             }
 
             @Override
             public void onError(Object tag, String msg) {
 
-                super.onError(tag, msg);
                 showToast(msg);
             }
         });
@@ -255,45 +211,38 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
                 String result = data.getExtras().getString("pay_result");
                 String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
                 String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
-                showMsg(result, errorMsg, extraMsg);
 
                 takePayResult(result, errorMsg, extraMsg);
             }
         }
     }
 
+    /**
+     * 处理返回值
+     * "success" - payment succeed
+     * "fail"    - payment failed
+     * "cancel"  - user canceld
+     * "invalid" - payment plugin not installed
+     */
     private void takePayResult(String result, String errorMsg, String extraMsg) {
-                /* 处理返回值
-                 * "success" - payment succeed
-                 * "fail"    - payment failed
-                 * "cancel"  - user canceld
-                 * "invalid" - payment plugin not installed
-                 */
+
 
         if ("success".equals(result)) {
 
-            // todo open order detail activity
-            showToast("todo open order detail activity");
-        } else if ("fail".equals(result)) {
-            showToast(R.string.toast_pay_failed);
-        } else if ("invalid".equals(result)) {
-            showToast(errorMsg);
-        }
-    }
+            OrderDetailActivity.startActivity(this, mId);
+            finish();
 
-    public void showMsg(String title, String msg1, String msg2) {
-        String str = title;
-        if (null != msg1 && msg1.length() != 0) {
-            str += "\n" + msg1;
+        } else if ("fail".equals(result)) {
+
+            showToast(R.string.toast_pay_failed);
+
+        } else if ("invalid".equals(result)) {
+
+            showToast(errorMsg);
+
+        } else if ("cancel".equals(result)) {
+        } else {
         }
-        if (null != msg2 && msg2.length() != 0) {
-            str += "\n" + msg2;
-        }
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(str);
-        builder.setTitle("提示");
-        builder.setPositiveButton("OK", null);
-        builder.create().show();
     }
 
     public static void startActivity(Activity act, String order_id, OrderDetail data) {
