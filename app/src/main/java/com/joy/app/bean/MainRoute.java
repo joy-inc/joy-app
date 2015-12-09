@@ -1,6 +1,7 @@
 package com.joy.app.bean;
 
 import com.android.library.utils.TextUtil;
+import com.joy.app.utils.UrlUtil;
 
 /**
  * 首页的路线列表
@@ -16,7 +17,6 @@ public class MainRoute {
     private int type = 1;//1城市 2专题
     private String place_url = TextUtil.TEXT_EMPTY;//旅游地的详情url
     private String pic_url = TextUtil.TEXT_EMPTY;//图片地址
-
 
     public String getPlace_id() {
         return place_id;
@@ -72,6 +72,14 @@ public class MainRoute {
 
     public void setPic_url(String pic_url) {
         this.pic_url = TextUtil.filterNull(pic_url);
+    }
+
+    /**
+     * 获取城市id
+     */
+    public String getCityId() {
+
+        return UrlUtil.getLastParameter(place_url);
     }
 
     /**

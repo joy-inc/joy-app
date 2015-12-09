@@ -61,7 +61,6 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
     TextView mTvButton;
 
     View mDecorView;//根目录
-    private String mSubmitPhone;//提交的电话号码.
     private int mDurationMillis = 200;//动画时间
     private float mDefaultLoginY;//默认的登录view的坐标
     DisTime mDisTime;
@@ -116,7 +115,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!TextUtil.isEmpty(mEtCode.getText().toString()) && !TextUtil.isEmpty(mSubmitPhone)) {
+                if (!TextUtil.isEmpty(mEtCode.getText().toString()) && !TextUtil.isEmpty(mEtPhone.getText().toString())) {
 
                     mTvButton.setEnabled(true);
                     mTvButton.setBackgroundResource(R.drawable.selector_bg_rectangle_accent_fill);
@@ -229,8 +228,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
      */
     private void toLogin() {
 
-        if (TextUtil.isEmpty(mSubmitPhone)) {
-            ToastUtil.showToast(R.string.login_phone_empty);
+        if (!checkPhoneNum()) {
             return;
         }
         String code = mEtCode.getText().toString();
@@ -238,18 +236,14 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
             ToastUtil.showToast(R.string.login_code_empty);
             return;
         }
-        showLoading();
 
-        ObjectRequest<User> req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN, User.class, UserHtpUtil.userLogin(mSubmitPhone, code));
-        //        User u = new User();
-        //        u.setUser_id("ssss");
-        //        u.setMobile("18888888888");
-        //        u.setCreate_time(new Date().getTime() / 1000);
-        //        u.setNickname("liulong");
-        //        u.setToken("sadfasdfas");
-        //        req.setData(u);
+        ObjectRequest<User> req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN, User.class, UserHtpUtil.userLogin(mEtPhone.getText().toString(), code));
         req.setResponseListener(new ObjectResponse<User>() {
 
+            @Override
+            public void onPre() {
+                showLoading();
+            }
 
             @Override
             public void onSuccess(Object tag, User u) {
@@ -270,7 +264,6 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
 
             @Override
             public void onError(Object tag, String msg) {
-                super.onError(tag, msg);
                 hideLoading();
                 if (TextUtil.isEmpty(msg)) {
                     ToastUtil.showToast(R.string.request_error);
@@ -279,26 +272,42 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
                 }
             }
         });
-        JoyApplication.getRequestQueue().add(req);
+        addRequestNoCache(req);
     }
 
+
+    /**
+     * 检查号码是否正确
+     * @return
+     */
+    private boolean checkPhoneNum(){
+
+        String tmp = mEtPhone.getText().toString();
+        if (TextUtil.isEmpty(tmp) || tmp.length() < 11) {
+            showToast(R.string.login_no_phone);
+            return false;
+        }
+        return true;
+    }
     /**
      * 获取验证码
      */
     private void getCode() {
 
 
-        String tmp = mEtPhone.getText().toString();
-        if (TextUtil.isEmpty(tmp) || tmp.length() < 11) {
-            showToast(R.string.login_no_phone);
+        if (!checkPhoneNum()) {
             return;
         }
-        mSubmitPhone = tmp;
         mTvButton.setEnabled(false);
-        showLoading();
-        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mSubmitPhone));
+        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode( mEtPhone.getText().toString()));
 //                req.setData("");
         req.setResponseListener(new ObjectResponse() {
+
+            @Override
+            public void onPre() {
+                showLoading();
+
+            }
 
             @Override
             public void onSuccess(Object tag, Object o) {
@@ -312,7 +321,6 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
 
             @Override
             public void onError(Object tag, String msg) {
-                super.onError(tag, msg);
                 if (TextUtil.isEmpty(msg)) {
                     ToastUtil.showToast(R.string.request_error);
                 } else {
@@ -322,7 +330,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
                 hideLoading();
             }
         });
-        JoyApplication.getRequestQueue().add(req);
+        addRequestNoCache(req);
     }
 
     @Override

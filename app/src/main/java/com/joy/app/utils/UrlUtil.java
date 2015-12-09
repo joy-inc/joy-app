@@ -1,5 +1,7 @@
 package com.joy.app.utils;
 
+import android.net.Uri;
+
 /**
  * 处理url相关的, 处理url分析,提取,组合
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
@@ -17,5 +19,38 @@ public class UrlUtil {
 
         return "";//HtpApi.URL_LOGIN_COOKIE + "?client_id=" + HtpApi.CLIENT_ID + "&client_secret=" + HtpApi.CLIENT_SECRET + "&oauth_token=" + token;
         //// TODO: 15/11/10 把url组合成
+    }
+
+    /**
+     * 获取url对应的key数值
+     *
+     * @param url
+     * @param key
+     * @return
+     */
+    public static String getQueryParameter(String url, String key) {
+
+        try {
+            Uri uri = Uri.parse(url);
+            String value = uri.getQueryParameter(key);
+            return value;
+        } catch (Exception ex) {
+            return "";
+        }
+    }
+
+    /**
+     * 获取url最后的参数值
+     *
+     * @param url
+     * @return
+     */
+    public static String getLastParameter(String url) {
+
+        int index = url.lastIndexOf("/");
+        if (index > 0) {
+            return url.substring(index + 1).trim();
+        }
+        return "";
     }
 }
