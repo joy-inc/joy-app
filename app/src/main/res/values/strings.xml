@@ -152,6 +152,12 @@
         <item>吃什么</item>
         <item>值得买</item>
     </string-array>
+    <string-array name="city_necessary">
+        <item>景点/门票</item>
+        <item>签证/出入境</item>
+        <item>交通/接送机</item>
+        <item>WIFI/电话卡</item>
+    </string-array>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
 </resources>

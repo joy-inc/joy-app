@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.android.library.activity.BaseHttpRvActivity;
-import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
+import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -60,7 +61,6 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     protected void initTitleView() {
 
         addTitleLeftBackView();
-        // todo add mapview
     }
 
     @Override
@@ -69,13 +69,13 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
         setSwipeRefreshEnable(false);
         getRecyclerView().setBackgroundResource(R.color.color_primary);
         setAdapter(new CityRouteAdapter());
-        getAdapter().setOnItemViewClickListener(new OnItemViewClickListener<CityRoute>() {
+        setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemViewClick(int position, View clickView, CityRoute cityRoute) {
+            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                if (cityRoute != null)
-                    WebViewActivity.startActivity(CityActivity.this, cityRoute.getRoute_url(), cityRoute.getRoute_name());
+                CityRoute cityRoute = (CityRoute) getAdapter().getItem(position);
+                WebViewActivity.startActivity(CityActivity.this, cityRoute.getRoute_url(), cityRoute.getRoute_name());
             }
         });
     }
@@ -125,22 +125,22 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             case R.id.jimTicket:
 
                 if (mCity != null)
-                    WebViewActivity.startActivity(this, mCity.getTicket_url(), "");
+                    WebViewActivity.startActivity(this, mCity.getTicket_url(), getStringArray(R.array.city_necessary)[0]);
                 break;
             case R.id.jimVisa:
 
                 if (mCity != null)
-                    WebViewActivity.startActivity(this, mCity.getVisa_url(), "");
+                    WebViewActivity.startActivity(this, mCity.getVisa_url(), getStringArray(R.array.city_necessary)[1]);
                 break;
             case R.id.jimAirpalne:
 
                 if (mCity != null)
-                    WebViewActivity.startActivity(this, mCity.getTraffic_url(), "");
+                    WebViewActivity.startActivity(this, mCity.getTraffic_url(), getStringArray(R.array.city_necessary)[2]);
                 break;
             case R.id.jimWifi:
 
                 if (mCity != null)
-                    WebViewActivity.startActivity(this, mCity.getWifi_url(), "");
+                    WebViewActivity.startActivity(this, mCity.getWifi_url(), getStringArray(R.array.city_necessary)[3]);
                 break;
 
             case R.id.jimPlay:
