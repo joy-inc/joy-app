@@ -34,11 +34,11 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     private String mFolderID;
     private PlanUtil planUtil;
 
-    public static void startActivityById(Activity act, String FolderID, String mFolderName) {
+    public static void startActivityById(Activity act, String FolderID, String mFolderName, int code) {
         Intent intent = new Intent(act, UserPlanListActivity.class);
         intent.putExtra("FolderID", FolderID);
         intent.putExtra("FolderName", mFolderName);
-        act.startActivity(intent);
+        act.startActivityForResult(intent, code);
     }
 
     @Override
@@ -95,6 +95,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     @Override
     public void onSuccess(dialog_category category, Object obj) {
         showToast("删除成功");
+        setResult(Activity.RESULT_OK);
         finish();
     }
 
@@ -111,7 +112,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     @Override
     protected ObjectRequest<List<PlanItem>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = PlanHtpUtil.getUserPlanListRequest(mFolderID, PlanFolder.class);
+        ObjectRequest obj = PlanHtpUtil.getUserPlanListRequest(mFolderID, PlanItem.class);
         return obj;
 
     }
