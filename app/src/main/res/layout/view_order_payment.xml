@@ -17,74 +17,54 @@
         android:textSize="12dp" />
 
     <View
-        style="@style/Line.Dark.Horizontal"
-        android:layout_marginLeft="19dp" />
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="20dp"
+        android:background="@color/black_trans12" />
 
-    <RelativeLayout
-        android:id="@+id/rlWeChatDiv"
+    <RadioGroup
+        android:id="@+id/acrgPayment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
-        android:paddingBottom="15dp"
-        android:paddingLeft="19dp"
-        android:paddingRight="19dp"
-        android:paddingTop="15dp">
+        android:layout_height="wrap_content">
 
-        <com.android.library.widget.JTextView
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/acrbWeChat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/accbWechat"
+            android:button="@null"
+            android:checked="true"
             android:drawableLeft="@drawable/ic_order_payment_wechat"
             android:drawablePadding="14dp"
-            android:gravity="center_vertical"
+            android:drawableRight="@drawable/selector_bg_checkbox"
+            android:gravity="left|center_vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="19dp"
+            android:paddingRight="19dp"
+            android:paddingTop="15dp"
             android:text="@string/payment_wechat"
             android:textColor="@color/black_trans70"
             android:textSize="12dp" />
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/accbWechat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/selector_bg_checkbox"
-            android:checked="true" />
-    </RelativeLayout>
+        <View
+            style="@style/Line.Light.Horizontal"
+            android:layout_marginLeft="20dp"
+            android:background="@color/black_trans12" />
 
-    <View
-        style="@style/Line.Dark.Horizontal"
-        android:layout_marginLeft="19dp" />
-
-
-    <RelativeLayout
-        android:id="@+id/rlAlipayDiv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
-        android:paddingBottom="15dp"
-        android:paddingLeft="19dp"
-        android:paddingRight="19dp"
-        android:paddingTop="15dp">
-
-        <com.android.library.widget.JTextView
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/acrbAlipay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/accbAlipay"
+            android:button="@null"
             android:drawableLeft="@drawable/ic_order_payment_alipay"
             android:drawablePadding="14dp"
-            android:gravity="center_vertical"
+            android:drawableRight="@drawable/selector_bg_checkbox"
+            android:gravity="left|center_vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="19dp"
+            android:paddingRight="19dp"
+            android:paddingTop="15dp"
             android:text="@string/payment_alipay"
             android:textColor="@color/black_trans70"
             android:textSize="12dp" />
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/accbAlipay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/selector_bg_checkbox" />
-    </RelativeLayout>
+    </RadioGroup>
 </LinearLayout>
