@@ -9,7 +9,6 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.activity.plan.UserPlanListActivity;
-import com.joy.app.activity.sample.RvLoadMoreTestActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.utils.http.PlanHtpUtil;
@@ -43,14 +42,11 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         super.initContentView();
         final UserPlanAdapter adapter = new UserPlanAdapter();
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
-
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
-                if (position == 0){
-                    RvLoadMoreTestActivity.startActivity(getActivity());
-                    return;
-                }
-                UserPlanListActivity.startActivityById(getActivity(), adapter.getItem(position).getFolder_name(), adapter.getItem(position).getId());
+                if (planFolder != null)
+                    UserPlanListActivity.startActivityById(getActivity(), planFolder.getFolder_id(), planFolder.getFolder_name());
+
             }
         });
         setAdapter(adapter);
@@ -59,7 +55,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class,pageLimit, pageIndex);
+        ObjectRequest obj = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class, pageLimit, pageIndex);
         return obj;
     }
 

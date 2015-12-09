@@ -74,7 +74,7 @@ public class JoyApplication extends BaseApplication {
             return mUser.getToken();
         }
         return "";
-        //        return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb";
+//                return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb";
     }
 
     /**

@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
 
     <com.android.library.widget.JTextView
         android:id="@+id/jtv_del"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:background="@color/black_trans12"
-        android:text="删除旅行规划" />
+        android:gravity="center"
+        android:text="删除旅行规划"
+        android:textColor="@color/text_pink"
+        android:textStyle="bold"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"/>
@@ -20,8 +23,10 @@
         android:id="@+id/jtv_cancel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:background="@color/black_trans12"
-        android:text="取消" />
+        android:gravity="center"
+
+        android:text="取消"
+        android:textStyle="bold"/>
 
 </LinearLayout>
