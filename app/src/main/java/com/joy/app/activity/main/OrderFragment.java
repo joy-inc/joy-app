@@ -12,17 +12,22 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.LogMgr;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ViewHolder;
+import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
+import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 我的订单
@@ -44,7 +49,14 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
+        EventBus.getDefault().register(this);
         executeCacheAndRefresh();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -64,8 +76,8 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                     showCommentonDialog(data.getProduct_id());
                 } else {
 
-                    showToast(data.getOrder_id() + " To Order Detail");
-                    PoiDetailActivity.startActivity(getActivity(), data.getProduct_id());
+//                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id());
+                    PoiDetailActivity.startActivity(getActivity(), "28");// todo
                 }
             }
         });
@@ -82,7 +94,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     @Override
     protected void onHttpFailed(Object tag, String msg) {
 
-        showToast("OrderFragment error: " + msg);
+        showToast(msg);
     }
 
     private void showCommentonDialog(final String productId) {
@@ -137,5 +149,29 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         });
 
         addRequestNoCache(obj);
+    }
+
+    /**
+     * 登录的回掉
+     *
+     * @param event
+     */
+    public void onEventMainThread(LoginStatusEvent event) {
+        handleUserLogin();
+    }
+
+    /**
+     *
+     */
+    private void handleUserLogin() {
+
+        // todo
+        if (JoyApplication.isLogin()) {
+            showToast("订单页 接收登录");
+            LogMgr.w("~~~订单页 接收登录");
+        } else {
+            showToast("订单页 接收退出");
+            LogMgr.w("~~~订单页 接收退出");
+        }
     }
 }

@@ -19,12 +19,12 @@ import com.android.library.adapter.ExViewHolderBase;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
+import com.android.library.view.dialogplus.OnCancelListener;
 import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -61,6 +61,10 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private BookDateWidget mDateWidget;
     private BookSubjectWidget mSubjectWidget;
     private BookCountWidget mCountWidget;
+
+    private DialogPlus mSubjectDialog;
+    private int index = 0;
+    private int currentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,45 +212,70 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         if (CollectionUtil.isNotEmpty(options)) {
 
-            final DialogSubjectAdapter adapter = new DialogSubjectAdapter();
-            options.get(0).setLocalCheck(false);
-            adapter.setData(options);
-            adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
+            if (mSubjectDialog == null) {
+                options.get(0).setLocalCheck(true);
+                final DialogSubjectAdapter adapter = new DialogSubjectAdapter();
+                adapter.setData(options);
+                adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
 
-                @Override
-                public void onItemViewClick(int position, View clickView, LevelOptions option) {
+                    @Override
+                    public void onItemViewClick(int position, View clickView, LevelOptions option) {
 
-                    options.get(0).setLocalCheck(adapter.getItem(0).isLocalCheck());
-                    adapter.setData(options);
-                    adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
-                    adapter.notifyDataSetChanged();
+                        currentIndex = position;
 
-                }
-            });
+                        if (!adapter.getItem(position).isLocalCheck()) {
 
-            DialogPlus dialog = DialogPlus.newDialog(OrderBookActivity.this)
-                    .setContentHolder(new ListHolder())
-                    .setHeader(R.layout.view_header_dialog_orderbook)
-                    .setFooter(R.layout.view_footer_dialog_orderbook)
-                    .setCancelable(true)
-                    .setAdapter(adapter)
-                    .create();
-            dialog.getFooterView().setOnClickListener(new View.OnClickListener() {
+                            for (LevelOptions data : options) {
+                                data.setLocalCheck(false);
+                            }
 
-                @Override
-                public void onClick(View v) {
-
-                    if (CollectionUtil.isNotEmpty(adapter.getData())) {
-                        for (LevelOptions data : adapter.getData()) {
-                            LogMgr.w("~~~~" + data.isLocalCheck());
+                            adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
+                            adapter.notifyDataSetChanged();
                         }
+                    }
+                });
 
+                mSubjectDialog = DialogPlus.newDialog(OrderBookActivity.this)
+                        .setContentHolder(new ListHolder())
+                        .setHeader(R.layout.view_header_dialog_orderbook)
+                        .setFooter(R.layout.view_footer_dialog_orderbook)
+                        .setCancelable(true)
+                        .setAdapter(adapter)
+                        .setOnCancelListener(new OnCancelListener() {
+
+                            @Override
+                            public void onCancel(DialogPlus dialog) {
+
+                                for (LevelOptions data : adapter.getData()) {
+                                    data.setLocalCheck(false);
+                                }
+
+                                adapter.getItem(index).setLocalCheck(true);
+                            }
+                        })
+                        .create();
+
+                mSubjectDialog.getFooterView().setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        index = currentIndex;
+
+                        for (LevelOptions data : adapter.getData()) {
+                            data.setLocalCheck(false);
+                        }
+                        adapter.getItem(index).setLocalCheck(true);
+
+                        mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
                         mCountWidget.setDateSubjectIds(createDateSubjectStr());
                         mCountWidget.resetUnitPrice();
+                        mSubjectDialog.dismiss();
+
                     }
-                }
-            });
-            dialog.show();
+                });
+            }
+            mSubjectDialog.show();
         }
     }
 
