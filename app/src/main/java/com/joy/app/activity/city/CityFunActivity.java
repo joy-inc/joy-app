@@ -10,6 +10,7 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.joy.app.R;
+import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.city.CityFunAdapter;
 import com.joy.app.bean.city.CityFun;
 import com.joy.app.utils.http.CityHtpUtil;
@@ -66,13 +67,14 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                showToast("~~" + position);
+                CityFun.ListEntity entity = (CityFun.ListEntity) getAdapter().getItem(position);
+                WebViewActivity.startActivity(CityFunActivity.this, entity.getTopic_url(), entity.getTopic_name());
             }
         });
     }
 
     @Override
-    protected List<?> getListInvalidateContent(CityFun cityFun) {
+    protected List<CityFun.ListEntity> getListInvalidateContent(CityFun cityFun) {
 
         return cityFun.getList();
     }

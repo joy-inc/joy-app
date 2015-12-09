@@ -54,10 +54,10 @@ public class AddPoiToFloderActivity extends Activity {
     String PoiId;
     String FolderName;
 
-    public static void startActivity(Activity activity, String PoiId) {
+    public static void startActivity(Activity activity, String PoiId,int requestCode) {
         Intent intent = new Intent(activity, AddPoiToFloderActivity.class);
         intent.putExtra("PoiId", PoiId);
-        activity.startActivity(intent);
+        activity.startActivityForResult(intent,requestCode);
     }
 
     @Override

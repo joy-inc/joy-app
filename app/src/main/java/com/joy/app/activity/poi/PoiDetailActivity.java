@@ -21,6 +21,7 @@ import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.map.SinglePoiMapActivity;
 import com.joy.app.activity.map.StaticMapWidget;
+import com.joy.app.activity.plan.AddPoiToFloderActivity;
 import com.joy.app.bean.poi.CommentAll;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
@@ -46,6 +47,8 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     private PoiDetailIntroduceWidget mIntroduceWidget;
     private PoiDetailCommentWidget mCommentWidget;
 
+    private final int REQ_ADD_POI = 101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -67,14 +70,14 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         setTitle(null);
         addTitleLeftBackView();
-        addTitleRightView(R.drawable.abc_ic_menu_share_mtrl_alpha, new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                showPoiShareDialog();
-            }
-        });
+//        addTitleRightView(R.drawable.abc_ic_menu_share_mtrl_alpha, new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                showPoiShareDialog();
+//            }
+//        });
     }
 
     @Override
@@ -145,6 +148,14 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         showToast(msg);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (REQ_ADD_POI == requestCode && resultCode == RESULT_OK){
+            executeRefreshOnly();
+        }
+    }
+
     private void getCommentList() {
 
         ObjectRequest<CommentAll> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 3, 1));
@@ -178,7 +189,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
         } else if (R.id.btnAddToPlan == view.getId()) {
 
-            showToast("加入旅行计划");
+            AddPoiToFloderActivity.startActivity(this,mId,REQ_ADD_POI);
         } else if (R.id.rl_mapview == view.getId()) {
 
             startMapActivity();

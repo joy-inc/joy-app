@@ -35,14 +35,6 @@ public class CityRouteAdapter extends ExRvAdapter<CityRouteAdapter.ViewHolder, C
 
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    callbackOnItemViewClickListener(getLayoutPosition(), v);
-                }
-            });
         }
 
         @Override
