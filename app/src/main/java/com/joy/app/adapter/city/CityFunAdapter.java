@@ -30,7 +30,6 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
         @Bind(R.id.sdvPhoto)          SimpleDraweeView sdvPhoto;
         @Bind(R.id.jtvName)           JTextView        jtvName;
         @Bind(R.id.jtvTitle)          JTextView        jtvTitle;
-        @Bind(R.id.jtvRecommendCount) JTextView        jtvRecommendCount;
 
         public ViewHolder(View itemView) {
 
