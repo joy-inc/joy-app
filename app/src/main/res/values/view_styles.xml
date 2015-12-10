@@ -128,6 +128,15 @@
         <item name="android:minHeight">5dp</item>
     </style>
 
+    <!-- 可折叠TextView-->
+    <declare-styleable name="FoldTextView">
+        <attr name="unfolded" format="boolean" />
+        <attr name="minLines" format="integer" />
+        <attr name="promptText" format="string" />
+        <attr name="promptColor" format="color" />
+        <attr name="promptCollapseText" format="string" />
+    </declare-styleable>
+
     <!-- 日期选择的星期几样式-->
     <style name="day_style">
         <item name="android:layout_width">match_parent</item>

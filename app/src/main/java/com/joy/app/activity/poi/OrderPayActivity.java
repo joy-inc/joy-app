@@ -18,12 +18,14 @@ import com.android.library.utils.TextUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
+import com.joy.app.eventbus.PayStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.pingplusplus.android.PaymentActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * 订单支付页
@@ -101,8 +103,8 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
         super.initData();
         mId = TextUtil.filterNull(getIntent().getStringExtra("id"));
-        if (getIntent().getSerializableExtra("data") instanceof OrderDetail)
-            mOrderDetail = (OrderDetail) getIntent().getSerializableExtra("data");
+        if (getIntent().getParcelableExtra("data") instanceof OrderDetail)
+            mOrderDetail = getIntent().getParcelableExtra("data");
     }
 
     @Override
@@ -175,8 +177,15 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         obj.setResponseListener(new ObjectResponse<OrderCharge>() {
 
             @Override
+            public void onPre() {
+
+                showLoading();
+            }
+
+            @Override
             public void onSuccess(Object tag, OrderCharge orderCharge) {
 
+                hideLoading();
                 String jsonCharge = JSON.toJSONString(orderCharge);
                 startPaymentActivity(jsonCharge);
             }
@@ -184,6 +193,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             @Override
             public void onError(Object tag, String msg) {
 
+                hideLoading();
                 showToast(msg);
             }
         });
@@ -229,6 +239,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
         if ("success".equals(result)) {
 
+            EventBus.getDefault().post(new PayStatusEvent());
             OrderDetailActivity.startActivity(this, mId);
             finish();
 

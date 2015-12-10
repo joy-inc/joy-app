@@ -32,11 +32,14 @@ import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
 import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
+import com.joy.app.eventbus.PayStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 商品项目选择页
@@ -75,9 +78,17 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     }
 
     @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     protected void initData() {
 
         super.initData();
+        EventBus.getDefault().register(this);
         mId = TextUtil.filterNull(getIntent().getStringExtra("id"));
         mPhotoUrl = TextUtil.filterNull(getIntent().getStringExtra("photoUrl"));
         mTitle = TextUtil.filterNull(getIntent().getStringExtra("title"));
@@ -378,6 +389,16 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         } else {
             return super.onKeyDown(keyCode, event);
         }
+    }
+
+    /**
+     * 支付状态的回调 关闭支付页之前的预订流程页面
+     *
+     * @param event
+     */
+    public void onEventMainThread(PayStatusEvent event) {
+
+        finish();
     }
 
     /**
