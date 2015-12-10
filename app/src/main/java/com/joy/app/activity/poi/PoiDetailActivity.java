@@ -16,7 +16,6 @@ import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.map.SinglePoiMapActivity;
@@ -26,8 +25,6 @@ import com.joy.app.bean.poi.CommentAll;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
-
-import java.util.ArrayList;
 
 /**
  * 目的地折扣详情页(下订单的唯一入口)
@@ -70,14 +67,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         setTitle(null);
         addTitleLeftBackView();
-//        addTitleRightView(R.drawable.abc_ic_menu_share_mtrl_alpha, new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                showPoiShareDialog();
-//            }
-//        });
     }
 
     @Override
@@ -150,15 +139,16 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
-        if (REQ_ADD_POI == requestCode && resultCode == RESULT_OK){
+        if (REQ_ADD_POI == requestCode && resultCode == RESULT_OK) {
             executeRefreshOnly();
         }
     }
 
     private void getCommentList() {
 
-        ObjectRequest<CommentAll> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 3, 1));
+        ObjectRequest<CommentAll> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENTS, CommentAll.class, OrderHtpUtil.getProductCommentListUrl(mId, 5, 1));
 
         obj.setResponseListener(new ObjectResponse<CommentAll>() {
 
@@ -188,10 +178,14 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
             OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
         } else if (R.id.btnAddToPlan == view.getId()) {
-            if(TextUtil.isEmpty(mPoiDetail.getFolder_id())){
-                AddPoiToFloderActivity.startActivity(this,mId,REQ_ADD_POI);
-            }else{//已经收藏了
+
+            if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
+
+                AddPoiToFloderActivity.startActivity(this, mId, REQ_ADD_POI);
+            } else {//已经收藏了
+
             }
+
         } else if (R.id.rl_mapview == view.getId()) {
 
             startMapActivity();
@@ -224,14 +218,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
             SinglePoiMapActivity.startActivityByPoiDetail(this, mPoiDetail);
             showToast("open all comments activity");
-        }
-    }
-
-    private void showPoiShareDialog() {
-
-        if (mPoiDetail != null) {
-
-            showToast("show share dialog");
         }
     }
 
