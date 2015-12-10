@@ -1,22 +1,17 @@
 package com.joy.app.activity.hotel;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.LogMgr;
-import com.android.library.utils.TextUtil;
 import com.android.library.view.ExBaseWidget;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
-import com.android.library.view.dialogplus.OnClickListener;
-import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.adapter.hotel.HotelSortAdapter;
@@ -26,8 +21,6 @@ import com.joy.app.bean.hotel.HotelSearchFilters;
 import com.joy.app.utils.Consts;
 import com.joy.app.utils.hotel.HotelTimeUtil;
 import com.joy.app.utils.http.HotelHtpUtil;
-
-import java.util.Map;
 
 /**
  * @author litong  <br>
@@ -39,7 +32,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     HotelListFragment hotelListFragment;
     final int REQ_DAY_PICK = 101;
     final int REQ_FILTER = 102;
-    FooterWidget footer;
+    HotelFooterWidget footer;
 
     /**
      * @param activity
@@ -116,7 +109,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     @Override
     protected void initContentView() {
         super.initContentView();
-        footer = new FooterWidget(this);
+        footer = new HotelFooterWidget(this);
         footer.setContentView(findViewById(R.id.llFooterView));
         footer.initDate(params.getCheckInMills(), params.getCheckOutMills());
         footer.setOnWidgetViewClickListener(this);

@@ -17,6 +17,7 @@ import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
+import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
@@ -76,8 +77,8 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                     showCommentonDialog(data.getProduct_id());
                 } else {
 
-//                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id());
-                    PoiDetailActivity.startActivity(getActivity(), "28");// todo
+                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id());
+//                    PoiDetailActivity.startActivity(getActivity(), "28");// todo
                 }
             }
         });
