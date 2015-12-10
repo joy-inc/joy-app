@@ -73,8 +73,9 @@ public class JoyApplication extends BaseApplication {
         if (mUser != null) {
             return mUser.getToken();
         }
-//        return "";
-                return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb"; // test
+        return "";
+        //测试不要提交
+//                return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb"; // test
 //                return "41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e"; // 4awork
     }
 
