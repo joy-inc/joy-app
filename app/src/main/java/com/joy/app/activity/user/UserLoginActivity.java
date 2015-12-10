@@ -119,10 +119,13 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
 
                     mTvButton.setEnabled(true);
                     mTvButton.setBackgroundResource(R.drawable.selector_bg_rectangle_accent_fill);
+                    mTvButton.setTextColor(getResources().getColor(R.color.white));
 
                 } else {
                     mTvButton.setEnabled(false);
                     mTvButton.setBackgroundResource(R.drawable.shape_bg_rectangle_dark);
+                    mTvButton.setTextColor(getResources().getColor(R.color.white_trans50));
+
 
                 }
             }
@@ -136,7 +139,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         mEtCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId==KeyEvent.ACTION_DOWN|| actionId== EditorInfo.IME_ACTION_DONE){
+                if (actionId == KeyEvent.ACTION_DOWN || actionId == EditorInfo.IME_ACTION_DONE) {
                     toLogin();
                     return true;
                 }
@@ -278,9 +281,10 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
 
     /**
      * 检查号码是否正确
+     *
      * @return
      */
-    private boolean checkPhoneNum(){
+    private boolean checkPhoneNum() {
 
         String tmp = mEtPhone.getText().toString();
         if (TextUtil.isEmpty(tmp) || tmp.length() < 11) {
@@ -289,6 +293,7 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         }
         return true;
     }
+
     /**
      * 获取验证码
      */
@@ -299,8 +304,8 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
             return;
         }
         mTvButton.setEnabled(false);
-        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode( mEtPhone.getText().toString()));
-//                req.setData("");
+        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mEtPhone.getText().toString()));
+//                        req.setData("");
         req.setResponseListener(new ObjectResponse() {
 
             @Override
@@ -314,7 +319,9 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
 
                 ToastUtil.showToast(R.string.login_phone_code_success);
                 startCountdown(60);
-
+                mEtCode.setFocusable(true);
+                mEtCode.setFocusableInTouchMode(true);
+                mEtCode.requestFocus();
 
                 hideLoading();
             }
