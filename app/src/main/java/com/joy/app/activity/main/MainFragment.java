@@ -60,7 +60,6 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             }
         });
         setAdapter(adapter);
-        OrderDetailActivity.startActivity(getActivity(),null);
 
     }
 
