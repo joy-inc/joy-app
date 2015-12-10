@@ -14,5 +14,7 @@
         android:textColor="@color/black_trans60"
         android:textSize="16dp" />
 
-    <View style="@style/Line.Dark.Horizontal" />
+    <View
+        style="@style/Line.Dark.Horizontal"
+        android:background="@color/black_trans12" />
 </LinearLayout>

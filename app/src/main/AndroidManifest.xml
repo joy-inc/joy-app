@@ -222,8 +222,19 @@
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+
+        <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:windowSoftInputMode="adjustResize"
+                  android:exported="false" >
+        </activity>
         <!-- 友盟升级 -->
         <!-- 友盟 -->
+        <!--分享-->
+        <activity android:name="com.joy.library.share.weibo.auth.WeiBoAuthActivity"
+                  android:theme="@android:style/Theme.NoDisplay"/>
+        <activity android:name="com.joy.library.share.weibo.auth.WeiboEditActivitiy"
+                  android:screenOrientation="portrait"/>
 
         <!-- Ping++ sdk -->
         <activity
