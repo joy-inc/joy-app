@@ -16,6 +16,7 @@ import com.joy.app.R;
 import com.joy.app.bean.poi.LevelOptions;
 import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
+import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.view.LinearListView;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
     private Product mProduct;
 
-    public void setProduct(Product product){
+    public void setProduct(Product product) {
 
         mProduct = product;
     }
@@ -175,7 +176,7 @@ public class BookCountWidget extends ExLayoutWidget {
     private void refreshUnitPrice(int position, String unitPrice) {
 
         mAdapter.getItem(position).setLocalPrice(unitPrice);
-        ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvPrice)).setText(unitPrice);
+        ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvPrice)).setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, unitPrice)));
     }
 
     protected void setDateSubjectIds(String dateSubjectIds) {
@@ -208,30 +209,6 @@ public class BookCountWidget extends ExLayoutWidget {
             TextView acbPlus;
 
             @Override
-            public void invalidateConvertView() {
-
-                LevelOptions data = getItem(mPosition);
-
-                if (data != null) {
-
-                    tvContent.setText(data.getContent());
-                    tvDesc.setText(data.getDescribe());
-
-                    if (TextUtil.isEmpty(data.getLocalPrice()))
-                        data.setLocalPrice("0");
-
-                    if (mPosition == 0) {
-                        data.setLocalCount("1");
-                    } else if (TextUtil.isEmpty(data.getLocalCount())) {
-                        data.setLocalCount("0");
-                    }
-
-                    tvPrice.setText(data.getLocalPrice());
-                    tvCount.setText(data.getLocalCount());
-                }
-            }
-
-            @Override
             public int getConvertViewRid() {
 
                 return R.layout.item_order_level_count_option;
@@ -262,6 +239,30 @@ public class BookCountWidget extends ExLayoutWidget {
                         callbackOnItemViewClickListener(mPosition, v);
                     }
                 });
+            }
+
+            @Override
+            public void invalidateConvertView() {
+
+                LevelOptions data = getItem(mPosition);
+
+                if (data != null) {
+
+                    tvContent.setText(data.getContent());
+                    tvDesc.setText(data.getDescribe());
+
+                    if (TextUtil.isEmpty(data.getLocalPrice()))
+                        data.setLocalPrice("0");
+
+                    if (mPosition == 0) {
+                        data.setLocalCount("1");
+                    } else if (TextUtil.isEmpty(data.getLocalCount())) {
+                        data.setLocalCount("0");
+                    }
+
+                    tvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, data.getLocalPrice())));
+                    tvCount.setText(data.getLocalCount());
+                }
             }
         }
     }

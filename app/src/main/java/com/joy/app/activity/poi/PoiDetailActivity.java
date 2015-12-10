@@ -112,7 +112,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         mMapWidget.invalidate(R.drawable.ic_star_light_small);
 
-        mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), "我是地址");
+        mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), mPoiDetail.getAddress());
 
         mIntroduceWidget.invalidate(mPoiDetail);
 

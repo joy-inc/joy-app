@@ -12,14 +12,12 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
-import com.android.library.utils.LogMgr;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.activity.poi.OrderPayActivity;
-import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.eventbus.LoginStatusEvent;
@@ -81,7 +79,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                 } else {
 
                     OrderDetailActivity.startActivity(getActivity(), data.getOrder_id());
-                    //                    PoiDetailActivity.startActivity(getActivity(), "28");// todo
                 }
             }
         });
@@ -182,8 +179,8 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      * 设置没有登录的界面提示
      */
     private void setNotLoginView() {
-        setSwipeRefreshEnable(false);
 
+        setSwipeRefreshEnable(false);
         if (mLoginTipView == null)
             mLoginTipView = new LoginTipView(this.getActivity(), R.string.order_no_login, R.string.order_no_login_sub);
         removeCustomView(mLoginTipView);

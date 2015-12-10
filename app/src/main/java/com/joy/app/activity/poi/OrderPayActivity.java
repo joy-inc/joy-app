@@ -19,6 +19,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
 import com.joy.app.eventbus.PayStatusEvent;
+import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.pingplusplus.android.PaymentActivity;
@@ -157,7 +158,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         jtvOrderEmail.setText(data.getContact_email());
         jtvOrderTotal.setText(data.getTotal_price_Str());
 
-        tvTotalPrice.setText(data.getTotal_price_Str());
+        tvTotalPrice.setText(JTextSpanUtil.getFormatUnitStr(data.getTotal_price_Str()));
 
         return true;
     }

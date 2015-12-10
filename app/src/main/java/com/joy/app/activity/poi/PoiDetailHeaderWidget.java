@@ -11,6 +11,7 @@ import com.android.library.view.ExLayoutWidget;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
+import com.joy.app.utils.JTextSpanUtil;
 
 
 /**
@@ -69,7 +70,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         }
 
         mTvTitle.setText(mPoiDetail.getTitle());
-        mTvPrice.setText(getActivity().getResources().getString(R.string.unit, mPoiDetail.getPrice()));
+        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, mPoiDetail.getPrice())));
         mAcRatingBar.setRating(MathUtil.parseFloat(mPoiDetail.getComment_level(), 0));
         mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, mPoiDetail.getComment_num()));
 

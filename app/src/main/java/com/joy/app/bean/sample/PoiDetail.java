@@ -31,6 +31,7 @@ public class PoiDetail implements Parcelable {
     private String booking_before = TextUtil.TEXT_EMPTY;//提前几天预订
     private ArrayList<String> photos;//图片地址
     private String purchase_info = TextUtil.TEXT_EMPTY;//购买须知url
+    private String address = TextUtil.TEXT_EMPTY;
 
 
     public String getProduct_id() {
@@ -161,6 +162,13 @@ public class PoiDetail implements Parcelable {
         this.booking_before = booking_before;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @Override
     public int describeContents() {

@@ -5,18 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.library.activity.BaseTabActivity;
+import com.android.library.activity.BaseUiFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.android.library.activity.BaseTabActivity;
-import com.android.library.activity.BaseUiFragment;
-import com.joy.app.activity.common.DayPickerActivity;
-import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.setting.SettingActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
