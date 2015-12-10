@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     style="@style/CardView.Dark.margin_8dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="180dp">
 
@@ -10,14 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:tint="@color/black_trans26"/>
-
+        android:tint="@color/black_trans26"
+        fresco:roundedCornerRadius="2dp" />
 
     <RelativeLayout
         android:id="@+id/rlDiv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <LinearLayout
             android:id="@+id/llTitle"
@@ -43,7 +42,6 @@
                 android:textSize="16dp"
                 android:textStyle="bold"/>
         </LinearLayout>
-
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvTopic"

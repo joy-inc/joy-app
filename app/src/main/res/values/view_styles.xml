@@ -2,24 +2,40 @@
 <resources>
 
     <style name="CardView.Light.margin_8dp">
+        <item name="cardCornerRadius">3dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:layout_marginRight">8dp</item>
     </style>
 
     <style name="CardView.Dark.margin_8dp">
+        <item name="cardCornerRadius">3dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:layout_marginRight">8dp</item>
     </style>
 
+    <style name="CardView.Light.margin_10dp">
+        <item name="cardCornerRadius">3dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
     <style name="CardView.Light.margin_16dp">
+        <item name="cardCornerRadius">3dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
     </style>
 
     <style name="CardView.Dark.margin_16dp">
+        <item name="cardCornerRadius">3dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
@@ -36,6 +52,7 @@
     <style name="Line.Dark">
         <item name="android:background">@color/black_trans26</item>
     </style>
+
     <style name="Line.Black15">
         <item name="android:background">@color/black_trans15</item>
         <item name="android:layout_width">match_parent</item>
@@ -154,5 +171,5 @@
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">80dp</item>
     </style>
-    
+
 </resources>
