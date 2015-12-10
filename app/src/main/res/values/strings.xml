@@ -36,6 +36,7 @@
     <string name="login_phone_empty">请输入电话号码</string>
     <string name="login_success">登录成功</string>
     <string name="login_code_empty">请输入验证码</string>
+    <string name="no_login_tip">你还没的登录</string>
     <!--设置界面-->
     <string name="setting_no_login">您还没有登录</string>
     <string name="setting_title">个人</string>

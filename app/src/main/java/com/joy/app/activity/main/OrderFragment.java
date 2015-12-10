@@ -24,6 +24,7 @@ import com.joy.app.bean.MainOrder;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
+import com.joy.app.view.LoginTipView;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
         super.onActivityCreated(savedInstanceState);
         EventBus.getDefault().register(this);
-        executeCacheAndRefresh();
+        initViewLoad();
     }
 
     @Override
@@ -157,20 +158,28 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      * @param event
      */
     public void onEventMainThread(LoginStatusEvent event) {
-        handleUserLogin();
+        initViewLoad();
     }
 
     /**
-     * 用户登录、退出操作后 订单列表页状态处理
+     * 处理界面的加载状态还是显示登录界面
      */
-    private void handleUserLogin() {
-
+    private void initViewLoad(){
         if (JoyApplication.isLogin()) {
             executeCacheAndRefresh();
         } else {
-            //todo
-            showToast("订单页 接收退出");
-            LogMgr.w("~~~订单页 接收退出");
+            //设置界面为提示登录
+            setNotLoginView();
         }
     }
+
+    /**
+     * 设置没有登录的界面提示
+     */
+    private void setNotLoginView() {
+
+        LoginTipView loginTipView=new LoginTipView(this.getActivity());
+    }
+
+
 }
