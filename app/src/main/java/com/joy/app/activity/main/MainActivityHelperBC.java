@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.joy.app.BuildConfig;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
+import com.joy.app.receiver.MiPushMessageReceiver;
 import com.umeng.update.UmengUpdateAgent;
 
 /**
@@ -16,6 +17,7 @@ import com.umeng.update.UmengUpdateAgent;
  * Date: 2015-11-10
  */
 public class MainActivityHelperBC {
+
 
     public static final String EXTRA_INTEGER_INTENT_TYPE = "intent_type";
     public static final int VAL_INTEGER_INTENT_TYPE_NONE = 0;
@@ -39,7 +41,7 @@ public class MainActivityHelperBC {
 
         //处理推送
         delayStartActivityByPushIntent(mMainActivity.getIntent());
-        if(!BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             UmengUpdateAgent.setUpdateOnlyWifi(false);
             UmengUpdateAgent.update(mMainActivity);
         }
@@ -58,10 +60,12 @@ public class MainActivityHelperBC {
      */
     private void delayStartActivityByPushIntent(Intent intent) {
 
-        String id = intent.getStringExtra(EXTRA_STRING_INTENT_MSG_ID);
-        String url = intent.getStringExtra(EXTRA_STRING_INTENT_MSG_URL);
-        if(!TextUtil.isEmpty(url)) {
-            ToastUtil.showToast("push message id=" + id + " url= " + url);
+        String id = intent.getStringExtra(MiPushMessageReceiver.EXTRA_INTENT_STRING_ID);
+        String content = intent.getStringExtra(MiPushMessageReceiver.EXTRA_INTENT_STRING_CONTENT);
+        String title = intent.getStringExtra(MiPushMessageReceiver.EXTRA_INTENT_STRING_TITLE);
+        String desc = intent.getStringExtra(MiPushMessageReceiver.EXTRA_INTENT_STRING_DESC);
+        if (!TextUtil.isEmpty(content)) {
+            ToastUtil.showToast("push message content=" + content);
         }
     }
 

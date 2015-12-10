@@ -40,6 +40,8 @@ import de.greenrobot.event.EventBus;
  */
 public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
+    LoginTipView mLoginTipView;
+
     private DialogPlus mCommentonDialog;
 
     public static OrderFragment instantiate(Context context) {
@@ -79,7 +81,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                 } else {
 
                     OrderDetailActivity.startActivity(getActivity(), data.getOrder_id());
-//                    PoiDetailActivity.startActivity(getActivity(), "28");// todo
+                    //                    PoiDetailActivity.startActivity(getActivity(), "28");// todo
                 }
             }
         });
@@ -101,10 +103,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
     private void showCommentonDialog(final String productId) {
 
-        mCommentonDialog = DialogPlus.newDialog(getActivity())
-                .setContentHolder(new ViewHolder(R.layout.view_order_commenton))
-                .setGravity(Gravity.CENTER)
-                .create();
+        mCommentonDialog = DialogPlus.newDialog(getActivity()).setContentHolder(new ViewHolder(R.layout.view_order_commenton)).setGravity(Gravity.CENTER).create();
 
         final AppCompatRatingBar ratingBar = (AppCompatRatingBar) mCommentonDialog.findViewById(R.id.acRatingBar);
         final AppCompatEditText editText = (AppCompatEditText) mCommentonDialog.findViewById(R.id.acetContent);
@@ -165,8 +164,13 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     /**
      * 处理界面的加载状态还是显示登录界面
      */
-    private void initViewLoad(){
+    private void initViewLoad() {
         if (JoyApplication.isLogin()) {
+            setSwipeRefreshEnable(true);
+
+            if (mLoginTipView != null)
+                removeCustomView(mLoginTipView);
+
             executeCacheAndRefresh();
         } else {
             //设置界面为提示登录
@@ -178,8 +182,12 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      * 设置没有登录的界面提示
      */
     private void setNotLoginView() {
+        setSwipeRefreshEnable(false);
 
-        LoginTipView loginTipView=new LoginTipView(this.getActivity());
+        if (mLoginTipView == null)
+            mLoginTipView = new LoginTipView(this.getActivity(), R.string.order_no_login, R.string.order_no_login_sub);
+        removeCustomView(mLoginTipView);
+        addCustomView(mLoginTipView);
     }
 
 

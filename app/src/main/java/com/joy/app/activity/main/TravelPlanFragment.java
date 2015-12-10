@@ -11,6 +11,7 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;
+import com.joy.app.R;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
@@ -31,6 +32,8 @@ import de.greenrobot.event.EventBus;
  * Date: 2015-11-16
  */
 public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
+
+    LoginTipView mLoginTipView;
 
     public static TravelPlanFragment instantiate(Context context) {
 
@@ -67,6 +70,10 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      */
     private void initViewLoad() {
         if (JoyApplication.isLogin()) {
+            setSwipeRefreshEnable(true);
+
+            if (mLoginTipView != null)
+                removeCustomView(mLoginTipView);
             executeRefreshOnly();
         } else {
             //设置界面为提示登录
@@ -78,9 +85,12 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      * 设置没有登录的界面提示
      */
     private void setNotLoginView() {
-
-        LoginTipView loginTipView = new LoginTipView(this.getActivity());
-
+        setSwipeRefreshEnable(false);
+        if (mLoginTipView == null) {
+            mLoginTipView = new LoginTipView(this.getActivity(), R.string.travel_no_login, R.string.travel_no_login_sub);
+        }
+        removeCustomView(mLoginTipView);
+        addCustomView(mLoginTipView);
     }
 
 
