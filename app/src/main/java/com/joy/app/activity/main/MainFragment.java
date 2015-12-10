@@ -11,6 +11,7 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.joy.app.activity.city.CityActivity;
 import com.joy.app.activity.common.WebViewActivity;
+import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.bean.MainRoute;
 import com.joy.app.utils.http.MainHtpUtil;
@@ -59,6 +60,8 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             }
         });
         setAdapter(adapter);
+        OrderDetailActivity.startActivity(getActivity(),null);
+
     }
 
     @Override

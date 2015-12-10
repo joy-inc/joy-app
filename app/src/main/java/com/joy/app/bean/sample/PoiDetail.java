@@ -11,8 +11,9 @@ import java.util.ArrayList;
  * 目的地详情
  * <p/>
  * Created by xiaoyu.chen on 15/11/11.
+ * 加Parcelable，打开地图时候需要传递这个对象----李彤
  */
-public class PoiDetail {
+public class PoiDetail implements Parcelable {
 
     private String product_id = TextUtil.TEXT_EMPTY;
     private String title = TextUtil.TEXT_EMPTY;
@@ -160,4 +161,61 @@ public class PoiDetail {
         this.booking_before = booking_before;
     }
 
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.product_id);
+        dest.writeString(this.title);
+        dest.writeString(this.sub_title);
+        dest.writeString(this.comment_level);
+        dest.writeString(this.comment_num);
+        dest.writeString(this.price);
+        dest.writeString(this.lat);
+        dest.writeString(this.lon);
+        dest.writeString(this.folder_name);
+        dest.writeString(this.folder_id);
+        dest.writeStringList(this.highlights);
+        dest.writeString(this.introduction);
+        dest.writeString(this.is_book);
+        dest.writeString(this.booking_before);
+        dest.writeStringList(this.photos);
+        dest.writeString(this.purchase_info);
+    }
+
+    public PoiDetail() {
+    }
+
+    protected PoiDetail(Parcel in) {
+        this.product_id = in.readString();
+        this.title = in.readString();
+        this.sub_title = in.readString();
+        this.comment_level = in.readString();
+        this.comment_num = in.readString();
+        this.price = in.readString();
+        this.lat = in.readString();
+        this.lon = in.readString();
+        this.folder_name = in.readString();
+        this.folder_id = in.readString();
+        this.highlights = in.createStringArrayList();
+        this.introduction = in.readString();
+        this.is_book = in.readString();
+        this.booking_before = in.readString();
+        this.photos = in.createStringArrayList();
+        this.purchase_info = in.readString();
+    }
+
+    public static final Parcelable.Creator<PoiDetail> CREATOR = new Parcelable.Creator<PoiDetail>() {
+        public PoiDetail createFromParcel(Parcel source) {
+            return new PoiDetail(source);
+        }
+
+        public PoiDetail[] newArray(int size) {
+            return new PoiDetail[size];
+        }
+    };
 }

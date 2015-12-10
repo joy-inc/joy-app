@@ -112,6 +112,9 @@
             android:name=".activity.poi.OrderBookProfileActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.poi.OrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.poi.OrderPayActivity"
             android:screenOrientation="portrait" />
         <activity

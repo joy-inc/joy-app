@@ -11,6 +11,7 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.activity.plan.UserPlanListActivity;
+import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.utils.http.PlanHtpUtil;
