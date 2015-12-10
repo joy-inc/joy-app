@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 
 /**
  * @author litong  <br>
- * @Description 订单详情页    <br>
+ * @Description 不用了，    <br>
  */
 public class OrderDetailAdapter extends ExRvAdapter <OrderDetailAdapter.ViewHolder,OrderDetail>{
 

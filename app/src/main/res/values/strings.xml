@@ -99,16 +99,17 @@
     <string name="order_detail_total_price">总金额</string>
 
     <string name="order_detail_create_title">下单成功，请尽快支付</string>
-    <string name="order_detail_create_infor">如有更多问题请咨询微信号</string>
+    <string name="order_detail_create_infor">如有更多问题请咨询微信号\n1234567</string>
 
     <string name="order_detail_paied_title">订单支付完成，库存确认中…</string>
-    <string name="order_detail_paied_infor">预计需要12个小时，如有更多问题请咨询微信号</string>
+    <string name="order_detail_paied_infor">预计需要12个小时，如有更多问题请咨询微信号\n1234567</string>
 
     <string name="order_detail_cancel_title">订单失效或被取消</string>
-    <string name="order_detail_cancel_infor">如有更多问题请咨询微信号</string>
+    <string name="order_detail_cancel_infor">如有更多问题请咨询微信号\n1234567</string>
 
     <string name="order_detail_finish_title">订单已确认，购买成功</string>
-    <string name="order_detail_finish_infor">请查收确认邮件，如有更多问题请咨询微信号</string>
+    <string name="order_detail_finish_infor">请查收确认邮件，如有更多问题请咨询微信号\n1234567</string>
+
     <string name="comment_all">全部点评</string>
     <string name="commenton">立即点评</string>
     <string name="commenton_score">在你心目中的分数</string>
