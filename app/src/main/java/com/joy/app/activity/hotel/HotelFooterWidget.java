@@ -16,10 +16,10 @@ import java.util.Calendar;
  * @author litong  <br>
  * @Description XXXXXX    <br>
  */
-public class FooterWidget extends ExBaseWidget implements View.OnClickListener {
+public class HotelFooterWidget extends ExBaseWidget implements View.OnClickListener {
     View filter,sort,day;
     TextView checkIn,checkOut,count;
-    public FooterWidget(Activity activity) {
+    public HotelFooterWidget(Activity activity) {
         super(activity);
     }
 

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -15,6 +18,8 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.DensityUtil;
+import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JRecyclerView;
@@ -35,7 +40,7 @@ import butterknife.ButterKnife;
  */
 public class AddPoiToFloderActivity extends Activity {
     @Bind(R.id.jrv_list)
-    JRecyclerView jrvList;
+    RecyclerView jrvList;
     @Bind(R.id.jtv_empty)
     JTextView jtvEmpty;
     @Bind(R.id.rl_loading)
@@ -75,6 +80,9 @@ public class AddPoiToFloderActivity extends Activity {
     }
 
     private void initContent() {
+        int width = DeviceUtil.getScreenWidth();
+        LinearLayout layout = (LinearLayout) findViewById(R.id.ll_content);
+        layout.setLayoutParams(new FrameLayout.LayoutParams(width, FrameLayout.LayoutParams.MATCH_PARENT));
         jtvButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,8 +136,8 @@ public class AddPoiToFloderActivity extends Activity {
         ViewUtil.showView(jrvList);
         ViewUtil.goneView(rlCreate);
 
-        jrvList.setLayoutManager(new LinearLayoutManager(this));
-        if (adapter != null){
+        if (adapter == null){
+            jrvList.setLayoutManager(new LinearLayoutManager(this));
             adapter = new PlanFolderAdapter();
             adapter.setName(PoiId);
             adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {

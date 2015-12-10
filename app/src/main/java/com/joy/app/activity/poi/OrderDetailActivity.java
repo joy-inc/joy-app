@@ -59,8 +59,8 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
 
     public static void startActivity(Activity act, String orderId) {
         Intent intent = new Intent(act, OrderDetailActivity.class);
-//        intent.putExtra("DATA",orderId);
-        intent.putExtra("DATA", "20151208_66084");
+        intent.putExtra("DATA",orderId);
+//        intent.putExtra("DATA", "20151208_66084");
         act.startActivity(intent);
     }
 
@@ -129,8 +129,8 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
                     showFinishIcon();
                     break;
                 case 1://订单过期或被取消
-                    orderDetail.setOrderInfor(getString(R.string.order_detail_create_infor));
-                    orderDetail.setOrderTitle(getString(R.string.order_detail_create_title));
+                    orderDetail.setOrderInfor(getString(R.string.order_detail_cancel_infor));
+                    orderDetail.setOrderTitle(getString(R.string.order_detail_cancel_title));
                     hideFinishIcon();
                     break;
                 case 2://支付成功 订单处理中
@@ -140,8 +140,8 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
 
                     break;
                 case 3://订单已确认
-                    orderDetail.setOrderInfor(getString(R.string.order_detail_create_infor));
-                    orderDetail.setOrderTitle(getString(R.string.order_detail_create_title));
+                    orderDetail.setOrderInfor(getString(R.string.order_detail_finish_infor));
+                    orderDetail.setOrderTitle(getString(R.string.order_detail_finish_title));
                     showFinishIcon();
                     break;
                 default://默认
