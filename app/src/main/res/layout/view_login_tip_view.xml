@@ -5,13 +5,31 @@
               android:gravity="center"
               android:orientation="vertical">
 
-    <com.android.library.widget.JTextView
-        android:id="@+id/tvTip"
+    <ImageView
+        android:id="@+id/ivIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_empty_login"/>
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
         android:text="@string/no_login_tip"
         android:textColor="@color/white"
-        android:textSize="20dp"/>
+        android:textSize="14dp"/>
+
+    <com.android.library.widget.JTextView
+        android:id="@+id/tvSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
+        android:text="@string/no_login_tip"
+        android:textColor="@color/white_trans50"
+        android:textSize="14dp"/>
 
     <com.android.library.widget.JTextView
         android:id="@+id/tvLoginButton"
