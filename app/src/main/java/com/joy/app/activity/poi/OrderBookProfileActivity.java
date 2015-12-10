@@ -18,8 +18,11 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderContacts;
 import com.joy.app.bean.poi.OrderDetail;
+import com.joy.app.eventbus.PayStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 预订
@@ -49,8 +52,16 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     }
 
     @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     protected void initData() {
 
+        EventBus.getDefault().register(this);
         mPhotoUrl = TextUtil.filterNull(getIntent().getStringExtra("photoUrl"));
         mTitle = TextUtil.filterNull(getIntent().getStringExtra("title"));
         mTotalPrice = TextUtil.filterNull(getIntent().getStringExtra("price"));
@@ -208,21 +219,17 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     private void addContact(OrderContacts data) {
 
         ObjectRequest<OrderContacts> request = ReqFactory.newPost(OrderHtpUtil.URL_POST_CONTACT_ADD, OrderContacts.class, OrderHtpUtil.getContactAddUrl(data));
-        request.setResponseListener(new ObjectResponse<OrderContacts>() {
-
-            @Override
-            public void onSuccess(Object tag, OrderContacts orderContacts) {
-
-            }
-
-            @Override
-            public void onError(Object tag, String msg) {
-
-                super.onError(tag, msg);
-                showToast(msg);
-            }
-        });
         addRequestNoCache(request);
+    }
+
+    /**
+     * 支付状态的回调 关闭支付页之前的预订流程页面
+     *
+     * @param event
+     */
+    public void onEventMainThread(PayStatusEvent event) {
+
+        finish();
     }
 
     /**

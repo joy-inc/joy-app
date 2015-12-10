@@ -1,13 +1,13 @@
 package com.joy.app;
 
+import com.android.library.BaseApplication;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.joy.app.bean.User;
 import com.joy.app.utils.XiaomiUtil;
 import com.joy.app.utils.prefs.CommonPrefs;
-import com.android.library.BaseApplication;
 import com.joy.library.share.ShareConstant;
-import com.android.library.utils.LogMgr;
 
 /**
  * Created by KEVIN.DAI on 15/7/8.
@@ -73,10 +73,16 @@ public class JoyApplication extends BaseApplication {
         if (mUser != null) {
             return mUser.getToken();
         }
+<<<<<<< HEAD
         return "";
         //测试不要提交
 //                return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb"; // test
 //                return "41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e"; // 4awork
+=======
+//      return "";
+//      return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb"; // test
+      return "41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e"; // 4awork
+>>>>>>> 0f762cd96e3360ef7880b136eb3d9f04119b281a
     }
 
     /**

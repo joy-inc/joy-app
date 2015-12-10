@@ -45,9 +45,9 @@ public class WebViewNativeWidget extends WebViewBaseWidget implements DimenCons,
         FrameLayout frameView = new FrameLayout(getActivity());
 
         // add transition animation
-        LayoutTransition lt = new LayoutTransition();
-        lt.setDuration(100);
-        frameView.setLayoutTransition(lt);
+//        LayoutTransition lt = new LayoutTransition();
+//        lt.setDuration(100);
+//        frameView.setLayoutTransition(lt);
 
         //create tip view
         mIvTip = new ImageView(getActivity());
