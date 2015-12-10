@@ -87,7 +87,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     @Override
     protected ObjectRequest<List<MainOrder>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl(pageIndex, pageLimit, "0"));
+        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl(pageIndex, pageLimit, ""));
         return obj;
     }
 
@@ -161,15 +161,14 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     }
 
     /**
-     *
+     * 用户登录、退出操作后 订单列表页状态处理
      */
     private void handleUserLogin() {
 
-        // todo
         if (JoyApplication.isLogin()) {
-            showToast("订单页 接收登录");
-            LogMgr.w("~~~订单页 接收登录");
+            executeCacheAndRefresh();
         } else {
+            //todo
             showToast("订单页 接收退出");
             LogMgr.w("~~~订单页 接收退出");
         }
