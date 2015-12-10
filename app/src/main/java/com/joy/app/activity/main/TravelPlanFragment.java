@@ -10,13 +10,18 @@ import android.view.View;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.joy.app.JoyApplication;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
+import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
+import com.joy.app.view.LoginTipView;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 我的旅行计划
@@ -44,7 +49,49 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        executeRefreshOnly();
+        EventBus.getDefault().register(this);
+
+        initViewLoad();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+
+    }
+
+    /**
+     * 处理界面的加载状态还是显示登录界面
+     */
+    private void initViewLoad() {
+        if (JoyApplication.isLogin()) {
+            executeRefreshOnly();
+        } else {
+            //设置界面为提示登录
+            setNotLoginView();
+        }
+    }
+
+    /**
+     * 设置没有登录的界面提示
+     */
+    private void setNotLoginView() {
+
+        LoginTipView loginTipView = new LoginTipView(this.getActivity());
+
+    }
+
+
+    /**
+     * 登录的回掉
+     *
+     * @param event
+     */
+    public void onEventMainThread(LoginStatusEvent event) {
+
+        initViewLoad();
     }
 
     @Override
