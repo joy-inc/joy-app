@@ -101,7 +101,7 @@ public class JoyApplication extends BaseApplication {
      *
      * @return
      */
-    public static String getUserNameStr() {
+    public static String getNickname() {
 
         if (mUser != null) {
             return mUser.getNickname();
