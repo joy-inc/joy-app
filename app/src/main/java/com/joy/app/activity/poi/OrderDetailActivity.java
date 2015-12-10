@@ -177,19 +177,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
     }
 
     private void SendPayMassage() {
-
-    }
-
-    private void SendCancelMassage() {
-        ObjectRequest<Object> req = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_CANCEL, Object.class, OrderHtpUtil.getCancelOrderUrl(order_id));
-        req.setResponseListener(new ObjectResponse<Object>() {
-
-            @Override
-            public void onSuccess(Object tag, Object obj) {
-
-            }
-        });
-        addRequestNoCache(req);
+        OrderPayActivity.startActivity(this,order_id,detail);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.joy.app.bean.poi;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
@@ -12,7 +14,7 @@ import java.io.Serializable;
  * @author litong  <br>
  * @Description XXXXXX    <br>
  */
-public class OrderDetail implements Serializable {
+public class OrderDetail implements Parcelable {
 
 //            "order_id":"201511120001",
 //            "travel_date":"2015年11月12日",
@@ -161,4 +163,56 @@ public class OrderDetail implements Serializable {
         spannableString.setSpan(new RelativeSizeSpan(0.50f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.order_id);
+        dest.writeString(this.travel_date);
+        dest.writeString(this.product_title);
+        dest.writeString(this.selected_item);
+        dest.writeString(this.contact_name);
+        dest.writeString(this.contact_phone);
+        dest.writeString(this.contact_email);
+        dest.writeInt(this.count);
+        dest.writeInt(this.order_status);
+        dest.writeFloat(this.total_price);
+        dest.writeString(this.product_photo);
+        dest.writeString(this.orderInfor);
+        dest.writeString(this.orderTitle);
+    }
+
+    public OrderDetail() {
+    }
+
+    protected OrderDetail(Parcel in) {
+        this.order_id = in.readString();
+        this.travel_date = in.readString();
+        this.product_title = in.readString();
+        this.selected_item = in.readString();
+        this.contact_name = in.readString();
+        this.contact_phone = in.readString();
+        this.contact_email = in.readString();
+        this.count = in.readInt();
+        this.order_status = in.readInt();
+        this.total_price = in.readFloat();
+        this.product_photo = in.readString();
+        this.orderInfor = in.readString();
+        this.orderTitle = in.readString();
+    }
+
+    public static final Parcelable.Creator<OrderDetail> CREATOR = new Parcelable.Creator<OrderDetail>() {
+        public OrderDetail createFromParcel(Parcel source) {
+            return new OrderDetail(source);
+        }
+
+        public OrderDetail[] newArray(int size) {
+            return new OrderDetail[size];
+        }
+    };
 }

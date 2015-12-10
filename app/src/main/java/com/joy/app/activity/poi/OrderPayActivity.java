@@ -101,8 +101,8 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
         super.initData();
         mId = TextUtil.filterNull(getIntent().getStringExtra("id"));
-        if (getIntent().getSerializableExtra("data") instanceof OrderDetail)
-            mOrderDetail = (OrderDetail) getIntent().getSerializableExtra("data");
+        if (getIntent().getParcelableExtra("data") instanceof OrderDetail)
+            mOrderDetail = getIntent().getParcelableExtra("data");
     }
 
     @Override
