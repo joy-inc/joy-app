@@ -59,8 +59,8 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
 
     public static void startActivity(Activity act, String orderId) {
         Intent intent = new Intent(act, OrderDetailActivity.class);
-//        intent.putExtra("DATA",orderId);
-        intent.putExtra("DATA", "20151208_66084");
+        intent.putExtra("DATA",orderId);
+//        intent.putExtra("DATA", "20151208_66084");
         act.startActivity(intent);
     }
 
