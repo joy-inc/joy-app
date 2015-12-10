@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
+import com.android.library.utils.TextUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -30,7 +31,6 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
         @Bind(R.id.sdvPhoto)          SimpleDraweeView sdvPhoto;
         @Bind(R.id.jtvName)           JTextView        jtvName;
         @Bind(R.id.jtvTitle)          JTextView        jtvTitle;
-        @Bind(R.id.jtvRecommendCount) JTextView        jtvRecommendCount;
 
         public ViewHolder(View itemView) {
 
@@ -42,7 +42,7 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
         protected void invalidateItemView(int position, CityFun.ListEntity entity) {
 
             sdvPhoto.setImageURI(Uri.parse(entity.getPic_url()));
-            jtvName.setText(entity.getTopic_name() + "\n" + entity.getEn_name());
+            jtvName.setText(TextUtil.isEmpty(entity.getEn_name()) ? entity.getTopic_name() : entity.getTopic_name() + "\n" + entity.getEn_name());
             jtvTitle.setText(entity.getRecommend());
         }
     }
