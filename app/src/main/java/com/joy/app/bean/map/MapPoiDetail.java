@@ -10,17 +10,19 @@ import com.android.library.utils.TextUtil;
  * @Description 地图扎点    <br>
  */
 public class MapPoiDetail implements Parcelable {
-    String mEnName, mCnName, mPhotoUrl;
+    String mEnName = TextUtil.TEXT_EMPTY,
+            mCnName = TextUtil.TEXT_EMPTY,
+            mPhotoUrl = TextUtil.TEXT_EMPTY;
     int icon_nor, icon_press;
     double latitude, longitude;
-    String mId;
+    String mId = TextUtil.TEXT_EMPTY;
 
     public String getmId() {
         return mId;
     }
 
     public void setmId(String mId) {
-        this.mId = mId;
+        this.mId = TextUtil.filterNull(mId);
     }
 
     public String getmEnName() {
@@ -28,7 +30,7 @@ public class MapPoiDetail implements Parcelable {
     }
 
     public void setmEnName(String mEnName) {
-        this.mEnName = mEnName;
+        this.mEnName = TextUtil.filterNull(mEnName);
     }
 
     public String getmCnName() {
@@ -36,7 +38,7 @@ public class MapPoiDetail implements Parcelable {
     }
 
     public void setmCnName(String mCnName) {
-        this.mCnName = mCnName;
+        this.mCnName = TextUtil.filterNull(mCnName);
     }
 
     public String getmPhotoUrl() {
@@ -44,7 +46,7 @@ public class MapPoiDetail implements Parcelable {
     }
 
     public void setmPhotoUrl(String mPhotoUrl) {
-        this.mPhotoUrl = mPhotoUrl;
+        this.mPhotoUrl = TextUtil.filterNull(mPhotoUrl);
     }
 
     public int getIcon_nor() {

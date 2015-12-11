@@ -65,7 +65,7 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
         double lat = location.getLatitude();
         invalidate(lng, lat, 15);
     }
-    public void setLocation(double lng, double lat,String address){
+    public void setLocation( double lat,double lng,String address){
 
         showAddress(address);
         invalidate(lng, lat, 15);
