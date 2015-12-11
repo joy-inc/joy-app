@@ -1,6 +1,8 @@
 package com.joy.app.activity.main;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
@@ -41,6 +43,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     LoginTipView mLoginTipView;
 
     private DialogPlus mCommentonDialog;
+    private final int REQ_ORDER_DETAIL = 101;
 
     public static OrderFragment instantiate(Context context) {
 
@@ -62,6 +65,13 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQ_ORDER_DETAIL && requestCode == Activity.RESULT_OK){
+            executeRefreshOnly();
+        }
+    }
+
+    @Override
     protected void initContentView() {
 
         super.initContentView();
@@ -78,7 +88,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                     showCommentonDialog(data.getProduct_id());
                 } else {
 
-                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id());
+                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id(),REQ_ORDER_DETAIL);
                 }
             }
         });

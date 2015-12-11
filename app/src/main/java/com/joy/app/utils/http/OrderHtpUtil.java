@@ -1,9 +1,11 @@
 package com.joy.app.utils.http;
 
+import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;
 import com.joy.app.bean.poi.OrderContacts;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 商品及订单相关网络请求
@@ -30,12 +32,12 @@ public class OrderHtpUtil extends BaseHtpUtil {
      *
      * @return
      */
-    public static Map<String, String> getCancelOrderUrl(String order_id) {
+    public static ObjectRequest getCancelOrderRequest(String order_id) {
 
         Map<String, String> params = getBaseParams();
         params.put("order_id", order_id);
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
-        return params;
+        return createPostRequest(URL_POST_ORDER_CANCEL,params, Object.class);
     }
 
     /**

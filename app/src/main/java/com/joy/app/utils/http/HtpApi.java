@@ -37,6 +37,7 @@ public interface HtpApi {
     String URL_POST_PLAN_FOLDER_CREATE = JOY_URL_BASE + "/user/plan_folder_create";//  我的文件夹创建接口
     String URL_POST_PLAN_FOLDER_MODIFY = JOY_URL_BASE + "/user/plan_folder_modify";//  我的文件夹修改接口
     String URL_POST_PLAN_FOLDER_DELETE = JOY_URL_BASE + "/user/plan_folder_delete";//  我的文件夹删除接口
+    String URL_POST_PLAN_DELETE = JOY_URL_BASE + "/user/plan_delete";//  删除我收藏的旅行计划
 
     //酒店============
     String URL_POST_HOTEL_LIST = JOY_URL_BASE + "/place/cityfun";//  城市玩乐
