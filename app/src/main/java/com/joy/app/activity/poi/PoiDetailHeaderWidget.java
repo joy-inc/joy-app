@@ -70,7 +70,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
             e.printStackTrace();
         }
 
-        if (TextUtil.isEmpty(data.getFolder_id()) ){
+        if (TextUtil.isNotEmpty(data.getFolder_id()) ){
 
             mBtnAddToPlan.setText("已加入 "+data.getFolder_name());
         }

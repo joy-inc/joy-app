@@ -3,6 +3,7 @@ package com.joy.app.activity.plan;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.android.library.activity.BaseHttpRvActivity;
@@ -89,6 +90,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
             }
         });
         setAdapter(adapter);
+        getRecyclerView().setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         planUtil = new PlanUtil(this, this);
     }
 

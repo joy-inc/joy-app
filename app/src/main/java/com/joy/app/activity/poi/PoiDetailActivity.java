@@ -179,12 +179,12 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
         } else if (R.id.btnAddToPlan == view.getId()) {
 
-//            if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
+            if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
 
                 AddPoiToFloderActivity.startActivity(this, mId,mPoiDetail.getFolder_id(), REQ_ADD_POI);
-//            } else {//已经收藏了
+            } else {//已经收藏了
 
-//            }
+            }
 
         } else if (R.id.rl_mapview == view.getId()) {
 
