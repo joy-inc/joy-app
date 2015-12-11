@@ -1,6 +1,7 @@
 package com.joy.app.activity.city;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +27,7 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
     private String mPlaceId;
     private int mType;
 
-    public static void startActivity(Activity act, String placeId, int type) {
+    public static void startActivity(Context act, String placeId, int type) {
 
         if (TextUtil.isEmpty(placeId))
             return;

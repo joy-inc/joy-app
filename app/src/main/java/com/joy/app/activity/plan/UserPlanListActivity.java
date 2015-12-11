@@ -1,6 +1,7 @@
 package com.joy.app.activity.plan;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -37,6 +38,13 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
         intent.putExtra("FolderID", FolderID);
         intent.putExtra("FolderName", mFolderName);
         act.startActivityForResult(intent, code);
+    }
+
+    public static void startActivityById(Context act, String FolderID, String mFolderName) {
+        Intent intent = new Intent(act, UserPlanListActivity.class);
+        intent.putExtra("FolderID", FolderID);
+        intent.putExtra("FolderName", mFolderName);
+        act.startActivity(intent);
     }
 
     @Override

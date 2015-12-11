@@ -1,6 +1,7 @@
 package com.joy.app.activity.poi;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -220,7 +221,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         }
     }
 
-    public static void startActivity(Activity act, String id) {
+    public static void startActivity(Context act, String id) {
 
         if (act == null || TextUtil.isEmpty(id))
             return;

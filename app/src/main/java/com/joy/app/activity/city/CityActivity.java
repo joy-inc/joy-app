@@ -1,6 +1,7 @@
 package com.joy.app.activity.city;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     private String mPlaceId;
     private City mCity;
 
-    public static void startActivity(Activity act, String placeId) {
+    public static void startActivity(Context act, String placeId) {
 
         if (TextUtil.isEmpty(placeId))
             return;

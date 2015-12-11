@@ -5,6 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.android.library.utils.TextUtil;
+import com.joy.app.activity.city.CityActivity;
+import com.joy.app.activity.city.CityFunActivity;
+import com.joy.app.activity.common.WebViewActivity;
+import com.joy.app.activity.hotel.CityHotelListActivity;
+import com.joy.app.activity.hotel.HotelSearchFilterActivity;
+import com.joy.app.activity.plan.UserPlanListActivity;
+import com.joy.app.activity.poi.PoiDetailActivity;
 
 /**
  * 处理url打开对应的activity或者处理事件
@@ -14,6 +21,7 @@ import com.android.library.utils.TextUtil;
 public class ActivityUrlUtil {
 
     private static final int TYPE_COUNTRY_TOPIC = 1;//国家路线专题
+
     private static final String URL_COUNTRY_TOPIC = "topic.joy.com/country/";//国家路线专题
 
     private static final int TYPE_CITY_TOPIC = 2;//城市详情
@@ -111,31 +119,52 @@ public class ActivityUrlUtil {
         int urlType = getUrlType(url);
         switch (urlType) {
             case TYPE_COUNTRY_TOPIC:
-
+                WebViewActivity.startActivity(context, UrlUtil.getQueryParameter(url, "url"));
                 return true;
             case TYPE_CITY_TOPIC:
+                CityActivity.startActivity(context, UrlUtil.getQueryParameter(url, "id"));
                 return true;
             case TYPE_POI_DETAIL:
+                PoiDetailActivity.startActivity(context, UrlUtil.getQueryParameter(url, "id"));
                 return true;
             case TYPE_HOLTER_DETAIL:
+                WebViewActivity.startActivity(context,UrlUtil.getQueryParameter(url, "url"),"");
+
                 return true;
             case TYPE_TICKETS:
+                WebViewActivity.startActivity(context, UrlUtil.getQueryParameter(url, "url"));
+
                 return true;
             case TYPE_VISA:
+                WebViewActivity.startActivity(context, UrlUtil.getQueryParameter(url, "url"));
+
                 return true;
             case TYPE_TRANSPORT:
+                WebViewActivity.startActivity(context, UrlUtil.getQueryParameter(url, "url"));
+
                 return true;
             case TYPE_WIFI:
+                WebViewActivity.startActivity(context, UrlUtil.getQueryParameter(url, "url"));
+
                 return true;
             case TYPE_JOY:
+                CityFunActivity.startActivity(context, UrlUtil.getQueryParameter(url, "id"), 1);
+
                 return true;
             case TYPE_HOLTER:
+                CityHotelListActivity.startActivity(context, UrlUtil.getQueryParameter(url, "id"), UrlUtil.getQueryParameter(url, "name"), "app_joy_android");
+
                 return true;
             case TYPE_FOOD:
+                CityFunActivity.startActivity(context, UrlUtil.getQueryParameter(url, "id"), 3);
+
                 return true;
             case TYPE_SHOPPING:
+                CityFunActivity.startActivity(context, UrlUtil.getQueryParameter(url, "id"), 4);
+
                 return true;
             case TYPE_ROUTE:
+                UserPlanListActivity.startActivityById(context, UrlUtil.getQueryParameter(url, "id"), UrlUtil.getQueryParameter(url, "name"));
                 return true;
         }
         return false;
@@ -149,8 +178,6 @@ public class ActivityUrlUtil {
         }
         return false;
     }
-
-
 
 
 }
