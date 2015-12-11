@@ -1,43 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/CardView.Light"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    style="@style/CardView.Light.margin_10dp"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="10dp">
+    android:layout_height="240dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvPhoto"
         android:layout_width="match_parent"
         android:layout_height="162dp"
         android:scaleType="centerCrop"
-        android:tint="@color/black_trans50" />
+        android:tint="@color/black_trans50"
+        fresco:roundBottomLeft="false"
+        fresco:roundBottomRight="false"
+        fresco:roundedCornerRadius="2dp" />
 
     <com.android.library.widget.JTextView
         android:id="@+id/jtvName"
         android:layout_width="match_parent"
         android:layout_height="162dp"
         android:gravity="center"
-        android:text="浅草寺晴空塔与周边"
         android:textColor="@color/white_trans87"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:translationY="-10dp" />
-
-    <com.android.library.widget.JTextView
-        android:id="@+id/jtvRecommendCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/shape_bg_oval_accent"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:text="7个推荐"
-        android:textColor="@color/white_trans87"
-        android:textSize="10dp" />
+        android:textStyle="bold" />
 
     <com.android.library.widget.JTextView
         android:id="@+id/jtvTitle"
@@ -50,7 +35,6 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
-        android:text="拉面是日本人生活中必不可少的一道美味，日本拉面非常讲究汤底，东京以酱油底、豚骨汤底最为常见。东京拉面的新流行。"
         android:textColor="@color/black_trans45"
         android:textSize="13dp" />
 </android.support.v7.widget.CardView>

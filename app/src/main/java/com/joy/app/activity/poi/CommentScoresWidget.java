@@ -80,12 +80,11 @@ public class CommentScoresWidget extends ExLayoutWidget {
         score2.setProgress(MathUtil.parseInt(data.getTwo(), 0));
         score1.setProgress(MathUtil.parseInt(data.getOne(), 0));
 
-//        tv5Count.setText(MathUtil.parseInt(data.getFive(), 0));
-//        tv4Count.setText(MathUtil.parseInt(data.getFour(), 0));
-//        tv3Count.setText(MathUtil.parseInt(data.getThree(), 0));
-//        tv2Count.setText(MathUtil.parseInt(data.getTwo(), 0));
-//        tv1Count.setText(MathUtil.parseInt(data.getOne(), 0));
-        // todo why 资源找不到？
+        tv5Count.setText(data.getFive());
+        tv4Count.setText(data.getFour());
+        tv3Count.setText(data.getThree());
+        tv2Count.setText(data.getTwo());
+        tv1Count.setText(data.getOne());
     }
 
     private void setMaxValue(String commentCount) {

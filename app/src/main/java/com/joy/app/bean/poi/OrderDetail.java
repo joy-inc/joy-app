@@ -160,7 +160,7 @@ public class OrderDetail implements Parcelable {
     public CharSequence getFormatCountStr() {
 
         SpannableString spannableString = new SpannableString("x" + getCount());
-        spannableString.setSpan(new RelativeSizeSpan(0.50f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new RelativeSizeSpan(0.67f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;
     }
 

@@ -24,4 +24,5 @@ public class PushStartACtivityReceiver extends BroadcastReceiver {
             context.startActivity(intent);
         }
     }
+
 }

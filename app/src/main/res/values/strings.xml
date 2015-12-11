@@ -36,7 +36,14 @@
     <string name="login_phone_empty">请输入电话号码</string>
     <string name="login_success">登录成功</string>
     <string name="login_code_empty">请输入验证码</string>
-    <string name="no_login_tip">你还没的登录</string>
+
+    <string name="order_no_login">暂无订单</string>
+    <string name="order_no_login_sub">登录后查看订单</string>
+
+    <string name="travel_no_login">暂无规划</string>
+    <string name="travel_no_login_sub">登录后查看规划</string>
+
+    <string name="no_login_tip">立即登录</string>
     <!--设置界面-->
     <string name="setting_no_login">您还没有登录</string>
     <string name="setting_title">个人</string>
@@ -52,7 +59,8 @@
     <!--设置界面-->
 
     <!-- 详情、商品 -->
-    <string name="unit">¥%s</string>
+    <string name="unit">¥ %s</string>
+    <string name="unit_ge">%s个</string>
     <string name="kuohao">(%s)</string>
     <string name="add_plan">加入行程规划</string>
     <string name="highlights">项目亮点</string>

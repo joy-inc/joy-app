@@ -19,6 +19,7 @@ import com.joy.app.R;
 import com.joy.app.bean.poi.OrderContacts;
 import com.joy.app.bean.poi.OrderDetail;
 import com.joy.app.eventbus.PayStatusEvent;
+import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
@@ -100,7 +101,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
 
         mSdvPhoto.setImageURI(Uri.parse(mPhotoUrl));
         mTvTitle.setText(mTitle);
-        mTvPrice.setText(mTotalPrice);
+        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(mTotalPrice));
     }
 
     @Override

@@ -111,7 +111,7 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
         if (JoyApplication.isLogin()) {
             ViewUtil.showView(mLoinOut);
             ViewUtil.showView(mUserName);
-            mUserName.setText(JoyApplication.getUser().getNickname());
+            mUserName.setText(JoyApplication.getNickname());
             mUserHead.setImageResource(R.drawable.ic_joy_login);
             ViewUtil.goneView(mLoginInfo);
         } else {
