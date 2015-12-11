@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.library.activity.BaseHttpUiActivity;
-import com.android.library.activity.BaseUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
@@ -112,7 +111,7 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
             ViewUtil.showView(mLoinOut);
             ViewUtil.showView(mUserName);
             mUserName.setText(JoyApplication.getNickname());
-            mUserHead.setImageResource(R.drawable.ic_joy_login);
+            mUserHead.setImageResource(R.drawable.ic_logo_circle);
             ViewUtil.goneView(mLoginInfo);
         } else {
             ViewUtil.goneView(mLoinOut);

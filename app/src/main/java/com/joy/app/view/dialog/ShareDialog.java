@@ -78,24 +78,12 @@ public class ShareDialog implements View.OnClickListener {
         ShareType type = null;
         switch (v.getId()) {
             case R.id.tvWeibo:
-                if (!ShareWeiBoUtil.hasSinaWeiboClient()) {
-                    ToastUtil.showToast(R.string.no_app_weibo);
-                    return;
-                }
                 type = ShareType.SINA;
                 break;
             case R.id.tvWeixin:
-                if (!ShareWeixinUtil.hasWeChatClient()) {
-                    ToastUtil.showToast(R.string.no_app_wechat);
-                    return;
-                }
                 type = ShareType.WEIXIN;
                 break;
             case R.id.tvFriend:
-                if (!ShareWeixinUtil.hasWeChatClient()) {
-                    ToastUtil.showToast(R.string.no_app_wechat);
-                    return;
-                }
                 type = ShareType.WEIXIN_CIRCLE;
                 break;
             //            case R.id.tvEmail:

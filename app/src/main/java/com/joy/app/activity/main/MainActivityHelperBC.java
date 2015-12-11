@@ -3,9 +3,11 @@ package com.joy.app.activity.main;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.alibaba.fastjson.JSON;
 import com.joy.app.BuildConfig;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
+import com.joy.app.bean.MiPushMessage;
 import com.joy.app.receiver.MiPushMessageReceiver;
 import com.umeng.update.UmengUpdateAgent;
 
@@ -65,7 +67,14 @@ public class MainActivityHelperBC {
         String title = intent.getStringExtra(MiPushMessageReceiver.EXTRA_INTENT_STRING_TITLE);
         String desc = intent.getStringExtra(MiPushMessageReceiver.EXTRA_INTENT_STRING_DESC);
         if (!TextUtil.isEmpty(content)) {
-            ToastUtil.showToast("push message content=" + content);
+            try {
+                MiPushMessage miPushMessage = JSON.parseObject(content, MiPushMessage.class);
+
+                ToastUtil.showToast("push message content=" + content);
+            } catch (Exception ex) {
+                if (BuildConfig.DEBUG)
+                    ex.printStackTrace();
+            }
         }
     }
 

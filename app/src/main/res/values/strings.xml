@@ -13,8 +13,6 @@
     <string name="request_error">网络请求错误</string>
 
     <!--分享-->
-    <string name="no_app_weibo">请安装微博客户端</string>
-    <string name="no_app_wechat">请安装微信客户端</string>
 
     <string name="share_to">分享到</string>
     <string name="weibo">微博</string>

@@ -158,7 +158,7 @@ public class MainActivity extends BaseTabActivity {
     private void handleUserLogin() {
 
         if (JoyApplication.isLogin()) {
-            mSimpleDraweeView.setImageResource(R.drawable.ic_joy_login);
+            mSimpleDraweeView.setImageResource(R.drawable.ic_logo_circle);
         } else {
             mSimpleDraweeView.setImageResource(R.drawable.ic_main_def_user_head);
 
