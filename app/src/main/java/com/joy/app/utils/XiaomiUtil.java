@@ -14,7 +14,6 @@ import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.activity.main.MainActivityHelperBC;
 import com.joy.app.bean.PushMessageBean;
-import com.joy.app.receiver.PushStartACtivityReceiver;
 import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
@@ -228,7 +227,7 @@ public class XiaomiUtil {
     public static Intent getIntentByPush(Context context, String pushUrl, String messageId) {
 
         Intent intent = new Intent();
-        intent.setAction(PushStartACtivityReceiver.ACTION);
+//        intent.setAction(PushStartACtivityReceiver.ACTION);
         intent.putExtra(MainActivityHelperBC.EXTRA_INTEGER_INTENT_TYPE, MainActivityHelperBC.VAL_INTEGER_INTENT_TYPE_PUSH);
         intent.putExtra(MainActivityHelperBC.EXTRA_STRING_INTENT_MSG_URL, pushUrl);
         intent.putExtra(MainActivityHelperBC.EXTRA_STRING_INTENT_MSG_ID, messageId);

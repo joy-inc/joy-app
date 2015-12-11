@@ -199,11 +199,7 @@
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.PushStartACtivityReceiver">
-            <intent-filter>
-                <action android:name="com.joy.app.receiver.PushStartACtivityReceiver" />
-            </intent-filter>
-        </receiver>
+
         <!-- 小米 -->
         <!--高德-->
         <meta-data
