@@ -100,8 +100,7 @@ public class PlanItem {
     }
 
     public SpannableString getPrice() {
-        String str = "￥"+price+" 起";
-        LogMgr.i("price:"+str);
+        String str = "￥"+TextUtil.filterEmpty(price,"0")+" 起";
         SpannableString spannableString = new SpannableString(str);
         spannableString.setSpan(new RelativeSizeSpan(0.5f),0,1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         spannableString.setSpan(new RelativeSizeSpan(0.75f),str.length()-1,str.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
