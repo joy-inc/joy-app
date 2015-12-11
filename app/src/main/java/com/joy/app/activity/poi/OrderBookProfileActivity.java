@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.library.activity.BaseHttpUiActivity;
@@ -39,7 +39,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
 
     private SimpleDraweeView mSdvPhoto;
     private TextView mTvTitle;
-    private AppCompatEditText mEtName, mEtPhone, mEtEmail;
+    private EditText mEtName, mEtPhone, mEtEmail;
     private TextView mTvPrice;
     private AppCompatButton mAcbNext;
     private OrderContacts mContact;
@@ -84,9 +84,9 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
         mSdvPhoto = (SimpleDraweeView) findViewById(R.id.sdvPhoto);
         mTvTitle = (TextView) findViewById(R.id.tvTitle);
 
-        mEtName = (AppCompatEditText) findViewById(R.id.etName);
-        mEtPhone = (AppCompatEditText) findViewById(R.id.etPhone);
-        mEtEmail = (AppCompatEditText) findViewById(R.id.etEmail);
+        mEtName = (EditText) findViewById(R.id.etName);
+        mEtPhone = (EditText) findViewById(R.id.etPhone);
+        mEtEmail = (EditText) findViewById(R.id.etEmail);
 
         mTvPrice = (TextView) findViewById(R.id.tvTotalPrice);
         mAcbNext = (AppCompatButton) findViewById(R.id.acbNext);

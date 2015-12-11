@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.library.utils.MathUtil;
+import com.android.library.utils.TextUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -67,6 +68,11 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
             mSdvPhoto.setImageURI(Uri.parse(mPoiDetail.getPhotos().get(0)));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if (TextUtil.isNotEmpty(data.getFolder_id()) ){
+
+            mBtnAddToPlan.setText("已加入 "+data.getFolder_name());
         }
 
         mTvTitle.setText(mPoiDetail.getTitle());

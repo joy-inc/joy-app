@@ -181,7 +181,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
             if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
 
-                AddPoiToFloderActivity.startActivity(this, mId, REQ_ADD_POI);
+                AddPoiToFloderActivity.startActivity(this, mId,mPoiDetail.getFolder_id(), REQ_ADD_POI);
             } else {//已经收藏了
 
             }
@@ -217,7 +217,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         if (mPoiDetail != null) {
 
             SinglePoiMapActivity.startActivityByPoiDetail(this, mPoiDetail);
-            showToast("open all comments activity");
         }
     }
 

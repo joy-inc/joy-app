@@ -83,7 +83,7 @@
                     android:text="@string/name"
                     android:textColor="@color/black_trans87" />
 
-                <android.support.v7.widget.AppCompatEditText
+                <com.android.library.widget.JEditText
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                     android:text="@string/phone"
                     android:textColor="@color/black_trans87" />
 
-                <android.support.v7.widget.AppCompatEditText
+                <com.android.library.widget.JEditText
                     android:id="@+id/etPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
                     android:text="@string/email"
                     android:textColor="@color/black_trans87" />
 
-                <android.support.v7.widget.AppCompatEditText
+                <com.android.library.widget.JEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

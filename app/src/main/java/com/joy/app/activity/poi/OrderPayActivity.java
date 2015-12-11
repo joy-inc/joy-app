@@ -122,24 +122,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         super.initContentView();
         ButterKnife.bind(this);
         acbNext.setText(R.string.pay);
-        acbNext.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                if (acrgPayment.getCheckedRadioButtonId() == R.id.acrbWeChat) {
-
-                    getOrderChargeToPay(CHANNEL_WECHAT);
-
-                } else if (acrgPayment.getCheckedRadioButtonId() == R.id.acrbAlipay) {
-
-                    getOrderChargeToPay(CHANNEL_ALIPAY);
-
-                } else {
-                    showToast("请选择支付方式");
-                }
-            }
-        });
+        acbNext.setOnClickListener(payBtnClickListener);
     }
 
     @Override
@@ -163,6 +146,25 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         return true;
     }
 
+    private View.OnClickListener payBtnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+
+            if (acrgPayment.getCheckedRadioButtonId() == R.id.acrbWeChat) {
+
+                getOrderChargeToPay(CHANNEL_WECHAT);
+
+            } else if (acrgPayment.getCheckedRadioButtonId() == R.id.acrbAlipay) {
+
+                getOrderChargeToPay(CHANNEL_ALIPAY);
+
+            } else {
+                showToast("请选择支付方式");
+            }
+        }
+    };
+
     @Override
     protected ObjectRequest<OrderDetail> getObjectRequest() {
 
@@ -181,6 +183,8 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             public void onPre() {
 
                 showLoading();
+                //按键点击之后的禁用，防止重复点击
+                acbNext.setOnClickListener(null);
             }
 
             @Override
@@ -194,6 +198,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             @Override
             public void onError(Object tag, String msg) {
 
+                acbNext.setOnClickListener(payBtnClickListener);
                 hideLoading();
                 showToast(msg);
             }
@@ -215,6 +220,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
+        acbNext.setOnClickListener(payBtnClickListener);
         //支付页面返回处理
         if (requestCode == REQUEST_CODE_PAYMENT) {
             if (resultCode == Activity.RESULT_OK) {
