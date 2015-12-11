@@ -103,7 +103,7 @@
     <string name="order_detail_create_infor">如有更多问题请咨询微信号\n1234567</string>
 
     <string name="order_detail_paied_title">订单支付完成，库存确认中…</string>
-    <string name="order_detail_paied_infor">预计需要12个小时，如有更多问题请咨询微信号\n1234567</string>
+    <string name="order_detail_paied_infor">预计需要12小时，如有更多问题请咨询微信号\n1234567</string>
 
     <string name="order_detail_cancel_title">订单失效或被取消</string>
     <string name="order_detail_cancel_infor">如有更多问题请咨询微信号\n1234567</string>

@@ -20,7 +20,7 @@ public class PlanHtpUtil extends BaseHtpUtil{
 
         Map<String, String> params = getBaseParams();
         params.put("product_id", poiId);
-        params.put("folder", folderId);
+        params.put("folder_id", folderId);
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 
         return createPostRequest(URL_POST_PLAN_ADD, params,clazz);

@@ -6,23 +6,19 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.library.BaseApplication;
-import com.android.library.activity.BaseUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.DensityUtil;
 import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
-import com.android.library.widget.JRecyclerView;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.adapter.plan.PlanFolderAdapter;
@@ -57,12 +53,15 @@ public class AddPoiToFloderActivity extends Activity {
     LinearLayout llDialog;
 
     String PoiId;
-    String FolderName;
+    String FolderId;
+    @Bind(R.id.v_shadow)
+    View vShadow;
 
-    public static void startActivity(Activity activity, String PoiId,int requestCode) {
+    public static void startActivity(Activity activity, String PoiId, String FolderId, int requestCode) {
         Intent intent = new Intent(activity, AddPoiToFloderActivity.class);
         intent.putExtra("PoiId", PoiId);
-        activity.startActivityForResult(intent,requestCode);
+        intent.putExtra("FolderId", FolderId);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     @Override
@@ -76,8 +75,12 @@ public class AddPoiToFloderActivity extends Activity {
 
 
     private void initData() {
+
         PoiId = getIntent().getStringExtra("PoiId");
+        FolderId = getIntent().getStringExtra("FolderId");
     }
+
+    boolean isCreateView = false;
 
     private void initContent() {
         int width = DeviceUtil.getScreenWidth();
@@ -86,18 +89,26 @@ public class AddPoiToFloderActivity extends Activity {
         jtvButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (jtvButton.getTag().equals("create")){
+                if (!isCreateView) {
                     showCreateView();
-                }else{
+                } else {
                     showLoading();
                     createFolder(edtName.getText().toString());
                 }
             }
         });
+        vShadow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        showLoading();
         getFolderData();
     }
 
-    public void showCreateView(){
+    public void showCreateView() {
+        isCreateView = true;
         jtvTitle.setText("创建旅行规划");
         ViewUtil.goneView(rlLoading);
         ViewUtil.goneView(jtvEmpty);
@@ -109,6 +120,7 @@ public class AddPoiToFloderActivity extends Activity {
     }
 
     private void showEmpty() {
+        isCreateView = false;
         jtvTitle.setText("我的旅行规划");
         ViewUtil.goneView(rlLoading);
         ViewUtil.showView(jtvEmpty);
@@ -118,7 +130,9 @@ public class AddPoiToFloderActivity extends Activity {
         jtvButton.setTag("add");
         jtvButton.setText("创建新规划");
     }
+
     private void showLoading() {
+        isCreateView = false;
         jtvTitle.setText("我的旅行规划");
         ViewUtil.showView(rlLoading);
         ViewUtil.goneView(jtvEmpty);
@@ -128,30 +142,33 @@ public class AddPoiToFloderActivity extends Activity {
         jtvButton.setTag("add");
         jtvButton.setText("创建新规划");
     }
+
     PlanFolderAdapter adapter;
+
     private void showList(List<PlanFolder> planFolders) {
+        isCreateView = false;
         jtvTitle.setText("我的旅行规划");
         ViewUtil.goneView(rlLoading);
         ViewUtil.goneView(jtvEmpty);
         ViewUtil.showView(jrvList);
         ViewUtil.goneView(rlCreate);
 
-        if (adapter == null){
+        if (adapter == null) {
             jrvList.setLayoutManager(new LinearLayoutManager(this));
             adapter = new PlanFolderAdapter();
-            adapter.setName(PoiId);
+            adapter.setName(FolderId);
             adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
                 @Override
                 public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
-                    if (planFolder.getFolder_name().equals(FolderName)) return;
+                    if (planFolder.getFolder_name().equals(FolderId)) return;
                     showLoading();
                     addPoi(planFolder);
                 }
             });
             jrvList.setAdapter(adapter);
         }
-        if (!CollectionUtil.isEmpty(planFolders)){
-            if(adapter.getData() != null){
+        if (!CollectionUtil.isEmpty(planFolders)) {
+            if (adapter.getData() != null) {
                 adapter.getData().clear();
             }
             adapter.setData(planFolders);
@@ -166,10 +183,10 @@ public class AddPoiToFloderActivity extends Activity {
     }
 
     private void addPoi(final PlanFolder folde) {
-        ObjectRequest<List<PlanFolder>> req = PlanHtpUtil.getUserPlanAddRequest(PoiId, folde.getFolder_id(), PlanFolder.class);
-        req.setResponseListener(new ObjectResponse<List<PlanFolder>>() {
+        ObjectRequest<Object> req = PlanHtpUtil.getUserPlanAddRequest(PoiId, folde.getFolder_id(), Object.class);
+        req.setResponseListener(new ObjectResponse<Object>() {
             @Override
-            public void onSuccess(Object tag, List<PlanFolder> planFolders) {
+            public void onSuccess(Object tag, Object object) {
                 Intent intent = new Intent();
                 intent.putExtra("name", folde.getFolder_name());
                 intent.putExtra("id", folde.getFolder_id());
@@ -223,7 +240,7 @@ public class AddPoiToFloderActivity extends Activity {
             @Override
             public void onError(Object tag, String msg) {
                 super.onError(tag, msg);
-                if (adapter != null){
+                if (adapter != null) {
                     showList(null);
                 }
                 ToastUtil.showToast(msg);

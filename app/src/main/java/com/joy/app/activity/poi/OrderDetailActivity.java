@@ -83,7 +83,6 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         super.initTitleView();
         addTitleLeftBackView();
         addTitleMiddleView(R.string.order_detail_title);
-        //TODO 右边的点点点图标
     }
 
     @Override
