@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -17,6 +18,8 @@ import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
+import com.joy.app.utils.plan.DialogUtil;
+import com.joy.app.utils.plan.FolderRequestListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +28,7 @@ import butterknife.ButterKnife;
  * @author litong  <br>
  * @Description 订单详情页    <br>
  */
-public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> implements View.OnClickListener {
+public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> implements View.OnClickListener ,FolderRequestListener {
     String order_id;
     OrderDetail detail;
     @Bind(R.id.jtv_title)
@@ -57,11 +60,12 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
     @Bind(R.id.iv_finsh)
     ImageView ivFinsh;
 
-    public static void startActivity(Activity act, String orderId) {
+    DialogUtil dialogUtil;
+
+    public static void startActivity(Activity act, String orderId,int requestCode) {
         Intent intent = new Intent(act, OrderDetailActivity.class);
         intent.putExtra("DATA",orderId);
-//        intent.putExtra("DATA", "20151208_66084");
-        act.startActivity(intent);
+        act.startActivityForResult(intent,requestCode);
     }
 
     @Override
@@ -83,6 +87,13 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         super.initTitleView();
         addTitleLeftBackView();
         addTitleMiddleView(R.string.order_detail_title);
+        addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isRequest)return;
+                dialogUtil.showDeleteOrderDialog(order_id);
+            }
+        });
     }
 
     @Override
@@ -90,6 +101,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         super.initContentView();
         ButterKnife.bind(this);
         jtvPay.setOnClickListener(this);
+        dialogUtil = new DialogUtil(this,this);
     }
 
     private void showPayButton() {
@@ -164,9 +176,32 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         jtvOrderCount.setText(orderDetail.getFormatCountStr());
         return true;
     }
+    boolean isRequest= false;
+    @Override
+    public void onRequest(dialog_category category, Object obj) {
+        isRequest = true;
+        showLoading();
+    }
+
+    @Override
+    public void onSuccess(dialog_category category, Object obj) {
+        isRequest= false;
+        hideLoading();
+        ToastUtil.showToast("删除成功");
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void onfaild(dialog_category category, String msg) {
+        isRequest= false;
+        hideLoading();
+        ToastUtil.showToast(msg);
+    }
 
     @Override
     public void onClick(View v) {
+        if (isRequest)return;
         switch (v.getId()) {
             case R.id.jtv_pay:
                 SendPayMassage();

@@ -12,6 +12,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
 import com.joy.app.R;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.plan.PlanItem;
@@ -135,6 +136,9 @@ public class MapUtil {
         ArrayList<MapPoiDetail> content = new ArrayList<>();
         //        for (PlanItem item : list) {
         for (int i = 0; i < list.size(); i++) {
+            if (TextUtil.isEmpty(list.get(i).getLat())){
+                continue;
+            }
             MapPoiDetail detail = new MapPoiDetail();
             detail.setIcon_nor(R.drawable.ic_map_poi);
             detail.setIcon_press(R.drawable.ic_map_poi_pressed);
