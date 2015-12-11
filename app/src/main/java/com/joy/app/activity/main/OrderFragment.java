@@ -3,10 +3,10 @@ package com.joy.app.activity.main;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
@@ -103,7 +103,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         mCommentonDialog = DialogPlus.newDialog(getActivity()).setContentHolder(new ViewHolder(R.layout.view_order_commenton)).setGravity(Gravity.CENTER).create();
 
         final AppCompatRatingBar ratingBar = (AppCompatRatingBar) mCommentonDialog.findViewById(R.id.acRatingBar);
-        final AppCompatEditText editText = (AppCompatEditText) mCommentonDialog.findViewById(R.id.acetContent);
+        final EditText editText = (EditText) mCommentonDialog.findViewById(R.id.acetContent);
 
         mCommentonDialog.findViewById(R.id.tvSubmit).setOnClickListener(new View.OnClickListener() {
 
