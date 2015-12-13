@@ -44,5 +44,6 @@ public class SinglePoiMapActivity extends MapActivity {
         mapview.getController().setCenter(item.getPoint());
         mapview.getController().setZoom(15);
         showPathBtn();
+        selectPosition(item,false);
     }
 }

@@ -200,6 +200,14 @@ public class MapUtil {
         //        aMapLocation.getAdCode();//地区编码
     }
 
+    public static boolean compareFloatData(float d1, float d2) {
+        if ((d1 - d2) < 3 || (d2 - d1) < 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private static class LatComparator implements Comparator<Double> {
 
         @Override
