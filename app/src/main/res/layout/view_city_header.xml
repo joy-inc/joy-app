@@ -5,10 +5,9 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvPhoto"
+        style="@style/sdv_cover"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:scaleType="centerCrop"
-        android:tint="@color/black_trans50" />
+        android:layout_height="260dp" />
 
     <com.android.library.widget.JTextView
         android:id="@+id/jtvName"
@@ -33,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:foreground="?android:selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_ticket" />
 
@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_visa" />
 
@@ -49,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_airplane" />
 
@@ -57,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_wifi" />
     </LinearLayout>
@@ -76,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:foreground="?android:selectableItemBackground"
             android:scaleType="centerInside"
             android:src="@drawable/ic_play"
             android:tint="@color/black_trans26" />
@@ -86,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_weight="1"
+            android:foreground="?selectableItemBackground"
             android:scaleType="centerInside"
             android:src="@drawable/ic_food"
             android:tint="@color/black_trans26" />

@@ -13,12 +13,9 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/sdvPhoto"
+            style="@style/sdv_cover.CornerRadius.Top"
             android:layout_width="match_parent"
-            android:layout_height="187dp"
-            android:scaleType="centerCrop"
-            fresco:roundBottomLeft="false"
-            fresco:roundBottomRight="false"
-            fresco:roundedCornerRadius="2dp"/>
+            android:layout_height="187dp" />
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvTitle"
