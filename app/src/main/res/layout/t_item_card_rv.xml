@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/CardView.Dark.margin_8dp"
+    style="@style/CardView.Trans.margin_8dp"
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:transitionName="xxx">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvPhoto"
+        style="@style/sdv_cover.CornerRadius"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:tint="@color/black_trans26" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/tvName"
