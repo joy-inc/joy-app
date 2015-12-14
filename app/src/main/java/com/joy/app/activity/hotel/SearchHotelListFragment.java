@@ -62,7 +62,6 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
 
     @Override
     public void onItemViewClick(int position, View clickView, Object o) {
-        LogMgr.i("position:"+position);
         if (position != 0 ){
             HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position -1);
             WebViewActivity.startActivity(getActivity(),hotelEntity.getLink(),"");

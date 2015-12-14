@@ -22,6 +22,7 @@
     <color name="calendar_weekend_color">#FE7562</color>
     <color name="select_link">#7FFFFFFF</color>
     <color name="select_point">#FFFFFF</color>
+    <color name="hotel_level_orange">#F0B11B</color>
 
     <!--默认的日历控件颜色.保留是为了以后移植使用-->
     <!--现在使用的日历控件颜色 -->

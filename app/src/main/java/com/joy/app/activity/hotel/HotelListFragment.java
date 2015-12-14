@@ -11,6 +11,7 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.LogMgr;
 import com.android.library.view.recyclerview.RecyclerAdapter;
+import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.hotel.HotelListAdapter;
 import com.joy.app.adapter.sample.CityDetailRvAdapter;
@@ -25,12 +26,12 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener{
-    HotelParams params ;
+public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener, View.OnClickListener {
+    HotelParams params;
 
-    public static HotelListFragment instantiate(Context context,HotelParams hotelParams) {
+    public static HotelListFragment instantiate(Context context, HotelParams hotelParams) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("data", hotelParams );
+        bundle.putParcelable("data", hotelParams);
         return (HotelListFragment) Fragment.instantiate(context, HotelListFragment.class.getName(), bundle);
     }
 
@@ -49,37 +50,38 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
     @Override
     protected void initContentView() {
         super.initContentView();
-        HotelListAdapter adapter = new HotelListAdapter(getActivity());
-        adapter.setHeaderCount(1);
+        HotelListAdapter adapter = new HotelListAdapter();
         adapter.setOnItemViewClickListener(this);
         setAdapter(adapter);
+        View v = View.inflate(getActivity(), R.layout.item_hotel_header, null);
+        v.setOnClickListener(this);
+        addHeaderView(v);
     }
 
-    public void reLoadHotelList(HotelParams hotelParams){
+    public void reLoadHotelList(HotelParams hotelParams) {
         params = hotelParams;
-        getAdapter().getData().clear();
-        getAdapter().notifyDataSetChanged();
         executeRefreshOnly();
     }
 
     @Override
     public void onItemViewClick(int position, View clickView, Object o) {
-        LogMgr.i("position:"+position);
-        if (position != 0 ){
-            HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position -1);
-            WebViewActivity.startActivity(getActivity(),hotelEntity.getLink(),"");
-        }else{
-            SearchHotelActivity.startActivity(getActivity(),params.getCityId(),params.getCheckIn(),params.getCheckOut(),params.getFrom_key());
-        }
+        HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position - 1);
+        WebViewActivity.startActivity(getActivity(), hotelEntity.getLink(), "");
+    }
+
+    @Override
+    public void onClick(View v) {
+        SearchHotelActivity.startActivity(getActivity(), params.getCityId(), params.getCheckIn(), params.getCheckOut(), params.getFrom_key());
     }
 
     @Override
     protected List<?> getListInvalidateContent(HotelList hotelList) {
+        ((CityHotelListActivity)getActivity()).showtitle(hotelList.getCity_name());
         return hotelList.getHotel();
     }
 
     @Override
     protected ObjectRequest<HotelList> getObjectRequest(int pageIndex, int pageLimit) {
-        return HotelHtpUtil.getHotelListRequest(params,pageIndex,pageLimit,HotelList.class);
+        return HotelHtpUtil.getHotelListRequest(params, pageIndex, pageLimit, HotelList.class);
     }
 }
