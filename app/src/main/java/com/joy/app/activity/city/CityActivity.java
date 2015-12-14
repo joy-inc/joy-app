@@ -68,7 +68,6 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     protected void initContentView() {
 
         setSwipeRefreshEnable(false);
-        getRecyclerView().setBackgroundResource(R.color.color_primary);
         setAdapter(new CityRouteAdapter());
         setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
 

@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     style="@style/CardView.Light.margin_10dp"
     android:layout_width="match_parent"
     android:layout_height="240dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvPhoto"
+        style="@style/sdv_cover.CornerRadius.Top"
         android:layout_width="match_parent"
-        android:layout_height="162dp"
-        android:scaleType="centerCrop"
-        android:tint="@color/black_trans50"
-        fresco:roundBottomLeft="false"
-        fresco:roundBottomRight="false"
-        fresco:roundedCornerRadius="2dp" />
+        android:layout_height="162dp" />
 
     <com.android.library.widget.JTextView
         android:id="@+id/jtvName"

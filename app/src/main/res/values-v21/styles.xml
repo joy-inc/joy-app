@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="theme_app" parent="lib_theme_base">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">?colorPrimary</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:windowBackground">@drawable/shape_bg_window</item>
+        <item name="android:navigationBarColor">?colorPrimary</item>
+        <item name="android:textColorPrimary">@color/color_primary_text</item>
+        <item name="android:textColorSecondary">@color/color_secondary_text</item>
+        <item name="android:colorEdgeEffect">@color/color_bg_window_trans26</item>
+        <item name="android:colorControlHighlight">@color/color_bg_window_trans45</item>
+    </style>
 </resources>

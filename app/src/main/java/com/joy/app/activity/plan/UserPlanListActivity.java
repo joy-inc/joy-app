@@ -11,15 +11,14 @@ import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.adapter.OnItemViewLongClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.ToastUtil;
 import com.joy.app.R;
 import com.joy.app.activity.map.ListPoiMapActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.bean.plan.PlanItem;
 import com.joy.app.utils.http.PlanHtpUtil;
-import com.joy.app.utils.plan.FolderRequestListener;
 import com.joy.app.utils.plan.DialogUtil;
+import com.joy.app.utils.plan.FolderRequestListener;
 
 import java.util.List;
 
@@ -62,7 +61,6 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     @Override
     protected void initTitleView() {
 
-        setTitle(null);
         addTitleLeftBackView();
         setTitle(getIntent().getStringExtra("FolderName"));
 
@@ -134,7 +132,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     public void onfaild(dialog_category category, String msg) {
         hideLoading();
         isRequest = false;
-        ToastUtil.showToast(msg);
+        showToast(msg);
     }
 
     @Override

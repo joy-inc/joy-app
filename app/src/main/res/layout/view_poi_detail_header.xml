@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,11 +7,9 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvPhoto"
-        android:layout_width="360dp"
-        android:layout_height="240dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop" />
-
+        style="@style/sdv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
 
     <com.android.library.widget.JTextView
         android:id="@+id/tvTitle"

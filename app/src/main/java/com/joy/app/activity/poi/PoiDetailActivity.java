@@ -66,7 +66,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     @Override
     protected void initTitleView() {
 
-        setTitle(null);
         addTitleLeftBackView();
     }
 

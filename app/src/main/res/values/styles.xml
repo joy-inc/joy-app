@@ -1,18 +1,20 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="theme_app" parent="lib_theme_base">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">?colorPrimary</item>
         <item name="colorAccent">@color/color_accent</item>
-        <item name="android:windowBackground">@color/color_primary</item>
-        <item name="android:navigationBarColor" tools:targetApi="21">?colorPrimary</item>
+        <item name="android:windowBackground">@drawable/shape_bg_window</item>
         <item name="android:textColorPrimary">@color/color_primary_text</item>
         <item name="android:textColorSecondary">@color/color_secondary_text</item>
     </style>
 
     <style name="theme_app.translucent">
-        <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
-        <item name="android:windowTranslucentNavigation" tools:targetApi="19">false</item>
+
+    </style>
+
+    <style name="theme_app.main">
+        <item name="colorPrimary">@color/color_bg_window_dark</item>
     </style>
 
     <style name="theme_app.translucent.toolbar">
@@ -23,8 +25,20 @@
         <item name="overlay">true</item>
     </style>
 
+    <style name="ex_theme">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ex_theme_dialog" parent="ex_theme">
+        <item name="android:windowFrame">@null</item><!-- 边框 -->
+        <item name="android:windowIsFloating">true</item><!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item><!-- 半透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item><!-- 背景透明 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.InputMethod</item>
+    </style>
+
     <!-- 对话框样式，带白色圆角背景 -->
-    <style name="qa_ex_theme_dialog" parent="@style/ex_theme_dialog">
+    <style name="qa_ex_theme_dialog" parent="ex_theme_dialog">
         <item name="android:windowBackground">@drawable/bg_search_gray</item>
     </style>
 </resources>
