@@ -11,11 +11,13 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.joy.app.activity.city.CityActivity;
 import com.joy.app.activity.common.WebViewActivity;
+import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.bean.MainRoute;
 import com.joy.app.bean.sample.PoiDetail;
+import com.joy.app.utils.JoyConstant;
 import com.joy.app.utils.http.MainHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
@@ -62,6 +64,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             }
         });
         setAdapter(adapter);
+        CityHotelListActivity.startActivity(getActivity(),"50", JoyConstant.HOTEL_FROM_KEY);
     }
 
     @Override

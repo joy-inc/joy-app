@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.LogMgr;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.adapter.hotel.HotelListAdapter;
+import com.joy.app.activity.hotel.frame.FrameHttpRvFragment;
 import com.joy.app.adapter.hotel.SearchHotelListAdapter;
 import com.joy.app.bean.hotel.HotelEntity;
 import com.joy.app.bean.hotel.HotelList;
@@ -23,7 +21,7 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener {
+public class SearchHotelListFragment extends FrameHttpRvFragment<HotelList> implements OnItemViewClickListener {
     HotelParams params;
 
     public static SearchHotelListFragment instantiate(Context context, HotelParams hotelParams) {
@@ -35,7 +33,7 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        executeRefreshOnly();
+        executeRefresh();
     }
 
     @Override
@@ -53,12 +51,14 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
     }
 
     public void reLoadHotelList(String keyword) {
+        if(params == null )return;
         if (params.setHotel(keyword)) {
             getAdapter().getData().clear();
             getAdapter().notifyDataSetChanged();
-            executeRefreshOnly();
+            executeRefresh();
         }
     }
+
 
     @Override
     public void onItemViewClick(int position, View clickView, Object o) {
