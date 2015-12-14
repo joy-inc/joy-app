@@ -62,7 +62,6 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             }
         });
         setAdapter(adapter);
-        PoiDetailActivity.startActivity(getActivity(),"37");
     }
 
     @Override
