@@ -302,6 +302,11 @@ public class SeekBarPressure extends View {
 
         return true;
     }
+
+    public void setmScollBarWidth(int mScollBarWidth) {
+        this.mScollBarWidth = mScollBarWidth;
+    }
+
     public int getAreaFlag(MotionEvent e) {
 
         int top = 50;

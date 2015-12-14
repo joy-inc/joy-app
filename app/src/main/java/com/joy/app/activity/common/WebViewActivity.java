@@ -58,6 +58,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
         mWebViewShare = new WebViewShare();
         mWebViewShare.setInfo("http://www.qq.com");
         EventBus.getDefault().register(this);
+        mWebViewWidget.setUserCookie(false);
         mWebViewWidget.loadUrl(getIntent().getStringExtra("url"));
         mType = getIntent().getIntExtra("type", 0);
     }
@@ -225,11 +226,12 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     /**
      * 不需要分享的调这
      */
-    public static void startActivity(Context context, String url ) {
+    public static void startActivity(Context context, String url) {
 
         startActivity(context, url, "", 0);
 
     }
+
     /**
      * 不需要分享的调这
      */
