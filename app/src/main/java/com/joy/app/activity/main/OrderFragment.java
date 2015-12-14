@@ -23,6 +23,7 @@ import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.eventbus.LoginStatusEvent;
+import com.joy.app.eventbus.PayStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.view.LoginTipView;
@@ -165,6 +166,12 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      * @param event
      */
     public void onEventMainThread(LoginStatusEvent event) {
+
+        initViewLoad();
+    }
+
+    public void onEventMainThread(PayStatusEvent event) {
+
         initViewLoad();
     }
 

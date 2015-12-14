@@ -111,6 +111,14 @@ public class MainActivity extends BaseTabActivity {
             }
         });
         mMainActivityBC.initTitleView();
+
+        addTitleRightView(R.drawable.ic_map_poi, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
+            }
+        });
     }
 
 

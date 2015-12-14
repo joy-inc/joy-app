@@ -31,7 +31,7 @@ public class FoldTextView extends TextView {
 
     private static final int DEFAULT_LINE_SPACING = DensityUtil.dip2px(3);
     private static final boolean DEFAULT_UNFOLDED = false;// 默认为不展开
-    private static final int DEFAULT_MIN_LINES = 3;
+    private static final int DEFAULT_MIN_LINES = 5;
     private static final long DEFAULT_ANIMATION_DURATION = 200;
 
     private boolean mIsUnfolded = DEFAULT_UNFOLDED;

@@ -81,6 +81,7 @@
     <string name="payment">支付方式</string>
     <string name="payment_wechat">微信支付</string>
     <string name="payment_alipay">支付宝支付</string>
+    <string name="collapse">收起</string>
 
     <string name="toast_over_limit">您选择的商品数量已超上限，请重新选择</string>
     <string name="toast_input_date">请填写日期</string>

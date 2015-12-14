@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
-import com.android.library.view.ExLayoutWidget;
+import com.joy.app.view.FoldTextView;
 
 /**
  * 简介与购买须知
@@ -15,9 +16,9 @@ import com.android.library.view.ExLayoutWidget;
  */
 public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnClickListener {
 
-    TextView tvIntroduce;
-    TextView tvAllIntroduce;
-    TextView tvAllKnow;
+    private FoldTextView ftvIntroduce;
+    private TextView tvAllIntroduce;
+    private TextView tvAllKnow;
 
     public PoiDetailIntroduceWidget(Activity activity) {
         super(activity);
@@ -28,7 +29,7 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
 
         View contentView = activity.getLayoutInflater().inflate(R.layout.view_poi_detail_introduce, null);
 
-        tvIntroduce = (TextView) contentView.findViewById(R.id.tvIntroduce);
+        ftvIntroduce = (FoldTextView) contentView.findViewById(R.id.ftvIntroduce);
         tvAllIntroduce = (TextView) contentView.findViewById(R.id.tvAllIntroduce);
         tvAllKnow = (TextView) contentView.findViewById(R.id.tvAllKnow);
         tvAllIntroduce.setOnClickListener(this);
@@ -42,12 +43,12 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
         if (data == null)
             return;
 
-        tvIntroduce.setText(data.getIntroduction());
+        ftvIntroduce.setText(data.getIntroduction());
     }
 
     @Override
     public void onClick(View v) {
 
-        callbackWidgetViewClickListener(v);
+        ftvIntroduce.toggle();
     }
 }

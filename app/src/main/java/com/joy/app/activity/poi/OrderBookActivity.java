@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.KeyEvent;
@@ -36,6 +37,8 @@ import com.joy.app.eventbus.PayStatusEvent;
 import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
+import com.joy.library.dialog.DialogUtil;
+import com.joy.library.share.weibo.auth.AccessTokenKeeper;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -71,6 +74,8 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private DialogPlus mSubjectDialog;
     private int index = 0;
     private int currentIndex = 0;
+
+    private AlertDialog mExitDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -340,7 +345,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         dfs.setDecimalSeparator('.');
         twoDForm.setDecimalFormatSymbols(dfs);
 
-        return twoDForm.format(total) ;
+        return twoDForm.format(total);
     }
 
     @Override
@@ -383,14 +388,17 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void showAlertDialog() {
 
-        new JDialog.Builder(this).setTitle(R.string.alert_drop_content).setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+        if (mExitDialog == null) {
+            mExitDialog = DialogUtil.getOkCancelDialog(this, com.joy.library.R.string.cancel, R.string.confirm, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                finish();
-            }
-        }).create().show();
+                    if (which == DialogInterface.BUTTON_POSITIVE)
+                        finish();
+                }
+            });
+        }
+        mExitDialog.show();
     }
 
     @Override
