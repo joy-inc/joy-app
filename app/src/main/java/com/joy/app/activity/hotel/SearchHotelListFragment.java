@@ -23,12 +23,12 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener{
-    HotelParams params ;
+public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener {
+    HotelParams params;
 
     public static SearchHotelListFragment instantiate(Context context, HotelParams hotelParams) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("data", hotelParams );
+        bundle.putParcelable("data", hotelParams);
         return (SearchHotelListFragment) Fragment.instantiate(context, SearchHotelListFragment.class.getName(), bundle);
     }
 
@@ -52,8 +52,8 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
         setAdapter(adapter);
     }
 
-    public void reLoadHotelList(String keyword){
-        if (params.setHotel(keyword)){
+    public void reLoadHotelList(String keyword) {
+        if (params.setHotel(keyword)) {
             getAdapter().getData().clear();
             getAdapter().notifyDataSetChanged();
             executeRefreshOnly();
@@ -62,12 +62,8 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
 
     @Override
     public void onItemViewClick(int position, View clickView, Object o) {
-        if (position != 0 ){
-            HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position -1);
-            WebViewActivity.startActivity(getActivity(),hotelEntity.getLink(),"");
-        }else{
-            SearchHotelActivity.startActivity(getActivity(),params.getCityId(),params.getCheckIn(),params.getCheckOut(),params.getFrom_key());
-        }
+        HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position);
+        WebViewActivity.startActivity(getActivity(), hotelEntity.getLink(), "");
     }
 
     @Override
@@ -78,6 +74,6 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
 
     @Override
     protected ObjectRequest<HotelList> getObjectRequest(int pageIndex, int pageLimit) {
-        return HotelHtpUtil.getHotelListRequest(params,pageIndex,pageLimit,HotelList.class);
+        return HotelHtpUtil.getHotelListRequest(params, pageIndex, pageLimit, HotelList.class);
     }
 }

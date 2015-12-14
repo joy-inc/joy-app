@@ -50,7 +50,6 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
-                    android:paddingRight="50dp"
                     android:singleLine="true"
                     android:text="东京台场希尔顿酒店"
                     android:textStyle="bold"
