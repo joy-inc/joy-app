@@ -37,20 +37,15 @@ public class SearchHotelListAdapter extends ExRvAdapter<SearchHotelListAdapter.V
 
         @Bind(R.id.iv_hotel_item_Photo)
         SimpleDraweeView ivHotelItemPhoto;
-        @Bind(R.id.fl_image_container)
-        FrameLayout flImageContainer;
         @Bind(R.id.tv_hotel_city_cnname)
         JTextView tvHotelCityCnname;
         @Bind(R.id.tv_hotel_city_enname)
         JTextView tvHotelCityEnname;
-        @Bind(R.id.ll_infos)
-        LinearLayout llInfos;
         @Bind(R.id.tv_hotel_city_star)
         JTextView tvHotelCityStar;
         @Bind(R.id.tv_hotel_item_price)
         JTextView tvHotelItemPrice;
-        @Bind(R.id.linearLayout)
-        LinearLayout linearLayout;
+
 
         public ViewHolder(final View itemView) {
 
@@ -72,7 +67,7 @@ public class SearchHotelListAdapter extends ExRvAdapter<SearchHotelListAdapter.V
             ivHotelItemPhoto.setImageURI(Uri.parse(hotelEntity.getPhoto()));
             tvHotelCityCnname.setText(hotelEntity.getCnname());
             tvHotelCityEnname.setText(hotelEntity.getEnname());
-            tvHotelItemPrice.setText(hotelEntity.getPrice()+"");
+            tvHotelItemPrice.setText(hotelEntity.getPriceStr());
             tvHotelCityStar.setText(hotelEntity.getStar());
         }
     }

@@ -1,175 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:id="@+id/llFilterRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <com.android.library.widget.JTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="42dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:textSize="16dp"
-        android:text="筛选" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
 
-    <ScrollView
+    <LinearLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.android.library.widget.JTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:text="筛选"
+            android:textSize="16dp" />
+        <View
+            android:layout_marginBottom="20dp"
+            android:background="@color/qa_bg_split_line"
+            style="@style/Line.Dark.Horizontal"/>
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <com.android.library.widget.JTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:text="价格区间" />
-
-            <com.joy.app.view.hotel.SeekBarPressure
-                android:id="@+id/sbDistance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="26dp"
-                android:layout_marginRight="26dp"
-                android:layout_marginTop="16dp"
-                app:duration="0.5"
-                app:lheight="3dp"
-                app:circleRadius="9dp"
-                app:maxValue="5.0"
-                app:minValue="1.0"
-                app:lwidth="320dp" />
-
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal" >
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.android.library.widget.JTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:text="价格区间" />
+
+                <com.joy.app.view.hotel.SeekBarPressure
+                    android:id="@+id/sbDistance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginRight="26dp"
+                    android:layout_marginTop="16dp"
+                    app:circleRadius="9dp"
+                    app:duration="0.5"
+                    app:lheight="3dp"
+                    app:lwidth="330dp"
+                    app:maxValue="5.0"
+                    app:minValue="1.0" />
+
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginRight="26dp"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
 
                     <com.android.library.widget.JTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="left"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
                         android:text="¥0" />
 
                     <com.android.library.widget.JTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="left"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="¥300" />
 
 
                     <com.android.library.widget.JTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="left"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="¥500" />
 
 
                     <com.android.library.widget.JTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="left"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="¥800" />
 
                     <com.android.library.widget.JTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="left"
                         android:layout_height="wrap_content"
-                        android:text="¥1000" />
-                    <com.android.library.widget.JTextView
-                        android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:gravity="left"
+                        android:gravity="center"
+                        android:text="¥1000" />
+
+                    <com.android.library.widget.JTextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="不限" />
 
+                </LinearLayout>
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="29dp"
+                    android:text="星级" />
+
+                <LinearLayout
+                    android:id="@+id/ll_stars"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginRight="26dp"
+                    android:layout_marginTop="14dp"
+                    android:orientation="horizontal"/>
+
+                <com.android.library.widget.JTextView
+                    android:id="@+id/tvFacility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="29dp"
+                    android:text="设施" />
+
+                <com.joy.app.view.hotel.AutoChangeLineViewGroup
+                    android:id="@+id/llFilterView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="26dp"
+                    android:paddingRight="16dp"
+                    app:horSpacing="15dp"
+                    app:verSpacing="15dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
             </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <com.android.library.widget.JTextView
-                android:id="@+id/tvStar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="29dp"
-                android:text="星级" />
-
-            <LinearLayout
-                android:id="@+id/ll_stars"
-                android:layout_marginLeft="26dp"
-                android:layout_marginRight="26dp"
-                android:layout_marginTop="14dp"
+                android:id="@+id/tvClear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-            </LinearLayout>
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="清空筛选"
+                android:textColor="@color/white" />
 
             <com.android.library.widget.JTextView
-                android:id="@+id/tvFacility"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvDone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
-                android:layout_marginTop="29dp"
-                android:text="设施" />
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:background="@color/color_accent"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="确定"
+                android:textColor="@color/white" />
 
-            <com.joy.app.view.hotel.AutoChangeLineViewGroup
-                android:id="@+id/llFilterView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="26dp"
-                android:paddingRight="16dp"
-                app:horSpacing="15dp"
-                app:verSpacing="15dp">
-            </com.joy.app.view.hotel.AutoChangeLineViewGroup>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp" />
         </LinearLayout>
-    </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.android.library.widget.JTextView
-            android:id="@+id/tvClear"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:gravity="center"
-            android:background="@color/black"
-            android:text="清空筛选"
-            android:textColor="@color/white" />
-        <com.android.library.widget.JTextView
-            android:id="@+id/tvDone"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:background="@color/pink_dark"
-            android:text="确定"
-            android:textColor="@color/white" />
 
     </LinearLayout>
 

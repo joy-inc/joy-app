@@ -3,6 +3,7 @@ package com.joy.app.activity.hotel;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -67,15 +68,13 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
     boolean isDisable = false;
     private int mThemeColor;
     private int mThemeSelector;
+    private int mThemeLeftSelector;
+    private int mThemeRightSelector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        RelativeLayout contnet = new RelativeLayout(this);
-//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        setContentView(contnet,params);
-//        contnet.addView(View.inflate(this,R.layout.act_hotel_list_filter,null));
         setContentView(R.layout.act_hotel_list_filter);
         initData();
         initContentView();
@@ -115,17 +114,17 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
 
         mThemeColor = R.color.white;
         mThemeSelector = R.drawable.selector_bg_hotel_list_filter;
+        mThemeLeftSelector = R.drawable.selector_bg_hotel_list_left_filter;
+        mThemeRightSelector = R.drawable.selector_bg_hotel_list_right_filter;
+
     }
 
     protected void initContentView() {
         int width = DeviceUtil.getScreenWidth();
-        int height = DeviceUtil.getScreenHeight() - DensityUtil.dip2px(156.0f);
-//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, height);
-//        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
-        params.gravity = Gravity.BOTTOM;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, DeviceUtil.getScreenHeight()-DensityUtil.dip2px(20));
         LinearLayout llRoot = (LinearLayout) findViewById(R.id.llFilterRoot);
         llRoot.setLayoutParams(params);
+
         TextView tvDone = (TextView) findViewById(R.id.tvDone);
         tvDone.setTextColor(getResources().getColorStateList(mThemeColor));
         tvDone.setOnClickListener(this);
@@ -147,10 +146,18 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
 
         LinearLayout llStarsView = (LinearLayout) findViewById(R.id.ll_stars);
 
+        int i= 0;
         for (FilterItems types : mStarTypes) {
 
             String name = types.getName();
             CheckBox filterCB = initCheckBoxForStar(name);
+            i++;
+            if (i== 1){
+                filterCB.setBackgroundResource(mThemeLeftSelector);
+            }
+            if (i== mStarTypes.size()){
+                filterCB.setBackgroundResource(mThemeRightSelector);
+            }
             mStarListCb.add(filterCB);
             if (mStarTypeList.contains(types.getName()))
                 filterCB.setChecked(true);
@@ -162,16 +169,15 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
 
 
     private void initSeekBar() {
-
+        int width = DeviceUtil.getScreenWidth()-DensityUtil.dip2px(52);
         mSbDistance = (SeekBarPressure) findViewById(R.id.sbDistance);
+        mSbDistance.setmScollBarWidth(width);
         mSbDistance.setProgressLowInt(getProgress(mPrice[0]));
-
         int highProgress = getProgress(mPrice[1]);
         if (highProgress == 0) {
             highProgress = 5;
         }
         mSbDistance.setProgressHighInt(highProgress);
-
         mSbDistance.setOnSeekBarChangeListener(new SeekBarPressure.OnSeekBarChangeListener() {
 
             @Override
@@ -277,15 +283,18 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
 
     private CheckBox initCheckBoxForStar(String text) {
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(36.0f));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(36.0f));
+        params.weight=1;
+        params.setMargins(DensityUtil.dip2px(2),0,DensityUtil.dip2px(2),0);
         CheckBox FilterCheckBox = new CheckBox(this);
         FilterCheckBox.setButtonDrawable(getResources().getDrawable(android.R.color.transparent));
         FilterCheckBox.setText(text);
+        FilterCheckBox.setGravity(Gravity.CENTER);
         FilterCheckBox.setBackgroundResource(mThemeSelector);
         FilterCheckBox.setTextColor(getResources().getColorStateList(R.color.selector_font_poilist_filter));
         FilterCheckBox.setSingleLine();
         FilterCheckBox.setEllipsize(TextUtils.TruncateAt.END);//容错
-        FilterCheckBox.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12.0f);
+        FilterCheckBox.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14.0f);
         FilterCheckBox.setPadding(DensityUtil.dip2px(15.0f), DensityUtil.dip2px(3.0f), DensityUtil.dip2px(15.0f), DensityUtil.dip2px(3.0f));
         FilterCheckBox.setLayoutParams(params);
         FilterCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -331,11 +340,11 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
         CheckBox FilterCheckBox = new CheckBox(this);
         FilterCheckBox.setButtonDrawable(getResources().getDrawable(android.R.color.transparent));
         FilterCheckBox.setText(text);
-        FilterCheckBox.setBackgroundResource(mThemeSelector);
+        FilterCheckBox.setBackgroundResource(R.drawable.selector_bg_hotel_list_tag_filter);
         FilterCheckBox.setTextColor(getResources().getColorStateList(R.color.selector_font_poilist_filter));
         FilterCheckBox.setSingleLine();
         FilterCheckBox.setEllipsize(TextUtils.TruncateAt.END);//容错
-        FilterCheckBox.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12.0f);
+        FilterCheckBox.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14.0f);
         FilterCheckBox.setPadding(DensityUtil.dip2px(15.0f), DensityUtil.dip2px(3.0f), DensityUtil.dip2px(15.0f), DensityUtil.dip2px(3.0f));
         FilterCheckBox.setLayoutParams(params);
         FilterCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -396,11 +405,11 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
 
     private void changeClearView() {
 
-        if (0 == getProgress(mPrice[0]) && 5 == getProgress(mPrice[1]) && mCheckedNum == 0 && mCheckedStarNum == 0) {
-            tvClear.setTextColor(getResources().getColorStateList(R.color.white_trans26));
-        } else {
-            tvClear.setTextColor(getResources().getColorStateList(mThemeColor));
-        }
+//        if (0 == getProgress(mPrice[0]) && 5 == getProgress(mPrice[1]) && mCheckedNum == 0 && mCheckedStarNum == 0) {
+//            tvClear.setTextColor(getResources().getColorStateList(R.color.white));
+//        } else {
+//            tvClear.setTextColor(getResources().getColorStateList(mThemeColor));
+//        }
     }
 
 

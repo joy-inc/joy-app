@@ -1,8 +1,16 @@
 package com.joy.app.bean.hotel;
 
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+
+import com.joy.app.R;
+
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 酒店item    <br>
  */
 public class HotelEntity {
 
@@ -122,5 +130,13 @@ public class HotelEntity {
 
     public String getLink() {
         return link;
+    }
+
+    public CharSequence getPriceStr(){
+        SpannableString string = new SpannableString(String.format("￥%d 起",getPrice()));
+        string.setSpan(new RelativeSizeSpan(0.5f),0,1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        string.setSpan(new RelativeSizeSpan(0.75f),string.length()-1,string.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        string.setSpan(new ForegroundColorSpan(Color.parseColor("#66000000")),string.length()-1,string.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return string;
     }
 }

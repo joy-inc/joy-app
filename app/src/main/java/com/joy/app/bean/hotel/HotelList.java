@@ -16,8 +16,9 @@ public class HotelList {
      * hotel : [{"id":342124,"cnname":"布达佩斯大饭店","enname":"Budapest Hotel","ranking":9.2,"star":"五星级","area_name":"尖沙咀","price":939,"lat":83.212,"lon":112.5423,"distance":"0.4千米","is_recommend":true,"photo":"http://static.qyer.com/hotel/2342342/img/222.jpg","link":"http://www.booking.com/hotel/fr/belambra-city-magendie.html?aid=378575"},{"id":342124,"cnname":"布达佩斯大饭店","enname":"Budapest Hotel","ranking":9.2,"star":"五星级","area_name":"尖沙咀","price":939,"lat":83.212,"lon":112.5423,"distance":"0.4千米","is_recommend":true,"photo":"http://static.qyer.com/hotel/2342342/img/222.jpg","link":"http://www.booking.com/hotel/fr/belambra-city-magendie.html?aid=378575"},{"id":342124,"cnname":"布达佩斯大饭店","enname":"Budapest Hotel","ranking":9.2,"star":"五星级","area_name":"尖沙咀","price":939,"lat":83.212,"lon":112.5423,"distance":"0.4千米","is_recommend":true,"photo":"http://static.qyer.com/hotel/2342342/img/222.jpg","link":"http://www.booking.com/hotel/fr/belambra-city-magendie.html?aid=378575"},{"id":342124,"cnname":"布达佩斯大饭店","enname":"Budapest Hotel","ranking":9.2,"star":"五星级","area_name":"尖沙咀","price":939,"lat":83.212,"lon":112.5423,"distance":"0.4千米","is_recommend":true,"photo":"http://static.qyer.com/hotel/2342342/img/222.jpg","link":"http://www.booking.com/hotel/fr/belambra-city-magendie.html?aid=378575"}]
      */
 
-    private int total;
+    private int total,has_area;
     private String city_photo;
+    private String city_name;
     /**
      * id : 10474
      * name : 铜锣湾
@@ -62,6 +63,22 @@ public class HotelList {
 
     public int getTotal() {
         return total;
+    }
+
+    public int getHas_area() {
+        return has_area;
+    }
+
+    public void setHas_area(int has_area) {
+        this.has_area = has_area;
+    }
+
+    public String getCity_name() {
+        return city_name;
+    }
+
+    public void setCity_name(String city_name) {
+        this.city_name = city_name;
     }
 
     public String getCity_photo() {
