@@ -3,6 +3,7 @@ package com.joy.app.activity.map;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -26,18 +27,17 @@ import com.joy.app.R;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.utils.map.GoogleTileSource;
 import com.joy.app.utils.map.MapUtil;
-import com.joy.app.utils.map.OsmDirectOverlay;
 import com.joy.app.utils.map.OsmResourceImpl;
 import com.joy.app.utils.map.JoyMapOverlayItem;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.utils.QaAnimUtil;
 
-import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.DirectedLocationOverlay;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
@@ -61,7 +61,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     private ResourceProxy mResourceProxy;
     protected MapView mapview;
     private ArrayList<JoyMapOverlayItem> mOverlayItems;
-    private OsmDirectOverlay mLocationOverlay;
+    private DirectedLocationOverlay mLocationOverlay;
     private boolean isLocation = false;
     private AMapLocationClient locationClient = null;
     private JoyMapOverlayItem selectMark;
@@ -91,6 +91,8 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     @Bind(R.id.poi_map_path_btn)
     RelativeLayout poiMapPathBtn;
 
+    boolean isTouchable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,20 +116,46 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     @Override
     protected void initContentView() {
         mResourceProxy = new OsmResourceImpl(this);
-        mapview = new MapView(this, new DefaultResourceProxyImpl(this));
+
+        mapview = new MapView(this,mResourceProxy);
         OnlineTileSourceBase GoogleMap = GoogleTileSource.getDefultGoogleTileSource();
         mapview.setTileSource(GoogleMap);
         FrameLayout.LayoutParams mapParams = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         maplayout.addView(mapview, mapParams);
         mapview.setMultiTouchControls(true);
-
+        mapview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (!isTouchable){
+                    return false;
+                }
+                if (ontouch(event)){
+                    v.postDelayed(cleanMarker,500);
+                }
+                return false;
+            }
+        });
         ivPath.setOnClickListener(this);
         poiMapPathBtn.setOnClickListener(this);
         poiMapLocationBar.setOnClickListener(this);
         llContent.setOnClickListener(this);
         locationClient = new AMapLocationClient(getApplicationContext());
         MapUtil.initAccuracyLocation(locationClient, this);
+    }
+
+    float touchx,touchy;
+    private boolean ontouch(MotionEvent event){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            touchx = event.getX();
+            touchy = event.getY();
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (MapUtil.compareFloatData(touchx, event.getX())
+                    && MapUtil.compareFloatData(touchy, event.getY())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected void clearCurrMap() {
@@ -162,6 +190,9 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
                     @Override
                     public boolean onItemSingleTapUp(final int index,
                                                      final JoyMapOverlayItem item) {
+                        if (!isTouchable){
+                            return false;
+                        }
 
                         selectPosition(index, item);
 
@@ -205,6 +236,19 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
         selectMark = item;
         showInfoBar();
         updatePoiInfoView(item.getDataObject());
+    }
+
+    protected void selectPosition(JoyMapOverlayItem marker,boolean isTouchable){
+
+        marker.setMarker(ContextCompat.getDrawable(this,marker.getDataObject().getIcon_press()));
+        selectMark = marker;
+        if (isTouchable){
+            updatePoiInfoView(marker.getDataObject());
+            showInfoBar();
+        }else{
+            hideInforBar();
+        }
+        this.isTouchable = isTouchable;
     }
 
     public void showAllMarker() {
@@ -259,7 +303,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     }
 
     protected void showPathBtn() {
-        if (poiMapPathBtn.getVisibility() == View.VISIBLE) {
+        if (poiMapPathBtn.getVisibility() != View.VISIBLE) {
             poiMapPathBtn.setAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
             poiMapPathBtn.setVisibility(View.VISIBLE);
             poiMapLocationBar.startAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
@@ -273,8 +317,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
         GeoPoint mLocationPoint = new GeoPoint(mLatitude, mLongitude);
 
         if (mLocationOverlay == null) {
-            mLocationOverlay = new OsmDirectOverlay(this,
-                    new DefaultResourceProxyImpl(this));
+            mLocationOverlay = new DirectedLocationOverlay(this,mResourceProxy);
             mLocationOverlay.setEnabled(true);
             mLocationOverlay.setLocation(mLocationPoint);
             mapview.getOverlays().add(mLocationOverlay);
@@ -358,4 +401,14 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
             }
         }
     }
+
+    Runnable cleanMarker = new Runnable() {
+        @Override
+        public void run() {
+            selectMark.setMarker(ContextCompat.getDrawable(MapActivity.this,selectMark.getDataObject().getIcon_nor()));
+            mapview.invalidate();
+            selectMark = null;
+            hideInforBar();
+        }
+    };
 }

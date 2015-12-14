@@ -33,9 +33,12 @@ import com.joy.app.bean.poi.LevelOptions;
 import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
 import com.joy.app.eventbus.PayStatusEvent;
+import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -169,7 +172,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             }
         });
 
-        mTvPrice.setText("0");
+        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.unit, "0")));
     }
 
     @Override
@@ -327,7 +330,17 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             totalPrice = totalPrice + itemTotalPrice;
         }
 
-        mTvPrice.setText(String.valueOf(totalPrice));
+        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.unit, formatPrice(totalPrice))));
+    }
+
+    public static String formatPrice(double total) {
+
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        twoDForm.setDecimalFormatSymbols(dfs);
+
+        return twoDForm.format(total) ;
     }
 
     @Override

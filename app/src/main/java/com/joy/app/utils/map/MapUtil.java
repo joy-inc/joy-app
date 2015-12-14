@@ -12,6 +12,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
 import com.joy.app.R;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.plan.PlanItem;
@@ -135,6 +136,9 @@ public class MapUtil {
         ArrayList<MapPoiDetail> content = new ArrayList<>();
         //        for (PlanItem item : list) {
         for (int i = 0; i < list.size(); i++) {
+            if (TextUtil.isEmpty(list.get(i).getLat())){
+                continue;
+            }
             MapPoiDetail detail = new MapPoiDetail();
             detail.setIcon_nor(R.drawable.ic_map_poi);
             detail.setIcon_press(R.drawable.ic_map_poi_pressed);
@@ -194,6 +198,14 @@ public class MapUtil {
         //        aMapLocation.getRoad();//街道信息
         //        aMapLocation.getCityCode();//城市编码
         //        aMapLocation.getAdCode();//地区编码
+    }
+
+    public static boolean compareFloatData(float d1, float d2) {
+        if ((d1 - d2) < 3 || (d2 - d1) < 3) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private static class LatComparator implements Comparator<Double> {

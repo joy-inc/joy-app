@@ -11,6 +11,7 @@ import com.android.library.adapter.ExRvViewHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.MainOrder;
+import com.joy.app.utils.JTextSpanUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -105,8 +106,8 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
                 tvTitle.setText(mainOrder.getProduct_title());
                 tvType.setText(mainOrder.getSelected_item());
                 tvDepartureDate.setText(mainOrder.getTravel_date());
-                tvCount.setText(mainOrder.getCount() + "个");
-                tvTotalPrice.setText("¥ " + mainOrder.getTotal_price());
+                tvCount.setText(getString(R.string.unit_ge, mainOrder.getCount()));
+                tvTotalPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.unit, mainOrder.getTotal_price())));
 
                 if ("0".equals(mainOrder.getOrder_status())) {
 

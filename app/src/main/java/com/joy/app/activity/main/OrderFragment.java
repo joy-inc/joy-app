@@ -1,25 +1,25 @@
 package com.joy.app.activity.main;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
-import com.android.library.utils.LogMgr;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.activity.poi.OrderPayActivity;
-import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.eventbus.LoginStatusEvent;
@@ -43,6 +43,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     LoginTipView mLoginTipView;
 
     private DialogPlus mCommentonDialog;
+    private final int REQ_ORDER_DETAIL = 101;
 
     public static OrderFragment instantiate(Context context) {
 
@@ -64,6 +65,13 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQ_ORDER_DETAIL && requestCode == Activity.RESULT_OK){
+            executeRefreshOnly();
+        }
+    }
+
+    @Override
     protected void initContentView() {
 
         super.initContentView();
@@ -80,8 +88,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                     showCommentonDialog(data.getProduct_id());
                 } else {
 
-                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id());
-                    //                    PoiDetailActivity.startActivity(getActivity(), "28");// todo
+                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id(),REQ_ORDER_DETAIL);
                 }
             }
         });
@@ -106,7 +113,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         mCommentonDialog = DialogPlus.newDialog(getActivity()).setContentHolder(new ViewHolder(R.layout.view_order_commenton)).setGravity(Gravity.CENTER).create();
 
         final AppCompatRatingBar ratingBar = (AppCompatRatingBar) mCommentonDialog.findViewById(R.id.acRatingBar);
-        final AppCompatEditText editText = (AppCompatEditText) mCommentonDialog.findViewById(R.id.acetContent);
+        final EditText editText = (EditText) mCommentonDialog.findViewById(R.id.acetContent);
 
         mCommentonDialog.findViewById(R.id.tvSubmit).setOnClickListener(new View.OnClickListener() {
 
@@ -182,8 +189,8 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      * 设置没有登录的界面提示
      */
     private void setNotLoginView() {
-        setSwipeRefreshEnable(false);
 
+        setSwipeRefreshEnable(false);
         if (mLoginTipView == null)
             mLoginTipView = new LoginTipView(this.getActivity(), R.string.order_no_login, R.string.order_no_login_sub);
         removeCustomView(mLoginTipView);

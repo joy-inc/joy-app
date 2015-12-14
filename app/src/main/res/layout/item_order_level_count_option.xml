@@ -9,15 +9,18 @@
 
     <LinearLayout
         android:id="@+id/llContentDiv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tvPrice"
         android:orientation="vertical">
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/black_trans87"
             android:textSize="14dp" />
 
@@ -25,19 +28,19 @@
             android:id="@+id/tvDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@color/black_trans54"
             android:textSize="11dp" />
     </LinearLayout>
 
     <com.android.library.widget.JTextView
         android:id="@+id/tvPrice"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
         android:layout_toLeftOf="@+id/tvX"
-        android:layout_toRightOf="@+id/llContentDiv"
-        android:gravity="right"
-        android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="19dp" />
 
@@ -47,9 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/tvCount"
+        android:paddingLeft="8dp"
+        android:paddingRight="3dp"
         android:text="x"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:textColor="@color/color_accent" />
 
     <com.android.library.widget.JTextView

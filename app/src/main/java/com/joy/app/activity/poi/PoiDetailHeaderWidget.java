@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.library.utils.MathUtil;
+import com.android.library.utils.TextUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
+import com.joy.app.utils.JTextSpanUtil;
 
 
 /**
@@ -68,8 +70,13 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
             e.printStackTrace();
         }
 
+        if (TextUtil.isNotEmpty(data.getFolder_id()) ){
+
+            mBtnAddToPlan.setText("已加入 "+data.getFolder_name());
+        }
+
         mTvTitle.setText(mPoiDetail.getTitle());
-        mTvPrice.setText(getActivity().getResources().getString(R.string.unit, mPoiDetail.getPrice()));
+        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, mPoiDetail.getPrice())));
         mAcRatingBar.setRating(MathUtil.parseFloat(mPoiDetail.getComment_level(), 0));
         mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, mPoiDetail.getComment_num()));
 

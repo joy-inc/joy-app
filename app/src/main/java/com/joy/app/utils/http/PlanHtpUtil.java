@@ -20,7 +20,7 @@ public class PlanHtpUtil extends BaseHtpUtil{
 
         Map<String, String> params = getBaseParams();
         params.put("product_id", poiId);
-        params.put("folder", folderId);
+        params.put("folder_id", folderId);
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 
         return createPostRequest(URL_POST_PLAN_ADD, params,clazz);
@@ -64,6 +64,20 @@ public class PlanHtpUtil extends BaseHtpUtil{
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 
         return createPostRequest(URL_POST_PLAN_FOLDER_DELETE, params,clazz);
+    }
+    /**
+     *删除我的旅行计划文件夹
+     *
+     * @return
+     */
+    public static ObjectRequest getUserPlanDeleteRequest(String folder_id,String PoiId,Class clazz) {
+
+        Map<String, String> params = getBaseParams();
+        params.put("folder_id", folder_id);
+        params.put("product_id", PoiId);
+        params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
+
+        return createPostRequest(URL_POST_PLAN_DELETE, params,clazz);
     }
     /**
      *添加旅行计划

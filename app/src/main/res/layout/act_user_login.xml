@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
-        android:src="@drawable/ic_login_logo"/>
+        android:src="@drawable/ic_logo_big"/>
 
     <com.android.library.widget.JTextView
         android:id="@+id/tvInfo"

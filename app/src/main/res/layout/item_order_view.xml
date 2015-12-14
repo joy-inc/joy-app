@@ -80,6 +80,8 @@
                     android:layout_gravity="center"
                     android:paddingLeft="10dp"
                     android:text="1234"
+                    android:lines="2"
+                    android:ellipsize="end"
                     android:textColor="@color/black_trans87"
                     android:textSize="14dp" />
             </LinearLayout>
@@ -137,7 +139,9 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:lines="1"
-                    android:text="1234"
+                    android:ellipsize="end"
+                    android:paddingRight="10dp"
+                    android:text="1234567890123456789011111111111111111111111111"
                     android:textColor="@color/text_pink"
                     android:textSize="14dp" />
 
@@ -148,7 +152,7 @@
                     android:layout_gravity="center"
                     android:text="x2"
                     android:textColor="@color/text_pink"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <View
@@ -278,5 +282,5 @@
         android:textSize="16dp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:background="@color/pink_dark"/>
+        android:background="@color/color_accent"/>
 </RelativeLayout>

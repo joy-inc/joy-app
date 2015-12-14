@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.ActivityUrlUtil;
@@ -36,6 +37,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     private ShareDialog mShareDialog;
     private WebViewShare mWebViewShare;
     private int mType = 0;
+    private String mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,8 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     protected void initTitleView() {
 
         addTitleLeftBackView();
-        addTitleMiddleView(getIntent().getStringExtra("title"));
+        mTitle = getIntent().getStringExtra("title");
+        addTitleMiddleView(mTitle);
 
         if (mType > 100) {
             addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
@@ -131,6 +134,9 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     @Override
     public void onWebViewReceiveTitle(String title) {
 
+        if (TextUtil.isEmpty(mTitle) && !TextUtil.isEmpty(title)) {
+            setTitle(title);
+        }
     }
 
     @Override
@@ -215,6 +221,15 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
             mWebViewWidget.reloadUrlByLoginStateChanged();
     }
 
+
+    /**
+     * 不需要分享的调这
+     */
+    public static void startActivity(Context context, String url ) {
+
+        startActivity(context, url, "", 0);
+
+    }
     /**
      * 不需要分享的调这
      */

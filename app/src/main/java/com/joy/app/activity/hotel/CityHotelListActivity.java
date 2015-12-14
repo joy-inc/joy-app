@@ -1,6 +1,7 @@
 package com.joy.app.activity.hotel;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +43,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
      *                 默认时间为今天和明天
      *                 无onresult的返回
      */
-    public static void startActivity(Activity activity, String cityId, String cityName, String fromKey) {
+    public static void startActivity(Context activity, String cityId, String cityName, String fromKey) {
 
         long[] days = HotelTimeUtil.getLastOffsetDay(Consts.MONTH_DAY_OFFSET);
 
@@ -50,7 +51,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         startActivity(activity, "50", "香港", fromKey, days[0], days[1]);
     }
 
-    public static void startActivity(Activity activity, String cityId, String cityName, String fromKey, long startDay, long endDay) {
+    public static void startActivity(Context activity, String cityId, String cityName, String fromKey, long startDay, long endDay) {
 
         Intent intent = new Intent(activity, CityHotelListActivity.class);
         Bundle bundle = new Bundle();

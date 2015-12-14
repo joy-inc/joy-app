@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <View
+        android:id="@+id/v_shadow"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -20,6 +21,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="20dp"
+            android:textSize="16dp"
+            android:textColor="@color/black_trans60"
             android:text="我的旅行规划"/>
         <View
             style="@style/Line.Dark.Horizontal"
@@ -59,22 +62,28 @@
                 android:padding="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black_trans87"
                 android:text="旅行规划名称"/>
             <EditText
                 android:id="@+id/edt_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:background="@drawable/bg_edt_gray"
+                android:textCursorDrawable="@drawable/zic_cursor_pink"
                 android:lines="1"
-                android:textColor="@color/black_trans40"/>
+                android:padding="4dp"
+                android:text=""
+                android:textColor="@color/black_trans65"/>
         </LinearLayout>
         <com.android.library.widget.JTextView
             android:id="@+id/jtv_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/pink_dark"
+            android:background="@color/color_accent"
             android:padding="20dp"
+            android:textSize="16dp"
             android:gravity="center"
             android:textColor="@color/white"
             android:text="创建新规划"/>

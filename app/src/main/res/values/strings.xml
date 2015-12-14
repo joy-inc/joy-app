@@ -13,8 +13,6 @@
     <string name="request_error">网络请求错误</string>
 
     <!--分享-->
-    <string name="no_app_weibo">请安装微博客户端</string>
-    <string name="no_app_wechat">请安装微信客户端</string>
 
     <string name="share_to">分享到</string>
     <string name="weibo">微博</string>
@@ -59,7 +57,8 @@
     <!--设置界面-->
 
     <!-- 详情、商品 -->
-    <string name="unit">¥%s</string>
+    <string name="unit">¥ %s</string>
+    <string name="unit_ge">%s个</string>
     <string name="kuohao">(%s)</string>
     <string name="add_plan">加入行程规划</string>
     <string name="highlights">项目亮点</string>
@@ -110,7 +109,7 @@
     <string name="order_detail_create_infor">如有更多问题请咨询微信号\n1234567</string>
 
     <string name="order_detail_paied_title">订单支付完成，库存确认中…</string>
-    <string name="order_detail_paied_infor">预计需要12个小时，如有更多问题请咨询微信号\n1234567</string>
+    <string name="order_detail_paied_infor">预计需要12小时，如有更多问题请咨询微信号\n1234567</string>
 
     <string name="order_detail_cancel_title">订单失效或被取消</string>
     <string name="order_detail_cancel_infor">如有更多问题请咨询微信号\n1234567</string>
