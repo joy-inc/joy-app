@@ -40,7 +40,8 @@
         <activity
             android:name=".activity.main.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.main" />
         <activity
             android:name=".activity.common.WebViewActivity"
             android:screenOrientation="portrait" />
