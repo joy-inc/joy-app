@@ -2,6 +2,8 @@ package com.joy.app.utils;
 
 import android.net.Uri;
 
+import com.joy.app.utils.http.HtpApi;
+
 /**
  * 处理url相关的, 处理url分析,提取,组合
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
@@ -17,7 +19,7 @@ public class UrlUtil {
      */
     public static String getWebViewCookieUrl(String token) {
 
-        return "";//HtpApi.URL_LOGIN_COOKIE + "?client_id=" + HtpApi.CLIENT_ID + "&client_secret=" + HtpApi.CLIENT_SECRET + "&oauth_token=" + token;
+        return "";// HtpApi.URL_LOGIN_COOKIE + "?client_id=" + HtpApi.CLIENT_ID + "&client_secret=" + HtpApi.CLIENT_SECRET + "&oauth_token=" + token;
         //// TODO: 15/11/10 把url组合成
     }
 
@@ -39,6 +41,7 @@ public class UrlUtil {
         }
     }
 
+
     /**
      * 获取url最后的参数值
      *
@@ -53,4 +56,6 @@ public class UrlUtil {
         }
         return "";
     }
+
+
 }

@@ -60,7 +60,7 @@ public class JoyApplication extends BaseApplication {
      */
     public static boolean isLogin() {
 
-        return !TextUtil.isEmpty(getUserToken());
+        return mUser!=null && !TextUtil.isEmpty(getUserToken());
     }
 
     /**
