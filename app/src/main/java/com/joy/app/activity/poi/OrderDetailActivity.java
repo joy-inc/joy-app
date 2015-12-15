@@ -205,6 +205,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         hideLoading();
         ToastUtil.showToast("删除成功");
         setResult(RESULT_OK);
+        EventBus.getDefault().post(new OrderStatusEvent(OrderStatusEvent.EnumOrderStatus.ORDER_CANCEL_SUCESS));
         finish();
     }
 

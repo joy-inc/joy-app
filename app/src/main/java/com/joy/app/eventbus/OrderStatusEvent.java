@@ -10,7 +10,9 @@ public class OrderStatusEvent {
 
         ORDER_CREATE_SUCCESS,
 
-        ORDER_PAY_SUCCESS;
+        ORDER_PAY_SUCCESS,
+
+        ORDER_CANCEL_SUCESS,
     }
 
     private EnumOrderStatus status;

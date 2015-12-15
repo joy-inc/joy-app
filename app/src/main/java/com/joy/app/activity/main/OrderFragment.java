@@ -14,6 +14,7 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.LogMgr;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.JoyApplication;
@@ -77,13 +78,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQ_ORDER_DETAIL && requestCode == Activity.RESULT_OK){
-            executeRefreshOnly();
-        }
-    }
-
-    @Override
     protected void initContentView() {
 
         super.initContentView();
@@ -100,7 +94,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                     showCommentonDialog(data.getProduct_id());
                 } else {
 
-                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id(),REQ_ORDER_DETAIL);
+                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id(), REQ_ORDER_DETAIL);
                 }
             }
         });
@@ -183,7 +177,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
     public void onEventMainThread(OrderStatusEvent event) {
 
-        // 支付成功、下单成功，返回该页面都需要刷新
+        // 支付成功、下单成功、删除订单成功，返回该页面都需要刷新
         mNeedToRefresh = true;
     }
 

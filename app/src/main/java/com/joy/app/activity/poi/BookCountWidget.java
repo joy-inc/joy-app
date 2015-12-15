@@ -253,6 +253,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
                     tvContent.setText(data.getContent());
                     tvDesc.setText(data.getDescribe());
+                    tvDesc.setVisibility(TextUtil.isEmpty(data.getDescribe()) ? View.GONE : View.VISIBLE);
 
                     if (TextUtil.isEmpty(data.getLocalPrice()))
                         data.setLocalPrice("0");

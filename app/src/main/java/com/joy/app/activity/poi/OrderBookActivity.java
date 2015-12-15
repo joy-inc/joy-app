@@ -216,6 +216,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             mSubjectWidget.invalidate(list2);
             mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.invalidate(data3);
+            refreshTotalPrice();
         }
 
         return CollectionUtil.isNotEmpty(product.getLevels());
@@ -326,7 +327,12 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private String createDateSubjectStr() {
 
-        String itemStr = mDateWidget.getSelectId() + "_" + mSubjectWidget.getSelectId();
+        String itemStr;
+
+        if (TextUtil.isNotEmpty(mDateWidget.getSelectId()))
+            itemStr = mDateWidget.getSelectId() + "_" + mSubjectWidget.getSelectId();
+        else
+            itemStr = mSubjectWidget.getSelectId();
 
         return itemStr;
     }
@@ -488,6 +494,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             public void invalidateConvertView() {
 
                 LevelOptions data = getItem(mPosition);
+                data.setContent("2015年12月11日");
 
                 tvTitle.setText(data.getContent());
                 acCheckBox.setChecked(data.isLocalCheck());
