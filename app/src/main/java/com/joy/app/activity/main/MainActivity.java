@@ -10,9 +10,12 @@ import com.android.library.activity.BaseUiFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
+import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.activity.setting.SettingActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -106,11 +109,18 @@ public class MainActivity extends BaseTabActivity {
 
             @Override
             public void onClick(View v) {
-
                 SettingActivity.startActivity(MainActivity.this);
             }
         });
         mMainActivityBC.initTitleView();
+
+        addTitleRightView(R.drawable.ic_map_poi, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
+            }
+        });
     }
 
 

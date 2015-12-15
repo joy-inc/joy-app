@@ -32,6 +32,11 @@ public class SinglePoiMapActivity extends MapActivity {
             mapPoiDetail.setmCnName(poi.getTitle());
             mapPoiDetail.setLatitude(Double.parseDouble(poi.getLat()));
             mapPoiDetail.setLongitude(Double.parseDouble(poi.getLon()));
+            return;
+        }
+        if (mapPoiDetail == null || !mapPoiDetail.isShow()){
+            showToast("扎点数据错误");
+            finish();
         }
     }
 
@@ -40,6 +45,7 @@ public class SinglePoiMapActivity extends MapActivity {
         super.initContentView();
         clearCurrMap();
         JoyMapOverlayItem item = addPoi(mapPoiDetail);
+        if (item == null)return;
         showMarkers();
         mapview.getController().setCenter(item.getPoint());
         mapview.getController().setZoom(15);

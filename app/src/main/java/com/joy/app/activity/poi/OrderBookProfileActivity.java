@@ -18,7 +18,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderContacts;
 import com.joy.app.bean.poi.OrderDetail;
-import com.joy.app.eventbus.PayStatusEvent;
+import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
@@ -50,6 +50,14 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_order_book_profile);
         executeRefreshOnly();
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        if (mAcbNext != null)
+            mAcbNext.setClickable(true);
     }
 
     @Override
@@ -195,6 +203,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             @Override
             public void onPre() {
 
+                mAcbNext.setClickable(false);
                 showLoading();
             }
 
@@ -203,7 +212,9 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
 
                 hideLoading();
                 showToast("创建订单成功");
+                EventBus.getDefault().post(new OrderStatusEvent(OrderStatusEvent.EnumOrderStatus.ORDER_CREATE_SUCCESS));
                 OrderPayActivity.startActivity(OrderBookProfileActivity.this, data.getOrder_id(), data);
+                mAcbNext.setClickable(true);
             }
 
             @Override
@@ -211,6 +222,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
 
                 hideLoading();
                 showToast(msg);
+                mAcbNext.setClickable(true);
             }
         });
         addRequestNoCache(req);
@@ -228,9 +240,10 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
      *
      * @param event
      */
-    public void onEventMainThread(PayStatusEvent event) {
+    public void onEventMainThread(OrderStatusEvent event) {
 
-        finish();
+        if (event.getStatus() == OrderStatusEvent.EnumOrderStatus.ORDER_PAY_SUCCESS)
+            finish();
     }
 
     /**

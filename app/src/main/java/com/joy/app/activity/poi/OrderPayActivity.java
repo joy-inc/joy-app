@@ -18,7 +18,7 @@ import com.android.library.utils.TextUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
-import com.joy.app.eventbus.PayStatusEvent;
+import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
@@ -184,7 +184,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
                 showLoading();
                 //按键点击之后的禁用，防止重复点击
-                acbNext.setOnClickListener(null);
+                acbNext.setClickable(false);
             }
 
             @Override
@@ -198,9 +198,9 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             @Override
             public void onError(Object tag, String msg) {
 
-                acbNext.setOnClickListener(payBtnClickListener);
                 hideLoading();
                 showToast(msg);
+                acbNext.setClickable(true);
             }
         });
         addRequestNoCache(obj);
@@ -220,7 +220,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        acbNext.setOnClickListener(payBtnClickListener);
+        acbNext.setClickable(true);
         //支付页面返回处理
         if (requestCode == REQUEST_CODE_PAYMENT) {
             if (resultCode == Activity.RESULT_OK) {
@@ -246,7 +246,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
         if ("success".equals(result)) {
 
-            EventBus.getDefault().post(new PayStatusEvent());
+            EventBus.getDefault().post(new OrderStatusEvent(OrderStatusEvent.EnumOrderStatus.ORDER_PAY_SUCCESS));
             OrderDetailActivity.startActivity(this, mId);
             finish();
 

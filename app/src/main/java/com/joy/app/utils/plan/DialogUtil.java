@@ -129,7 +129,7 @@ public class DialogUtil {
         View v = View.inflate(activity,R.layout.dialog_plan_del,null);
         ((TextView)v.findViewById(R.id.jtv_del)).setText("删除订单");
         DialogPlus dialog = DialogPlus.newDialog(activity)
-                .setContentHolder(new ViewHolder(R.layout.dialog_plan_del))
+                .setContentHolder(new ViewHolder(v))
                 .setCancelable(true)
                 .setOnClickListener(new OnClickListener() {
                     @Override

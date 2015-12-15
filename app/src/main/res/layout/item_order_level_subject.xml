@@ -29,23 +29,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tvContent"
             android:layout_toRightOf="@+id/ivIcon"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/black_trans87"
             android:textSize="14dp" />
 
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvContent"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toRightOf="@+id/tvTitle"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:drawablePadding="14dp"
             android:drawableRight="@drawable/ic_setting_noun"
             android:ellipsize="end"
-            android:paddingRight="12dp"
+            android:maxWidth="137dp"
             android:singleLine="true"
             android:textColor="@color/color_accent"
             android:textSize="14dp" />

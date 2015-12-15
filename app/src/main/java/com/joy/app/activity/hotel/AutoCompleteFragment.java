@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 
-import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;
+import com.joy.app.activity.hotel.frame.FrameHttpRvFragment;
 import com.joy.app.adapter.hotel.AutoCompleteAdapter;
 import com.joy.app.bean.hotel.AutoComplete;
-import com.joy.app.bean.hotel.HotelParams;
 import com.joy.app.utils.http.HotelHtpUtil;
 
 import java.net.URLEncoder;
@@ -22,7 +21,7 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店搜索联想    <br>
  */
-public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> implements RecyclerAdapter.OnItemClickListener {
+public class AutoCompleteFragment extends FrameHttpRvFragment<AutoComplete> implements RecyclerAdapter.OnItemClickListener {
     String id ,keyword;
     OnItemViewClickListener clickListener;
 
@@ -36,7 +35,7 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> imple
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        executeRefreshOnly();
+        executeRefresh();
     }
 
     @Override
@@ -64,8 +63,7 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> imple
     public void reloadAutoComplete(String keyword){
         if (TextUtil.isNotEmpty(this.keyword) && this.keyword.equals(keyword))return;
         this.keyword = keyword;
-        getAdapter().clear();
-        executeRefreshOnly();
+        executeRefresh();
     }
 
     @Override

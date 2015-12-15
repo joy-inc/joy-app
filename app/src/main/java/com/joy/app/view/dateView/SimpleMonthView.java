@@ -359,15 +359,19 @@ class SimpleMonthView extends View {
             Calendar cNow = Calendar.getInstance();
             cNow.set(toYear, toMonth, toDay);
             if (cNow.getTimeInMillis() >= mStartSectionTime && cNow.getTimeInMillis() <= mEndSectionTime) {
+                LogMgr.d("tyear "+toYear+"-"+toMonth+"-"+toDay);
                 return true;
-            } else
+            } else{
+                LogMgr.d("ddddd");
                 return false;
+
+            }
         }
         return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mMonth == toMonth && monthDay < toDay);
     }
 
     private boolean checkPreDay(int monthDay, int toYear, int toMonth, int toDay) {
-        return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mMonth == toMonth && monthDay < toDay);
+        return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mYear == toYear &&mMonth == toMonth && monthDay < toDay);
 
     }
 

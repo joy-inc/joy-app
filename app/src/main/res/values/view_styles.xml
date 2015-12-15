@@ -156,7 +156,7 @@
     </style>
 
     <style name="LongText.Light">
-        <item name="android:textColor">@color/black_trans54</item>
+        <item name="android:textColor">@color/black_trans40</item>
     </style>
 
     <style name="Base.Widget.AppCompat.ProgressBar.Horizontal.Scores">

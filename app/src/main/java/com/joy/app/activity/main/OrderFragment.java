@@ -14,6 +14,7 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.LogMgr;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.JoyApplication;
@@ -22,7 +23,9 @@ import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
+import com.joy.app.eventbus.DeleteEvent;
 import com.joy.app.eventbus.LoginStatusEvent;
+import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.view.LoginTipView;
@@ -44,6 +47,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
     private DialogPlus mCommentonDialog;
     private final int REQ_ORDER_DETAIL = 101;
+    private boolean mNeedToRefresh = false;
 
     public static OrderFragment instantiate(Context context) {
 
@@ -59,16 +63,19 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+    public void onResume() {
+
+        super.onResume();
+        if (mNeedToRefresh) {
+            mNeedToRefresh = false;
+            executeSwipeRefresh();
+        }
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQ_ORDER_DETAIL && requestCode == Activity.RESULT_OK){
-            executeRefreshOnly();
-        }
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -88,7 +95,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
                     showCommentonDialog(data.getProduct_id());
                 } else {
 
-                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id(),REQ_ORDER_DETAIL);
+                    OrderDetailActivity.startActivity(getActivity(), data.getOrder_id(), REQ_ORDER_DETAIL);
                 }
             }
         });
@@ -159,7 +166,14 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      * @param event
      */
     public void onEventMainThread(LoginStatusEvent event) {
+
         initViewLoad();
+    }
+
+    public void onEventMainThread(OrderStatusEvent event) {
+
+        // 支付成功、下单成功、删除订单成功，返回该页面都需要刷新
+        mNeedToRefresh = true;
     }
 
     /**

@@ -9,13 +9,14 @@ import android.widget.ImageView;
 
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
+import com.joy.app.eventbus.DeleteEvent;
+import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.utils.plan.DialogUtil;
@@ -23,6 +24,7 @@ import com.joy.app.utils.plan.FolderRequestListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author litong  <br>
@@ -82,8 +84,17 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
     }
 
     @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     protected void initData() {
+
         super.initData();
+        EventBus.getDefault().register(this);
         order_id = getIntent().getStringExtra("DATA");
     }
 
@@ -194,6 +205,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         hideLoading();
         ToastUtil.showToast("删除成功");
         setResult(RESULT_OK);
+        EventBus.getDefault().post(new OrderStatusEvent(OrderStatusEvent.EnumOrderStatus.ORDER_CANCEL_SUCESS));
         finish();
     }
 
@@ -223,5 +235,16 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
     protected ObjectRequest<OrderDetail> getObjectRequest() {
 
         return ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_DETAIL, OrderDetail.class, OrderHtpUtil.getOrderDetailUrl(order_id));
+    }
+
+    /**
+     * 支付状态的回调 关闭支付页之前的预订流程页面
+     *
+     * @param event
+     */
+    public void onEventMainThread(OrderStatusEvent event) {
+
+        if (event.getStatus() == OrderStatusEvent.EnumOrderStatus.ORDER_PAY_SUCCESS)
+            finish();
     }
 }

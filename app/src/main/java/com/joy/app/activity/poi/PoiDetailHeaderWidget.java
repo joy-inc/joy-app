@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
+import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
@@ -20,8 +21,6 @@ import com.joy.app.utils.JTextSpanUtil;
  * Created by xiaoyu.chen on 15/11/18.
  */
 public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClickListener {
-
-    private PoiDetail mPoiDetail;
 
     private SimpleDraweeView mSdvPhoto;
     private TextView mTvTitle;
@@ -62,23 +61,25 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         if (data == null)
             return;
 
-        mPoiDetail = data;
-
         try {
-            mSdvPhoto.setImageURI(Uri.parse(mPoiDetail.getPhotos().get(0)));
+            mSdvPhoto.setImageURI(Uri.parse(data.getPhotos().get(0)));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (TextUtil.isNotEmpty(data.getFolder_id()) ){
+        if (TextUtil.isNotEmpty(data.getFolder_id())) {
 
-            mBtnAddToPlan.setText("已加入 "+data.getFolder_name());
+            mBtnAddToPlan.setText("已加入 " + data.getFolder_name());
         }
 
-        mTvTitle.setText(mPoiDetail.getTitle());
-        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, mPoiDetail.getPrice())));
-        mAcRatingBar.setRating(MathUtil.parseFloat(mPoiDetail.getComment_level(), 0));
-        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, mPoiDetail.getComment_num()));
+        if (data.getIs_book()) {
+            mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, data.getPrice())));
+            ViewUtil.showView(mTvPrice);
+        }
+
+        mTvTitle.setText(data.getTitle());
+        mAcRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
+        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, TextUtil.isEmpty(data.getComment_num()) ? "0" : data.getComment_num()));
 
     }
 

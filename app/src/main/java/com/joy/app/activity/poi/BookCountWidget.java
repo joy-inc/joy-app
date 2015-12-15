@@ -11,6 +11,7 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
+import com.android.library.utils.ToastUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
 import com.joy.app.bean.poi.LevelOptions;
@@ -108,6 +109,8 @@ public class BookCountWidget extends ExLayoutWidget {
             count = count + 1;
             mAdapter.getItem(position).setLocalCount(count + "");
             ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvCount)).setText(count + "");
+        } else {
+            ToastUtil.showToast(R.string.toast_over_limit);
         }
     }
 
@@ -250,6 +253,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
                     tvContent.setText(data.getContent());
                     tvDesc.setText(data.getDescribe());
+                    tvDesc.setVisibility(TextUtil.isEmpty(data.getDescribe()) ? View.GONE : View.VISIBLE);
 
                     if (TextUtil.isEmpty(data.getLocalPrice()))
                         data.setLocalPrice("0");

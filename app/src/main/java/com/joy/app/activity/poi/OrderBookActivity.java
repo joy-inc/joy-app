@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.KeyEvent;
@@ -25,17 +26,17 @@ import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
 import com.android.library.view.dialogplus.OnCancelListener;
-import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
 import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
-import com.joy.app.eventbus.PayStatusEvent;
+import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
+import com.joy.library.dialog.DialogUtil;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -72,6 +73,8 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private int index = 0;
     private int currentIndex = 0;
 
+    private AlertDialog mExitDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -102,7 +105,14 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     protected void initTitleView() {
 
         super.initTitleView();
-        addTitleLeftBackView();
+        addTitleLeftView(R.drawable.ic_back, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                showAlertDialog();
+            }
+        });
     }
 
     @Override
@@ -206,6 +216,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             mSubjectWidget.invalidate(list2);
             mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.invalidate(data3);
+            refreshTotalPrice();
         }
 
         return CollectionUtil.isNotEmpty(product.getLevels());
@@ -284,6 +295,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
                         mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
                         mCountWidget.setDateSubjectIds(createDateSubjectStr());
                         mCountWidget.resetUnitPrice();
+                        refreshTotalPrice();
                         mSubjectDialog.dismiss();
 
                     }
@@ -315,7 +327,12 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private String createDateSubjectStr() {
 
-        String itemStr = mDateWidget.getSelectId() + "_" + mSubjectWidget.getSelectId();
+        String itemStr;
+
+        if (TextUtil.isNotEmpty(mDateWidget.getSelectId()))
+            itemStr = mDateWidget.getSelectId() + "_" + mSubjectWidget.getSelectId();
+        else
+            itemStr = mSubjectWidget.getSelectId();
 
         return itemStr;
     }
@@ -340,7 +357,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         dfs.setDecimalSeparator('.');
         twoDForm.setDecimalFormatSymbols(dfs);
 
-        return twoDForm.format(total) ;
+        return twoDForm.format(total);
     }
 
     @Override
@@ -376,14 +393,19 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void showAlertDialog() {
 
-        new JDialog.Builder(this).setTitle(R.string.alert_drop_content).setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+        if (mExitDialog == null) {
+            mExitDialog = DialogUtil.getOkCancelDialog(this, R.string.confirm, com.joy.library.R.string.cancel, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                finish();
-            }
-        }).create().show();
+                    if (which == DialogInterface.BUTTON_POSITIVE)
+                        finish();
+                    else if (which == DialogInterface.BUTTON_NEGATIVE)
+                        mExitDialog.dismiss();
+                }
+            });
+        }
+        mExitDialog.show();
     }
 
     @Override
@@ -402,9 +424,10 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
      *
      * @param event
      */
-    public void onEventMainThread(PayStatusEvent event) {
+    public void onEventMainThread(OrderStatusEvent event) {
 
-        finish();
+        if (event.getStatus() == OrderStatusEvent.EnumOrderStatus.ORDER_PAY_SUCCESS)
+            finish();
     }
 
     /**
@@ -464,6 +487,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             public void invalidateConvertView() {
 
                 LevelOptions data = getItem(mPosition);
+                data.setContent("2015年12月11日");
 
                 tvTitle.setText(data.getContent());
                 acCheckBox.setChecked(data.isLocalCheck());
