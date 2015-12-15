@@ -128,6 +128,7 @@ public abstract class FrameHttpRvFragment<T> extends BaseHttpUiFragment<T> {
         resetPageIndex();
         if (getAdapter() == null)return;
         getAdapter().clear();
+        getAdapter().notifyDataSetChanged();
     }
 
 
@@ -191,8 +192,8 @@ public abstract class FrameHttpRvFragment<T> extends BaseHttpUiFragment<T> {
 
         List<?> datas = getListInvalidateContent(t);
         if (CollectionUtil.isEmpty(datas)) {
-            if (getAdapter() != null )
-                getAdapter().clear();
+
+            clearData();
             return false;
 
         }

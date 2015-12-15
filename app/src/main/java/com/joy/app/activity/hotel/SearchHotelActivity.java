@@ -175,6 +175,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
 
     private void showSearchContent(String keyowrd){
         saveHistoryData(keyowrd);
+        seachTitleWidget.hiddenInputWindow();
         if (state != resultcontent_state){
             removeAutoCompleteContent();
             removeHistory();
