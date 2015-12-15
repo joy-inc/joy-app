@@ -16,11 +16,14 @@ import com.joy.app.activity.map.ListPoiMapActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.bean.plan.PlanItem;
+import com.joy.app.eventbus.DeleteEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 import com.joy.app.utils.plan.DialogUtil;
 import com.joy.app.utils.plan.FolderRequestListener;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * @author litong  <br>
@@ -126,6 +129,8 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
             getAdapter().clear();
             executeRefreshOnly();
         }
+        //首页需要刷新POI数量
+        EventBus.getDefault().post(new DeleteEvent(DeleteEvent.DELETE_ORDER));
     }
 
     @Override

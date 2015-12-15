@@ -23,6 +23,7 @@ import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
+import com.joy.app.eventbus.DeleteEvent;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;

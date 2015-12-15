@@ -16,6 +16,7 @@ import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
+import com.joy.app.eventbus.DeleteEvent;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 import com.joy.app.view.LoginTipView;
@@ -34,6 +35,7 @@ import de.greenrobot.event.EventBus;
 public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
     LoginTipView mLoginTipView;
+    private boolean mNeedToRefresh = false;
 
     public static TravelPlanFragment instantiate(Context context) {
 
@@ -57,6 +59,15 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         initViewLoad();
     }
 
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        if (mNeedToRefresh) {
+            mNeedToRefresh = false;
+            executeSwipeRefresh();
+        }
+    }
 
     @Override
     public void onDestroy() {
@@ -102,6 +113,15 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     public void onEventMainThread(LoginStatusEvent event) {
 
         initViewLoad();
+    }
+    /**
+     * 登录的回掉
+     *
+     * @param event
+     */
+    public void onEventMainThread(DeleteEvent event) {
+        if (event.getDelete() == DeleteEvent.DELETE_FOLDER)
+            mNeedToRefresh = false;
     }
 
     @Override
