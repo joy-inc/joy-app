@@ -272,6 +272,10 @@ public abstract class FrameHttpRvFragment<T> extends BaseHttpUiFragment<T> {
             super.showContentView();
     }
 
+    protected void addOnscrollerListener(RecyclerView.OnScrollListener listener){
+        mRecyclerView.addOnScrollListener(listener);
+    }
+
     protected void setSwipeRefreshEnable(boolean enable) {
 
         mSwipeRefreshWidget.setEnabled(enable);
