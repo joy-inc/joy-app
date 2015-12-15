@@ -22,6 +22,7 @@ import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
+import com.joy.app.eventbus.DeleteEvent;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
@@ -184,6 +185,12 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     public void onEventMainThread(OrderStatusEvent event) {
 
         // 支付成功、下单成功，返回该页面都需要刷新
+        mNeedToRefresh = true;
+    }
+    public void onEventMainThread(DeleteEvent event) {
+
+        if (event.getDelete() == DeleteEvent.DELETE_ORDER)
+        // 订单删除，返回该页面都需要刷新
         mNeedToRefresh = true;
     }
 

@@ -16,6 +16,7 @@ import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
+import com.joy.app.eventbus.DeleteEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.utils.plan.DialogUtil;
@@ -23,6 +24,7 @@ import com.joy.app.utils.plan.FolderRequestListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author litong  <br>
@@ -194,6 +196,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         hideLoading();
         ToastUtil.showToast("删除成功");
         setResult(RESULT_OK);
+        EventBus.getDefault().post(new DeleteEvent(DeleteEvent.DELETE_ORDER));
         finish();
     }
 
