@@ -3,12 +3,14 @@ package com.joy.app.activity.hotel;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExBaseWidget;
 import com.android.library.view.dialogplus.DialogPlus;
@@ -46,7 +48,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
 
         long[] days = HotelTimeUtil.getLastOffsetDay(JoyConstant.MONTH_DAY_OFFSET);
 
-        startActivity(activity, TextUtil.filterEmpty(cityId,"50"), fromKey, days[0], days[1]);
+        startActivity(activity, TextUtil.filterEmpty(cityId,"50"), TextUtil.filterEmpty(fromKey,JoyConstant.HOTEL_FROM_KEY), days[0], days[1]);
 //        startActivity(activity, "50", fromKey, days[0], days[1]);
     }
 
@@ -117,6 +119,25 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         footer.initDate(params.getCheckInMills(), params.getCheckOutMills());
         footer.setOnWidgetViewClickListener(this);
         hotelListFragment = HotelListFragment.instantiate(this, params);
+//        hotelListFragment.setListener(new RecyclerView.OnScrollListener(){
+//            boolean isDragging = false;
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                isDragging = (RecyclerView.SCROLL_STATE_DRAGGING== newState);
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                if (!isDragging)return;
+//                if (dy >0){
+//                    //TODO
+//                    LogMgr.i("down");
+//                }else{
+//                    LogMgr.i("up");
+//                }
+//
+//            }
+//        });
         addFragment(R.id.fl_content, hotelListFragment);
     }
 
