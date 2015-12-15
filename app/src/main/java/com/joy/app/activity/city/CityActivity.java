@@ -1,6 +1,5 @@
 package com.joy.app.activity.city;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -167,15 +166,5 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     protected ObjectRequest<List<CityRoute>> getObjectRequest(int pageIndex, int pageLimit) {
 
         return ReqFactory.newPost(CityHtpUtil.URL_POST_CITY_ROUTE, CityRoute.class, CityHtpUtil.getCityRouteParams(mPlaceId, pageLimit, pageIndex));
-    }
-
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast("CityActivity error: " + msg);
-    }
-
-    @Override
-    protected void showNoContentTip() {
     }
 }

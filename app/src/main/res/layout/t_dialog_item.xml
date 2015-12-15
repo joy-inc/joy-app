@@ -5,14 +5,14 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <ImageView
+    <com.android.library.widget.JImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:src="@mipmap/ic_launcher" />
 
-    <TextView
+    <com.android.library.widget.JTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

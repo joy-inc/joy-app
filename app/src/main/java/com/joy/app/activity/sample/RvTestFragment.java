@@ -62,10 +62,4 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
 
         return ReqFactory.newGet(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
     }
-
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast("error: " + msg);
-    }
 }

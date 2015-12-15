@@ -53,10 +53,4 @@ public class LvTestFragment extends BaseHttpLvFragment<List<HotCityItem>> {
 
         return ObjectRequest.get(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
     }
-
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast("error: " + msg);
-    }
 }

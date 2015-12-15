@@ -14,6 +14,14 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.CollectionUtil;
+import com.android.library.view.observablescrollview.ObservableRecyclerView;
+import com.android.library.view.observablescrollview.ObservableScrollViewCallbacks;
+import com.android.library.view.observablescrollview.ScrollState;
+import com.android.library.view.observablescrollview.ScrollUtils;
+import com.android.library.view.systembar.SystemBarTintManager;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
@@ -27,14 +35,6 @@ import com.joy.app.R;
 import com.joy.app.adapter.sample.CityDetailRvAdapter3;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.utils.http.sample.TestHtpUtil;
-import com.android.library.activity.BaseHttpRvActivity;
-import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.CollectionUtil;
-import com.android.library.view.observablescrollview.ObservableRecyclerView;
-import com.android.library.view.observablescrollview.ObservableScrollViewCallbacks;
-import com.android.library.view.observablescrollview.ScrollState;
-import com.android.library.view.observablescrollview.ScrollUtils;
-import com.android.library.view.systembar.SystemBarTintManager;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
@@ -199,12 +199,6 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
         adapter.setData(datas);
         adapter.notifyDataSetChanged();
         return true;
-    }
-
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast(msg);
     }
 
     @Override

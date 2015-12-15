@@ -1,6 +1,5 @@
 package com.joy.app.activity.poi;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -128,13 +127,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_PRODUCT_DETAIL, PoiDetail.class, OrderHtpUtil.getProductDetailUrl(mId));
 
         return obj;
-    }
-
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        super.onHttpFailed(tag, msg);
-        showToast(msg);
     }
 
     @Override

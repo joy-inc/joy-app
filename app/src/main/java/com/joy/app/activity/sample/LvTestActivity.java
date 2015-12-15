@@ -61,12 +61,6 @@ public class LvTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
         return ObjectRequest.get(TestHtpUtil.getHotCityListUrl(), HotCityItem.class);
     }
 
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast("error: " + msg);
-    }
-
     private long mLastPressedTime;
 
     @Override

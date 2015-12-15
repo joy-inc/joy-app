@@ -374,13 +374,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
         return obj;
     }
 
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast(msg);
-    }
-
-
     private void showAlertDialog() {
 
         new JDialog.Builder(this).setTitle(R.string.alert_drop_content).setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {

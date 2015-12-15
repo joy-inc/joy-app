@@ -102,12 +102,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         return obj;
     }
 
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast(msg);
-    }
-
     private void showCommentonDialog(final String productId) {
 
         mCommentonDialog = DialogPlus.newDialog(getActivity()).setContentHolder(new ViewHolder(R.layout.view_order_commenton)).setGravity(Gravity.CENTER).create();

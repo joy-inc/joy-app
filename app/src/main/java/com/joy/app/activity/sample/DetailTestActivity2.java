@@ -8,10 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.joy.app.R;
-import com.joy.app.adapter.sample.CityDetailRvAdapter;
-import com.joy.app.bean.sample.CityDetail;
-import com.joy.app.utils.http.sample.TestHtpUtil;
 import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.CollectionUtil;
@@ -20,6 +16,10 @@ import com.android.library.view.observablescrollview.ObservableScrollViewCallbac
 import com.android.library.view.observablescrollview.ScrollState;
 import com.android.library.view.observablescrollview.ScrollUtils;
 import com.android.library.view.systembar.SystemBarTintManager;
+import com.joy.app.R;
+import com.joy.app.adapter.sample.CityDetailRvAdapter;
+import com.joy.app.bean.sample.CityDetail;
+import com.joy.app.utils.http.sample.TestHtpUtil;
 
 import java.util.ArrayList;
 
@@ -136,12 +136,6 @@ public class DetailTestActivity2 extends BaseHttpRvActivity<CityDetail> implemen
         adapter.setData(datas);
         adapter.notifyDataSetChanged();
         return true;
-    }
-
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast(msg);
     }
 
     @Override

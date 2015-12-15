@@ -13,7 +13,6 @@ import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.plan.UserPlanListActivity;
-import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
 import com.joy.app.eventbus.LoginStatusEvent;
@@ -125,11 +124,5 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
         ObjectRequest obj = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class, pageLimit, pageIndex);
         return obj;
-    }
-
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast("TravelPlanFragment error: " + msg);
     }
 }

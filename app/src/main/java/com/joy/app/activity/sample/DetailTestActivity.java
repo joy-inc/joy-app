@@ -112,10 +112,4 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
         adapter.notifyDataSetChanged();
         return true;
     }
-
-    @Override
-    protected void onHttpFailed(Object tag, String msg) {
-
-        showToast(msg);
-    }
 }
