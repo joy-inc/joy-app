@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.TextUtil;
+import com.android.library.utils.ViewUtil;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.view.LinearListView;
@@ -19,6 +22,7 @@ import com.android.library.view.ExLayoutWidget;
  */
 public class PoiDetailHighWidget extends ExLayoutWidget {
 
+    private View vRootView;
     private HighlightAdapter mAdapter;
     private LinearListView mLinearListview;
 
@@ -33,6 +37,7 @@ public class PoiDetailHighWidget extends ExLayoutWidget {
 
         View contentView = activity.getLayoutInflater().inflate(R.layout.view_poi_detail_high, null);
 
+        vRootView = contentView;
         mLinearListview = (LinearListView) contentView.findViewById(R.id.linearLv);
 
         return contentView;
@@ -40,8 +45,10 @@ public class PoiDetailHighWidget extends ExLayoutWidget {
 
     protected void invalidate(final PoiDetail data) {
 
-        if (data == null)
+        if (data == null || CollectionUtil.isEmpty(data.getHighlights())) {
+            ViewUtil.goneView(vRootView);
             return;
+        }
 
         mAdapter.setData(data.getHighlights());
         mLinearListview.setAdapter(mAdapter);

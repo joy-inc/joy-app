@@ -56,8 +56,10 @@ public class PoiDetailCommentWidget extends ExLayoutWidget implements View.OnCli
 
     protected void invalidate(final CommentAll data) {
 
-        if (data == null && data.getComments() != null)
+        if (data == null || CollectionUtil.isEmpty(data.getComments())) {
+            mScoreWidget.invalidate(null);
             return;
+        }
 
         mScoreWidget.invalidate(data.getScores());
 

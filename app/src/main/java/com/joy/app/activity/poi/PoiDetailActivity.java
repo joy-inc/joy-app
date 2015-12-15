@@ -103,16 +103,17 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     }
 
     @Override
-    protected boolean invalidateContent(PoiDetail datas) {
+    protected boolean invalidateContent(PoiDetail data) {
 
-        mPoiDetail = datas;
+        mPoiDetail = data;
 
         mHeaderWidget.invalidate(mPoiDetail);
         mHighWidget.invalidate(mPoiDetail);
 
         mMapWidget.invalidate(R.drawable.ic_star_light_small);
-
         mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), mPoiDetail.getAddress());
+        if (TextUtil.isEmpty(data.getLat()) || TextUtil.isEmpty(data.getLon()))
+            ViewUtil.goneView(mMapWidget.getContentView());
 
         mIntroduceWidget.invalidate(mPoiDetail);
 
@@ -181,7 +182,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
             if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
 
-                AddPoiToFloderActivity.startActivity(this, mId,mPoiDetail.getFolder_id(), REQ_ADD_POI);
+                AddPoiToFloderActivity.startActivity(this, mId, mPoiDetail.getFolder_id(), REQ_ADD_POI);
             } else {//已经收藏了
 
             }
