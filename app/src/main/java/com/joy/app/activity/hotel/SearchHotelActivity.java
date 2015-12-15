@@ -161,8 +161,11 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     }
 
     private void removeHistory(){
+
         ViewUtil.hideView(jrvHistory);
     }
+
+
 
     private void clearHistoryData(){
         historyAdapter.getData().clear();
@@ -171,22 +174,27 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     }
 
     private void showSearchContent(String keyowrd){
+        saveHistoryData(keyowrd);
+        seachTitleWidget.hiddenInputWindow();
         if (state != resultcontent_state){
             removeAutoCompleteContent();
             removeHistory();
             if (searchHotelListFragment == null){
                 params.setHotel(keyowrd);
                 searchHotelListFragment = SearchHotelListFragment.instantiate(this,params);
+                addFragment(R.id.fl_content,searchHotelListFragment);
+            }else{
+                addFragment(R.id.fl_content,searchHotelListFragment);
+                searchHotelListFragment.reLoadHotelList(keyowrd);
             }
-            addFragment(R.id.fl_content,searchHotelListFragment);
             state = resultcontent_state;
-        }else{
-            searchHotelListFragment.reLoadHotelList(keyowrd);
+            return;
         }
-        saveHistoryData(keyowrd);
+        searchHotelListFragment.reLoadHotelList(keyowrd);
     }
     private void removeSearchContent(){
         if (searchHotelListFragment == null || state != resultcontent_state)return;
+        searchHotelListFragment.clearData();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.remove(searchHotelListFragment);
         ft.commitAllowingStateLoss();
@@ -200,17 +208,22 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
             if (autoCompleteFragment == null){
                 autoCompleteFragment = AutoCompleteFragment.instantiate(this,cityId,keyowrd);
                 autoCompleteFragment.setClickListener(this);
+                addFragment(R.id.fl_content,autoCompleteFragment);
+            }else{
+                addFragment(R.id.fl_content,autoCompleteFragment);
+                autoCompleteFragment.reloadAutoComplete(keyowrd);
             }
-            addFragment(R.id.fl_content,autoCompleteFragment);
             state = autocomplete_state;
-        }else{
-            autoCompleteFragment.reloadAutoComplete(keyowrd);
+            return;
         }
+        autoCompleteFragment.reloadAutoComplete(keyowrd);
+
     }
 
     private void removeAutoCompleteContent(){
 
         if (autoCompleteFragment == null || state != autocomplete_state)return;
+        autoCompleteFragment.clearData();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.remove(autoCompleteFragment);
         ft.commitAllowingStateLoss();

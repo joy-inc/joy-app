@@ -3,18 +3,14 @@ package com.joy.app.activity.hotel;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.LogMgr;
-import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
+import com.joy.app.activity.hotel.frame.FrameHttpRvFragment;
 import com.joy.app.adapter.hotel.HotelListAdapter;
-import com.joy.app.adapter.sample.CityDetailRvAdapter;
 import com.joy.app.bean.hotel.HotelEntity;
 import com.joy.app.bean.hotel.HotelList;
 import com.joy.app.bean.hotel.HotelParams;
@@ -26,7 +22,7 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener, View.OnClickListener {
+public class HotelListFragment extends FrameHttpRvFragment<HotelList> implements OnItemViewClickListener, View.OnClickListener {
     HotelParams params;
 
     public static HotelListFragment instantiate(Context context, HotelParams hotelParams) {
@@ -38,7 +34,7 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        executeRefreshOnly();
+        executeRefresh();
     }
 
     @Override
@@ -60,7 +56,7 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
 
     public void reLoadHotelList(HotelParams hotelParams) {
         params = hotelParams;
-        executeRefreshOnly();
+        executeRefresh();
     }
 
     @Override

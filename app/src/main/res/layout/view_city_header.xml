@@ -13,9 +13,14 @@
         android:id="@+id/jtvName"
         android:layout_width="match_parent"
         android:layout_height="260dp"
+        android:ellipsize="end"
         android:gravity="center"
+        android:maxLines="2"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:textColor="@color/white_trans75"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/llDiv0"
@@ -32,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:foreground="?android:selectableItemBackgroundBorderless"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_ticket" />
 
@@ -127,6 +132,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llRouteTitle"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/llDiv2"

@@ -75,8 +75,8 @@ public class JoyApplication extends BaseApplication {
         }
 //        return "";
         //测试不要提交
-                return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb"; // test
-//                return "41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e"; // 4awork
+//                return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb"; // test
+                return "41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e"; // 4awork
     }
 
     /**
@@ -119,6 +119,7 @@ public class JoyApplication extends BaseApplication {
         ShareConstant.getIns().setWeiboUrl("http://sns.whalecloud.com/sina2/callback");
 //        ShareConstant.getIns().setWeiboScope("email,direct_messages_read,direct_messages_write," + "friendships_groups_read,friendships_groups_write,statuses_to_me_read," + "follow_app_official_microblog," + "invitation_write");
         ShareConstant.getIns().setWeiboScope("email," + "follow_app_official_microblog" );
+
         ShareConstant.getIns().setWeixinAppid("wx4f5cdafa5eaf4ca0");
         ShareConstant.getIns().setWeixinSecret("d4624c36b6795d1d99dcf0547af5443d");
     }
