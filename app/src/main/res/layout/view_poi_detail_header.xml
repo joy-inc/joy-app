@@ -64,7 +64,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/color_accent"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <android.support.v7.widget.AppCompatButton

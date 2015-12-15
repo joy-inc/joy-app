@@ -113,7 +113,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.poi.OrderDetailActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.poi.OrderPayActivity"

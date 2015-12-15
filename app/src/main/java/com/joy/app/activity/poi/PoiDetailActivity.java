@@ -103,9 +103,9 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     }
 
     @Override
-    protected boolean invalidateContent(PoiDetail datas) {
+    protected boolean invalidateContent(PoiDetail data) {
 
-        mPoiDetail = datas;
+        mPoiDetail = data;
 
         mHeaderWidget.invalidate(mPoiDetail);
         mHighWidget.invalidate(mPoiDetail);
