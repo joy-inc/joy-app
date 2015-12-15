@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 /**
  * @author litong  <br>
- * @Description XXXXXX    <br>
+ * @Description 酒店    <br>
  */
 public class HotelFooterWidget extends ExBaseWidget implements View.OnClickListener {
     View filter,sort,day;

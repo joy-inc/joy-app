@@ -3,10 +3,13 @@ package com.joy.app.activity.hotel;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.LogMgr;
+import com.android.library.view.observablescrollview.ScrollState;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.hotel.frame.FrameHttpRvFragment;
@@ -24,6 +27,7 @@ import java.util.List;
  */
 public class HotelListFragment extends FrameHttpRvFragment<HotelList> implements OnItemViewClickListener, View.OnClickListener {
     HotelParams params;
+    RecyclerView.OnScrollListener listener;
 
     public static HotelListFragment instantiate(Context context, HotelParams hotelParams) {
         Bundle bundle = new Bundle();
@@ -52,6 +56,16 @@ public class HotelListFragment extends FrameHttpRvFragment<HotelList> implements
         View v = View.inflate(getActivity(), R.layout.item_hotel_header, null);
         v.setOnClickListener(this);
         addHeaderView(v);
+        if (listener != null){
+            addOnscrollerListener(listener);
+        }
+    }
+
+    public void setListener(RecyclerView.OnScrollListener listener) {
+        this.listener = listener;
+//        if (isAdded()){
+//            addOnscrollerListener(listener);
+//        }
     }
 
     public void reLoadHotelList(HotelParams hotelParams) {
