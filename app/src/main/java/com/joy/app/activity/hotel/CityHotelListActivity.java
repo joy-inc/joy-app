@@ -1,15 +1,15 @@
 package com.joy.app.activity.hotel;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
 import com.android.library.view.ExBaseWidget;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
@@ -19,7 +19,7 @@ import com.joy.app.adapter.hotel.HotelSortAdapter;
 import com.joy.app.bean.hotel.FilterItems;
 import com.joy.app.bean.hotel.HotelParams;
 import com.joy.app.bean.hotel.HotelSearchFilters;
-import com.joy.app.utils.Consts;
+import com.joy.app.utils.JoyConstant;
 import com.joy.app.utils.hotel.HotelTimeUtil;
 import com.joy.app.utils.http.HotelHtpUtil;
 
@@ -38,24 +38,22 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     /**
      * @param activity
      * @param cityId
-     * @param cityName
      * @param fromKey  只传入城市信息和Aid
      *                 默认时间为今天和明天
      *                 无onresult的返回
      */
-    public static void startActivity(Context activity, String cityId, String cityName, String fromKey) {
+    public static void startActivity(Context activity, String cityId, String fromKey) {
 
-        long[] days = HotelTimeUtil.getLastOffsetDay(Consts.MONTH_DAY_OFFSET);
+        long[] days = HotelTimeUtil.getLastOffsetDay(JoyConstant.MONTH_DAY_OFFSET);
 
-//        startActivity(activity, TextUtil.filterEmpty(cityId,"50"), TextUtil.filterEmpty(cityName,"香港"), fromKey, days[0], days[1]);
-        startActivity(activity, "50", "香港", fromKey, days[0], days[1]);
+        startActivity(activity, TextUtil.filterEmpty(cityId,"50"), fromKey, days[0], days[1]);
+//        startActivity(activity, "50", fromKey, days[0], days[1]);
     }
 
-    public static void startActivity(Context activity, String cityId, String cityName, String fromKey, long startDay, long endDay) {
+    public static void startActivity(Context activity, String cityId, String fromKey, long startDay, long endDay) {
 
         Intent intent = new Intent(activity, CityHotelListActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("cityName", cityName);
         bundle.putString("cityId", cityId);
         bundle.putLong("startDay", startDay);
         bundle.putLong("endDay", endDay);
@@ -67,7 +65,8 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (REQ_DAY_PICK == requestCode && resultCode == RESULT_OK) {
+        if (resultCode != RESULT_OK)return;
+        if ( REQ_DAY_PICK == requestCode ) {
 
             long start = data.getLongExtra(DayPickerActivity.REQ_EXTRA_KEY_BEGIN_DATE, 0);
             long end = data.getLongExtra(DayPickerActivity.REQ_EXTRA_KEY_END_DATE, 0);
@@ -75,7 +74,8 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
             params.setCheckInMills(start);
             params.setCheckOutMills(end);
             hotelListFragment.reLoadHotelList(params);
-        } else if (REQ_FILTER == requestCode && resultCode == RESULT_OK) {
+        }
+        if ( REQ_FILTER == requestCode ) {
             String facilities = data.getStringExtra(HotelSearchFilterActivity.EX_KEY_HOTEL__FACILITIES_TYPE_STR);
             String price[] = data.getStringArrayExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_PRICES_TYPE);
             String star = data.getStringExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_STAR_TYPE_STR);
@@ -83,6 +83,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
             params.setStar_ids(star);
             params.setPrice_rangs(price);
         }
+        hotelListFragment.reLoadHotelList(params);
     }
 
     @Override
@@ -99,12 +100,13 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         params.setFrom_key(getIntent().getStringExtra("fromKey"));
         params.setCheckIn(getIntent().getLongExtra("startDay", System.currentTimeMillis()));
         params.setCheckOut(getIntent().getLongExtra("endDay", System.currentTimeMillis()));
+        params.setOrderby(1);
     }
-
+    TextView title ;
     @Override
     protected void initTitleView() {
         addTitleLeftBackView();
-        addTitleMiddleView(getIntent().getStringExtra("cityName") + "酒店");
+        title = addTitleMiddleView("");
     }
 
     @Override
@@ -118,6 +120,10 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         addFragment(R.id.fl_content, hotelListFragment);
     }
 
+    public void showtitle(String str){
+        title.setText(String.format("%s酒店",str));
+    }
+
     DialogPlus mDialog;
     private void showDialog() {
         HotelSortAdapter adapter = new HotelSortAdapter();
@@ -126,7 +132,6 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<FilterItems>() {
             @Override
             public void onItemViewClick(int position, View clickView, FilterItems filterItems) {
-                LogMgr.i("filterItems:"+filterItems);
                 params.setOrderby(filterItems.getValue());
                 mDialog.dismiss();
                 hotelListFragment.reLoadHotelList(params);
@@ -159,7 +164,6 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
                 DayPickerActivity.startHotelDayPickerForResult(this, true, params.getCheckInMills(), params.getCheckOutMills(), REQ_DAY_PICK);
                 break;
             case R.id.ll_hotel_filter:
-                //TODO
                 HotelSearchFilterActivity.startActivityForResult(this,REQ_FILTER,hotelSearchFilters.getFacilities(),hotelSearchFilters.getStars(),params.getFacilities_ids(),params.getStar_ids(),params.getPrice());
                 break;
             case R.id.ll_hotel_list_sort:

@@ -15,4 +15,10 @@ public class JoyConstant {
     public static final String XIOMI_SECRET ="xAxoljxKhrqCdhuagQYApQ==";
     //mitag
     public static final String XIAOMI_MITAG = "com.joy.mi-push";
+    /**
+     * 默认一个月的偏移量
+     */
+    public static final int MONTH_DAY_OFFSET  = 28;
+
+    public static final String HOTEL_FROM_KEY = "app_joy_android";
 }

@@ -2,6 +2,7 @@ package com.joy.app.activity.plan;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -84,6 +85,7 @@ public class AddPoiToFloderActivity extends Activity {
 
     private void initContent() {
         int width = DeviceUtil.getScreenWidth();
+
         LinearLayout layout = (LinearLayout) findViewById(R.id.ll_content);
         layout.setLayoutParams(new FrameLayout.LayoutParams(width, FrameLayout.LayoutParams.MATCH_PARENT));
         jtvButton.setOnClickListener(new View.OnClickListener() {
