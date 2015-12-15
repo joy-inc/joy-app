@@ -23,7 +23,7 @@ import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.eventbus.LoginStatusEvent;
-import com.joy.app.eventbus.PayStatusEvent;
+import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.view.LoginTipView;
@@ -45,6 +45,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
     private DialogPlus mCommentonDialog;
     private final int REQ_ORDER_DETAIL = 101;
+    private boolean mNeedToRefresh = false;
 
     public static OrderFragment instantiate(Context context) {
 
@@ -57,6 +58,16 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         super.onActivityCreated(savedInstanceState);
         EventBus.getDefault().register(this);
         initViewLoad();
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        if (mNeedToRefresh) {
+            mNeedToRefresh = false;
+            executeSwipeRefresh();
+        }
     }
 
     @Override
@@ -170,9 +181,10 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         initViewLoad();
     }
 
-    public void onEventMainThread(PayStatusEvent event) {
+    public void onEventMainThread(OrderStatusEvent event) {
 
-        initViewLoad();
+        // 支付成功、下单成功，返回该页面都需要刷新
+        mNeedToRefresh = true;
     }
 
     /**

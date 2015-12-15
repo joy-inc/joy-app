@@ -26,19 +26,17 @@ import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
 import com.android.library.view.dialogplus.OnCancelListener;
-import com.android.library.widget.JDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
 import com.joy.app.bean.poi.Product;
 import com.joy.app.bean.poi.ProductLevels;
-import com.joy.app.eventbus.PayStatusEvent;
+import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.JTextSpanUtil;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.library.dialog.DialogUtil;
-import com.joy.library.share.weibo.auth.AccessTokenKeeper;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -107,7 +105,14 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     protected void initTitleView() {
 
         super.initTitleView();
-        addTitleLeftBackView();
+        addTitleLeftView(R.drawable.ic_back, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                showAlertDialog();
+            }
+        });
     }
 
     @Override
@@ -289,6 +294,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
                         mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
                         mCountWidget.setDateSubjectIds(createDateSubjectStr());
                         mCountWidget.resetUnitPrice();
+                        refreshTotalPrice();
                         mSubjectDialog.dismiss();
 
                     }
@@ -389,12 +395,14 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private void showAlertDialog() {
 
         if (mExitDialog == null) {
-            mExitDialog = DialogUtil.getOkCancelDialog(this, com.joy.library.R.string.cancel, R.string.confirm, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {
+            mExitDialog = DialogUtil.getOkCancelDialog(this, R.string.confirm, com.joy.library.R.string.cancel, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
                     if (which == DialogInterface.BUTTON_POSITIVE)
                         finish();
+                    else if (which == DialogInterface.BUTTON_NEGATIVE)
+                        mExitDialog.dismiss();
                 }
             });
         }
@@ -417,9 +425,10 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
      *
      * @param event
      */
-    public void onEventMainThread(PayStatusEvent event) {
+    public void onEventMainThread(OrderStatusEvent event) {
 
-        finish();
+        if (event.getStatus() == OrderStatusEvent.EnumOrderStatus.ORDER_PAY_SUCCESS)
+            finish();
     }
 
     /**
