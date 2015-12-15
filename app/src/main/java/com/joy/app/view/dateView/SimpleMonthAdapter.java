@@ -270,10 +270,10 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         //        int showCount1 = (int) ((mEndTime - calendar.getTimeInMillis()) / (1000 * 3600 * 24 * 30));
         //        LogMgr.d("showCount="+showCount+"   showCount1="+showCount1);
         if (showCount < 1)
-            showCount = 1;
-//        else {
-//            showCount++;
-//        }
+            showCount = 3;
+        else if (showCount == 1) {
+            showCount++;
+        }
         setItemCount(showCount);
     }
 
