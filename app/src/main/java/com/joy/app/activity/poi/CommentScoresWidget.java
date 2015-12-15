@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
+import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
 import com.joy.app.bean.poi.CommentScores;
@@ -18,6 +19,7 @@ import com.joy.app.bean.poi.CommentScores;
  */
 public class CommentScoresWidget extends ExLayoutWidget {
 
+    private View vRootView;
     private AppCompatRatingBar mAcRatingBar;
     private TextView mTvPoiCommentNum;
     private TextView tvCommentLevel;
@@ -45,6 +47,7 @@ public class CommentScoresWidget extends ExLayoutWidget {
 
         View contentView = activity.getLayoutInflater().inflate(R.layout.view_poi_comment_score, null);
 
+        vRootView = contentView;
         mAcRatingBar = (AppCompatRatingBar) contentView.findViewById(R.id.acRatingBar);
         mTvPoiCommentNum = (TextView) contentView.findViewById(R.id.tvPoiCommentNum);
         tvCommentLevel = (TextView) contentView.findViewById(R.id.tvCommentLevel);
@@ -66,8 +69,10 @@ public class CommentScoresWidget extends ExLayoutWidget {
 
     public void invalidate(final CommentScores data) {
 
-        if (data == null)
+        if (data == null) {
+            ViewUtil.goneView(vRootView);
             return;
+        }
 
         mAcRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
         mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, data.getComment_num()));
