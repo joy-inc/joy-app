@@ -3,6 +3,6 @@
 
     <style name="theme_app.translucent">
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 </resources>

@@ -9,7 +9,6 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.activity.hotel.frame.FrameHttpRvFragment;
 import com.joy.app.adapter.hotel.SearchHotelListAdapter;
 import com.joy.app.bean.hotel.HotelEntity;
 import com.joy.app.bean.hotel.HotelList;
@@ -50,13 +49,14 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
         SearchHotelListAdapter adapter = new SearchHotelListAdapter();
         adapter.setOnItemViewClickListener(this);
         setAdapter(adapter);
+        setLoadMoreDarkTheme();
     }
 
     public void reLoadHotelList(String keyword) {
         if(params == null )return;
         if (params.setHotel(keyword)) {
-            getAdapter().getData().clear();
-            getAdapter().notifyDataSetChanged();
+//            getAdapter().getData().clear();
+//            getAdapter().notifyDataSetChanged();
 //            executeRefresh();
             executeFrameRefresh();
         }

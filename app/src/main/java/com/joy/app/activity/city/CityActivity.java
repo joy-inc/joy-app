@@ -16,7 +16,6 @@ import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.joy.app.adapter.city.CityRouteAdapter;
 import com.joy.app.bean.city.City;
 import com.joy.app.bean.city.CityRoute;
@@ -47,7 +46,6 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        executeRefreshOnly();// recommend route
         executeCityDetail();// city detail
     }
 
@@ -85,9 +83,23 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
         cityReq.setResponseListener(new ObjectResponse<City>() {
 
             @Override
+            public void onPre() {
+
+                showLoading();
+            }
+
+            @Override
             public void onSuccess(Object tag, City city) {
 
                 onSuccessCallback(city);
+                executeRefreshOnly();// recommend route
+            }
+
+            @Override
+            public void onError(Object tag, String msg) {
+
+                hideLoading();
+                showFailedTip();
             }
         });
         addRequestNoCache(cityReq);
@@ -149,7 +161,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             case R.id.jimHotel:
 
                 if (mCity != null)
-                CityFunActivity.startActivity(this, mPlaceId, 2);
+                    CityFunActivity.startActivity(this, mPlaceId, 2);
                 break;
             case R.id.jimFood:
 

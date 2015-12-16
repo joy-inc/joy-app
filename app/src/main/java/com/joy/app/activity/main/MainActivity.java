@@ -8,6 +8,7 @@ import android.view.View;
 import com.android.library.activity.BaseTabActivity;
 import com.android.library.activity.BaseUiFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
@@ -115,19 +116,22 @@ public class MainActivity extends BaseTabActivity {
         });
         mMainActivityBC.initTitleView();
 
-        addTitleRightView(R.drawable.btn_hotellist_seekbar_button, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CityHotelListActivity.startActivity(MainActivity.this,"","");
-            }
-        });
-        addTitleRightView(R.drawable.ic_star_light_big, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+       if (BuildConfig.DEBUG) {
+           // 快捷入口
+           addTitleRightView(R.drawable.btn_hotellist_seekbar_button, new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   CityHotelListActivity.startActivity(MainActivity.this,"","");
+               }
+           });
+           addTitleRightView(R.drawable.ic_star_light_big, new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
 
-                com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
-            }
-        });
+                   com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
+               }
+           });
+       }
     }
 
 
