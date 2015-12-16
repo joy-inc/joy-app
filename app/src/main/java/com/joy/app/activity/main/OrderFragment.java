@@ -201,6 +201,10 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         setSwipeRefreshEnable(false);
         if (mLoginTipView == null)
             mLoginTipView = new LoginTipView(this.getActivity(), R.string.order_no_login, R.string.order_no_login_sub);
+        if (getAdapter() != null && !getAdapter().isEmpty()) {
+            getAdapter().clear();
+            getAdapter().notifyDataSetChanged();
+        }
         removeCustomView(mLoginTipView);
         addCustomView(mLoginTipView);
     }

@@ -60,7 +60,7 @@ public class JoyApplication extends BaseApplication {
      */
     public static boolean isLogin() {
 
-        return mUser!=null && !TextUtil.isEmpty(getUserToken());
+        return !TextUtil.isEmpty(getUserToken());
     }
 
     /**
@@ -73,10 +73,7 @@ public class JoyApplication extends BaseApplication {
         if (mUser != null) {
             return mUser.getToken();
         }
-//        return "";
-        //测试不要提交
-//                return "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb"; // test
-                return "41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e"; // 4awork
+        return "";
     }
 
     /**
@@ -117,8 +114,8 @@ public class JoyApplication extends BaseApplication {
         ShareConstant.getIns().setWeiboAppid("1720673958");
         ShareConstant.getIns().setWeiboSecret("121aa6378e89dba7d6fc290fdb40e669");
         ShareConstant.getIns().setWeiboUrl("http://sns.whalecloud.com/sina2/callback");
-//        ShareConstant.getIns().setWeiboScope("email,direct_messages_read,direct_messages_write," + "friendships_groups_read,friendships_groups_write,statuses_to_me_read," + "follow_app_official_microblog," + "invitation_write");
-        ShareConstant.getIns().setWeiboScope("email," + "follow_app_official_microblog" );
+        //        ShareConstant.getIns().setWeiboScope("email,direct_messages_read,direct_messages_write," + "friendships_groups_read,friendships_groups_write,statuses_to_me_read," + "follow_app_official_microblog," + "invitation_write");
+        ShareConstant.getIns().setWeiboScope("email," + "follow_app_official_microblog");
 
         ShareConstant.getIns().setWeixinAppid("wx4f5cdafa5eaf4ca0");
         ShareConstant.getIns().setWeixinSecret("d4624c36b6795d1d99dcf0547af5443d");
