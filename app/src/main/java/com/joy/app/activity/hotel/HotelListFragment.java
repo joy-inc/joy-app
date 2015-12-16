@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.LogMgr;
@@ -25,7 +26,7 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class HotelListFragment extends FrameHttpRvFragment<HotelList> implements OnItemViewClickListener, View.OnClickListener {
+public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener, View.OnClickListener {
     HotelParams params;
     RecyclerView.OnScrollListener listener;
 
@@ -38,7 +39,7 @@ public class HotelListFragment extends FrameHttpRvFragment<HotelList> implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override
@@ -57,7 +58,7 @@ public class HotelListFragment extends FrameHttpRvFragment<HotelList> implements
         v.setOnClickListener(this);
         addHeaderView(v);
         if (listener != null){
-            addOnscrollerListener(listener);
+            getRecyclerView().addOnScrollListener(listener);
         }
     }
 
@@ -70,7 +71,8 @@ public class HotelListFragment extends FrameHttpRvFragment<HotelList> implements
 
     public void reLoadHotelList(HotelParams hotelParams) {
         params = hotelParams;
-        executeRefresh();
+//        executeRefresh();
+        executeFrameRefresh();
     }
 
     @Override

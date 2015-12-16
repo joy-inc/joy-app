@@ -11,6 +11,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
+import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.joy.app.activity.setting.SettingActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
 
@@ -118,7 +119,8 @@ public class MainActivity extends BaseTabActivity {
             @Override
             public void onClick(View v) {
 
-                com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
+//                com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
+                CityHotelListActivity.startActivity(MainActivity.this,"","");
             }
         });
     }
