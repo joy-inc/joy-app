@@ -115,12 +115,17 @@ public class MainActivity extends BaseTabActivity {
         });
         mMainActivityBC.initTitleView();
 
-        addTitleRightView(R.drawable.ic_map_poi, new View.OnClickListener() {
+        addTitleRightView(R.drawable.btn_hotellist_seekbar_button, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CityHotelListActivity.startActivity(MainActivity.this,"","");
+            }
+        });
+        addTitleRightView(R.drawable.ic_star_light_big, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
-                CityHotelListActivity.startActivity(MainActivity.this,"","");
+                com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
             }
         });
     }
