@@ -36,7 +36,6 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> imple
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        executeRefresh();
         executeRefreshOnly();
     }
 
@@ -65,8 +64,12 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> imple
     public void reloadAutoComplete(String keyword){
         if (TextUtil.isNotEmpty(this.keyword) && this.keyword.equals(keyword))return;
         this.keyword = keyword;
-//        executeRefresh();
         executeFrameRefresh();
+    }
+
+    public void clearData(){
+        if (getAdapter() == null)return;
+        getAdapter().clear();
     }
 
     @Override

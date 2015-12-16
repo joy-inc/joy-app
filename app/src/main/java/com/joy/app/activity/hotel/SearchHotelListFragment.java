@@ -61,7 +61,10 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
             executeFrameRefresh();
         }
     }
-
+    public void clearData(){
+        if (getAdapter() == null)return;
+        getAdapter().clear();
+    }
 
     @Override
     public void onItemViewClick(int position, View clickView, Object o) {

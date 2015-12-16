@@ -5,18 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.DensityUtil;
-import com.android.library.utils.LogMgr;
-import com.android.library.view.observablescrollview.ScrollState;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.activity.hotel.frame.FrameHttpRvFragment;
 import com.joy.app.adapter.hotel.HotelListAdapter;
 import com.joy.app.bean.hotel.HotelEntity;
 import com.joy.app.bean.hotel.HotelList;
@@ -31,7 +25,7 @@ import java.util.List;
  */
 public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener, View.OnClickListener {
     HotelParams params;
-//    RecyclerView.OnScrollListener listener;
+    RecyclerView.OnScrollListener listener;
 
     public static HotelListFragment instantiate(Context context, HotelParams hotelParams) {
         Bundle bundle = new Bundle();
@@ -42,7 +36,6 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        executeRefresh();
         executeRefreshOnly();
     }
 
@@ -61,24 +54,16 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
         View v = View.inflate(getActivity(), R.layout.item_hotel_header, null);
         v.setOnClickListener(this);
         addHeaderView(v);
-        View view = new View(getActivity());
-        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(55)));
-        addFooterView(view);
-//        if (listener != null){frame 使用
-//            addOnscrollerListener(listener);
-//        }
+//        View view = new View(getActivity());
+//        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(55)));
+//        addFooterView(view);
+        if (listener != null){
+            getRecyclerView().addOnScrollListener(listener);
+        }
     }
-
-//    public void setListener(RecyclerView.OnScrollListener listener) {
-//        this.listener = listener;
-//        if (isAdded()){
-//            addOnscrollerListener(listener);
-//        }
-//    }
 
     public void reLoadHotelList(HotelParams hotelParams) {
         params = hotelParams;
-//        executeRefresh();
         executeFrameRefresh();
     }
 
