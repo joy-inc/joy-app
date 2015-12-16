@@ -150,6 +150,10 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
                 return false;
             }
         });
+        if(BuildConfig.DEBUG){
+            mEtPhone.setText("11111111111");
+            mEtCode.setText("111111");
+        }
     }
 
     ViewTreeObserver.OnGlobalLayoutListener mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -323,9 +327,6 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         }
         mTvButton.setEnabled(false);
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mEtPhone.getText().toString()));
-        if (BuildConfig.DEBUG && "11111111111".equals(mEtPhone.getText().toString())) {
-            req.setData("");
-        }
         req.setResponseListener(new ObjectResponse() {
 
             @Override
