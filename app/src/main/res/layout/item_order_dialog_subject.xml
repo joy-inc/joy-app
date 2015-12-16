@@ -26,6 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="14dp"
             android:layout_toLeftOf="@+id/acCheckBox"
+            android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
             android:textColor="@color/text_grey_dark"

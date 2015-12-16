@@ -73,6 +73,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private int index = 0;
     private int currentIndex = 0;
 
+    private boolean mIsShouldShowDialog = false;
     private AlertDialog mExitDialog;
 
     @Override
@@ -217,6 +218,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.invalidate(data3);
             refreshTotalPrice();
+            mIsShouldShowDialog = true;
         }
 
         return CollectionUtil.isNotEmpty(product.getLevels());
@@ -347,17 +349,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             totalPrice = totalPrice + itemTotalPrice;
         }
 
-        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.unit, formatPrice(totalPrice))));
-    }
-
-    public static String formatPrice(double total) {
-
-        DecimalFormat twoDForm = new DecimalFormat("#.##");
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-        dfs.setDecimalSeparator('.');
-        twoDForm.setDecimalFormatSymbols(dfs);
-
-        return twoDForm.format(total);
+        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(JTextSpanUtil.getUnitFormatPrice(totalPrice)));
     }
 
     @Override
@@ -393,19 +385,27 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void showAlertDialog() {
 
-        if (mExitDialog == null) {
-            mExitDialog = DialogUtil.getOkCancelDialog(this, R.string.confirm, com.joy.library.R.string.cancel, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+        if (mIsShouldShowDialog) {
 
-                    if (which == DialogInterface.BUTTON_POSITIVE)
-                        finish();
-                    else if (which == DialogInterface.BUTTON_NEGATIVE)
-                        mExitDialog.dismiss();
-                }
-            });
+            if (mSubjectDialog != null && mSubjectDialog.isShowing())
+                return;
+
+            if (mExitDialog == null) {
+                mExitDialog = DialogUtil.getOkCancelDialog(this, R.string.confirm, com.joy.library.R.string.cancel, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (which == DialogInterface.BUTTON_POSITIVE)
+                            finish();
+                        else if (which == DialogInterface.BUTTON_NEGATIVE)
+                            mExitDialog.dismiss();
+                    }
+                });
+            }
+            mExitDialog.show();
+        } else {
+            finish();
         }
-        mExitDialog.show();
     }
 
     @Override
