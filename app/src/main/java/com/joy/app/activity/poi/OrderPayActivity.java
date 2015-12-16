@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -58,8 +59,17 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     @Bind(R.id.jtv_order_id)
     TextView jtvOrderId;
 
+    @Bind(R.id.jtv_order_day)
+    TextView jtvOrderDay;
+
+    @Bind(R.id.ll_selected_item)
+    LinearLayout llSelectedItem;
+
     @Bind(R.id.jtv_order_item)
     TextView jtvOrderItem;
+
+    @Bind(R.id.v_spilt)
+    View vSpilt;
 
     @Bind(R.id.jtv_order_count)
     TextView jtvOrderCount;
@@ -134,7 +144,16 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         sdvPhoto.setImageURI(Uri.parse(data.getProduct_photo()));
         tvTitle.setText(data.getProduct_title());
         jtvOrderId.setText(data.getOrder_id());
-        jtvOrderItem.setText(data.getSelected_item());
+
+        if (TextUtil.isEmpty(data.getSelected_item())) {
+            goneView(llSelectedItem);
+            goneView(vSpilt);
+        } else {
+            showView(llSelectedItem);
+            showView(vSpilt);
+            jtvOrderItem.setText(data.getSelected_item());
+        }
+
         jtvOrderCount.setText(data.getFormatCountStr());
         jtvOrderName.setText(data.getContact_name());
         jtvOrderPhone.setText(data.getContact_phone());

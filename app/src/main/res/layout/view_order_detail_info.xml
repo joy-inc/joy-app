@@ -75,6 +75,34 @@
         <com.android.library.widget.JTextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
+            android:text="@string/order_detail_day"
+            android:textColor="@color/black_trans87"
+            android:textSize="14dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/jtv_order_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <View
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="16dp"
+        android:background="@color/black_trans12" />
+
+    <LinearLayout
+        android:id="@+id/ll_selected_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.android.library.widget.JTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:text="@string/order_detail_item"
             android:textColor="@color/black_trans87"
             android:textSize="14dp" />
@@ -87,13 +115,33 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:lines="1"
-            android:paddingRight="8dp"
             android:textColor="@color/text_pink"
+            android:textSize="14dp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_spilt"
+        style="@style/Line.Light.Horizontal"
+        android:layout_marginLeft="16dp"
+        android:background="@color/black_trans12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <com.android.library.widget.JTextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/order_detail_count"
+            android:textColor="@color/black_trans87"
             android:textSize="14dp" />
 
         <com.android.library.widget.JTextView
             android:id="@+id/jtv_order_count"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/text_pink"
