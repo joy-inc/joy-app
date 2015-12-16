@@ -139,9 +139,9 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         jtvOrderName.setText(data.getContact_name());
         jtvOrderPhone.setText(data.getContact_phone());
         jtvOrderEmail.setText(data.getContact_email());
-        jtvOrderTotal.setText(data.getTotal_price_Str());
+        jtvOrderTotal.setText(JTextSpanUtil.getFormatUnitStr(JTextSpanUtil.getUnitFormatPrice(data.getTotal_price())));
 
-        tvTotalPrice.setText(JTextSpanUtil.getFormatUnitStr(data.getTotal_price_Str()));
+        tvTotalPrice.setText(JTextSpanUtil.getFormatUnitStr(JTextSpanUtil.getUnitFormatPrice(data.getTotal_price())));
 
         return true;
     }

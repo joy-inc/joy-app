@@ -10,7 +10,6 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;
-import com.joy.app.activity.hotel.frame.FrameHttpRvFragment;
 import com.joy.app.adapter.hotel.AutoCompleteAdapter;
 import com.joy.app.bean.hotel.AutoComplete;
 import com.joy.app.utils.http.HotelHtpUtil;
@@ -36,6 +35,7 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> imple
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+//        executeRefresh();
         executeRefreshOnly();
     }
 
@@ -64,6 +64,7 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> imple
     public void reloadAutoComplete(String keyword){
         if (TextUtil.isNotEmpty(this.keyword) && this.keyword.equals(keyword))return;
         this.keyword = keyword;
+//        executeRefresh();
         executeFrameRefresh();
     }
 

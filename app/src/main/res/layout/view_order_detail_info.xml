@@ -57,7 +57,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="1234"
             android:textColor="@color/text_pink"
             android:textSize="14dp" />
     </LinearLayout>
@@ -86,8 +85,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:lines="1"
-            android:text="1234"
+            android:paddingRight="8dp"
             android:textColor="@color/text_pink"
             android:textSize="14dp" />
 
@@ -96,7 +96,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="x2"
             android:textColor="@color/text_pink"
             android:textSize="14dp" />
     </LinearLayout>
@@ -124,7 +123,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="1234"
             android:textColor="@color/text_pink"
             android:textSize="14dp" />
     </LinearLayout>
@@ -152,7 +150,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="1234"
             android:textColor="@color/text_pink"
             android:textSize="14dp" />
     </LinearLayout>
@@ -180,7 +177,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="1234"
             android:textColor="@color/text_pink"
             android:textSize="14dp" />
     </LinearLayout>
@@ -208,7 +204,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="1234"
             android:textColor="@color/text_pink"
             android:textSize="14dp" />
     </LinearLayout>

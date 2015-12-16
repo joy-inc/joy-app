@@ -6,6 +6,9 @@ import android.text.style.RelativeSizeSpan;
 
 import com.android.library.utils.TextUtil;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 /**
  * 文本Spannable工具类
  * Created by xiaoyu.chen on 15/12/10.
@@ -26,5 +29,15 @@ public class JTextSpanUtil {
         SpannableString spannableString = new SpannableString(priceWithUnit);
         spannableString.setSpan(new RelativeSizeSpan(0.67f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;
+    }
+
+    public static String getUnitFormatPrice(float total) {
+
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        twoDForm.setDecimalFormatSymbols(dfs);
+
+        return "¥ " + twoDForm.format(total);
     }
 }

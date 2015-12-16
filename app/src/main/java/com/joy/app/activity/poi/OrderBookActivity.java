@@ -38,8 +38,6 @@ import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.library.dialog.DialogUtil;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +71,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private int index = 0;
     private int currentIndex = 0;
 
+    private boolean mIsShouldShowDialog = false;
     private AlertDialog mExitDialog;
 
     @Override
@@ -217,6 +216,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             mCountWidget.setDateSubjectIds(createDateSubjectStr());
             mCountWidget.invalidate(data3);
             refreshTotalPrice();
+            mIsShouldShowDialog = true;
         }
 
         return CollectionUtil.isNotEmpty(product.getLevels());
@@ -237,70 +237,76 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         if (CollectionUtil.isNotEmpty(options)) {
 
-            if (mSubjectDialog == null) {
-                options.get(0).setLocalCheck(true);
-                final DialogSubjectAdapter adapter = new DialogSubjectAdapter();
-                adapter.setData(options);
-                adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
+            index = 0;
+            for (int i = 0; i < CollectionUtil.size(options); i++) {
+                if (options.get(i).isLocalCheck()) {
+                    index = i;
+                    break;
+                }
+            }
+            options.get(index).setLocalCheck(true);
 
-                    @Override
-                    public void onItemViewClick(int position, View clickView, LevelOptions option) {
+            final DialogSubjectAdapter adapter = new DialogSubjectAdapter();
+            adapter.setData(options);
+            adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
 
-                        currentIndex = position;
+                @Override
+                public void onItemViewClick(int position, View clickView, LevelOptions option) {
 
-                        if (!adapter.getItem(position).isLocalCheck()) {
+                    currentIndex = position;
 
-                            for (LevelOptions data : options) {
+                    if (!adapter.getItem(position).isLocalCheck()) {
+
+                        for (LevelOptions data : options) {
+                            data.setLocalCheck(false);
+                        }
+
+                        adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
+
+            mSubjectDialog = DialogPlus.newDialog(OrderBookActivity.this)
+                    .setContentHolder(new ListHolder())
+                    .setHeader(R.layout.view_header_dialog_orderbook)
+                    .setFooter(R.layout.view_footer_dialog_orderbook)
+                    .setCancelable(true)
+                    .setAdapter(adapter)
+                    .setOnCancelListener(new OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogPlus dialog) {
+
+                            for (LevelOptions data : adapter.getData()) {
                                 data.setLocalCheck(false);
                             }
 
-                            adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
-                            adapter.notifyDataSetChanged();
+                            adapter.getItem(index).setLocalCheck(true);
                         }
+                    })
+                    .create();
+
+            mSubjectDialog.getFooterView().setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    index = currentIndex;
+
+                    for (LevelOptions data : adapter.getData()) {
+                        data.setLocalCheck(false);
                     }
-                });
+                    adapter.getItem(index).setLocalCheck(true);
 
-                mSubjectDialog = DialogPlus.newDialog(OrderBookActivity.this)
-                        .setContentHolder(new ListHolder())
-                        .setHeader(R.layout.view_header_dialog_orderbook)
-                        .setFooter(R.layout.view_footer_dialog_orderbook)
-                        .setCancelable(true)
-                        .setAdapter(adapter)
-                        .setOnCancelListener(new OnCancelListener() {
+                    mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
+                    mCountWidget.setDateSubjectIds(createDateSubjectStr());
+                    mCountWidget.resetUnitPrice();
+                    refreshTotalPrice();
+                    mSubjectDialog.dismiss();
 
-                            @Override
-                            public void onCancel(DialogPlus dialog) {
-
-                                for (LevelOptions data : adapter.getData()) {
-                                    data.setLocalCheck(false);
-                                }
-
-                                adapter.getItem(index).setLocalCheck(true);
-                            }
-                        })
-                        .create();
-
-                mSubjectDialog.getFooterView().setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        index = currentIndex;
-
-                        for (LevelOptions data : adapter.getData()) {
-                            data.setLocalCheck(false);
-                        }
-                        adapter.getItem(index).setLocalCheck(true);
-
-                        mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
-                        mCountWidget.setDateSubjectIds(createDateSubjectStr());
-                        mCountWidget.resetUnitPrice();
-                        refreshTotalPrice();
-                        mSubjectDialog.dismiss();
-
-                    }
-                });
-            }
+                }
+            });
             mSubjectDialog.show();
         }
     }
@@ -347,17 +353,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             totalPrice = totalPrice + itemTotalPrice;
         }
 
-        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.unit, formatPrice(totalPrice))));
-    }
-
-    public static String formatPrice(double total) {
-
-        DecimalFormat twoDForm = new DecimalFormat("#.##");
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-        dfs.setDecimalSeparator('.');
-        twoDForm.setDecimalFormatSymbols(dfs);
-
-        return twoDForm.format(total);
+        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(JTextSpanUtil.getUnitFormatPrice(totalPrice)));
     }
 
     @Override
@@ -393,19 +389,27 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void showAlertDialog() {
 
-        if (mExitDialog == null) {
-            mExitDialog = DialogUtil.getOkCancelDialog(this, R.string.confirm, com.joy.library.R.string.cancel, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+        if (mIsShouldShowDialog) {
 
-                    if (which == DialogInterface.BUTTON_POSITIVE)
-                        finish();
-                    else if (which == DialogInterface.BUTTON_NEGATIVE)
-                        mExitDialog.dismiss();
-                }
-            });
+            if (mSubjectDialog != null && mSubjectDialog.isShowing())
+                return;
+
+            if (mExitDialog == null) {
+                mExitDialog = DialogUtil.getOkCancelDialog(this, R.string.confirm, com.joy.library.R.string.cancel, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (which == DialogInterface.BUTTON_POSITIVE)
+                            finish();
+                        else if (which == DialogInterface.BUTTON_NEGATIVE)
+                            mExitDialog.dismiss();
+                    }
+                });
+            }
+            mExitDialog.show();
+        } else {
+            finish();
         }
-        mExitDialog.show();
     }
 
     @Override

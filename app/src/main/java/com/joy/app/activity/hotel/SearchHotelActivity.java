@@ -194,7 +194,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     }
     private void removeSearchContent(){
         if (searchHotelListFragment == null || state != resultcontent_state)return;
-        searchHotelListFragment.clearData();
+//        searchHotelListFragment.clearData();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.remove(searchHotelListFragment);
         ft.commitAllowingStateLoss();
@@ -223,7 +223,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     private void removeAutoCompleteContent(){
 
         if (autoCompleteFragment == null || state != autocomplete_state)return;
-        autoCompleteFragment.clearData();
+//        autoCompleteFragment.clearData();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.remove(autoCompleteFragment);
         ft.commitAllowingStateLoss();
