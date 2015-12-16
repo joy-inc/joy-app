@@ -487,7 +487,6 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             public void invalidateConvertView() {
 
                 LevelOptions data = getItem(mPosition);
-                data.setContent("2015年12月11日");
 
                 tvTitle.setText(data.getContent());
                 acCheckBox.setChecked(data.isLocalCheck());
