@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    android:fitsSystemWindows="true" >
+    android:fitsSystemWindows="true">
 
     <com.android.library.view.observablescrollview.ObservableScrollView
         android:layout_width="match_parent"
@@ -29,14 +29,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/sdvPhoto"
                 android:layout_margin="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textColor="@color/white"
                 android:textSize="17dp" />
 
             <LinearLayout
                 android:id="@+id/llContentDiv"
-                android:layout_below="@+id/sdvPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/sdvPhoto"
                 android:orientation="vertical" />
 
         </RelativeLayout>

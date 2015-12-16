@@ -99,10 +99,12 @@ public class PlanHtpUtil extends BaseHtpUtil{
      *
      * @return
      */
-    public static ObjectRequest getUserPlanListRequest(String folder_id,Class clazz) {
+    public static ObjectRequest getUserPlanListRequest(String folder_id,int count, int page,Class clazz) {
 
         Map<String, String> params = getBaseParams();
         params.put("folder_id", folder_id);
+        params.put("page", String.valueOf(page));
+        params.put("count", String.valueOf(count));
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 
         return createPostRequest(URL_POST_PLAN_LIST, params,clazz);

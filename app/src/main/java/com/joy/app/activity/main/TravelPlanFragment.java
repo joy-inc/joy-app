@@ -55,7 +55,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         super.onActivityCreated(savedInstanceState);
         EventBus.getDefault().register(this);
 
-        initViewLoad();
+        initViewShowStatus();
     }
 
     @Override
@@ -78,9 +78,10 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     /**
      * 处理界面的加载状态还是显示登录界面
      */
-    private void initViewLoad() {
+    private void initViewShowStatus() {
+
         if (JoyApplication.isLogin()) {
-            setSwipeRefreshEnable(true);
+//            setSwipeRefreshEnable(true);
 
             if (mLoginTipView != null)
                 removeCustomView(mLoginTipView);
@@ -95,9 +96,13 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      * 设置没有登录的界面提示
      */
     private void setNotLoginView() {
-        setSwipeRefreshEnable(false);
+//        setSwipeRefreshEnable(false);
         if (mLoginTipView == null) {
             mLoginTipView = new LoginTipView(this.getActivity(), R.string.travel_no_login, R.string.travel_no_login_sub);
+        }
+        if( getAdapter()!=null && ! getAdapter().isEmpty()) {
+            getAdapter().clear();
+            getAdapter().notifyDataSetChanged();
         }
         removeCustomView(mLoginTipView);
         addCustomView(mLoginTipView);
@@ -111,7 +116,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      */
     public void onEventMainThread(LoginStatusEvent event) {
 
-        initViewLoad();
+        initViewShowStatus();
     }
     /**
      * 登录的回掉

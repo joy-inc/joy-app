@@ -118,8 +118,6 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
 
     @Override
     protected void showFailedTip() {
-
-//        super.showFailedTip();
     }
 
     @Override

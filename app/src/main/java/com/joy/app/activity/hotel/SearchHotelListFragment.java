@@ -9,7 +9,6 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.activity.hotel.frame.FrameHttpRvFragment;
 import com.joy.app.adapter.hotel.SearchHotelListAdapter;
 import com.joy.app.bean.hotel.HotelEntity;
 import com.joy.app.bean.hotel.HotelList;
@@ -62,7 +61,10 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
             executeFrameRefresh();
         }
     }
-
+    public void clearData(){
+        if (getAdapter() == null)return;
+        getAdapter().clear();
+    }
 
     @Override
     public void onItemViewClick(int position, View clickView, Object o) {

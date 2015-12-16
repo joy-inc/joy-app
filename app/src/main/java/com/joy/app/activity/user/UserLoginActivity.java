@@ -23,12 +23,16 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
+import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.bean.User;
 import com.joy.app.eventbus.LoginStatusEvent;
+import com.joy.app.utils.http.HtpApi;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.utils.http.UserHtpUtil;
+
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -146,6 +150,10 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
                 return false;
             }
         });
+        if(BuildConfig.DEBUG){
+            mEtPhone.setText("11111111111");
+            mEtCode.setText("111111");
+        }
     }
 
     ViewTreeObserver.OnGlobalLayoutListener mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -239,8 +247,22 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
             ToastUtil.showToast(R.string.login_code_empty);
             return;
         }
+        String phone = mEtPhone.getText().toString();
 
-        ObjectRequest<User> req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN, User.class, UserHtpUtil.userLogin(mEtPhone.getText().toString(), code));
+        ObjectRequest<User> req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN, User.class, UserHtpUtil.userLogin(phone, code));
+        if (BuildConfig.DEBUG && ("11111111111".equals(phone) || "22222222222".equals(phone))) {
+            User u = new User();
+            u.setUser_id("ssss");
+            u.setMobile("18888888888");
+            u.setCreate_time(new Date().getTime() / 1000);
+            u.setNickname("liulong");
+            if ("11111111111".equals(phone)) {
+                u.setToken("41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e");//线上
+            } else {
+                u.setToken("e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb");//test
+            }
+            req.setData(u);
+        }
         req.setResponseListener(new ObjectResponse<User>() {
 
             @Override
@@ -305,7 +327,6 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         }
         mTvButton.setEnabled(false);
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mEtPhone.getText().toString()));
-//                        req.setData("");
         req.setResponseListener(new ObjectResponse() {
 
             @Override
