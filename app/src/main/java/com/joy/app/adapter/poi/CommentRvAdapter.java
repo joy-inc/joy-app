@@ -1,22 +1,15 @@
 package com.joy.app.adapter.poi;
 
-import android.app.Activity;
 import android.support.v7.widget.AppCompatRatingBar;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.library.adapter.ExRvMultipleAdapter;
-import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.DimenCons;
+import com.android.library.adapter.ExRvAdapter;
+import com.android.library.adapter.ExRvViewHolder;
 import com.android.library.utils.MathUtil;
 import com.joy.app.R;
-import com.joy.app.activity.poi.CommentScoresWidget;
 import com.joy.app.bean.poi.CommentItem;
-import com.joy.app.bean.poi.CommentScores;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,89 +18,15 @@ import butterknife.ButterKnife;
  * 商品评论列表adapter
  * Created by xiaoyu.chen on 15/11/20.
  */
-public class CommentRvAdapter extends ExRvMultipleAdapter {
-
-    private CommentScores mScore;
-    private Activity mActivity;
-
-    public CommentRvAdapter(Activity act) {
-
-        super(act);
-        mHeaderCount = 1;
-        mBottomCount = 1;
-        mActivity = act;
-    }
-
-    public void setScoreData(CommentScores data) {
-
-        mScore = data;
-    }
+public class CommentRvAdapter extends ExRvAdapter<CommentRvAdapter.ViewHolder, CommentItem> {
 
     @Override
-    public int getContentItemCount() {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return CollectionUtil.size(getData());
+        return new ViewHolder(inflate(parent, R.layout.item_poi_comment));
     }
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-        if (holder instanceof HeaderViewHolder) {
-
-            HeaderViewHolder vh = ((HeaderViewHolder) holder);
-            vh.scoresWidget.invalidate(mScore);
-
-        } else if (holder instanceof ContentViewHolder) {
-
-            ArrayList<CommentItem> datas = (ArrayList<CommentItem>) getData();
-            if (CollectionUtil.isEmpty(datas))
-                return;
-
-            int pos = position - mHeaderCount;
-            ContentViewHolder vh = ((ContentViewHolder) holder);
-
-            CommentItem data = datas.get(pos);
-
-            vh.acRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
-            vh.tvComment.setText(data.getComment());
-            vh.tvCommentUserDate.setText(data.getComment_user() + " - " + data.getComment_date());
-        }
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateHeaderView(ViewGroup parent) {
-
-        CommentScoresWidget data = new CommentScoresWidget(mActivity);
-
-        return new HeaderViewHolder(data);
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateContentView(ViewGroup parent) {
-
-        return new ContentViewHolder(mLayoutInflater.inflate(R.layout.item_poi_comment, parent, false));
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateBottomView(ViewGroup parent) {
-
-        View view = new View(parent.getContext());
-        view.setMinimumHeight(DimenCons.DP_1_PX * 16);
-        return new BottomViewHolder(view);
-    }
-
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
-
-        private CommentScoresWidget scoresWidget;
-
-        public HeaderViewHolder(CommentScoresWidget view) {
-
-            super(view.getContentView());
-            scoresWidget = view;
-        }
-    }
-
-    public class ContentViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends ExRvViewHolder<CommentItem> {
 
         @Bind(R.id.acRatingBar)
         AppCompatRatingBar acRatingBar;
@@ -118,18 +37,21 @@ public class CommentRvAdapter extends ExRvMultipleAdapter {
         @Bind(R.id.tvCommentUserDate)
         TextView tvCommentUserDate;
 
-        ContentViewHolder(final View itemView) {
+        public ViewHolder(View itemView) {
 
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
 
-    private class BottomViewHolder extends RecyclerView.ViewHolder {
+        @Override
+        protected void invalidateItemView(int position, CommentItem commentItem) {
 
-        BottomViewHolder(View view) {
+            if (commentItem != null) {
 
-            super(view);
+                acRatingBar.setRating(MathUtil.parseFloat(commentItem.getComment_level(), 0));
+                tvComment.setText(commentItem.getComment());
+                tvCommentUserDate.setText(commentItem.getComment_user() + " - " + commentItem.getComment_date());
+            }
         }
     }
 }
