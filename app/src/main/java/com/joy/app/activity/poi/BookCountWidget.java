@@ -139,7 +139,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
             for (LevelOptions data : getSelectId()) {
 
-                Product.Item item = getItemObject("_" + data.getOption_id());
+                Product.Item item = getItemObject(data.getOption_id());
                 if (item != null)
                     list.add(item.getItem_id() + "-" + data.getLocalCount());
             }
@@ -156,6 +156,9 @@ public class BookCountWidget extends ExLayoutWidget {
 
     private Product.Item getItemObject(String key) {
 
+        if (TextUtil.isNotEmpty(mDateSubjectIds))
+            key = "_" + key;
+
         return mProduct.getItems().get(mDateSubjectIds + key);
     }
 
@@ -166,7 +169,7 @@ public class BookCountWidget extends ExLayoutWidget {
 
             for (int i = 0; i < mAdapter.getCount(); i++) {
 
-                Product.Item item = getItemObject("_" + mAdapter.getItem(i).getOption_id());
+                Product.Item item = getItemObject(mAdapter.getItem(i).getOption_id());
 
                 if (item != null)
                     refreshUnitPrice(i, item.getPrice());
