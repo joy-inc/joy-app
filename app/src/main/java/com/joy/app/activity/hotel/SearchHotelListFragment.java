@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.activity.common.WebViewActivity;
@@ -21,7 +22,7 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class SearchHotelListFragment extends FrameHttpRvFragment<HotelList> implements OnItemViewClickListener {
+public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener {
     HotelParams params;
 
     public static SearchHotelListFragment instantiate(Context context, HotelParams hotelParams) {
@@ -33,7 +34,8 @@ public class SearchHotelListFragment extends FrameHttpRvFragment<HotelList> impl
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        executeRefresh();
+//        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override
@@ -55,7 +57,8 @@ public class SearchHotelListFragment extends FrameHttpRvFragment<HotelList> impl
         if (params.setHotel(keyword)) {
             getAdapter().getData().clear();
             getAdapter().notifyDataSetChanged();
-            executeRefresh();
+//            executeRefresh();
+            executeFrameRefresh();
         }
     }
 

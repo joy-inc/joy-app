@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 
+import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
@@ -21,7 +22,7 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店搜索联想    <br>
  */
-public class AutoCompleteFragment extends FrameHttpRvFragment<AutoComplete> implements RecyclerAdapter.OnItemClickListener {
+public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> implements RecyclerAdapter.OnItemClickListener {
     String id ,keyword;
     OnItemViewClickListener clickListener;
 
@@ -35,7 +36,8 @@ public class AutoCompleteFragment extends FrameHttpRvFragment<AutoComplete> impl
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        executeRefresh();
+//        executeRefresh();
+        executeRefreshOnly();
     }
 
     @Override
@@ -63,7 +65,8 @@ public class AutoCompleteFragment extends FrameHttpRvFragment<AutoComplete> impl
     public void reloadAutoComplete(String keyword){
         if (TextUtil.isNotEmpty(this.keyword) && this.keyword.equals(keyword))return;
         this.keyword = keyword;
-        executeRefresh();
+//        executeRefresh();
+        executeFrameRefresh();
     }
 
     @Override
