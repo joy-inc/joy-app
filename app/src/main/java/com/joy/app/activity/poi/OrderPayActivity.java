@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -16,6 +17,7 @@ import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
+import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
@@ -46,6 +48,22 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
      * 支付支付渠道
      */
     private static final String CHANNEL_ALIPAY = "alipay";
+    @Bind(R.id.llTitleDiv)
+    LinearLayout llTitleDiv;
+    @Bind(R.id.ll_date_item)
+    LinearLayout llDateItem;
+    @Bind(R.id.v_date_splite)
+    View vDateSplite;
+    @Bind(R.id.v_item_spilt)
+    View vItemSpilt;
+    @Bind(R.id.acrbWeChat)
+    AppCompatRadioButton acrbWeChat;
+    @Bind(R.id.acrbAlipay)
+    AppCompatRadioButton acrbAlipay;
+    @Bind(R.id.tvTotal)
+    JTextView tvTotal;
+    @Bind(R.id.llTotalDiv)
+    LinearLayout llTotalDiv;
 
     private String mId;
     private OrderDetail mOrderDetail;
@@ -68,8 +86,6 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     @Bind(R.id.jtv_order_item)
     TextView jtvOrderItem;
 
-    @Bind(R.id.v_spilt)
-    View vSpilt;
 
     @Bind(R.id.jtv_order_count)
     TextView jtvOrderCount;
@@ -145,21 +161,29 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         tvTitle.setText(data.getProduct_title());
         jtvOrderId.setText(data.getOrder_id());
 
-        if (TextUtil.isEmpty(data.getSelected_item())) {
+        if (data.isEmptyItem()) {
             goneView(llSelectedItem);
-            goneView(vSpilt);
+            goneView(vItemSpilt);
         } else {
             showView(llSelectedItem);
-            showView(vSpilt);
+            showView(vItemSpilt);
             jtvOrderItem.setText(data.getSelected_item());
         }
+        if (data.hasTravelDate()){
+            showView(llDateItem);
+            showView(vDateSplite);
+            jtvOrderDay.setText(data.getTravel_date());
+        }else{
+            goneView(llDateItem);
+            goneView(vDateSplite);
+        }
 
-        jtvOrderCount.setText(data.getFormatCountStr());
+
+        jtvOrderCount.setText(data.getItem_count());
         jtvOrderName.setText(data.getContact_name());
         jtvOrderPhone.setText(data.getContact_phone());
         jtvOrderEmail.setText(data.getContact_email());
         jtvOrderTotal.setText(JTextSpanUtil.getFormatUnitStr(JTextSpanUtil.getUnitFormatPrice(data.getTotal_price())));
-
         tvTotalPrice.setText(JTextSpanUtil.getFormatUnitStr(JTextSpanUtil.getUnitFormatPrice(data.getTotal_price())));
 
         return true;
