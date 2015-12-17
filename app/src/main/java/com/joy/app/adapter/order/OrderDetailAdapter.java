@@ -79,7 +79,7 @@ public class OrderDetailAdapter extends ExRvAdapter <OrderDetailAdapter.ViewHold
             orderEmail.setText(orderDetail.getContact_email());
             orderPhone.setText(orderDetail.getContact_phone());
             orderTotal.setText(orderDetail.getTotal_price_Str());
-            orderCount.setText(orderDetail.getFormatCountStr());
+            orderCount.setText(orderDetail.getItem_count());
         }
     }
 }
