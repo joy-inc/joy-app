@@ -174,6 +174,7 @@ public class AddPoiToFloderActivity extends Activity {
                 adapter.getData().clear();
             }
             adapter.setData(planFolders);
+            adapter.notifyDataSetChanged();
         }
         jtvButton.setClickable(true);
         jtvButton.setTag("add");
@@ -211,6 +212,7 @@ public class AddPoiToFloderActivity extends Activity {
     private void getFolderData() {
         ObjectRequest<List<PlanFolder>> req = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class, 200, 1);
         req.setResponseListener(new ObjectResponse<List<PlanFolder>>() {
+
             @Override
             public void onSuccess(Object tag, List<PlanFolder> planFolders) {
                 if (CollectionUtil.isEmpty(planFolders)) {
