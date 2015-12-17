@@ -67,8 +67,12 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
     JTextView jtvOrderDay;
     @Bind(R.id.ll_selected_item)
     LinearLayout llSelectedItem;
-    @Bind(R.id.v_spilt)
-    View vSpilt;
+    @Bind(R.id.ll_day_item)
+    LinearLayout llDayItem;
+    @Bind(R.id.v_day_spilt)
+    View vDaySpilt;
+    @Bind(R.id.v_item_spilt)
+    View vItemSpilt;
 
     public static void startActivity(Activity act, String orderId, int requestCode) {
         Intent intent = new Intent(act, OrderDetailActivity.class);
@@ -192,19 +196,26 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         jtvOrderName.setText(orderDetail.getContact_name());
         jtvOrderId.setText(orderDetail.getOrder_id());
         jtvOrderTitle.setText(orderDetail.getProduct_title());
-        if (orderDetail.isEmptyItem()){
+        if (orderDetail.isEmptyItem()) {
             goneView(llSelectedItem);
-            goneView(vSpilt);
-        }else{
+            goneView(vItemSpilt);
+        } else {
             showView(llSelectedItem);
-            showView(vSpilt);
+            showView(vItemSpilt);
             jtvOrderItem.setText(orderDetail.getSelected_item());
         }
-        jtvOrderDay.setText(orderDetail.getTravel_date());
+        if(orderDetail.hasTravelDate()){
+            showView(llDayItem);
+            showView(vDaySpilt);
+            jtvOrderDay.setText(orderDetail.getTravel_date());
+        }else{
+            goneView(llDayItem);
+            goneView(vDaySpilt);
+        }
         jtvOrderEmail.setText(orderDetail.getContact_email());
         jtvOrderPhone.setText(orderDetail.getContact_phone());
         jtvOrderTotal.setText(orderDetail.getTotal_price_Str());
-        jtvOrderCount.setText(orderDetail.getCount());
+        jtvOrderCount.setText(orderDetail.getItem_count());
         return true;
     }
 

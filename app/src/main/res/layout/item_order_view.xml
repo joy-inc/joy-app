@@ -121,6 +121,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@color/black_trans12" />
             <LinearLayout
+                android:id="@+id/ll_day_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -144,6 +145,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/v_day_spilt"
                 style="@style/Line.Light.Horizontal"
                 android:layout_marginLeft="10dp"
                 android:background="@color/black_trans12" />
@@ -171,14 +173,14 @@
                     android:ellipsize="end"
                     android:lines="1"
                     android:paddingRight="10dp"
-                    android:text="1234567890123456789011111111111111111111111111"
+                    android:text=""
                     android:textColor="@color/text_pink"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
             <View
-                android:id="@+id/v_spilt"
+                android:id="@+id/v_item_spilt"
                 style="@style/Line.Light.Horizontal"
                 android:layout_marginLeft="10dp"
                 android:background="@color/black_trans12" />
