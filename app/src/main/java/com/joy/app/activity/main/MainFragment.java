@@ -64,7 +64,6 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
             }
         });
         setAdapter(adapter);
-        CityHotelListActivity.startActivity(getActivity(),"50", JoyConstant.HOTEL_FROM_KEY);
     }
 
     @Override

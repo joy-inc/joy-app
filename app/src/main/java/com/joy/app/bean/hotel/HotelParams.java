@@ -19,11 +19,29 @@ public class HotelParams implements Parcelable {
     String From_key;//aid	booking跟踪来源
     String hotel;//酒店名
     String star_ids;//过滤星级
+    String stars;//过滤星级
     String price_rangs;//价格区间	逗号分割高低价格
     String facilities_ids;//过滤标签
+    String facilities;//过滤标签
     int Orderby;//排序方式 默认智能排序
     int area_id;//区域id
     String[] price;
+
+    public String getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(String facilities) {
+        this.facilities = facilities;
+    }
+
+    public String getStars() {
+        return stars;
+    }
+
+    public void setStars(String stars) {
+        this.stars = stars;
+    }
 
     public String getCityId() {
         return cityId;

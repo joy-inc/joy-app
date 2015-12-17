@@ -40,7 +40,7 @@ public class HotelHtpUtil extends BaseHtpUtil {
             params.put("star_ids",hotelParams.getStar_ids());
         }
         if (TextUtil.isNotEmpty(hotelParams.getPrice_rangs())){
-            params.put("price_rangs",hotelParams.getPrice_rangs());
+            params.put("price_rangs",hotelParams.getPrice_rangs().replace(",不限",""));
         }
         params.put(KEY_COUNT, count + "");
         params.put(KEY_PAGE, page + "");

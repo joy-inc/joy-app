@@ -1,5 +1,7 @@
 package com.joy.app.bean.hotel;
 
+import com.android.library.utils.TextUtil;
+
 import java.util.List;
 
 /**
@@ -47,6 +49,45 @@ public class HotelSearchFilters {
     public void setOrderby(List<FilterItems> orderby) {
         this.orderby = orderby;
     }
+
+    public String getFacilitiesIds(String str){
+        String temp[] = str.split(",");
+        StringBuilder builder = new StringBuilder();
+        for (String s1 : temp){
+            String id =  getFid(s1);
+            if (TextUtil.isEmpty(id))continue;
+            builder.append(",");
+            builder.append(id);
+        }
+        return builder.substring(1);
+    }
+
+    public String getStarIds(String str){
+        String temp[] = str.split(",");
+        StringBuilder builder = new StringBuilder();
+        for (String s1 : temp){
+            String id =  getSid(s1);
+            if (TextUtil.isEmpty(id))continue;
+            builder.append(",");
+            builder.append(id);
+        }
+        return builder.substring(1);
+    }
+
+    private String getFid(String name){
+       for (FilterItems item:facilities){
+           if (item.getName().equals(name))return String.valueOf(item.getValue());
+       }
+        return TextUtil.TEXT_EMPTY;
+    }
+
+    private String getSid(String name){
+       for (FilterItems item:stars){
+           if (item.getName().equals(name))return String.valueOf(item.getValue());
+       }
+        return TextUtil.TEXT_EMPTY;
+    }
+
 
 }
 
