@@ -65,7 +65,8 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     protected void initTitleView() {
 
         addTitleLeftBackView();
-        setTitle(getIntent().getStringExtra("FolderName"));
+        setTitle("");
+        addTitleMiddleView(getIntent().getStringExtra("FolderName"));
 
         addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {
             @Override
@@ -127,8 +128,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
             EventBus.getDefault().post(new FolderEvent(FolderEvent.DELETE_FOLDER));
         }else{
             showToast("删除成功");
-            getAdapter().clear();
-            executeRefreshOnly();
+            executeFrameRefresh();
             EventBus.getDefault().post(new FolderEvent(FolderEvent.DELETE_POI));
         }
         //首页需要刷新POI数量
