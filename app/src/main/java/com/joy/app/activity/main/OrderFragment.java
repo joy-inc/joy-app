@@ -1,8 +1,6 @@
 package com.joy.app.activity.main;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatRatingBar;
@@ -14,9 +12,6 @@ import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
-import com.android.library.utils.LogMgr;
-import com.android.library.utils.MathUtil;
-import com.android.library.utils.TextUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.JoyApplication;
@@ -25,7 +20,6 @@ import com.joy.app.activity.poi.OrderDetailActivity;
 import com.joy.app.activity.poi.OrderPayActivity;
 import com.joy.app.adapter.MainOrderRvAdapter;
 import com.joy.app.bean.MainOrder;
-import com.joy.app.eventbus.DeleteEvent;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;

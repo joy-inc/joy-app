@@ -24,12 +24,14 @@ import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.adapter.plan.PlanFolderAdapter;
 import com.joy.app.bean.plan.PlanFolder;
+import com.joy.app.eventbus.FolderEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author litong  <br>
@@ -193,6 +195,7 @@ public class AddPoiToFloderActivity extends Activity {
                 Intent intent = new Intent();
                 intent.putExtra("name", folde.getFolder_name());
                 intent.putExtra("id", folde.getFolder_id());
+                EventBus.getDefault().post(new FolderEvent(FolderEvent.ADD_POI));
                 setResult(RESULT_OK, intent);
                 finish();
 
@@ -238,6 +241,7 @@ public class AddPoiToFloderActivity extends Activity {
 
             @Override
             public void onSuccess(Object tag, Object object) {
+                EventBus.getDefault().post(new FolderEvent(FolderEvent.CREATE_FOLDER));
                 getFolderData();
             }
 
