@@ -16,7 +16,7 @@ import com.joy.app.activity.map.ListPoiMapActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.bean.plan.PlanItem;
-import com.joy.app.eventbus.DeleteEvent;
+import com.joy.app.eventbus.FolderEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 import com.joy.app.utils.plan.DialogUtil;
 import com.joy.app.utils.plan.FolderRequestListener;
@@ -124,13 +124,14 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
             showToast("删除成功");
             setResult(Activity.RESULT_OK);
             finish();
+            EventBus.getDefault().post(new FolderEvent(FolderEvent.DELETE_FOLDER));
         }else{
             showToast("删除成功");
             getAdapter().clear();
             executeRefreshOnly();
+            EventBus.getDefault().post(new FolderEvent(FolderEvent.DELETE_POI));
         }
         //首页需要刷新POI数量
-        EventBus.getDefault().post(new DeleteEvent(DeleteEvent.DELETE_ORDER));
     }
 
     @Override

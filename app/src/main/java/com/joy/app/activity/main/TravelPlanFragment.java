@@ -10,12 +10,13 @@ import android.view.View;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.LogMgr;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
-import com.joy.app.eventbus.DeleteEvent;
+import com.joy.app.eventbus.FolderEvent;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 import com.joy.app.view.LoginTipView;
@@ -64,7 +65,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         super.onResume();
         if (mNeedToRefresh) {
             mNeedToRefresh = false;
-            executeSwipeRefresh();
+            executeFrameRefresh();
         }
     }
 
@@ -123,9 +124,9 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      *
      * @param event
      */
-    public void onEventMainThread(DeleteEvent event) {
-        if (event.getDelete() == DeleteEvent.DELETE_FOLDER)
-            mNeedToRefresh = false;
+    public void onEventMainThread(FolderEvent event) {
+        LogMgr.i("onEventMainThread" +" event:"+event.getDelete());
+            mNeedToRefresh = true;
     }
 
     @Override
