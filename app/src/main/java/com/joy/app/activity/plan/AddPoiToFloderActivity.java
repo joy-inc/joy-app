@@ -98,6 +98,7 @@ public class AddPoiToFloderActivity extends Activity {
                 } else {
                     showLoading();
                     createFolder(edtName.getText().toString());
+                    edtName.setText("");
                 }
             }
         });
