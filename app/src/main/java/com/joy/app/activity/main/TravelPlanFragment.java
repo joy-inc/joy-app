@@ -65,7 +65,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         super.onResume();
         if (mNeedToRefresh) {
             mNeedToRefresh = false;
-            executeFrameRefresh();
+            executeSwipeRefresh();
         }
     }
 
