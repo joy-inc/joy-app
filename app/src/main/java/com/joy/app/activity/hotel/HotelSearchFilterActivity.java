@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -387,8 +388,8 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
             isDisable = true;
             for (int i = 0; i < mListCb.size(); i++) {
                 if (!mTypeList.contains(mListCb.get(i).getTag())) {
-                    mListCb.get(i).setBackgroundResource(R.drawable.shape_bg_poilist_filter_tag);
-                    mListCb.get(i).setTextColor(getResources().getColorStateList(R.color.holo_gray_bright));
+                    mListCb.get(i).setBackgroundResource(R.drawable.shape_bg_poilist_filter_tag_disable);
+                    mListCb.get(i).setTextColor(Color.parseColor("#cfcfcf"));
                 }
             }
         } else if (isDisable) {
