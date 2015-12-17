@@ -48,22 +48,6 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
      * 支付支付渠道
      */
     private static final String CHANNEL_ALIPAY = "alipay";
-    @Bind(R.id.llTitleDiv)
-    LinearLayout llTitleDiv;
-    @Bind(R.id.ll_date_item)
-    LinearLayout llDateItem;
-    @Bind(R.id.v_date_splite)
-    View vDateSplite;
-    @Bind(R.id.v_item_spilt)
-    View vItemSpilt;
-    @Bind(R.id.acrbWeChat)
-    AppCompatRadioButton acrbWeChat;
-    @Bind(R.id.acrbAlipay)
-    AppCompatRadioButton acrbAlipay;
-    @Bind(R.id.tvTotal)
-    JTextView tvTotal;
-    @Bind(R.id.llTotalDiv)
-    LinearLayout llTotalDiv;
 
     private String mId;
     private OrderDetail mOrderDetail;
@@ -77,8 +61,14 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     @Bind(R.id.jtv_order_id)
     TextView jtvOrderId;
 
+    @Bind(R.id.ll_date_item)
+    LinearLayout llDateItem;
+
     @Bind(R.id.jtv_order_day)
     TextView jtvOrderDay;
+
+    @Bind(R.id.v_date_splite)
+    View vDateSplite;
 
     @Bind(R.id.ll_selected_item)
     LinearLayout llSelectedItem;
@@ -86,6 +76,8 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     @Bind(R.id.jtv_order_item)
     TextView jtvOrderItem;
 
+    @Bind(R.id.v_item_spilt)
+    View vItemSpilt;
 
     @Bind(R.id.jtv_order_count)
     TextView jtvOrderCount;
@@ -169,11 +161,12 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             showView(vItemSpilt);
             jtvOrderItem.setText(data.getSelected_item());
         }
-        if (data.hasTravelDate()){
+
+        if (data.hasTravelDate()) {
             showView(llDateItem);
             showView(vDateSplite);
             jtvOrderDay.setText(data.getTravel_date());
-        }else{
+        } else {
             goneView(llDateItem);
             goneView(vDateSplite);
         }
