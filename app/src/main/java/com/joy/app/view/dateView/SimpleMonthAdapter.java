@@ -263,17 +263,19 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
 
         int showCount = 1;
         int year = c1.get(Calendar.YEAR) - calendar.get(Calendar.YEAR);
+
         if (year > 0) {
-            showCount = c1.get(Calendar.MONTH) + (12 - calendar.get(Calendar.MONTH)) + (year - 1) * 12;
+            showCount = (c1.get(Calendar.MONTH) + 1) + (12 - (calendar.get(Calendar.MONTH) + 1)) + (year - 1) * 12;
+            showCount++;//因为索引从0开始;
+        }else{
+            showCount=12-c1.get(Calendar.MONTH);
         }
         //          showCount = ((int)(mEndTime / 1000) - (int)(calendar.getTimeInMillis() / 1000)) / 3600 / (24 * 30);
         //        int showCount1 = (int) ((mEndTime - calendar.getTimeInMillis()) / (1000 * 3600 * 24 * 30));
         //        LogMgr.d("showCount="+showCount+"   showCount1="+showCount1);
-        if (showCount < 1)
-            showCount = 3;
-        else if (showCount == 1) {
-            showCount++;
-        }
+//        if (showCount < 1)
+//            showCount = 3;
+
         setItemCount(showCount);
     }
 

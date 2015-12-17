@@ -93,8 +93,11 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:gravity="center_vertical"
+            android:maxWidth="150dp"
             android:paddingLeft="5dp"
+            android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="14dp"
             android:textStyle="bold" />
