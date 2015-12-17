@@ -70,7 +70,7 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
     @Override
     public void onItemViewClick(int position, View clickView, Object o) {
         HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position - 1);
-        WebViewActivity.startActivity(getActivity(), hotelEntity.getLink(), "");
+        WebViewActivity.startHotelActivity(getActivity(), hotelEntity.getLink());
     }
 
     @Override
