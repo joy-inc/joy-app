@@ -1,16 +1,21 @@
 package com.joy.app.activity.plan;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.library.BaseApplication;
 import com.android.library.adapter.OnItemViewClickListener;
@@ -18,6 +23,8 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.DeviceUtil;
+import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
@@ -102,6 +109,23 @@ public class AddPoiToFloderActivity extends Activity {
                 }
             }
         });
+        edtName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                LogMgr.i("actionId:"+actionId);
+
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                    if (TextUtil.isEmptyTrim(v.getText().toString()))
+                        return false;
+                    showLoading();
+                    createFolder(edtName.getText().toString());
+                    edtName.setText("");
+                    return true;
+                }
+                return false;
+            }
+        });
         vShadow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +146,8 @@ public class AddPoiToFloderActivity extends Activity {
         jtvButton.setClickable(true);
         jtvButton.setTag("create");
         jtvButton.setText("确认创建");
+        edtName.requestFocus();
+        showInputWindow();
     }
 
     private void showEmpty() {
@@ -251,12 +277,33 @@ public class AddPoiToFloderActivity extends Activity {
                 super.onError(tag, msg);
                 if (adapter != null) {
                     showList(null);
+                }else{
+                    getFolderData();
                 }
                 ToastUtil.showToast(msg);
             }
         });
 
         addRequestNoCache(req);
+    }
+
+    /**
+     * 隐藏输入框
+     */
+    public void hiddenInputWindow() {
+
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(edtName.getWindowToken(), 0);
+
+    }
+
+    /**
+     * 弹出输入框
+     */
+    public void showInputWindow() {
+
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(edtName, InputMethodManager.SHOW_IMPLICIT);
     }
 
     private void addRequestNoCache(ObjectRequest<?> req) {
