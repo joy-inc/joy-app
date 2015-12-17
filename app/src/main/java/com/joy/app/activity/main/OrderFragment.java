@@ -15,6 +15,8 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.LogMgr;
+import com.android.library.utils.MathUtil;
+import com.android.library.utils.TextUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.JoyApplication;
@@ -121,7 +123,8 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
             @Override
             public void onClick(View v) {
 
-                addComment(productId, String.valueOf(ratingBar.getRating()), editText.getText().toString());
+                String rating = ratingBar.getRating() > 0 ? String.valueOf(ratingBar.getRating()) : "";
+                addComment(productId, rating, editText.getText().toString());
             }
         });
 
