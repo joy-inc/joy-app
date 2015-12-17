@@ -387,7 +387,7 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
             isDisable = true;
             for (int i = 0; i < mListCb.size(); i++) {
                 if (!mTypeList.contains(mListCb.get(i).getTag())) {
-                    mListCb.get(i).setBackgroundResource(R.drawable.shape_bg_poilist_filter_normal);
+                    mListCb.get(i).setBackgroundResource(R.drawable.shape_bg_poilist_filter_tag);
                     mListCb.get(i).setTextColor(getResources().getColorStateList(R.color.holo_gray_bright));
                 }
             }
@@ -395,7 +395,7 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
             isDisable = false;
             for (int i = 0; i < mListCb.size(); i++) {
                 if (!mTypeList.contains(mListCb.get(i).getTag())) {
-                    mListCb.get(i).setBackgroundResource(mThemeSelector);
+                    mListCb.get(i).setBackgroundResource(R.drawable.selector_bg_hotel_list_tag_filter);
                     mListCb.get(i).setTextColor(getResources().getColorStateList(R.color.selector_font_poilist_filter));
                 }
             }
