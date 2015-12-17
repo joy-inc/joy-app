@@ -170,7 +170,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
                 mPhotoUrl = mPoiDetail.getPhotos().get(0);
 
             OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
-        } else if (R.id.btnAddToPlan == view.getId()) {
+        } else if (R.id.llAddPlanDiv == view.getId()) {
 
             if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
 

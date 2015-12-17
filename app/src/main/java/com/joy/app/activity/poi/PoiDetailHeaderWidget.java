@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.library.utils.MathUtil;
@@ -14,6 +15,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.JTextSpanUtil;
+
+import butterknife.ButterKnife;
 
 
 /**
@@ -27,9 +30,12 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
     private TextView mTvPrice;
     private AppCompatRatingBar mAcRatingBar;
     private TextView mTvPoiCommentNum;
+    private LinearLayout llAddPlanDiv;
     private TextView mBtnAddToPlan;
+    private TextView mTvName;
 
     public PoiDetailHeaderWidget(Activity activity) {
+
         super(activity);
     }
 
@@ -49,8 +55,10 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         mSdvPhoto = (SimpleDraweeView) contentView.findViewById(R.id.sdvPhoto);
         mTvTitle = (TextView) contentView.findViewById(R.id.tvTitle);
         mAcRatingBar = (AppCompatRatingBar) contentView.findViewById(R.id.acRatingBar);
-        mBtnAddToPlan = (TextView) contentView.findViewById(R.id.btnAddToPlan);
-        mBtnAddToPlan.setOnClickListener(this);
+        llAddPlanDiv = (LinearLayout) contentView.findViewById(R.id.llAddPlanDiv);
+        llAddPlanDiv.setOnClickListener(this);
+        mBtnAddToPlan = (TextView) contentView.findViewById(R.id.tvAddToPlan);
+        mTvName = (TextView) contentView.findViewById(R.id.tvName);
         mTvPrice = (TextView) contentView.findViewById(R.id.tvPrice);
         mTvPoiCommentNum = (TextView) contentView.findViewById(R.id.tvPoiCommentNum);
 
@@ -69,7 +77,10 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
 
         if (TextUtil.isNotEmpty(data.getFolder_id())) {
 
-            mBtnAddToPlan.setText("已加入 " + data.getFolder_name());
+            mBtnAddToPlan.setText(R.string.added);
+            mBtnAddToPlan.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_poi_add_plan_selected, 0, 0, 0);
+            mTvName.setText(data.getFolder_name());
+            llAddPlanDiv.setSelected(true);
         }
 
         if (data.getIs_book()) {
