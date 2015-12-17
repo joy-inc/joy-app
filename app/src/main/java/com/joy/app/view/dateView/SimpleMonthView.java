@@ -143,13 +143,13 @@ class SimpleMonthView extends View {
     protected int mLastDay;
 
     protected long mStartSectionTime = 0;//开始区间的时间
-    protected int mStartSectionYear;
-    protected int mStartSectionMonth;
-    protected int mStartSectionDay;
+    //    protected int mStartSectionYear;
+    //    protected int mStartSectionMonth;
+    //    protected int mStartSectionDay;
     protected long mEndSectionTime = 0;//结束的时间
-    protected int mEndSectionYear;
-    protected int mEndSectionMonth;
-    protected int mEndSectionDay;
+    //    protected int mEndSectionYear;
+    //    protected int mEndSectionMonth;
+    //    protected int mEndSectionDay;
     private final Calendar mCalendar;
     private final Calendar mDayLabelCalendar;
     private final Boolean isPrevDayEnabled;
@@ -357,12 +357,11 @@ class SimpleMonthView extends View {
     private boolean checkDay(int monthDay, int toYear, int toMonth, int toDay) {
         if (mEndSectionTime > 0 && mStartSectionTime > 0) {
             Calendar cNow = Calendar.getInstance();
-            cNow.set(toYear, toMonth, toDay);
-            if (cNow.getTimeInMillis() >= mStartSectionTime && cNow.getTimeInMillis() <= mEndSectionTime) {
-                LogMgr.d("tyear "+toYear+"-"+toMonth+"-"+toDay);
+            cNow.set(toYear, toMonth, toDay, 0, 0, 0);
+            long cNowTick = cNow.getTime().getTime() / 10000;
+            if (cNowTick >= mStartSectionTime && cNowTick <= mEndSectionTime) {
                 return true;
-            } else{
-                LogMgr.d("ddddd");
+            } else {
                 return false;
 
             }
@@ -371,7 +370,7 @@ class SimpleMonthView extends View {
     }
 
     private boolean checkPreDay(int monthDay, int toYear, int toMonth, int toDay) {
-        return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mYear == toYear &&mMonth == toMonth && monthDay < toDay);
+        return ((mYear < toYear)) || (mYear == toYear && mMonth < toMonth) || (mYear == toYear && mMonth == toMonth && monthDay < toDay);
 
     }
 
@@ -530,7 +529,7 @@ class SimpleMonthView extends View {
                     ((mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedBeginMonth && day < mSelectedBeginDay) || (mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedLastMonth && day > mSelectedLastDay)))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType,  drawYMiddle, drawCircle);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, drawYMiddle, drawCircle);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -539,7 +538,7 @@ class SimpleMonthView extends View {
                     (((mSelectedBeginMonth < mSelectedLastMonth && mMonth == mSelectedBeginMonth && day < mSelectedBeginDay) || (mSelectedBeginMonth < mSelectedLastMonth && mMonth == mSelectedLastMonth && day > mSelectedLastDay)) || ((mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedBeginMonth && day > mSelectedBeginDay) || (mSelectedBeginMonth > mSelectedLastMonth && mMonth == mSelectedLastMonth && day < mSelectedLastDay))))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType,  drawYMiddle, drawCircle);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, drawYMiddle, drawCircle);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -556,7 +555,7 @@ class SimpleMonthView extends View {
             if ((mSelectedBeginDay != -1 && mSelectedLastDay != -1 && mSelectedBeginYear != mSelectedLastYear) && ((mSelectedBeginYear < mSelectedLastYear && ((mMonth > mSelectedBeginMonth && mYear == mSelectedBeginYear) || (mMonth < mSelectedLastMonth && mYear == mSelectedLastYear))) || (mSelectedBeginYear > mSelectedLastYear && ((mMonth < mSelectedBeginMonth && mYear == mSelectedBeginYear) || (mMonth > mSelectedLastMonth && mYear == mSelectedLastYear))))) {
                 if (mDrawRect) {
                     isInSelecDay = true;
-                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType,  drawYMiddle, drawCircle);
+                    drawSelRec(canvas, dayOffset, linkCount, oneWidth, drawSelType, drawYMiddle, drawCircle);
                 }
                 mMonthNumPaint.setColor(mSelectDayTextColor);
             }
@@ -815,27 +814,12 @@ class SimpleMonthView extends View {
      * 设置可选的开始和结束的时间区间
      *
      * @param startTime
-     * @param endtime
+     * @param endTime
      */
-    public void setSectionDay(long startTime, long endtime) {
+    public void setSectionDay(long startTime, long endTime) {
 
-        mEndSectionTime = endtime;
-        if (mEndSectionTime > 0) {
-            Calendar tmp = Calendar.getInstance();
-            tmp.setTimeInMillis(mEndSectionTime);
-            mEndSectionYear = tmp.get(Calendar.YEAR);
-            mEndSectionMonth = tmp.get(Calendar.MONTH);
-            mEndSectionDay = tmp.get(Calendar.DAY_OF_MONTH);
-        }
-        mStartSectionTime = startTime;
-        if (mStartSectionTime > 0) {
-            Calendar tmp = Calendar.getInstance();
-
-            tmp.setTimeInMillis(mStartSectionTime);
-            mStartSectionYear = tmp.get(Calendar.YEAR);
-            mStartSectionMonth = tmp.get(Calendar.MONTH);
-            mStartSectionDay = tmp.get(Calendar.DAY_OF_MONTH);
-        }
+        mEndSectionTime = endTime / 10000;
+        mStartSectionTime = startTime / 10000;
 
     }
 
