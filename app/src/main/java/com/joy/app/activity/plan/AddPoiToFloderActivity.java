@@ -251,6 +251,8 @@ public class AddPoiToFloderActivity extends Activity {
                 super.onError(tag, msg);
                 if (adapter != null) {
                     showList(null);
+                }else{
+                    getFolderData();
                 }
                 ToastUtil.showToast(msg);
             }
