@@ -121,6 +121,7 @@ public class AddPoiToFloderActivity extends Activity {
                     showLoading();
                     createFolder(edtName.getText().toString());
                     edtName.setText("");
+                    hiddenInputWindow();
                     return true;
                 }
                 return false;

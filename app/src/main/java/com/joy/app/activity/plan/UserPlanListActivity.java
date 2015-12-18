@@ -34,6 +34,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
 
     private String mFolderID;
     private DialogUtil dialogUtil;
+    View mapbtn;
 
     public static void startActivityById(Activity act, String FolderID, String mFolderName, int code) {
         Intent intent = new Intent(act, UserPlanListActivity.class);
@@ -75,7 +76,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
                 dialogUtil.showDeleteFolderDialog(mFolderID);
             }
         });
-        addTitleRightView(R.drawable.ic_plan_map, new View.OnClickListener() {
+        mapbtn = addTitleRightView(R.drawable.ic_plan_map, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -84,6 +85,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
                 ListPoiMapActivity.startActivityByPoiList(UserPlanListActivity.this, ((PlanListAdapter) getAdapter()).getContent());
             }
         });
+        hideView(mapbtn);
     }
 
 
@@ -143,6 +145,11 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
 
     @Override
     protected List<?> getListInvalidateContent(List<PlanItem> planItems) {
+        for (PlanItem item:planItems){
+            if (item.getMapPoiDetail() != null){
+                showView(mapbtn);
+            }
+        }
         return super.getListInvalidateContent(planItems);
     }
 

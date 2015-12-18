@@ -31,11 +31,18 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
     @Override
     public void setData(List<PlanItem> data) {
         super.setData(data);
-        content = MapUtil.getMapContent(data);
+        content = new ArrayList<>();
+        for (PlanItem item : data){
+            if (item.getMapPoiDetail() == null){
+                continue;
+            }
+            content.add(item.getMapPoiDetail());
+        }
     }
 
 
     public ArrayList<MapPoiDetail> getContent() {
+
         return content;
     }
 
