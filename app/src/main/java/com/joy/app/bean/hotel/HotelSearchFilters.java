@@ -59,7 +59,12 @@ public class HotelSearchFilters {
             builder.append(",");
             builder.append(id);
         }
-        return builder.substring(1);
+        if (builder.length()>1){
+
+            return builder.substring(1);
+        }else {
+            return TextUtil.TEXT_EMPTY;
+        }
     }
 
     public String getStarIds(String str){
@@ -71,7 +76,11 @@ public class HotelSearchFilters {
             builder.append(",");
             builder.append(id);
         }
-        return builder.substring(1);
+        if(builder.length()>1){
+
+            return builder.substring(1);
+        }else return TextUtil.TEXT_EMPTY;
+
     }
 
     private String getFid(String name){

@@ -112,7 +112,6 @@ public class AddPoiToFloderActivity extends Activity {
         edtName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                LogMgr.i("actionId:"+actionId);
 
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
 
