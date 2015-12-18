@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -227,8 +228,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             public void onSuccess(Object tag, String orderCharge) {
 
                 hideLoading();
-                String jsonCharge = JSON.toJSONString(orderCharge);
-                startPaymentActivity(jsonCharge);
+                startPaymentActivity(orderCharge);
             }
 
             @Override
