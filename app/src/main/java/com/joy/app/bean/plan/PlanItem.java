@@ -129,6 +129,9 @@ public class PlanItem {
         detail.setmPhotoUrl(pic_url);
         detail.setIcon_nor(R.drawable.ic_map_poi);
         detail.setIcon_press(R.drawable.ic_map_poi_pressed);
+        if (detail.getLatitude() > 90 || detail.getLatitude() < -90)
+            return null;
+
         return detail;
     }
 }

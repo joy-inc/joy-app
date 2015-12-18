@@ -91,7 +91,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     @Bind(R.id.poi_map_path_btn)
     RelativeLayout poiMapPathBtn;
 
-    boolean isTouchable;
+    boolean isTouchable = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -405,6 +405,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     Runnable cleanMarker = new Runnable() {
         @Override
         public void run() {
+            if (selectMark == null)return;
             selectMark.setMarker(ContextCompat.getDrawable(MapActivity.this,selectMark.getDataObject().getIcon_nor()));
             mapview.invalidate();
             selectMark = null;
