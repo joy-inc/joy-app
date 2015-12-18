@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
@@ -19,6 +20,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.JTextSpanUtil;
+
+import java.util.Collection;
 
 
 /**
@@ -86,6 +89,9 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
 
         if (data == null)
             return;
+
+        if(CollectionUtil.isEmpty(data.getPhotos()))
+            data.getPhotos().add("");
 
         mAdapter = new BannerAdapter(new BannerImage<String>() {
 
