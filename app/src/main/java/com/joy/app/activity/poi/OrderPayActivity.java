@@ -211,9 +211,9 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
     private void getOrderChargeToPay(String channel) {
 
-        ObjectRequest<OrderCharge> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_PAY_CREATE_CHARGE, OrderCharge.class, OrderHtpUtil.getOrderPayCreateCharge(mId, channel));
+        ObjectRequest<String> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_PAY_CREATE_CHARGE, String.class, OrderHtpUtil.getOrderPayCreateCharge(mId, channel));
 
-        obj.setResponseListener(new ObjectResponse<OrderCharge>() {
+        obj.setResponseListener(new ObjectResponse<String>() {
 
             @Override
             public void onPre() {
@@ -224,7 +224,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             }
 
             @Override
-            public void onSuccess(Object tag, OrderCharge orderCharge) {
+            public void onSuccess(Object tag, String orderCharge) {
 
                 hideLoading();
                 String jsonCharge = JSON.toJSONString(orderCharge);

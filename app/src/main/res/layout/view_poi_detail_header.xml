@@ -5,11 +5,11 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdvPhoto"
-        style="@style/sdv_cover"
+    <LinearLayout
+        android:id="@+id/llBannerDiv"
         android:layout_width="match_parent"
-        android:layout_height="240dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 
     <com.android.library.widget.JTextView
         android:id="@+id/tvTitle"
