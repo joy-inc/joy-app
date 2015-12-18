@@ -12,18 +12,27 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
+import com.android.library.BaseApplication;
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.httptask.ObjectRequest;
+import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JRecyclerView;
 import com.joy.app.R;
+import com.joy.app.adapter.hotel.AutoCompleteAdapter;
 import com.joy.app.adapter.hotel.HotelSearchHistoryAdapter;
 import com.joy.app.bean.hotel.AutoComplete;
 import com.joy.app.bean.hotel.EntryEntity;
 import com.joy.app.bean.hotel.HotelParams;
 import com.joy.app.utils.hotel.JoyShareUtil;
+import com.joy.app.utils.http.HotelHtpUtil;
+import com.joy.app.utils.http.OrderHtpUtil;
+import com.joy.app.utils.plan.FolderRequestListener;
 
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -52,6 +61,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     HotelParams params;
     SeachTitleWidget seachTitleWidget;
     HotelSearchHistoryAdapter historyAdapter ;
+    AutoCompleteAdapter autoCompleteAdapter;
     AutoCompleteFragment autoCompleteFragment;
     SearchHotelListFragment searchHotelListFragment;
     public static void startActivity(Activity activity, String cityID, String checkin, String checkout, String aid) {
@@ -146,6 +156,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     }
 
     private void showHistory(){
+        showView(jrvHistory);
         if (state != history_state){
             removeSearchContent();
             removeAutoCompleteContent();
@@ -153,16 +164,18 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
         if (historyAdapter == null){
             historyAdapter = new HotelSearchHistoryAdapter();
             historyAdapter.setOnItemViewClickListener(this);
-            jrvHistory.setAdapter(historyAdapter);
         }
-        historyAdapter.setData(JoyShareUtil.getData(this,getClass().getSimpleName(),SHARE_fILE));
-        ViewUtil.showView(jrvHistory);
+        jrvHistory.setAdapter(historyAdapter);
+        historyAdapter.clear();
+        historyAdapter.addAll(JoyShareUtil.getData(this,getClass().getSimpleName(),SHARE_fILE));
+        historyAdapter.notifyDataSetChanged();
         state = history_state;
     }
 
     private void removeHistory(){
 
-        ViewUtil.hideView(jrvHistory);
+//        ViewUtil.hideView(jrvHistory);
+
     }
 
 
@@ -174,6 +187,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     }
 
     private void showSearchContent(String keyowrd){
+        hideView(jrvHistory);
         saveHistoryData(keyowrd);
         seachTitleWidget.hiddenInputWindow();
         if (state != resultcontent_state){
@@ -194,39 +208,46 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     }
     private void removeSearchContent(){
         if (searchHotelListFragment == null || state != resultcontent_state)return;
-//        searchHotelListFragment.clearData();
+        searchHotelListFragment.clearData();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.remove(searchHotelListFragment);
         ft.commitAllowingStateLoss();
     }
 
     private void showAutoCompleteContent(String keyowrd){
+        showView(jrvHistory);
         if (state != autocomplete_state){
             state = autocomplete_state;
             removeSearchContent();
             removeHistory();
-            if (autoCompleteFragment == null){
-                autoCompleteFragment = AutoCompleteFragment.instantiate(this,cityId,keyowrd);
-                autoCompleteFragment.setClickListener(this);
-                addFragment(R.id.fl_content,autoCompleteFragment);
-            }else{
-                addFragment(R.id.fl_content,autoCompleteFragment);
-                autoCompleteFragment.reloadAutoComplete(keyowrd);
+//            if (autoCompleteFragment == null){
+//                autoCompleteFragment = AutoCompleteFragment.instantiate(this,cityId,keyowrd);
+//                autoCompleteFragment.setClickListener(this);
+//                addFragment(R.id.fl_content,autoCompleteFragment);
+//            }else{
+//                addFragment(R.id.fl_content,autoCompleteFragment);
+//                autoCompleteFragment.reloadAutoComplete(keyowrd);
+//            }
+            if (autoCompleteAdapter == null){
+                autoCompleteAdapter = new AutoCompleteAdapter();
+                autoCompleteAdapter.setData(new ArrayList<EntryEntity>());
+                autoCompleteAdapter.setOnItemViewClickListener(this);
             }
+            jrvHistory.setAdapter(autoCompleteAdapter);
             state = autocomplete_state;
-            return;
         }
-        autoCompleteFragment.reloadAutoComplete(keyowrd);
+        getAutoComplete(keyowrd);
+//        autoCompleteFragment.reloadAutoComplete(keyowrd);
 
     }
 
     private void removeAutoCompleteContent(){
 
-        if (autoCompleteFragment == null || state != autocomplete_state)return;
+//        if (autoCompleteFragment == null || state != autocomplete_state)return;
 //        autoCompleteFragment.clearData();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.remove(autoCompleteFragment);
-        ft.commitAllowingStateLoss();
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.remove(autoCompleteFragment);
+//        ft.commitAllowingStateLoss();
     }
 
     private void saveHistoryData( String keyword){
@@ -243,6 +264,44 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
             historyAdapter.notifyDataSetChanged();
             JoyShareUtil.SaveData(this, getClass().getSimpleName(), SHARE_fILE,list);
         }
+    }
+    ObjectRequest<AutoComplete> req;
+    private void getAutoComplete(String keyWord){
+
+        if (req != null){
+            req.cancel();
+        }
+        req = HotelHtpUtil.getAutoCompleteRequest(cityId, URLEncoder.encode(keyWord),AutoComplete.class);
+        req.setResponseListener(new ObjectResponse<AutoComplete>() {
+
+            @Override
+            public void onPre() {
+                if (autoCompleteAdapter != null){
+                    autoCompleteAdapter.clear();
+                }
+            }
+
+            @Override
+            public void onSuccess(Object tag, AutoComplete autoComplete) {
+                if (autoCompleteAdapter != null){
+                    autoCompleteAdapter.addAll(autoComplete.getEntry());
+                    autoCompleteAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(Object tag, String msg) {
+                super.onError(tag, msg);
+
+            }
+        });
+        addRequestNoCache(req);
+    }
+
+    private void addRequestNoCache(ObjectRequest<?> req){
+        req.setTag( req.getIdentifier());
+        req.setShouldCache(false);
+        BaseApplication.getRequestQueue().add(req);
     }
 
     @Override

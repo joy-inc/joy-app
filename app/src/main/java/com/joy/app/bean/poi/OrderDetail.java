@@ -38,7 +38,8 @@ public class OrderDetail implements Parcelable {
     private String contact_name = TextUtil.TEXT_EMPTY;
     private String contact_phone = TextUtil.TEXT_EMPTY;
     private String contact_email = TextUtil.TEXT_EMPTY;
-    private int count, order_status;
+    private String item_count = TextUtil.TEXT_EMPTY;
+    private int order_status;
     private float total_price;
     private String product_photo = TextUtil.TEXT_EMPTY;
 
@@ -63,6 +64,10 @@ public class OrderDetail implements Parcelable {
 
     public String getSelected_item() {
         return selected_item;
+    }
+
+    public boolean isEmptyItem(){
+        return TextUtil.isEmpty(selected_item);
     }
 
     public void setSelected_item(String selected_item) {
@@ -93,12 +98,12 @@ public class OrderDetail implements Parcelable {
         this.contact_email = contact_email;
     }
 
-    public int getCount() {
-        return count;
+    public String getItem_count() {
+        return item_count;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setItem_count(String item_count) {
+        this.item_count = item_count;
     }
 
     public int getOrder_status() {
@@ -157,13 +162,9 @@ public class OrderDetail implements Parcelable {
         this.travel_date = travel_date;
     }
 
-    public CharSequence getFormatCountStr() {
-
-        SpannableString spannableString = new SpannableString("x" + getCount());
-        spannableString.setSpan(new RelativeSizeSpan(0.67f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableString;
-    }
-
+public boolean hasTravelDate(){
+    return TextUtil.isNotEmpty(travel_date);
+}
 
     @Override
     public int describeContents() {
@@ -179,7 +180,7 @@ public class OrderDetail implements Parcelable {
         dest.writeString(this.contact_name);
         dest.writeString(this.contact_phone);
         dest.writeString(this.contact_email);
-        dest.writeInt(this.count);
+        dest.writeString(this.item_count);
         dest.writeInt(this.order_status);
         dest.writeFloat(this.total_price);
         dest.writeString(this.product_photo);
@@ -198,7 +199,7 @@ public class OrderDetail implements Parcelable {
         this.contact_name = in.readString();
         this.contact_phone = in.readString();
         this.contact_email = in.readString();
-        this.count = in.readInt();
+        this.item_count = in.readString();
         this.order_status = in.readInt();
         this.total_price = in.readFloat();
         this.product_photo = in.readString();

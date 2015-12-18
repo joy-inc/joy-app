@@ -44,6 +44,7 @@
             android:theme="@style/theme_app.main" />
         <activity
             android:name=".activity.common.WebViewActivity"
+            android:theme="@style/theme_app.translucent.toolbar.overlay"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.setting.SettingActivity"

@@ -38,8 +38,6 @@ import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.library.dialog.DialogUtil;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -239,70 +237,76 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         if (CollectionUtil.isNotEmpty(options)) {
 
-            if (mSubjectDialog == null) {
-                options.get(0).setLocalCheck(true);
-                final DialogSubjectAdapter adapter = new DialogSubjectAdapter();
-                adapter.setData(options);
-                adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
+            index = 0;
+            for (int i = 0; i < CollectionUtil.size(options); i++) {
+                if (options.get(i).isLocalCheck()) {
+                    index = i;
+                    break;
+                }
+            }
+            options.get(index).setLocalCheck(true);
 
-                    @Override
-                    public void onItemViewClick(int position, View clickView, LevelOptions option) {
+            final DialogSubjectAdapter adapter = new DialogSubjectAdapter();
+            adapter.setData(options);
+            adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
 
-                        currentIndex = position;
+                @Override
+                public void onItemViewClick(int position, View clickView, LevelOptions option) {
 
-                        if (!adapter.getItem(position).isLocalCheck()) {
+                    currentIndex = position;
 
-                            for (LevelOptions data : options) {
+                    if (!adapter.getItem(position).isLocalCheck()) {
+
+                        for (LevelOptions data : options) {
+                            data.setLocalCheck(false);
+                        }
+
+                        adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
+
+            mSubjectDialog = DialogPlus.newDialog(OrderBookActivity.this)
+                    .setContentHolder(new ListHolder())
+                    .setHeader(R.layout.view_header_dialog_orderbook)
+                    .setFooter(R.layout.view_footer_dialog_orderbook)
+                    .setCancelable(true)
+                    .setAdapter(adapter)
+                    .setOnCancelListener(new OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogPlus dialog) {
+
+                            for (LevelOptions data : adapter.getData()) {
                                 data.setLocalCheck(false);
                             }
 
-                            adapter.getItem(position).setLocalCheck(!adapter.getItem(position).isLocalCheck());
-                            adapter.notifyDataSetChanged();
+                            adapter.getItem(index).setLocalCheck(true);
                         }
+                    })
+                    .create();
+
+            mSubjectDialog.getFooterView().setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    index = currentIndex;
+
+                    for (LevelOptions data : adapter.getData()) {
+                        data.setLocalCheck(false);
                     }
-                });
+                    adapter.getItem(index).setLocalCheck(true);
 
-                mSubjectDialog = DialogPlus.newDialog(OrderBookActivity.this)
-                        .setContentHolder(new ListHolder())
-                        .setHeader(R.layout.view_header_dialog_orderbook)
-                        .setFooter(R.layout.view_footer_dialog_orderbook)
-                        .setCancelable(true)
-                        .setAdapter(adapter)
-                        .setOnCancelListener(new OnCancelListener() {
+                    mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
+                    mCountWidget.setDateSubjectIds(createDateSubjectStr());
+                    mCountWidget.resetUnitPrice();
+                    refreshTotalPrice();
+                    mSubjectDialog.dismiss();
 
-                            @Override
-                            public void onCancel(DialogPlus dialog) {
-
-                                for (LevelOptions data : adapter.getData()) {
-                                    data.setLocalCheck(false);
-                                }
-
-                                adapter.getItem(index).setLocalCheck(true);
-                            }
-                        })
-                        .create();
-
-                mSubjectDialog.getFooterView().setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        index = currentIndex;
-
-                        for (LevelOptions data : adapter.getData()) {
-                            data.setLocalCheck(false);
-                        }
-                        adapter.getItem(index).setLocalCheck(true);
-
-                        mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
-                        mCountWidget.setDateSubjectIds(createDateSubjectStr());
-                        mCountWidget.resetUnitPrice();
-                        refreshTotalPrice();
-                        mSubjectDialog.dismiss();
-
-                    }
-                });
-            }
+                }
+            });
             mSubjectDialog.show();
         }
     }

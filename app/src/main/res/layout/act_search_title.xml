@@ -26,9 +26,10 @@
         android:imeOptions="actionSearch"
         android:inputType="textNoSuggestions"
         android:singleLine="true"
-        android:textColor="@android:color/white"
+        android:drawablePadding="5dp"
+        android:textColor="@android:color/black"
         android:textColorHint="@color/black_trans40"
-        android:textCursorDrawable="@drawable/zic_cursor_white"
+        android:textCursorDrawable="@drawable/zic_cursor_pink"
         android:textSize="16dp"
         android:textStyle="normal"/>
 

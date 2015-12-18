@@ -23,6 +23,7 @@ import java.util.List;
 public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
 
     private String mId;
+    private CommentScoresWidget mScoreWidget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,23 @@ public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
     @Override
     protected void initContentView() {
 
-        setAdapter(new CommentRvAdapter(this));
+        mScoreWidget = new CommentScoresWidget(this);
+        setAdapter(new CommentRvAdapter());
         getRecyclerView().setBackgroundResource(R.color.white);
+        setLoadMoreDarkTheme();
+    }
+
+    @Override
+    protected boolean invalidateContent(CommentAll commentAll) {
+
+        addHeaderView(mScoreWidget.getContentView());
+        mScoreWidget.invalidate(commentAll.getScores());
+        return super.invalidateContent(commentAll);
     }
 
     @Override
     protected List<CommentItem> getListInvalidateContent(CommentAll commentAll) {
 
-        ((CommentRvAdapter) getAdapter()).setScoreData(commentAll.getScores());
         return commentAll.getComments();
     }
 

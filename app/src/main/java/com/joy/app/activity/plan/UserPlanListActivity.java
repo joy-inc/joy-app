@@ -16,7 +16,7 @@ import com.joy.app.activity.map.ListPoiMapActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.bean.plan.PlanItem;
-import com.joy.app.eventbus.DeleteEvent;
+import com.joy.app.eventbus.FolderEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 import com.joy.app.utils.plan.DialogUtil;
 import com.joy.app.utils.plan.FolderRequestListener;
@@ -34,6 +34,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
 
     private String mFolderID;
     private DialogUtil dialogUtil;
+    View mapbtn;
 
     public static void startActivityById(Activity act, String FolderID, String mFolderName, int code) {
         Intent intent = new Intent(act, UserPlanListActivity.class);
@@ -65,7 +66,8 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     protected void initTitleView() {
 
         addTitleLeftBackView();
-        setTitle(getIntent().getStringExtra("FolderName"));
+        setTitle("");
+        addTitleMiddleView(getIntent().getStringExtra("FolderName"));
 
         addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {
             @Override
@@ -74,7 +76,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
                 dialogUtil.showDeleteFolderDialog(mFolderID);
             }
         });
-        addTitleRightView(R.drawable.ic_plan_map, new View.OnClickListener() {
+        mapbtn = addTitleRightView(R.drawable.ic_plan_map, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -83,6 +85,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
                 ListPoiMapActivity.startActivityByPoiList(UserPlanListActivity.this, ((PlanListAdapter) getAdapter()).getContent());
             }
         });
+        hideView(mapbtn);
     }
 
 
@@ -124,13 +127,13 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
             showToast("删除成功");
             setResult(Activity.RESULT_OK);
             finish();
+            EventBus.getDefault().post(new FolderEvent(FolderEvent.DELETE_FOLDER));
         }else{
             showToast("删除成功");
-            getAdapter().clear();
-            executeRefreshOnly();
+            executeFrameRefresh();
+            EventBus.getDefault().post(new FolderEvent(FolderEvent.DELETE_POI));
         }
         //首页需要刷新POI数量
-        EventBus.getDefault().post(new DeleteEvent(DeleteEvent.DELETE_ORDER));
     }
 
     @Override
@@ -142,6 +145,11 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
 
     @Override
     protected List<?> getListInvalidateContent(List<PlanItem> planItems) {
+        for (PlanItem item:planItems){
+            if (item.getMapPoiDetail() != null){
+                showView(mapbtn);
+            }
+        }
         return super.getListInvalidateContent(planItems);
     }
 

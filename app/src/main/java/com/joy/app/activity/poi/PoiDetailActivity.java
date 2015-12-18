@@ -111,7 +111,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         mMapWidget.invalidate(R.drawable.ic_star_light_small);
         mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), mPoiDetail.getAddress());
-        if (TextUtil.isEmpty(data.getLat()) || TextUtil.isEmpty(data.getLon()))
+        if (TextUtil.isEmpty(data.getLat()) || TextUtil.isEmpty(data.getLon()) || "0".equals(data.getLat()) || "0".equals(data.getLon()))
             ViewUtil.goneView(mMapWidget.getContentView());
 
         mIntroduceWidget.invalidate(mPoiDetail);
@@ -170,7 +170,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
                 mPhotoUrl = mPoiDetail.getPhotos().get(0);
 
             OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
-        } else if (R.id.btnAddToPlan == view.getId()) {
+        } else if (R.id.llAddPlanDiv == view.getId()) {
 
             if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
 

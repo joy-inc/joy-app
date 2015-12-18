@@ -67,18 +67,40 @@
             android:visibility="invisible" />
     </RelativeLayout>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnAddToPlan"
+    <LinearLayout
+        android:id="@+id/llAddPlanDiv"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/selector_bg_rectangle_accent"
-        android:text="@string/add_plan"
-        android:textColor="@color/color_accent"
-        android:textSize="11dp" />
+        android:gravity="center">
 
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvAddToPlan"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:drawableLeft="@drawable/ic_poi_add_plan_normal"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/add_plan"
+            android:textColor="@color/selector_text_color_accent_white"
+            android:textSize="12dp" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxWidth="150dp"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>
 

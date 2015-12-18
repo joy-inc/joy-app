@@ -1,16 +1,21 @@
 package com.joy.app.activity.plan;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.library.BaseApplication;
 import com.android.library.adapter.OnItemViewClickListener;
@@ -18,18 +23,22 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.DeviceUtil;
+import com.android.library.utils.LogMgr;
+import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.adapter.plan.PlanFolderAdapter;
 import com.joy.app.bean.plan.PlanFolder;
+import com.joy.app.eventbus.FolderEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author litong  <br>
@@ -96,7 +105,25 @@ public class AddPoiToFloderActivity extends Activity {
                 } else {
                     showLoading();
                     createFolder(edtName.getText().toString());
+                    edtName.setText("");
                 }
+            }
+        });
+        edtName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                    if (TextUtil.isEmptyTrim(v.getText().toString()))
+                        return false;
+                    showLoading();
+                    createFolder(edtName.getText().toString());
+                    edtName.setText("");
+                    hiddenInputWindow();
+                    return true;
+                }
+                return false;
             }
         });
         vShadow.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +146,8 @@ public class AddPoiToFloderActivity extends Activity {
         jtvButton.setClickable(true);
         jtvButton.setTag("create");
         jtvButton.setText("确认创建");
+        edtName.requestFocus();
+        showInputWindow();
     }
 
     private void showEmpty() {
@@ -174,6 +203,7 @@ public class AddPoiToFloderActivity extends Activity {
                 adapter.getData().clear();
             }
             adapter.setData(planFolders);
+            adapter.notifyDataSetChanged();
         }
         jtvButton.setClickable(true);
         jtvButton.setTag("add");
@@ -192,6 +222,7 @@ public class AddPoiToFloderActivity extends Activity {
                 Intent intent = new Intent();
                 intent.putExtra("name", folde.getFolder_name());
                 intent.putExtra("id", folde.getFolder_id());
+                EventBus.getDefault().post(new FolderEvent(FolderEvent.ADD_POI));
                 setResult(RESULT_OK, intent);
                 finish();
 
@@ -211,6 +242,7 @@ public class AddPoiToFloderActivity extends Activity {
     private void getFolderData() {
         ObjectRequest<List<PlanFolder>> req = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class, 200, 1);
         req.setResponseListener(new ObjectResponse<List<PlanFolder>>() {
+
             @Override
             public void onSuccess(Object tag, List<PlanFolder> planFolders) {
                 if (CollectionUtil.isEmpty(planFolders)) {
@@ -236,6 +268,7 @@ public class AddPoiToFloderActivity extends Activity {
 
             @Override
             public void onSuccess(Object tag, Object object) {
+                EventBus.getDefault().post(new FolderEvent(FolderEvent.CREATE_FOLDER));
                 getFolderData();
             }
 
@@ -244,12 +277,33 @@ public class AddPoiToFloderActivity extends Activity {
                 super.onError(tag, msg);
                 if (adapter != null) {
                     showList(null);
+                }else{
+                    getFolderData();
                 }
                 ToastUtil.showToast(msg);
             }
         });
 
         addRequestNoCache(req);
+    }
+
+    /**
+     * 隐藏输入框
+     */
+    public void hiddenInputWindow() {
+
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(edtName.getWindowToken(), 0);
+
+    }
+
+    /**
+     * 弹出输入框
+     */
+    public void showInputWindow() {
+
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(edtName, InputMethodManager.SHOW_IMPLICIT);
     }
 
     private void addRequestNoCache(ObjectRequest<?> req) {

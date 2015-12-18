@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebBackForwardList;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
+import com.android.library.utils.ViewUtil;
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.ActivityUrlUtil;
@@ -26,7 +30,7 @@ import de.greenrobot.event.EventBus;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-10
  */
-public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget.WebViewListener {
+public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget.WebViewListener, View.OnClickListener {
 
     //--大于100有分享的意思
     public static final int TYPE_CITY = 101;//城市详情
@@ -38,6 +42,8 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     private WebViewShare mWebViewShare;
     private int mType = 0;
     private String mTitle;
+    private boolean mUseBottomBanner = false;//使用底部的banner
+    private String mUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,28 +65,45 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
         mWebViewShare.setInfo("http://www.qq.com");
         EventBus.getDefault().register(this);
         mWebViewWidget.setUserCookie(false);
-        mWebViewWidget.loadUrl(getIntent().getStringExtra("url"));
+        mUrl = getIntent().getStringExtra("url");
+        mWebViewWidget.loadUrl(mUrl);
         mType = getIntent().getIntExtra("type", 0);
+        mUseBottomBanner = getIntent().getBooleanExtra("usebootom", false);
+
     }
 
     @Override
     protected void initTitleView() {
 
-        addTitleLeftBackView();
-        mTitle = getIntent().getStringExtra("title");
-        addTitleMiddleView(mTitle);
+        if (!mUseBottomBanner) {
+            addTitleLeftBackView();
+            //            mTitle = getIntent().getStringExtra("title");
+            //            addTitleMiddleView(mTitle);
 
-        if (mType > 100) {
-            addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mShareDialog == null) {
+            if (mType > 100) {
+                addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mShareDialog == null) {
 
-                        mShareDialog = new ShareDialog(WebViewActivity.this, mWebViewShare);
+                            mShareDialog = new ShareDialog(WebViewActivity.this, mWebViewShare);
+                        }
+                        mShareDialog.show();
                     }
-                    mShareDialog.show();
-                }
-            });
+                });
+            }
+        }
+    }
+
+    @Override
+    protected void initContentView() {
+
+        if (mUseBottomBanner) {
+            ViewUtil.showView(findViewById(R.id.llTool));
+            findViewById(R.id.ivBack).setOnClickListener(this);
+            findViewById(R.id.ivFoward).setOnClickListener(this);
+            findViewById(R.id.ivClose).setOnClickListener(this);
+            findViewById(R.id.ivRefresh).setOnClickListener(this);
         }
     }
 
@@ -109,7 +132,13 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     protected void setContentFullScreenWebView(boolean isNativeMode) {
 
         setWebWidget(new WebViewNativeWidget(this));
-        setContentView(getWebWidget().getContentView());
+
+        setContentView(R.layout.act_web_browser);
+
+        RelativeLayout root = (RelativeLayout) getContentView();
+        RelativeLayout.LayoutParams ls = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        ls.addRule(RelativeLayout.ABOVE, R.id.llTool);
+        root.addView(getWebWidget().getContentView(), ls);
     }
 
     protected void setWebWidget(WebViewBaseWidget widget) {
@@ -135,9 +164,9 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     @Override
     public void onWebViewReceiveTitle(String title) {
 
-        if (TextUtil.isEmpty(mTitle) && !TextUtil.isEmpty(title)) {
-            setTitle(title);
-        }
+        //        if (TextUtil.isEmpty(mTitle) && !TextUtil.isEmpty(title) && !mUseBottomBanner) {
+        //            setTitle(title);
+        //        }
     }
 
     @Override
@@ -165,7 +194,9 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
         if (LogMgr.isDebug())
             LogMgr.d("webviewActivity", "onWebViewShouldOverrideUrlLoading url  = " + url);
-        if (!ActivityUrlUtil.startActivityByHttpUrl(this, url)) {
+        if (mUrl.equals(url)) {
+            loadUrl(url);
+        } else if (!ActivityUrlUtil.startActivityByHttpUrl(this, url)) {
             loadUrl(url);
 
         }
@@ -222,6 +253,62 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
             mWebViewWidget.reloadUrlByLoginStateChanged();
     }
 
+    private void onGoBackClick(boolean needFinish) {
+
+        if (getWebWidget().canGoBack()) {
+
+            if (getWebWidget().isCookieStatusNone()) {
+
+                //如果没有种cookie，直接back
+                getWebWidget().goBack();
+            } else {
+
+                //如果加载过cookie，则最早的历史纪录是cookieurl，不能back
+                WebBackForwardList list = getWebWidget().copyBackForwardList();
+                if (list != null && list.getCurrentIndex() > 1) {
+
+                    if (mUseBottomBanner && list.getCurrentIndex() == 2) {// TODO 跳过loading页，直接关闭。暂时先这么写
+
+                        finish();
+                        return;
+                    }
+
+                    getWebWidget().goBack();
+                } else {
+
+                    if (needFinish)
+                        finish();
+                }
+            }
+
+        } else {
+
+            if (needFinish)
+                finish();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.ivBack:
+                onGoBackClick(false);
+
+                break;
+            case R.id.ivFoward:
+                getWebWidget().goForward();
+                break;
+            case R.id.ivClose:
+                finish();
+                break;
+            case R.id.ivRefresh:
+                getWebWidget().reloadUrl();
+
+                break;
+
+        }
+    }
 
     /**
      * 不需要分享的调这
@@ -242,6 +329,17 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     }
 
     /**
+     * 酒店打开的方式
+     *
+     * @param context
+     * @param url
+     */
+    public static void startHotelActivity(Context context, String url) {
+
+        startActivity(context, url, "", 0, true);
+    }
+
+    /**
      * 有分享的调用这
      *
      * @param context
@@ -251,12 +349,27 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
      */
     public static void startActivity(Context context, String url, String title, int type) {
 
+        startActivity(context, url, title, type, false);
+
+    }
+
+    /**
+     * @param context
+     * @param url
+     * @param title
+     * @param type
+     * @param useBottomBanner 就不使用标题栏了,直接底部
+     */
+    public static void startActivity(Context context, String url, String title, int type, boolean useBottomBanner) {
+
         Intent intent = new Intent();
         intent.putExtra("url", url);
         intent.putExtra("title", title);
         intent.putExtra("type", type);
+        intent.putExtra("usebootom", useBottomBanner);
         intent.setClass(context, WebViewActivity.class);
         context.startActivity(intent);
 
     }
+
 }

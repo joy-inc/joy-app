@@ -30,7 +30,8 @@
             android:layout_toRightOf="@+id/acRatingBar"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textSize="12dp" />
+            android:textSize="12dp"
+            android:textStyle="bold" />
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvCommentLevel"
@@ -38,7 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/acRatingBar"
             android:textColor="@color/black_trans87"
-            android:textSize="43dp" />
+            android:textSize="43dp"
+            android:textStyle="bold" />
 
         <com.android.library.widget.JTextView
             android:layout_width="wrap_content"
@@ -51,15 +53,15 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/llProgressDiv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/scoreDiv"
         android:layout_alignTop="@+id/scoreDiv"
-        android:layout_marginRight="26dp"
+        android:layout_toLeftOf="@+id/llCountDiv"
         android:layout_toRightOf="@+id/scoreDiv"
         android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:paddingRight="26dp">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -72,22 +74,15 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:textColor="@color/black_trans54"
-                android:textSize="10dp" />
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/score5"
                 style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/tv5Count"
                 android:layout_toRightOf="@+id/tv5" />
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tv5Count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/color_accent"
-                android:textSize="10dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -101,22 +96,16 @@
                 android:layout_height="wrap_content"
                 android:text="4"
                 android:textColor="@color/black_trans54"
-                android:textSize="10dp" />
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/score4"
                 style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/tv4Count"
                 android:layout_toRightOf="@+id/tv4" />
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tv4Count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/color_accent"
-                android:textSize="10dp" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -130,22 +119,15 @@
                 android:layout_height="wrap_content"
                 android:text="3"
                 android:textColor="@color/black_trans54"
-                android:textSize="10dp" />
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/score3"
                 style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/tv3Count"
                 android:layout_toRightOf="@+id/tv3" />
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tv3Count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/color_accent"
-                android:textSize="10dp" />
 
         </RelativeLayout>
 
@@ -160,22 +142,14 @@
                 android:layout_height="wrap_content"
                 android:text="2"
                 android:textColor="@color/black_trans54"
-                android:textSize="10dp" />
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/score2"
                 style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/tv2Count"
                 android:layout_toRightOf="@+id/tv2" />
-
-            <com.android.library.widget.JTextView
-                android:id="@+id/tv2Count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/color_accent"
-                android:textSize="10dp" />
 
         </RelativeLayout>
 
@@ -192,25 +166,85 @@
                 android:gravity="center_vertical"
                 android:text="1"
                 android:textColor="@color/black_trans54"
-                android:textSize="10dp" />
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/score1"
                 style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/tv1Count"
                 android:layout_toRightOf="@+id/tv1" />
 
-            <com.android.library.widget.JTextView
-                android:id="@+id/tv1Count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/color_accent"
-                android:textSize="10dp" />
-
         </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llCountDiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/scoreDiv"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/scoreDiv"
+        android:layout_marginRight="26dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tv5Count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/color_accent"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tv4Count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/color_accent"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tv3Count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/color_accent"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tv2Count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/color_accent"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <com.android.library.widget.JTextView
+            android:id="@+id/tv1Count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/color_accent"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <View

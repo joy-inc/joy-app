@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
+import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
@@ -58,8 +61,23 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     @Bind(R.id.jtv_order_id)
     TextView jtvOrderId;
 
+    @Bind(R.id.ll_date_item)
+    LinearLayout llDateItem;
+
+    @Bind(R.id.jtv_order_day)
+    TextView jtvOrderDay;
+
+    @Bind(R.id.v_date_splite)
+    View vDateSplite;
+
+    @Bind(R.id.ll_selected_item)
+    LinearLayout llSelectedItem;
+
     @Bind(R.id.jtv_order_item)
     TextView jtvOrderItem;
+
+    @Bind(R.id.v_item_spilt)
+    View vItemSpilt;
 
     @Bind(R.id.jtv_order_count)
     TextView jtvOrderCount;
@@ -134,13 +152,31 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         sdvPhoto.setImageURI(Uri.parse(data.getProduct_photo()));
         tvTitle.setText(data.getProduct_title());
         jtvOrderId.setText(data.getOrder_id());
-        jtvOrderItem.setText(data.getSelected_item());
-        jtvOrderCount.setText(data.getFormatCountStr());
+
+        if (data.isEmptyItem()) {
+            goneView(llSelectedItem);
+            goneView(vItemSpilt);
+        } else {
+            showView(llSelectedItem);
+            showView(vItemSpilt);
+            jtvOrderItem.setText(data.getSelected_item());
+        }
+
+        if (data.hasTravelDate()) {
+            showView(llDateItem);
+            showView(vDateSplite);
+            jtvOrderDay.setText(data.getTravel_date());
+        } else {
+            goneView(llDateItem);
+            goneView(vDateSplite);
+        }
+
+
+        jtvOrderCount.setText(data.getItem_count());
         jtvOrderName.setText(data.getContact_name());
         jtvOrderPhone.setText(data.getContact_phone());
         jtvOrderEmail.setText(data.getContact_email());
         jtvOrderTotal.setText(JTextSpanUtil.getFormatUnitStr(JTextSpanUtil.getUnitFormatPrice(data.getTotal_price())));
-
         tvTotalPrice.setText(JTextSpanUtil.getFormatUnitStr(JTextSpanUtil.getUnitFormatPrice(data.getTotal_price())));
 
         return true;

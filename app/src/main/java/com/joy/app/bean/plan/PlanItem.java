@@ -1,6 +1,7 @@
 package com.joy.app.bean.plan;
 
 import android.graphics.Color;
+import android.text.GetChars;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -8,6 +9,8 @@ import android.text.style.RelativeSizeSpan;
 
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
+import com.joy.app.R;
+import com.joy.app.bean.map.MapPoiDetail;
 
 /**
  * @author litong  <br>
@@ -111,5 +114,21 @@ public class PlanItem {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public MapPoiDetail getMapPoiDetail(){
+        if (TextUtil.isEmpty(lon)||TextUtil.isEmpty(lat)||lon.equals("0")||lat.equals("0")){
+            return null;
+        }
+        MapPoiDetail detail = new MapPoiDetail();
+        detail.setmCnName(cn_name);
+        detail.setmEnName(en_name);
+        detail.setLongitude(Double.parseDouble(lon));
+        detail.setLatitude(Double.parseDouble(lat));
+        detail.setmId(product_id);
+        detail.setmPhotoUrl(pic_url);
+        detail.setIcon_nor(R.drawable.ic_map_poi);
+        detail.setIcon_press(R.drawable.ic_map_poi_pressed);
+        return detail;
     }
 }
