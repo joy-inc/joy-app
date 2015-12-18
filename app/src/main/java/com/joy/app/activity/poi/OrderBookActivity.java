@@ -333,11 +333,13 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private String createDateSubjectStr() {
 
-        String itemStr;
+        String itemStr = TextUtil.TEXT_EMPTY;
 
-        if (TextUtil.isNotEmpty(mDateWidget.getSelectId()))
+        if (TextUtil.isNotEmpty(mDateWidget.getSelectId()) && TextUtil.isNotEmpty(mSubjectWidget.getSelectId()))
             itemStr = mDateWidget.getSelectId() + "_" + mSubjectWidget.getSelectId();
-        else
+        else if (TextUtil.isNotEmpty(mDateWidget.getSelectId()))
+            itemStr = mDateWidget.getSelectId();
+        else if (TextUtil.isNotEmpty(mSubjectWidget.getSelectId()))
             itemStr = mSubjectWidget.getSelectId();
 
         return itemStr;

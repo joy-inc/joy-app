@@ -9,6 +9,7 @@ import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
@@ -157,9 +158,9 @@ public class BookCountWidget extends ExLayoutWidget {
     private Product.Item getItemObject(String key) {
 
         if (TextUtil.isNotEmpty(mDateSubjectIds))
-            key = "_" + key;
+            key = mDateSubjectIds + "_" + key;
 
-        return mProduct.getItems().get(mDateSubjectIds + key);
+        return mProduct.getItems().get(key);
     }
 
     // 重新选择日期、项目时，重置每个产品的单价
