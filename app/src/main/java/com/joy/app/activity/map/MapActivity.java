@@ -131,11 +131,13 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
                     return false;
                 }
                 if (ontouch(event)){
+                    isClick = false;
                     v.postDelayed(cleanMarker,500);
                 }
                 return false;
             }
         });
+
         ivPath.setOnClickListener(this);
         poiMapPathBtn.setOnClickListener(this);
         poiMapLocationBar.setOnClickListener(this);
@@ -194,8 +196,8 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
                             return false;
                         }
 
+                        isClick = true;
                         selectPosition(index, item);
-
                         return true;
                     }
 
@@ -401,11 +403,14 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
             }
         }
     }
+    boolean isClick = false;
 
     Runnable cleanMarker = new Runnable() {
         @Override
         public void run() {
-            if (selectMark == null)return;
+            if (selectMark == null || isClick){
+                return;
+            }
             selectMark.setMarker(ContextCompat.getDrawable(MapActivity.this,selectMark.getDataObject().getIcon_nor()));
             mapview.invalidate();
             selectMark = null;

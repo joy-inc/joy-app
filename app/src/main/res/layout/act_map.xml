@@ -41,7 +41,7 @@
             android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="102dp"
-            android:background="@color/white_trans80"
+            android:background="@color/white_trans95"
             android:orientation="horizontal"
             android:padding="15dp"
             android:visibility="gone">
@@ -65,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="80dp"
                     android:orientation="vertical"
                     android:padding="10dp">
 
@@ -73,6 +74,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="东京"
+                        android:lines="1"
+                        android:ellipsize="end"
+
                         android:textColor="@color/black_trans80"
                         android:textSize="16dp" />
 
@@ -81,14 +85,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="tokyo"
+                        android:lines="1"
+                        android:ellipsize="end"
                         android:textColor="@color/black_trans40"
                         android:textSize="14dp" />
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/iv_path"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_map_path" />

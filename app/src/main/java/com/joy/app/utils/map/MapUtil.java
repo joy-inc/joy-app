@@ -201,7 +201,7 @@ public class MapUtil {
     }
 
     public static boolean compareFloatData(float d1, float d2) {
-        if ((d1 - d2) < 3 || (d2 - d1) < 3) {
+        if (((d1 - d2)* (d2 - d1)) < 10) {
             return true;
         } else {
             return false;
