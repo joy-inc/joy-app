@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -211,9 +212,9 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
 
     private void getOrderChargeToPay(String channel) {
 
-        ObjectRequest<OrderCharge> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_PAY_CREATE_CHARGE, OrderCharge.class, OrderHtpUtil.getOrderPayCreateCharge(mId, channel));
+        ObjectRequest<String> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_PAY_CREATE_CHARGE, String.class, OrderHtpUtil.getOrderPayCreateCharge(mId, channel));
 
-        obj.setResponseListener(new ObjectResponse<OrderCharge>() {
+        obj.setResponseListener(new ObjectResponse<String>() {
 
             @Override
             public void onPre() {
@@ -224,11 +225,10 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
             }
 
             @Override
-            public void onSuccess(Object tag, OrderCharge orderCharge) {
+            public void onSuccess(Object tag, String orderCharge) {
 
                 hideLoading();
-                String jsonCharge = JSON.toJSONString(orderCharge);
-                startPaymentActivity(jsonCharge);
+                startPaymentActivity(orderCharge);
             }
 
             @Override

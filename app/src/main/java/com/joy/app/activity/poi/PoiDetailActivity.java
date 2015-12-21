@@ -56,6 +56,20 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     }
 
     @Override
+    protected void onResume() {
+
+        super.onResume();
+        mHeaderWidget.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+        mHeaderWidget.onPause();
+    }
+
+    @Override
     protected void initData() {
 
         mId = TextUtil.filterNull(getIntent().getStringExtra("id"));
@@ -107,6 +121,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mPoiDetail = data;
 
         mHeaderWidget.invalidate(mPoiDetail);
+        mHeaderWidget.onResume(); // 打开图片自动滚动
         mHighWidget.invalidate(mPoiDetail);
 
         mMapWidget.invalidate(R.drawable.ic_star_light_small);

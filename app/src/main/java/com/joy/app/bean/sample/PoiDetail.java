@@ -23,7 +23,7 @@ public class PoiDetail implements Parcelable {
     private String price = TextUtil.TEXT_EMPTY;//价格范围	格式：200-300
     private String lat = TextUtil.TEXT_EMPTY;
     private String lon = TextUtil.TEXT_EMPTY;
-    private String folder_name	 = TextUtil.TEXT_EMPTY;//收藏的文件夹名称
+    private String folder_name = TextUtil.TEXT_EMPTY;//收藏的文件夹名称
     private String folder_id = TextUtil.TEXT_EMPTY;//收藏文件夹的id
     private ArrayList<String> highlights;//项目亮点
     private String introduction = TextUtil.TEXT_EMPTY;//项目简介
@@ -123,7 +123,7 @@ public class PoiDetail implements Parcelable {
     }
 
     public ArrayList<String> getPhotos() {
-        return photos;
+        return photos == null ? new ArrayList<String>() : photos;
     }
 
     public void setPhotos(ArrayList<String> photos) {

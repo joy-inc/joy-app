@@ -1,22 +1,27 @@
 package com.joy.app.activity.poi;
 
 import android.app.Activity;
-import android.net.Uri;
+import android.content.Context;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
+import com.android.library.view.banner.BannerAdapter;
+import com.android.library.view.banner.BannerImage;
+import com.android.library.view.banner.BannerWidget;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.JTextSpanUtil;
 
-import butterknife.ButterKnife;
+import java.util.Collection;
 
 
 /**
@@ -25,7 +30,9 @@ import butterknife.ButterKnife;
  */
 public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClickListener {
 
-    private SimpleDraweeView mSdvPhoto;
+    private BannerAdapter<String> mAdapter;
+    private BannerWidget mBannerWidget;
+    private LinearLayout mLlBannerDiv;
     private TextView mTvTitle;
     private TextView mTvPrice;
     private AppCompatRatingBar mAcRatingBar;
@@ -39,7 +46,6 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         super(activity);
     }
 
-
     @Override
     protected View onCreateView(Activity activity, Object... args) {
 
@@ -50,9 +56,24 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         return contentView;
     }
 
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        if (mBannerWidget != null)
+            mBannerWidget.onResume();
+    }
+
+    @Override
+    public void onPause() {
+
+        super.onPause();
+        mBannerWidget.onPause();
+    }
+
     private void initContentViews(View contentView) {
 
-        mSdvPhoto = (SimpleDraweeView) contentView.findViewById(R.id.sdvPhoto);
+        mLlBannerDiv = (LinearLayout) contentView.findViewById(R.id.llBannerDiv);
         mTvTitle = (TextView) contentView.findViewById(R.id.tvTitle);
         mAcRatingBar = (AppCompatRatingBar) contentView.findViewById(R.id.acRatingBar);
         llAddPlanDiv = (LinearLayout) contentView.findViewById(R.id.llAddPlanDiv);
@@ -69,11 +90,21 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         if (data == null)
             return;
 
-        try {
-            mSdvPhoto.setImageURI(Uri.parse(data.getPhotos().get(0)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        if(CollectionUtil.isEmpty(data.getPhotos()))
+            data.getPhotos().add("");
+
+        mAdapter = new BannerAdapter(new BannerImage<String>() {
+
+            @Override
+            protected SimpleDraweeView onCreateView(Context context) {
+
+                return (SimpleDraweeView) getActivity().getLayoutInflater().inflate(R.layout.item_banner, null);
+            }
+        });
+        mAdapter.setData(data.getPhotos());
+        mBannerWidget = new BannerWidget(getActivity(), mAdapter);
+        mBannerWidget.setPageTransformer(new AccordionTransformer());// page transformer animation
+        mLlBannerDiv.addView(mBannerWidget.getContentView());
 
         if (TextUtil.isNotEmpty(data.getFolder_id())) {
 

@@ -21,7 +21,7 @@
                 android:id="@+id/sdvPhoto"
                 style="@style/sdv_cover"
                 android:layout_width="match_parent"
-                android:layout_height="240dp" />
+                android:layout_height="192dp" />
 
             <com.android.library.widget.JTextView
                 android:id="@+id/tvTitle"
