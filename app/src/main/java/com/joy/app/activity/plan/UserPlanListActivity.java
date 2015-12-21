@@ -2,9 +2,11 @@ package com.joy.app.activity.plan;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.android.library.activity.BaseHttpRvActivity;
@@ -112,6 +114,24 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
         getRecyclerView().setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         dialogUtil = new DialogUtil(this, this);
     }
+
+    AlertDialog mExitDialog;
+    private void showAlertDialog(){
+        if (mExitDialog == null) {
+            mExitDialog = com.joy.library.dialog.DialogUtil.getOkCancelDialog(this, R.string.confirm, R.string.cancel, getString(R.string.alert_plan_folder_delete), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    if (which == DialogInterface.BUTTON_POSITIVE)
+                        finish();
+                    else if (which == DialogInterface.BUTTON_NEGATIVE)
+                        mExitDialog.dismiss();
+                }
+            });
+        }
+        mExitDialog.show();
+    }
+
     boolean isRequest;
     @Override
     public void onRequest(dialog_category category, Object obj) {

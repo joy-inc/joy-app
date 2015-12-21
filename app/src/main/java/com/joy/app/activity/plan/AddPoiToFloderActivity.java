@@ -210,13 +210,15 @@ public class AddPoiToFloderActivity extends Activity {
         jtvButton.setText("创建新规划");
     }
 
-    private void showCreateDialog() {
-
-    }
-
     private void addPoi(final PlanFolder folde) {
         ObjectRequest<Object> req = PlanHtpUtil.getUserPlanAddRequest(PoiId, folde.getFolder_id(), Object.class);
         req.setResponseListener(new ObjectResponse<Object>() {
+
+            @Override
+            public void onPre() {
+                ToastUtil.showToast(R.string.toast_plan_folder_adding);
+            }
+
             @Override
             public void onSuccess(Object tag, Object object) {
                 Intent intent = new Intent();
@@ -232,7 +234,7 @@ public class AddPoiToFloderActivity extends Activity {
             public void onError(Object tag, String msg) {
                 super.onError(tag, msg);
                 showList(null);
-                ToastUtil.showToast(msg);
+                ToastUtil.showToast(TextUtil.filterEmpty(msg,getString(R.string.toast_plan_folder_add_erro)));
             }
         });
 

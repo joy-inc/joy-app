@@ -131,9 +131,16 @@
     <string name="commenton_submit">提交</string>
     <string name="commenton_success">点评成功</string>
 
+    <!--地图-->
+    <string name="toast_map_location_erro">定位失败，请稍后再试</string>
     <!--行程规划-->
 
     <string name="plan_folder_things">things to do</string>
+    <string name="toast_plan_folder_adding">正在添加行程规划</string>
+    <string name="toast_plan_folder_add_erro">加入行程计划失败</string>
+    <string name="alert_plan_folder_delete">确定删除旅行计划？</string>
+    <string name="plan_folder_delete_success">删除成功</string>
+    <string name="plan_folder_delete_erro">删除失败</string>
     <string name="plan_list_before_day">需提前%s天预定</string>
 
     <!--日历-->
