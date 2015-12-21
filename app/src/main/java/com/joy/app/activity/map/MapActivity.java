@@ -137,7 +137,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
                 return false;
             }
         });
-        
+
         ivPath.setOnClickListener(this);
         poiMapPathBtn.setOnClickListener(this);
         poiMapLocationBar.setOnClickListener(this);
