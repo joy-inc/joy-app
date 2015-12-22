@@ -564,7 +564,7 @@ class SimpleMonthView extends View {
             //判断日期是否不可选颜色,1.小于今天的是否可用 2.是否在开始的时间前
             if (hasChoseStart()) { //分开写判断,好维护
                 if (mStartSectionTime > 0) {
-                    if (!checkDay(day, mYear, mMonth, day)) {
+                    if (!checkDay(day, mYear, mMonth, day) || checkPreDay(day, today.year, today.month, today.monthDay)) {
                         mMonthNumPaint.setColor(mPreviousDayColor);
                     }
                 } else {
