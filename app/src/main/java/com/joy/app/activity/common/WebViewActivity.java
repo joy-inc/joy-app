@@ -44,6 +44,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     private String mTitle;
     private boolean mUseBottomBanner = false;//使用底部的banner
     private String mUrl;
+    private boolean mNoJump = false;//是否会进行打开新页面
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +67,14 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
         EventBus.getDefault().register(this);
         mWebViewWidget.setUserCookie(false);
         mUrl = getIntent().getStringExtra("url");
+
+        if (mUrl.indexOf("booking.com") > 0) {
+            mNoJump = true;
+        }
         mWebViewWidget.loadUrl(mUrl);
         mType = getIntent().getIntExtra("type", 0);
         mUseBottomBanner = getIntent().getBooleanExtra("usebootom", false);
+
 
     }
 
@@ -194,7 +200,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
         if (LogMgr.isDebug())
             LogMgr.d("webviewActivity", "onWebViewShouldOverrideUrlLoading url  = " + url);
-        if (mUrl.equals(url)) {
+        if (mNoJump || mUrl.equals(url)) {
             loadUrl(url);
         } else if (!ActivityUrlUtil.startActivityByHttpUrl(this, url)) {
             loadUrl(url);
