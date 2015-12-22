@@ -25,7 +25,7 @@ public class DialogUtil {
 
     BaseHttpUiActivity activity;
 
-    DialogPlus dialog;
+    DialogPlus mDialog;
 
     FolderRequestListener listener;
 
@@ -36,13 +36,14 @@ public class DialogUtil {
 
     public DialogPlus showDeleteFolderDialog(final String mFolderID) {
 
-        DialogPlus dialog = DialogPlus.newDialog(activity)
+        mDialog = DialogPlus.newDialog(activity)
                 .setContentHolder(new ViewHolder(R.layout.dialog_plan_del))
                 .setCancelable(true)
                 .setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(DialogPlus dialog, View view) {
                         if (view.getId() == R.id.jtv_cancel) {
+                            mDialog.dismiss();
                         } else if (view.getId() == R.id.jtv_del) {
                             showAlertDialog(activity.getString(R.string.alert_plan_folder_delete), new DialogInterface.OnClickListener() {
                                 @Override
@@ -50,15 +51,15 @@ public class DialogUtil {
                                     if (which == DialogInterface.BUTTON_POSITIVE){
                                         delFolder(mFolderID);
                                     }
+                                    mDialog.dismiss();
                                 }
                             });
                         }
-                        dialog.dismiss();
                     }
                 })
                 .create();
-        dialog.show();
-        return dialog;
+        mDialog.show();
+        return mDialog;
     }
 
     private void delFolder(String mFolderID) {
@@ -91,7 +92,7 @@ public class DialogUtil {
     public DialogPlus showDeletePoiDialog(final String mFolderID, final String PoiId) {
         View v = View.inflate(activity, R.layout.dialog_plan_del, null);
         ((TextView) v.findViewById(R.id.jtv_del)).setText("删除景点");
-        DialogPlus dialog = DialogPlus.newDialog(activity)
+        mDialog = DialogPlus.newDialog(activity)
                 .setContentHolder(new ViewHolder(v))
                 .setCancelable(true)
                 .setOnClickListener(new OnClickListener() {
@@ -100,12 +101,12 @@ public class DialogUtil {
                         if (view.getId() == R.id.jtv_del) {
                             delPoiFromFolder(mFolderID, PoiId);
                         }
-                        dialog.dismiss();
+                        mDialog.dismiss();
                     }
                 })
                 .create();
-        dialog.show();
-        return dialog;
+        mDialog.show();
+        return mDialog;
     }
 
     public void delPoiFromFolder(String mFolderID, String PoiId) {
@@ -139,7 +140,7 @@ public class DialogUtil {
     public DialogPlus showDeleteOrderDialog(final String OrderID,final boolean isProcess) {
         View v = View.inflate(activity, R.layout.dialog_plan_del, null);
         ((TextView) v.findViewById(R.id.jtv_del)).setText("删除订单");
-        DialogPlus dialog = DialogPlus.newDialog(activity)
+        mDialog = DialogPlus.newDialog(activity)
                 .setContentHolder(new ViewHolder(v))
                 .setCancelable(true)
                 .setOnClickListener(new OnClickListener() {
@@ -149,6 +150,8 @@ public class DialogUtil {
                         } else if (view.getId() == R.id.jtv_del) {
                             if (isProcess){
                                 ToastUtil.showToast(R.string.toast_cannot_delete);
+                                mDialog.dismiss();
+
                             }else{
 
                                 showAlertDialog(activity.getString(R.string.alert_order_delete), new DialogInterface.OnClickListener() {
@@ -157,16 +160,16 @@ public class DialogUtil {
                                         if (which == DialogInterface.BUTTON_POSITIVE){
                                             delOrder(OrderID);
                                         }
+                                        mDialog.dismiss();
                                     }
                                 });
                             }
                         }
-                        dialog.dismiss();
                     }
                 })
                 .create();
-        dialog.show();
-        return dialog;
+        mDialog.show();
+        return mDialog;
     }
 
     public void delOrder(String OrderID) {

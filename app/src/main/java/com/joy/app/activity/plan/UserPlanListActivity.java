@@ -115,23 +115,6 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
         dialogUtil = new DialogUtil(this, this);
     }
 
-    AlertDialog mExitDialog;
-    private void showAlertDialog(){
-        if (mExitDialog == null) {
-            mExitDialog = com.joy.library.dialog.DialogUtil.getOkCancelDialog(this, R.string.confirm, R.string.cancel, getString(R.string.alert_plan_folder_delete), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    if (which == DialogInterface.BUTTON_POSITIVE)
-                        finish();
-                    else if (which == DialogInterface.BUTTON_NEGATIVE)
-                        mExitDialog.dismiss();
-                }
-            });
-        }
-        mExitDialog.show();
-    }
-
     boolean isRequest;
     @Override
     public void onRequest(dialog_category category, Object obj) {

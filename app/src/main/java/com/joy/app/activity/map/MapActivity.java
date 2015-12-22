@@ -35,6 +35,7 @@ import com.joy.app.utils.QaAnimUtil;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
+import org.osmdroid.util.BoundingBoxE6;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.DirectedLocationOverlay;
@@ -123,6 +124,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
         FrameLayout.LayoutParams mapParams = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         maplayout.addView(mapview, mapParams);
+        mapview.setTilesScaledToDpi(true);
         mapview.setMultiTouchControls(true);
         mapview.setOnTouchListener(new View.OnTouchListener() {
             @Override
