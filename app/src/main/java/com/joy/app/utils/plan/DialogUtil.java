@@ -9,6 +9,7 @@ import com.android.library.BaseApplication;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.ToastUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.OnClickListener;
 import com.android.library.view.dialogplus.ViewHolder;
@@ -135,7 +136,7 @@ public class DialogUtil {
         addRequestNoCache(req);
     }
 
-    public DialogPlus showDeleteOrderDialog(final String OrderID) {
+    public DialogPlus showDeleteOrderDialog(final String OrderID,final boolean isProcess) {
         View v = View.inflate(activity, R.layout.dialog_plan_del, null);
         ((TextView) v.findViewById(R.id.jtv_del)).setText("删除订单");
         DialogPlus dialog = DialogPlus.newDialog(activity)
@@ -146,7 +147,19 @@ public class DialogUtil {
                     public void onClick(DialogPlus dialog, View view) {
                         if (view.getId() == R.id.jtv_cancel) {
                         } else if (view.getId() == R.id.jtv_del) {
-                            delOrder(OrderID);
+                            if (isProcess){
+                                ToastUtil.showToast(R.string.toast_cannot_delete);
+                            }else{
+
+                                showAlertDialog(activity.getString(R.string.alert_order_delete), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (which == DialogInterface.BUTTON_POSITIVE){
+                                            delOrder(OrderID);
+                                        }
+                                    }
+                                });
+                            }
                         }
                         dialog.dismiss();
                     }

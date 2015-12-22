@@ -117,8 +117,9 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (isRequest) return;
-                dialogUtil.showDeleteOrderDialog(order_id);
+                dialogUtil.showDeleteOrderDialog(order_id,detail.getOrder_status()==2);
             }
         });
     }
