@@ -14,6 +14,9 @@ import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
 import com.joy.app.eventbus.OrderStatusEvent;
@@ -92,6 +95,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         setContentView(R.layout.item_order_view);
         ButterKnife.bind(this);
         executeRefreshOnly();
+
     }
 
     @Override
@@ -117,8 +121,9 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (isRequest) return;
-                dialogUtil.showDeleteOrderDialog(order_id);
+                dialogUtil.showDeleteOrderDialog(order_id, detail.getOrder_status() == 2);
             }
         });
     }
@@ -204,11 +209,11 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
             showView(vItemSpilt);
             jtvOrderItem.setText(orderDetail.getSelected_item());
         }
-        if(orderDetail.hasTravelDate()){
+        if (orderDetail.hasTravelDate()) {
             showView(llDayItem);
             showView(vDaySpilt);
             jtvOrderDay.setText(orderDetail.getTravel_date());
-        }else{
+        } else {
             goneView(llDayItem);
             goneView(vDaySpilt);
         }

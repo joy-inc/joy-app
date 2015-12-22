@@ -9,6 +9,7 @@ import com.android.library.BaseApplication;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.utils.ToastUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.OnClickListener;
 import com.android.library.view.dialogplus.ViewHolder;
@@ -24,7 +25,7 @@ public class DialogUtil {
 
     BaseHttpUiActivity activity;
 
-    DialogPlus dialog;
+    DialogPlus mDialog;
 
     FolderRequestListener listener;
 
@@ -35,13 +36,14 @@ public class DialogUtil {
 
     public DialogPlus showDeleteFolderDialog(final String mFolderID) {
 
-        DialogPlus dialog = DialogPlus.newDialog(activity)
+        mDialog = DialogPlus.newDialog(activity)
                 .setContentHolder(new ViewHolder(R.layout.dialog_plan_del))
                 .setCancelable(true)
                 .setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(DialogPlus dialog, View view) {
                         if (view.getId() == R.id.jtv_cancel) {
+                            mDialog.dismiss();
                         } else if (view.getId() == R.id.jtv_del) {
                             showAlertDialog(activity.getString(R.string.alert_plan_folder_delete), new DialogInterface.OnClickListener() {
                                 @Override
@@ -49,15 +51,15 @@ public class DialogUtil {
                                     if (which == DialogInterface.BUTTON_POSITIVE){
                                         delFolder(mFolderID);
                                     }
+                                    mDialog.dismiss();
                                 }
                             });
                         }
-                        dialog.dismiss();
                     }
                 })
                 .create();
-        dialog.show();
-        return dialog;
+        mDialog.show();
+        return mDialog;
     }
 
     private void delFolder(String mFolderID) {
@@ -90,7 +92,7 @@ public class DialogUtil {
     public DialogPlus showDeletePoiDialog(final String mFolderID, final String PoiId) {
         View v = View.inflate(activity, R.layout.dialog_plan_del, null);
         ((TextView) v.findViewById(R.id.jtv_del)).setText("删除景点");
-        DialogPlus dialog = DialogPlus.newDialog(activity)
+        mDialog = DialogPlus.newDialog(activity)
                 .setContentHolder(new ViewHolder(v))
                 .setCancelable(true)
                 .setOnClickListener(new OnClickListener() {
@@ -99,12 +101,12 @@ public class DialogUtil {
                         if (view.getId() == R.id.jtv_del) {
                             delPoiFromFolder(mFolderID, PoiId);
                         }
-                        dialog.dismiss();
+                        mDialog.dismiss();
                     }
                 })
                 .create();
-        dialog.show();
-        return dialog;
+        mDialog.show();
+        return mDialog;
     }
 
     public void delPoiFromFolder(String mFolderID, String PoiId) {
@@ -135,10 +137,10 @@ public class DialogUtil {
         addRequestNoCache(req);
     }
 
-    public DialogPlus showDeleteOrderDialog(final String OrderID) {
+    public DialogPlus showDeleteOrderDialog(final String OrderID,final boolean isProcess) {
         View v = View.inflate(activity, R.layout.dialog_plan_del, null);
         ((TextView) v.findViewById(R.id.jtv_del)).setText("删除订单");
-        DialogPlus dialog = DialogPlus.newDialog(activity)
+        mDialog = DialogPlus.newDialog(activity)
                 .setContentHolder(new ViewHolder(v))
                 .setCancelable(true)
                 .setOnClickListener(new OnClickListener() {
@@ -146,14 +148,28 @@ public class DialogUtil {
                     public void onClick(DialogPlus dialog, View view) {
                         if (view.getId() == R.id.jtv_cancel) {
                         } else if (view.getId() == R.id.jtv_del) {
-                            delOrder(OrderID);
+                            if (isProcess){
+                                ToastUtil.showToast(R.string.toast_cannot_delete);
+                                mDialog.dismiss();
+
+                            }else{
+
+                                showAlertDialog(activity.getString(R.string.alert_order_delete), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (which == DialogInterface.BUTTON_POSITIVE){
+                                            delOrder(OrderID);
+                                        }
+                                        mDialog.dismiss();
+                                    }
+                                });
+                            }
                         }
-                        dialog.dismiss();
                     }
                 })
                 .create();
-        dialog.show();
-        return dialog;
+        mDialog.show();
+        return mDialog;
     }
 
     public void delOrder(String OrderID) {
