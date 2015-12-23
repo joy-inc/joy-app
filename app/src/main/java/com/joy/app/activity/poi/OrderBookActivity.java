@@ -181,7 +181,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
             }
         });
 
-        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.unit, "0")));
+        mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.fmt_unit, "0")));
     }
 
     @Override

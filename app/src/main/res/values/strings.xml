@@ -57,9 +57,10 @@
     <!--设置界面-->
 
     <!-- 详情、商品 -->
-    <string name="unit">¥ %s</string>
-    <string name="unit_ge">%s个</string>
-    <string name="kuohao">(%s)</string>
+    <string name="fmt_poi_before">请提前%s天预订</string>
+    <string name="fmt_unit">¥ %s</string>
+    <string name="fmt_unit_ge">%s个</string>
+    <string name="fmt_kuohao">(%s)</string>
     <string name="add_plan">加入行程规划</string>
     <string name="highlights">项目亮点</string>
     <string name="introduce">简介</string>

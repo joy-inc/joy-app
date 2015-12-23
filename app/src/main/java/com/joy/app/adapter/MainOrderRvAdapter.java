@@ -106,8 +106,8 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
                 tvTitle.setText(mainOrder.getProduct_title());
                 tvType.setText(mainOrder.getSelected_item());
                 tvDepartureDate.setText(mainOrder.getTravel_date());
-                tvCount.setText(getString(R.string.unit_ge, mainOrder.getCount()));
-                tvTotalPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.unit, mainOrder.getTotal_price())));
+                tvCount.setText(getString(R.string.fmt_unit_ge, mainOrder.getCount()));
+                tvTotalPrice.setText(JTextSpanUtil.getFormatUnitStr(getString(R.string.fmt_unit, mainOrder.getTotal_price())));
 
                 if ("0".equals(mainOrder.getOrder_status())) {
 
