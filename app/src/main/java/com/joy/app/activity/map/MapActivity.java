@@ -348,7 +348,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.iv_path:
             case R.id.poi_map_path_btn: // poiMapPathBtn
-                MapUtil.startMapApp(this, selectMark.getDataObject());
+                MapUtil.startSystemMap(this, selectMark.getDataObject());
                 return;
             case R.id.poi_map_location_bar: //poiMapLocationBar
 

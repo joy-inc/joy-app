@@ -74,7 +74,6 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_hotel_list_filter);
         initData();
@@ -135,6 +134,13 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
         initSeekBar();
         initFilterView();
         changeCheckBoxState();
+        findViewById(R.id.v_shadow).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
     }
 
     private void initStarFilterView() {
@@ -459,8 +465,13 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
             default:
                 return "";
         }
-
     }
+
+//    @Override
+//    public void finish() {
+//        overridePendingTransition(R.anim.anim_bottom_enter, R.anim.anim_bottom_finish);
+//        super.finish();
+//    }
 
     /**
      * 开启酒店条件筛选页面
@@ -483,6 +494,7 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
         intent.putExtra(EX_KEY_HOTEL__FACILITIES_TYPE_STR, facTypesStr);
         intent.putExtra(EX_KEY_HOTEL_STAR_TYPE_STR, starTypeStr);
         intent.putExtra(EX_KEY_HOTEL_PRICES_TYPE, priceStrs);
+//        activity.overridePendingTransition(R.anim.anim_bottom_enter, R.anim.anim_bottom_finish);
         activity.startActivityForResult(intent, requestCode);
 
     }

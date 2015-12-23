@@ -3,6 +3,7 @@ package com.joy.app.utils.map;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Point;
 import android.net.Uri;
 import android.util.DisplayMetrics;
@@ -18,6 +19,7 @@ import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.plan.PlanItem;
 import com.joy.app.bean.sample.PoiDetail;
 
+import org.osmdroid.api.Marker;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.TileSystem;
 import org.osmdroid.views.MapView;
@@ -71,6 +73,48 @@ public class MapUtil {
         mAct.startActivity(it);
     }
 
+    public static void startSystemMap(Activity mAct, MapPoiDetail mCurrItem){
+        try {
+//            if (checkGoogleMap(mAct)){
+//                startGoogleMapApp(mAct,mCurrItem);
+//            }else{
+                startMapApp(mAct,mCurrItem);
+//            }
+        }catch (Exception e){
+            startGoogleMapWeb(mAct,mCurrItem.getLatitude(),mCurrItem.getLongitude());
+        }
+    }
+
+    public static boolean checkGoogleMap(Context mAct) {
+        boolean isInstallGMap = false;
+        List<PackageInfo> packs = mAct.getPackageManager()
+                .getInstalledPackages(0);
+        for (int i = 0; i < packs.size(); i++) {
+            PackageInfo p = packs.get(i);
+            if (p.versionName == null) { // system packages
+                continue;
+            }
+
+            if (LogMgr.isDebug())
+                LogMgr.e("p:" + p.packageName);
+
+            if ("com.google.android.apps.maps".equals(p.packageName)) {
+                isInstallGMap = true;
+                break;
+            }
+        }
+        return isInstallGMap;
+    }
+    public static void startGoogleMapWeb(Activity mAct,double lat, double lon) {
+        try {
+            Intent i = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://ditu.google.cn/maps?hl=zh&mrt=loc&q="
+                            + lat + "," + lon ));
+            mAct.startActivity(i);
+        } catch (Exception e) {
+
+        }
+    }
     public static void setMoveCameraAndZoomByOverlay(List<JoyMapOverlayItem> list, MapView mapview) {
 
         ArrayList<Double> latListSort = new ArrayList<>();
