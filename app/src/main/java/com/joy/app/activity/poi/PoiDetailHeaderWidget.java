@@ -21,8 +21,6 @@ import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.JTextSpanUtil;
 
-import java.util.Collection;
-
 
 /**
  * poi详情的头部内容（头图、国家名称、评星、去过、想去）
@@ -34,6 +32,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
     private BannerWidget mBannerWidget;
     private LinearLayout mLlBannerDiv;
     private TextView mTvTitle;
+    private TextView mTvBookBefore;
     private TextView mTvPrice;
     private AppCompatRatingBar mAcRatingBar;
     private TextView mTvPoiCommentNum;
@@ -75,6 +74,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
 
         mLlBannerDiv = (LinearLayout) contentView.findViewById(R.id.llBannerDiv);
         mTvTitle = (TextView) contentView.findViewById(R.id.tvTitle);
+        mTvBookBefore = (TextView) contentView.findViewById(R.id.tvBookBefore);
         mAcRatingBar = (AppCompatRatingBar) contentView.findViewById(R.id.acRatingBar);
         llAddPlanDiv = (LinearLayout) contentView.findViewById(R.id.llAddPlanDiv);
         llAddPlanDiv.setOnClickListener(this);
@@ -90,8 +90,8 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         if (data == null)
             return;
 
-        if(CollectionUtil.isEmpty(data.getPhotos()))
-            data.getPhotos().add("");
+        if (CollectionUtil.isEmpty(data.getPhotos()))
+            data.getPhotos().add(""); // 没有数据时，加一个空占位
 
         mAdapter = new BannerAdapter(new BannerImage<String>() {
 
@@ -104,7 +104,9 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         mAdapter.setData(data.getPhotos());
         mBannerWidget = new BannerWidget(getActivity(), mAdapter);
         mBannerWidget.setPageTransformer(new AccordionTransformer());// page transformer animation
-        mLlBannerDiv.addView(mBannerWidget.getContentView());
+
+        if (mLlBannerDiv.getChildCount() <= 0)
+            mLlBannerDiv.addView(mBannerWidget.getContentView());
 
         if (TextUtil.isNotEmpty(data.getFolder_id())) {
 
@@ -115,13 +117,18 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         }
 
         if (data.getIs_book()) {
-            mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, data.getPrice())));
+            mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.fmt_unit, data.getPrice())));
             ViewUtil.showView(mTvPrice);
+        }
+
+        if (TextUtil.isNotEmpty(data.getBooking_before()) || "0".equals(data.getBooking_before())) {
+            mTvBookBefore.setText(getActivity().getString(R.string.fmt_poi_before, data.getBooking_before()));
+            ViewUtil.showView(mTvBookBefore);
         }
 
         mTvTitle.setText(data.getTitle());
         mAcRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
-        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, TextUtil.isEmpty(data.getComment_num()) ? "0" : data.getComment_num()));
+        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.fmt_kuohao, TextUtil.isEmpty(data.getComment_num()) ? "0" : data.getComment_num()));
 
     }
 

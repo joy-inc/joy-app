@@ -88,4 +88,27 @@
         <attr name="verSpacing" format="dimension"/>
         <attr name="showLines" format="integer"/>
     </declare-styleable>
+
+    <!-- 可折叠TextView-->
+    <declare-styleable name="FoldTextView">
+        <attr name="unfolded" format="boolean" />
+        <attr name="minLines" format="integer" />
+        <attr name="promptText" format="string" />
+        <attr name="promptColor" format="color" />
+        <attr name="promptCollapseText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ExpandTextView">
+        <attr name="textcolor" format="color"></attr>
+        <attr name="textsize" format="dimension"></attr>
+        <attr name="expand_icon" format="reference"></attr>
+        <attr name="lines" format="integer"></attr>
+        <attr name="text" format="string"></attr>
+        <attr name="collapseText" format="string"></attr>
+        <attr name="expandText" format="string"></attr>
+        <attr name="expandStyle">
+            <enum name="bottom_icon" value="1" />
+            <enum name="bottom_btn" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

@@ -37,6 +37,7 @@
             android:layout_marginTop="20dp"
             android:ellipsize="end"
             android:paddingTop="8dp"
+            android:visibility="gone"
             app:promptCollapseText=""
             app:promptColor="@color/text_pink"
             app:promptText="" />
@@ -44,13 +45,29 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/tvAllIntroduce"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:background="@drawable/selector_bg_rectangle_accent"
             android:paddingLeft="56dp"
             android:paddingRight="56dp"
             android:text="@string/see_all"
             android:textColor="@color/color_accent"
-            android:textSize="12dp" />
+            android:textSize="12dp"
+            android:visibility="gone" />
+
+        <com.joy.app.view.ExpandTextView
+            android:id="@+id/etvIntroduce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:paddingTop="8dp"
+            app:collapseText="@string/collapse"
+            app:expandStyle="bottom_btn"
+            app:expandText="@string/see_all"
+            app:textcolor="@color/black_trans40"
+            app:textsize="12dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -158,7 +175,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/tvAllKnow"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:background="@drawable/selector_bg_rectangle_accent"
             android:paddingLeft="56dp"
             android:paddingRight="56dp"

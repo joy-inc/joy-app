@@ -197,9 +197,6 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         } else if (R.id.rl_mapview == view.getId()) {
 
             startMapActivity();
-        } else if (R.id.tvAllIntroduce == view.getId()) {
-
-            showToast("查看全部简介");
         } else if (R.id.tvAllKnow == view.getId()) {
 
             WebViewActivity.startActivityNoShare(PoiDetailActivity.this, mPoiDetail.getPurchase_info(), getString(R.string.need_know));

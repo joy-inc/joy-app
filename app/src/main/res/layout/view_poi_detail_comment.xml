@@ -18,7 +18,7 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/acbSeeAll"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="23dp"
         android:background="@drawable/selector_bg_rectangle_accent"

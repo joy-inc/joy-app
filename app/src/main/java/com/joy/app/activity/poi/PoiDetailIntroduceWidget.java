@@ -10,6 +10,7 @@ import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
+import com.joy.app.view.ExpandTextView;
 import com.joy.app.view.FoldTextView;
 
 /**
@@ -24,6 +25,7 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
     private LinearLayout llKnowDiv;
     private View vLine;
     private FoldTextView ftvIntroduce;
+    private ExpandTextView etvIntroduce;
     private TextView tvAllIntroduce;
     private TextView tvAllKnow;
 
@@ -41,10 +43,12 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
         llKnowDiv = (LinearLayout) contentView.findViewById(R.id.llKnowDiv);
         vLine = contentView.findViewById(R.id.vLine);
         ftvIntroduce = (FoldTextView) contentView.findViewById(R.id.ftvIntroduce);
+        etvIntroduce = (ExpandTextView) contentView.findViewById(R.id.etvIntroduce);
         tvAllIntroduce = (TextView) contentView.findViewById(R.id.tvAllIntroduce);
         tvAllKnow = (TextView) contentView.findViewById(R.id.tvAllKnow);
         tvAllIntroduce.setOnClickListener(this);
         tvAllKnow.setOnClickListener(this);
+        ftvIntroduce.setOnClickListener(this);
 
         return contentView;
     }
@@ -58,6 +62,7 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
 
         if (TextUtil.isNotEmpty(data.getIntroduction())) {
             ftvIntroduce.setText(data.getIntroduction());
+            etvIntroduce.setText(data.getIntroduction());
             ViewUtil.showView(llIntroduceDiv);
         }
 
@@ -71,9 +76,11 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.tvAllIntroduce)
+        if (v.getId() == R.id.tvAllIntroduce) {
             ftvIntroduce.toggle();
-        else if (v.getId() == R.id.tvAllKnow)
+        } else if (v.getId() == R.id.ftvIntroduce) {
+            ftvIntroduce.toggle();
+        } else if (v.getId() == R.id.tvAllKnow)
             callbackWidgetViewClickListener(v);
     }
 }

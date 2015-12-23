@@ -9,7 +9,6 @@ import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
@@ -183,7 +182,7 @@ public class BookCountWidget extends ExLayoutWidget {
     private void refreshUnitPrice(int position, String unitPrice) {
 
         mAdapter.getItem(position).setLocalPrice(unitPrice);
-        ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvPrice)).setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, unitPrice)));
+        ((TextView) mLinearLv.getChildAt(position).findViewById(R.id.tvPrice)).setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.fmt_unit, unitPrice)));
     }
 
     protected void setDateSubjectIds(String dateSubjectIds) {
@@ -268,7 +267,7 @@ public class BookCountWidget extends ExLayoutWidget {
                         data.setLocalCount("0");
                     }
 
-                    tvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.unit, data.getLocalPrice())));
+                    tvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.fmt_unit, data.getLocalPrice())));
                     tvCount.setText(data.getLocalCount());
                 }
             }
