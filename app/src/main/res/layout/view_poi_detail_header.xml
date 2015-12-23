@@ -29,9 +29,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/shape_bg_rectangle_dark"
         android:padding="2dp"
+        android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="10dp" />
 
