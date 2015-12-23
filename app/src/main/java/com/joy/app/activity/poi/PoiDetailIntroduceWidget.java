@@ -60,10 +60,6 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
             return;
         }
 
-        data.setIntroduction("新西兰天然牧场（SPCA）是英联邦国家政府下属机构，也是防止虐待宠物，宠物救助，政府用犬（警犬、缉毒犬、导盲犬）训练的专业机构，天然牧场（SPCA）宠物食品被指定为英联邦政府用犬唯一食品。\n" +
-                "天然牧场（SPCA）系列产品做工考究，品质优良，宠物食品更是选用新西兰及澳洲天然牧场放养无任何饲料添加剂的鲜肉为基础材料并配合天然无污染糙米及谷物为辅料加工而成，营养丰富，适口性好，能够充分满足宠物发育以及日常所需营养。\n" +
-                "过去二十年，新西兰经济成功地从农业为主，转型为具有国际竞争力的工业化自由市场经济。鹿茸、羊肉、奶制品和粗羊毛的出口值皆为世界第一。新西兰气候宜人、环境清新、风景优美、旅游胜地遍布、森林资源丰富，所以产物都会非常适合宠物消化吸收。");
-
         if (TextUtil.isNotEmpty(data.getIntroduction())) {
             ftvIntroduce.setText(data.getIntroduction());
             etvIntroduce.setText(data.getIntroduction());
