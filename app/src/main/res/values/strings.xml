@@ -57,7 +57,7 @@
     <!--设置界面-->
 
     <!-- 详情、商品 -->
-    <string name="fmt_poi_before">请提前%s天预订</string>
+    <string name="fmt_poi_before">需提前%s天预订</string>
     <string name="fmt_unit">¥ %s</string>
     <string name="fmt_unit_ge">%s个</string>
     <string name="fmt_kuohao">(%s)</string>
