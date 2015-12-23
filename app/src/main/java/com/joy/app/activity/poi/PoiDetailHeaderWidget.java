@@ -121,8 +121,12 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
             ViewUtil.showView(mTvPrice);
         }
 
+        if (TextUtil.isNotEmpty(data.getBooking_before())) {
+            mTvBookBefore.setText(getActivity().getString(R.string.fmt_poi_before, data.getBooking_before()));
+            ViewUtil.showView(mTvBookBefore);
+        }
+
         mTvTitle.setText(data.getTitle());
-        mTvBookBefore.setText(getActivity().getString(R.string.fmt_poi_before, data.getTitle()));
         mAcRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
         mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.fmt_kuohao, TextUtil.isEmpty(data.getComment_num()) ? "0" : data.getComment_num()));
 
