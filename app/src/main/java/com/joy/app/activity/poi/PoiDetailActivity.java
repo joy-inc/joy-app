@@ -124,7 +124,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mHeaderWidget.onResume(); // 打开图片自动滚动
         mHighWidget.invalidate(mPoiDetail);
 
-        mMapWidget.invalidate(R.drawable.ic_star_light_small);
+        mMapWidget.invalidate(R.drawable.ic_poi_detail_map_point);
         mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), mPoiDetail.getAddress());
         if (TextUtil.isEmpty(data.getLat()) || TextUtil.isEmpty(data.getLon()) || "0".equals(data.getLat()) || "0".equals(data.getLon()))
             ViewUtil.goneView(mMapWidget.getContentView());

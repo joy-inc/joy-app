@@ -147,6 +147,7 @@ public class DialogUtil {
                     @Override
                     public void onClick(DialogPlus dialog, View view) {
                         if (view.getId() == R.id.jtv_cancel) {
+                            mDialog.dismiss();
                         } else if (view.getId() == R.id.jtv_del) {
                             if (isProcess){
                                 ToastUtil.showToast(R.string.toast_cannot_delete);
