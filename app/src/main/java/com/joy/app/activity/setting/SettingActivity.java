@@ -205,7 +205,7 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
      */
     private void about() {
 
-        WebViewActivity.startActivity(this, "http://www.qyer.com", getString(R.string.setting_about), WebViewActivity.TYPE_ABOUT);
+        WebViewActivity.startActivityNoTitle(this, "http://www.qyer.com", WebViewActivity.TYPE_ABOUT);
     }
 
     /**
@@ -225,11 +225,10 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
 
         //网络请求,发广播
 
-//        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN_OUT, String.class, UserHtpUtil.userLoginOut(JoyApplication.getUserToken()));
+        //        ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN_OUT, String.class, UserHtpUtil.userLoginOut(JoyApplication.getUserToken()));
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_LOGIN_OUT, String.class, UserHtpUtil.userLoginOut("22222"));
 
-        if (BuildConfig.DEBUG && ("41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e".equals(JoyApplication.getUserToken())
-                || "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb".equals(JoyApplication.getUserToken()))){
+        if (BuildConfig.DEBUG && ("41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e".equals(JoyApplication.getUserToken()) || "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb".equals(JoyApplication.getUserToken()))) {
             req.setData("");
         }
         req.setResponseListener(new ObjectResponse() {

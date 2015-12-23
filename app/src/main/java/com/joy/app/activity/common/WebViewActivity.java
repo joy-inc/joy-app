@@ -33,7 +33,12 @@ import de.greenrobot.event.EventBus;
 public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget.WebViewListener, View.OnClickListener {
 
     //--大于100有分享的意思
-    public static final int TYPE_CITY = 101;//城市详情
+    public static final int TYPE_CITY_TOPIC = 102;//首页城市专题
+    public static final int TYPE_CITY_RECMMMEND = 103;//城市页下面的推荐
+    public static final int TYPE_CITY_PLAY = 104;//城市下的玩
+    public static final int TYPE_CITY_FOOD = 105;//城市下的食物
+    public static final int TYPE_CITY_SHOP = 106;//城市下的购物
+    public static final int TYPE_CITY_HOTEL = 107;//城市下的酒店
 
     public static final int TYPE_ABOUT = 1;//关于界面
 
@@ -48,8 +53,12 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        mTitle = getIntent().getStringExtra("title");
+        if (!TextUtil.isEmpty(mTitle)) {
+            setTheme(R.style.theme_app);
+        }
         super.onCreate(savedInstanceState);
+
         setContentFullScreenWebView(true);
     }
 
@@ -62,19 +71,26 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
     @Override
     protected void initData() {
-        mWebViewShare = new WebViewShare();
-        mWebViewShare.setInfo("http://www.qq.com");
-        EventBus.getDefault().register(this);
-        mWebViewWidget.setUserCookie(false);
-        mUrl = getIntent().getStringExtra("url");
 
+        mUrl = getIntent().getStringExtra("url");
         if (mUrl.indexOf("booking.com") > 0) {
             mNoJump = true;
         }
-        mWebViewWidget.loadUrl(mUrl);
-        mType = getIntent().getIntExtra("type", 0);
-        mUseBottomBanner = getIntent().getBooleanExtra("usebootom", false);
 
+        mType = getIntent().getIntExtra("type", 0);
+        if (mType > 100) {
+            //再根据不同的来生成
+            mWebViewShare = new WebViewShare();
+            mWebViewShare.setInfo(mType, mUrl, mTitle);
+        }
+
+        EventBus.getDefault().register(this);
+
+
+        mWebViewWidget.setUserCookie(false);
+        mWebViewWidget.loadUrl(mUrl);
+
+        mUseBottomBanner = getIntent().getBooleanExtra("usebootom", false);
 
     }
 
@@ -82,9 +98,17 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     protected void initTitleView() {
 
         if (!mUseBottomBanner) {
-            addTitleLeftBackView();
-            //            mTitle = getIntent().getStringExtra("title");
-            //            addTitleMiddleView(mTitle);
+            if (TextUtil.isEmpty(mTitle)) { //就是透明的
+                addTitleLeftView(R.drawable.ic_back_gray, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+            } else {
+                setTitle(mTitle);
+                addTitleLeftBackView();
+            }
 
             if (mType > 100) {
                 addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
@@ -125,6 +149,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
      *
      * @param event
      */
+
     public void onEventMainThread(LoginStatusEvent event) {
 
         onUserLoginStatusChanged(event.isLogin());
@@ -317,20 +342,30 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     }
 
     /**
-     * 不需要分享的调这
+     * 透明标题,没有标题栏没有分享
      */
-    public static void startActivity(Context context, String url) {
+    public static void startActivityNoTitleShare(Context context, String url) {
 
-        startActivity(context, url, "", 0);
-
+        startActivity(context, url, "", 0, false);
     }
 
     /**
-     * 不需要分享的调这
+     * 透明标题,带分享的
      */
-    public static void startActivity(Context context, String url, String title) {
+    public static void startActivityNoTitle(Context context, String url, int type) {
 
-        startActivity(context, url, title, 0);
+        startActivity(context, url, "", type, false);
+    }
+
+    /**
+     * 标题栏不透明,有标题,不带分享
+     *
+     * @param context
+     * @param url
+     * @param title
+     */
+    public static void startActivityNoShare(Context context, String url, String title) {
+        startActivity(context, url, title, 0, false);
 
     }
 
@@ -345,19 +380,6 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
         startActivity(context, url, "", 0, true);
     }
 
-    /**
-     * 有分享的调用这
-     *
-     * @param context
-     * @param url
-     * @param title
-     * @param type
-     */
-    public static void startActivity(Context context, String url, String title, int type) {
-
-        startActivity(context, url, title, type, false);
-
-    }
 
     /**
      * @param context
@@ -366,7 +388,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
      * @param type
      * @param useBottomBanner 就不使用标题栏了,直接底部
      */
-    public static void startActivity(Context context, String url, String title, int type, boolean useBottomBanner) {
+    private static void startActivity(Context context, String url, String title, int type, boolean useBottomBanner) {
 
         Intent intent = new Intent();
         intent.putExtra("url", url);

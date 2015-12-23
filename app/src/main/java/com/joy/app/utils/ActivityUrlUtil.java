@@ -8,11 +8,7 @@ import com.android.library.utils.TextUtil;
 import com.joy.app.activity.city.CityActivity;
 import com.joy.app.activity.city.CityFunActivity;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.activity.hotel.CityHotelListActivity;
-import com.joy.app.activity.hotel.HotelSearchFilterActivity;
-import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
-import com.joy.app.utils.http.HtpApi;
 
 /**
  * 处理url打开对应的activity或者处理事件
@@ -149,19 +145,19 @@ public class ActivityUrlUtil {
 
                 return true;
             case TYPE_TICKETS:
-                WebViewActivity.startActivity(context, url);
+                WebViewActivity.startActivityNoTitleShare(context, url);
 
                 return true;
             case TYPE_VISA:
-                WebViewActivity.startActivity(context, url);
+                WebViewActivity.startActivityNoTitleShare(context, url);
 
                 return true;
             case TYPE_TRANSPORT:
-                WebViewActivity.startActivity(context, url);
+                WebViewActivity.startActivityNoTitleShare(context, url);
 
                 return true;
             case TYPE_WIFI:
-                WebViewActivity.startActivity(context, url);
+                WebViewActivity.startActivityNoTitleShare(context, url);
 
                 return true;
             case TYPE_JOY:

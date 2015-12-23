@@ -25,7 +25,7 @@ import java.util.List;
 public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
 
     private String mPlaceId;
-    private int mType;
+    private FunType mType;
 
     public static void startActivity(Context act, String placeId, int type) {
 
@@ -49,14 +49,14 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
     protected void initData() {
 
         mPlaceId = getIntent().getStringExtra("placeId");
-        mType = getIntent().getIntExtra("type", 0);
+        mType = FunType.getFunType(getIntent().getIntExtra("type", 0));
     }
 
     @Override
     protected void initTitleView() {
 
         addTitleLeftBackView();
-        addTitleMiddleView(getResources().getStringArray(R.array.city_fun)[mType - 1]);
+        addTitleMiddleView(mType.getTitleResId());
     }
 
     @Override
@@ -69,7 +69,8 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
                 CityFun.ListEntity entity = (CityFun.ListEntity) getAdapter().getItem(position);
-                WebViewActivity.startActivity(CityFunActivity.this, entity.getTopic_url(), entity.getTopic_name());
+
+                WebViewActivity.startActivityNoTitle(CityFunActivity.this, entity.getTopic_url(), mType.getShareType());
             }
         });
     }
@@ -83,6 +84,49 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
     @Override
     protected ObjectRequest<CityFun> getObjectRequest(int pageIndex, int pageLimit) {
 
-        return ReqFactory.newPost(CityHtpUtil.URL_POST_CITY_FUN, CityFun.class, CityHtpUtil.getCityFunParams(mPlaceId, mType, pageLimit, pageIndex));
+        return ReqFactory.newPost(CityHtpUtil.URL_POST_CITY_FUN, CityFun.class, CityHtpUtil.getCityFunParams(mPlaceId, mType.getNetType(), pageLimit, pageIndex));
+    }
+
+    public enum FunType {
+
+        PLAY(R.string.city_fun_play, WebViewActivity.TYPE_CITY_PLAY, 1),
+        HOTEL(R.string.city_fun_hotel, WebViewActivity.TYPE_CITY_HOTEL, 2),
+        FOOD(R.string.city_fun_food, WebViewActivity.TYPE_CITY_FOOD, 3),
+        SHOP(R.string.city_fun_shop, WebViewActivity.TYPE_CITY_SHOP, 4);
+
+        int mTitleResId = 0;
+        int mShareType = 0;
+        int mNetType = 0;
+
+        FunType(int titleResId, int shareType, int netType) {
+            mTitleResId = titleResId;
+            mShareType = shareType;
+            mNetType = netType;
+        }
+
+        public int getTitleResId() {
+            return mTitleResId;
+        }
+
+        public int getShareType() {
+            return mShareType;
+        }
+
+        public int getNetType() {
+            return mNetType;
+        }
+
+        public static FunType getFunType(int netType) {
+
+            if (netType == FunType.PLAY.getNetType()) {
+                return FunType.PLAY;
+            } else if (netType == FunType.HOTEL.getNetType()) {
+                return FunType.HOTEL;
+            } else if (netType == FunType.FOOD.getNetType()) {
+                return FunType.FOOD;
+            } else {
+                return FunType.SHOP;
+            }
+        }
     }
 }
