@@ -199,7 +199,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             startMapActivity();
         } else if (R.id.tvAllKnow == view.getId()) {
 
-            WebViewActivity.startActivity(PoiDetailActivity.this, mPoiDetail.getPurchase_info(), "");
+            WebViewActivity.startActivityNoShare(PoiDetailActivity.this, mPoiDetail.getPurchase_info(), getString(R.string.need_know));
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();

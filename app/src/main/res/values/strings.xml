@@ -169,12 +169,11 @@
 
     <!-- city -->
     <string name="recommend_route">推荐路线</string>
-    <string-array name="city_fun">
-        <item>怎么玩</item>
-        <item>住在哪</item>
-        <item>吃什么</item>
-        <item>值得买</item>
-    </string-array>
+    <string name="city_fun_play">怎么玩</string>
+    <string name="city_fun_hotel">住在哪</string>
+    <string name="city_fun_food">吃什么</string>
+    <string name="city_fun_shop">值得买</string>
+
     <string-array name="city_necessary">
         <item>景点/门票</item>
         <item>签证/出入境</item>

@@ -58,7 +58,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
                             CityActivity.startActivity(getActivity(), cityId);
                         }
                     } else {
-                        WebViewActivity.startActivity(getActivity(), mainRoute.getPlace_url(), mainRoute.getCn_name());
+                        WebViewActivity.startActivityNoTitle(getActivity(), mainRoute.getPlace_url(),WebViewActivity.TYPE_CITY_TOPIC);
                     }
                 }
             }
