@@ -67,7 +67,8 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
     public void onPause() {
 
         super.onPause();
-        mBannerWidget.onPause();
+        if (mBannerWidget != null)
+            mBannerWidget.onPause();
     }
 
     private void initContentViews(View contentView) {
