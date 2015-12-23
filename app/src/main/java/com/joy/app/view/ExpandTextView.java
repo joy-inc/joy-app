@@ -33,7 +33,7 @@ public class ExpandTextView extends LinearLayout implements OnClickListener {
     public static final int DEFAULT_TEXT_COLOR = 0XFF000000;
     public static final float DEFAULT_SPACE_MUTIL = 1.0f;
     public static final float DEFAULT_SPACE_ADD = 0.0f;
-    public static final int DEFAULT_LINE_NUM = 3;
+    public static final int DEFAULT_LINE_NUM = 5;
     public static final int DEFAULT_TEXT_SIZE = 12;
     public static final int DEFAULT_MARGIN_TOP = 20;
     public static final int DEFAULT_EXPAND_STYPE = 0;
