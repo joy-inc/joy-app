@@ -8,11 +8,11 @@ import java.util.List;
 public class CityFun {
 
     /**
-     * description : 购物的总体描述
+     * desc : 购物的总体描述
      * list : [{"topic_id":"QteM+pm2pOE=","topic_name":"韩国商场","en_name":"second name","pic_url":"http://xx.com/photo....","topic_url":"http://xx.com/..","recommend":"这是推荐语，很棒的商场，东西不要钱"},{"topic_id":"steM+pm2pOE=","topic_name":"首尔商场","en_name":"second name","pic_url":"http://xx.com/photo....","topic_url":"http://xx.com/..","recommend":"这是推荐语，很棒的商场，东西不要钱"}]
      */
 
-    private String description;
+    private String desc;
     /**
      * topic_id : QteM+pm2pOE=
      * topic_name : 韩国商场
@@ -24,16 +24,16 @@ public class CityFun {
 
     private List<ListEntity> list;
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public void setList(List<ListEntity> list) {
         this.list = list;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
     public List<ListEntity> getList() {
@@ -47,6 +47,7 @@ public class CityFun {
         private String pic_url;
         private String topic_url;
         private String recommend;
+        private String recom_num;
 
         public void setTopic_id(String topic_id) {
             this.topic_id = topic_id;
@@ -72,6 +73,10 @@ public class CityFun {
             this.recommend = recommend;
         }
 
+        public void setRecom_num(String recom_num) {
+            this.recom_num = recom_num;
+        }
+
         public String getTopic_id() {
             return topic_id;
         }
@@ -94,6 +99,10 @@ public class CityFun {
 
         public String getRecommend() {
             return recommend;
+        }
+
+        public String getRecom_num() {
+            return recom_num;
         }
     }
 }

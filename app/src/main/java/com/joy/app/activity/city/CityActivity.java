@@ -46,7 +46,6 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        getRootView().setBackgroundResource(R.color.color_primary);
         executeCityDetail();// city detail
     }
 
@@ -65,6 +64,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     @Override
     protected void initContentView() {
 
+        setBackgroundResource(R.color.color_primary);
         setSwipeRefreshEnable(false);
         setAdapter(new CityRouteAdapter());
         setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
@@ -179,5 +179,14 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     protected ObjectRequest<List<CityRoute>> getObjectRequest(int pageIndex, int pageLimit) {
 
         return ReqFactory.newPost(CityHtpUtil.URL_POST_CITY_ROUTE, CityRoute.class, CityHtpUtil.getCityRouteParams(mPlaceId, pageLimit, pageIndex));
+    }
+
+    @Override
+    protected boolean invalidateContent(List<CityRoute> cityRoutes) {
+
+        boolean ret = super.invalidateContent(cityRoutes);
+        if (!ret)
+            goneView(findViewById(R.id.llRouteTitle));
+        return ret;
     }
 }

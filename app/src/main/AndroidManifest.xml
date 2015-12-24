@@ -65,7 +65,7 @@
         <activity
             android:name=".activity.user.UserLoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay"
+            android:theme="@style/theme_app.translucent.overlay"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.common.DayPickerActivity"

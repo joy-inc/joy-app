@@ -1,6 +1,5 @@
 package com.joy.app.activity.city;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;
+import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.city.CityFunAdapter;
@@ -62,6 +62,9 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
     @Override
     protected void initContentView() {
 
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+//            getToolbar().setElevation(0);
+        setBackgroundResource(R.color.color_primary);
         setAdapter(new CityFunAdapter());
         setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
 
@@ -73,6 +76,19 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
                 WebViewActivity.startActivityNoTitle(CityFunActivity.this, entity.getTopic_url(), mType.getShareType());
             }
         });
+    }
+
+    @Override
+    protected boolean invalidateContent(CityFun cityFun) {
+
+        if (TextUtil.isNotEmpty(cityFun.getDesc()) && getHeaderViewsCount() == 0) {
+
+            JTextView jtvDesc = (JTextView) inflateLayout(R.layout.view_cityfun_header);
+            jtvDesc.setText(cityFun.getDesc());
+            addHeaderView(jtvDesc);
+        }
+
+        return super.invalidateContent(cityFun);
     }
 
     @Override

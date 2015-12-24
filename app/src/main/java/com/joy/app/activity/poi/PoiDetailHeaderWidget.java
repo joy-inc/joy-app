@@ -104,7 +104,6 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         });
         mAdapter.setData(data.getPhotos());
         mBannerWidget = new BannerWidget(getActivity(), mAdapter);
-        mBannerWidget.setPageTransformer(new AccordionTransformer());// page transformer animation
 
         if (mLlBannerDiv.getChildCount() <= 0)
             mLlBannerDiv.addView(mBannerWidget.getContentView());

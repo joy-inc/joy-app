@@ -48,9 +48,9 @@ public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
     @Override
     protected void initContentView() {
 
+        setBackgroundResource(R.color.white);
         mScoreWidget = new CommentScoresWidget(this);
         setAdapter(new CommentRvAdapter());
-        getRecyclerView().setBackgroundResource(R.color.white);
         setLoadMoreDarkTheme();
     }
 

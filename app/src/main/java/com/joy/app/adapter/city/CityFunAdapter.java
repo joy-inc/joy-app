@@ -31,6 +31,7 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
         @Bind(R.id.sdvPhoto)          SimpleDraweeView sdvPhoto;
         @Bind(R.id.jtvName)           JTextView        jtvName;
         @Bind(R.id.jtvTitle)          JTextView        jtvTitle;
+        @Bind(R.id.jtvRecNum)         JTextView        jtvRecNum;
 
         public ViewHolder(View itemView) {
 
@@ -44,6 +45,14 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
             sdvPhoto.setImageURI(Uri.parse(entity.getPic_url()));
             jtvName.setText(TextUtil.isEmpty(entity.getEn_name()) ? entity.getTopic_name() : entity.getTopic_name() + "\n" + entity.getEn_name());
             jtvTitle.setText(entity.getRecommend());
+            if (TextUtil.isEmpty(entity.getRecom_num())) {
+
+                goneView(jtvRecNum);
+            } else {
+
+                jtvRecNum.setText(getString(R.string.fmt_recommend_num, entity.getRecom_num()));
+                showView(jtvRecNum);
+            }
         }
     }
 }

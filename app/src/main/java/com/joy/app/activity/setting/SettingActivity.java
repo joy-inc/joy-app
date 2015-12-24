@@ -88,6 +88,7 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
 
         ButterKnife.bind(this);
 
+        setBackgroundResource(R.color.color_primary);
         findViewById(R.id.llApp).setOnClickListener(this);
         findViewById(R.id.llRectangle).setOnClickListener(this);
         findViewById(R.id.llClean).setOnClickListener(this);

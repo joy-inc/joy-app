@@ -168,6 +168,7 @@
     <string name="more_then_5">最多添加5个筛选条件</string>
 
     <!-- city -->
+    <string name="fmt_recommend_num">%s个推荐</string>
     <string name="recommend_route">推荐路线</string>
     <string name="city_fun_play">怎么玩</string>
     <string name="city_fun_hotel">住在哪</string>
