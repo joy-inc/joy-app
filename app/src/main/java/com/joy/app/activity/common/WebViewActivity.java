@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.utils.LogMgr;
-import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
@@ -33,7 +32,9 @@ import de.greenrobot.event.EventBus;
 public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget.WebViewListener, View.OnClickListener {
 
     //--大于100有分享的意思
+    public static final int TYPE_POI = 100;//POI详情页#购买须知#查看全部（深色主题）
     public static final int TYPE_CITY = 101;//城市详情
+    public static final int TYPE_HOTEL = 102;//酒店Booking
 
     public static final int TYPE_ABOUT = 1;//关于界面
 
@@ -47,6 +48,12 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mType = getIntent().getIntExtra("type", 0);
+        if (mType == TYPE_HOTEL)
+            setTheme(R.style.theme_app_noTitle_hotel);
+        else if (mType == TYPE_POI)
+            setTheme(R.style.theme_app);
 
         super.onCreate(savedInstanceState);
         setContentFullScreenWebView(true);
@@ -67,7 +74,6 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
         mWebViewWidget.setUserCookie(false);
         mUrl = getIntent().getStringExtra("url");
         mWebViewWidget.loadUrl(mUrl);
-        mType = getIntent().getIntExtra("type", 0);
         mUseBottomBanner = getIntent().getBooleanExtra("usebootom", false);
 
     }
@@ -76,9 +82,14 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     protected void initTitleView() {
 
         if (!mUseBottomBanner) {
+
             addTitleLeftBackView();
-            //            mTitle = getIntent().getStringExtra("title");
-            //            addTitleMiddleView(mTitle);
+
+            if (mType == TYPE_POI) {
+
+                mTitle = getIntent().getStringExtra("title");
+                addTitleMiddleView(mTitle);
+            }
 
             if (mType > 100) {
                 addTitleRightView(R.drawable.ic_share_pink, new View.OnClickListener() {
@@ -336,7 +347,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
      */
     public static void startHotelActivity(Context context, String url) {
 
-        startActivity(context, url, "", 0, true);
+        startActivity(context, url, "", TYPE_HOTEL, true);
     }
 
     /**

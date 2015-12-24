@@ -3,31 +3,26 @@ package com.joy.app.activity.hotel;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseUiActivity;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.DensityUtil;
 import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
+import com.android.library.view.NewlineLayout;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.FilterItems;
-import com.joy.app.view.hotel.AutoChangeLineViewGroup;
 import com.joy.app.view.hotel.SeekBarPressure;
 
 import java.io.Serializable;
@@ -200,7 +195,7 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
             return;
         }
 
-        AutoChangeLineViewGroup mLlFilterView = (AutoChangeLineViewGroup) findViewById(R.id.llFilterView);
+        NewlineLayout mLlFilterView = (NewlineLayout) findViewById(R.id.llFilterView);
 
         for (FilterItems types : mTypesData) {
 

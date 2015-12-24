@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#252525</color>
-    <color name="color_primary_dark">#252525</color>
+    <color name="color_primary">#373737</color>
+    <color name="color_primary_dark">#373737</color>
     <color name="color_accent">#fa617d</color>
     <color name="color_primary_text">@color/white</color>
     <color name="color_secondary_text">@color/white_trans87</color>
@@ -11,8 +11,8 @@
 
     <color name="color_bg_window">#5c303d</color>
     <color name="color_bg_window_dark">#412d45</color>
-    <color name="color_bg_window_trans26">#425c303d</color>
-    <color name="color_bg_window_trans45">#735c303d</color>
+
+    <color name="color_statusbar_hotel">#002f70</color>
 
     <!--登录-->
     <color name="pink_dark">#73f9617c</color>

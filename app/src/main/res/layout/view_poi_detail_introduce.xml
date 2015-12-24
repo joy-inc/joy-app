@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llRootDiv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,18 +27,13 @@
             android:textColor="@color/black_trans87"
             android:textSize="16dp" />
 
-        <com.joy.app.view.FoldTextView
+        <com.android.library.view.FoldTextView
             android:id="@+id/ftvIntroduce"
             style="@style/LongText.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:ellipsize="end"
-            android:paddingTop="8dp"
-            app:promptCollapseText=""
-            app:promptColor="@color/text_pink"
-            app:promptText="" />
+            android:layout_marginTop="20dp" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/tvAllIntroduce"

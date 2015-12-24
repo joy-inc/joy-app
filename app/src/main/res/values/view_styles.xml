@@ -15,6 +15,7 @@
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
+        <item name="android:foreground">?selectableItemBackground</item>
     </style>
 
     <style name="CardView.Light.margin_16dp">
@@ -43,6 +44,7 @@
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:layout_marginRight">8dp</item>
+        <item name="android:foreground">?selectableItemBackground</item>
     </style>
 
     <style name="sdv_cover">
@@ -169,15 +171,6 @@
         <item name="android:maxHeight">5dp</item>
         <item name="android:minHeight">5dp</item>
     </style>
-
-    <!-- 可折叠TextView-->
-    <declare-styleable name="FoldTextView">
-        <attr name="unfolded" format="boolean" />
-        <attr name="minLines" format="integer" />
-        <attr name="promptText" format="string" />
-        <attr name="promptColor" format="color" />
-        <attr name="promptCollapseText" format="string" />
-    </declare-styleable>
 
     <!-- 日期选择的星期几样式-->
     <style name="day_style">

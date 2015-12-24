@@ -8,9 +8,9 @@ import android.widget.TextView;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
+import com.android.library.view.FoldTextView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
-import com.joy.app.view.FoldTextView;
 
 /**
  * 简介与购买须知

@@ -202,7 +202,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             showToast("查看全部简介");
         } else if (R.id.tvAllKnow == view.getId()) {
 
-            WebViewActivity.startActivity(PoiDetailActivity.this, mPoiDetail.getPurchase_info(), "");
+            WebViewActivity.startActivity(PoiDetailActivity.this, mPoiDetail.getPurchase_info(), getString(R.string.need_know), WebViewActivity.TYPE_POI);
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();

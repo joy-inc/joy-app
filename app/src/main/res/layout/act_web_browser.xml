@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical">
-
+    android:background="@color/white"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true">
 
     <LinearLayout android:visibility="gone"
         android:id="@+id/llTool"
         android:layout_width="match_parent"
-        android:layout_height="56dip"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_weight="0"
         android:background="#FFF6F8F7"
@@ -21,35 +20,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
-            android:src="@drawable/selector_ic_web_bar_back"/>
+            android:src="@drawable/ic_web_bar_back"/>
 
         <ImageView
             android:id="@+id/ivFoward"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
-            android:src="@drawable/selector_ic_web_bar_forward"/>
+            android:src="@drawable/ic_web_bar_forward"/>
 
         <ImageView
             android:id="@+id/ivClose"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
-            android:src="@drawable/selector_ic_web_bar_close"/>
+            android:src="@drawable/ic_web_bar_close"/>
 
         <ImageView
             android:id="@+id/ivRefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
-            android:src="@drawable/selector_ic_web_bar_refresh"/>
-
-
+            android:src="@drawable/ic_web_bar_refresh"/>
     </LinearLayout>
-
-
 </RelativeLayout>
