@@ -92,6 +92,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         setContentView(R.layout.item_order_view);
         ButterKnife.bind(this);
         executeRefreshOnly();
+
     }
 
     @Override
@@ -117,8 +118,10 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (isRequest) return;
-                dialogUtil.showDeleteOrderDialog(order_id);
+                if (dialogUtil != null)
+                    dialogUtil.showDeleteOrderDialog(order_id, detail.getOrder_status() == 2);
             }
         });
     }
@@ -204,11 +207,11 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
             showView(vItemSpilt);
             jtvOrderItem.setText(orderDetail.getSelected_item());
         }
-        if(orderDetail.hasTravelDate()){
+        if (orderDetail.hasTravelDate()) {
             showView(llDayItem);
             showView(vDaySpilt);
             jtvOrderDay.setText(orderDetail.getTravel_date());
-        }else{
+        } else {
             goneView(llDayItem);
             goneView(vDaySpilt);
         }

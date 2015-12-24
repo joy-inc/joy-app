@@ -73,7 +73,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
                 CityRoute cityRoute = (CityRoute) getAdapter().getItem(position);
-                WebViewActivity.startActivity(CityActivity.this, cityRoute.getRoute_url(), cityRoute.getRoute_name());
+                WebViewActivity.startActivityNoTitle(CityActivity.this, cityRoute.getRoute_url(), WebViewActivity.TYPE_CITY_RECMMMEND);
             }
         });
     }
@@ -137,40 +137,40 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             case R.id.jimTicket:
 
                 if (mCity != null)
-                    WebViewActivity.startActivity(this, mCity.getTicket_url(), getStringArray(R.array.city_necessary)[0]);
+                    WebViewActivity.startActivityNoTitleShare(this, mCity.getTicket_url());
                 break;
             case R.id.jimVisa:
 
                 if (mCity != null)
-                    WebViewActivity.startActivity(this, mCity.getVisa_url(), getStringArray(R.array.city_necessary)[1]);
+                    WebViewActivity.startActivityNoTitleShare(this, mCity.getVisa_url());
                 break;
             case R.id.jimAirpalne:
 
                 if (mCity != null)
-                    WebViewActivity.startActivity(this, mCity.getTraffic_url(), getStringArray(R.array.city_necessary)[2]);
+                    WebViewActivity.startActivityNoTitleShare(this, mCity.getTraffic_url());
                 break;
             case R.id.jimWifi:
 
                 if (mCity != null)
-                    WebViewActivity.startActivity(this, mCity.getWifi_url(), getStringArray(R.array.city_necessary)[3]);
+                    WebViewActivity.startActivityNoTitleShare(this, mCity.getWifi_url());
                 break;
 
             case R.id.jimPlay:
 
-                CityFunActivity.startActivity(this, mPlaceId, 1);
+                CityFunActivity.startActivity(this, mPlaceId, CityFunActivity.FunType.PLAY.getNetType());
                 break;
             case R.id.jimHotel:
 
                 if (mCity != null)
-                    CityFunActivity.startActivity(this, mPlaceId, 2);
+                    CityFunActivity.startActivity(this, mPlaceId, CityFunActivity.FunType.HOTEL.getNetType());
                 break;
             case R.id.jimFood:
 
-                CityFunActivity.startActivity(this, mPlaceId, 3);
+                CityFunActivity.startActivity(this, mPlaceId, CityFunActivity.FunType.FOOD.getNetType());
                 break;
             case R.id.jimShop:
 
-                CityFunActivity.startActivity(this, mPlaceId, 4);
+                CityFunActivity.startActivity(this, mPlaceId, CityFunActivity.FunType.SHOP.getNetType());
                 break;
         }
     }

@@ -35,6 +35,7 @@ import com.joy.app.utils.QaAnimUtil;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
+import org.osmdroid.util.BoundingBoxE6;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.DirectedLocationOverlay;
@@ -123,6 +124,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
         FrameLayout.LayoutParams mapParams = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         maplayout.addView(mapview, mapParams);
+        mapview.setTilesScaledToDpi(true);
         mapview.setMultiTouchControls(true);
         mapview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -346,7 +348,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.iv_path:
             case R.id.poi_map_path_btn: // poiMapPathBtn
-                MapUtil.startMapApp(this, selectMark.getDataObject());
+                MapUtil.startSystemMap(this, selectMark.getDataObject());
                 return;
             case R.id.poi_map_location_bar: //poiMapLocationBar
 

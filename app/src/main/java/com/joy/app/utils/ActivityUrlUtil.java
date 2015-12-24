@@ -8,11 +8,7 @@ import com.android.library.utils.TextUtil;
 import com.joy.app.activity.city.CityActivity;
 import com.joy.app.activity.city.CityFunActivity;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.activity.hotel.CityHotelListActivity;
-import com.joy.app.activity.hotel.HotelSearchFilterActivity;
-import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
-import com.joy.app.utils.http.HtpApi;
 
 /**
  * 处理url打开对应的activity或者处理事件
@@ -34,7 +30,7 @@ public class ActivityUrlUtil {
 
     private static final int TYPE_HOLTER_DETAIL = 4;//酒店详情
     private static final String URL_HOLTER_DETAIL = "www.qyer.com/goto.php";//BASE_HOST + "hotel.joy.com/";//酒店详情
-    private static final String URL_HOLTER_DETAIL2 = "www.booking.com";
+    public static final String URL_HOLTER_DETAIL2 = "//www.booking.com/";
 
     private static final int TYPE_TICKETS = 5;//景点门票
     private static final String URL_TICKETS = BASE_HOST + "topic.joy.com/tickets/";//景点门票
@@ -96,7 +92,7 @@ public class ActivityUrlUtil {
             return TYPE_POI_DETAIL;
         } else if (checkUrl(url, URL_PRODUCT_DETAIL)) {
             return TYPE_PRODUCT_DETAIL;
-        } else if (checkUrl(url, URL_HOLTER_DETAIL) && checkUrl(url, URL_HOLTER_DETAIL2)) {
+        } else if (checkUrl(url, URL_HOLTER_DETAIL2)) {
             return TYPE_HOLTER_DETAIL;
         } else if (checkUrl(url, URL_TICKETS)) {
             return TYPE_TICKETS;
@@ -122,27 +118,46 @@ public class ActivityUrlUtil {
         return -1;
     }
 
-    public static boolean startActivityByHttpUrl(Context context, String url) {
+    /**
+     * 判断打开url,但排除一些指定的url
+     * @param context
+     * @param url
+     * @param excludeUrl
+     * @return
+     */
+    public static boolean startActivityByHttpUrl(Context context, String url, String... excludeUrl) {
+        int type = getUrlType(url);
+        if (type > 0 && excludeUrl.length > 0) {
+            for (String item : excludeUrl) {
+                if (url.indexOf(item) > 0) {
+                    return false;
+                }
+            }
+        }
+        return startType(context, type, url);
+    }
 
-        int urlType = getUrlType(url);
+    private static boolean startType(Context context, int urlType, String url) {
         switch (urlType) {
 
             case TYPE_HOLTER_DETAIL:
                 WebViewActivity.startHotelActivity(context, url);
+
                 return true;
             case TYPE_TICKETS:
-                WebViewActivity.startActivity(context, url);
+                WebViewActivity.startActivityNoTitleShare(context, url);
+
                 return true;
             case TYPE_VISA:
-                WebViewActivity.startActivity(context, url);
+                WebViewActivity.startActivityNoTitleShare(context, url);
 
                 return true;
             case TYPE_TRANSPORT:
-                WebViewActivity.startActivity(context, url);
+                WebViewActivity.startActivityNoTitleShare(context, url);
 
                 return true;
             case TYPE_WIFI:
-                WebViewActivity.startActivity(context, url);
+                WebViewActivity.startActivityNoTitleShare(context, url);
 
                 return true;
             case TYPE_JOY:
@@ -180,6 +195,12 @@ public class ActivityUrlUtil {
 
         }
         return false;
+    }
+
+    public static boolean startActivityByHttpUrl(Context context, String url) {
+
+        int urlType = getUrlType(url);
+        return startType(context, urlType, url);
     }
 
     private static boolean checkUrl(String url, String url1) {

@@ -124,7 +124,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mHeaderWidget.onResume(); // 打开图片自动滚动
         mHighWidget.invalidate(mPoiDetail);
 
-        mMapWidget.invalidate(R.drawable.ic_star_light_small);
+        mMapWidget.invalidate(R.drawable.ic_poi_detail_map_point);
         mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), mPoiDetail.getAddress());
         if (TextUtil.isEmpty(data.getLat()) || TextUtil.isEmpty(data.getLon()) || "0".equals(data.getLat()) || "0".equals(data.getLon()))
             ViewUtil.goneView(mMapWidget.getContentView());
@@ -197,12 +197,9 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         } else if (R.id.rl_mapview == view.getId()) {
 
             startMapActivity();
-        } else if (R.id.tvAllIntroduce == view.getId()) {
-
-            showToast("查看全部简介");
         } else if (R.id.tvAllKnow == view.getId()) {
 
-            WebViewActivity.startActivity(PoiDetailActivity.this, mPoiDetail.getPurchase_info(), getString(R.string.need_know), WebViewActivity.TYPE_POI);
+            WebViewActivity.startActivityNoShare(PoiDetailActivity.this, mPoiDetail.getPurchase_info(), getString(R.string.need_know));
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();

@@ -45,6 +45,7 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
         tvAllKnow = (TextView) contentView.findViewById(R.id.tvAllKnow);
         tvAllIntroduce.setOnClickListener(this);
         tvAllKnow.setOnClickListener(this);
+        ftvIntroduce.setOnClickListener(this);
 
         return contentView;
     }
@@ -71,9 +72,9 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.tvAllIntroduce)
+        if (v.getId() == R.id.tvAllIntroduce) {
             ftvIntroduce.toggle();
-        else if (v.getId() == R.id.tvAllKnow)
+        } else if (v.getId() == R.id.tvAllKnow)
             callbackWidgetViewClickListener(v);
     }
 }

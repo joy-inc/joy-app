@@ -38,7 +38,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/tvAllIntroduce"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:background="@drawable/selector_bg_rectangle_accent"
             android:paddingLeft="56dp"
             android:paddingRight="56dp"
@@ -152,7 +152,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/tvAllKnow"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:background="@drawable/selector_bg_rectangle_accent"
             android:paddingLeft="56dp"
             android:paddingRight="56dp"

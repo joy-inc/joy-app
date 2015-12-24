@@ -57,9 +57,10 @@
     <!--设置界面-->
 
     <!-- 详情、商品 -->
-    <string name="unit">¥ %s</string>
-    <string name="unit_ge">%s个</string>
-    <string name="kuohao">(%s)</string>
+    <string name="fmt_poi_before">需提前%s天预订</string>
+    <string name="fmt_unit">¥ %s</string>
+    <string name="fmt_unit_ge">%s个</string>
+    <string name="fmt_kuohao">(%s)</string>
     <string name="add_plan">加入行程规划</string>
     <string name="highlights">项目亮点</string>
     <string name="introduce">简介</string>
@@ -131,9 +132,16 @@
     <string name="commenton_submit">提交</string>
     <string name="commenton_success">点评成功</string>
 
+    <!--地图-->
+    <string name="toast_map_location_erro">定位失败，请稍后再试</string>
     <!--行程规划-->
 
     <string name="plan_folder_things">things to do</string>
+    <string name="toast_plan_folder_adding">正在添加行程规划</string>
+    <string name="toast_plan_folder_add_erro">加入行程计划失败</string>
+    <string name="alert_plan_folder_delete">确定删除旅行计划？</string>
+    <string name="plan_folder_delete_success">删除成功</string>
+    <string name="plan_folder_delete_erro">删除失败</string>
     <string name="plan_list_before_day">需提前%s天预定</string>
 
     <!--日历-->
@@ -161,12 +169,11 @@
 
     <!-- city -->
     <string name="recommend_route">推荐路线</string>
-    <string-array name="city_fun">
-        <item>怎么玩</item>
-        <item>住在哪</item>
-        <item>吃什么</item>
-        <item>值得买</item>
-    </string-array>
+    <string name="city_fun_play">怎么玩</string>
+    <string name="city_fun_hotel">住在哪</string>
+    <string name="city_fun_food">吃什么</string>
+    <string name="city_fun_shop">值得买</string>
+
     <string-array name="city_necessary">
         <item>景点/门票</item>
         <item>签证/出入境</item>

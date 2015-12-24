@@ -75,7 +75,7 @@ public class CommentScoresWidget extends ExLayoutWidget {
         }
 
         mAcRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
-        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.kuohao, data.getComment_num()));
+        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.fmt_kuohao, data.getComment_num()));
         tvCommentLevel.setText(data.getComment_level());
 
         setMaxValue(data.getComment_num());

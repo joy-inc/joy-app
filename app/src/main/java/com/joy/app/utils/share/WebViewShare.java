@@ -12,22 +12,26 @@ import com.joy.library.share.ShareType;
  */
 public class WebViewShare implements IShareInfo {
 
-    String url;
+    private String mUrl;
 
-    public void setInfo(String url) {
-        this.url = url;
+    private int mType;
+    private String mTitle;
+    public void setInfo(int type, String url,String title) {
+        mUrl = url;
+        mType = type;
+        mTitle=title;
     }
 
     @Override
     public ShareInfo getShareInfo(ShareType platform) {
 
         ShareInfo shareInfo = new ShareInfo();
-        shareInfo.setContent("要分享的url" + url);
+        shareInfo.setContent("要分享的url" + mUrl);
         shareInfo.setMediaResId(R.drawable.ic_logo_circle);
 
         shareInfo.setMediaUrl(ShareUtil.getWeiboPaht());
         shareInfo.setTitle("分享的");
-        shareInfo.setUrl(url);
+        shareInfo.setUrl(mUrl);
         return shareInfo;
     }
 }
