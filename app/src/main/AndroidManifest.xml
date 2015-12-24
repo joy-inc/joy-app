@@ -101,7 +101,7 @@
         <activity
             android:name=".activity.city.CityFunActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.navigationBar" />
+            android:theme="@style/theme_app.noTitle" />
         <activity
             android:name=".activity.sample.TabTestActivity"
             android:screenOrientation="portrait" />
@@ -124,7 +124,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.poi.CommentActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.toolbar.overlay" />
 
         <!--行程规划-->
         <activity

@@ -3,6 +3,7 @@ package com.joy.app.activity.poi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
@@ -41,8 +42,13 @@ public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
     @Override
     protected void initTitleView() {
 
-        addTitleLeftBackView();
-        addTitleMiddleView(R.string.comment_all);
+        addTitleLeftView(R.drawable.ic_back_gray, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
