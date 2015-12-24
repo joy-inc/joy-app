@@ -174,6 +174,7 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
         int width = DeviceUtil.getScreenWidth()-DensityUtil.dip2px(52);
         mSbDistance = (SeekBarPressure) findViewById(R.id.sbDistance);
         mSbDistance.setmScollBarWidth(width);
+        mSbDistance.invalidate();
         mSbDistance.setProgressLowInt(getProgress(mPrice[0]));
         int highProgress = getProgress(mPrice[1]);
         if (highProgress == 0) {

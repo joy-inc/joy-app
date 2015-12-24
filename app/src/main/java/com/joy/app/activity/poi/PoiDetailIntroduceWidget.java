@@ -17,7 +17,7 @@ import com.joy.app.bean.sample.PoiDetail;
  * <p/>
  * Created by xiaoyu.chen on 15/11/18.
  */
-public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnClickListener {
+public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnClickListener ,FoldTextView.OnFoldListener{
 
     private View vRootView;
     private LinearLayout llIntroduceDiv;
@@ -45,7 +45,7 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
         tvAllKnow = (TextView) contentView.findViewById(R.id.tvAllKnow);
         tvAllIntroduce.setOnClickListener(this);
         tvAllKnow.setOnClickListener(this);
-        ftvIntroduce.setOnClickListener(this);
+        ftvIntroduce.setOnFoldListener(this);
 
         return contentView;
     }
@@ -58,7 +58,17 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
         }
 
         if (TextUtil.isNotEmpty(data.getIntroduction())) {
+
             ftvIntroduce.setText(data.getIntroduction());
+            ftvIntroduce.post(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    if (ftvIntroduce.isEnable())
+                        ViewUtil.showView(tvAllIntroduce);
+                }
+            });
             ViewUtil.showView(llIntroduceDiv);
         }
 
@@ -76,5 +86,11 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
             ftvIntroduce.toggle();
         } else if (v.getId() == R.id.tvAllKnow)
             callbackWidgetViewClickListener(v);
+    }
+
+    @Override
+    public void onFold(boolean isFold) {
+
+        tvAllIntroduce.setText(isFold ? R.string.see_all : R.string.collapse);
     }
 }

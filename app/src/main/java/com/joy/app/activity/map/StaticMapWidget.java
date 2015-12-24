@@ -28,12 +28,9 @@ import com.android.library.view.ExLayoutWidget;
 public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListener {
 
     ImageView locationView;
-    LinearLayout TileLayout;
     RelativeLayout contentView;
     JTextView addressView;
     SimpleDraweeView map,Lmap,Rmap;
-    SimpleDraweeView LTmap,CTmap,RTmap;
-    SimpleDraweeView LBmap,CBmap,RBmap;
     int zoom = 0;
 
 
