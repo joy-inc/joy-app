@@ -8,6 +8,7 @@ import com.android.library.utils.TextUtil;
 import com.joy.app.activity.city.CityActivity;
 import com.joy.app.activity.city.CityFunActivity;
 import com.joy.app.activity.common.WebViewActivity;
+import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
 
 /**
@@ -62,6 +63,9 @@ public class ActivityUrlUtil {
     private static final int TYPE_COUNTRY_TOPIC = 14;//国家路线专题
     private static final String URL_COUNTRY_TOPIC = BASE_HOST + "topic.joy.com/country/";//国家路线专题
 
+    private static final int TYPE_HOTEL_ALL = 15;//国家路线专题
+    private static final String URL_HOTEL_ALL = BASE_HOST + "hotel.joy.com/all/";//国家路线专题
+
     public static boolean startUriActivity(Context context, String uriStr, boolean newTask) {
 
         try {
@@ -114,12 +118,15 @@ public class ActivityUrlUtil {
             return TYPE_ROUTE;
         } else if (checkUrl(url, URL_COUNTRY_TOPIC)) {
             return TYPE_COUNTRY_TOPIC;
+        } else if (checkUrl(url, URL_HOTEL_ALL)) {
+            return TYPE_HOTEL_ALL;
         }
         return -1;
     }
 
     /**
      * 判断打开url,但排除一些指定的url
+     *
      * @param context
      * @param url
      * @param excludeUrl
@@ -190,6 +197,9 @@ public class ActivityUrlUtil {
                 return true;
             case TYPE_PRODUCT_DETAIL:
                 PoiDetailActivity.startActivity(context, UrlUtil.getLastParameter(url));
+                return true;
+            case TYPE_HOTEL_ALL:
+                CityHotelListActivity.startActivity(context, UrlUtil.getLastParameter(url), "");
                 return true;
 
 
