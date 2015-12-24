@@ -7,18 +7,25 @@
         android:id="@+id/sdvPhoto"
         style="@style/sdv_cover"
         android:layout_width="match_parent"
-        android:layout_height="260dp" />
+        android:layout_height="270dp"
+        android:tint="@color/transparent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignBottom="@id/sdvPhoto"
+        android:background="@drawable/shape_bg_city_mask" />
 
     <com.android.library.widget.JTextView
         android:id="@+id/jtvName"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="270dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:textColor="@color/white_trans75"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -27,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/sdvPhoto"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal">
@@ -37,7 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:foreground="?selectableItemBackgroundBorderless"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_ticket" />
 
@@ -46,7 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:foreground="?selectableItemBackgroundBorderless"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_visa" />
 
@@ -55,7 +64,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:foreground="?selectableItemBackgroundBorderless"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_airplane" />
 
@@ -64,7 +74,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:foreground="?selectableItemBackgroundBorderless"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_wifi" />
     </LinearLayout>
@@ -76,7 +87,6 @@
         android:layout_below="@id/llDiv0"
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <com.android.library.widget.JImageView
@@ -84,10 +94,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:foreground="?android:selectableItemBackground"
+            android:foreground="?selectableItemBackground"
             android:scaleType="centerInside"
             android:src="@drawable/ic_play"
-            android:tint="@color/black_trans26" />
+            android:tint="@color/black_trans12" />
 
         <com.android.library.widget.JImageView
             android:id="@+id/jimFood"
@@ -98,7 +108,7 @@
             android:foreground="?selectableItemBackground"
             android:scaleType="centerInside"
             android:src="@drawable/ic_food"
-            android:tint="@color/black_trans26" />
+            android:tint="@color/black_trans12" />
     </LinearLayout>
 
     <LinearLayout
@@ -116,9 +126,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:foreground="?selectableItemBackground"
             android:scaleType="centerInside"
             android:src="@drawable/ic_shop"
-            android:tint="@color/black_trans26" />
+            android:tint="@color/black_trans12" />
 
         <com.android.library.widget.JImageView
             android:id="@+id/jimHotel"
@@ -126,9 +137,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_weight="1"
+            android:foreground="?selectableItemBackground"
             android:scaleType="centerInside"
             android:src="@drawable/ic_hotel"
-            android:tint="@color/black_trans26" />
+            android:tint="@color/black_trans12" />
     </LinearLayout>
 
     <LinearLayout

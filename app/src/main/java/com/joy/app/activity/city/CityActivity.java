@@ -46,6 +46,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        getRootView().setBackgroundResource(R.color.color_primary);
         executeCityDetail();// city detail
     }
 

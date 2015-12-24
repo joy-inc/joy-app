@@ -41,6 +41,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     public static final int TYPE_CITY_HOTEL = 107;//城市下的酒店
 
     public static final int TYPE_ABOUT = 1;//关于界面
+    public static final int TYPE_HOTEL = 2;//酒店Booking.com
 
     private WebViewBaseWidget mWebViewWidget;
     private ShareDialog mShareDialog;
@@ -53,12 +54,16 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mTitle = getIntent().getStringExtra("title");
-        if (!TextUtil.isEmpty(mTitle)) {
-            setTheme(R.style.theme_app);
-        }
-        super.onCreate(savedInstanceState);
 
+        mType = getIntent().getIntExtra("type", 0);
+        mTitle = getIntent().getStringExtra("title");
+
+        if (!TextUtil.isEmpty(mTitle))
+            setTheme(R.style.theme_app);
+        else if (mType == TYPE_HOTEL)
+            setTheme(R.style.theme_app_noTitle_hotel);
+
+        super.onCreate(savedInstanceState);
         setContentFullScreenWebView(true);
     }
 
@@ -77,7 +82,6 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
             mNoJump = true;
         }
 
-        mType = getIntent().getIntExtra("type", 0);
         if (mType > 100) {
             //再根据不同的来生成
             mWebViewShare = new WebViewShare();
@@ -377,7 +381,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
      */
     public static void startHotelActivity(Context context, String url) {
 
-        startActivity(context, url, "", 0, true);
+        startActivity(context, url, "", 2, true);
     }
 
 

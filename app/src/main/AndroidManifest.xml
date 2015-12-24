@@ -97,10 +97,11 @@
         <activity
             android:name=".activity.city.CityActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:theme="@style/theme_app.translucent.overlay" />
         <activity
             android:name=".activity.city.CityFunActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/theme_app.translucent.navigationBar" />
         <activity
             android:name=".activity.sample.TabTestActivity"
             android:screenOrientation="portrait" />
