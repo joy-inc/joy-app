@@ -61,7 +61,7 @@
                     app:circleRadius="9dp"
                     app:duration="0.5"
                     app:lheight="3dp"
-                    app:lwidth="330dp"
+                    app:lwidth="300dp"
                     app:maxValue="5.0"
                     app:minValue="1.0" />
 
