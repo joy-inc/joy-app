@@ -106,7 +106,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
                     }
                 });
             } else {
-                setTitle(mTitle);
+                addTitleMiddleView(mTitle);
                 addTitleLeftBackView();
             }
 
