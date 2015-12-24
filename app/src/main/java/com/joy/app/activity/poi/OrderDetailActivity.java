@@ -120,7 +120,8 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
             public void onClick(View v) {
 
                 if (isRequest) return;
-                dialogUtil.showDeleteOrderDialog(order_id, detail.getOrder_status() == 2);
+                if (dialogUtil != null)
+                    dialogUtil.showDeleteOrderDialog(order_id, detail.getOrder_status() == 2);
             }
         });
     }
