@@ -308,9 +308,9 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
 
     protected void showPathBtn() {
         if (poiMapPathBtn.getVisibility() != View.VISIBLE) {
-            poiMapPathBtn.setAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
+//            poiMapPathBtn.setAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
             poiMapPathBtn.setVisibility(View.VISIBLE);
-            poiMapLocationBar.startAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
+//            poiMapLocationBar.startAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
         }
     }
 

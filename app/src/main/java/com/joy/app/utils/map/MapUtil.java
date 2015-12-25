@@ -167,7 +167,7 @@ public class MapUtil {
                 break;
             }
         }
-
+        if (minLevel >15)minLevel = 15;
         mapview.getController().setZoom(minLevel);
 
         mapview.getController().animateTo(new GeoPoint(middle[0], middle[1]));
