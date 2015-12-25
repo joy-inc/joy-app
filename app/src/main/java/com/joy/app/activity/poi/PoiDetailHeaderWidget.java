@@ -127,8 +127,14 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         }
 
         mTvTitle.setText(data.getTitle());
-        mAcRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
-        mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.fmt_kuohao, TextUtil.isEmpty(data.getComment_num()) ? "0" : data.getComment_num()));
+
+        if (TextUtil.isNotEmpty(data.getComment_num()) && !"0".equals(data.getComment_num())) {
+
+            mAcRatingBar.setRating(MathUtil.parseFloat(data.getComment_level(), 0));
+            mTvPoiCommentNum.setText(getActivity().getResources().getString(R.string.fmt_kuohao, TextUtil.isEmpty(data.getComment_num()) ? "0" : data.getComment_num()));
+            ViewUtil.showView(mAcRatingBar);
+            ViewUtil.showView(mTvPoiCommentNum);
+        }
 
     }
 
