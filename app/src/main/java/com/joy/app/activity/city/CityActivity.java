@@ -185,8 +185,8 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     protected boolean invalidateContent(List<CityRoute> cityRoutes) {
 
         boolean ret = super.invalidateContent(cityRoutes);
-        if (!ret)
-            goneView(findViewById(R.id.llRouteTitle));
+        if (ret)
+            showView(findViewById(R.id.llRouteTitle));
         return ret;
     }
 }
