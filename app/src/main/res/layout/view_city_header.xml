@@ -151,7 +151,8 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <com.android.library.widget.JImageView
             style="@style/Line.Light"
