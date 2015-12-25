@@ -79,12 +79,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     @Override
     protected void initTitleView() {
 
-        addTitleLeftView(R.drawable.ic_back_gray, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        addTitleLeftBackView(R.drawable.ic_back_gray);
     }
 
     @Override

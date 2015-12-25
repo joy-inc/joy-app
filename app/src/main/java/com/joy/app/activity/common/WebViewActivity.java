@@ -103,12 +103,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
         if (!mUseBottomBanner) {
             if (TextUtil.isEmpty(mTitle)) { //就是透明的
-                addTitleLeftView(R.drawable.ic_back_gray, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+                addTitleLeftBackView(R.drawable.ic_back_gray);
             } else {
                 addTitleMiddleView(mTitle);
                 addTitleLeftBackView();

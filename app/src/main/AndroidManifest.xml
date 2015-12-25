@@ -101,7 +101,7 @@
         <activity
             android:name=".activity.city.CityFunActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.noTitle" />
+            android:theme="@style/theme_app.translucent.navigationBar" />
         <activity
             android:name=".activity.sample.TabTestActivity"
             android:screenOrientation="portrait" />
