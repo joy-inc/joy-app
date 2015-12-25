@@ -170,8 +170,8 @@ public class MapUtil {
         if (minLevel >15)minLevel = 15;
         mapview.getController().setZoom(minLevel);
 
-        mapview.getController().animateTo(new GeoPoint(middle[0], middle[1]));
-
+//        mapview.getController().animateTo(new GeoPoint(middle[0], middle[1]));
+        mapview.getController().setCenter(new GeoPoint(middle[0], middle[1]));
         latListSort.clear();
         lngListSort.clear();
     }
