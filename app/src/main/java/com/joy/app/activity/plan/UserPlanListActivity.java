@@ -55,12 +55,12 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        executeRefreshOnly();
+        executeCacheAndRefresh();
     }
 
     @Override
     protected void initData() {
-
+        setPageLimit(200);
         mFolderID = getIntent().getStringExtra("FolderID");
     }
 
