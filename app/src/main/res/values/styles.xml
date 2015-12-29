@@ -20,6 +20,10 @@
         <item name="colorPrimary">@color/transparent</item>
     </style>
 
+    <style name="theme_app.translucent.noTitle">
+        <item name="noTitle">true</item>
+    </style>
+
     <style name="theme_app.translucent.overlay">
         <item name="overlay">true</item>
     </style>
