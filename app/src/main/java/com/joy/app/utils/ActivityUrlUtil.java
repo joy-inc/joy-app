@@ -18,7 +18,7 @@ import com.joy.app.activity.poi.PoiDetailActivity;
  */
 public class ActivityUrlUtil {
 
-    private static final String BASE_HOST = "joy.4awork.com/";
+    private static final String BASE_HOST = "topic.joyapp.cc/";
 
     private static final int TYPE_CITY_TOPIC = 1;//城市详情
     private static final String URL_CITY_TOPIC = BASE_HOST + "place.joy.com/city/";//城市详情
@@ -27,7 +27,7 @@ public class ActivityUrlUtil {
     private static final String URL_POI_DETAIL = BASE_HOST + "place.joy.com/poi/";//POI详情
 
     private static final int TYPE_PRODUCT_DETAIL = 3;//POI详情
-    private static final String URL_PRODUCT_DETAIL = BASE_HOST + "topic/product/detail/";//POI详情
+    private static final String URL_PRODUCT_DETAIL = "/product/detail/";//POI详情
 
     private static final int TYPE_HOLTER_DETAIL = 4;//酒店详情
     private static final String URL_HOLTER_DETAIL = "www.qyer.com/goto.php";//BASE_HOST + "hotel.joy.com/";//酒店详情
