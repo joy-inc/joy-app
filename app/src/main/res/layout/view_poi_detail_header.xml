@@ -55,7 +55,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:numStars="5"
-            android:stepSize="0.5" />
+            android:stepSize="0.5"
+            android:visibility="gone" />
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvPoiCommentNum"
@@ -66,7 +67,8 @@
             android:layout_toRightOf="@+id/acRatingBar"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:visibility="gone" />
 
         <com.android.library.widget.JTextView
             android:id="@+id/tvPrice"

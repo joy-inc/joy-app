@@ -43,19 +43,10 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Activity.RESULT_OK) {
-            executeRefreshOnly();
-        }
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
         EventBus.getDefault().register(this);
-
         initViewShowStatus();
     }
 
@@ -63,10 +54,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     public void onResume() {
 
         super.onResume();
-        if (mNeedToRefresh) {
-            mNeedToRefresh = false;
-            executeFrameRefresh();
-        }
+//        executeSwipeRefresh();
     }
 
     @Override
@@ -86,7 +74,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
             if (mLoginTipView != null)
                 removeCustomView(mLoginTipView);
-            executeRefreshOnly();
+                executeCacheAndRefresh();
         } else {
             //设置界面为提示登录
             setNotLoginView();
@@ -97,7 +85,6 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      * 设置没有登录的界面提示
      */
     private void setNotLoginView() {
-//        setSwipeRefreshEnable(false);
         if (mLoginTipView == null) {
             mLoginTipView = new LoginTipView(this.getActivity(), R.string.travel_no_login, R.string.travel_no_login_sub);
         }
@@ -119,15 +106,6 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
         initViewShowStatus();
     }
-    /**
-     * 登录的回掉
-     *
-     * @param event
-     */
-    public void onEventMainThread(FolderEvent event) {
-        LogMgr.i("onEventMainThread" +" event:"+event.getDelete());
-            mNeedToRefresh = true;
-    }
 
     @Override
     protected void initContentView() {
@@ -138,8 +116,10 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
 
-                if (planFolder != null)
+                if (planFolder != null){
+                    executeSwipeRefresh();
                     UserPlanListActivity.startActivityById(getActivity(), planFolder.getFolder_id(), planFolder.getFolder_name(), 1);
+                }
             }
         });
         setAdapter(adapter);

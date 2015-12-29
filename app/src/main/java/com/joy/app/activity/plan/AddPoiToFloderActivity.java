@@ -215,19 +215,14 @@ public class AddPoiToFloderActivity extends Activity {
         req.setResponseListener(new ObjectResponse<Object>() {
 
             @Override
-            public void onPre() {
-                ToastUtil.showToast(R.string.toast_plan_folder_adding);
-            }
-
-            @Override
             public void onSuccess(Object tag, Object object) {
+                ToastUtil.showToast(R.string.toast_plan_folder_add_finish);
                 Intent intent = new Intent();
                 intent.putExtra("name", folde.getFolder_name());
                 intent.putExtra("id", folde.getFolder_id());
                 EventBus.getDefault().post(new FolderEvent(FolderEvent.ADD_POI));
                 setResult(RESULT_OK, intent);
                 finish();
-
             }
 
             @Override

@@ -43,13 +43,13 @@ public class SinglePoiMapActivity extends MapActivity {
     @Override
     protected void initContentView() {
         super.initContentView();
+        showPathBtn();
         clearCurrMap();
         JoyMapOverlayItem item = addPoi(mapPoiDetail);
         if (item == null)return;
         showMarkers();
         mapview.getController().setCenter(item.getPoint());
         mapview.getController().setZoom(15);
-        showPathBtn();
         selectPosition(item,false);
     }
 }

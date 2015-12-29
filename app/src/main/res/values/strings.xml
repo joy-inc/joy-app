@@ -138,7 +138,8 @@
 
     <string name="plan_folder_things">things to do</string>
     <string name="toast_plan_folder_adding">正在添加行程规划</string>
-    <string name="toast_plan_folder_add_erro">加入行程计划失败</string>
+    <string name="toast_plan_folder_add_finish">加入行程规划成功</string>
+    <string name="toast_plan_folder_add_erro">加入行程规划失败</string>
     <string name="alert_plan_folder_delete">确定删除旅行计划？</string>
     <string name="plan_folder_delete_success">删除成功</string>
     <string name="plan_folder_delete_erro">删除失败</string>

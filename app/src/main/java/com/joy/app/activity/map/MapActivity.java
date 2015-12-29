@@ -125,6 +125,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         maplayout.addView(mapview, mapParams);
         mapview.setTilesScaledToDpi(true);
+        mapview.setMinZoomLevel(3);
         mapview.setMultiTouchControls(true);
         mapview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -308,9 +309,9 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
 
     protected void showPathBtn() {
         if (poiMapPathBtn.getVisibility() != View.VISIBLE) {
-            poiMapPathBtn.setAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
+//            poiMapPathBtn.setAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
             poiMapPathBtn.setVisibility(View.VISIBLE);
-            poiMapLocationBar.startAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
+//            poiMapLocationBar.startAnimation(QaAnimUtil.getFloatViewBottomSlideInAnim());
         }
     }
 
