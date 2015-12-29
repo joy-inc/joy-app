@@ -6,8 +6,7 @@ package com.joy.app.utils.http;
 public interface HtpApi {
 
     String QYER_URL_BASE = "http://open.qyer.com";// base url
-//    String JOY_URL_BASE = "http://api.joy.com";// base url
-    String JOY_URL_BASE = "http://api.joy.4awork.com";// base url
+    String JOY_URL_BASE = "http://api.joyapp.cc";// base url
 
     // sample
     String URL_GET_SEARCH_HOT_CITY = QYER_URL_BASE + "/qyer/hotel/hot_city_list";// 200热门城市
