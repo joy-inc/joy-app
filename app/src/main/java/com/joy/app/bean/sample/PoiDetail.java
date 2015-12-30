@@ -32,6 +32,7 @@ public class PoiDetail implements Parcelable {
     private ArrayList<String> photos;//图片地址
     private String purchase_info = TextUtil.TEXT_EMPTY;//购买须知url
     private String address = TextUtil.TEXT_EMPTY;
+    private String map = TextUtil.TEXT_EMPTY;
 
 
     public String getProduct_id() {
@@ -168,6 +169,14 @@ public class PoiDetail implements Parcelable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getMap() {
+        return map;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
     }
 
     @Override

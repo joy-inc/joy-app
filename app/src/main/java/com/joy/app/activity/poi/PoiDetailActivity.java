@@ -2,6 +2,7 @@ package com.joy.app.activity.poi;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,16 @@ import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.activity.map.SinglePoiMapActivity;
-import com.joy.app.activity.map.StaticMapWidget;
 import com.joy.app.activity.plan.AddPoiToFloderActivity;
+import com.joy.app.activity.user.UserLoginActivity;
 import com.joy.app.bean.poi.CommentAll;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.http.OrderHtpUtil;
@@ -40,7 +42,9 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     private TextView mAcbBook;
     private PoiDetailHeaderWidget mHeaderWidget;
     private PoiDetailHighWidget mHighWidget;
-    private StaticMapWidget mMapWidget;
+    private RelativeLayout mMapDiv;
+    private SimpleDraweeView mSdvMap;
+    private TextView mTvAddress;
     private PoiDetailIntroduceWidget mIntroduceWidget;
     private PoiDetailCommentWidget mCommentWidget;
 
@@ -98,10 +102,9 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         RelativeLayout highDiv = (RelativeLayout) findViewById(R.id.poiDetailHighDiv);
         highDiv.addView(mHighWidget.getContentView(), new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        mMapWidget = new StaticMapWidget(this);
-        mMapWidget.setOnWidgetViewClickListener(this);
-        RelativeLayout mapDiv = (RelativeLayout) findViewById(R.id.poiDetailMapDiv);
-        mapDiv.addView(mMapWidget.getContentView(), new RelativeLayout.LayoutParams(SCREEN_WIDTH, SCREEN_WIDTH / 2));
+        mMapDiv = (RelativeLayout) findViewById(R.id.poiDetailMapDiv);
+        mSdvMap = (SimpleDraweeView) findViewById(R.id.sdvMap);
+        mTvAddress = (TextView) findViewById(R.id.tvAddress);
 
         mIntroduceWidget = new PoiDetailIntroduceWidget(this);
         mIntroduceWidget.setOnWidgetViewClickListener(this);
@@ -124,10 +127,8 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mHeaderWidget.onResume(); // 打开图片自动滚动
         mHighWidget.invalidate(mPoiDetail);
 
-        mMapWidget.invalidate(R.drawable.ic_poi_detail_map_point);
-        mMapWidget.setLocation(MathUtil.parseDouble(mPoiDetail.getLat(), 0), MathUtil.parseDouble(mPoiDetail.getLon(), 0), mPoiDetail.getAddress());
-        if (TextUtil.isEmpty(data.getLat()) || TextUtil.isEmpty(data.getLon()) || "0".equals(data.getLat()) || "0".equals(data.getLon()))
-            ViewUtil.goneView(mMapWidget.getContentView());
+        if (TextUtil.isNotEmpty(data.getMap()))
+            invalidateMap(data);
 
         mIntroduceWidget.invalidate(mPoiDetail);
 
@@ -135,6 +136,17 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             ViewUtil.showView(mAcbBook);
 
         return true;
+    }
+
+    private void invalidateMap(PoiDetail data) {
+
+        mSdvMap.setImageURI(Uri.parse(data.getMap()));
+        if (TextUtil.isNotEmpty(data.getAddress())) {
+            mTvAddress.setText(data.getAddress());
+            ViewUtil.showView(mTvAddress);
+        }
+
+        ViewUtil.showView(mMapDiv);
     }
 
     @Override
@@ -181,10 +193,16 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         if (R.id.acbBook == view.getId()) {
 
-            if (CollectionUtil.isNotEmpty(mPoiDetail.getPhotos()) && TextUtil.isEmpty(mPhotoUrl))
-                mPhotoUrl = mPoiDetail.getPhotos().get(0);
+            if (JoyApplication.isLogin()) {
 
-            OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
+                if (CollectionUtil.isNotEmpty(mPoiDetail.getPhotos()) && TextUtil.isEmpty(mPhotoUrl))
+                    mPhotoUrl = mPoiDetail.getPhotos().get(0);
+
+                OrderBookActivity.startActivity(this, view, mPoiDetail.getProduct_id(), mPhotoUrl, mPoiDetail.getTitle());
+            } else {
+
+                UserLoginActivity.startActivity(this);
+            }
         } else if (R.id.llAddPlanDiv == view.getId()) {
 
             if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
@@ -194,7 +212,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
             }
 
-        } else if (R.id.rl_mapview == view.getId()) {
+        } else if (R.id.poiDetailMapDiv == view.getId()) {
 
             startMapActivity();
         } else if (R.id.tvAllKnow == view.getId()) {
