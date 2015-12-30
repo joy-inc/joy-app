@@ -118,7 +118,7 @@ public class MainActivity extends BaseTabActivity {
 
        if (BuildConfig.DEBUG) {
            // 快捷入口
-           addTitleRightView(R.drawable.btn_hotellist_seekbar_button, new View.OnClickListener() {
+           addTitleRightView(R.drawable.ic_star_light_big, new View.OnClickListener() {
                @Override
                public void onClick(View v) {
                    CityHotelListActivity.startActivity(MainActivity.this,"","");
