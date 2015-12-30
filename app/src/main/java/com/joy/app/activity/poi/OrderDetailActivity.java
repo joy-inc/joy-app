@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
@@ -119,7 +120,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
             @Override
             public void onClick(View v) {
 
-                if (isRequest) return;
+                if (isRequest ) return;
                 if (dialogUtil != null && detail != null)
                     dialogUtil.showDeleteOrderDialog(order_id, detail.getOrder_status() == 2);
             }
