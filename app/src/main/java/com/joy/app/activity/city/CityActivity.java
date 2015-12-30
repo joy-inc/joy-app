@@ -31,6 +31,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
 
     private String mPlaceId;
     private City mCity;
+    private boolean isCityDetailReqFailed;
 
     public static void startActivity(Context act, String placeId) {
 
@@ -99,11 +100,25 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             @Override
             public void onError(Object tag, String msg) {
 
+                isCityDetailReqFailed = true;
                 hideLoading();
                 showFailedTip();
             }
         });
         addRequestNoCache(cityReq);
+    }
+
+    @Override
+    protected void onTipViewClick() {
+
+        if (isCityDetailReqFailed) {
+
+            isCityDetailReqFailed = false;
+            executeCityDetail();
+        } else {
+
+            super.onTipViewClick();
+        }
     }
 
     private void onSuccessCallback(City city) {// generate header view
@@ -126,7 +141,6 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
         headerView.findViewById(R.id.jimHotel).setOnClickListener(this);
 
         addHeaderView(headerView);
-        showContentView();// todo
     }
 
     @Override
