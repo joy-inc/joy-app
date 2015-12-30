@@ -12,9 +12,18 @@
     <style name="CardView.Light.margin_10dp">
         <item name="cardCornerRadius">3dp</item>
         <item name="cardPreventCornerOverlap">false</item>
-        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+    </style>
+
+    <style name="CardView.Light.margin_12dp">
+        <item name="cardCornerRadius">3dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">12dp</item>
         <item name="android:foreground">?selectableItemBackground</item>
     </style>
 

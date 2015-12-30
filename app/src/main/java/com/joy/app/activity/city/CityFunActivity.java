@@ -3,6 +3,7 @@ package com.joy.app.activity.city;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 
 import com.android.library.activity.BaseHttpRvActivity;
@@ -62,8 +63,6 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
     @Override
     protected void initContentView() {
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-//            getToolbar().setElevation(0);
         setBackgroundResource(R.color.color_primary);
         setAdapter(new CityFunAdapter());
         setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
@@ -72,7 +71,6 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
                 CityFun.ListEntity entity = (CityFun.ListEntity) getAdapter().getItem(position);
-
                 WebViewActivity.startActivityNoTitle(CityFunActivity.this, entity.getTopic_url(), mType.getShareType());
             }
         });
@@ -114,33 +112,41 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
         int mShareType = 0;
         int mNetType = 0;
 
-        FunType(int titleResId, int shareType, int netType) {
+        FunType(@StringRes int titleResId, int shareType, int netType) {
+
             mTitleResId = titleResId;
             mShareType = shareType;
             mNetType = netType;
         }
 
         public int getTitleResId() {
+
             return mTitleResId;
         }
 
         public int getShareType() {
+
             return mShareType;
         }
 
         public int getNetType() {
+
             return mNetType;
         }
 
         public static FunType getFunType(int netType) {
 
             if (netType == FunType.PLAY.getNetType()) {
+
                 return FunType.PLAY;
             } else if (netType == FunType.HOTEL.getNetType()) {
+
                 return FunType.HOTEL;
             } else if (netType == FunType.FOOD.getNetType()) {
+
                 return FunType.FOOD;
             } else {
+
                 return FunType.SHOP;
             }
         }
