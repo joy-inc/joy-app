@@ -47,7 +47,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
         super.onActivityCreated(savedInstanceState);
         EventBus.getDefault().register(this);
-        initViewShowStatus();
+//        initViewShowStatus();
     }
 
     @Override
@@ -55,6 +55,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
         super.onResume();
 //        executeSwipeRefresh();
+        initViewShowStatus();
     }
 
     @Override
@@ -63,18 +64,23 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         EventBus.getDefault().unregister(this);
 
     }
-
+    boolean firstLoad = true;
     /**
      * 处理界面的加载状态还是显示登录界面
      */
     private void initViewShowStatus() {
 
+        if (isRespIntermediate())return;
         if (JoyApplication.isLogin()) {
 //            setSwipeRefreshEnable(true);
 
-            if (mLoginTipView != null)
+            if (mLoginTipView != null) {
                 removeCustomView(mLoginTipView);
+            }
+            if (firstLoad)
                 executeCacheAndRefresh();
+            else executeSwipeRefresh();
+            firstLoad = false;
         } else {
             //设置界面为提示登录
             setNotLoginView();
@@ -117,7 +123,6 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
 
                 if (planFolder != null){
-                    executeSwipeRefresh();
                     UserPlanListActivity.startActivityById(getActivity(), planFolder.getFolder_id(), planFolder.getFolder_name(), 1);
                 }
             }
