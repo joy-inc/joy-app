@@ -11,7 +11,7 @@
         <item name="android:textColorSecondary">@color/color_secondary_text</item>
         <item name="android:colorEdgeEffect">?colorPrimary</item>
         <item name="colorControlHighlight">@color/white_trans26</item>
-        <item name="colorControlActivated">@color/white_trans26</item>
+        <!--<item name="colorControlActivated">@color/white_trans26</item>-->
         <item name="noTitle">false</item>
         <item name="overlay">false</item>
     </style>
