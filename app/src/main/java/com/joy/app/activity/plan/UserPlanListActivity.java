@@ -13,6 +13,7 @@ import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.adapter.OnItemViewLongClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.utils.DeviceUtil;
 import com.joy.app.R;
 import com.joy.app.activity.map.ListPoiMapActivity;
 import com.joy.app.activity.poi.PoiDetailActivity;
@@ -33,7 +34,7 @@ import de.greenrobot.event.EventBus;
  */
 public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> implements FolderRequestListener {
 
-
+    private String FileName = "UserPlanListActivity";
     private String mFolderID;
     private DialogUtil dialogUtil;
     View mapbtn;
@@ -74,7 +75,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
         addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isRequest)return;
+                if (isRequest || DeviceUtil.isNetworkDisable())return;
                 dialogUtil.showDeleteFolderDialog(mFolderID);
             }
         });

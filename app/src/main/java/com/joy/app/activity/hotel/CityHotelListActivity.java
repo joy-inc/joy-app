@@ -171,6 +171,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
     @Override
     protected boolean invalidateContent(HotelSearchFilters hotelSearchFilters) {
         this.hotelSearchFilters = hotelSearchFilters;
+        hotelListFragment.reLoadHotelList(params);
         return true;
     }
 
