@@ -127,7 +127,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mHeaderWidget.onResume(); // 打开图片自动滚动
         mHighWidget.invalidate(mPoiDetail);
 
-        if (TextUtil.isNotEmpty(data.getMap()))
+        if (TextUtil.isNotEmpty(data.getLat()) && TextUtil.isNotEmpty(data.getLon()) && !"0".equals(data.getLat()) && !"0".equals(data.getLon()) && TextUtil.isNotEmpty(data.getMap()))
             invalidateMap(data);
 
         mIntroduceWidget.invalidate(mPoiDetail);

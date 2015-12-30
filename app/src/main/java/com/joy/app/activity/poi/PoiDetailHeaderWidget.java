@@ -116,12 +116,12 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
             llAddPlanDiv.setSelected(true);
         }
 
-        if (data.getIs_book()) {
+        if (data.getIs_book() && !TextUtil.isNotEmpty(data.getPrice()) && !"0".equals(data.getPrice())) {
             mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.fmt_unit, data.getPrice())));
             ViewUtil.showView(mTvPrice);
         }
 
-        if (TextUtil.isNotEmpty(data.getBooking_before()) || "0".equals(data.getBooking_before())) {
+        if (TextUtil.isNotEmpty(data.getBooking_before()) || !"0".equals(data.getBooking_before())) {
             mTvBookBefore.setText(getActivity().getString(R.string.fmt_poi_before, data.getBooking_before()));
             ViewUtil.showView(mTvBookBefore);
         }

@@ -34,7 +34,6 @@ import de.greenrobot.event.EventBus;
  */
 public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> implements FolderRequestListener {
 
-    private String FileName = "UserPlanListActivity";
     private String mFolderID;
     private DialogUtil dialogUtil;
     View mapbtn;
