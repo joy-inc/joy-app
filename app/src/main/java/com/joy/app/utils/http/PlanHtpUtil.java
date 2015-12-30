@@ -106,8 +106,9 @@ public class PlanHtpUtil extends BaseHtpUtil{
         params.put("page", String.valueOf(page));
         params.put("count", String.valueOf(count));
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
-
-        return createPostRequest(URL_POST_PLAN_LIST, params,clazz);
+        ObjectRequest objectRequest = createPostRequest(URL_POST_PLAN_LIST, params,clazz);
+        objectRequest.setCacheKey(URL_POST_PLAN_LIST+"/"+folder_id);
+        return objectRequest;
 
     }
 }
