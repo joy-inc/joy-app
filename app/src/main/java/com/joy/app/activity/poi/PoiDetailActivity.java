@@ -105,6 +105,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mMapDiv = (RelativeLayout) findViewById(R.id.poiDetailMapDiv);
         mSdvMap = (SimpleDraweeView) findViewById(R.id.sdvMap);
         mTvAddress = (TextView) findViewById(R.id.tvAddress);
+        mMapDiv.setOnClickListener(this);
 
         mIntroduceWidget = new PoiDetailIntroduceWidget(this);
         mIntroduceWidget.setOnWidgetViewClickListener(this);
