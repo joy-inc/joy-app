@@ -79,7 +79,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
             }
             if (firstLoad)
                 executeCacheAndRefresh();
-            else executeSwipeRefresh();
+            else executeRefreshAndCache();
             firstLoad = false;
         } else {
             //设置界面为提示登录
