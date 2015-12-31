@@ -70,16 +70,15 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      */
     private void initViewShowStatus() {
 
-        if (isRespIntermediate())return;
         if (JoyApplication.isLogin()) {
-//            setSwipeRefreshEnable(true);
 
             if (mLoginTipView != null) {
                 removeCustomView(mLoginTipView);
             }
             if (firstLoad)
                 executeCacheAndRefresh();
-            else executeRefreshAndCache();
+            else
+                executeRefreshAndCache();
             firstLoad = false;
         } else {
             //设置界面为提示登录
@@ -110,7 +109,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      */
     public void onEventMainThread(LoginStatusEvent event) {
 
-        initViewShowStatus();
+//        initViewShowStatus();
     }
 
     @Override
