@@ -105,6 +105,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         mMapDiv = (RelativeLayout) findViewById(R.id.poiDetailMapDiv);
         mSdvMap = (SimpleDraweeView) findViewById(R.id.sdvMap);
         mTvAddress = (TextView) findViewById(R.id.tvAddress);
+        mMapDiv.setOnClickListener(this);
 
         mIntroduceWidget = new PoiDetailIntroduceWidget(this);
         mIntroduceWidget.setOnWidgetViewClickListener(this);
@@ -205,13 +206,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
             }
         } else if (R.id.llAddPlanDiv == view.getId()) {
 
-            if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
-
-                AddPoiToFloderActivity.startActivity(this, mId, mPoiDetail.getFolder_id(), REQ_ADD_POI);
-            } else {//已经收藏了
-
-            }
-
+            addToPlanFolder();
         } else if (R.id.poiDetailMapDiv == view.getId()) {
 
             startMapActivity();
@@ -221,6 +216,25 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         } else if (R.id.acbSeeAll == view.getId()) {
 
             startAllCommentActivity();
+        }
+    }
+
+    /**
+     * 添加进旅行计划
+     */
+    private void addToPlanFolder() {
+
+        if (JoyApplication.isLogin()) {
+
+            if (TextUtil.isEmpty(mPoiDetail.getFolder_id())) {
+
+                AddPoiToFloderActivity.startActivity(this, mId, mPoiDetail.getFolder_id(), REQ_ADD_POI);
+            } else {//已经收藏了
+
+            }
+        } else {
+
+            UserLoginActivity.startActivity(this);
         }
     }
 

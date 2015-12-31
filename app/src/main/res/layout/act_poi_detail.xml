@@ -42,8 +42,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/sdvMap"
                     style="@style/sdv_cover"
+                    placeholderImage="@null"
                     android:layout_width="match_parent"
-                    android:layout_height="187dp" />
+                    android:layout_height="187dp"
+                    android:tint="#C1D7FE" />
 
                 <ImageView
                     android:layout_width="wrap_content"
