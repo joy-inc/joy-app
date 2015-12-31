@@ -92,7 +92,12 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
             sdvPoiPhoto.setImageURI(Uri.parse(planItem.getPic_url()));
             jtvCnname.setText(planItem.getCn_name());
             jtvEnname.setText(planItem.getEn_name());
-            jtvPrice.setText(planItem.getPrice());
+            if (planItem.isEmptyPrice()){
+                ViewUtil.hideView(jtvPrice);
+            }else{
+                ViewUtil.showView(jtvPrice);
+                jtvPrice.setText(planItem.getPrice());
+            }
 
             if (planItem.hasBefore_day()) {
                 jtvDay.setText(jtvDay.getContext().getString(R.string.plan_list_before_day, planItem.getBefore_day()));
