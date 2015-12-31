@@ -113,7 +113,16 @@ public class PlanItem {
     }
 
     public void setPrice(String price) {
-        this.price = price;
+        this.price = TextUtil.filterEmpty(price,"0");
+    }
+
+    public boolean isEmptyPrice(){
+        if ((price.equals("0"))){
+            return true;
+        }else{
+
+            return false;
+        }
     }
 
     public MapPoiDetail getMapPoiDetail(){
