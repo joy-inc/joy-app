@@ -1,13 +1,12 @@
 package com.joy.app.adapter.plan;
 
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.plan.PlanFolder;
 
@@ -29,7 +28,7 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
     public class ViewHolder extends ExRvViewHolder<PlanFolder> {
 
         @Bind(R.id.sdvBg)
-        SimpleDraweeView mPhoto;
+        FrescoImageView mPhoto;
 
         @Bind(R.id.jtv_number)
         TextView mCount;
@@ -55,7 +54,7 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
         @Override
         protected void invalidateItemView(int position, PlanFolder planFolder) {
 
-            mPhoto.setImageURI(Uri.parse(planFolder.getPic_url()));
+            mPhoto.setImageURI(planFolder.getPic_url());
             mCount.setText(planFolder.getChildren_num() + "");
             mTtile.setText(planFolder.getFolder_name());
         }

@@ -1,15 +1,14 @@
 package com.joy.app.adapter.sample;
 
-import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.joy.app.R;
-import com.joy.app.bean.sample.HotCityItem;
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
+import com.android.library.widget.FrescoImageView;
+import com.joy.app.R;
+import com.joy.app.bean.sample.HotCityItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,7 +26,7 @@ public class CityLvAdapter extends ExAdapter<HotCityItem> {
 
     public class ViewHolder extends ExViewHolderBase {
 
-        @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
+        @Bind(R.id.sdvPhoto) FrescoImageView sdvPhoto;
         @Bind(R.id.tvName)   TextView tvName;
 
         @Override
@@ -54,7 +53,7 @@ public class CityLvAdapter extends ExAdapter<HotCityItem> {
         public void invalidateConvertView() {
 
             HotCityItem data = getItem(mPosition);
-            sdvPhoto.setImageURI(Uri.parse(data.getPhoto()));
+            sdvPhoto.setImageURI(data.getPhoto());
             tvName.setText(data.getCnname());
         }
     }

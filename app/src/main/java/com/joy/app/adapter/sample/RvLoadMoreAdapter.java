@@ -1,13 +1,12 @@
 package com.joy.app.adapter.sample;
 
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.Special;
 
@@ -27,7 +26,7 @@ public class RvLoadMoreAdapter extends ExRvAdapter<RvLoadMoreAdapter.ViewHolder,
 
     public class ViewHolder extends ExRvViewHolder<Special> {
 
-        @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
+        @Bind(R.id.sdvPhoto) FrescoImageView sdvPhoto;
         @Bind(R.id.tvName)   TextView tvName;
 
         public ViewHolder(View itemView) {
@@ -39,7 +38,7 @@ public class RvLoadMoreAdapter extends ExRvAdapter<RvLoadMoreAdapter.ViewHolder,
         @Override
         protected void invalidateItemView(int position, Special special) {
 
-            sdvPhoto.setImageURI(Uri.parse(special.getPhoto()));
+            sdvPhoto.setImageURI(special.getPhoto());
             tvName.setText(special.getTitle());
         }
     }

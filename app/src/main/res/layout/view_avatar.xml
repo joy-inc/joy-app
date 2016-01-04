@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="?selectableItemBackgroundBorderless">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.android.library.widget.FrescoImageView
         android:id="@+id/sdvAvatar"
         android:layout_width="32dp"
         android:layout_height="32dp"

@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone">
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <com.android.library.widget.FrescoImageView
                     android:id="@+id/sdvMap"
                     style="@style/sdv_cover"
                     placeholderImage="@null"

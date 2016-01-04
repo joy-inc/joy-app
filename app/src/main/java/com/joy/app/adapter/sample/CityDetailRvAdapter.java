@@ -10,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.library.adapter.ExRvMultipleAdapter;
+import com.android.library.utils.CollectionUtil;
+import com.android.library.utils.DimenCons;
+import com.android.library.utils.LogMgr;
+import com.android.library.widget.FrescoImageView;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.bitmaps.PlatformBitmapFactory;
 import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
@@ -22,10 +26,6 @@ import com.facebook.imagepipeline.request.Postprocessor;
 import com.joy.app.R;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.bean.sample.Trip;
-import com.android.library.adapter.ExRvMultipleAdapter;
-import com.android.library.utils.CollectionUtil;
-import com.android.library.utils.DimenCons;
-import com.android.library.utils.LogMgr;
 
 import java.util.ArrayList;
 
@@ -128,16 +128,16 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
             } else {
 
                 if (!(vh.sdvPhoto.getDrawable() instanceof BitmapDrawable))
-                    vh.sdvPhoto.setImageURI(Uri.parse(photos.get(0)));
+                    vh.sdvPhoto.setImageURI(photos.get(0));
             }
             if (photos.size() > 1)
-                vh.sdvSubPhoto1.setImageURI(Uri.parse(photos.get(1)));
+                vh.sdvSubPhoto1.setImageURI(photos.get(1));
             if (photos.size() > 2)
-                vh.sdvSubPhoto2.setImageURI(Uri.parse(photos.get(2)));
+                vh.sdvSubPhoto2.setImageURI(photos.get(2));
             if (photos.size() > 3)
-                vh.sdvSubPhoto3.setImageURI(Uri.parse(photos.get(3)));
+                vh.sdvSubPhoto3.setImageURI(photos.get(3));
             if (photos.size() > 4)
-                vh.sdvSubPhoto4.setImageURI(Uri.parse(photos.get(4)));
+                vh.sdvSubPhoto4.setImageURI(photos.get(4));
         } else if (holder instanceof ContentViewHolder) {
 
             ArrayList<Trip> trips = mCityDetail.getNew_trip();
@@ -146,9 +146,9 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
 
             int pos = position - mHeaderCount;
             ContentViewHolder vh = ((ContentViewHolder) holder);
-            vh.sdvPhoto.setImageURI(Uri.parse(trips.get(pos).getPhoto()));
+            vh.sdvPhoto.setImageURI(trips.get(pos).getPhoto());
             vh.tvTitle.setText(trips.get(pos).getTitle());
-            vh.sdvAvatar.setImageURI(Uri.parse(trips.get(pos).getAvatar()));
+            vh.sdvAvatar.setImageURI(trips.get(pos).getAvatar());
             vh.tvName.setText(trips.get(pos).getUsername());
         }
     }
@@ -176,17 +176,17 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.sdvPhoto)
-        SimpleDraweeView sdvPhoto;
+        FrescoImageView sdvPhoto;
         @Bind(R.id.tvName)
         TextView tvName;
         @Bind(R.id.sdvSubPhoto1)
-        SimpleDraweeView sdvSubPhoto1;
+        FrescoImageView sdvSubPhoto1;
         @Bind(R.id.sdvSubPhoto2)
-        SimpleDraweeView sdvSubPhoto2;
+        FrescoImageView sdvSubPhoto2;
         @Bind(R.id.sdvSubPhoto3)
-        SimpleDraweeView sdvSubPhoto3;
+        FrescoImageView sdvSubPhoto3;
         @Bind(R.id.sdvSubPhoto4)
-        SimpleDraweeView sdvSubPhoto4;
+        FrescoImageView sdvSubPhoto4;
 
         HeaderViewHolder(View view) {
 
@@ -204,8 +204,8 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
 
     public class ContentViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.sdvPhoto)  SimpleDraweeView sdvPhoto;
-        @Bind(R.id.sdvAvatar) SimpleDraweeView sdvAvatar;
+        @Bind(R.id.sdvPhoto)  FrescoImageView sdvPhoto;
+        @Bind(R.id.sdvAvatar) FrescoImageView sdvAvatar;
         @Bind(R.id.tvTitle)   TextView tvTitle;
         @Bind(R.id.tvName)    TextView tvName;
 

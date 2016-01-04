@@ -1,6 +1,5 @@
 package com.joy.app.adapter;
 
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -8,7 +7,7 @@ import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.utils.JTextSpanUtil;
@@ -32,7 +31,7 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
     public class ViewHolder extends ExRvViewHolder<MainOrder> {
 
         @Bind(R.id.sdvPhoto)
-        SimpleDraweeView sdvPhoto;
+        FrescoImageView sdvPhoto;
 
         @Bind(R.id.tvTitle)
         TextView tvTitle;
@@ -102,7 +101,7 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
 
             if (mainOrder != null) {
 
-                sdvPhoto.setImageURI(Uri.parse(mainOrder.getProduct_photo()));
+                sdvPhoto.setImageURI(mainOrder.getProduct_photo());
                 tvTitle.setText(mainOrder.getProduct_title());
                 tvType.setText(mainOrder.getSelected_item());
                 tvDepartureDate.setText(mainOrder.getTravel_date());

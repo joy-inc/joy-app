@@ -24,7 +24,7 @@
                 android:background="@color/white"
                 android:gravity="center_vertical">
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <com.android.library.widget.FrescoImageView
                     android:id="@+id/sdvPhoto"
                     style="@style/sdv_cover"
                     android:layout_width="60dp"

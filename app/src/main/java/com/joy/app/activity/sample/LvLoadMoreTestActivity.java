@@ -2,14 +2,13 @@ package com.joy.app.activity.sample;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
 import com.android.library.activity.BaseHttpLvActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.adapter.sample.LvLoadMoreAdapter;
 import com.joy.app.bean.sample.Special;
@@ -42,8 +41,8 @@ public class LvLoadMoreTestActivity extends BaseHttpLvActivity<List<Special>> {
         setTitle("lv loadmore sample");
 
         View v = inflateLayout(R.layout.view_avatar);
-        SimpleDraweeView sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
-        sdvAvatar.setImageURI(Uri.parse("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207"));
+        FrescoImageView sdvAvatar = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
+        sdvAvatar.setImageURI("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207");
         addTitleRightView(v, new View.OnClickListener() {
 
             @Override

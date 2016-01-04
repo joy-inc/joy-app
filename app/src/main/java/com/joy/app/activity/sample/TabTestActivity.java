@@ -2,12 +2,11 @@ package com.joy.app.activity.sample;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 
 import com.android.library.activity.BaseTabActivity;
 import com.android.library.activity.BaseUiFragment;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 
@@ -33,8 +32,8 @@ public class TabTestActivity extends BaseTabActivity {
         setTitleLogo(R.drawable.ic_logo);
 
         View v = inflateLayout(R.layout.view_avatar);
-        SimpleDraweeView sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
-        sdvAvatar.setImageURI(Uri.parse("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207"));
+        FrescoImageView sdvAvatar = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
+        sdvAvatar.setImageURI("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207");
         addTitleRightView(v, new View.OnClickListener() {
 
             @Override

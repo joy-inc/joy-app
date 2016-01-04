@@ -11,7 +11,7 @@
         android:background="?selectableItemBackground"
         android:orientation="vertical">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <com.android.library.widget.FrescoImageView
             android:id="@+id/sdvPhoto"
             style="@style/sdv_cover.CornerRadius.Top"
             android:layout_width="match_parent"

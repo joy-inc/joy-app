@@ -3,23 +3,21 @@ package com.joy.app.activity.map;
 import android.app.Activity;
 import android.graphics.drawable.Animatable;
 import android.location.Location;
-import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.android.library.utils.TextUtil;
+import com.android.library.utils.ViewUtil;
+import com.android.library.view.ExLayoutWidget;
+import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.joy.app.R;
-import com.android.library.utils.ViewUtil;
-import com.android.library.view.ExLayoutWidget;
 
 /**
  * @author litong  <br>
@@ -30,7 +28,7 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
     ImageView locationView;
     RelativeLayout contentView;
     JTextView addressView;
-    SimpleDraweeView map,Lmap,Rmap;
+    FrescoImageView map,Lmap,Rmap;
     int zoom = 0;
 
 
@@ -43,9 +41,9 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
 
         contentView = (RelativeLayout)activity.getLayoutInflater().inflate(R.layout.view_static_map, null);
         contentView.setOnClickListener(this);
-        map = (SimpleDraweeView)contentView.findViewById(R.id.map_center);
-        Lmap =(SimpleDraweeView)contentView.findViewById(R.id.map_left);;
-        Rmap = (SimpleDraweeView)contentView.findViewById(R.id.map_right);;
+        map = (FrescoImageView) contentView.findViewById(R.id.map_center);
+        Lmap =(FrescoImageView) contentView.findViewById(R.id.map_left);;
+        Rmap = (FrescoImageView) contentView.findViewById(R.id.map_right);;
         locationView = (ImageView)contentView.findViewById(R.id.iv_center_icon);;
         addressView = (JTextView)contentView.findViewById(R.id.jtv_addreess);;
         ViewUtil.goneView(locationView);
@@ -82,10 +80,10 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
         zoom = Zoom;
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setControllerListener(maplistener)
-                .setUri(Uri.parse(toTile(lng, lat))).build();
+                .setUri(toTile(lng, lat)).build();
         map.setController(controller);
-        Lmap.setImageURI(Uri.parse(getLeftPath(X, Y, zoom)));
-        Rmap.setImageURI(Uri.parse(getRightPath(X, Y, zoom)));
+        Lmap.setImageURI(getLeftPath(X, Y, zoom));
+        Rmap.setImageURI(getRightPath(X, Y, zoom));
     }
     int X,Y;
 

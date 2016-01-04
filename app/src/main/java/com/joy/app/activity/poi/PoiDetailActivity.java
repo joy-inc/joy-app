@@ -2,7 +2,6 @@ package com.joy.app.activity.poi;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
@@ -43,7 +42,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     private PoiDetailHeaderWidget mHeaderWidget;
     private PoiDetailHighWidget mHighWidget;
     private RelativeLayout mMapDiv;
-    private SimpleDraweeView mSdvMap;
+    private FrescoImageView mSdvMap;
     private TextView mTvAddress;
     private PoiDetailIntroduceWidget mIntroduceWidget;
     private PoiDetailCommentWidget mCommentWidget;
@@ -103,7 +102,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         highDiv.addView(mHighWidget.getContentView(), new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         mMapDiv = (RelativeLayout) findViewById(R.id.poiDetailMapDiv);
-        mSdvMap = (SimpleDraweeView) findViewById(R.id.sdvMap);
+        mSdvMap = (FrescoImageView) findViewById(R.id.sdvMap);
         mTvAddress = (TextView) findViewById(R.id.tvAddress);
         mMapDiv.setOnClickListener(this);
 
@@ -141,7 +140,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
     private void invalidateMap(PoiDetail data) {
 
-        mSdvMap.setImageURI(Uri.parse(data.getMap()));
+        mSdvMap.setImageURI(data.getMap());
         if (TextUtil.isNotEmpty(data.getAddress())) {
             mTvAddress.setText(data.getAddress());
             ViewUtil.showView(mTvAddress);

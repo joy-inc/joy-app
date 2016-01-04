@@ -2,7 +2,6 @@ package com.joy.app.activity.poi;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
@@ -14,7 +13,7 @@ import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderContacts;
 import com.joy.app.bean.poi.OrderDetail;
@@ -37,7 +36,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     private String mOrderItem;
     private String mDateTime;
 
-    private SimpleDraweeView mSdvPhoto;
+    private FrescoImageView mSdvPhoto;
     private TextView mTvTitle;
     private EditText mEtName, mEtPhone, mEtEmail;
     private TextView mTvPrice;
@@ -89,7 +88,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     @Override
     protected void initContentView() {
 
-        mSdvPhoto = (SimpleDraweeView) findViewById(R.id.sdvPhoto);
+        mSdvPhoto = (FrescoImageView) findViewById(R.id.sdvPhoto);
         mTvTitle = (TextView) findViewById(R.id.tvTitle);
 
         mEtName = (EditText) findViewById(R.id.etName);
@@ -107,7 +106,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
             }
         });
 
-        mSdvPhoto.setImageURI(Uri.parse(mPhotoUrl));
+        mSdvPhoto.setImageURI(mPhotoUrl);
         mTvTitle.setText(mTitle);
         mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(mTotalPrice));
     }

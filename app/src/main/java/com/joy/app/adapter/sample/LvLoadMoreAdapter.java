@@ -1,13 +1,12 @@
 package com.joy.app.adapter.sample;
 
-import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.Special;
 
@@ -27,7 +26,7 @@ public class LvLoadMoreAdapter extends ExAdapter<Special> {
 
     public class ViewHolder extends ExViewHolderBase {
 
-        @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
+        @Bind(R.id.sdvPhoto) FrescoImageView sdvPhoto;
         @Bind(R.id.tvName)   TextView tvName;
 
         @Override
@@ -54,7 +53,7 @@ public class LvLoadMoreAdapter extends ExAdapter<Special> {
         public void invalidateConvertView() {
 
             Special data = getItem(mPosition);
-            sdvPhoto.setImageURI(Uri.parse(data.getPhoto()));
+            sdvPhoto.setImageURI(data.getPhoto());
             tvName.setText(data.getTitle());
         }
     }
