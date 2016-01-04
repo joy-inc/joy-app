@@ -129,8 +129,10 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
         View headerView = inflateLayout(R.layout.view_city_header);
         FrescoImageView fivHeader = (FrescoImageView) headerView.findViewById(R.id.sdvPhoto);
         fivHeader.setImageURI(city.getPic_url());
-        JTextView jtvName = (JTextView) headerView.findViewById(R.id.jtvName);
-        jtvName.setText(mCity.getCn_name() + "\n" + mCity.getEn_name());
+        JTextView jtvCnName = (JTextView) headerView.findViewById(R.id.jtvCnName);
+        JTextView jtvEnName = (JTextView) headerView.findViewById(R.id.jtvEnName);
+        jtvCnName.setText(mCity.getCn_name());
+        jtvEnName.setText(mCity.getEn_name());
         headerView.findViewById(R.id.jimTicket).setOnClickListener(this);
         headerView.findViewById(R.id.jimVisa).setOnClickListener(this);
         headerView.findViewById(R.id.jimAirpalne).setOnClickListener(this);
