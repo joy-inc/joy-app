@@ -26,12 +26,11 @@
                 android:id="@+id/jtvDays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
+                android:layout_marginTop="-4dp"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
                 android:scaleX="0.6"
                 android:scaleY="1.2"
-                android:text="14"
                 android:textColor="@color/color_accent"
                 android:textSize="30dp"
                 android:textStyle="bold" />
@@ -40,7 +39,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="days" />
+                android:layout_marginTop="-4dp"
+                android:text="days"
+                android:textColor="@color/black_trans54"
+                android:textSize="12dp" />
         </LinearLayout>
 
         <com.android.library.widget.JImageView
@@ -57,7 +59,6 @@
             android:maxLines="2"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:text="新西兰米尔福德峡湾一日游的很多行程之一"
             android:textColor="@color/black_trans54"
             android:textSize="15dp" />
     </LinearLayout>
