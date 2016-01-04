@@ -100,7 +100,9 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             public void onError(Object tag, String msg) {
 
                 isCityDetailReqFailed = true;
+
                 hideLoading();
+                hideContentView();
                 showFailedTip();
             }
         });
@@ -108,7 +110,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     }
 
     @Override
-    protected void onTipViewClick() {
+    protected void onRetry() {
 
         if (isCityDetailReqFailed) {
 
@@ -116,7 +118,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             executeCityDetail();
         } else {
 
-            super.onTipViewClick();
+            super.onRetry();
         }
     }
 
