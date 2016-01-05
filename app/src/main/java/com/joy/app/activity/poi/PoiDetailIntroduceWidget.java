@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
-import com.android.library.view.FoldTextView;
+import com.android.library.view.FoldTextView2;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 
@@ -17,13 +17,13 @@ import com.joy.app.bean.sample.PoiDetail;
  * <p/>
  * Created by xiaoyu.chen on 15/11/18.
  */
-public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnClickListener ,FoldTextView.OnFoldListener{
+public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnClickListener ,FoldTextView2.OnFoldListener{
 
     private View vRootView;
     private LinearLayout llIntroduceDiv;
     private LinearLayout llKnowDiv;
     private View vLine;
-    private FoldTextView ftvIntroduce;
+    private FoldTextView2 ftvIntroduce;
     private TextView tvAllIntroduce;
     private TextView tvAllKnow;
 
@@ -40,7 +40,7 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
         llIntroduceDiv = (LinearLayout) contentView.findViewById(R.id.llIntroduceDiv);
         llKnowDiv = (LinearLayout) contentView.findViewById(R.id.llKnowDiv);
         vLine = contentView.findViewById(R.id.vLine);
-        ftvIntroduce = (FoldTextView) contentView.findViewById(R.id.ftvIntroduce);
+        ftvIntroduce = (FoldTextView2) contentView.findViewById(R.id.ftvIntroduce);
         tvAllIntroduce = (TextView) contentView.findViewById(R.id.tvAllIntroduce);
         tvAllKnow = (TextView) contentView.findViewById(R.id.tvAllKnow);
         tvAllIntroduce.setOnClickListener(this);
@@ -60,6 +60,7 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
         if (TextUtil.isNotEmpty(data.getIntroduction())) {
 
             ftvIntroduce.setText(data.getIntroduction());
+            ViewUtil.hideView(llIntroduceDiv);
             ftvIntroduce.post(new Runnable() {
 
                 @Override
@@ -67,9 +68,9 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
 
                     if (ftvIntroduce.isEnable())
                         ViewUtil.showView(tvAllIntroduce);
+                    ViewUtil.showView(llIntroduceDiv);
                 }
             });
-            ViewUtil.showView(llIntroduceDiv);
         }
 
         if (TextUtil.isNotEmpty(data.getPurchase_info())) {
@@ -89,8 +90,8 @@ public class PoiDetailIntroduceWidget extends ExLayoutWidget implements View.OnC
     }
 
     @Override
-    public void onFold(boolean isFold) {
+    public void onFold(boolean isUnfold) {
 
-        tvAllIntroduce.setText(isFold ? R.string.see_all : R.string.collapse);
+        tvAllIntroduce.setText(isUnfold ? R.string.collapse : R.string.see_all);
     }
 }

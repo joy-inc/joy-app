@@ -27,7 +27,7 @@
             android:textColor="@color/black_trans87"
             android:textSize="16dp" />
 
-        <com.android.library.view.FoldTextView
+        <com.android.library.view.FoldTextView2
             android:id="@+id/ftvIntroduce"
             style="@style/LongText.Light"
             android:layout_width="wrap_content"
