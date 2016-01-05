@@ -2,7 +2,9 @@ package com.joy.app.utils.http;
 
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;
+import com.joy.app.bean.plan.PlanFolder;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,7 +32,7 @@ public class PlanHtpUtil extends BaseHtpUtil{
      *
      * @return
      */
-    public static ObjectRequest getUserPlanFolderRequest(Class clazz,int count, int page) {
+    public static ObjectRequest<List<PlanFolder>> getUserPlanFolderRequest(Class clazz, int count, int page) {
 
         Map<String, String> params = getBaseParams();
         params.put(KEY_COUNT, count+"");

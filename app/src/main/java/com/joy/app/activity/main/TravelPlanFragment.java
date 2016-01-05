@@ -1,8 +1,6 @@
 package com.joy.app.activity.main;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -10,13 +8,11 @@ import android.view.View;
 import com.android.library.activity.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.LogMgr;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
-import com.joy.app.eventbus.FolderEvent;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 import com.joy.app.view.LoginTipView;
@@ -35,7 +31,6 @@ import de.greenrobot.event.EventBus;
 public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
     LoginTipView mLoginTipView;
-    private boolean mNeedToRefresh = false;
 
     public static TravelPlanFragment instantiate(Context context) {
 
@@ -47,14 +42,12 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
         super.onActivityCreated(savedInstanceState);
         EventBus.getDefault().register(this);
-//        initViewShowStatus();
     }
 
     @Override
     public void onResume() {
 
         super.onResume();
-//        executeSwipeRefresh();
         initViewShowStatus();
     }
 
@@ -115,8 +108,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     @Override
     protected void initContentView() {
 
-        super.initContentView();
-        final UserPlanAdapter adapter = new UserPlanAdapter();
+        UserPlanAdapter adapter = new UserPlanAdapter();
         adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
             @Override
             public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
@@ -132,7 +124,6 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     @Override
     protected ObjectRequest<List<PlanFolder>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class, pageLimit, pageIndex);
-        return obj;
+        return PlanHtpUtil.getUserPlanFolderRequest(PlanFolder.class, pageLimit, pageIndex);
     }
 }
