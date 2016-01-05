@@ -64,7 +64,7 @@ public class ActivityUrlUtil {
     private static final String URL_COUNTRY_TOPIC = BASE_HOST + "topic.joy.com/country/";//国家路线专题
 
     private static final int TYPE_HOTEL_ALL = 15;//国家路线专题
-    private static final String URL_HOTEL_ALL = BASE_HOST + "topic/hotel.joy.com/all/";//国家路线专题
+    private static final String URL_HOTEL_ALL =  "/hotel/all/";//国家路线专题
 
     public static boolean startUriActivity(Context context, String uriStr, boolean newTask) {
 
