@@ -6,7 +6,7 @@
     android:paddingLeft="10dp"
     android:background="@color/white">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.android.library.widget.FrescoImageView
         android:id="@+id/sdv_poi_photo"
         android:layout_width="100dp"
         android:layout_height="100dp"

@@ -22,10 +22,10 @@ import com.android.library.view.observablescrollview.ObservableScrollViewCallbac
 import com.android.library.view.observablescrollview.ScrollState;
 import com.android.library.view.observablescrollview.ScrollUtils;
 import com.android.library.view.systembar.SystemBarTintManager;
+import com.android.library.widget.FrescoImageView;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.bitmaps.PlatformBitmapFactory;
 import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
@@ -44,7 +44,7 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
 
     private int mFlexibleHeight;
     private SystemBarTintManager mTintManager;
-    private SimpleDraweeView mCoverSdvPhoto;
+    private FrescoImageView mCoverSdvPhoto;
     private TextView mCoverTvTitle;
 
     public static void startActivity(Activity act, String... params) {
@@ -125,7 +125,7 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
         setSwipeRefreshEnable(false);// 设置下拉刷新不可用
 
         Intent it = getIntent();
-        mCoverSdvPhoto = (SimpleDraweeView) findViewById(R.id.sdvPhoto);
+        mCoverSdvPhoto = (FrescoImageView) findViewById(R.id.sdvPhoto);
         mCoverTvTitle = (TextView) findViewById(R.id.tvName);
         mCoverTvTitle.setText(it.getStringExtra("cnname") + "\n" + it.getStringExtra("enname"));
         hideView(mCoverTvTitle);

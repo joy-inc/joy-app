@@ -1,13 +1,12 @@
 package com.joy.app.adapter;
 
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.MainRoute;
 
@@ -30,7 +29,7 @@ public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolde
     public class ViewHolder extends ExRvViewHolder<MainRoute> {
 
         @Bind(R.id.sdvPhoto)
-        SimpleDraweeView sdvPhoto;
+        FrescoImageView sdvPhoto;
         @Bind(R.id.tvName)
         TextView tvName;
 
@@ -61,7 +60,7 @@ public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolde
 
             if (mainRoute != null) {
 
-                sdvPhoto.setImageURI(Uri.parse(mainRoute.getPic_url()));
+                sdvPhoto.setImageURI(mainRoute.getPic_url());
                 tvName.setText(mainRoute.getCn_name());
                 tvEnName.setText(mainRoute.getEn_name());
                 tvTags.setText(mainRoute.getTags());

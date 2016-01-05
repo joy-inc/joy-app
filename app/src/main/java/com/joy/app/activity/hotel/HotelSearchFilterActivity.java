@@ -20,7 +20,7 @@ import com.android.library.utils.DensityUtil;
 import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
-import com.android.library.view.NewlineLayout;
+import com.android.library.view.NewLineLayout;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.FilterItems;
 import com.joy.app.view.hotel.SeekBarPressure;
@@ -202,7 +202,7 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
             return;
         }
 
-        NewlineLayout mLlFilterView = (NewlineLayout) findViewById(R.id.llFilterView);
+        NewLineLayout mLlFilterView = (NewLineLayout) findViewById(R.id.llFilterView);
 
         for (FilterItems types : mTypesData) {
 

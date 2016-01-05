@@ -1,14 +1,13 @@
 package com.joy.app.adapter.city;
 
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
 import com.android.library.utils.TextUtil;
+import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.city.CityFun;
 
@@ -28,8 +27,9 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
 
     public class ViewHolder extends ExRvViewHolder<CityFun.ListEntity> {
 
-        @Bind(R.id.sdvPhoto)          SimpleDraweeView sdvPhoto;
-        @Bind(R.id.jtvName)           JTextView        jtvName;
+        @Bind(R.id.sdvPhoto)          FrescoImageView  sdvPhoto;
+        @Bind(R.id.jtvCnName)         JTextView        jtvCnName;
+        @Bind(R.id.jtvEnName)         JTextView        jtvEnName;
         @Bind(R.id.jtvTitle)          JTextView        jtvTitle;
         @Bind(R.id.jtvRecNum)         JTextView        jtvRecNum;
 
@@ -42,8 +42,9 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
         @Override
         protected void invalidateItemView(int position, CityFun.ListEntity entity) {
 
-            sdvPhoto.setImageURI(Uri.parse(entity.getPic_url()));
-            jtvName.setText(TextUtil.isEmpty(entity.getEn_name()) ? entity.getTopic_name() : entity.getTopic_name() + "\n" + entity.getEn_name());
+            sdvPhoto.setImageURI(entity.getPic_url());
+            jtvCnName.setText(entity.getTopic_name());
+            jtvEnName.setText(entity.getEn_name());
             jtvTitle.setText(entity.getRecommend());
             if (TextUtil.isEmpty(entity.getRecom_num())) {
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="180dp">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.android.library.widget.FrescoImageView
         android:id="@+id/sdvPhoto"
         style="@style/sdv_cover.CornerRadius"
         android:layout_width="match_parent"

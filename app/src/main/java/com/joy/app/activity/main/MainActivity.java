@@ -7,17 +7,14 @@ import android.view.View;
 
 import com.android.library.activity.BaseTabActivity;
 import com.android.library.activity.BaseUiFragment;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.joy.app.activity.setting.SettingActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -36,7 +33,7 @@ public class MainActivity extends BaseTabActivity {
     private MainActivityBC mMainActivityBC;
     private MainActivityHelperBC mMainActivityHelper;
     private long mLastPressedTime; //最后一次按返回的按钮
-    private SimpleDraweeView mSimpleDraweeView;
+    private FrescoImageView mSimpleDraweeView;
 
     public static void startActivity(Context context) {
 
@@ -105,7 +102,7 @@ public class MainActivity extends BaseTabActivity {
         setTitleLogo(R.drawable.ic_logo);
 
         View v = inflateLayout(R.layout.view_avatar);
-        mSimpleDraweeView = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
+        mSimpleDraweeView = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
         handleUserLogin();
         addTitleRightView(v, new View.OnClickListener() {
 

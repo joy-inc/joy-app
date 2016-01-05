@@ -201,17 +201,19 @@ public class DialogUtil {
     }
     AlertDialog mExitDialog;
     private void showAlertDialog(String content,final DialogInterface.OnClickListener alertListener) {
-        mExitDialog = com.joy.library.dialog.DialogUtil.getOkCancelDialog(activity, R.string.confirm, R.string.cancel, content, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        if(mExitDialog==null) {
+            mExitDialog = com.joy.library.dialog.DialogUtil.getOkCancelDialog(activity, R.string.confirm, R.string.cancel, content, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-                if (alertListener != null) {
-                    alertListener.onClick(dialog,which);
+                    if (alertListener != null) {
+                        alertListener.onClick(dialog, which);
+                    }
+                    if (which == DialogInterface.BUTTON_NEGATIVE)
+                        mExitDialog.dismiss();
                 }
-                if (which == DialogInterface.BUTTON_NEGATIVE)
-                    mExitDialog.dismiss();
-            }
-        });
+            });
+        }
         mExitDialog.show();
     }
 

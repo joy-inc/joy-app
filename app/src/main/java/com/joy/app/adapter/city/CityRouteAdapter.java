@@ -1,13 +1,12 @@
 package com.joy.app.adapter.city;
 
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
+import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.city.CityRoute;
 
@@ -27,7 +26,7 @@ public class CityRouteAdapter extends ExRvAdapter<CityRouteAdapter.ViewHolder, C
 
     public class ViewHolder extends ExRvViewHolder<CityRoute> {
 
-        @Bind(R.id.sdvPhoto) SimpleDraweeView sdvPhoto;
+        @Bind(R.id.sdvPhoto) FrescoImageView  sdvPhoto;
         @Bind(R.id.jtvDays)  JTextView        jtvDays;
         @Bind(R.id.jtvTitle) JTextView        jtvTitle;
 
@@ -40,7 +39,7 @@ public class CityRouteAdapter extends ExRvAdapter<CityRouteAdapter.ViewHolder, C
         @Override
         protected void invalidateItemView(int position, CityRoute cityRoute) {
 
-            sdvPhoto.setImageURI(Uri.parse(cityRoute.getPic_url()));
+            sdvPhoto.setImageURI(cityRoute.getPic_url());
             jtvDays.setText(cityRoute.getRoute_day());
             jtvTitle.setText(cityRoute.getRoute_name());
         }

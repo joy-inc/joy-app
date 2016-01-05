@@ -3,23 +3,18 @@ package com.joy.app.activity.poi;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
-import com.android.library.widget.JTextView;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
 import com.joy.app.eventbus.OrderStatusEvent;
@@ -54,7 +49,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     private OrderDetail mOrderDetail;
 
     @Bind(R.id.sdvPhoto)
-    SimpleDraweeView sdvPhoto;
+    FrescoImageView sdvPhoto;
 
     @Bind(R.id.tvTitle)
     TextView tvTitle;
@@ -150,7 +145,7 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
         if (data == null)
             return false;
 
-        sdvPhoto.setImageURI(Uri.parse(data.getProduct_photo()));
+        sdvPhoto.setImageURI(data.getProduct_photo());
         tvTitle.setText(data.getProduct_title());
         jtvOrderId.setText(data.getOrder_id());
 

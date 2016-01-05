@@ -68,7 +68,7 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <com.android.library.widget.FrescoImageView
                     android:id="@+id/sdv_order_photo"
                     style="@style/sdv_cover"
                     android:layout_width="50dp"

@@ -1,6 +1,5 @@
 package com.joy.app.activity.map;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
@@ -16,36 +15,30 @@ import android.widget.RelativeLayout;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.android.library.activity.BaseUiActivity;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.LogMgr;
+import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.activity.poi.PoiDetailActivity;
-import com.joy.app.utils.map.GoogleTileSource;
-import com.joy.app.utils.map.MapUtil;
-import com.joy.app.utils.map.OsmResourceImpl;
-import com.joy.app.utils.map.JoyMapOverlayItem;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.utils.QaAnimUtil;
+import com.joy.app.utils.map.GoogleTileSource;
+import com.joy.app.utils.map.JoyMapOverlayItem;
+import com.joy.app.utils.map.MapUtil;
+import com.joy.app.utils.map.OsmResourceImpl;
 
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
-import org.osmdroid.util.BoundingBoxE6;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.DirectedLocationOverlay;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.OverlayItem;
 
-import java.net.IDN;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -71,7 +64,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     FrameLayout maplayout;
 
     @Bind(R.id.sdv_photo)
-    SimpleDraweeView sdvPhoto;
+    FrescoImageView sdvPhoto;
 
     @Bind(R.id.jtv_cnname)
     JTextView jtvCnname;
@@ -271,7 +264,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     }
 
     public void updatePoiInfoView(MapPoiDetail poiDetail) {
-        sdvPhoto.setImageURI(Uri.parse(poiDetail.getmPhotoUrl()));
+        sdvPhoto.setImageURI(poiDetail.getmPhotoUrl());
         jtvCnname.setText(poiDetail.getmCnName());
         jtvEnname.setText(poiDetail.getmEnName());
 //        ViewUtil.hideView(ivPath);

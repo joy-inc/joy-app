@@ -1,13 +1,12 @@
 package com.joy.app.adapter.hotel;
 
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
+import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.HotelEntity;
 
@@ -31,7 +30,7 @@ public class HotelListAdapter extends ExRvAdapter<HotelListAdapter.ViewHolder,Ho
         View topline;
 
         @Bind(R.id.iv_hotel_item_Photo)
-        SimpleDraweeView ivHotelItemPhoto;
+        FrescoImageView ivHotelItemPhoto;
         @Bind(R.id.tv_hotel_city_cnname)
         JTextView tvHotelCityCnname;
         @Bind(R.id.tv_hotel_city_enname)
@@ -58,7 +57,7 @@ public class HotelListAdapter extends ExRvAdapter<HotelListAdapter.ViewHolder,Ho
 
         @Override
         protected void invalidateItemView(int position, HotelEntity hotelEntity) {
-            ivHotelItemPhoto.setImageURI(Uri.parse(hotelEntity.getPhoto()));
+            ivHotelItemPhoto.setImageURI(hotelEntity.getPhoto());
             tvHotelCityCnname.setText(hotelEntity.getCnname());
             tvHotelCityEnname.setText(hotelEntity.getEnname());
             tvHotelItemPrice.setText(hotelEntity.getPriceStr());

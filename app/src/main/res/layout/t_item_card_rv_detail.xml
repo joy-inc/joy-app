@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="280dp">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.android.library.widget.FrescoImageView
         android:id="@+id/sdvPhoto"
         style="@style/sdv_cover.CornerRadius.Top"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <com.android.library.widget.FrescoImageView
             android:id="@+id/sdvAvatar"
             android:layout_width="35dp"
             android:layout_height="35dp"

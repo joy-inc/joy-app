@@ -13,7 +13,7 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.view.banner.BannerAdapter;
 import com.android.library.view.banner.BannerImage;
 import com.android.library.view.banner.BannerWidget;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 
 import java.util.ArrayList;
@@ -62,9 +62,9 @@ public class BannerTestActivity extends BaseUiActivity {
         BannerAdapter<TestEntry> adapter = new BannerAdapter<>(new BannerImage<TestEntry>() {
 
             @Override
-            protected SimpleDraweeView onCreateView(Context context) {
+            protected FrescoImageView onCreateView(Context context) {
 
-                return (SimpleDraweeView) inflateLayout(R.layout.item_banner);
+                return (FrescoImageView) inflateLayout(R.layout.item_banner);
             }
         });
         adapter.setData(getEntries());

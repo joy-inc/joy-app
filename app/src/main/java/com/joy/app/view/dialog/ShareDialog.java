@@ -75,15 +75,23 @@ public class ShareDialog implements View.OnClickListener {
             return;
         }
         ShareInfo info = null;
+        int errorStr = 0;
         ShareType type = null;
         switch (v.getId()) {
             case R.id.tvWeibo:
                 type = ShareType.SINA;
                 break;
             case R.id.tvWeixin:
-                type = ShareType.WEIXIN;
+                if (!ShareWeixinUtil.hasWeChatClient()) {
+                    errorStr = R.string.wechat_no_app;
+                } else {
+                    type = ShareType.WEIXIN;
+                }
                 break;
             case R.id.tvFriend:
+                if (!ShareWeixinUtil.hasWeChatClient()) {
+                    errorStr = R.string.wechat_no_app;
+                }
                 type = ShareType.WEIXIN_CIRCLE;
                 break;
             //            case R.id.tvEmail:
@@ -96,10 +104,14 @@ public class ShareDialog implements View.OnClickListener {
                 type = ShareType.MORE;
                 break;
         }
-        info = mIShareInfo.getShareInfo(type);
+        if (errorStr <= 0) {
+            info = mIShareInfo.getShareInfo(type);
 
-        if (info != null) {
-            mShareHandle.handleShare(info, type);
+            if (info != null) {
+                mShareHandle.handleShare(info, type);
+            }
+        } else {
+            ToastUtil.showToast(errorStr);
         }
         mDialogPlus.dismiss();
     }

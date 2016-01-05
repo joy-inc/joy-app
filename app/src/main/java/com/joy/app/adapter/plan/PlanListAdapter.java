@@ -1,19 +1,16 @@
 package com.joy.app.adapter.plan;
 
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
+import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.plan.PlanItem;
-import com.joy.app.utils.map.MapUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +52,7 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
     public class ViewHolder extends ExRvViewHolder<PlanItem> {
 
         @Bind(R.id.sdv_poi_photo)
-        SimpleDraweeView sdvPoiPhoto;
+        FrescoImageView sdvPoiPhoto;
         @Bind(R.id.jtv_cnname)
         JTextView jtvCnname;
         @Bind(R.id.jtv_enname)
@@ -89,7 +86,7 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
         @Override
         protected void invalidateItemView(int position, PlanItem planItem) {
 
-            sdvPoiPhoto.setImageURI(Uri.parse(planItem.getPic_url()));
+            sdvPoiPhoto.setImageURI(planItem.getPic_url());
             jtvCnname.setText(planItem.getCn_name());
             jtvEnname.setText(planItem.getEn_name());
             if (planItem.isEmptyPrice()){

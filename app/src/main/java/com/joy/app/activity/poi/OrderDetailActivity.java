@@ -2,7 +2,6 @@ package com.joy.app.activity.poi;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,11 +9,10 @@ import android.widget.LinearLayout;
 
 import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
+import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
 import com.joy.app.eventbus.OrderStatusEvent;
@@ -39,7 +37,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
     @Bind(R.id.jtv_infor)
     JTextView jtvInfor;
     @Bind(R.id.sdv_order_photo)
-    SimpleDraweeView sdvOrderPhoto;
+    FrescoImageView sdvOrderPhoto;
     @Bind(R.id.jtv_order_title)
     JTextView jtvOrderTitle;
     @Bind(R.id.jtv_order_id)
@@ -196,7 +194,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         }
         jtvTitle.setText(orderDetail.getOrderTitle());
         jtvInfor.setText(orderDetail.getOrderInfor());
-        sdvOrderPhoto.setImageURI(Uri.parse(orderDetail.getProduct_photo()));
+        sdvOrderPhoto.setImageURI(orderDetail.getProduct_photo());
         jtvOrderName.setText(orderDetail.getContact_name());
         jtvOrderId.setText(orderDetail.getOrder_id());
         jtvOrderTitle.setText(orderDetail.getProduct_title());

@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
 
@@ -34,7 +34,7 @@ public class OrderDetailAdapter extends ExRvAdapter <OrderDetailAdapter.ViewHold
         TextView Infor;//状态详情
 
         @Bind(R.id.sdv_order_photo)
-        SimpleDraweeView photo;//图片
+        FrescoImageView photo;//图片
 
         @Bind(R.id.jtv_order_title)
         TextView orderTitle;//订单名称

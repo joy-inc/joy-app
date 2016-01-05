@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
@@ -16,7 +15,7 @@ import com.android.library.view.ExLayoutWidget;
 import com.android.library.view.banner.BannerAdapter;
 import com.android.library.view.banner.BannerImage;
 import com.android.library.view.banner.BannerWidget;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.JTextSpanUtil;
@@ -97,9 +96,9 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         mAdapter = new BannerAdapter(new BannerImage<String>() {
 
             @Override
-            protected SimpleDraweeView onCreateView(Context context) {
+            protected FrescoImageView onCreateView(Context context) {
 
-                return (SimpleDraweeView) getActivity().getLayoutInflater().inflate(R.layout.item_banner, null);
+                return (FrescoImageView) getActivity().getLayoutInflater().inflate(R.layout.item_banner, null);
             }
         });
         mAdapter.setData(data.getPhotos());

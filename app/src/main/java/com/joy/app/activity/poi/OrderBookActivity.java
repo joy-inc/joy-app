@@ -3,7 +3,6 @@ package com.joy.app.activity.poi;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
@@ -26,7 +25,7 @@ import com.android.library.utils.TimeUtil;
 import com.android.library.view.dialogplus.DialogPlus;
 import com.android.library.view.dialogplus.ListHolder;
 import com.android.library.view.dialogplus.OnCancelListener;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
@@ -55,7 +54,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private String mTitle;
     private String mOrderItem = TextUtil.TEXT_EMPTY;
 
-    private SimpleDraweeView sdvPhoto;
+    private FrescoImageView sdvPhoto;
     private TextView tvTitle;
 
     private TextView mTvPrice;
@@ -161,10 +160,10 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void initHeaderView() {
 
-        sdvPhoto = (SimpleDraweeView) findViewById(R.id.sdvPhoto);
+        sdvPhoto = (FrescoImageView) findViewById(R.id.sdvPhoto);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
 
-        sdvPhoto.setImageURI(Uri.parse(mPhotoUrl));
+        sdvPhoto.setImageURI(mPhotoUrl);
         tvTitle.setText(mTitle);
     }
 

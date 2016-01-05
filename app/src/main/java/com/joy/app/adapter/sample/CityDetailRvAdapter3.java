@@ -1,20 +1,19 @@
 package com.joy.app.adapter.sample;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.joy.app.R;
-import com.joy.app.bean.sample.CityDetail;
-import com.joy.app.bean.sample.Trip;
 import com.android.library.adapter.ExRvMultipleAdapter;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.DimenCons;
 import com.android.library.utils.LogMgr;
+import com.android.library.widget.FrescoImageView;
+import com.joy.app.R;
+import com.joy.app.bean.sample.CityDetail;
+import com.joy.app.bean.sample.Trip;
 
 import java.util.ArrayList;
 
@@ -61,9 +60,9 @@ public class CityDetailRvAdapter3 extends ExRvMultipleAdapter {
 
             int pos = position - mHeaderCount;
             ContentViewHolder vh = ((ContentViewHolder) holder);
-            vh.sdvPhoto.setImageURI(Uri.parse(trips.get(pos).getPhoto()));
+            vh.sdvPhoto.setImageURI(trips.get(pos).getPhoto());
             vh.tvTitle.setText(trips.get(pos).getTitle());
-            vh.sdvAvatar.setImageURI(Uri.parse(trips.get(pos).getAvatar()));
+            vh.sdvAvatar.setImageURI(trips.get(pos).getAvatar());
             vh.tvName.setText(trips.get(pos).getUsername());
         }
     }
@@ -98,8 +97,8 @@ public class CityDetailRvAdapter3 extends ExRvMultipleAdapter {
 
     public class ContentViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.sdvPhoto)  SimpleDraweeView sdvPhoto;
-        @Bind(R.id.sdvAvatar) SimpleDraweeView sdvAvatar;
+        @Bind(R.id.sdvPhoto)  FrescoImageView sdvPhoto;
+        @Bind(R.id.sdvAvatar) FrescoImageView sdvAvatar;
         @Bind(R.id.tvTitle)   TextView tvTitle;
         @Bind(R.id.tvName)    TextView tvName;
 
