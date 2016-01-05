@@ -115,7 +115,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
             llAddPlanDiv.setSelected(true);
         }
 
-        if (data.getIs_book() && !TextUtil.isNotEmpty(data.getPrice()) && !"0".equals(data.getPrice())) {
+        if (data.getIs_book() && TextUtil.isNotEmpty(data.getPrice()) && !"0".equals(data.getPrice())) {
             mTvPrice.setText(JTextSpanUtil.getFormatUnitStr(getActivity().getString(R.string.fmt_unit, data.getPrice())));
             ViewUtil.showView(mTvPrice);
         }
