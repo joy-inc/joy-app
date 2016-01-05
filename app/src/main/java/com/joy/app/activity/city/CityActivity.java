@@ -86,6 +86,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
             @Override
             public void onPre() {
 
+                hideTipView();
                 showLoading();
             }
 
