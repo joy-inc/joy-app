@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clipToPadding="false"
     android:fitsSystemWindows="true">
 
@@ -41,11 +42,11 @@
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/sdvMap"
-                    style="@style/sdv_cover"
-                    placeholderImage="@null"
+                    app:placeholderImage="@drawable/bg_poi_map"
+                    app:placeholderImageScaleType="centerCrop"
+                    app:actualImageScaleType="centerCrop"
                     android:layout_width="match_parent"
-                    android:layout_height="187dp"
-                    android:tint="#C1D7FE" />
+                    android:layout_height="187dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
