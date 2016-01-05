@@ -120,7 +120,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
             ViewUtil.showView(mTvPrice);
         }
 
-        if (TextUtil.isNotEmpty(data.getBooking_before()) || !"0".equals(data.getBooking_before())) {
+        if (TextUtil.isNotEmpty(data.getBooking_before()) && !"0".equals(data.getBooking_before())) {
             mTvBookBefore.setText(getActivity().getString(R.string.fmt_poi_before, data.getBooking_before()));
             ViewUtil.showView(mTvBookBefore);
         }
