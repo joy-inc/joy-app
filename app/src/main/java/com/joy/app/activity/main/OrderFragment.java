@@ -54,6 +54,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
+        setPageLimit(10);
         EventBus.getDefault().register(this);
         initViewLoad();
     }
@@ -178,7 +179,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      */
     private void initViewLoad() {
         if (JoyApplication.isLogin()) {
-            setSwipeRefreshEnable(true);
 
             if (mLoginTipView != null)
                 removeCustomView(mLoginTipView);
@@ -195,7 +195,6 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      */
     private void setNotLoginView() {
 
-        setSwipeRefreshEnable(false);
         if (mLoginTipView == null)
             mLoginTipView = new LoginTipView(this.getActivity(), R.string.order_no_login, R.string.order_no_login_sub);
         if (getAdapter() != null && !getAdapter().isEmpty()) {
