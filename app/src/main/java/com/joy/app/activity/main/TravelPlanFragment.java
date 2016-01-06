@@ -41,6 +41,7 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
+        setPageLimit(10);
         EventBus.getDefault().register(this);
     }
 

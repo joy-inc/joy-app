@@ -11,13 +11,8 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.joy.app.activity.city.CityActivity;
 import com.joy.app.activity.common.WebViewActivity;
-import com.joy.app.activity.hotel.CityHotelListActivity;
-import com.joy.app.activity.poi.OrderDetailActivity;
-import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
 import com.joy.app.bean.MainRoute;
-import com.joy.app.bean.sample.PoiDetail;
-import com.joy.app.utils.JoyConstant;
 import com.joy.app.utils.http.MainHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 
@@ -39,6 +34,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
+        setPageLimit(5);
         executeCacheAndRefresh();
     }
 
@@ -69,7 +65,6 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     @Override
     protected ObjectRequest<List<MainRoute>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest req = ReqFactory.newPost(MainHtpUtil.URL_POST_MAIN_ROUTE_LIST, MainRoute.class, MainHtpUtil.getMainRouteList(pageIndex, pageLimit));
-        return req;
+        return ReqFactory.newPost(MainHtpUtil.URL_POST_MAIN_ROUTE_LIST, MainRoute.class, MainHtpUtil.getMainRouteList(pageIndex, pageLimit));
     }
 }
