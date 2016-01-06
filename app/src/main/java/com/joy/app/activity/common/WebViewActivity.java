@@ -10,9 +10,12 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.android.library.activity.BaseHttpUiActivity;
 import com.android.library.activity.BaseUiActivity;
+import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
+import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
@@ -30,7 +33,7 @@ import de.greenrobot.event.EventBus;
  * User: liulongzhenhai(longzhenhai.liu@qyer.com)
  * Date: 2015-11-10
  */
-public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget.WebViewListener, View.OnClickListener {
+public class WebViewActivity extends BaseHttpUiActivity<String> implements WebViewBaseWidget.WebViewListener, View.OnClickListener {
 
     //--大于100有分享的意思
     public static final int TYPE_CITY_TOPIC = 102;//首页城市专题
@@ -72,6 +75,16 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
 
         super.onPause();
         mWebViewWidget.onPause();
+    }
+
+    @Override
+    protected boolean invalidateContent(String s) {
+        return false;
+    }
+
+    @Override
+    protected ObjectRequest<String> getObjectRequest() {
+        return null;
     }
 
     @Override
@@ -127,6 +140,7 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     @Override
     protected void initContentView() {
 
+        setBackgroundResource(R.color.white);
         if (mUseBottomBanner) {
             ViewUtil.showView(findViewById(R.id.llTool));
             findViewById(R.id.ivBack).setOnClickListener(this);
@@ -182,6 +196,13 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
         return mWebViewWidget;
     }
 
+    @Override
+    protected void onRetry() {
+        showContentView();
+        mWebViewWidget.loadUrl(mWebViewWidget.getUrl());
+
+    }
+
     /*
         webview方法回调区
      */
@@ -207,6 +228,8 @@ public class WebViewActivity extends BaseUiActivity implements WebViewBaseWidget
     @Override
     public void onWebViewReceivedError(int errorCode, String description, String failingUrl) {
 
+        hideContentView();
+        showFailedTip();
     }
 
     @Override
