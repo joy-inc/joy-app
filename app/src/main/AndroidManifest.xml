@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.joy.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -134,7 +133,7 @@
         <activity
             android:name=".activity.plan.AddPoiToFloderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ex_theme_dialog" />
+            android:theme="@style/theme_app.dialog" />
 
         <!--地图-->
         <activity
@@ -153,9 +152,7 @@
         <activity
             android:name=".activity.hotel.HotelSearchFilterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ex_theme_dialog" />
-
-        <!--android:theme="@style//"-->
+            android:theme="@style/theme_app.dialog" />
 
         <activity
             android:name=".activity.hotel.SearchHotelActivity"
