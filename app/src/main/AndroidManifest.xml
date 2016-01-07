@@ -134,7 +134,7 @@
         <activity
             android:name=".activity.plan.AddPoiToFloderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ex_theme_dialog" />
+            android:theme="@style/theme_app.dialog" />
 
         <!--地图-->
         <activity
@@ -153,7 +153,7 @@
         <activity
             android:name=".activity.hotel.HotelSearchFilterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ex_theme_dialog" />
+            android:theme="@style/theme_app.dialog" />
 
         <!--android:theme="@style//"-->
 
