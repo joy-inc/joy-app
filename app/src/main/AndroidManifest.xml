@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.joy.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -154,8 +153,6 @@
             android:name=".activity.hotel.HotelSearchFilterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/theme_app.dialog" />
-
-        <!--android:theme="@style//"-->
 
         <activity
             android:name=".activity.hotel.SearchHotelActivity"
