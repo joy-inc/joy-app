@@ -209,10 +209,15 @@ public class AddPoiToFloderActivity extends Activity {
         jtvButton.setTag("add");
         jtvButton.setText("创建新规划");
     }
-
+    long requestTime;
     private void addPoi(final PlanFolder folde) {
         ObjectRequest<Object> req = PlanHtpUtil.getUserPlanAddRequest(PoiId, folde.getFolder_id(), Object.class);
         req.setResponseListener(new ObjectResponse<Object>() {
+            @Override
+            public void onPre() {
+                super.onPre();
+                requestTime = System.currentTimeMillis();
+            }
 
             @Override
             public void onSuccess(Object tag, Object object) {
@@ -222,7 +227,18 @@ public class AddPoiToFloderActivity extends Activity {
                 intent.putExtra("id", folde.getFolder_id());
                 EventBus.getDefault().post(new FolderEvent(FolderEvent.ADD_POI));
                 setResult(RESULT_OK, intent);
-                finish();
+                long time = System.currentTimeMillis() - requestTime ;
+
+                if (time > 2000){
+                    finish();
+                }else{
+                    vShadow.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    },2000-time);
+                }
             }
 
             @Override
