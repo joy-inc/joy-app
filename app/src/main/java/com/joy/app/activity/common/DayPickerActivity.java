@@ -89,8 +89,9 @@ public class DayPickerActivity extends BaseUiActivity implements DatePickerContr
 
     @Override
     protected void initTitleView() {
-        setTitle(R.string.picker_title);
+
         addTitleLeftBackView();
+        addTitleMiddleView(R.string.picker_title);
 
         //        addTitleMiddleTextView(getIntent().getIntExtra(EXTRA_KEY_INTEGER_TITLE, 0));
         //        int iconResId = R.drawable.ic_back_white;
