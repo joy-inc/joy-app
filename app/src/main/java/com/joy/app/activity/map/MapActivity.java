@@ -104,7 +104,6 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     protected void initTitleView() {
 
         addTitleLeftBackView();
-        setTitle("");
     }
 
     @Override

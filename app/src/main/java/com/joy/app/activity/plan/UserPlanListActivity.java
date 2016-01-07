@@ -68,7 +68,6 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     protected void initTitleView() {
 
         addTitleLeftBackView();
-        setTitle("");
         addTitleMiddleView(getIntent().getStringExtra("FolderName"));
 
         addTitleRightView(R.drawable.ic_plan_more, new View.OnClickListener() {

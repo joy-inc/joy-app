@@ -103,7 +103,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     protected void initTitleView() {
 
         super.initTitleView();
-        addTitleLeftView(R.drawable.ic_back, new View.OnClickListener() {
+        addTitleLeftView(R.drawable.ic_back_gray, new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
