@@ -209,7 +209,6 @@ public class AddPoiToFloderActivity extends Activity {
         jtvButton.setTag("add");
         jtvButton.setText("创建新规划");
     }
-
     private void addPoi(final PlanFolder folde) {
         ObjectRequest<Object> req = PlanHtpUtil.getUserPlanAddRequest(PoiId, folde.getFolder_id(), Object.class);
         req.setResponseListener(new ObjectResponse<Object>() {
