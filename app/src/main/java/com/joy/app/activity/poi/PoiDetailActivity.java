@@ -24,8 +24,11 @@ import com.joy.app.activity.plan.AddPoiToFloderActivity;
 import com.joy.app.activity.user.UserLoginActivity;
 import com.joy.app.bean.poi.CommentAll;
 import com.joy.app.bean.sample.PoiDetail;
+import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 目的地折扣详情页(下订单的唯一入口)
@@ -54,6 +57,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_poi_detail);
+        EventBus.getDefault().register(this);
         executeRefreshOnly();
         getCommentList();
     }
@@ -70,6 +74,24 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
 
         super.onPause();
         mHeaderWidget.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    /**
+     * 登录的回掉
+     *
+     * @param event
+     */
+    public void onEventMainThread(LoginStatusEvent event) {
+
+        if (JoyApplication.isLogin())
+            executeRefreshOnly();
     }
 
     @Override
