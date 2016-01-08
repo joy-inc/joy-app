@@ -39,11 +39,10 @@ import de.greenrobot.event.EventBus;
  */
 public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
-    LoginTipView mLoginTipView;
-
+    private LoginTipView mLoginTipView;
     private DialogPlus mCommentonDialog;
     private final int REQ_ORDER_DETAIL = 101;
-    private boolean mNeedToRefresh = false;
+    private boolean mOrderStateChanged, mLoginStateChanged;
 
     public static OrderFragment instantiate(Context context) {
 
@@ -56,21 +55,26 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         super.onActivityCreated(savedInstanceState);
         setPageLimit(10);
         EventBus.getDefault().register(this);
-        initViewLoad();
+        refresh(true);
     }
 
     @Override
-    public void onResume() {
+    public void onVisible() {
 
-        super.onResume();
-        if (mNeedToRefresh) {
-            mNeedToRefresh = false;
+        if (mLoginStateChanged) {
+
+            mLoginStateChanged = false;
+            refresh(false);
+        } else if (mOrderStateChanged) {
+
+            mOrderStateChanged = false;
             executeSwipeRefresh();
         }
     }
 
     @Override
     public void onDestroy() {
+
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
@@ -102,8 +106,7 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     @Override
     protected ObjectRequest<List<MainOrder>> getObjectRequest(int pageIndex, int pageLimit) {
 
-        ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl(pageIndex, pageLimit, ""));
-        return obj;
+        return ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_LIST, MainOrder.class, OrderHtpUtil.getOrderListUrl(pageIndex, pageLimit, ""));
     }
 
     private void showCommentonDialog(final String productId) {
@@ -165,26 +168,32 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
      */
     public void onEventMainThread(LoginStatusEvent event) {
 
-        initViewLoad();
+        // 登录状态有变化
+        mLoginStateChanged = true;
     }
 
     public void onEventMainThread(OrderStatusEvent event) {
 
         // 支付成功、下单成功、删除订单成功，返回该页面都需要刷新
-        mNeedToRefresh = true;
+        mOrderStateChanged = true;
     }
 
     /**
      * 处理界面的加载状态还是显示登录界面
      */
-    private void initViewLoad() {
+    private void refresh(boolean fromOnCreate) {
+
         if (JoyApplication.isLogin()) {
 
             if (mLoginTipView != null)
                 removeCustomView(mLoginTipView);
 
-            executeCacheAndRefresh();
+            if (fromOnCreate)
+                executeCacheAndRefresh();
+            else
+                executeRefreshAndCache();
         } else {
+
             //设置界面为提示登录
             setNotLoginView();
         }
@@ -204,6 +213,4 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
         removeCustomView(mLoginTipView);
         addCustomView(mLoginTipView);
     }
-
-
 }

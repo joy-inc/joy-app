@@ -13,6 +13,7 @@ import com.joy.app.R;
 import com.joy.app.activity.plan.UserPlanListActivity;
 import com.joy.app.adapter.plan.UserPlanAdapter;
 import com.joy.app.bean.plan.PlanFolder;
+import com.joy.app.eventbus.FolderEvent;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
 import com.joy.app.view.LoginTipView;
@@ -30,7 +31,8 @@ import de.greenrobot.event.EventBus;
  */
 public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
 
-    LoginTipView mLoginTipView;
+    private LoginTipView mLoginTipView;
+    private boolean mFolderStateChanged, mLoginStateChanged;
 
     public static TravelPlanFragment instantiate(Context context) {
 
@@ -43,38 +45,46 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
         super.onActivityCreated(savedInstanceState);
         setPageLimit(10);
         EventBus.getDefault().register(this);
+        refresh(true);
     }
 
     @Override
-    public void onResume() {
+    public void onVisible() {
 
-        super.onResume();
-        initViewShowStatus();
+        if (mLoginStateChanged) {
+
+            mLoginStateChanged = false;
+            refresh(false);
+        } else if (mFolderStateChanged) {
+
+            mFolderStateChanged = false;
+            executeSwipeRefresh();
+        }
     }
 
     @Override
     public void onDestroy() {
+
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-
     }
-    boolean firstLoad = true;
+
     /**
      * 处理界面的加载状态还是显示登录界面
      */
-    private void initViewShowStatus() {
+    private void refresh(boolean fromOnCreate) {
 
         if (JoyApplication.isLogin()) {
 
-            if (mLoginTipView != null) {
+            if (mLoginTipView != null)
                 removeCustomView(mLoginTipView);
-            }
-            if (firstLoad)
+
+            if (fromOnCreate)
                 executeCacheAndRefresh();
             else
                 executeRefreshAndCache();
-            firstLoad = false;
         } else {
+
             //设置界面为提示登录
             setNotLoginView();
         }
@@ -84,17 +94,16 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      * 设置没有登录的界面提示
      */
     private void setNotLoginView() {
-        if (mLoginTipView == null) {
+
+        if (mLoginTipView == null)
             mLoginTipView = new LoginTipView(this.getActivity(), R.string.travel_no_login, R.string.travel_no_login_sub);
-        }
-        if( getAdapter()!=null && ! getAdapter().isEmpty()) {
+        if (getAdapter() != null && !getAdapter().isEmpty()) {
             getAdapter().clear();
             getAdapter().notifyDataSetChanged();
         }
         removeCustomView(mLoginTipView);
         addCustomView(mLoginTipView);
     }
-
 
     /**
      * 登录的回掉
@@ -103,7 +112,14 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
      */
     public void onEventMainThread(LoginStatusEvent event) {
 
-//        initViewShowStatus();
+        // 登录状态有变化
+        mLoginStateChanged = true;
+    }
+
+    public void onEventMainThread(FolderEvent event) {
+
+        // 创建、删除文件夹；添加、删除POI，返回该页面都需要刷新
+        mFolderStateChanged = true;
     }
 
     @Override
