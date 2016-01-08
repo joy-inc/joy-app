@@ -40,8 +40,8 @@ public class BaseHtpUtil implements HtpApi {
         params.put("track_device_info", Build.DEVICE);
         params.put("track_os", "Android" + Build.VERSION.RELEASE);
         params.put("app_installtime", AppUtil.getInstallTime() + "");
-        params.put("lat", "");// 纬度
-        params.put("lon", "");// 经度
+        params.put("lat", JoyApplication.getLocationLatitude());// 纬度
+        params.put("lon", JoyApplication.getLocationLongitude());// 经度
         params.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 
         //-----------------------------------------------------------------------
