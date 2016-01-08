@@ -27,7 +27,6 @@ import com.joy.app.utils.JTextSpanUtil;
  */
 public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClickListener {
 
-    private BannerAdapter<String> mAdapter;
     private BannerWidget mBannerWidget;
     private LinearLayout mLlBannerDiv;
     private TextView mTvTitle;
@@ -93,7 +92,7 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         if (CollectionUtil.isEmpty(data.getPhotos()))
             data.getPhotos().add(""); // 没有数据时，加一个空占位
 
-        mAdapter = new BannerAdapter(new BannerImage<String>() {
+        BannerAdapter<String> adapter = new BannerAdapter(new BannerImage<String>() {
 
             @Override
             protected FrescoImageView onCreateView(Context context) {
@@ -101,8 +100,8 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
                 return (FrescoImageView) getActivity().getLayoutInflater().inflate(R.layout.item_banner, null);
             }
         });
-        mAdapter.setData(data.getPhotos());
-        mBannerWidget = new BannerWidget(getActivity(), mAdapter);
+        adapter.setData(data.getPhotos());
+        mBannerWidget = new BannerWidget(getActivity(), adapter);
 
         if (mLlBannerDiv.getChildCount() <= 0)
             mLlBannerDiv.addView(mBannerWidget.getContentView());
