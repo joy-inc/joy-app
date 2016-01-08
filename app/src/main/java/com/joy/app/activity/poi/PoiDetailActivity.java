@@ -95,6 +95,13 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     }
 
     @Override
+    protected void onRetry() {
+
+        super.onRetry();
+        getCommentList();
+    }
+
+    @Override
     protected void initData() {
 
         mId = TextUtil.filterNull(getIntent().getStringExtra("id"));
