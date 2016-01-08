@@ -21,9 +21,11 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.LogMgr;
 import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
+import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.bean.map.MapPoiDetail;
+import com.joy.app.utils.LocationUtil;
 import com.joy.app.utils.QaAnimUtil;
 import com.joy.app.utils.map.GoogleTileSource;
 import com.joy.app.utils.map.JoyMapOverlayItem;
@@ -57,7 +59,9 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     private ArrayList<JoyMapOverlayItem> mOverlayItems;
     private DirectedLocationOverlay mLocationOverlay;
     private boolean isLocation = false;
-    private AMapLocationClient locationClient = null;
+//    private AMapLocationClient locationClient = null;
+    private LocationUtil locationUtil = null;
+
     private JoyMapOverlayItem selectMark;
 
     @Bind(R.id.maplayout)
@@ -137,8 +141,10 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
         poiMapPathBtn.setOnClickListener(this);
         poiMapLocationBar.setOnClickListener(this);
         llContent.setOnClickListener(this);
-        locationClient = new AMapLocationClient(getApplicationContext());
-        MapUtil.initAccuracyLocation(locationClient, this);
+//        locationClient = new AMapLocationClient(getApplicationContext());
+        locationUtil = JoyApplication.getLocationUtil();
+        locationUtil.gettAccuracyLocation(this,2000);
+//        MapUtil.initAccuracyLocation(locationClient, this);
     }
 
     float touchx,touchy;
@@ -327,7 +333,8 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     private void startGetLocation() {
         if (isLocation) return;
         isLocation = true;
-        locationClient.startLocation();
+//        locationClient.startLocation();
+        locationUtil.startLocation();
     }
 
     private void startPoiDetailActivity() {
@@ -357,24 +364,24 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-        if (locationClient != null && isLocation) {
-            locationClient.startLocation();
+        if (locationUtil != null && isLocation) {
+            locationUtil.startLocation();
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (locationClient != null) {
-            locationClient.stopLocation();
+        if (locationUtil != null) {
+            locationUtil.stopLocation();
         }
     }
 
     @Override
     protected void onDestroy() {
-        if (locationClient != null) {
-            locationClient.onDestroy();
-            locationClient = null;
+        if (locationUtil != null) {
+            locationUtil.removeListener(this);
+            locationUtil = null;
         }
         super.onDestroy();
     }

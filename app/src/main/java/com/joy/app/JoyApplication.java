@@ -1,10 +1,13 @@
 package com.joy.app;
 
+import android.location.Location;
+
 import com.android.library.BaseApplication;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.joy.app.bean.User;
+import com.joy.app.utils.LocationUtil;
 import com.joy.app.utils.XiaomiUtil;
 import com.joy.app.utils.prefs.CommonPrefs;
 import com.joy.library.share.ShareConstant;
@@ -15,6 +18,7 @@ import com.joy.library.share.ShareConstant;
 public class JoyApplication extends BaseApplication {
 
     private static User mUser;
+    private static LocationUtil locationUtil;
 
     @Override
     public void onCreate() {
@@ -31,6 +35,8 @@ public class JoyApplication extends BaseApplication {
 
         Fresco.initialize(getContext());
         initShareInfo();
+        locationUtil = new LocationUtil(this);
+//        locationUtil.getOnceLocation();//获取一次位置
         XiaomiUtil.registerMiPush(this);
         if (BuildConfig.DEBUG) {
 
@@ -61,6 +67,31 @@ public class JoyApplication extends BaseApplication {
     public static boolean isLogin() {
 
         return !TextUtil.isEmpty(getUserToken());
+    }
+
+    public static Location getLocation() {
+        if (locationUtil != null) {
+            return locationUtil.getLastKnownLocation();
+        } else
+            return null;
+    }
+
+    public static LocationUtil getLocationUtil() {
+        return locationUtil;
+    }
+    public static String getLocationLatitude() {
+        if (getLocation() == null){
+            return TextUtil.TEXT_EMPTY;
+        }else{
+            return String.valueOf(getLocation().getLatitude());
+        }
+    }
+    public static String getLocationLongitude() {
+        if (getLocation() == null){
+            return TextUtil.TEXT_EMPTY;
+        }else{
+            return String.valueOf(getLocation().getLongitude());
+        }
     }
 
     /**
