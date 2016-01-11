@@ -5,7 +5,6 @@ import android.location.Location;
 import com.android.library.BaseApplication;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.joy.app.bean.User;
 import com.joy.app.utils.LocationUtil;
 import com.joy.app.utils.XiaomiUtil;
@@ -33,7 +32,6 @@ public class JoyApplication extends BaseApplication {
 
     private void initApplication() {
 
-        Fresco.initialize(getContext());
         initShareInfo();
         locationUtil = new LocationUtil(this);
 //        locationUtil.getOnceLocation();//获取一次位置
@@ -49,7 +47,6 @@ public class JoyApplication extends BaseApplication {
 
     public static void releaseForExitApp() {
 
-        //        Fresco.shutDown();
         release();
         CommonPrefs.releaseInstance();
     }
