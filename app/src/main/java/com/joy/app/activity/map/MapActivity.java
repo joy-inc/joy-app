@@ -380,7 +380,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     @Override
     protected void onDestroy() {
         if (locationUtil != null) {
-            locationUtil.removeListener(this);
+            locationUtil.onDestroy();
             locationUtil = null;
         }
         super.onDestroy();
