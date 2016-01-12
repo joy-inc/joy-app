@@ -74,6 +74,9 @@ public class LocationUtil implements AMapLocationListener {
         if (locationClient == null){
             locationClient = new AMapLocationClient(mContext);
             //给定位客户端对象设置定位参数
+            if (locationOption == null){
+                resetClientOption(false);
+            }
             locationClient.setLocationOption(locationOption);
         }
         return locationClient;
