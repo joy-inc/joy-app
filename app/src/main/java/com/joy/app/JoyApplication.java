@@ -3,7 +3,6 @@ package com.joy.app;
 import android.location.Location;
 
 import com.android.library.BaseApplication;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.joy.app.bean.User;
 import com.joy.app.utils.LocationUtil;
@@ -36,13 +35,6 @@ public class JoyApplication extends BaseApplication {
         locationUtil = new LocationUtil(this);
 //        locationUtil.getOnceLocation();//获取一次位置
         XiaomiUtil.registerMiPush(this);
-        if (BuildConfig.DEBUG) {
-
-            LogMgr.turnOn();
-        } else {
-
-            LogMgr.turnOff();
-        }
     }
 
     public static void releaseForExitApp() {

@@ -15,6 +15,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
+import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.utils.ActivityUrlUtil;
 import com.joy.app.utils.UrlUtil;
@@ -205,7 +206,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
 
     private void onWebViewPageStarted(String url, Bitmap favicon) {
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d(simpleTag(), "onWebViewPageStarted url = " + url);
 
         mIsLoadUrlError = false;
@@ -220,7 +221,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
 
     private void onWebViewProgressChanged(int newProgress) {
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d(simpleTag(), "onWebViewProgressChanged progress = " + newProgress);
 
         switchViewOnProgressChanged(newProgress);
@@ -239,7 +240,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
      */
     private void onWebViewReceivedError(int errorCode, String description, String failingUrl) {
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d(simpleTag(), "onWebViewReceivedError url = " + failingUrl + ", errorCode = " + errorCode + ", desc = " + description);
 
         mIsLoadUrlError = true;
@@ -269,7 +270,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
      */
     protected void onWebViewPageTimeout() {
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d(simpleTag(), "onWebViewPageTimeout");
 
         mIsLoadUrlError = true;
@@ -284,7 +285,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
      */
     private void onWebViewPageFinished(String url, boolean isLoadUrlError) {
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d(simpleTag(), "onWebViewPageFinished url = " + url);
 
         removeWebViewTimeOutMsg();
@@ -354,7 +355,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
             //cookie没有种上，尝试两次
             if (mCookieUrlTryCount < 2) {
 
-                if (LogMgr.isDebug())
+                if (BuildConfig.DEBUG)
                     LogMgr.d(simpleTag(), "handleCookieUrl():setCooking, tryCount = " + mCookieUrlTryCount);
 
                 mCookieUrlTryCount++;
@@ -362,7 +363,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
 
             } else {
 
-                if (LogMgr.isDebug())
+                if (BuildConfig.DEBUG)
                     LogMgr.d(simpleTag(), "handleCookieUrl():setCookieFailed, tryCount = " + mCookieUrlTryCount);
 
                 setCookieStatusFailed();
@@ -372,7 +373,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
 
         } else {
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.d(simpleTag(), "handleCookieUrl():setCookieSuccess, tryCount = " + mCookieUrlTryCount);
 
             setCookieStatusSuccess();//cookie已种上，标记成功
@@ -510,7 +511,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
         }
         if (isCookieStatusLoaded()) {//cookie已经加载过，直接加载新链接
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.d(simpleTag(), "loadUrl cookie loaded, url=" + url);
 
             mWebView.loadUrl(url);
@@ -518,14 +519,14 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
 
         } else if (isCookieStatusLoading()) {//cookie正在加载中，则只临时保存要加载的链接，cookie种完后再加载该链接
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.d(simpleTag(), "loadUrl cookie loading, url=" + url);
 
             mTempLoadUrl = url;
 
         } else if (isCookieStatusNone()) {//cookie还未加载过
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.d(simpleTag(), "loadUrl cookie loadnone, user is login =" + JoyApplication.isLogin() + ", url=" + url);
 
             if (!JoyApplication.isLogin()) {//用户未登录
@@ -538,7 +539,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
 
             //            //用户已登录，获取cookieUrl
             String cookieUrl = UrlUtil.getWebViewCookieUrl(JoyApplication.getUserToken());
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.d(simpleTag(), "loadUrl cookie loadnone cookieUrl = " + cookieUrl + ", webview has cookie = " + webViewHasCookie(cookieUrl));
 
             /**
@@ -612,7 +613,7 @@ public abstract class WebViewBaseWidget extends ExLayoutWidget implements DimenC
 
     private boolean webViewHasCookie(String cookieUrl) {
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d(simpleTag(), "webViewHasCookie cookie info = " + CookieManager.getInstance().getCookie(cookieUrl));
 
         return !TextUtil.isEmpty(CookieManager.getInstance().getCookie(cookieUrl));

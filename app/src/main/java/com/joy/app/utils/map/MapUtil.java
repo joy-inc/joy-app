@@ -14,6 +14,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
+import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.bean.map.MapPoiDetail;
 import com.joy.app.bean.plan.PlanItem;
@@ -95,7 +96,7 @@ public class MapUtil {
                 continue;
             }
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.e("p:" + p.packageName);
 
             if ("com.google.android.apps.maps".equals(p.packageName)) {

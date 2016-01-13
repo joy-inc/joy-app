@@ -19,3 +19,21 @@ allprojects {
 wrapper {
     gradleVersion = '2.9'
 }
+
+task clean << {
+    cleanApks.execute()
+}
+
+task cleanApks(type: Exec) {
+    workingDir 'app/python'
+    commandLine 'python', 'clean.py'
+}
+
+task buildChannels(type: Exec) {
+    commandLine 'sh', 'build.sh'
+}
+
+task makeChannels(type: Exec) {
+    workingDir 'app/python'
+    commandLine 'python', 'build.py'
+}

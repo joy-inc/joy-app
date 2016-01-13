@@ -23,6 +23,7 @@ import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
+import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.bean.sample.Trip;
@@ -197,7 +198,7 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
         @OnClick(R.id.tvName)
         void onItemClick() {
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.d("HeaderViewHolder", "onClick--> position = " + getPosition());
         }
     }
@@ -218,7 +219,7 @@ public class CityDetailRvAdapter extends ExRvMultipleAdapter {
         @OnClick(R.id.tvName)
         void onItemClick() {
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.d("ContentViewHolder", "onClick--> position = " + getPosition());
         }
     }

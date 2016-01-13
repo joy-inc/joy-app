@@ -13,11 +13,14 @@ android {
         applicationId "com.joy.app"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
 
         // Enabling multidex support. Requires Build-Tools 21.1.0, and Support repository rev 8.
         multiDexEnabled false
+
+        // Default we are in debug mode, will be overriden on task execution
+        rootProject.ext.variantRelease = false
     }
     signingConfigs {
         debug {
@@ -42,6 +45,12 @@ android {
             signingConfig signingConfigs.release
 //            minifyEnabled true
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def apkName = APP_NAME + "-" + buildType.name/* + defaultConfig.versionName*/ + ".apk"
+                    output.outputFile = new File(output.outputFile.parent, apkName)
+                }
+            }
         }
     }
     packagingOptions {
@@ -56,9 +65,6 @@ android {
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
     }
-    productFlavors {
-        qyer {}
-    }
     lintOptions {
         abortOnError false
     }
@@ -70,4 +76,23 @@ android {
         // moves the whole sourceSet (and its sub folders) to a new folder. This moves src/androidTest/* to tests/*
         androidTest.setRoot('tests')
     }
+}
+
+// Trigger build type (as soon as possible) and make some action via corresponding tasks
+project.afterEvaluate {
+    tasks.all { task ->
+        if (task.name =~ /check.*Manifest/) {
+            if (task.name =~ /[dD]ebug/) {
+                task.dependsOn(onDebugTypeTriggered)
+            } else {
+                task.dependsOn(onReleaseTypeTriggered)
+            }
+        }
+    }
+}
+task onDebugTypeTriggered << {
+    rootProject.ext.variantRelease = false
+}
+task onReleaseTypeTriggered << {
+    rootProject.ext.variantRelease = true
 }

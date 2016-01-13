@@ -117,7 +117,7 @@ public class XiaomiUtil {
             MiPushClient.setAlias(context, XiaomiUtil.getAliasName(), null);
         } catch (Exception e) {
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.e(getTag(), "onCommandResult error: " + e.getMessage());
         }
     }
@@ -143,7 +143,7 @@ public class XiaomiUtil {
 
         } catch (Exception e) {
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.e(getTag(), "praseMiPushMessage error: " + e.getMessage());
         }
 
@@ -173,7 +173,7 @@ public class XiaomiUtil {
 
         } catch (Exception e) {
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.e(getTag(), "sendPushNotification error: " + e.getMessage());
         }
     }
@@ -182,7 +182,7 @@ public class XiaomiUtil {
 
         String uri = pushMessage.getUri();
         String messageId = pushMessage.getMessageId();
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d(getTag(), "sendPushNotification uri = " + uri + ", msg id = " + messageId);
 
         if (TextUtil.isEmptyTrim(uri) || TextUtil.isEmpty(messageId))

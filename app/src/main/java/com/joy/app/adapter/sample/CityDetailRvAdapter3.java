@@ -11,6 +11,7 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.DimenCons;
 import com.android.library.utils.LogMgr;
 import com.android.library.widget.FrescoImageView;
+import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.bean.sample.Trip;
@@ -111,7 +112,7 @@ public class CityDetailRvAdapter3 extends ExRvMultipleAdapter {
         @OnClick(R.id.tvName)
         void onItemClick() {
 
-            if (LogMgr.isDebug())
+            if (BuildConfig.DEBUG)
                 LogMgr.d("ContentViewHolder", "onClick--> position = " + getPosition());
         }
     }

@@ -55,7 +55,7 @@ public class BaseHtpUtil implements HtpApi {
 
         String requestUrl = new StringBuilder(url).append('?').append(ParamsUtil.createUrl(params)).toString();
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d("BaseHtpUtil", "~~get: " + requestUrl);
 
         return requestUrl;

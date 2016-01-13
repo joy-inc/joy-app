@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.android.library.utils.LogMgr;
+import com.joy.app.BuildConfig;
 import com.joy.app.activity.main.MainActivity;
 import com.xiaomi.mipush.sdk.MiPushCommandMessage;
 import com.xiaomi.mipush.sdk.MiPushMessage;
@@ -70,7 +71,7 @@ public class MiPushMessageReceiver extends PushMessageReceiver {
     @Override
     public void onCommandResult(Context context, MiPushCommandMessage message) {
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.i("  onCommandResult()  :     " + message.toString());
     }
 }

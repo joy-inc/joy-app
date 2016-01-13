@@ -17,6 +17,7 @@ import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
+import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.eventbus.LoginStatusEvent;
 import com.joy.app.utils.ActivityUrlUtil;
@@ -198,7 +199,7 @@ public class WebViewActivity extends BaseHttpUiActivity<String> implements WebVi
 
     @Override
     protected void onRetry() {
-        showContentView();
+//        showContentView();
         mWebViewWidget.loadUrl(mWebViewWidget.getUrl());
 
     }
@@ -228,7 +229,7 @@ public class WebViewActivity extends BaseHttpUiActivity<String> implements WebVi
     @Override
     public void onWebViewReceivedError(int errorCode, String description, String failingUrl) {
 
-        hideContentView();
+//        hideContentView();
         showFailedTip();
     }
 
@@ -245,7 +246,7 @@ public class WebViewActivity extends BaseHttpUiActivity<String> implements WebVi
     @Override
     public boolean onWebViewShouldOverrideUrlLoading(String url) {
 
-        if (LogMgr.isDebug())
+        if (BuildConfig.DEBUG)
             LogMgr.d("webviewActivity", "onWebViewShouldOverrideUrlLoading url  = " + url);
         if (mNoJump || mUrl.equals(url)) {
             loadUrl(url);

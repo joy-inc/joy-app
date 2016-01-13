@@ -21,6 +21,7 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.LogMgr;
 import com.android.library.widget.FrescoImageView;
 import com.android.library.widget.JTextView;
+import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.poi.PoiDetailActivity;
@@ -392,12 +393,12 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
         if (aMapLocation != null) {
             if (aMapLocation.getErrorCode() == 0) {
                 updateLocation(aMapLocation);
-                if (LogMgr.isDebug())
+                if (BuildConfig.DEBUG)
                     MapUtil.showLocationInfor(aMapLocation);
 
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                if (LogMgr.isDebug()) {
+                if (BuildConfig.DEBUG) {
                     LogMgr.e("AmapError", "location Error, ErrCode:"
                             + aMapLocation.getErrorCode() + ", errInfo:"
                             + aMapLocation.getErrorInfo());
