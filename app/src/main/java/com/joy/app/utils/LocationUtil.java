@@ -74,6 +74,9 @@ public class LocationUtil implements AMapLocationListener {
         if (locationClient == null){
             locationClient = new AMapLocationClient(mContext);
             //给定位客户端对象设置定位参数
+            if (locationOption == null){
+                resetClientOption(false);
+            }
             locationClient.setLocationOption(locationOption);
         }
         return locationClient;
@@ -87,7 +90,7 @@ public class LocationUtil implements AMapLocationListener {
         //设置定位间隔,单位毫秒,默认为2000ms
         locationOption.setInterval(Interval);
         // 设置定位监听
-        locationClient.setLocationListener(listener);
+        getLocationClient().setLocationListener(listener);
 
     }
 
@@ -99,7 +102,7 @@ public class LocationUtil implements AMapLocationListener {
         //设置定位间隔,单位毫秒,默认为2000ms
         locationOption.setInterval(Interval);
         // 设置定位监听
-        locationClient.setLocationListener(listener);
+        getLocationClient().setLocationListener(listener);
 
     }
 
