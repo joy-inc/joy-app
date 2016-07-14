@@ -3,17 +3,12 @@ package com.joy.app.activity.main;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatRatingBar;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.EditText;
 
-import com.android.library.activity.BaseHttpRvFragment;
+import com.android.library.ui.fragment.BaseHttpRvFragment;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
-import com.android.library.view.dialogplus.DialogPlus;
-import com.android.library.view.dialogplus.ViewHolder;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.poi.OrderDetailActivity;
@@ -40,7 +35,7 @@ import de.greenrobot.event.EventBus;
 public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
     private LoginTipView mLoginTipView;
-    private DialogPlus mCommentonDialog;
+//    private DialogPlus mCommentonDialog;
     private final int REQ_ORDER_DETAIL = 101;
     private boolean mOrderStateChanged, mLoginStateChanged;
 
@@ -110,42 +105,43 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
     }
 
     private void showCommentonDialog(final String productId) {
-
-        mCommentonDialog = DialogPlus.newDialog(getActivity()).setContentHolder(new ViewHolder(R.layout.view_order_commenton)).setGravity(Gravity.CENTER).create();
-
-        final AppCompatRatingBar ratingBar = (AppCompatRatingBar) mCommentonDialog.findViewById(R.id.acRatingBar);
-        final EditText editText = (EditText) mCommentonDialog.findViewById(R.id.acetContent);
-
-        mCommentonDialog.findViewById(R.id.tvSubmit).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                String rating = ratingBar.getRating() > 0 ? String.valueOf(ratingBar.getRating()) : "";
-                addComment(productId, rating, editText.getText().toString());
-            }
-        });
-
-        mCommentonDialog.show();
+//
+//        mCommentonDialog = DialogPlus.newDialog(getActivity()).setContentHolder(new ViewHolder(R.layout.view_order_commenton)).setGravity(Gravity.CENTER).create();
+//
+//        final AppCompatRatingBar ratingBar = (AppCompatRatingBar) mCommentonDialog.findViewById(R.id.acRatingBar);
+//        final EditText editText = (EditText) mCommentonDialog.findViewById(R.id.acetContent);
+//
+//        mCommentonDialog.findViewById(R.id.tvSubmit).setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                String rating = ratingBar.getRating() > 0 ? String.valueOf(ratingBar.getRating()) : "";
+//                addComment(productId, rating, editText.getText().toString());
+//            }
+//        });
+//
+//        mCommentonDialog.show();
     }
 
 
     private void addComment(String productId, String commentLevel, String content) {
 
         ObjectRequest obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_COMMENT_ADD, Object.class, OrderHtpUtil.getCommentAdd(productId, commentLevel, content));
+        showLoading();
         obj.setResponseListener(new ObjectResponse() {
 
-            @Override
-            public void onPre() {
-                showLoading();
-            }
+//            @Override
+//            public void onPre() {
+//                showLoading();
+//            }
 
             @Override
             public void onSuccess(Object tag, Object o) {
 
                 hideLoading();
-                if (mCommentonDialog != null)
-                    mCommentonDialog.dismiss();
+//                if (mCommentonDialog != null)
+//                    mCommentonDialog.dismiss();
 
                 showToast(R.string.commenton_success);
             }

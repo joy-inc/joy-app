@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="theme_app" parent="lib_theme_base">
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
-        <item name="android:windowBackground">@drawable/shape_bg_window</item>
-        <item name="android:navigationBarColor">?colorPrimaryDark</item>
-        <item name="android:textColorPrimary">@color/color_primary_text</item>
-        <item name="android:textColorSecondary">@color/color_secondary_text</item>
-        <item name="android:colorEdgeEffect">?colorPrimary</item>
-        <item name="colorControlHighlight">@color/white_trans26</item>
-        <!--<item name="colorControlActivated">@color/white_trans26</item>-->
-        <item name="noTitle">false</item>
-        <item name="overlay">false</item>
-    </style>
-
-    <style name="theme_app.main">
-        <item name="colorPrimary">@color/color_bg_window_dark</item>
-        <item name="colorPrimaryDark">@color/color_bg_window_dark</item>
-        <item name="android:navigationBarColor">@color/transparent</item>
-    </style>
-
-    <style name="theme_app.noTitle.hotel">
+    <style name="base_theme.noTitle.hotel">
         <item name="colorPrimaryDark">@color/color_statusbar_hotel</item>
         <item name="android:colorEdgeEffect">@color/color_statusbar_hotel</item>
         <item name="android:colorControlHighlight">@color/color_statusbar_hotel</item>

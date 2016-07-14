@@ -10,7 +10,7 @@ import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.plan.PlanFolder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -27,13 +27,13 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
 
     public class ViewHolder extends ExRvViewHolder<PlanFolder> {
 
-        @Bind(R.id.sdvBg)
+        @BindView(R.id.sdvBg)
         FrescoImageView mPhoto;
 
-        @Bind(R.id.jtv_number)
+        @BindView(R.id.jtv_number)
         TextView mCount;
 
-        @Bind(R.id.jtv_Title)
+        @BindView(R.id.jtv_Title)
         TextView mTtile;
 
 

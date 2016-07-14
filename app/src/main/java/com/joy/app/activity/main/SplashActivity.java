@@ -7,7 +7,7 @@ import android.os.Message;
 
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
-import com.joy.app.activity.sample.BannerTestActivity;
+import com.joy.app.activity.sample.TabTestActivity;
 
 /**
  * 闪屏处理,是否要打开引导页
@@ -60,16 +60,16 @@ public class SplashActivity extends Activity {
                 GuideSplashActivity.startActivity(this);
             } else {
 
-                    MainActivity.startActivity(this);
-                //  TabTestActivity.startActivity(this);
-                //  LvTestActivity.startActivity(this);
-                //  LvLoadMoreTestActivity.startActivity(this);
-                //  RvLoadMoreTestActivity.startActivity(this);
-                //  BannerTestActivity.startActivity(this);
+//                MainActivity.startActivity(this);
+                TabTestActivity.startActivity(this);
+//                LvTestActivity.startActivity(this);
+//                LvLoadMoreTestActivity.startActivity(this);
+//                RvLoadMoreTestActivity.startActivity(this);
+//                BannerTestActivity.startActivity(this);
             }
             finish();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
             MainActivity.startActivity(this);
             finish();
         }

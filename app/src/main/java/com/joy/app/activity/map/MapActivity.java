@@ -14,9 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationListener;
-import com.android.library.activity.BaseUiActivity;
+import com.android.library.ui.activity.BaseUiActivity;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.LogMgr;
 import com.android.library.widget.FrescoImageView;
@@ -44,7 +43,7 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -65,29 +64,28 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
 
     private JoyMapOverlayItem selectMark;
 
-    @Bind(R.id.maplayout)
+    @BindView(R.id.maplayout)
     FrameLayout maplayout;
 
-    @Bind(R.id.sdv_photo)
+    @BindView(R.id.sdv_photo)
     FrescoImageView sdvPhoto;
 
-    @Bind(R.id.jtv_cnname)
+    @BindView(R.id.jtv_cnname)
     JTextView jtvCnname;
 
-    @Bind(R.id.jtv_enname)
+    @BindView(R.id.jtv_enname)
     JTextView jtvEnname;
 
-    @Bind(R.id.iv_path)
+    @BindView(R.id.iv_path)
     ImageView ivPath;
 
-
-    @Bind(R.id.poi_map_location_bar)
+    @BindView(R.id.poi_map_location_bar)
     RelativeLayout poiMapLocationBar;
 
-    @Bind(R.id.ll_content)
+    @BindView(R.id.ll_content)
     LinearLayout llContent;
 
-    @Bind(R.id.poi_map_path_btn)
+    @BindView(R.id.poi_map_path_btn)
     RelativeLayout poiMapPathBtn;
 
     boolean isTouchable = true;

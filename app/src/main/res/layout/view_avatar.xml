@@ -14,6 +14,7 @@
         fresco:placeholderImage="@drawable/ic_def_avatar"
         fresco:roundAsCircle="true"
         fresco:roundingBorderColor="@color/white"
+        fresco:roundingBorderPadding="2dp"
         fresco:roundingBorderWidth="2dp" />
 
     <View

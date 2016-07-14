@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
@@ -18,10 +18,9 @@ import com.joy.app.bean.poi.OrderDetail;
 import com.joy.app.eventbus.OrderStatusEvent;
 import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
-import com.joy.app.utils.plan.DialogUtil;
 import com.joy.app.utils.plan.FolderRequestListener;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
@@ -32,45 +31,45 @@ import de.greenrobot.event.EventBus;
 public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> implements View.OnClickListener, FolderRequestListener {
     String order_id;
     OrderDetail detail;
-    @Bind(R.id.jtv_title)
+    @BindView(R.id.jtv_title)
     JTextView jtvTitle;
-    @Bind(R.id.jtv_infor)
+    @BindView(R.id.jtv_infor)
     JTextView jtvInfor;
-    @Bind(R.id.sdv_order_photo)
+    @BindView(R.id.sdv_order_photo)
     FrescoImageView sdvOrderPhoto;
-    @Bind(R.id.jtv_order_title)
+    @BindView(R.id.jtv_order_title)
     JTextView jtvOrderTitle;
-    @Bind(R.id.jtv_order_id)
+    @BindView(R.id.jtv_order_id)
     JTextView jtvOrderId;
-    @Bind(R.id.jtv_order_item)
+    @BindView(R.id.jtv_order_item)
     JTextView jtvOrderItem;
-    @Bind(R.id.jtv_order_count)
+    @BindView(R.id.jtv_order_count)
     JTextView jtvOrderCount;
-    @Bind(R.id.jtv_order_name)
+    @BindView(R.id.jtv_order_name)
     JTextView jtvOrderName;
-    @Bind(R.id.jtv_order_phone)
+    @BindView(R.id.jtv_order_phone)
     JTextView jtvOrderPhone;
-    @Bind(R.id.jtv_order_email)
+    @BindView(R.id.jtv_order_email)
     JTextView jtvOrderEmail;
-    @Bind(R.id.jtv_order_total)
+    @BindView(R.id.jtv_order_total)
     JTextView jtvOrderTotal;
-    @Bind(R.id.v_empty)
+    @BindView(R.id.v_empty)
     View vEmpty;
-    @Bind(R.id.jtv_pay)
+    @BindView(R.id.jtv_pay)
     JTextView jtvPay;
-    @Bind(R.id.iv_finsh)
+    @BindView(R.id.iv_finsh)
     ImageView ivFinsh;
 
-    DialogUtil dialogUtil;
-    @Bind(R.id.jtv_order_day)
+//    DialogUtil dialogUtil;
+    @BindView(R.id.jtv_order_day)
     JTextView jtvOrderDay;
-    @Bind(R.id.ll_selected_item)
+    @BindView(R.id.ll_selected_item)
     LinearLayout llSelectedItem;
-    @Bind(R.id.ll_day_item)
+    @BindView(R.id.ll_day_item)
     LinearLayout llDayItem;
-    @Bind(R.id.v_day_spilt)
+    @BindView(R.id.v_day_spilt)
     View vDaySpilt;
-    @Bind(R.id.v_item_spilt)
+    @BindView(R.id.v_item_spilt)
     View vItemSpilt;
 
     public static void startActivity(Activity act, String orderId, int requestCode) {
@@ -119,8 +118,8 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
             public void onClick(View v) {
 
                 if (isRequest ) return;
-                if (dialogUtil != null && detail != null)
-                    dialogUtil.showDeleteOrderDialog(order_id, detail.getOrder_status() == 2);
+//                if (dialogUtil != null && detail != null)
+//                    dialogUtil.showDeleteOrderDialog(order_id, detail.getOrder_status() == 2);
             }
         });
     }
@@ -130,7 +129,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
         super.initContentView();
         ButterKnife.bind(this);
         jtvPay.setOnClickListener(this);
-        dialogUtil = new DialogUtil(this, this);
+//        dialogUtil = new DialogUtil(this, this);
     }
 
     private void showPayButton() {

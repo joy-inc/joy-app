@@ -16,7 +16,7 @@ public class SettingShare implements IShareInfo {
     public ShareInfo getShareInfo(ShareType platform) {
 
         ShareInfo shareInfo = new ShareInfo();
-        shareInfo.setContent("joy大法好,joy大法妙,joy大法呱呱叫,重点幸福啪啪叫,请给该员工颁发最靓员工奖");
+        shareInfo.setContent("joy大法好，joy大法妙，joy大法呱呱叫，重点幸福啪啪叫，请给该员工颁发最靓员工奖！");
         shareInfo.setMediaResId(R.drawable.ic_pink_rectangle_logo);
 
         shareInfo.setMediaUrl(ShareUtil.getWeiboPaht());

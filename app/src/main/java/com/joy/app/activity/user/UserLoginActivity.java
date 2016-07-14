@@ -17,8 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseHttpUiActivity;
-import com.android.library.activity.BaseUiActivity;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
@@ -28,13 +27,12 @@ import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.bean.User;
 import com.joy.app.eventbus.LoginStatusEvent;
-import com.joy.app.utils.http.HtpApi;
 import com.joy.app.utils.http.ReqFactory;
 import com.joy.app.utils.http.UserHtpUtil;
 
 import java.util.Date;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
@@ -46,22 +44,22 @@ import de.greenrobot.event.EventBus;
 public class UserLoginActivity extends BaseHttpUiActivity<String> implements View.OnClickListener {
 
 
-    @Bind(R.id.tvInfo)
+    @BindView(R.id.tvInfo)
     TextView mTvInfo;
 
-    @Bind(R.id.llLoginDiv)
+    @BindView(R.id.llLoginDiv)
     View mLoginDiv;
 
-    @Bind(R.id.etPhone)
+    @BindView(R.id.etPhone)
     EditText mEtPhone;
 
-    @Bind(R.id.etCode)
+    @BindView(R.id.etCode)
     EditText mEtCode;
 
-    @Bind(R.id.tvGetCode)
+    @BindView(R.id.tvGetCode)
     TextView mTvGetCode;
 
-    @Bind(R.id.tvButton)
+    @BindView(R.id.tvButton)
     TextView mTvButton;
 
     View mDecorView;//根目录
@@ -263,12 +261,13 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
             }
             req.setData(u);
         }
+        showLoading();
         req.setResponseListener(new ObjectResponse<User>() {
 
-            @Override
-            public void onPre() {
-                showLoading();
-            }
+//            @Override
+//            public void onPre() {
+//                showLoading();
+//            }
 
             @Override
             public void onSuccess(Object tag, User u) {
@@ -327,13 +326,14 @@ public class UserLoginActivity extends BaseHttpUiActivity<String> implements Vie
         }
         mTvButton.setEnabled(false);
         ObjectRequest req = ReqFactory.newPost(UserHtpUtil.URL_USER_GETCODE, String.class, UserHtpUtil.getCode(mEtPhone.getText().toString()));
+        showLoading();
         req.setResponseListener(new ObjectResponse() {
 
-            @Override
-            public void onPre() {
-                showLoading();
-
-            }
+//            @Override
+//            public void onPre() {
+//                showLoading();
+//
+//            }
 
             @Override
             public void onSuccess(Object tag, Object o) {

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
@@ -194,15 +194,16 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     private void createOrder(OrderContacts userinfo) {
 
         ObjectRequest<OrderDetail> req = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_CREATE, OrderDetail.class, OrderHtpUtil.getCreateOrderUrl(mOrderItem, mDateTime, userinfo));
-
+        mAcbNext.setClickable(false);
+        showLoading();
         req.setResponseListener(new ObjectResponse<OrderDetail>() {
 
-            @Override
-            public void onPre() {
-
-                mAcbNext.setClickable(false);
-                showLoading();
-            }
+//            @Override
+//            public void onPre() {
+//
+//                mAcbNext.setClickable(false);
+//                showLoading();
+//            }
 
             @Override
             public void onSuccess(Object tag, OrderDetail data) {

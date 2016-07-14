@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
@@ -22,9 +22,6 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
-import com.android.library.view.dialogplus.DialogPlus;
-import com.android.library.view.dialogplus.ListHolder;
-import com.android.library.view.dialogplus.OnCancelListener;
 import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
@@ -66,7 +63,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private BookSubjectWidget mSubjectWidget;
     private BookCountWidget mCountWidget;
 
-    private DialogPlus mSubjectDialog;
+//    private DialogPlus mSubjectDialog;
     private int index = 0;
     private int currentIndex = 0;
 
@@ -266,47 +263,47 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
                 }
             });
 
-            mSubjectDialog = DialogPlus.newDialog(OrderBookActivity.this)
-                    .setContentHolder(new ListHolder())
-                    .setHeader(R.layout.view_header_dialog_orderbook)
-                    .setFooter(R.layout.view_footer_dialog_orderbook)
-                    .setCancelable(true)
-                    .setAdapter(adapter)
-                    .setOnCancelListener(new OnCancelListener() {
+//            mSubjectDialog = DialogPlus.newDialog(OrderBookActivity.this)
+//                    .setContentHolder(new ListHolder())
+//                    .setHeader(R.layout.view_header_dialog_orderbook)
+//                    .setFooter(R.layout.view_footer_dialog_orderbook)
+//                    .setCancelable(true)
+//                    .setAdapter(adapter)
+//                    .setOnCancelListener(new OnCancelListener() {
+//
+//                        @Override
+//                        public void onCancel(DialogPlus dialog) {
+//
+//                            for (LevelOptions data : adapter.getData()) {
+//                                data.setLocalCheck(false);
+//                            }
+//
+//                            adapter.getItem(index).setLocalCheck(true);
+//                        }
+//                    })
+//                    .create();
 
-                        @Override
-                        public void onCancel(DialogPlus dialog) {
-
-                            for (LevelOptions data : adapter.getData()) {
-                                data.setLocalCheck(false);
-                            }
-
-                            adapter.getItem(index).setLocalCheck(true);
-                        }
-                    })
-                    .create();
-
-            mSubjectDialog.getFooterView().setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    index = currentIndex;
-
-                    for (LevelOptions data : adapter.getData()) {
-                        data.setLocalCheck(false);
-                    }
-                    adapter.getItem(index).setLocalCheck(true);
-
-                    mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
-                    mCountWidget.setDateSubjectIds(createDateSubjectStr());
-                    mCountWidget.resetUnitPrice();
-                    refreshTotalPrice();
-                    mSubjectDialog.dismiss();
-
-                }
-            });
-            mSubjectDialog.show();
+//            mSubjectDialog.getFooterView().setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//
+//                    index = currentIndex;
+//
+//                    for (LevelOptions data : adapter.getData()) {
+//                        data.setLocalCheck(false);
+//                    }
+//                    adapter.getItem(index).setLocalCheck(true);
+//
+//                    mSubjectWidget.resetSelectValue(mSelectPosition, adapter.getItem(index));
+//                    mCountWidget.setDateSubjectIds(createDateSubjectStr());
+//                    mCountWidget.resetUnitPrice();
+//                    refreshTotalPrice();
+//                    mSubjectDialog.dismiss();
+//
+//                }
+//            });
+//            mSubjectDialog.show();
         }
     }
 
@@ -392,8 +389,8 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
         if (mIsShouldShowDialog) {
 
-            if (mSubjectDialog != null && mSubjectDialog.isShowing())
-                return;
+//            if (mSubjectDialog != null && mSubjectDialog.isShowing())
+//                return;
 
             if (mExitDialog == null) {
                 mExitDialog = DialogUtil.getOkCancelDialog(this, R.string.confirm, com.joy.library.R.string.cancel, getString(R.string.alert_drop_content), new DialogInterface.OnClickListener() {

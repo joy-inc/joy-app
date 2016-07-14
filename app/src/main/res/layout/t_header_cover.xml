@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.android.library.widget.FrescoImageView
+        android:id="@+id/sdvPhoto"
+        style="@style/sdv_cover.Tint"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:transitionName="xxx" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sdvPhoto"
+        android:layout_alignLeft="@id/sdvPhoto"
+        android:layout_alignRight="@id/sdvPhoto"
+        android:layout_alignTop="@id/sdvPhoto"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="19dp"
+        android:textStyle="bold" />
+</RelativeLayout>

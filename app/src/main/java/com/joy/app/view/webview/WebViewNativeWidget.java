@@ -1,6 +1,5 @@
 package com.joy.app.view.webview;
 
-import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -56,7 +55,7 @@ public class WebViewNativeWidget extends WebViewBaseWidget implements DimenCons,
         ViewUtil.hideImageView(mIvTip);
 
         //设置网络错误提示图和为空图
-        mFailedImageResId = R.drawable.ic_net_error;
+        mFailedImageResId = R.drawable.ic_tip_error;
 
         mLoadingView = JLoadingView.get(getActivity());
         mLoadingView.hide();//默认隐藏

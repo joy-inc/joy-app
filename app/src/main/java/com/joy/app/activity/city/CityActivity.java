@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
@@ -81,14 +81,16 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
     private void executeCityDetail() {
 
         ObjectRequest<City> cityReq = ReqFactory.newPost(CityHtpUtil.URL_POST_CITY, City.class, CityHtpUtil.getCityParams(mPlaceId));
+        hideTipView();
+        showLoading();
         cityReq.setResponseListener(new ObjectResponse<City>() {
 
-            @Override
-            public void onPre() {
-
-                hideTipView();
-                showLoading();
-            }
+//            @Override
+//            public void onPre() {
+//
+//                hideTipView();
+//                showLoading();
+//            }
 
             @Override
             public void onSuccess(Object tag, City city) {

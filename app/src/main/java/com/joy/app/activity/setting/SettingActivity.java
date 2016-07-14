@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
@@ -28,7 +28,7 @@ import com.joy.app.utils.share.SettingShare;
 import com.joy.app.view.dialog.ShareDialog;
 import com.umeng.update.UmengUpdateAgent;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
@@ -39,16 +39,16 @@ import de.greenrobot.event.EventBus;
  */
 public class SettingActivity extends BaseHttpUiActivity<String> implements View.OnClickListener {
 
-    @Bind(R.id.sdvUserHead)
+    @BindView(R.id.sdvUserHead)
     ImageView mUserHead;
 
-    @Bind(R.id.tvLoginInfo)
+    @BindView(R.id.tvLoginInfo)
     TextView mLoginInfo;
 
-    @Bind(R.id.tvName)
+    @BindView(R.id.tvName)
     TextView mUserName;
 
-    @Bind(R.id.llLoginOut)
+    @BindView(R.id.llLoginOut)
     View mLoinOut;
 
     private SettingShare mShare;
@@ -232,12 +232,13 @@ public class SettingActivity extends BaseHttpUiActivity<String> implements View.
         if (BuildConfig.DEBUG && ("41dd399909650830414ae7b0276d8dc2ae777fa2d552c5a4dd93fcd0040bce1e".equals(JoyApplication.getUserToken()) || "e4f6ed7c3acb5bbcd17f62f82a0effb22bc3c1b319b50f825a95dc3891af0aeb".equals(JoyApplication.getUserToken()))) {
             req.setData("");
         }
+        showLoading();
         req.setResponseListener(new ObjectResponse() {
 
-            @Override
-            public void onPre() {
-                showLoading();
-            }
+//            @Override
+//            public void onPre() {
+//                showLoading();
+//            }
 
             @Override
             public void onSuccess(Object tag, Object o) {

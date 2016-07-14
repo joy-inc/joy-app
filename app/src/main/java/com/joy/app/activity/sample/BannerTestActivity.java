@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
-import com.android.library.activity.BaseUiActivity;
+//import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.android.library.ui.activity.BaseUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.view.banner.BannerAdapter;
 import com.android.library.view.banner.BannerImage;
@@ -78,7 +78,7 @@ public class BannerTestActivity extends BaseUiActivity {
         });
 
         mBannerWidget = new BannerWidget(this, adapter);
-        mBannerWidget.setPageTransformer(new AccordionTransformer());// page transformer animation
+//        mBannerWidget.setPageTransformer(new AccordionTransformer());// page transformer animation
         setContentView(mBannerWidget.getContentView());
     }
 

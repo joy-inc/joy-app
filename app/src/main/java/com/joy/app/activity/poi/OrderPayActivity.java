@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
@@ -23,7 +23,7 @@ import com.joy.app.utils.http.OrderHtpUtil;
 import com.joy.app.utils.http.ReqFactory;
 import com.pingplusplus.android.PaymentActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
@@ -48,55 +48,55 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     private String mId;
     private OrderDetail mOrderDetail;
 
-    @Bind(R.id.sdvPhoto)
+    @BindView(R.id.sdvPhoto)
     FrescoImageView sdvPhoto;
 
-    @Bind(R.id.tvTitle)
+    @BindView(R.id.tvTitle)
     TextView tvTitle;
 
-    @Bind(R.id.jtv_order_id)
+    @BindView(R.id.jtv_order_id)
     TextView jtvOrderId;
 
-    @Bind(R.id.ll_date_item)
+    @BindView(R.id.ll_date_item)
     LinearLayout llDateItem;
 
-    @Bind(R.id.jtv_order_day)
+    @BindView(R.id.jtv_order_day)
     TextView jtvOrderDay;
 
-    @Bind(R.id.v_date_splite)
+    @BindView(R.id.v_date_splite)
     View vDateSplite;
 
-    @Bind(R.id.ll_selected_item)
+    @BindView(R.id.ll_selected_item)
     LinearLayout llSelectedItem;
 
-    @Bind(R.id.jtv_order_item)
+    @BindView(R.id.jtv_order_item)
     TextView jtvOrderItem;
 
-    @Bind(R.id.v_item_spilt)
+    @BindView(R.id.v_item_spilt)
     View vItemSpilt;
 
-    @Bind(R.id.jtv_order_count)
+    @BindView(R.id.jtv_order_count)
     TextView jtvOrderCount;
 
-    @Bind(R.id.jtv_order_name)
+    @BindView(R.id.jtv_order_name)
     TextView jtvOrderName;
 
-    @Bind(R.id.jtv_order_phone)
+    @BindView(R.id.jtv_order_phone)
     TextView jtvOrderPhone;
 
-    @Bind(R.id.jtv_order_email)
+    @BindView(R.id.jtv_order_email)
     TextView jtvOrderEmail;
 
-    @Bind(R.id.jtv_order_total)
+    @BindView(R.id.jtv_order_total)
     TextView jtvOrderTotal;
 
-    @Bind(R.id.acrgPayment)
+    @BindView(R.id.acrgPayment)
     RadioGroup acrgPayment;
 
-    @Bind(R.id.tvTotalPrice)
+    @BindView(R.id.tvTotalPrice)
     TextView tvTotalPrice;
 
-    @Bind(R.id.acbNext)
+    @BindView(R.id.acbNext)
     AppCompatButton acbNext;
 
 
@@ -208,16 +208,18 @@ public class OrderPayActivity extends BaseHttpUiActivity<OrderDetail> {
     private void getOrderChargeToPay(String channel) {
 
         ObjectRequest<String> obj = ReqFactory.newPost(OrderHtpUtil.URL_POST_ORDER_PAY_CREATE_CHARGE, String.class, OrderHtpUtil.getOrderPayCreateCharge(mId, channel));
-
+        showLoading();
+        //按键点击之后的禁用，防止重复点击
+        acbNext.setClickable(false);
         obj.setResponseListener(new ObjectResponse<String>() {
 
-            @Override
-            public void onPre() {
-
-                showLoading();
-                //按键点击之后的禁用，防止重复点击
-                acbNext.setClickable(false);
-            }
+//            @Override
+//            public void onPre() {
+//
+//                showLoading();
+//                //按键点击之后的禁用，防止重复点击
+//                acbNext.setClickable(false);
+//            }
 
             @Override
             public void onSuccess(Object tag, String orderCharge) {

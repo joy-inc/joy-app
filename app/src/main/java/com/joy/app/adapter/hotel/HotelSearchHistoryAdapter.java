@@ -1,6 +1,5 @@
 package com.joy.app.adapter.hotel;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -11,7 +10,7 @@ import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -26,11 +25,11 @@ public class HotelSearchHistoryAdapter extends ExRvAdapter<HotelSearchHistoryAda
     }
 
     class ViewHolder extends ExRvViewHolder<String> {
-        @Bind(R.id.jtv_history_clear)
+        @BindView(R.id.jtv_history_clear)
         JTextView jtvHistoryClear;
-        @Bind(R.id.ll_history)
+        @BindView(R.id.ll_history)
         LinearLayout llHistory;
-        @Bind(R.id.jtv_title)
+        @BindView(R.id.jtv_title)
         JTextView jtvTitle;
 
         @Override

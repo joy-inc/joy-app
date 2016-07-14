@@ -58,21 +58,24 @@
 
     <style name="sdv_cover">
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:tint">@color/black_trans26</item>
         <item name="placeholderImage">@drawable/ic_def_large</item>
         <item name="placeholderImageScaleType">centerCrop</item>
     </style>
 
-    <style name="sdv_cover.CornerRadius">
+    <style name="sdv_cover.Tint">
+        <item name="android:tint">@color/black_trans26</item>
+    </style>
+
+    <style name="sdv_cover.Tint.CornerRadius">
         <item name="roundedCornerRadius">2dp</item>
     </style>
 
-    <style name="sdv_cover.CornerRadius.Top">
+    <style name="sdv_cover.Tint.CornerRadius.Top">
         <item name="roundBottomLeft">false</item>
         <item name="roundBottomRight">false</item>
     </style>
 
-    <style name="sdv_cover.CornerRadius.Bottom">
+    <style name="sdv_cover.Tint.CornerRadius.Bottom">
         <item name="roundTopLeft">false</item>
         <item name="roundTopRight">false</item>
     </style>
@@ -175,8 +178,8 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:indeterminateDrawable">@drawable/layer_poi_comment_score</item>
-        <item name="android:progressDrawable">@drawable/layer_poi_comment_score</item>
+        <item name="android:indeterminateDrawable">@drawable/layer_progressbar_horizontal</item>
+        <item name="android:progressDrawable">@drawable/layer_progressbar_horizontal</item>
         <item name="android:maxHeight">5dp</item>
         <item name="android:minHeight">5dp</item>
     </style>

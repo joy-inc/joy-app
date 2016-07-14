@@ -2,14 +2,12 @@ package com.joy.app.activity.plan;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 
-import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.adapter.OnItemViewLongClickListener;
 import com.android.library.httptask.ObjectRequest;
@@ -21,7 +19,6 @@ import com.joy.app.adapter.plan.PlanListAdapter;
 import com.joy.app.bean.plan.PlanItem;
 import com.joy.app.eventbus.FolderEvent;
 import com.joy.app.utils.http.PlanHtpUtil;
-import com.joy.app.utils.plan.DialogUtil;
 import com.joy.app.utils.plan.FolderRequestListener;
 
 import java.util.List;
@@ -35,7 +32,7 @@ import de.greenrobot.event.EventBus;
 public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> implements FolderRequestListener {
 
     private String mFolderID;
-    private DialogUtil dialogUtil;
+//    private DialogUtil dialogUtil;
     View mapbtn;
 
     public static void startActivityById(Activity act, String FolderID, String mFolderName, int code) {
@@ -74,7 +71,7 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
             @Override
             public void onClick(View v) {
                 if (isRequest || DeviceUtil.isNetworkDisable())return;
-                dialogUtil.showDeleteFolderDialog(mFolderID);
+//                dialogUtil.showDeleteFolderDialog(mFolderID);
             }
         });
         mapbtn = addTitleRightView(R.drawable.ic_plan_map, new View.OnClickListener() {
@@ -106,12 +103,12 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
             @Override
             public void onItemViewLongClick(int position, View clickView, PlanItem planItem) {
                 if (isRequest)return;
-                dialogUtil.showDeletePoiDialog(mFolderID,planItem.getProduct_id());
+//                dialogUtil.showDeletePoiDialog(mFolderID,planItem.getProduct_id());
             }
         });
         setAdapter(adapter);
         getRecyclerView().setBackgroundColor(ContextCompat.getColor(this, R.color.white));
-        dialogUtil = new DialogUtil(this, this);
+//        dialogUtil = new DialogUtil(this, this);
     }
 
     boolean isRequest;

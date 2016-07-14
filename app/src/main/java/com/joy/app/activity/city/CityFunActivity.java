@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 
-import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;

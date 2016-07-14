@@ -12,10 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.view.observablescrollview.ObservableRecyclerView;
 import com.android.library.view.observablescrollview.ObservableScrollViewCallbacks;
@@ -32,18 +33,25 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
 import com.joy.app.R;
-import com.joy.app.adapter.sample.CityDetailRvAdapter3;
+import com.joy.app.adapter.sample.CityDetailRvAdapter;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.utils.http.sample.TestHtpUtil;
 import com.nineoldandroids.view.ViewHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.ButterKnife;
+
 /**
  * Created by KEVIN.DAI on 15/7/11.
+ * Modified by KEVIN.DAI on 16/7/6.
  */
 public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implements ObservableScrollViewCallbacks {
 
     private int mFlexibleHeight;
     private SystemBarTintManager mTintManager;
+    private ImageButton mIbBack;
     private FrescoImageView mCoverSdvPhoto;
     private TextView mCoverTvTitle;
 
@@ -113,37 +121,109 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
 
         mTintManager = new SystemBarTintManager(this);
         mTintManager.setStatusBarTintEnabled(true);
-        mTintManager.setStatusBarTintColor(R.color.black_trans54);
+        mTintManager.setStatusBarTintResource(R.color.black_trans54);
+        mTintManager.setStatusBarAlpha(0);
 
-        addTitleLeftBackView();
+        mIbBack = addTitleLeftBackView();
         setTitleBgColorResId(R.color.black_trans54);
+        setTitleBarAlpha(0);
     }
 
     @Override
     protected void initContentView() {
 
+        initCoverView();
         setSwipeRefreshEnable(false);// 设置下拉刷新不可用
+        setAdapter(new CityDetailRvAdapter());
+        addHeaderView(initHeaderBlankView());
+        addFooterView(initFooterView());
+    }
 
-        Intent it = getIntent();
-        mCoverSdvPhoto = (FrescoImageView) findViewById(R.id.sdvPhoto);
-        mCoverTvTitle = (TextView) findViewById(R.id.tvName);
-        mCoverTvTitle.setText(it.getStringExtra("cnname") + "\n" + it.getStringExtra("enname"));
+    @Override
+    protected RecyclerView getDefaultRecyclerView() {
+
+        ObservableRecyclerView orv = (ObservableRecyclerView) inflateLayout(R.layout.lib_view_recycler_observable);
+        orv.setScrollViewCallbacks(this);
+        return orv;
+    }
+
+    @Override
+    protected ObjectRequest<CityDetail> getObjectRequest(int pageIndex, int pageLimit) {
+
+        return ObjectRequest.get(TestHtpUtil.getCityInfoUrl(getIntent().getStringExtra("cityId")), CityDetail.class);
+    }
+
+    @Override
+    protected boolean invalidateContent(CityDetail cityDetail) {
+
+        addHeaderView(initHeaderSubView(cityDetail));
+        return super.invalidateContent(cityDetail);
+    }
+
+    @Override
+    protected List<?> getListInvalidateContent(CityDetail cityDetail) {
+
+        return cityDetail.getNew_trip();
+    }
+
+    @Override
+    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+
+        scrollY += STATUS_BAR_HEIGHT;
+
+        float minOverlayTransitionY = -mFlexibleHeight;
+        float transY = ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0f);
+        ViewHelper.setTranslationY(mCoverSdvPhoto, transY);
+
+        // Translate title text
+        if (mCoverTvTitle.getWidth() > 0 || mCoverTvTitle.getHeight() > 0) {
+
+            float titleTranslationY = mFlexibleHeight / 2 - scrollY / 2;
+            titleTranslationY = Math.max(STATUS_BAR_HEIGHT + (TITLE_BAR_HEIGHT - mCoverTvTitle.getHeight()) / 2, titleTranslationY);
+            ViewHelper.setTranslationY(mCoverTvTitle, titleTranslationY);
+            float titleTranslationX = SCREEN_WIDTH / 2 - mCoverTvTitle.getWidth() / 2 - scrollY / 2;
+            titleTranslationX = Math.max(getToolbar().getContentInsetLeft() * 2 + mIbBack.getWidth() + HORIZONTAL_MARGINS, titleTranslationX);
+            ViewHelper.setTranslationX(mCoverTvTitle, titleTranslationX);
+
+            showView(mCoverTvTitle);
+        }
+
+        float flexibleRange = mFlexibleHeight;
+        float fraction = ScrollUtils.getFloat(scrollY / flexibleRange, 0f, 1f);
+        mTintManager.setStatusBarAlpha(fraction);
+        setTitleBarAlpha((int) (fraction * 255));
+    }
+
+    @Override
+    public void onDownMotionEvent() {
+
+    }
+
+    @Override
+    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+
+    }
+
+    private void initCoverView() {
+
+        String cnname = getIntent().getStringExtra("cnname");
+        String enname = getIntent().getStringExtra("enname");
+        mCoverTvTitle = ButterKnife.<TextView>findById(this, R.id.tvName);
+        mCoverTvTitle.setText(cnname + "\n" + enname);
         hideView(mCoverTvTitle);
+
+        mCoverSdvPhoto = ButterKnife.<FrescoImageView>findById(this, R.id.sdvPhoto);
         Postprocessor processor = new BasePostprocessor() {
 
             @Override
-            public CloseableReference<Bitmap> process(final Bitmap bitmap, PlatformBitmapFactory bitmapFactory) {
+            public CloseableReference<Bitmap> process(Bitmap bitmap, PlatformBitmapFactory bitmapFactory) {
 
-                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                Palette.from(bitmap).generate(palette -> {
 
-                    @Override
-                    public void onGenerated(Palette palette) {
+                    if (palette != null) {
 
-                        if (palette != null) {
-
-                            getRootView().setBackgroundColor(palette.getMutedColor(0X00000000));
-                            mCoverSdvPhoto.setImageBitmap(bitmap);
-                        }
+                        getRootView().setBackgroundColor(palette.getMutedColor(0X00000000));
+                        mCoverSdvPhoto.setImageBitmap(bitmap);
                     }
                 });
                 return null;
@@ -162,7 +242,7 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
             }
         };
         ImageRequest request = ImageRequestBuilder
-                .newBuilderWithSource(Uri.parse(it.getStringExtra("photoUrl")))
+                .newBuilderWithSource(Uri.parse(getIntent().getStringExtra("photoUrl")))
                 .setPostprocessor(processor)
                 .build();
         PipelineDraweeController controller = (PipelineDraweeController) Fresco
@@ -171,73 +251,37 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
                 .setOldController(mCoverSdvPhoto.getController())
                 .build();
         mCoverSdvPhoto.setController(controller);
-
-        setAdapter(new CityDetailRvAdapter3(this));
     }
 
-    @Override
-    protected RecyclerView getDefaultRecyclerView() {
+    private View initHeaderBlankView() {
 
-        ObservableRecyclerView orv = (ObservableRecyclerView) inflateLayout(R.layout.lib_view_recycler_observable);
-        orv.setScrollViewCallbacks(this);
-        return orv;
+        View view = new View(this);
+        view.setMinimumHeight(mFlexibleHeight);
+        return view;
     }
 
-    @Override
-    protected ObjectRequest<CityDetail> getObjectRequest(int pageIndex, int pageLimit) {
+    private View initHeaderSubView(CityDetail cityDetail) {
 
-        return ObjectRequest.get(TestHtpUtil.getCityInfoUrl(getIntent().getStringExtra("cityId")), CityDetail.class);
-    }
+        View vHeader = inflateLayout(R.layout.t_header_view_detail);
+        ArrayList<String> photos = cityDetail.getPhotos();
+        if (CollectionUtil.isNotEmpty(photos)) {
 
-    @Override
-    protected boolean invalidateContent(CityDetail datas) {
-
-        if (datas == null || CollectionUtil.isEmpty(datas.getNew_trip()))
-            return false;
-
-        CityDetailRvAdapter3 adapter = (CityDetailRvAdapter3) getAdapter();
-        adapter.setData(datas);
-        adapter.notifyDataSetChanged();
-        return true;
-    }
-
-    @Override
-    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-
-        scrollY += STATUS_BAR_HEIGHT;
-
-//        LogMgr.i("daisw", "~~" + scrollY);
-
-        float minOverlayTransitionY = -mFlexibleHeight;
-        float transY = ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0f);
-        ViewHelper.setTranslationY(mCoverSdvPhoto, transY);
-
-        // Translate title text
-        if (mCoverTvTitle.getWidth() > 0 || mCoverTvTitle.getHeight() > 0) {
-
-            float titleTranslationY = mFlexibleHeight / 2 - scrollY / 2;
-            titleTranslationY = Math.max(STATUS_BAR_HEIGHT + (TITLE_BAR_HEIGHT - mCoverTvTitle.getHeight()) / 2, titleTranslationY);
-            ViewHelper.setTranslationY(mCoverTvTitle, titleTranslationY);
-            float titleTranslationX = SCREEN_WIDTH / 2 - mCoverTvTitle.getWidth() / 2 - scrollY / 2;
-            titleTranslationX = Math.max(getToolbar().getContentInsetLeft() * 2 + getToolbar().getNavigationIcon().getMinimumWidth(), titleTranslationX);
-            ViewHelper.setTranslationX(mCoverTvTitle, titleTranslationX);
-
-            showView(mCoverTvTitle);
+            if (photos.size() > 1)
+                ButterKnife.<FrescoImageView>findById(vHeader, R.id.sdvSubPhoto1).setImageURI(photos.get(1));
+            if (photos.size() > 2)
+                ButterKnife.<FrescoImageView>findById(vHeader, R.id.sdvSubPhoto2).setImageURI(photos.get(2));
+            if (photos.size() > 3)
+                ButterKnife.<FrescoImageView>findById(vHeader, R.id.sdvSubPhoto3).setImageURI(photos.get(3));
+            if (photos.size() > 4)
+                ButterKnife.<FrescoImageView>findById(vHeader, R.id.sdvSubPhoto4).setImageURI(photos.get(4));
         }
-
-        float flexibleRange = mFlexibleHeight;
-        float fraction = ScrollUtils.getFloat(scrollY / flexibleRange, 0f, 1f);
-        mTintManager.setStatusBarAlpha(fraction);
-        getToolbar().getBackground().setAlpha((int) (fraction * 255));
+        return vHeader;
     }
 
-    @Override
-    public void onDownMotionEvent() {
+    private View initFooterView() {
 
-    }
-
-    @Override
-    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-
+        View view = new View(this);
+        view.setMinimumHeight(DP_1_PX * 16);
+        return view;
     }
 }

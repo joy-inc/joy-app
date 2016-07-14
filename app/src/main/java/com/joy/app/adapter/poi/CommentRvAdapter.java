@@ -11,7 +11,7 @@ import com.android.library.utils.MathUtil;
 import com.joy.app.R;
 import com.joy.app.bean.poi.CommentItem;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -28,13 +28,13 @@ public class CommentRvAdapter extends ExRvAdapter<CommentRvAdapter.ViewHolder, C
 
     public class ViewHolder extends ExRvViewHolder<CommentItem> {
 
-        @Bind(R.id.acRatingBar)
+        @BindView(R.id.acRatingBar)
         AppCompatRatingBar acRatingBar;
 
-        @Bind(R.id.tvComment)
+        @BindView(R.id.tvComment)
         TextView tvComment;
 
-        @Bind(R.id.tvCommentUserDate)
+        @BindView(R.id.tvCommentUserDate)
         TextView tvCommentUserDate;
 
         public ViewHolder(View itemView) {

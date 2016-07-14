@@ -1,8 +1,20 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':joy-library-android:library-joy')
+
+    final DAGGER_VERSION = '2.4'
+    apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"// APT dependencies
+
+    final BUTTERKNIFE_VERSION = '8.1.0'
+    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+
+    final LEAKCANARY_VERSION = '1.4-beta2';
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$LEAKCANARY_VERSION"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
 }
 
 android {
@@ -75,6 +87,10 @@ android {
         }
         // moves the whole sourceSet (and its sub folders) to a new folder. This moves src/androidTest/* to tests/*
         androidTest.setRoot('tests')
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

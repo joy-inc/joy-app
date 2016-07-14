@@ -10,7 +10,7 @@ import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.sample.Special;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -26,8 +26,8 @@ public class LvLoadMoreAdapter extends ExAdapter<Special> {
 
     public class ViewHolder extends ExViewHolderBase {
 
-        @Bind(R.id.sdvPhoto) FrescoImageView sdvPhoto;
-        @Bind(R.id.tvName)   TextView tvName;
+        @BindView(R.id.sdvPhoto) FrescoImageView sdvPhoto;
+        @BindView(R.id.tvName)   TextView tvName;
 
         @Override
         public int getConvertViewRid() {

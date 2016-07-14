@@ -20,12 +20,12 @@ public class ReqFactory {
     private static final String KEY_API_AUTH = "api-auth";
     private static final String KEY_USER_TOKEN = "user-token";
 
-    public static ObjectRequest newGet(String fullUrl, Class clazz) {
+    public static <T> ObjectRequest<T> newGet(String fullUrl, Class clazz) {
 
         return ObjectRequest.get(fullUrl, clazz);
     }
 
-    public static ObjectRequest newPost(String baseUrl, Class clazz, Map<String, String> params) {
+    public static <T> ObjectRequest<T> newPost(String baseUrl, Class clazz, Map<String, String> params) {
 
         String data = Base64.encodeToString(ParamsUtil.createUrl(params).getBytes(), Base64.NO_WRAP);
         String auth = HmacUtils.SHA256(data, PRIVATE_KEY);
@@ -33,7 +33,7 @@ public class ReqFactory {
         headers.put(KEY_API_AUTH, auth);
         headers.put(KEY_USER_TOKEN, JoyApplication.getUserToken());
 
-        ObjectRequest req = ObjectRequest.post(baseUrl, clazz);
+        ObjectRequest<T> req = ObjectRequest.post(baseUrl, clazz);
         req.setHeaders(headers);
         req.setParams(params);
         return req;

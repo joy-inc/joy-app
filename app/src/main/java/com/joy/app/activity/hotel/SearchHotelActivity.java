@@ -13,12 +13,11 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
 import com.android.library.BaseApplication;
-import com.android.library.activity.BaseUiActivity;
+import com.android.library.ui.activity.BaseUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
-import com.android.library.utils.ViewUtil;
 import com.android.library.widget.JRecyclerView;
 import com.joy.app.R;
 import com.joy.app.adapter.hotel.AutoCompleteAdapter;
@@ -28,14 +27,12 @@ import com.joy.app.bean.hotel.EntryEntity;
 import com.joy.app.bean.hotel.HotelParams;
 import com.joy.app.utils.hotel.JoyShareUtil;
 import com.joy.app.utils.http.HotelHtpUtil;
-import com.joy.app.utils.http.OrderHtpUtil;
-import com.joy.app.utils.plan.FolderRequestListener;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -45,7 +42,7 @@ import butterknife.ButterKnife;
 public class SearchHotelActivity extends BaseUiActivity implements OnItemViewClickListener,TextView.OnEditorActionListener {
 
 
-    @Bind(R.id.jrv_history)
+    @BindView(R.id.jrv_history)
     JRecyclerView jrvHistory;
 
     final String SHARE_fILE = "SearchHotelActivity";
@@ -143,7 +140,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
         });
         seachTitleWidget.setTextHinit("输入酒店名称");
         seachTitleWidget.getEtSearch().setOnEditorActionListener(this);
-        addTitleMiddleView(seachTitleWidget.getContentView());
+        addTitleMiddleViewMatchParent(seachTitleWidget.getContentView());
     }
 
     @Override
@@ -272,14 +269,17 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
             req.cancel();
         }
         req = HotelHtpUtil.getAutoCompleteRequest(cityId, URLEncoder.encode(keyWord),AutoComplete.class);
+        if (autoCompleteAdapter != null){
+            autoCompleteAdapter.clear();
+        }
         req.setResponseListener(new ObjectResponse<AutoComplete>() {
 
-            @Override
-            public void onPre() {
-                if (autoCompleteAdapter != null){
-                    autoCompleteAdapter.clear();
-                }
-            }
+//            @Override
+//            public void onPre() {
+//                if (autoCompleteAdapter != null){
+//                    autoCompleteAdapter.clear();
+//                }
+//            }
 
             @Override
             public void onSuccess(Object tag, AutoComplete autoComplete) {

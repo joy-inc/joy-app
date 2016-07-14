@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseUiActivity;
+import com.android.library.ui.activity.BaseUiActivity;
 import com.android.library.utils.ViewUtil;
 import com.joy.app.R;
 import com.joy.app.view.dateView.DatePickerController;

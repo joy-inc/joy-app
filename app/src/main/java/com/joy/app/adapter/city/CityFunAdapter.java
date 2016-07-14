@@ -11,7 +11,7 @@ import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.city.CityFun;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -27,11 +27,11 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
 
     public class ViewHolder extends ExRvViewHolder<CityFun.ListEntity> {
 
-        @Bind(R.id.sdvPhoto)          FrescoImageView  sdvPhoto;
-        @Bind(R.id.jtvCnName)         JTextView        jtvCnName;
-        @Bind(R.id.jtvEnName)         JTextView        jtvEnName;
-        @Bind(R.id.jtvTitle)          JTextView        jtvTitle;
-        @Bind(R.id.jtvRecNum)         JTextView        jtvRecNum;
+        @BindView(R.id.sdvPhoto)          FrescoImageView  sdvPhoto;
+        @BindView(R.id.jtvCnName)         JTextView        jtvCnName;
+        @BindView(R.id.jtvEnName)         JTextView        jtvEnName;
+        @BindView(R.id.jtvTitle)          JTextView        jtvTitle;
+        @BindView(R.id.jtvRecNum)         JTextView        jtvRecNum;
 
         public ViewHolder(View itemView) {
 

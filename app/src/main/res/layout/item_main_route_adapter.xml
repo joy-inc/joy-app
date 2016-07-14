@@ -6,7 +6,7 @@
 
     <com.android.library.widget.FrescoImageView
         android:id="@+id/sdvPhoto"
-        style="@style/sdv_cover.CornerRadius"
+        style="@style/sdv_cover.Tint.CornerRadius"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

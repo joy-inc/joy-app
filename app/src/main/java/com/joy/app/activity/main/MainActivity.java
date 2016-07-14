@@ -5,13 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.library.activity.BaseTabActivity;
-import com.android.library.activity.BaseUiFragment;
+import com.android.library.ui.activity.BaseTabActivity;
+import com.android.library.ui.fragment.BaseUiFragment;
 import com.android.library.widget.FrescoImageView;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.hotel.CityHotelListActivity;
+import com.joy.app.activity.poi.PoiDetailActivity;
 import com.joy.app.activity.setting.SettingActivity;
 import com.joy.app.eventbus.LoginStatusEvent;
 
@@ -51,7 +52,6 @@ public class MainActivity extends BaseTabActivity {
 
         mMainActivityHelper.onCreate(savedInstanceState);
         mMainActivityBC.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -104,33 +104,15 @@ public class MainActivity extends BaseTabActivity {
         View v = inflateLayout(R.layout.view_avatar);
         mSimpleDraweeView = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
         handleUserLogin();
-        addTitleRightView(v, new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                SettingActivity.startActivity(MainActivity.this);
-            }
-        });
+        addTitleRightView(v, v1 -> SettingActivity.startActivity(MainActivity.this));
         mMainActivityBC.initTitleView();
 
-       if (BuildConfig.DEBUG) {
-           // 快捷入口
-           addTitleRightView(R.drawable.ic_star_light_big, new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   CityHotelListActivity.startActivity(MainActivity.this,"","");
-               }
-           });
-           addTitleRightView(R.drawable.ic_star_light_big, new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
+        if (BuildConfig.DEBUG) {// 快捷入口
 
-                   com.joy.app.activity.poi.PoiDetailActivity.startActivity(MainActivity.this, "1");
-               }
-           });
-       }
+            addTitleRightView(R.drawable.ic_poi_order_plus, v1 -> CityHotelListActivity.startActivity(MainActivity.this, "", ""));
+            addTitleRightView(R.drawable.ic_poi_order_plus, v1 -> PoiDetailActivity.startActivity(MainActivity.this, "1"));
+        }
     }
-
 
     @Override
     protected void initContentView() {
@@ -176,12 +158,11 @@ public class MainActivity extends BaseTabActivity {
     private void handleUserLogin() {
 
         if (JoyApplication.isLogin()) {
+
             mSimpleDraweeView.setImageResource(R.drawable.ic_logo_circle);
         } else {
-            mSimpleDraweeView.setImageResource(R.drawable.ic_main_def_user_head);
 
+            mSimpleDraweeView.setImageResource(R.drawable.ic_main_def_user_head);
         }
     }
-
-
 }

@@ -75,4 +75,16 @@ public class CityDetail {
 
         this.new_trip = new_trip;
     }
+
+    @Override
+    public String toString() {
+        return "CityDetail{" +
+                "id='" + id + '\'' +
+                ", country_id='" + country_id + '\'' +
+                ", chinesename='" + chinesename + '\'' +
+                ", englishname='" + englishname + '\'' +
+                ", photos=" + photos +
+                ", new_trip=" + new_trip +
+                '}';
+    }
 }

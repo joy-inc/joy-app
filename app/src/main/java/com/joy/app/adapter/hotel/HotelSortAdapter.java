@@ -11,9 +11,6 @@ import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.FilterItems;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
  * @author litong  <br>
  * @Description 排序    <br>

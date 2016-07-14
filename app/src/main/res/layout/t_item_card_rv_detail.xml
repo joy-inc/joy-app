@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvLayout"
     style="@style/CardView.Light.margin_16dp"
     android:layout_width="match_parent"
     android:layout_height="280dp">
 
     <com.android.library.widget.FrescoImageView
         android:id="@+id/sdvPhoto"
-        style="@style/sdv_cover.CornerRadius.Top"
+        style="@style/sdv_cover.Tint.CornerRadius.Top"
         android:layout_width="match_parent"
         android:layout_height="180dp" />
 
@@ -40,7 +41,8 @@
             fresco:placeholderImage="@color/black_trans26"
             fresco:roundAsCircle="true"
             fresco:roundingBorderColor="@color/black_trans12"
-            fresco:roundingBorderWidth="2dp" />
+            fresco:roundingBorderPadding="1dp"
+            fresco:roundingBorderWidth="1dp" />
 
         <TextView
             android:id="@+id/tvName"

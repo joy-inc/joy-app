@@ -10,7 +10,7 @@ import com.android.library.widget.FrescoImageView;
 import com.joy.app.R;
 import com.joy.app.bean.MainRoute;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -28,17 +28,17 @@ public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolde
 
     public class ViewHolder extends ExRvViewHolder<MainRoute> {
 
-        @Bind(R.id.sdvPhoto)
+        @BindView(R.id.sdvPhoto)
         FrescoImageView sdvPhoto;
-        @Bind(R.id.tvName)
+        @BindView(R.id.tvName)
         TextView tvName;
 
-        @Bind(R.id.tvEnName)
+        @BindView(R.id.tvEnName)
         TextView tvEnName;
 
-        @Bind(R.id.tvTags)
+        @BindView(R.id.tvTags)
         TextView tvTags;
-        @Bind(R.id.tvTopic)
+        @BindView(R.id.tvTopic)
         TextView tvTopic;
 
         public ViewHolder(final View itemView) {

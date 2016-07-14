@@ -11,7 +11,7 @@ import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.plan.PlanFolder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -36,9 +36,9 @@ public class PlanFolderAdapter extends ExRvAdapter<PlanFolderAdapter.ViewHolder,
     }
 
     class ViewHolder extends ExRvViewHolder<PlanFolder> {
-        @Bind(R.id.jtv_title)
+        @BindView(R.id.jtv_title)
         JTextView jtvTitle;
-        @Bind(R.id.iv_select)
+        @BindView(R.id.iv_select)
         ImageView ivSelect;
 
         public ViewHolder(View itemView) {

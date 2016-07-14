@@ -15,7 +15,7 @@ import com.joy.app.bean.plan.PlanItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -51,15 +51,15 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
 
     public class ViewHolder extends ExRvViewHolder<PlanItem> {
 
-        @Bind(R.id.sdv_poi_photo)
+        @BindView(R.id.sdv_poi_photo)
         FrescoImageView sdvPoiPhoto;
-        @Bind(R.id.jtv_cnname)
+        @BindView(R.id.jtv_cnname)
         JTextView jtvCnname;
-        @Bind(R.id.jtv_enname)
+        @BindView(R.id.jtv_enname)
         JTextView jtvEnname;
-        @Bind(R.id.jtv_price)
+        @BindView(R.id.jtv_price)
         JTextView jtvPrice;
-        @Bind(R.id.jtv_day)
+        @BindView(R.id.jtv_day)
         JTextView jtvDay;
 
         public ViewHolder(final View itemView) {

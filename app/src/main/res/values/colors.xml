@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- About Theme -->
     <color name="color_primary">#373737</color>
     <color name="color_primary_dark">#373737</color>
     <color name="color_accent">#fa617d</color>
-    <color name="color_primary_text">@color/white</color>
-    <color name="color_secondary_text">@color/white_trans87</color>
-    <color name="color_grey">#f5f5f5</color>
+    <!--<color name="color_primary_text">@color/white_trans87</color>-->
+    <!--<color name="color_secondary_text">@color/white_trans54</color>-->
+    <!--<color name="color_disable_text">@color/white_trans38</color>-->
+    <!--<color name="color_hint_text">@color/white_trans38</color>-->
+    <!--<color name="color_divider">@color/white_trans12</color>-->
+    <!--<color name="color_window_bg">#373737</color>-->
+
     <color name="text_pink">#f9617c</color>
     <color name="text_grey_dark">#666666</color>
-
-    <color name="color_bg_window">#5c303d</color>
-    <color name="color_bg_window_dark">#412d45</color>
-
     <color name="color_statusbar_hotel">#002f70</color>
 
     <!--登录-->

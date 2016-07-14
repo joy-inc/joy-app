@@ -11,7 +11,7 @@
 
         <com.android.library.widget.FrescoImageView
             android:id="@+id/sdvBg"
-            style="@style/sdv_cover.CornerRadius.Top"
+            style="@style/sdv_cover.Tint.CornerRadius.Top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />

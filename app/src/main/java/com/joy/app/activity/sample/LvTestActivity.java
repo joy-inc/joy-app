@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.library.activity.BaseHttpLvActivity;
+import com.android.library.ui.activity.BaseHttpLvActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;

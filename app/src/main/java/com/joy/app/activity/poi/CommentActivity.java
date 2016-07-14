@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.TextUtil;
 import com.joy.app.R;
@@ -41,7 +41,7 @@ public class CommentActivity extends BaseHttpRvActivity<CommentAll> {
     @Override
     protected void initTitleView() {
 
-        addTitleLeftBackView(R.drawable.ic_back_gray);
+        addTitleLeftBackView();
     }
 
     @Override

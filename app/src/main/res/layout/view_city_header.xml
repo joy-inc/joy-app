@@ -5,7 +5,7 @@
 
     <com.android.library.widget.FrescoImageView
         android:id="@+id/sdvPhoto"
-        style="@style/sdv_cover"
+        style="@style/sdv_cover.Tint"
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:tint="@color/transparent" />

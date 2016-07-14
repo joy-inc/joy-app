@@ -25,11 +25,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/theme_app">
+        android:theme="@style/base_theme">
         <activity
             android:name=".activity.main.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent">
+            android:theme="@style/base_theme.translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,11 +39,10 @@
         <activity
             android:name=".activity.main.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/theme_app.main" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.common.WebViewActivity"
-            android:theme="@style/theme_app.translucent.toolbar.overlay"
+            android:theme="@style/base_theme.translucent.toolbar.overlay"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.setting.SettingActivity"
@@ -64,7 +63,7 @@
         <activity
             android:name=".activity.user.UserLoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.overlay"
+            android:theme="@style/base_theme.translucent.overlay"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.common.DayPickerActivity"
@@ -81,37 +80,37 @@
         <activity
             android:name=".activity.sample.DetailTestActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:theme="@style/base_theme.translucent.overlay" />
         <activity
             android:name=".activity.sample.DetailTestActivity2"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:theme="@style/base_theme.translucent.overlay" />
         <activity
             android:name=".activity.sample.DetailTestActivity3"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:theme="@style/base_theme.translucent.overlay" />
         <activity
             android:name=".activity.sample.BannerTestActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.city.CityActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.overlay" />
+            android:theme="@style/base_theme.translucent.overlay" />
         <activity
             android:name=".activity.city.CityFunActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.navigationBar" />
+            android:theme="@style/base_theme.translucent.navigationBar" />
         <activity
             android:name=".activity.sample.TabTestActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.poi.PoiDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:theme="@style/base_theme.translucent.toolbar.overlay" />
         <activity
             android:name=".activity.poi.OrderBookActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:theme="@style/base_theme.translucent.toolbar.overlay" />
         <activity
             android:name=".activity.poi.OrderBookProfileActivity"
             android:screenOrientation="portrait" />
@@ -123,8 +122,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.poi.CommentActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:screenOrientation="portrait" />
 
         <!--行程规划-->
         <activity
@@ -133,17 +131,17 @@
         <activity
             android:name=".activity.plan.AddPoiToFloderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.dialog" />
+            android:theme="@style/base_theme.dialog" />
 
         <!--地图-->
         <activity
             android:name=".activity.map.SinglePoiMapActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:theme="@style/base_theme.translucent.toolbar.overlay" />
         <activity
             android:name=".activity.map.ListPoiMapActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.translucent.toolbar.overlay" />
+            android:theme="@style/base_theme.translucent.toolbar.overlay" />
         <!--酒店-->
         <activity
             android:name=".activity.hotel.CityHotelListActivity"
@@ -152,7 +150,7 @@
         <activity
             android:name=".activity.hotel.HotelSearchFilterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/theme_app.dialog" />
+            android:theme="@style/base_theme.dialog" />
 
         <activity
             android:name=".activity.hotel.SearchHotelActivity"
@@ -231,7 +229,7 @@
         <!-- 友盟 -->
         <!--分享-->
         <activity android:name="com.joy.library.share.weibo.auth.WeiBoAuthActivity"
-                  android:theme="@android:style/Theme.NoDisplay"/>
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name="com.joy.library.share.weibo.auth.WeiboEditActivitiy"
                   android:screenOrientation="portrait"/>
 

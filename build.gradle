@@ -5,8 +5,14 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        final GRADLE_VERSION = '2.1.2'
+        final APT_VERSION = '1.8'
+        final LAMBDA_VERSION = '3.2.5'
+
+        classpath "com.android.tools.build:gradle:$GRADLE_VERSION"
         // NOTE: Do not place your application dependencies here; they belong in the individual module build.gradle files
+        classpath "com.neenbedankt.gradle.plugins:android-apt:$APT_VERSION"
+        classpath "me.tatarka:gradle-retrolambda:$LAMBDA_VERSION"
     }
 }
 
@@ -17,7 +23,7 @@ allprojects {
 }
 
 wrapper {
-    gradleVersion = '2.9'
+    gradleVersion = '2.10'
 }
 
 task clean << {

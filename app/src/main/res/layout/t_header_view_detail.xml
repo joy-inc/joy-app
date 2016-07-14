@@ -3,26 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.android.library.widget.FrescoImageView
-        android:id="@+id/sdvPhoto"
-        style="@style/sdv_cover"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:transitionName="xxx" />
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/sdvPhoto"
-        android:layout_alignLeft="@id/sdvPhoto"
-        android:layout_alignRight="@id/sdvPhoto"
-        android:layout_alignTop="@id/sdvPhoto"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="19dp"
-        android:textStyle="bold" />
-
     <LinearLayout
         android:id="@+id/llDiv1"
         android:layout_width="match_parent"
@@ -35,14 +15,14 @@
 
         <com.android.library.widget.FrescoImageView
             android:id="@+id/sdvSubPhoto1"
-            style="@style/sdv_cover.CornerRadius"
+            style="@style/sdv_cover.Tint.CornerRadius"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <com.android.library.widget.FrescoImageView
             android:id="@+id/sdvSubPhoto2"
-            style="@style/sdv_cover.CornerRadius"
+            style="@style/sdv_cover.Tint.CornerRadius"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="12dp"
@@ -61,14 +41,14 @@
 
         <com.android.library.widget.FrescoImageView
             android:id="@+id/sdvSubPhoto3"
-            style="@style/sdv_cover.CornerRadius"
+            style="@style/sdv_cover.Tint.CornerRadius"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <com.android.library.widget.FrescoImageView
             android:id="@+id/sdvSubPhoto4"
-            style="@style/sdv_cover.CornerRadius"
+            style="@style/sdv_cover.Tint.CornerRadius"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="12dp"

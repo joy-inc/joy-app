@@ -1,6 +1,5 @@
 package com.joy.app.adapter.hotel;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -10,7 +9,7 @@ import com.android.library.adapter.ExRvViewHolder;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.EntryEntity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -24,11 +23,11 @@ public class AutoCompleteAdapter extends ExRvAdapter<AutoCompleteAdapter.ViewHol
     }
 
     public class ViewHolder extends ExRvViewHolder<EntryEntity>{
-        @Bind(R.id.tv_cnname)
+        @BindView(R.id.tv_cnname)
         TextView tvCnname;
-        @Bind(R.id.tv_enname)
+        @BindView(R.id.tv_enname)
         TextView tvEnname;
-        @Bind(R.id.vline)
+        @BindView(R.id.vline)
         View vline;
 
         public ViewHolder(View itemView) {

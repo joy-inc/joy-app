@@ -3,18 +3,14 @@ package com.joy.app.activity.hotel;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.library.activity.BaseHttpUiActivity;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExBaseWidget;
-import com.android.library.view.dialogplus.DialogPlus;
-import com.android.library.view.dialogplus.ListHolder;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.adapter.hotel.HotelSortAdapter;
@@ -147,7 +143,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         title.setText(String.format("%s酒店",str));
     }
 
-    DialogPlus mDialog;
+//    DialogPlus mDialog;
     private void showDialog() {
         HotelSortAdapter adapter = new HotelSortAdapter();
         adapter.setData(hotelSearchFilters.getOrderby());
@@ -156,22 +152,22 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
             @Override
             public void onItemViewClick(int position, View clickView, FilterItems filterItems) {
                 params.setOrderby(filterItems.getValue());
-                mDialog.dismiss();
+//                mDialog.dismiss();
                 hotelListFragment.reLoadHotelList(params);
             }
         });
-        mDialog = DialogPlus.newDialog(this)
-                .setContentHolder(new ListHolder())
-                .setCancelable(true)
-                .setAdapter(adapter)
-                .create();
-        mDialog.show();
+//        mDialog = DialogPlus.newDialog(this)
+//                .setContentHolder(new ListHolder())
+//                .setCancelable(true)
+//                .setAdapter(adapter)
+//                .create();
+//        mDialog.show();
     }
 
     @Override
     protected boolean invalidateContent(HotelSearchFilters hotelSearchFilters) {
         this.hotelSearchFilters = hotelSearchFilters;
-        hotelListFragment.reLoadHotelList(params);
+//        hotelListFragment.reLoadHotelList(params);
         return true;
     }
 

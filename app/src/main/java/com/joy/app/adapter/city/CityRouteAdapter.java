@@ -10,7 +10,7 @@ import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.city.CityRoute;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -26,9 +26,9 @@ public class CityRouteAdapter extends ExRvAdapter<CityRouteAdapter.ViewHolder, C
 
     public class ViewHolder extends ExRvViewHolder<CityRoute> {
 
-        @Bind(R.id.sdvPhoto) FrescoImageView  sdvPhoto;
-        @Bind(R.id.jtvDays)  JTextView        jtvDays;
-        @Bind(R.id.jtvTitle) JTextView        jtvTitle;
+        @BindView(R.id.sdvPhoto) FrescoImageView  sdvPhoto;
+        @BindView(R.id.jtvDays)  JTextView        jtvDays;
+        @BindView(R.id.jtvTitle) JTextView        jtvTitle;
 
         public ViewHolder(View itemView) {
 

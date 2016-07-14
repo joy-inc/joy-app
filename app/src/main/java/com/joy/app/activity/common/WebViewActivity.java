@@ -10,12 +10,10 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.android.library.activity.BaseHttpUiActivity;
-import com.android.library.activity.BaseUiActivity;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
-import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
@@ -63,9 +61,9 @@ public class WebViewActivity extends BaseHttpUiActivity<String> implements WebVi
         mTitle = getIntent().getStringExtra("title");
 
         if (!TextUtil.isEmpty(mTitle))
-            setTheme(R.style.theme_app);
+            setTheme(R.style.base_theme);
         else if (mType == TYPE_HOTEL)
-            setTheme(R.style.theme_app_noTitle_hotel);
+            setTheme(R.style.base_theme_noTitle_hotel);
 
         super.onCreate(savedInstanceState);
         setContentFullScreenWebView(true);

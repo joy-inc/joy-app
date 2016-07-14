@@ -10,7 +10,7 @@ import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.HotelEntity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -26,18 +26,18 @@ public class HotelListAdapter extends ExRvAdapter<HotelListAdapter.ViewHolder,Ho
     }
 
     public class ViewHolder extends ExRvViewHolder<HotelEntity>  {
-        @Bind(R.id.topline)
+        @BindView(R.id.topline)
         View topline;
 
-        @Bind(R.id.iv_hotel_item_Photo)
+        @BindView(R.id.iv_hotel_item_Photo)
         FrescoImageView ivHotelItemPhoto;
-        @Bind(R.id.tv_hotel_city_cnname)
+        @BindView(R.id.tv_hotel_city_cnname)
         JTextView tvHotelCityCnname;
-        @Bind(R.id.tv_hotel_city_enname)
+        @BindView(R.id.tv_hotel_city_enname)
         JTextView tvHotelCityEnname;
-        @Bind(R.id.tv_hotel_city_star)
+        @BindView(R.id.tv_hotel_city_star)
         JTextView tvHotelCityStar;
-        @Bind(R.id.tv_hotel_item_price)
+        @BindView(R.id.tv_hotel_item_price)
         JTextView tvHotelItemPrice;
 
         public ViewHolder(final View itemView) {

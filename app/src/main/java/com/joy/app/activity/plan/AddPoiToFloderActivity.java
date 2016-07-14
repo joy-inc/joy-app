@@ -3,7 +3,6 @@ package com.joy.app.activity.plan;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +22,6 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.DeviceUtil;
-import com.android.library.utils.LogMgr;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
@@ -36,7 +34,7 @@ import com.joy.app.utils.http.PlanHtpUtil;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
@@ -45,26 +43,26 @@ import de.greenrobot.event.EventBus;
  * @Description 添加进规划    <br>
  */
 public class AddPoiToFloderActivity extends Activity {
-    @Bind(R.id.jrv_list)
+    @BindView(R.id.jrv_list)
     RecyclerView jrvList;
-    @Bind(R.id.jtv_empty)
+    @BindView(R.id.jtv_empty)
     JTextView jtvEmpty;
-    @Bind(R.id.rl_loading)
+    @BindView(R.id.rl_loading)
     RelativeLayout rlLoading;
-    @Bind(R.id.jtv_button)
+    @BindView(R.id.jtv_button)
     JTextView jtvButton;
-    @Bind(R.id.jtv_title)
+    @BindView(R.id.jtv_title)
     JTextView jtvTitle;
-    @Bind(R.id.edt_name)
+    @BindView(R.id.edt_name)
     EditText edtName;
-    @Bind(R.id.rl_create)
+    @BindView(R.id.rl_create)
     LinearLayout rlCreate;
-    @Bind(R.id.ll_dialog)
+    @BindView(R.id.ll_dialog)
     LinearLayout llDialog;
 
     String PoiId;
     String FolderId;
-    @Bind(R.id.v_shadow)
+    @BindView(R.id.v_shadow)
     View vShadow;
 
     public static void startActivity(Activity activity, String PoiId, String FolderId, int requestCode) {

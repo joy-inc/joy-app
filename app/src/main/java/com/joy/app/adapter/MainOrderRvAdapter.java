@@ -12,7 +12,7 @@ import com.joy.app.R;
 import com.joy.app.bean.MainOrder;
 import com.joy.app.utils.JTextSpanUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -30,40 +30,40 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
 
     public class ViewHolder extends ExRvViewHolder<MainOrder> {
 
-        @Bind(R.id.sdvPhoto)
+        @BindView(R.id.sdvPhoto)
         FrescoImageView sdvPhoto;
 
-        @Bind(R.id.tvTitle)
+        @BindView(R.id.tvTitle)
         TextView tvTitle;
 
-        @Bind(R.id.tvType)
+        @BindView(R.id.tvType)
         TextView tvType;
 
-        @Bind(R.id.tvDepartureDate)
+        @BindView(R.id.tvDepartureDate)
         TextView tvDepartureDate;
 
-        @Bind(R.id.tvCount)
+        @BindView(R.id.tvCount)
         TextView tvCount;
 
-        @Bind(R.id.rvStatus0Div)
+        @BindView(R.id.rvStatus0Div)
         RelativeLayout rvStatus0Div;
 
-        @Bind(R.id.rvStatus1Div)
+        @BindView(R.id.rvStatus1Div)
         RelativeLayout rvStatus1Div;
 
-        @Bind(R.id.rvStatus2Div)
+        @BindView(R.id.rvStatus2Div)
         RelativeLayout rvStatus2Div;
 
-        @Bind(R.id.rvStatus3Div)
+        @BindView(R.id.rvStatus3Div)
         RelativeLayout rvStatus3Div;
 
-        @Bind(R.id.tvTotalPrice)
+        @BindView(R.id.tvTotalPrice)
         TextView tvTotalPrice;
 
-        @Bind(R.id.acbPay)
+        @BindView(R.id.acbPay)
         TextView acbPay;
 
-        @Bind(R.id.acbCommenton)
+        @BindView(R.id.acbCommenton)
         TextView acbCommenton;
 
         public ViewHolder(final View itemView) {

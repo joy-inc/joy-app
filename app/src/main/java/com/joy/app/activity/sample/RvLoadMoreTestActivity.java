@@ -3,17 +3,9 @@ package com.joy.app.activity.sample;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
-import com.android.library.activity.BaseHttpRvActivity;
+import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.view.dialogplus.DialogPlus;
-import com.android.library.view.dialogplus.ListHolder;
-import com.android.library.view.dialogplus.OnItemClickListener;
-import com.android.library.view.recyclerview.RecyclerAdapter;
-import com.joy.app.R;
-import com.joy.app.adapter.sample.DialogListAdapter;
 import com.joy.app.adapter.sample.RvLoadMoreAdapter;
 import com.joy.app.bean.sample.Special;
 import com.joy.app.utils.http.sample.TestHtpUtil;
@@ -49,27 +41,6 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
     protected void initContentView() {
 
         setAdapter(new RvLoadMoreAdapter());
-        setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
-
-                DialogPlus.newDialog(RvLoadMoreTestActivity.this)
-                        .setContentHolder(new ListHolder())
-                        .setHeader(R.layout.t_dialog_header)
-                        .setFooter(R.layout.t_dialog_footer)
-                        .setCancelable(true)
-                        .setAdapter(new DialogListAdapter())
-                        .setOnItemClickListener(new OnItemClickListener() {
-
-                            @Override
-                            public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
-
-                                showToast("~~" + position);
-                            }
-                        }).create().show();
-            }
-        });
     }
 
     @Override
