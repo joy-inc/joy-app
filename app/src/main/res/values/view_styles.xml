@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="CardView.Light.margin_8dp">
+    <style name="base_cardview_light.margin_8dp">
         <item name="cardCornerRadius">3dp</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginTop">8dp</item>
@@ -9,7 +9,7 @@
         <item name="android:layout_marginRight">8dp</item>
     </style>
 
-    <style name="CardView.Light.margin_10dp">
+    <style name="base_cardview_light.margin_10dp">
         <item name="cardCornerRadius">3dp</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginBottom">10dp</item>
@@ -18,7 +18,7 @@
         <item name="android:foreground">?selectableItemBackground</item>
     </style>
 
-    <style name="CardView.Light.margin_12dp">
+    <style name="base_cardview_light.margin_12dp">
         <item name="cardCornerRadius">3dp</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginBottom">12dp</item>
@@ -27,7 +27,7 @@
         <item name="android:foreground">?selectableItemBackground</item>
     </style>
 
-    <style name="CardView.Light.margin_16dp">
+    <style name="base_cardview_light.margin_16dp">
         <item name="cardCornerRadius">3dp</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginTop">16dp</item>
@@ -35,7 +35,7 @@
         <item name="android:layout_marginRight">16dp</item>
     </style>
 
-    <style name="CardView.Dark.margin_8dp">
+    <style name="base_cardview_dark.margin_8dp">
         <item name="cardCornerRadius">3dp</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginTop">8dp</item>
@@ -43,11 +43,7 @@
         <item name="android:layout_marginRight">8dp</item>
     </style>
 
-    <style name="CardView.Trans">
-        <item name="cardBackgroundColor">@color/transparent</item>
-    </style>
-
-    <style name="CardView.Trans.margin_8dp">
+    <style name="base_cardview_trans.margin_8dp">
         <item name="cardCornerRadius">3dp</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="android:layout_marginTop">8dp</item>
@@ -118,7 +114,7 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <style name="Widget.AppCompat.RatingBar.Joy">
+    <style name="base_ratingbar.joy">
         <item name="android:progressDrawable">@drawable/src_ratingbar</item>
         <item name="android:indeterminateDrawable">@drawable/src_ratingbar</item>
     </style>
@@ -173,15 +169,9 @@
         <item name="android:textColor">@color/black_trans40</item>
     </style>
 
-    <style name="Base.Widget.AppCompat.ProgressBar.Horizontal.Scores">
-        <item name="android:layout_width">match_parent</item>
+    <style name="base_progressbar_horizontal.scores">
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:indeterminateDrawable">@drawable/layer_progressbar_horizontal</item>
-        <item name="android:progressDrawable">@drawable/layer_progressbar_horizontal</item>
-        <item name="android:maxHeight">5dp</item>
-        <item name="android:minHeight">5dp</item>
     </style>
 
     <!-- 日期选择的星期几样式-->

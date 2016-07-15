@@ -18,6 +18,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_toRightOf="@id/sdvPhoto"
-        android:textColor="?android:textColorSecondary"
+        android:textColor="?textColorSubMain"
         android:textSize="15dp" />
 </RelativeLayout>

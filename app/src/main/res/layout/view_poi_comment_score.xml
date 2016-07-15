@@ -15,7 +15,7 @@
 
         <android.support.v7.widget.AppCompatRatingBar
             android:id="@+id/acRatingBar"
-            style="@style/Widget.AppCompat.RatingBar.Joy"
+            style="@style/base_ratingbar.joy"
             android:layout_width="wrap_content"
             android:layout_height="13dp"
             android:numStars="5"
@@ -79,7 +79,7 @@
 
             <ProgressBar
                 android:id="@+id/score5"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                style="@style/base_progressbar_horizontal.scores"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tv5" />
 
@@ -101,7 +101,7 @@
 
             <ProgressBar
                 android:id="@+id/score4"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                style="@style/base_progressbar_horizontal.scores"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tv4" />
 
@@ -124,7 +124,7 @@
 
             <ProgressBar
                 android:id="@+id/score3"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                style="@style/base_progressbar_horizontal.scores"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tv3" />
 
@@ -147,7 +147,7 @@
 
             <ProgressBar
                 android:id="@+id/score2"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                style="@style/base_progressbar_horizontal.scores"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tv2" />
 
@@ -171,7 +171,7 @@
 
             <ProgressBar
                 android:id="@+id/score1"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal.Scores"
+                style="@style/base_progressbar_horizontal.scores"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tv1" />
 

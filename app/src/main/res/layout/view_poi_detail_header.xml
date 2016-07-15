@@ -49,7 +49,7 @@
 
         <android.support.v7.widget.AppCompatRatingBar
             android:id="@+id/acRatingBar"
-            style="@style/Widget.AppCompat.RatingBar.Joy"
+            style="@style/base_ratingbar.joy"
             android:layout_width="wrap_content"
             android:layout_height="13dp"
             android:layout_alignParentLeft="true"
