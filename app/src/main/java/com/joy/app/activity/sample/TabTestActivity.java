@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
@@ -99,7 +100,7 @@ public class TabTestActivity extends BaseTabActivity {
         View v = inflateLayout(R.layout.view_avatar);
         FrescoImageView sdvAvatar = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
         sdvAvatar.setImageURI("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207");
-        addTitleRightView(v, v1 -> showToast("Avatar click"));
+        addTitleRightView(v, v1 -> showSnackbar("avatar", Snackbar.LENGTH_SHORT));
     }
 
     @Override
@@ -108,7 +109,16 @@ public class TabTestActivity extends BaseTabActivity {
         super.initContentView();
         setTabTextColors(getResources().getColor(R.color.white_trans26), getResources().getColor(R.color.white));
         setTabIndicatorColor(getResources().getColor(R.color.transparent));
-        setFloatActionBtnEnable(R.drawable.abc_ic_search_api_mtrl_alpha, v -> showToast("FloatActionBtn click"));
+
+        setFloatActionBtnEnable(R.drawable.abc_ic_search_api_mtrl_alpha, v -> {
+
+            int[] startingLocation = new int[2];
+            getFloatActionBtn().getLocationOnScreen(startingLocation);
+            startingLocation[0] += getFloatActionBtn().getWidth() / 2;
+            startingLocation[1] += getFloatActionBtn().getHeight() / 2 + STATUS_BAR_HEIGHT;
+            SpreadTestActivity.startActivity(this, startingLocation);
+            overridePendingTransition(0, 0);
+        });
     }
 
     @Override

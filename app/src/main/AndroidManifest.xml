@@ -93,6 +93,13 @@
             android:name=".activity.sample.BannerTestActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.sample.TabTestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.sample.SpreadTestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/base_theme.translucent.overlay.window" />
+        <activity
             android:name=".activity.city.CityActivity"
             android:screenOrientation="portrait"
             android:theme="@style/base_theme.translucent.overlay" />
@@ -100,9 +107,6 @@
             android:name=".activity.city.CityFunActivity"
             android:screenOrientation="portrait"
             android:theme="@style/base_theme.translucent.navigationBar" />
-        <activity
-            android:name=".activity.sample.TabTestActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.poi.PoiDetailActivity"
             android:screenOrientation="portrait"
