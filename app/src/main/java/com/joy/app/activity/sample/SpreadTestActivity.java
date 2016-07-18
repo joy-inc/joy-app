@@ -1,12 +1,12 @@
 package com.joy.app.activity.sample;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 
-import com.android.library.listener.AnimatorListener;
 import com.android.library.ui.activity.BaseUiActivity;
 import com.android.library.view.SpreadView;
 import com.joy.app.R;
@@ -80,7 +80,7 @@ public class SpreadTestActivity extends BaseUiActivity implements SpreadView.OnS
         getToolbar().animate()
                 .translationY(-getToolbarHeight() - STATUS_BAR_HEIGHT)
                 .setDuration(ANIM_DURATION_TOOLBAR)
-                .setListener(new AnimatorListener() {
+                .setListener(new AnimatorListenerAdapter() {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
