@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
@@ -100,7 +99,7 @@ public class TabTestActivity extends BaseTabActivity {
         View v = inflateLayout(R.layout.view_avatar);
         FrescoImageView sdvAvatar = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
         sdvAvatar.setImageURI("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207");
-        addTitleRightView(v, v1 -> showSnackbar("avatar", Snackbar.LENGTH_SHORT));
+        addTitleRightView(v, v1 -> showSnackbar("avatar"));
     }
 
     @Override
@@ -110,7 +109,7 @@ public class TabTestActivity extends BaseTabActivity {
         setTabTextColors(getResources().getColor(R.color.white_trans26), getResources().getColor(R.color.white));
         setTabIndicatorColor(getResources().getColor(R.color.transparent));
 
-        setFloatActionBtnEnable(R.drawable.abc_ic_search_api_mtrl_alpha, v -> {
+        setFloatActionBtnEnable(R.drawable.ic_instagram_white, v -> {
 
             int[] startingLocation = new int[2];
             getFloatActionBtn().getLocationOnScreen(startingLocation);

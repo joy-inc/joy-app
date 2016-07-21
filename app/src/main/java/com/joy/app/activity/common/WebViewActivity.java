@@ -227,8 +227,8 @@ public class WebViewActivity extends BaseHttpUiActivity<String> implements WebVi
     @Override
     public void onWebViewReceivedError(int errorCode, String description, String failingUrl) {
 
-//        hideContentView();
-        showFailedTip();
+//        hideContent();
+        showErrorTip();
     }
 
     @Override

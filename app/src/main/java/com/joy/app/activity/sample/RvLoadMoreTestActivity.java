@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.ui.activity.BaseHttpRvActivity;
+import com.android.library.view.recyclerview.ItemAddAnimator;
+import com.android.library.view.recyclerview.ItemDecoration;
 import com.joy.app.adapter.sample.RvLoadMoreAdapter;
 import com.joy.app.bean.sample.Special;
 import com.joy.app.utils.http.sample.TestHtpUtil;
 
 import java.util.List;
+
+import static android.support.design.widget.Snackbar.LENGTH_SHORT;
+import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
 
 /**
  * Created by KEVIN.DAI on 15/12/2.
@@ -27,8 +32,7 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setPageLimit(10);
-        executeCacheAndRefresh();
+        executeRefreshOnly();
     }
 
     @Override
@@ -40,7 +44,10 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
     @Override
     protected void initContentView() {
 
+        setPageLimit(10);
         setAdapter(new RvLoadMoreAdapter());
+        getRecyclerView().setItemAnimator(new ItemAddAnimator(getPageLimit()));
+        setOnItemClickListener((holder, position) -> showSnackbar("item: " + position));
     }
 
     @Override

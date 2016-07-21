@@ -3,12 +3,11 @@ package com.joy.app.activity.main;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.View;
 
-import com.android.library.ui.fragment.BaseHttpRvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.ui.fragment.BaseHttpRvFragment;
 import com.android.library.utils.TextUtil;
+import com.android.library.view.recyclerview.ItemAddAnimator;
 import com.joy.app.activity.city.CityActivity;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.MainRouteRvAdapter;
@@ -42,24 +41,21 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     protected void initContentView() {
 
         MainRouteRvAdapter adapter = new MainRouteRvAdapter();
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<MainRoute>() {
+        adapter.setOnItemViewClickListener((position, clickView, mainRoute) -> {
 
-            @Override
-            public void onItemViewClick(int position, View clickView, MainRoute mainRoute) {
-
-                if (mainRoute != null) {
-                    if (mainRoute.isCity()) {
-                        String cityId = mainRoute.getCityId();
-                        if (!TextUtil.isEmpty(cityId)) {
-                            CityActivity.startActivity(getActivity(), cityId);
-                        }
-                    } else {
-                        WebViewActivity.startActivityNoTitle(getActivity(), mainRoute.getPlace_url(),WebViewActivity.TYPE_CITY_TOPIC);
+            if (mainRoute != null) {
+                if (mainRoute.isCity()) {
+                    String cityId = mainRoute.getCityId();
+                    if (!TextUtil.isEmpty(cityId)) {
+                        CityActivity.startActivity(getActivity(), cityId);
                     }
+                } else {
+                    WebViewActivity.startActivityNoTitle(getActivity(), mainRoute.getPlace_url(),WebViewActivity.TYPE_CITY_TOPIC);
                 }
             }
         });
         setAdapter(adapter);
+        getRecyclerView().setItemAnimator(new ItemAddAnimator());
     }
 
     @Override

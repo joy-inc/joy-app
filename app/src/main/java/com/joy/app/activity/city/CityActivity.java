@@ -105,8 +105,8 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
                 isCityDetailReqFailed = true;
 
                 hideLoading();
-                hideContentView();
-                showFailedTip();
+                hideContent();
+                showErrorTip();
             }
         });
         addRequestNoCache(cityReq);

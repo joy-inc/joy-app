@@ -112,11 +112,11 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     }
 
     @Override
-    protected void showNoContentTip() {
+    protected void showEmptyTip() {
     }
 
     @Override
-    protected void showFailedTip() {
+    protected void showErrorTip() {
     }
 
     @Override

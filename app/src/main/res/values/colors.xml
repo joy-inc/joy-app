@@ -5,9 +5,11 @@
     <color name="color_primary">#373737</color>
     <color name="color_primary_dark">#373737</color>
     <color name="color_accent">#fa617d</color>
+
     <!--<color name="color_window_bg">#373737</color>-->
     <!--<color name="color_text_main">@color/white_trans87</color>-->
     <!--<color name="color_text_sub_main">@color/white_trans54</color>-->
+
     <!--<color name="color_text_disable">@color/white_trans38</color>-->
     <!--<color name="color_text_hint">@color/white_trans38</color>-->
     <!--<color name="color_divider">@color/white_trans12</color>-->
