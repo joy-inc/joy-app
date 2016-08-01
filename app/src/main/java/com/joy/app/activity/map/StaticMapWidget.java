@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExLayoutWidget;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.android.library.widget.JTextView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
@@ -28,7 +28,7 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
     ImageView locationView;
     RelativeLayout contentView;
     JTextView addressView;
-    FrescoImageView map,Lmap,Rmap;
+    FrescoIv map,Lmap,Rmap;
     int zoom = 0;
 
 
@@ -41,9 +41,9 @@ public class StaticMapWidget extends ExLayoutWidget implements View.OnClickListe
 
         contentView = (RelativeLayout)activity.getLayoutInflater().inflate(R.layout.view_static_map, null);
         contentView.setOnClickListener(this);
-        map = (FrescoImageView) contentView.findViewById(R.id.map_center);
-        Lmap =(FrescoImageView) contentView.findViewById(R.id.map_left);;
-        Rmap = (FrescoImageView) contentView.findViewById(R.id.map_right);;
+        map = (FrescoIv) contentView.findViewById(R.id.map_center);
+        Lmap =(FrescoIv) contentView.findViewById(R.id.map_left);;
+        Rmap = (FrescoIv) contentView.findViewById(R.id.map_right);;
         locationView = (ImageView)contentView.findViewById(R.id.iv_center_icon);;
         addressView = (JTextView)contentView.findViewById(R.id.jtv_addreess);;
         ViewUtil.goneView(locationView);

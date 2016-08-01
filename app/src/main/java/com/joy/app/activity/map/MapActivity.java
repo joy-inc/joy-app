@@ -18,7 +18,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.android.library.ui.activity.BaseUiActivity;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.LogMgr;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.android.library.widget.JTextView;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
@@ -68,7 +68,7 @@ public abstract class MapActivity extends BaseUiActivity implements View.OnClick
     FrameLayout maplayout;
 
     @BindView(R.id.sdv_photo)
-    FrescoImageView sdvPhoto;
+    FrescoIv sdvPhoto;
 
     @BindView(R.id.jtv_cnname)
     JTextView jtvCnname;

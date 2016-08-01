@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.HotelEntity;
@@ -29,7 +29,7 @@ public class SearchHotelListAdapter extends ExRvAdapter<SearchHotelListAdapter.V
         View topline;
 
         @BindView(R.id.iv_hotel_item_Photo)
-        FrescoImageView ivHotelItemPhoto;
+        FrescoIv ivHotelItemPhoto;
         @BindView(R.id.tv_hotel_city_cnname)
         JTextView tvHotelCityCnname;
         @BindView(R.id.tv_hotel_city_enname)

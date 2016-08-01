@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground">
 
-    <com.android.library.widget.FrescoImageView
+    <com.android.library.view.fresco.FrescoIv
         android:id="@+id/sdvPhoto"
         style="@style/sdv_cover"
         android:layout_width="120dp"

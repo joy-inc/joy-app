@@ -23,7 +23,7 @@ import com.android.library.view.observablescrollview.ObservableScrollViewCallbac
 import com.android.library.view.observablescrollview.ScrollState;
 import com.android.library.view.observablescrollview.ScrollUtils;
 import com.android.library.view.systembar.SystemBarTintManager;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
@@ -52,7 +52,7 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
     private int mFlexibleHeight;
     private SystemBarTintManager mTintManager;
     private ImageButton mIbBack;
-    private FrescoImageView mCoverSdvPhoto;
+    private FrescoIv mCoverSdvPhoto;
     private TextView mCoverTvTitle;
 
     public static void startActivity(Activity act, String... params) {
@@ -212,7 +212,7 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
         mCoverTvTitle.setText(cnname + "\n" + enname);
         hideView(mCoverTvTitle);
 
-        mCoverSdvPhoto = ButterKnife.<FrescoImageView>findById(this, R.id.sdvPhoto);
+        mCoverSdvPhoto = ButterKnife.<FrescoIv>findById(this, R.id.sdvPhoto);
         Postprocessor processor = new BasePostprocessor() {
 
             @Override
@@ -267,13 +267,13 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
         if (CollectionUtil.isNotEmpty(photos)) {
 
             if (photos.size() > 1)
-                ButterKnife.<FrescoImageView>findById(vHeader, R.id.sdvSubPhoto1).setImageURI(photos.get(1));
+                ButterKnife.<FrescoIv>findById(vHeader, R.id.sdvSubPhoto1).setImageURI(photos.get(1));
             if (photos.size() > 2)
-                ButterKnife.<FrescoImageView>findById(vHeader, R.id.sdvSubPhoto2).setImageURI(photos.get(2));
+                ButterKnife.<FrescoIv>findById(vHeader, R.id.sdvSubPhoto2).setImageURI(photos.get(2));
             if (photos.size() > 3)
-                ButterKnife.<FrescoImageView>findById(vHeader, R.id.sdvSubPhoto3).setImageURI(photos.get(3));
+                ButterKnife.<FrescoIv>findById(vHeader, R.id.sdvSubPhoto3).setImageURI(photos.get(3));
             if (photos.size() > 4)
-                ButterKnife.<FrescoImageView>findById(vHeader, R.id.sdvSubPhoto4).setImageURI(photos.get(4));
+                ButterKnife.<FrescoIv>findById(vHeader, R.id.sdvSubPhoto4).setImageURI(photos.get(4));
         }
         return vHeader;
     }

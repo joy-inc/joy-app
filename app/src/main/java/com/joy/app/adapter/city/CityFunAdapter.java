@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
 import com.android.library.utils.TextUtil;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.city.CityFun;
@@ -27,7 +27,8 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
 
     public class ViewHolder extends ExRvViewHolder<CityFun.ListEntity> {
 
-        @BindView(R.id.sdvPhoto)          FrescoImageView  sdvPhoto;
+        @BindView(R.id.sdvPhoto)
+        FrescoIv sdvPhoto;
         @BindView(R.id.jtvCnName)         JTextView        jtvCnName;
         @BindView(R.id.jtvEnName)         JTextView        jtvEnName;
         @BindView(R.id.jtvTitle)          JTextView        jtvTitle;

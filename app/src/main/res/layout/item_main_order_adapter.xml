@@ -10,7 +10,7 @@
         android:background="?selectableItemBackground"
         android:orientation="vertical">
 
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/sdvPhoto"
             style="@style/sdv_cover.Tint.CornerRadius.Top"
             android:layout_width="match_parent"

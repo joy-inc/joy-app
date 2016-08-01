@@ -11,7 +11,7 @@ import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.recyclerview.RecyclerAdapter;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
@@ -130,7 +130,7 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
         mCity = city;
 
         View headerView = inflateLayout(R.layout.view_city_header);
-        FrescoImageView fivHeader = (FrescoImageView) headerView.findViewById(R.id.sdvPhoto);
+        FrescoIv fivHeader = (FrescoIv) headerView.findViewById(R.id.sdvPhoto);
         fivHeader.setImageURI(city.getPic_url());
         JTextView jtvCnName = (JTextView) headerView.findViewById(R.id.jtvCnName);
         JTextView jtvEnName = (JTextView) headerView.findViewById(R.id.jtvEnName);

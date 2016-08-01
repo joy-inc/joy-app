@@ -11,7 +11,7 @@ import android.view.View;
 import com.android.library.ui.activity.BaseTabActivity;
 import com.android.library.ui.fragment.BaseUiFragment;
 import com.android.library.utils.CollectionUtil;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -97,7 +97,7 @@ public class TabTestActivity extends BaseTabActivity {
         setTitleLogo(R.drawable.ic_logo);
 
         View v = inflateLayout(R.layout.view_avatar);
-        FrescoImageView sdvAvatar = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
+        FrescoIv sdvAvatar = (FrescoIv) v.findViewById(R.id.sdvAvatar);
         sdvAvatar.setImageURI("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207");
         addTitleRightView(v, v1 -> showSnackbar("avatar"));
     }

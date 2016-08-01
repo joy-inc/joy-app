@@ -68,7 +68,7 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <com.android.library.widget.FrescoImageView
+                <com.android.library.view.fresco.FrescoIv
                     android:id="@+id/sdv_order_photo"
                     style="@style/sdv_cover.Tint"
                     android:layout_width="50dp"

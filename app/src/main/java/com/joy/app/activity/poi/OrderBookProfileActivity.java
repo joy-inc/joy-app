@@ -13,7 +13,7 @@ import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderContacts;
 import com.joy.app.bean.poi.OrderDetail;
@@ -36,7 +36,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     private String mOrderItem;
     private String mDateTime;
 
-    private FrescoImageView mSdvPhoto;
+    private FrescoIv mSdvPhoto;
     private TextView mTvTitle;
     private EditText mEtName, mEtPhone, mEtEmail;
     private TextView mTvPrice;
@@ -88,7 +88,7 @@ public class OrderBookProfileActivity extends BaseHttpUiActivity<OrderContacts> 
     @Override
     protected void initContentView() {
 
-        mSdvPhoto = (FrescoImageView) findViewById(R.id.sdvPhoto);
+        mSdvPhoto = (FrescoIv) findViewById(R.id.sdvPhoto);
         mTvTitle = (TextView) findViewById(R.id.tvTitle);
 
         mEtName = (EditText) findViewById(R.id.etName);

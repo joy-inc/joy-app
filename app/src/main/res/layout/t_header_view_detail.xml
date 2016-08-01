@@ -13,14 +13,14 @@
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/sdvSubPhoto1"
             style="@style/sdv_cover.Tint.CornerRadius"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/sdvSubPhoto2"
             style="@style/sdv_cover.Tint.CornerRadius"
             android:layout_width="wrap_content"
@@ -39,14 +39,14 @@
         android:layout_marginTop="12dp"
         android:orientation="horizontal">
 
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/sdvSubPhoto3"
             style="@style/sdv_cover.Tint.CornerRadius"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/sdvSubPhoto4"
             style="@style/sdv_cover.Tint.CornerRadius"
             android:layout_width="wrap_content"

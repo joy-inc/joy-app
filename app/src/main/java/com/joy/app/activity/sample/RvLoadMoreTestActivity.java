@@ -14,7 +14,6 @@ import com.joy.app.utils.http.sample.TestHtpUtil;
 
 import java.util.List;
 
-import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
 
 /**
@@ -48,6 +47,16 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
         setAdapter(new RvLoadMoreAdapter());
         getRecyclerView().setItemAnimator(new ItemAddAnimator(getPageLimit()));
         setOnItemClickListener((holder, position) -> showSnackbar("item: " + position));
+        getRecyclerView().addItemDecoration(
+                new ItemDecoration.Builder(this)
+                        .orientation(HORIZONTAL)
+                        .marginTop(DP_1_PX * 10)
+                        .marginBottom(DP_1_PX * 10)
+                        .marginLeft(DP_1_PX * 16)
+                        .paddingParentTop(DP_1_PX * 16)
+                        .paddingParentBottom(DP_1_PX * 16)
+                        .paddingParentLeft(DP_1_PX * 16)
+                        .build());
     }
 
     @Override

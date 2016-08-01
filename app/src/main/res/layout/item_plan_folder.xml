@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/sdvBg"
             style="@style/sdv_cover.Tint.CornerRadius.Top"
             android:layout_width="match_parent"

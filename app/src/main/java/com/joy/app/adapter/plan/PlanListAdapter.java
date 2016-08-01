@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
 import com.android.library.utils.ViewUtil;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.map.MapPoiDetail;
@@ -52,7 +52,7 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
     public class ViewHolder extends ExRvViewHolder<PlanItem> {
 
         @BindView(R.id.sdv_poi_photo)
-        FrescoImageView sdvPoiPhoto;
+        FrescoIv sdvPoiPhoto;
         @BindView(R.id.jtv_cnname)
         JTextView jtvCnname;
         @BindView(R.id.jtv_enname)

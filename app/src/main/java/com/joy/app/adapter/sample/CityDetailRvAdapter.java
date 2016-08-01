@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.bean.sample.Trip;
@@ -30,10 +30,10 @@ public class CityDetailRvAdapter extends ExRvAdapter<CityDetailRvAdapter.ViewHol
     static class ViewHolder extends ExRvViewHolder<Trip> {
 
         @BindView(R.id.sdvPhoto)
-        FrescoImageView sdvPhoto;
+        FrescoIv sdvPhoto;
 
         @BindView(R.id.sdvAvatar)
-        FrescoImageView sdvAvatar;
+        FrescoIv sdvAvatar;
 
         @BindView(R.id.tvTitle)
         TextView tvTitle;

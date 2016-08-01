@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.library.ui.fragment.BaseHttpUiFragment2;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 
 import javax.inject.Inject;
@@ -31,7 +31,7 @@ public class MvpTestFragment extends BaseHttpUiFragment2 implements MvpTestView 
     MvpTestPresenter mPresenter;
 
     @BindView(R.id.sdvPhoto)
-    FrescoImageView mFivCover;
+    FrescoIv mFivCover;
 
     @BindView(R.id.tvName)
     TextView mTvCoverTitle;

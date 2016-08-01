@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/map_left"
             android:layout_weight="1"
             android:scaleType="fitXY"
@@ -17,14 +17,14 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/map_center"
             android:layout_weight="1"
             android:scaleType="fitXY"
             app:actualImageScaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/map_right"
             android:layout_weight="1"
             android:scaleType="fitXY"

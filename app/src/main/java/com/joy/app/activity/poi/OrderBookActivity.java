@@ -22,7 +22,7 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.TimeUtil;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.bean.poi.LevelOptions;
@@ -51,7 +51,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     private String mTitle;
     private String mOrderItem = TextUtil.TEXT_EMPTY;
 
-    private FrescoImageView sdvPhoto;
+    private FrescoIv sdvPhoto;
     private TextView tvTitle;
 
     private TextView mTvPrice;
@@ -157,7 +157,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
     private void initHeaderView() {
 
-        sdvPhoto = (FrescoImageView) findViewById(R.id.sdvPhoto);
+        sdvPhoto = (FrescoIv) findViewById(R.id.sdvPhoto);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
 
         sdvPhoto.setImageURI(mPhotoUrl);

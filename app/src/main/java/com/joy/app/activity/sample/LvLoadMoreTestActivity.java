@@ -8,7 +8,7 @@ import android.view.View;
 import com.android.library.ui.activity.BaseHttpLvActivity;
 import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 import com.joy.app.adapter.sample.LvLoadMoreAdapter;
 import com.joy.app.bean.sample.Special;
@@ -41,7 +41,7 @@ public class LvLoadMoreTestActivity extends BaseHttpLvActivity<List<Special>> {
         setTitle("lv loadmore sample");
 
         View v = inflateLayout(R.layout.view_avatar);
-        FrescoImageView sdvAvatar = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
+        FrescoIv sdvAvatar = (FrescoIv) v.findViewById(R.id.sdvAvatar);
         sdvAvatar.setImageURI("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207");
         addTitleRightView(v, new View.OnClickListener() {
 

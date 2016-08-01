@@ -24,7 +24,7 @@
                 android:background="@color/white"
                 android:gravity="center_vertical">
 
-                <com.android.library.widget.FrescoImageView
+                <com.android.library.view.fresco.FrescoIv
                     android:id="@+id/sdvPhoto"
                     style="@style/sdv_cover.Tint"
                     android:layout_width="60dp"

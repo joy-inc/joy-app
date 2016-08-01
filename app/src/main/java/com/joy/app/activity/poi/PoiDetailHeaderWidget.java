@@ -15,7 +15,7 @@ import com.android.library.view.ExLayoutWidget;
 import com.android.library.view.banner.BannerAdapter;
 import com.android.library.view.banner.BannerImage;
 import com.android.library.view.banner.BannerWidget;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 import com.joy.app.bean.sample.PoiDetail;
 import com.joy.app.utils.JTextSpanUtil;
@@ -95,9 +95,9 @@ public class PoiDetailHeaderWidget extends ExLayoutWidget implements View.OnClic
         BannerAdapter<String> adapter = new BannerAdapter(new BannerImage<String>() {
 
             @Override
-            protected FrescoImageView onCreateView(Context context) {
+            protected FrescoIv onCreateView(Context context) {
 
-                return (FrescoImageView) getActivity().getLayoutInflater().inflate(R.layout.item_banner, null);
+                return (FrescoIv) getActivity().getLayoutInflater().inflate(R.layout.item_banner, null);
             }
         });
         adapter.setData(data.getPhotos());

@@ -8,7 +8,7 @@ import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.TextUtil;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 import com.joy.app.bean.sample.HotCityItem;
 
@@ -47,7 +47,8 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
 
     public class ViewHolder extends ExRvViewHolder<HotCityItem> {
 
-        @BindView(R.id.sdvPhoto) FrescoImageView sdvPhoto;
+        @BindView(R.id.sdvPhoto)
+        FrescoIv sdvPhoto;
         @BindView(R.id.tvName)   TextView         tvName;
 
         public ViewHolder(final View itemView) {

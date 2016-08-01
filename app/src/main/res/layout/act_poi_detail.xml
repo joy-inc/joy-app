@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone">
 
-                <com.android.library.widget.FrescoImageView
+                <com.android.library.view.fresco.FrescoIv
                     android:id="@+id/sdvMap"
                     app:placeholderImage="@drawable/bg_poi_map"
                     app:placeholderImageScaleType="centerCrop"

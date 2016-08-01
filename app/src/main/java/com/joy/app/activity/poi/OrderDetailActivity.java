@@ -11,7 +11,7 @@ import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
@@ -36,7 +36,7 @@ public class OrderDetailActivity extends BaseHttpUiActivity<OrderDetail> impleme
     @BindView(R.id.jtv_infor)
     JTextView jtvInfor;
     @BindView(R.id.sdv_order_photo)
-    FrescoImageView sdvOrderPhoto;
+    FrescoIv sdvOrderPhoto;
     @BindView(R.id.jtv_order_title)
     JTextView jtvOrderTitle;
     @BindView(R.id.jtv_order_id)

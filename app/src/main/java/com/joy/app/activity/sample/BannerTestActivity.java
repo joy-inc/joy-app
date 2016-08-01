@@ -13,7 +13,7 @@ import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.view.banner.BannerAdapter;
 import com.android.library.view.banner.BannerImage;
 import com.android.library.view.banner.BannerWidget;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 
 import java.util.ArrayList;
@@ -62,9 +62,9 @@ public class BannerTestActivity extends BaseUiActivity {
         BannerAdapter<TestEntry> adapter = new BannerAdapter<>(new BannerImage<TestEntry>() {
 
             @Override
-            protected FrescoImageView onCreateView(Context context) {
+            protected FrescoIv onCreateView(Context context) {
 
-                return (FrescoImageView) inflateLayout(R.layout.item_banner);
+                return (FrescoIv) inflateLayout(R.layout.item_banner);
             }
         });
         adapter.setData(getEntries());

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.android.library.widget.FrescoImageView
+    <com.android.library.view.fresco.FrescoIv
         android:id="@+id/sdvPhoto"
         style="@style/sdv_cover.Tint"
         android:layout_width="match_parent"

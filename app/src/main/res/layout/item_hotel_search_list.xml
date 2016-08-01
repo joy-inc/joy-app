@@ -19,7 +19,7 @@
             android:layout_alignParentBottom="true" />
 
 
-        <com.android.library.widget.FrescoImageView
+        <com.android.library.view.fresco.FrescoIv
             android:id="@+id/iv_hotel_item_Photo"
             android:layout_width="60dp"
             android:layout_height="60dp"

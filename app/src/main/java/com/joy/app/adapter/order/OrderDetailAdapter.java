@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 import com.joy.app.bean.poi.OrderDetail;
 
@@ -34,7 +34,7 @@ public class OrderDetailAdapter extends ExRvAdapter <OrderDetailAdapter.ViewHold
         TextView Infor;//状态详情
 
         @BindView(R.id.sdv_order_photo)
-        FrescoImageView photo;//图片
+        FrescoIv photo;//图片
 
         @BindView(R.id.jtv_order_title)
         TextView orderTitle;//订单名称

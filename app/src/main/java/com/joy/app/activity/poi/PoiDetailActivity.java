@@ -15,7 +15,7 @@ import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.TextUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.ExBaseWidget;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
@@ -45,7 +45,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     private PoiDetailHeaderWidget mHeaderWidget;
     private PoiDetailHighWidget mHighWidget;
     private RelativeLayout mMapDiv;
-    private FrescoImageView mSdvMap;
+    private FrescoIv mSdvMap;
     private TextView mTvAddress;
     private PoiDetailIntroduceWidget mIntroduceWidget;
     private PoiDetailCommentWidget mCommentWidget;
@@ -131,7 +131,7 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
         highDiv.addView(mHighWidget.getContentView(), new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         mMapDiv = (RelativeLayout) findViewById(R.id.poiDetailMapDiv);
-        mSdvMap = (FrescoImageView) findViewById(R.id.sdvMap);
+        mSdvMap = (FrescoIv) findViewById(R.id.sdvMap);
         mTvAddress = (TextView) findViewById(R.id.tvAddress);
         mMapDiv.setOnClickListener(this);
 

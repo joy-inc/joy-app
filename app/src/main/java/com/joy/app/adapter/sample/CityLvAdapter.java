@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
 import com.joy.app.bean.sample.HotCityItem;
 
@@ -26,7 +26,8 @@ public class CityLvAdapter extends ExAdapter<HotCityItem> {
 
     public class ViewHolder extends ExViewHolderBase {
 
-        @BindView(R.id.sdvPhoto) FrescoImageView sdvPhoto;
+        @BindView(R.id.sdvPhoto)
+        FrescoIv sdvPhoto;
         @BindView(R.id.tvName)   TextView tvName;
 
         @Override

@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.android.library.ui.activity.BaseTabActivity;
 import com.android.library.ui.fragment.BaseUiFragment;
-import com.android.library.widget.FrescoImageView;
+import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
@@ -34,7 +34,7 @@ public class MainActivity extends BaseTabActivity {
     private MainActivityBC mMainActivityBC;
     private MainActivityHelperBC mMainActivityHelper;
     private long mLastPressedTime; //最后一次按返回的按钮
-    private FrescoImageView mSimpleDraweeView;
+    private FrescoIv mSimpleDraweeView;
 
     public static void startActivity(Context context) {
 
@@ -102,7 +102,7 @@ public class MainActivity extends BaseTabActivity {
         setTitleLogo(R.drawable.ic_logo);
 
         View v = inflateLayout(R.layout.view_avatar);
-        mSimpleDraweeView = (FrescoImageView) v.findViewById(R.id.sdvAvatar);
+        mSimpleDraweeView = (FrescoIv) v.findViewById(R.id.sdvAvatar);
         handleUserLogin();
         addTitleRightView(v, v1 -> SettingActivity.startActivity(MainActivity.this));
         mMainActivityBC.initTitleView();
