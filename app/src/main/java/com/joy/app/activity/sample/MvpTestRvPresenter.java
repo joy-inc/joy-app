@@ -40,4 +40,14 @@ public class MvpTestRvPresenter {
         mLauncher.setPageLimit(10);
         mLauncher.launchRefreshOnly();
     }
+
+    public void setPageLimit(int limit) {
+
+        mLauncher.setPageLimit(limit);
+    }
+
+    public int getPageLimit() {
+
+        return mLauncher.getPageLimit();
+    }
 }

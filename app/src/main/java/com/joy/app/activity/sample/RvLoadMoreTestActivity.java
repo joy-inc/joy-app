@@ -14,8 +14,6 @@ import com.joy.app.utils.http.sample.TestHtpUtil;
 
 import java.util.List;
 
-import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
-
 /**
  * Created by KEVIN.DAI on 15/12/2.
  */
@@ -45,11 +43,10 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
 
         setPageLimit(10);
         setAdapter(new RvLoadMoreAdapter());
-        getRecyclerView().setItemAnimator(new ItemAddAnimator(getPageLimit()));
         setOnItemClickListener((holder, position) -> showSnackbar("item: " + position));
+        getRecyclerView().setItemAnimator(new ItemAddAnimator(getPageLimit()));
         getRecyclerView().addItemDecoration(
                 new ItemDecoration.Builder(this)
-                        .orientation(HORIZONTAL)
                         .marginTop(DP_1_PX * 10)
                         .marginBottom(DP_1_PX * 10)
                         .marginLeft(DP_1_PX * 16)

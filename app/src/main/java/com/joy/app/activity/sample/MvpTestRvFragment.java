@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.android.library.ui.fragment.BaseHttpRvFragment2;
+import com.android.library.view.recyclerview.ItemAddAnimator;
 import com.android.library.view.recyclerview.ItemDecoration;
 import com.joy.app.adapter.sample.RvLoadMoreAdapter;
 
 import javax.inject.Inject;
-
-import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
 
 /**
  * Created by Daisw on 16/6/8.
@@ -30,26 +29,22 @@ public class MvpTestRvFragment extends BaseHttpRvFragment2 implements MvpTestRvV
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
-        super.onActivityCreated(savedInstanceState);
         ((TabTestActivity) getActivity()).component().inject(this);
+        super.onActivityCreated(savedInstanceState);
         mPresenter.launchRefreshOnly();
     }
 
     @Override
     protected void initContentView() {
 
+        mPresenter.setPageLimit(10);
         setAdapter(new RvLoadMoreAdapter());
+        getRecyclerView().setItemAnimator(new ItemAddAnimator(mPresenter.getPageLimit()));
         getRecyclerView().addItemDecoration(
                 new ItemDecoration.Builder(getActivity())
-                        .orientation(HORIZONTAL)
-                        .marginTop(DP_1_PX * 10)
-                        .marginBottom(DP_1_PX * 10)
-                        .marginLeft(DP_1_PX * 16)
-//                        .margin(DP_1_PX * 10)
-//                        .paddingParent(DP_1_PX * 16)
-                        .paddingParentTop(DP_1_PX * 16)
-                        .paddingParentBottom(DP_1_PX * 16)
-                        .paddingParentLeft(DP_1_PX * 16)
+                        .dividerSize(0)
+                        .verticalSpace(DP_1_PX * 10)
+                        .paddingParent(DP_1_PX * 10)
                         .build());
     }
 
