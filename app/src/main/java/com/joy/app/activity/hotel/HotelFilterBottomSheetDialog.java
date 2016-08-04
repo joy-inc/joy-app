@@ -1,9 +1,9 @@
 package com.joy.app.activity.hotel;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -21,26 +21,26 @@ import com.android.library.utils.DeviceUtil;
 import com.android.library.utils.ToastUtil;
 import com.android.library.utils.ViewUtil;
 import com.android.library.view.NewLineLayout;
+import com.android.library.view.bottomsheet.JBottomSheetDialog;
 import com.joy.app.R;
 import com.joy.app.bean.hotel.FilterItems;
 import com.joy.app.view.hotel.SeekBarPressure;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 酒店列表页条件筛选页面
- *
- * @author xinghai.qi on 2015/4/15.
+ * Created by Daisw on 16/8/4.
+ * origin file is HotelSearchFilterActivity created by xinghai.qi on 15/4/15. has been removed.
  */
-public class HotelSearchFilterActivity extends Activity implements View.OnClickListener {
 
-    public static final String EX_KEY_HOTEL_FACILITIES_TYPE = "ex_hotel_facilities_types";
-    public static final String EX_KEY_HOTEL_PRICES_TYPE = "ex_hotel_prices_types";
-    public static final String EX_KEY_HOTEL__FACILITIES_TYPE_STR = "ex_hotel_facilities_types_str";
-    public static final String EX_KEY_HOTEL_STAR_TYPE_STR = "ex_hotel_star_types_str";
-    public static final String EX_KEY_HOTEL_STAR_TYPE = "ex_hotel_star_types";
+public class HotelFilterBottomSheetDialog extends JBottomSheetDialog implements View.OnClickListener {
+
+//    public static final String EX_KEY_HOTEL_FACILITIES_TYPE = "ex_hotel_facilities_types";
+//    public static final String EX_KEY_HOTEL_PRICES_TYPE = "ex_hotel_prices_types";
+//    public static final String EX_KEY_HOTEL__FACILITIES_TYPE_STR = "ex_hotel_facilities_types_str";
+//    public static final String EX_KEY_HOTEL_STAR_TYPE_STR = "ex_hotel_star_types_str";
+//    public static final String EX_KEY_HOTEL_STAR_TYPE = "ex_hotel_star_types";
 
     private SeekBarPressure mSbDistance;
 
@@ -67,22 +67,34 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
     private int mThemeLeftSelector;
     private int mThemeRightSelector;
 
+    public HotelFilterBottomSheetDialog(@NonNull Context context) {
+
+        super(context);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.act_hotel_list_filter);
+
+        super.onCreate(savedInstanceState);
         initData();
         initContentView();
     }
 
+    private String typeStr, starTypeStr;
+
+    public void setDatas(List<FilterItems> typeDatas, List<FilterItems> starTypes, String[] prices, String typeStr, String starTypeStr) {
+
+        mTypesData = typeDatas;
+        mStarTypes = starTypes;
+        mPrice = prices;
+        this.typeStr = typeStr;
+        this.starTypeStr = starTypeStr;
+    }
 
     protected void initData() {
 
-        mTypesData = (List<FilterItems>) getIntent().getSerializableExtra(EX_KEY_HOTEL_FACILITIES_TYPE);
-        mStarTypes = (List<FilterItems>) getIntent().getSerializableExtra(EX_KEY_HOTEL_STAR_TYPE);
-        mPrice = getIntent().getStringArrayExtra(EX_KEY_HOTEL_PRICES_TYPE);
-        String typeStr = getIntent().getStringExtra(EX_KEY_HOTEL__FACILITIES_TYPE_STR);
-        String starTypeStr = getIntent().getStringExtra(EX_KEY_HOTEL_STAR_TYPE_STR);
         initTheme();
         if (typeStr != null && typeStr.length() > 0) {
 
@@ -116,12 +128,12 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
 
     protected void initContentView() {
         int width = DeviceUtil.getScreenWidth();
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, DeviceUtil.getScreenHeight()-DensityUtil.dip2px(20));
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, DeviceUtil.getScreenHeight()- DensityUtil.dip2px(20));
         LinearLayout llRoot = (LinearLayout) findViewById(R.id.llFilterRoot);
         llRoot.setLayoutParams(params);
 
         TextView tvDone = (TextView) findViewById(R.id.tvDone);
-        tvDone.setTextColor(getResources().getColorStateList(mThemeColor));
+        tvDone.setTextColor(getContext().getResources().getColorStateList(mThemeColor));
         tvDone.setOnClickListener(this);
         tvClear = (TextView) findViewById(R.id.tvClear);
         tvClear.setOnClickListener(this);
@@ -129,13 +141,6 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
         initSeekBar();
         initFilterView();
         changeCheckBoxState();
-        findViewById(R.id.v_shadow).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        });
     }
 
     private void initStarFilterView() {
@@ -239,12 +244,15 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
                         starsStr += "," + mStarTypeList.get(i);
                 }
 
-                Intent intent = new Intent();
-                intent.putExtra(HotelSearchFilterActivity.EX_KEY_HOTEL__FACILITIES_TYPE_STR, typeStr);
-                intent.putExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_PRICES_TYPE, mPrice);
-                intent.putExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_STAR_TYPE_STR, starsStr);
-                setResult(RESULT_OK, intent);
-                finish();
+//                Intent intent = new Intent();
+//                intent.putExtra(HotelSearchFilterActivity.EX_KEY_HOTEL__FACILITIES_TYPE_STR, typeStr);
+//                intent.putExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_PRICES_TYPE, mPrice);
+//                intent.putExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_STAR_TYPE_STR, starsStr);
+//                setResult(RESULT_OK, intent);
+//                finish();
+                dismiss();
+                if (mCallback != null)
+                    mCallback.callback(typeStr, mPrice, starsStr);
 
                 break;
             case R.id.tvClear://清空
@@ -277,7 +285,7 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
 
     private ImageView getSpaceView() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
-        ImageView imageView = new ImageView(this);
+        ImageView imageView = new ImageView(getContext());
         imageView.setLayoutParams(params);
         imageView.setBackgroundColor(Color.WHITE);
 
@@ -289,12 +297,12 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(36.0f));
         params.weight=1;
         params.setMargins(DensityUtil.dip2px(2),0,DensityUtil.dip2px(2),0);
-        CheckBox FilterCheckBox = new CheckBox(this);
-        FilterCheckBox.setButtonDrawable(getResources().getDrawable(android.R.color.transparent));
+        CheckBox FilterCheckBox = new CheckBox(getContext());
+        FilterCheckBox.setButtonDrawable(getContext().getResources().getDrawable(android.R.color.transparent));
         FilterCheckBox.setText(text);
         FilterCheckBox.setGravity(Gravity.CENTER);
         FilterCheckBox.setBackgroundResource(mThemeSelector);
-        FilterCheckBox.setTextColor(getResources().getColorStateList(R.color.selector_font_poilist_filter));
+        FilterCheckBox.setTextColor(getContext().getResources().getColorStateList(R.color.selector_font_poilist_filter));
         FilterCheckBox.setSingleLine();
         FilterCheckBox.setEllipsize(TextUtils.TruncateAt.END);//容错
         FilterCheckBox.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14.0f);
@@ -340,11 +348,11 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
     private CheckBox initCheckBox(String text) {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, DensityUtil.dip2px(30.0f));
-        CheckBox FilterCheckBox = new CheckBox(this);
-        FilterCheckBox.setButtonDrawable(getResources().getDrawable(android.R.color.transparent));
+        CheckBox FilterCheckBox = new CheckBox(getContext());
+        FilterCheckBox.setButtonDrawable(getContext().getResources().getDrawable(android.R.color.transparent));
         FilterCheckBox.setText(text);
         FilterCheckBox.setBackgroundResource(R.drawable.selector_bg_hotel_list_tag_filter);
-        FilterCheckBox.setTextColor(getResources().getColorStateList(R.color.selector_font_poilist_filter));
+        FilterCheckBox.setTextColor(getContext().getResources().getColorStateList(R.color.selector_font_poilist_filter));
         FilterCheckBox.setSingleLine();
         FilterCheckBox.setEllipsize(TextUtils.TruncateAt.END);//容错
         FilterCheckBox.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14.0f);
@@ -399,7 +407,7 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
             for (int i = 0; i < mListCb.size(); i++) {
                 if (!mTypeList.contains(mListCb.get(i).getTag())) {
                     mListCb.get(i).setBackgroundResource(R.drawable.selector_bg_hotel_list_tag_filter);
-                    mListCb.get(i).setTextColor(getResources().getColorStateList(R.color.selector_font_poilist_filter));
+                    mListCb.get(i).setTextColor(getContext().getResources().getColorStateList(R.color.selector_font_poilist_filter));
                 }
             }
         }
@@ -463,35 +471,11 @@ public class HotelSearchFilterActivity extends Activity implements View.OnClickL
         }
     }
 
-//    @Override
-//    public void finish() {
-//        overridePendingTransition(R.anim.anim_bottom_enter, R.anim.anim_bottom_finish);
-//        super.finish();
-//    }
-
-    /**
-     * 开启酒店条件筛选页面
-     *
-     * @param activity
-     * @param requestCode
-     * @param facilitiesTypes 设施的条件集合
-     * @param starTypes       星级的条件集合
-     * @param facTypesStr     已经选择的设施，中间用逗号分隔
-     * @param starTypeStr     已经选择的星级，中间用逗号分隔
-     * @param priceStrs       已经选择的价格区间
-     */
-    public static void startActivityForResult(Activity activity, int requestCode, List<FilterItems> facilitiesTypes,
-                                              List<FilterItems> starTypes, String facTypesStr, String starTypeStr,
-                                              String[] priceStrs) {
-
-        Intent intent = new Intent(activity, HotelSearchFilterActivity.class);
-        intent.putExtra(EX_KEY_HOTEL_FACILITIES_TYPE, (Serializable) facilitiesTypes);
-        intent.putExtra(EX_KEY_HOTEL_STAR_TYPE, (Serializable) starTypes);
-        intent.putExtra(EX_KEY_HOTEL__FACILITIES_TYPE_STR, facTypesStr);
-        intent.putExtra(EX_KEY_HOTEL_STAR_TYPE_STR, starTypeStr);
-        intent.putExtra(EX_KEY_HOTEL_PRICES_TYPE, priceStrs);
-//        activity.overridePendingTransition(R.anim.anim_bottom_enter, R.anim.anim_bottom_finish);
-        activity.startActivityForResult(intent, requestCode);
-
+    public interface Callback {
+        void callback(String facilities, String[] prices, String star);
+    }
+    private Callback mCallback;
+    public void setCallback(Callback callback) {
+        mCallback = callback;
     }
 }

@@ -150,12 +150,6 @@
         <activity
             android:name=".activity.hotel.CityHotelListActivity"
             android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".activity.hotel.HotelSearchFilterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/base_theme.dialog" />
-
         <activity
             android:name=".activity.hotel.SearchHotelActivity"
             android:screenOrientation="portrait" />

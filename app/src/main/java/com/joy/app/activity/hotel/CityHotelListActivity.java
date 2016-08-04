@@ -72,16 +72,16 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
             params.setCheckOutMills(end);
             hotelListFragment.reLoadHotelList(params);
         }
-        if ( REQ_FILTER == requestCode ) {
-            String facilities = data.getStringExtra(HotelSearchFilterActivity.EX_KEY_HOTEL__FACILITIES_TYPE_STR);
-            String price[] = data.getStringArrayExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_PRICES_TYPE);
-            String star = data.getStringExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_STAR_TYPE_STR);
-            params.setFacilities_ids(hotelSearchFilters.getFacilitiesIds(facilities));
-            params.setStar_ids(hotelSearchFilters.getStarIds(star));
-            params.setStars(star);
-            params.setFacilities(facilities);
-            params.setPrice_rangs(price);
-        }
+//        if ( REQ_FILTER == requestCode ) {
+//            String facilities = data.getStringExtra(HotelSearchFilterActivity.EX_KEY_HOTEL__FACILITIES_TYPE_STR);
+//            String price[] = data.getStringArrayExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_PRICES_TYPE);
+//            String star = data.getStringExtra(HotelSearchFilterActivity.EX_KEY_HOTEL_STAR_TYPE_STR);
+//            params.setFacilities_ids(hotelSearchFilters.getFacilitiesIds(facilities));
+//            params.setStar_ids(hotelSearchFilters.getStarIds(star));
+//            params.setStars(star);
+//            params.setFacilities(facilities);
+//            params.setPrice_rangs(price);
+//        }
         hotelListFragment.reLoadHotelList(params);
     }
 
@@ -179,7 +179,18 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
                 DayPickerActivity.startHotelDayPickerForResult(this, true, params.getCheckInMills(), params.getCheckOutMills(), REQ_DAY_PICK);
                 break;
             case R.id.ll_hotel_filter:
-                HotelSearchFilterActivity.startActivityForResult(this,REQ_FILTER,hotelSearchFilters.getFacilities(),hotelSearchFilters.getStars(),params.getFacilities(),params.getStars(),params.getPrice());
+//                HotelSearchFilterActivity.startActivityForResult(this,REQ_FILTER,hotelSearchFilters.getFacilities(),hotelSearchFilters.getStars(),params.getFacilities(),params.getStars(),params.getPrice());
+                HotelFilterBottomSheetDialog dialog = new HotelFilterBottomSheetDialog(this);
+                dialog.setDatas(hotelSearchFilters.getFacilities(), hotelSearchFilters.getStars(), params.getPrice(), params.getFacilities(), params.getStars());
+                dialog.setCallback((facilities, prices, star) -> {
+                    params.setFacilities_ids(hotelSearchFilters.getFacilitiesIds(facilities));
+                    params.setStar_ids(hotelSearchFilters.getStarIds(star));
+                    params.setStars(star);
+                    params.setFacilities(facilities);
+                    params.setPrice_rangs(prices);
+                    hotelListFragment.reLoadHotelList(params);
+                });
+                dialog.show();
                 break;
             case R.id.ll_hotel_list_sort:
                 showDialog();
