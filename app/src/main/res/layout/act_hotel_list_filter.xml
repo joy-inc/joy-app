@@ -27,10 +27,8 @@
             android:text="筛选"
             android:textColor="@color/black_trans60"
             android:textSize="16dp" />
-        <View
-            android:layout_marginBottom="20dp"
-            android:background="@color/qa_bg_split_line"
-            style="@style/Line.Dark.Horizontal"/>
+
+        <View style="@style/Line.Dark.Horizontal"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -40,6 +38,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingTop="20dp"
                 android:orientation="vertical">
 
                 <com.android.library.widget.JTextView

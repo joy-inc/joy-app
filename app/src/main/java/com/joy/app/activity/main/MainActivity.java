@@ -118,7 +118,6 @@ public class MainActivity extends BaseTabActivity {
     protected void initContentView() {
 
         super.initContentView();
-        setTabIndicatorHeight(DP_1_PX * 3);
         mMainActivityBC.initContentView();
     }
 

@@ -12,8 +12,10 @@ import com.android.library.ui.activity.BaseTabActivity;
 import com.android.library.ui.fragment.BaseUiFragment;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.view.fresco.FrescoIv;
+import com.joy.app.BuildConfig;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
+import com.joy.app.activity.hotel.CityHotelListActivity;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.ArrayList;
@@ -100,6 +102,11 @@ public class TabTestActivity extends BaseTabActivity {
         FrescoIv sdvAvatar = (FrescoIv) v.findViewById(R.id.sdvAvatar);
         sdvAvatar.setImageURI("http://static.qyer.com/data/avatar/000/66/51/28_avatar_big.jpg?v=1423838207");
         addTitleRightView(v, v1 -> showSnackbar("avatar"));
+
+        if (BuildConfig.DEBUG) {// 快捷入口
+
+            addTitleRightView(R.drawable.ic_poi_order_plus, v1 -> CityHotelListActivity.startActivity(this, "", ""));
+        }
     }
 
     @Override
@@ -107,7 +114,6 @@ public class TabTestActivity extends BaseTabActivity {
 
         super.initContentView();
         setTabTextColors(getResources().getColor(R.color.white_trans26), getResources().getColor(R.color.white));
-        setTabIndicatorColor(getResources().getColor(R.color.transparent));
 
         setFloatActionBtnEnable(R.drawable.ic_instagram_white, v -> {
 

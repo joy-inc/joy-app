@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="?selectableItemBackground"
     android:orientation="vertical">
     <LinearLayout
         android:orientation="horizontal"
@@ -20,16 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="123"
-            android:textSize="16dp"
-            />
+            android:textSize="16dp" />
         <ImageView
             android:id="@+id/iv_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_sort_selected"/>
-
+            android:src="@drawable/ic_sort_selected" />
     </LinearLayout>
-    <View
-        style="@style/Line.Dark.Horizontal"
-        android:background="@color/black_trans40"/>
+
+    <View style="@style/Line.Dark.Horizontal" />
+
 </LinearLayout>

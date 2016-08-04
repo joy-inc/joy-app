@@ -6,15 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.library.ui.activity.BaseHttpUiActivity;
-import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.utils.TextUtil;
 import com.android.library.view.ExBaseWidget;
+import com.android.library.view.bottomsheet.JBottomSheetRvDialog;
 import com.joy.app.R;
 import com.joy.app.activity.common.DayPickerActivity;
 import com.joy.app.adapter.hotel.HotelSortAdapter;
-import com.joy.app.bean.hotel.FilterItems;
 import com.joy.app.bean.hotel.HotelParams;
 import com.joy.app.bean.hotel.HotelSearchFilters;
 import com.joy.app.utils.JoyConstant;
@@ -143,25 +142,21 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         title.setText(String.format("%s酒店",str));
     }
 
-//    DialogPlus mDialog;
     private void showDialog() {
+
+        JBottomSheetRvDialog jbsDialog = new JBottomSheetRvDialog(this);
+
         HotelSortAdapter adapter = new HotelSortAdapter();
         adapter.setData(hotelSearchFilters.getOrderby());
         adapter.setSelect(params.getOrderby());
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<FilterItems>() {
-            @Override
-            public void onItemViewClick(int position, View clickView, FilterItems filterItems) {
-                params.setOrderby(filterItems.getValue());
-//                mDialog.dismiss();
-                hotelListFragment.reLoadHotelList(params);
-            }
+        adapter.setOnItemViewClickListener((position, clickView, filterItems) -> {
+            jbsDialog.dismiss();
+            params.setOrderby(filterItems.getValue());
+            hotelListFragment.reLoadHotelList(params);
         });
-//        mDialog = DialogPlus.newDialog(this)
-//                .setContentHolder(new ListHolder())
-//                .setCancelable(true)
-//                .setAdapter(adapter)
-//                .create();
-//        mDialog.show();
+
+        jbsDialog.setAdapter(adapter);
+        jbsDialog.show();
     }
 
     @Override
@@ -189,8 +184,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
             case R.id.ll_hotel_list_sort:
                 showDialog();
             default:
-
+                break;
         }
-
     }
 }
