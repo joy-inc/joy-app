@@ -26,9 +26,8 @@ public class LvLoadMoreAdapter extends ExAdapter<Special> {
 
     public class ViewHolder extends ExViewHolderBase {
 
-        @BindView(R.id.sdvPhoto)
-        FrescoIv sdvPhoto;
-        @BindView(R.id.tvName)   TextView tvName;
+        @BindView(R.id.sdvPhoto)    FrescoIv    sdvPhoto;
+        @BindView(R.id.tvName)      TextView    tvName;
 
         @Override
         public int getConvertViewRid() {
@@ -40,14 +39,7 @@ public class LvLoadMoreAdapter extends ExAdapter<Special> {
         public void initConvertView(View convertView) {
 
             ButterKnife.bind(this, convertView);
-            convertView.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    callbackOnItemViewClickListener(mPosition, v);
-                }
-            });
+            convertView.setOnClickListener(v -> callbackOnItemViewClickListener(mPosition, v));
         }
 
         @Override

@@ -113,7 +113,6 @@ public class TabTestActivity extends BaseTabActivity {
     protected void initContentView() {
 
         super.initContentView();
-        setTabTextColors(getResources().getColor(R.color.white_trans26), getResources().getColor(R.color.white));
 
         setFloatActionBtnEnable(R.drawable.ic_instagram_white, v -> {
 

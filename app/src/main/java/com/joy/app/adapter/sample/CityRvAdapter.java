@@ -47,9 +47,8 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
 
     public class ViewHolder extends ExRvViewHolder<HotCityItem> {
 
-        @BindView(R.id.sdvPhoto)
-        FrescoIv sdvPhoto;
-        @BindView(R.id.tvName)   TextView         tvName;
+        @BindView(R.id.sdvPhoto)    FrescoIv    sdvPhoto;
+        @BindView(R.id.tvName)      TextView    tvName;
 
         public ViewHolder(final View itemView) {
 

@@ -29,17 +29,10 @@ public class CityDetailRvAdapter extends ExRvAdapter<CityDetailRvAdapter.ViewHol
 
     static class ViewHolder extends ExRvViewHolder<Trip> {
 
-        @BindView(R.id.sdvPhoto)
-        FrescoIv sdvPhoto;
-
-        @BindView(R.id.sdvAvatar)
-        FrescoIv sdvAvatar;
-
-        @BindView(R.id.tvTitle)
-        TextView tvTitle;
-
-        @BindView(R.id.tvName)
-        TextView tvName;
+        @BindView(R.id.sdvPhoto)    FrescoIv    sdvPhoto;
+        @BindView(R.id.sdvAvatar)   FrescoIv    sdvAvatar;
+        @BindView(R.id.tvTitle)     TextView    tvTitle;
+        @BindView(R.id.tvName)      TextView    tvName;
 
         ViewHolder(View view) {
 
@@ -51,7 +44,7 @@ public class CityDetailRvAdapter extends ExRvAdapter<CityDetailRvAdapter.ViewHol
         void onItemClick() {
 
             if (BuildConfig.DEBUG)
-                showToast("onClick--> position = " + getPosition());
+                showToast("onClick--> position = " + getLayoutPosition());
         }
 
         @Override

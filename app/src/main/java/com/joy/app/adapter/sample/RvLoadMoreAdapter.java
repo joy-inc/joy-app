@@ -26,9 +26,8 @@ public class RvLoadMoreAdapter extends ExRvAdapter<RvLoadMoreAdapter.ViewHolder,
 
     public class ViewHolder extends ExRvViewHolder<Special> {
 
-        @BindView(R.id.sdvPhoto)
-        FrescoIv sdvPhoto;
-        @BindView(R.id.tvName)   TextView tvName;
+        @BindView(R.id.sdvPhoto)    FrescoIv    sdvPhoto;
+        @BindView(R.id.tvName)      TextView    tvName;
 
         public ViewHolder(View itemView) {
 
