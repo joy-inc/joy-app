@@ -11,6 +11,9 @@ import com.android.library.view.recyclerview.DisplayableItem;
 import com.joy.app.adapter.sample.DelegateAdapter1;
 import com.joy.app.adapter.sample.DelegateAdapter2;
 import com.joy.app.adapter.sample.DelegateAdapter3;
+import com.joy.app.adapter.sample.DelegateTypeAdapter1;
+import com.joy.app.adapter.sample.DelegateTypeAdapter2;
+import com.joy.app.adapter.sample.DelegateTypeAdapter3;
 import com.joy.app.bean.sample.DelegateBean1;
 import com.joy.app.bean.sample.DelegateBean2;
 import com.joy.app.bean.sample.DelegateBean3;
@@ -34,11 +37,32 @@ public class HomeFragment extends BaseHttpRvFragment2 {
     protected void initContentView() {
 
         List<DisplayableItem> items = new ArrayList<>();
-        items.addAll(Arrays.asList(new DelegateBean1("DelegateBean1"), new DelegateBean1("DelegateBean1"), new DelegateBean1("DelegateBean1")));
-        items.addAll(Arrays.asList(new DelegateBean2("DelegateBean2"), new DelegateBean2("DelegateBean2"), new DelegateBean2("DelegateBean2")));
-        items.addAll(Arrays.asList(new DelegateBean3("DelegateBean3"), new DelegateBean3("DelegateBean3"), new DelegateBean3("DelegateBean3")));
+        items.addAll(Arrays.asList(
+                new DelegateBean1(1, "DelegateBean1 with type"),
+                new DelegateBean1(2, "DelegateBean2 with type"),
+                new DelegateBean1(3, "DelegateBean3 with type"),
+                new DelegateBean1(1, "DelegateBean1 with type"),
+                new DelegateBean1(2, "DelegateBean2 with type"),
+                new DelegateBean1(3, "DelegateBean3 with type"),
+                new DelegateBean1(1, "DelegateBean1 with type"),
+                new DelegateBean1(2, "DelegateBean2 with type"),
+                new DelegateBean1(3, "DelegateBean3 with type"),
+
+                new DelegateBean1("DelegateBean1 without type"),
+                new DelegateBean1("DelegateBean1 without type"),
+                new DelegateBean1("DelegateBean1 without type"),
+                new DelegateBean2("DelegateBean2 without type"),
+                new DelegateBean2("DelegateBean2 without type"),
+                new DelegateBean2("DelegateBean2 without type"),
+                new DelegateBean3("DelegateBean3 without type"),
+                new DelegateBean3("DelegateBean3 without type"),
+                new DelegateBean3("DelegateBean3 without type")));
 
         AdapterDelegateManager delegateManager = new AdapterDelegateManager();
+        delegateManager.addDelegate(DelegateTypeAdapter1.TYPE_VALUE, new DelegateTypeAdapter1());
+        delegateManager.addDelegate(DelegateTypeAdapter2.TYPE_VALUE, new DelegateTypeAdapter2());
+        delegateManager.addDelegate(DelegateTypeAdapter3.TYPE_VALUE, new DelegateTypeAdapter3());
+
         delegateManager.addDelegate(new DelegateAdapter1());
         delegateManager.addDelegate(new DelegateAdapter2());
         delegateManager.addDelegate(new DelegateAdapter3());
