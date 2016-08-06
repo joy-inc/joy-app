@@ -44,7 +44,7 @@ public class CommentRvAdapter extends ExRvAdapter<CommentRvAdapter.ViewHolder, C
         }
 
         @Override
-        protected void invalidateItemView(int position, CommentItem commentItem) {
+        public void invalidateItemView(int position, CommentItem commentItem) {
 
             if (commentItem != null) {
 

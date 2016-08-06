@@ -84,7 +84,7 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
         }
 
         @Override
-        protected void invalidateItemView(int position, PlanItem planItem) {
+        public void invalidateItemView(int position, PlanItem planItem) {
 
             sdvPoiPhoto.setImageURI(planItem.getPic_url());
             jtvCnname.setText(planItem.getCn_name());

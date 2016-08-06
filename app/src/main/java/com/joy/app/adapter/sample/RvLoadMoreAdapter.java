@@ -36,7 +36,7 @@ public class RvLoadMoreAdapter extends ExRvAdapter<RvLoadMoreAdapter.ViewHolder,
         }
 
         @Override
-        protected void invalidateItemView(int position, Special special) {
+        public void invalidateItemView(int position, Special special) {
 
             sdvPhoto.setImageURI(special.getPhoto());
             tvName.setText(special.getTitle());

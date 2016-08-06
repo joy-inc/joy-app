@@ -48,7 +48,7 @@ public class HotelSortAdapter extends ExRvAdapter<HotelSortAdapter.ViewHolder, F
         }
 
         @Override
-        protected void invalidateItemView(int position, FilterItems filterItems) {
+        public void invalidateItemView(int position, FilterItems filterItems) {
 
             jtvName.setText(filterItems.getName());
             if (select == filterItems.getValue()) {

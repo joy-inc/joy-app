@@ -56,7 +56,7 @@ public class MainRouteRvAdapter extends ExRvAdapter<MainRouteRvAdapter.ViewHolde
         }
 
         @Override
-        protected void invalidateItemView(int position, MainRoute mainRoute) {
+        public void invalidateItemView(int position, MainRoute mainRoute) {
 
             if (mainRoute != null) {
 

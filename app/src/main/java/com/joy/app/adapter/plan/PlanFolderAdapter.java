@@ -53,7 +53,7 @@ public class PlanFolderAdapter extends ExRvAdapter<PlanFolderAdapter.ViewHolder,
         }
 
         @Override
-        protected void invalidateItemView(int position, PlanFolder planFolder) {
+        public void invalidateItemView(int position, PlanFolder planFolder) {
             if (poiId.equals(planFolder.getFolder_id())) {
                 jtvTitle.setTextColor(select);
                 ViewUtil.showView(ivSelect);

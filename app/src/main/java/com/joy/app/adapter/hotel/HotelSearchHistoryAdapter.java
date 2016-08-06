@@ -33,7 +33,7 @@ public class HotelSearchHistoryAdapter extends ExRvAdapter<HotelSearchHistoryAda
         JTextView jtvTitle;
 
         @Override
-        protected void invalidateItemView(int position, String s) {
+        public void invalidateItemView(int position, String s) {
             if (position == 0 ){
                 ViewUtil.showView(llHistory);
             }else{

@@ -67,7 +67,7 @@ public class OrderDetailAdapter extends ExRvAdapter <OrderDetailAdapter.ViewHold
         }
 
         @Override
-        protected void invalidateItemView(int position, OrderDetail orderDetail) {
+        public void invalidateItemView(int position, OrderDetail orderDetail) {
 
             Title.setText(orderDetail.getOrderTitle());
             Infor.setText(orderDetail.getOrderInfor());

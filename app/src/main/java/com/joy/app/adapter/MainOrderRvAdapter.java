@@ -97,7 +97,7 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
         }
 
         @Override
-        protected void invalidateItemView(int position, MainOrder mainOrder) {
+        public void invalidateItemView(int position, MainOrder mainOrder) {
 
             if (mainOrder != null) {
 

@@ -52,7 +52,7 @@ public class TabTestActivity extends BaseTabActivity {
 //            initActComponent(f1, f2);
 //        } else {
 
-        initActComponent(getFragment(0), getFragment(1));
+        initActComponent(getFragment(1), getFragment(2));
 //        }
 
         RxPermissions.getInstance(this)
@@ -134,6 +134,11 @@ public class TabTestActivity extends BaseTabActivity {
         if (CollectionUtil.isNotEmpty(fs)) {
 
             for (Fragment f : fs)
+                if (f instanceof HomeFragment) {
+                    fragments.add(((HomeFragment) f).setLableText("首页"));
+                    break;
+                }
+            for (Fragment f : fs)
                 if (f instanceof MvpTestFragment) {
                     fragments.add(((MvpTestFragment) f).setLableText("目的地"));
                     break;
@@ -151,10 +156,12 @@ public class TabTestActivity extends BaseTabActivity {
         }
 
         if (fragments.size() == 0)
-            fragments.add(MvpTestFragment.instantiate(this).setLableText("目的地"));
+            fragments.add(HomeFragment.instantiate(this).setLableText("首页"));
         if (fragments.size() == 1)
-            fragments.add(MvpTestRvFragment.instantiate(this).setLableText("旅行规划"));
+            fragments.add(MvpTestFragment.instantiate(this).setLableText("目的地"));
         if (fragments.size() == 2)
+            fragments.add(MvpTestRvFragment.instantiate(this).setLableText("旅行规划"));
+        if (fragments.size() == 3)
             fragments.add(RvTestFragment.instantiate(this).setLableText("订单"));
 
         return fragments;

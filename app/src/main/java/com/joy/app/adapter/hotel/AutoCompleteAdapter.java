@@ -42,7 +42,7 @@ public class AutoCompleteAdapter extends ExRvAdapter<AutoCompleteAdapter.ViewHol
         }
 
         @Override
-        protected void invalidateItemView(int position, EntryEntity entryEntity) {
+        public void invalidateItemView(int position, EntryEntity entryEntity) {
             tvCnname.setText(entryEntity.getCnname());
             tvEnname.setText(entryEntity.getEnname());
         }

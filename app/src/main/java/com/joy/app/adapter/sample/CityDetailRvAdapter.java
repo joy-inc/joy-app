@@ -48,7 +48,7 @@ public class CityDetailRvAdapter extends ExRvAdapter<CityDetailRvAdapter.ViewHol
         }
 
         @Override
-        protected void invalidateItemView(int position, Trip trip) {
+        public void invalidateItemView(int position, Trip trip) {
 
             sdvPhoto.setImageURI(trip.getPhoto());
             tvTitle.setText(trip.getTitle());

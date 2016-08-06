@@ -56,7 +56,7 @@ public class SearchHotelListAdapter extends ExRvAdapter<SearchHotelListAdapter.V
 
 
         @Override
-        protected void invalidateItemView(int position, HotelEntity hotelEntity) {
+        public void invalidateItemView(int position, HotelEntity hotelEntity) {
             ivHotelItemPhoto.setImageURI(hotelEntity.getPhoto());
             tvHotelCityCnname.setText(hotelEntity.getCnname());
             tvHotelCityEnname.setText(hotelEntity.getEnname());

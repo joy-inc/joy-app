@@ -38,7 +38,7 @@ public class CityRouteAdapter extends ExRvAdapter<CityRouteAdapter.ViewHolder, C
         }
 
         @Override
-        protected void invalidateItemView(int position, CityRoute cityRoute) {
+        public void invalidateItemView(int position, CityRoute cityRoute) {
 
             sdvPhoto.setImageURI(cityRoute.getPic_url());
             jtvDays.setText(cityRoute.getRoute_day());

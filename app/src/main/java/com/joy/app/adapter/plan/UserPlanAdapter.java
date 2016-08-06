@@ -52,7 +52,7 @@ public class UserPlanAdapter extends ExRvAdapter<UserPlanAdapter.ViewHolder, Pla
         }
 
         @Override
-        protected void invalidateItemView(int position, PlanFolder planFolder) {
+        public void invalidateItemView(int position, PlanFolder planFolder) {
 
             mPhoto.setImageURI(planFolder.getPic_url());
             mCount.setText(planFolder.getChildren_num() + "");

@@ -40,7 +40,7 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
         }
 
         @Override
-        protected void invalidateItemView(int position, CityFun.ListEntity entity) {
+        public void invalidateItemView(int position, CityFun.ListEntity entity) {
 
             sdvPhoto.setImageURI(entity.getPic_url());
             jtvCnName.setText(entity.getTopic_name());

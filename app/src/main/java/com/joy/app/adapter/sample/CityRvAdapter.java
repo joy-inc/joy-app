@@ -58,7 +58,7 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
         }
 
         @Override
-        protected void invalidateItemView(int position, HotCityItem hotCityItem) {
+        public void invalidateItemView(int position, HotCityItem hotCityItem) {
 
             sdvPhoto.setImageURI(hotCityItem.getPhoto());
             tvName.setText(hotCityItem.getCnname() + "\n" + hotCityItem.getEnname());
