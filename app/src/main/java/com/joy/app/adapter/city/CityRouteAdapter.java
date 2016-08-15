@@ -26,15 +26,15 @@ public class CityRouteAdapter extends ExRvAdapter<CityRouteAdapter.ViewHolder, C
 
     public class ViewHolder extends ExRvViewHolder<CityRoute> {
 
-        @BindView(R.id.sdvPhoto)
-        FrescoIv sdvPhoto;
-        @BindView(R.id.jtvDays)  JTextView        jtvDays;
-        @BindView(R.id.jtvTitle) JTextView        jtvTitle;
+        @BindView(R.id.sdvPhoto) FrescoIv   sdvPhoto;
+        @BindView(R.id.jtvDays)  JTextView  jtvDays;
+        @BindView(R.id.jtvTitle) JTextView  jtvTitle;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View v) {
 
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+            super(v);
+            ButterKnife.bind(this, v);
+            itemView.setOnClickListener(v1 -> callbackOnItemClickListener(getLayoutPosition(), v1));
         }
 
         @Override

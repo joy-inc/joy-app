@@ -49,7 +49,7 @@ public class HotelListAdapter extends ExRvAdapter<HotelListAdapter.ViewHolder,Ho
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
+                    callbackOnItemClickListener(getLayoutPosition(), itemView);
                 }
             });
         }

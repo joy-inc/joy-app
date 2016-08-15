@@ -3,13 +3,11 @@ package com.joy.app.activity.hotel;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 
-import com.android.library.ui.fragment.BaseHttpRvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.listener.OnItemClickListener;
+import com.android.library.ui.fragment.BaseHttpRvFragment;
 import com.android.library.utils.TextUtil;
-import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.joy.app.adapter.hotel.AutoCompleteAdapter;
 import com.joy.app.bean.hotel.AutoComplete;
 import com.joy.app.utils.http.HotelHtpUtil;
@@ -21,9 +19,9 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店搜索联想    <br>
  */
-public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> implements RecyclerAdapter.OnItemClickListener {
+public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> {
     String id ,keyword;
-    OnItemViewClickListener clickListener;
+    OnItemClickListener clickListener;
 
     public static AutoCompleteFragment instantiate(Context context, String id,String keyword) {
         Bundle bundle = new Bundle();
@@ -51,12 +49,12 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> imple
         super.initContentView();
         AutoCompleteAdapter autoCompleteAdapter = new AutoCompleteAdapter();
         if (clickListener != null){
-            autoCompleteAdapter.setOnItemViewClickListener(clickListener);
+            autoCompleteAdapter.setOnItemClickListener(clickListener);
         }
         setAdapter(autoCompleteAdapter);
     }
 
-    public void setClickListener(OnItemViewClickListener clickListener) {
+    public void setClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;
 
     }
@@ -71,11 +69,6 @@ public class AutoCompleteFragment extends BaseHttpRvFragment<AutoComplete> imple
     public void clearData(){
         if (getAdapter() == null)return;
         getAdapter().clear();
-    }
-
-    @Override
-    public void onItemClick(RecyclerView.ViewHolder holder, int position) {
-
     }
 
     @Override

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.library.ui.activity.BaseHttpLvActivity;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.view.fresco.FrescoIv;
 import com.joy.app.R;
@@ -57,10 +57,10 @@ public class LvLoadMoreTestActivity extends BaseHttpLvActivity<List<Special>> {
     protected void initContentView() {
 
         LvLoadMoreAdapter adapter = new LvLoadMoreAdapter();
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<Special>() {
+        adapter.setOnItemClickListener(new OnItemClickListener<Special>() {
 
             @Override
-            public void onItemViewClick(int position, View clickView, Special special) {
+            public void onItemClick(int position, View clickView, Special special) {
 
                 showToast(special.getTitle());
             }

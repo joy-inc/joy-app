@@ -149,7 +149,7 @@ public class CityHotelListActivity extends BaseHttpUiActivity<HotelSearchFilters
         HotelSortAdapter adapter = new HotelSortAdapter();
         adapter.setData(hotelSearchFilters.getOrderby());
         adapter.setSelect(params.getOrderby());
-        adapter.setOnItemViewClickListener((position, clickView, filterItems) -> {
+        adapter.setOnItemClickListener((position, clickView, filterItems) -> {
             jbsDialog.dismiss();
             params.setOrderby(filterItems.getValue());
             hotelListFragment.reLoadHotelList(params);

@@ -29,10 +29,11 @@ public class RvLoadMoreAdapter extends ExRvAdapter<RvLoadMoreAdapter.ViewHolder,
         @BindView(R.id.sdvPhoto)    FrescoIv    sdvPhoto;
         @BindView(R.id.tvName)      TextView    tvName;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View v) {
 
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+            super(v);
+            ButterKnife.bind(this, v);
+            v.setOnClickListener(v1 -> callbackOnItemClickListener(getLayoutPosition(), v1));
         }
 
         @Override

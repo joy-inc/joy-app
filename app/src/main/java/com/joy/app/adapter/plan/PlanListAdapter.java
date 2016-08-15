@@ -71,13 +71,13 @@ public class PlanListAdapter extends ExRvAdapter<PlanListAdapter.ViewHolder, Pla
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
+                    callbackOnItemClickListener(getLayoutPosition(), itemView);
                 }
             });
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    callbackOnItemViewLongClickListener(getLayoutPosition(),itemView);
+                    callbackOnItemLongClickListener(getLayoutPosition(),itemView);
                     return true;
                 }
             });

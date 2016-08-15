@@ -36,6 +36,8 @@ public class HomeFragment extends BaseHttpRvFragment2 {
     @Override
     protected void initContentView() {
 
+        setSwipeRefreshEnable(false);
+
         List<DisplayableItem> items = new ArrayList<>();
         items.addAll(Arrays.asList(
                 new DelegateBean1(1, "DelegateBean1 with type"),

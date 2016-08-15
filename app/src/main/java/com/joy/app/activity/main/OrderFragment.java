@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.android.library.ui.fragment.BaseHttpRvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.joy.app.JoyApplication;
@@ -79,10 +79,10 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
         super.initContentView();
         MainOrderRvAdapter adapter = new MainOrderRvAdapter();
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<MainOrder>() {
+        adapter.setOnItemClickListener(new OnItemClickListener<MainOrder>() {
 
             @Override
-            public void onItemViewClick(int position, View clickView, MainOrder data) {
+            public void onItemClick(int position, View clickView, MainOrder data) {
 
                 if (clickView.getId() == R.id.acbPay) {
                     OrderPayActivity.startActivity(getActivity(), data.getOrder_id(), null);

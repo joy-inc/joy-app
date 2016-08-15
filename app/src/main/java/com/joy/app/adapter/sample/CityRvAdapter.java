@@ -54,7 +54,7 @@ public class CityRvAdapter extends ExRvAdapter<CityRvAdapter.ViewHolder, HotCity
 
             super(itemView);
             ButterKnife.bind(this, itemView);
-            tvName.setOnClickListener(v -> callbackOnItemViewClickListener(getLayoutPosition(), itemView));
+            tvName.setOnClickListener(v -> callbackOnItemClickListener(getLayoutPosition(), itemView));
         }
 
         @Override

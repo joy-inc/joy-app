@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.android.library.BaseApplication;
 import com.android.library.ui.activity.BaseUiActivity;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.TextUtil;
@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
  * @author litong  <br>
  * @Description 酒店搜索    <br>
  */
-public class SearchHotelActivity extends BaseUiActivity implements OnItemViewClickListener,TextView.OnEditorActionListener {
+public class SearchHotelActivity extends BaseUiActivity implements OnItemClickListener,TextView.OnEditorActionListener {
 
 
     @BindView(R.id.jrv_history)
@@ -160,7 +160,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
         }
         if (historyAdapter == null){
             historyAdapter = new HotelSearchHistoryAdapter();
-            historyAdapter.setOnItemViewClickListener(this);
+            historyAdapter.setOnItemClickListener(this);
         }
         jrvHistory.setAdapter(historyAdapter);
         historyAdapter.clear();
@@ -228,7 +228,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
             if (autoCompleteAdapter == null){
                 autoCompleteAdapter = new AutoCompleteAdapter();
                 autoCompleteAdapter.setData(new ArrayList<EntryEntity>());
-                autoCompleteAdapter.setOnItemViewClickListener(this);
+                autoCompleteAdapter.setOnItemClickListener(this);
             }
             jrvHistory.setAdapter(autoCompleteAdapter);
             state = autocomplete_state;
@@ -305,7 +305,7 @@ public class SearchHotelActivity extends BaseUiActivity implements OnItemViewCli
     }
 
     @Override
-    public void onItemViewClick(int position, View clickView, Object o) {
+    public void onItemClick(int position, View clickView, Object o) {
         if (clickView == null){
             clearHistoryData();
         }else{

@@ -39,7 +39,7 @@ public class LvLoadMoreAdapter extends ExAdapter<Special> {
         public void initConvertView(View convertView) {
 
             ButterKnife.bind(this, convertView);
-            convertView.setOnClickListener(v -> callbackOnItemViewClickListener(mPosition, v));
+            convertView.setOnClickListener(v -> callbackOnItemClickListener(mPosition, v));
         }
 
         @Override

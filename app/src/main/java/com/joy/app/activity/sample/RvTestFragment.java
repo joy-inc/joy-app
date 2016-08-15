@@ -36,7 +36,7 @@ public class RvTestFragment extends BaseHttpRvFragment<List<HotCityItem>> {
     protected void initContentView() {
 
         CityRvAdapter adapter = new CityRvAdapter();
-        adapter.setOnItemViewClickListener((position, clickView, hotCityItem) -> {
+        adapter.setOnItemClickListener((position, clickView, hotCityItem) -> {
 
 //            DetailTestActivity.startActivity(getActivity(), clickView, hotCityItem.getId(), hotCityItem.getPhoto(), hotCityItem.getCnname(), hotCityItem.getEnname());
 //            DetailTestActivity2.startActivity(getActivity(), clickView, hotCityItem.getId(), hotCityItem.getPhoto(), hotCityItem.getCnname(), hotCityItem.getEnname());

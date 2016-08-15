@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.android.library.ui.fragment.BaseHttpRvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
@@ -126,9 +126,9 @@ public class TravelPlanFragment extends BaseHttpRvFragment<List<PlanFolder>> {
     protected void initContentView() {
 
         UserPlanAdapter adapter = new UserPlanAdapter();
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
+        adapter.setOnItemClickListener(new OnItemClickListener<PlanFolder>() {
             @Override
-            public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
+            public void onItemClick(int position, View clickView, PlanFolder planFolder) {
 
                 if (planFolder != null){
                     UserPlanListActivity.startActivityById(getActivity(), planFolder.getFolder_id(), planFolder.getFolder_name(), 1);

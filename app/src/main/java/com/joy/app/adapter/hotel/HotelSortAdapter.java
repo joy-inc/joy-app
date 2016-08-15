@@ -43,7 +43,7 @@ public class HotelSortAdapter extends ExRvAdapter<HotelSortAdapter.ViewHolder, F
             ButterKnife.bind(this, v);
             v.setOnClickListener(v1 -> {
                 select = getLayoutPosition();
-                callbackOnItemViewClickListener(select, v1);
+                callbackOnItemClickListener(select, v1);
             });
         }
 

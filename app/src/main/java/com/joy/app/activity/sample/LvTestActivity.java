@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.library.ui.activity.BaseHttpLvActivity;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.JoyApplication;
 import com.joy.app.R;
@@ -44,10 +44,10 @@ public class LvTestActivity extends BaseHttpLvActivity<List<HotCityItem>> {
     protected void initContentView() {
 
         CityLvAdapter adapter = new CityLvAdapter();
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<HotCityItem>() {
+        adapter.setOnItemClickListener(new OnItemClickListener<HotCityItem>() {
 
             @Override
-            public void onItemViewClick(int position, View clickView, HotCityItem hotCityItem) {
+            public void onItemClick(int position, View clickView, HotCityItem hotCityItem) {
 
                 DetailTestActivity.startActivity(LvTestActivity.this, clickView.findViewById(R.id.sdvPhoto), hotCityItem.getId(), hotCityItem.getPhoto());
             }

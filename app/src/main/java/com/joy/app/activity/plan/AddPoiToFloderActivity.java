@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.library.BaseApplication;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
 import com.android.library.utils.CollectionUtil;
@@ -186,9 +186,9 @@ public class AddPoiToFloderActivity extends Activity {
             jrvList.setLayoutManager(new LinearLayoutManager(this));
             adapter = new PlanFolderAdapter();
             adapter.setName(FolderId);
-            adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanFolder>() {
+            adapter.setOnItemClickListener(new OnItemClickListener<PlanFolder>() {
                 @Override
-                public void onItemViewClick(int position, View clickView, PlanFolder planFolder) {
+                public void onItemClick(int position, View clickView, PlanFolder planFolder) {
                     if (planFolder.getFolder_name().equals(FolderId)) return;
                     showLoading();
                     addPoi(planFolder);

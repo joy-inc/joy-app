@@ -42,8 +42,9 @@ public class RvLoadMoreTestActivity extends BaseHttpRvActivity<List<Special>> {
     protected void initContentView() {
 
         setPageLimit(10);
-        setAdapter(new RvLoadMoreAdapter());
-        setOnItemClickListener((holder, position) -> showSnackbar("item: " + position));
+        RvLoadMoreAdapter adapter = new RvLoadMoreAdapter();
+        adapter.setOnItemClickListener((p, v, t) -> showSnackbar("item: " + p));
+        setAdapter(adapter);
         getRecyclerView().setItemAnimator(new ItemAddAnimator(getPageLimit()));
         getRecyclerView().addItemDecoration(
                 new ItemDecoration.Builder(this)

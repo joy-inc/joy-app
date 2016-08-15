@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
-import android.support.v7.widget.RecyclerView;
 
-import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.utils.TextUtil;
-import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
 import com.joy.app.activity.common.WebViewActivity;
@@ -64,16 +62,9 @@ public class CityFunActivity extends BaseHttpRvActivity<CityFun> {
     protected void initContentView() {
 
         setBackgroundResource(R.color.color_primary);
-        setAdapter(new CityFunAdapter());
-        setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
-
-                CityFun.ListEntity entity = (CityFun.ListEntity) getAdapter().getItem(position);
-                WebViewActivity.startActivityNoTitle(CityFunActivity.this, entity.getTopic_url(), mType.getShareType());
-            }
-        });
+        CityFunAdapter adapter = new CityFunAdapter();
+        adapter.setOnItemClickListener((p, v, t) -> WebViewActivity.startActivityNoTitle(CityFunActivity.this, t.getTopic_url(), mType.getShareType()));
+        setAdapter(adapter);
     }
 
     @Override

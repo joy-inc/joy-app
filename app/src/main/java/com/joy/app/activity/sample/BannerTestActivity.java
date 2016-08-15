@@ -9,7 +9,7 @@ import android.view.View;
 
 //import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.android.library.ui.activity.BaseUiActivity;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.view.banner.BannerAdapter;
 import com.android.library.view.banner.BannerImage;
 import com.android.library.view.banner.BannerWidget;
@@ -68,10 +68,10 @@ public class BannerTestActivity extends BaseUiActivity {
             }
         });
         adapter.setData(getEntries());
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<TestEntry>() {
+        adapter.setOnItemClickListener(new OnItemClickListener<TestEntry>() {
 
             @Override
-            public void onItemViewClick(int position, View clickView, TestEntry testEntry) {
+            public void onItemClick(int position, View clickView, TestEntry testEntry) {
 
                 showToast(testEntry.getCnname() + ": " + position);
             }

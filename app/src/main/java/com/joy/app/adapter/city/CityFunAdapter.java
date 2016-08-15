@@ -33,10 +33,11 @@ public class CityFunAdapter extends ExRvAdapter<CityFunAdapter.ViewHolder, CityF
         @BindView(R.id.jtvTitle)    JTextView   jtvTitle;
         @BindView(R.id.jtvRecNum)   JTextView   jtvRecNum;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View v) {
 
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+            super(v);
+            ButterKnife.bind(this, v);
+            v.setOnClickListener(v1 -> callbackOnItemClickListener(getLayoutPosition(), v1));
         }
 
         @Override

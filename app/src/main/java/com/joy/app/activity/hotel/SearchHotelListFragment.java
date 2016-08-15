@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.android.library.ui.fragment.BaseHttpRvFragment;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.hotel.SearchHotelListAdapter;
@@ -21,7 +21,7 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemViewClickListener {
+public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemClickListener {
     HotelParams params;
 
     public static SearchHotelListFragment instantiate(Context context, HotelParams hotelParams) {
@@ -47,7 +47,7 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
     protected void initContentView() {
         super.initContentView();
         SearchHotelListAdapter adapter = new SearchHotelListAdapter();
-        adapter.setOnItemViewClickListener(this);
+        adapter.setOnItemClickListener(this);
         setAdapter(adapter);
         setLoadMoreDarkTheme();
     }
@@ -67,7 +67,7 @@ public class SearchHotelListFragment extends BaseHttpRvFragment<HotelList> imple
     }
 
     @Override
-    public void onItemViewClick(int position, View clickView, Object o) {
+    public void onItemClick(int position, View clickView, Object o) {
         HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position);
         WebViewActivity.startHotelActivity(getActivity(), hotelEntity.getLink());
     }

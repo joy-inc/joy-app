@@ -3,14 +3,12 @@ package com.joy.app.activity.city;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.httptask.ObjectResponse;
+import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.utils.TextUtil;
-import com.android.library.view.recyclerview.RecyclerAdapter;
 import com.android.library.view.fresco.FrescoIv;
 import com.android.library.widget.JTextView;
 import com.joy.app.R;
@@ -66,16 +64,9 @@ public class CityActivity extends BaseHttpRvActivity<List<CityRoute>> implements
 
         setBackgroundResource(R.color.color_primary);
         setSwipeRefreshEnable(false);
-        setAdapter(new CityRouteAdapter());
-        setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
-
-                CityRoute cityRoute = (CityRoute) getAdapter().getItem(position);
-                WebViewActivity.startActivityNoTitle(CityActivity.this, cityRoute.getRoute_url(), WebViewActivity.TYPE_CITY_RECMMMEND);
-            }
-        });
+        CityRouteAdapter adapter = new CityRouteAdapter();
+        adapter.setOnItemClickListener((p, v, t) -> WebViewActivity.startActivityNoTitle(CityActivity.this, t.getRoute_url(), WebViewActivity.TYPE_CITY_RECMMMEND));
+        setAdapter(adapter);
     }
 
     private void executeCityDetail() {

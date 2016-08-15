@@ -48,13 +48,13 @@ public class HotelSearchHistoryAdapter extends ExRvAdapter<HotelSearchHistoryAda
             jtvTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callbackOnItemViewClickListener(getLayoutPosition(), v);
+                    callbackOnItemClickListener(getLayoutPosition(), v);
                 }
             });
             jtvHistoryClear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callbackOnItemViewClickListener(getLayoutPosition(),null);
+                    callbackOnItemClickListener(getLayoutPosition(),null);
                 }
             });
         }

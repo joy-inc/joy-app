@@ -47,7 +47,7 @@ public class PlanFolderAdapter extends ExRvAdapter<PlanFolderAdapter.ViewHolder,
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callbackOnItemViewClickListener(getLayoutPosition(), v);
+                    callbackOnItemClickListener(getLayoutPosition(), v);
                 }
             });
         }

@@ -75,7 +75,7 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), itemView);
+                    callbackOnItemClickListener(getLayoutPosition(), itemView);
                 }
             });
             acbPay.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +83,7 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), acbPay);
+                    callbackOnItemClickListener(getLayoutPosition(), acbPay);
                 }
             });
             acbCommenton.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +91,7 @@ public class MainOrderRvAdapter extends ExRvAdapter<MainOrderRvAdapter.ViewHolde
                 @Override
                 public void onClick(View v) {
 
-                    callbackOnItemViewClickListener(getLayoutPosition(), acbCommenton);
+                    callbackOnItemClickListener(getLayoutPosition(), acbCommenton);
                 }
             });
         }

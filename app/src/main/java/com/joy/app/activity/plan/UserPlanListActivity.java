@@ -8,8 +8,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.android.library.ui.activity.BaseHttpRvActivity;
-import com.android.library.adapter.OnItemViewClickListener;
-import com.android.library.adapter.OnItemViewLongClickListener;
+import com.android.library.listener.OnItemClickListener;
+import com.android.library.listener.OnItemLongClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.DeviceUtil;
 import com.joy.app.R;
@@ -91,17 +91,17 @@ public class UserPlanListActivity extends BaseHttpRvActivity<List<PlanItem>> imp
     protected void initContentView() {
 
         PlanListAdapter adapter = new PlanListAdapter();
-        adapter.setOnItemViewClickListener(new OnItemViewClickListener<PlanItem>() {
+        adapter.setOnItemClickListener(new OnItemClickListener<PlanItem>() {
 
             @Override
-            public void onItemViewClick(int position, View clickView, PlanItem planItem) {
+            public void onItemClick(int position, View clickView, PlanItem planItem) {
                 if (isRequest)return;
                 PoiDetailActivity.startActivity(UserPlanListActivity.this, planItem.getProduct_id());
             }
         });
-        adapter.setOnItemViewLongClickListener(new OnItemViewLongClickListener<PlanItem>() {
+        adapter.setOnItemLongClickListener(new OnItemLongClickListener<PlanItem>() {
             @Override
-            public void onItemViewLongClick(int position, View clickView, PlanItem planItem) {
+            public void onItemLongClick(int position, View clickView, PlanItem planItem) {
                 if (isRequest)return;
 //                dialogUtil.showDeletePoiDialog(mFolderID,planItem.getProduct_id());
             }

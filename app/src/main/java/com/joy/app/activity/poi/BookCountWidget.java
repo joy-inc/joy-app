@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.MathUtil;
 import com.android.library.utils.TextUtil;
@@ -62,10 +62,10 @@ public class BookCountWidget extends ExLayoutWidget {
 
             tvTitle.setText(data.getTitle());
             mAdapter = new LevelAdapter(data.getOptions());
-            mAdapter.setOnItemViewClickListener(new OnItemViewClickListener() {
+            mAdapter.setOnItemClickListener(new OnItemClickListener() {
 
                 @Override
-                public void onItemViewClick(int position, View clickView, Object o) {
+                public void onItemClick(int position, View clickView, Object o) {
 
                     LevelOptions data = mAdapter.getItem(position);
 
@@ -234,7 +234,7 @@ public class BookCountWidget extends ExLayoutWidget {
                     @Override
                     public void onClick(View v) {
 
-                        callbackOnItemViewClickListener(mPosition, v);
+                        callbackOnItemClickListener(mPosition, v);
                     }
                 });
 
@@ -242,7 +242,7 @@ public class BookCountWidget extends ExLayoutWidget {
                     @Override
                     public void onClick(View v) {
 
-                        callbackOnItemViewClickListener(mPosition, v);
+                        callbackOnItemClickListener(mPosition, v);
                     }
                 });
             }

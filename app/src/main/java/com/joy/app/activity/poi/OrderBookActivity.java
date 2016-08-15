@@ -16,7 +16,7 @@ import com.android.library.ui.activity.BaseHttpUiActivity;
 import com.android.library.adapter.ExAdapter;
 import com.android.library.adapter.ExViewHolder;
 import com.android.library.adapter.ExViewHolderBase;
-import com.android.library.adapter.OnItemViewClickListener;
+import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.utils.CollectionUtil;
 import com.android.library.utils.MathUtil;
@@ -244,10 +244,10 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
 
             final DialogSubjectAdapter adapter = new DialogSubjectAdapter();
             adapter.setData(options);
-            adapter.setOnItemViewClickListener(new OnItemViewClickListener<LevelOptions>() {
+            adapter.setOnItemClickListener(new OnItemClickListener<LevelOptions>() {
 
                 @Override
-                public void onItemViewClick(int position, View clickView, LevelOptions option) {
+                public void onItemClick(int position, View clickView, LevelOptions option) {
 
                     currentIndex = position;
 
@@ -480,7 +480,7 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
                     @Override
                     public void onClick(View v) {
 
-                        callbackOnItemViewClickListener(mPosition, v);
+                        callbackOnItemClickListener(mPosition, v);
                     }
                 });
             }

@@ -41,7 +41,7 @@ public class MainFragment extends BaseHttpRvFragment<List<MainRoute>> {
     protected void initContentView() {
 
         MainRouteRvAdapter adapter = new MainRouteRvAdapter();
-        adapter.setOnItemViewClickListener((position, clickView, mainRoute) -> {
+        adapter.setOnItemClickListener((position, clickView, mainRoute) -> {
 
             if (mainRoute != null) {
                 if (mainRoute.isCity()) {
