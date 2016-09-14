@@ -7,7 +7,6 @@ import android.widget.TextView;
 import com.android.library.adapter.ExRvAdapter;
 import com.android.library.adapter.ExRvViewHolder;
 import com.android.library.view.fresco.FrescoIv;
-import com.joy.app.BuildConfig;
 import com.joy.app.R;
 import com.joy.app.bean.sample.Trip;
 
@@ -27,7 +26,7 @@ public class CityDetailRvAdapter extends ExRvAdapter<CityDetailRvAdapter.ViewHol
         return new ViewHolder(inflate(parent, R.layout.t_item_card_rv_detail));
     }
 
-    static class ViewHolder extends ExRvViewHolder<Trip> {
+    class ViewHolder extends ExRvViewHolder<Trip> {
 
         @BindView(R.id.sdvPhoto)    FrescoIv    sdvPhoto;
         @BindView(R.id.sdvAvatar)   FrescoIv    sdvAvatar;
@@ -41,10 +40,9 @@ public class CityDetailRvAdapter extends ExRvAdapter<CityDetailRvAdapter.ViewHol
         }
 
         @OnClick(R.id.cvLayout)
-        void onItemClick() {
+        void onItemClick(View v) {
 
-            if (BuildConfig.DEBUG)
-                showToast("onClick--> position = " + getLayoutPosition());
+            callbackOnItemClickListener(getLayoutPosition(), v);
         }
 
         @Override

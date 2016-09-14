@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.android.library.ui.fragment.BaseHttpRvFragment2;
+import com.android.library.ui.webview.BaseWebViewActivity;
 import com.android.library.view.recyclerview.ItemAddAnimator;
 import com.android.library.view.recyclerview.ItemDecoration;
 import com.joy.app.adapter.sample.RvLoadMoreAdapter;
@@ -15,8 +16,6 @@ import javax.inject.Inject;
  * Created by Daisw on 16/6/8.
  */
 public class MvpTestRvFragment extends BaseHttpRvFragment2 implements MvpTestRvView {
-
-    public static final String TAG = "MvpTestRvFragment";
 
     @Inject
     MvpTestRvPresenter mPresenter;
@@ -38,7 +37,9 @@ public class MvpTestRvFragment extends BaseHttpRvFragment2 implements MvpTestRvV
     protected void initContentView() {
 
         mPresenter.setPageLimit(10);
-        setAdapter(new RvLoadMoreAdapter());
+        RvLoadMoreAdapter adapter = new RvLoadMoreAdapter();
+        adapter.setOnItemClickListener((p, v, t) -> BaseWebViewActivity.startActivity(getActivity(), t.getUrl(), t.getTitle()));
+        setAdapter(adapter);
         getRecyclerView().setItemAnimator(new ItemAddAnimator(mPresenter.getPageLimit()));
         getRecyclerView().addItemDecoration(
                 new ItemDecoration.Builder(getActivity())

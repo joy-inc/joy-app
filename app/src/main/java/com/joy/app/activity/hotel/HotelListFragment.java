@@ -6,11 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.android.library.ui.fragment.BaseHttpRvFragment;
-import com.android.library.listener.OnItemClickListener;
 import com.android.library.httptask.ObjectRequest;
+import com.android.library.listener.OnItemClickListener;
+import com.android.library.ui.fragment.BaseHttpRvFragment;
+import com.android.library.ui.webview.BaseWebViewActivityNoTitle;
 import com.joy.app.R;
-import com.joy.app.activity.common.WebViewActivity;
 import com.joy.app.adapter.hotel.HotelListAdapter;
 import com.joy.app.bean.hotel.HotelEntity;
 import com.joy.app.bean.hotel.HotelList;
@@ -23,7 +23,7 @@ import java.util.List;
  * @author litong  <br>
  * @Description 酒店列表    <br>
  */
-public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemClickListener, View.OnClickListener {
+public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements OnItemClickListener<HotelEntity>, View.OnClickListener {
     HotelParams params;
     RecyclerView.OnScrollListener listener;
 
@@ -68,9 +68,9 @@ public class HotelListFragment extends BaseHttpRvFragment<HotelList> implements 
     }
 
     @Override
-    public void onItemClick(int position, View clickView, Object o) {
-        HotelEntity hotelEntity = (HotelEntity) getAdapter().getData().get(position - 1);
-        WebViewActivity.startHotelActivity(getActivity(), hotelEntity.getLink());
+    public void onItemClick(int position, View clickView, HotelEntity hotelEntity) {
+//        WebViewActivity.startHotelActivity(getActivity(), hotelEntity.getLink());
+        BaseWebViewActivityNoTitle.startActivity(getActivity(), hotelEntity.getLink());
     }
 
     @Override
