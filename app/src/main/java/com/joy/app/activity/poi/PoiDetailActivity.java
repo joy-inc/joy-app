@@ -111,7 +111,8 @@ public class PoiDetailActivity extends BaseHttpUiActivity<PoiDetail> implements 
     @Override
     protected void initTitleView() {
 
-        addTitleLeftBackView(R.drawable.ic_back_gray);
+        // daisw 16/9/11
+//        addTitleLeftBackView(R.drawable.ic_back_gray);
     }
 
     @Override

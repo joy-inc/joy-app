@@ -99,15 +99,15 @@ public class OrderBookActivity extends BaseHttpUiActivity<Product> {
     @Override
     protected void initTitleView() {
 
-        super.initTitleView();
-        addTitleLeftView(R.drawable.ic_back_gray, new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                showAlertDialog();
-            }
-        });
+        // daisw 16/9/11
+//        addTitleLeftView(R.drawable.ic_back_gray, new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                showAlertDialog();
+//            }
+//        });
     }
 
     @Override

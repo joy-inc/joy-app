@@ -36,7 +36,8 @@ public class JoyApplication extends BaseApplication {
         locationUtil = new LocationUtil(this);
 //        locationUtil.getOnceLocation();//获取一次位置
         XiaomiUtil.registerMiPush(this);
-        LeakCanary.install(this);
+        if (BuildConfig.DEBUG)
+            LeakCanary.install(this);
     }
 
     public static void releaseForExitApp() {

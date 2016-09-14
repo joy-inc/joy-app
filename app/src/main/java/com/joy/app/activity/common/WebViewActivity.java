@@ -115,7 +115,8 @@ public class WebViewActivity extends BaseHttpUiActivity<String> implements WebVi
 
         if (!mUseBottomBanner) {
             if (TextUtil.isEmpty(mTitle)) { //就是透明的
-                addTitleLeftBackView(R.drawable.ic_back_gray);
+                // daisw 16/9/11
+//                addTitleLeftBackView(R.drawable.ic_back_gray);
             } else {
                 addTitleMiddleView(mTitle);
                 addTitleLeftBackView();

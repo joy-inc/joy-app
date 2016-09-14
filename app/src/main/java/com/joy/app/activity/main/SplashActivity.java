@@ -50,7 +50,7 @@ public class SplashActivity extends Activity {
                 if (!isFinishing())
                     finishToEnterActivity();
             }
-        }.sendEmptyMessageDelayed(0, 2000);
+        }.sendEmptyMessageDelayed(0, 800);
     }
 
     private void finishToEnterActivity() {
