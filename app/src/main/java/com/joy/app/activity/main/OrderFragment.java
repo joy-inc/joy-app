@@ -181,8 +181,9 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
 
         if (JoyApplication.isLogin()) {
 
-            if (mLoginTipView != null)
-                removeCustomView(mLoginTipView);
+            // daisw 2016/9/17
+//            if (mLoginTipView != null)
+//                removeCustomView(mLoginTipView);
 
             if (fromOnCreate)
                 executeCacheAndRefresh();
@@ -206,7 +207,8 @@ public class OrderFragment extends BaseHttpRvFragment<List<MainOrder>> {
             getAdapter().clear();
             getAdapter().notifyDataSetChanged();
         }
-        removeCustomView(mLoginTipView);
-        addCustomView(mLoginTipView);
+        // daisw 2016/9/17
+//        removeCustomView(mLoginTipView);
+//        addCustomView(mLoginTipView);
     }
 }

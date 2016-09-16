@@ -15,12 +15,12 @@ import android.widget.TextView;
 import com.android.library.httptask.ObjectRequest;
 import com.android.library.ui.activity.BaseHttpRvActivity;
 import com.android.library.utils.CollectionUtil;
+import com.android.library.view.fresco.FrescoIv;
 import com.android.library.view.observablescrollview.ObservableRecyclerView;
 import com.android.library.view.observablescrollview.ObservableScrollViewCallbacks;
 import com.android.library.view.observablescrollview.ScrollState;
 import com.android.library.view.observablescrollview.ScrollUtils;
 import com.android.library.view.systembar.SystemBarTintManager;
-import com.android.library.view.fresco.FrescoIv;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
@@ -185,7 +185,7 @@ public class DetailTestActivity2 extends BaseHttpRvActivity<CityDetail> implemen
 
                     if (palette != null) {
 
-                        getRootView().setBackgroundColor(palette.getMutedColor(0X00000000));
+                        setBackgroundColor(palette.getMutedColor(0X00000000));
                         sdvPhoto.setImageBitmap(bitmap);
                     }
                 });

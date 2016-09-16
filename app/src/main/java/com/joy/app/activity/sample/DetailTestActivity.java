@@ -136,7 +136,7 @@ public class DetailTestActivity extends BaseHttpRvActivity<CityDetail> {
 
                     if (palette != null) {
 
-                        getRootView().setBackgroundColor(palette.getMutedColor(0X00000000));
+                        setBackgroundColor(palette.getMutedColor(0X00000000));
                         sdvPhoto.setImageBitmap(bitmap);
                     }
                 });
