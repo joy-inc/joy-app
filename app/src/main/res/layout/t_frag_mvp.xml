@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
+    <include layout="@layout/t_header_cover_photo3" />
+
+    <include
+        layout="@layout/t_header_cover_title3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include layout="@layout/t_header_cover_photo3" />
-
-        <include
-            layout="@layout/t_header_cover_title3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
-
-</RelativeLayout>
+        android:layout_height="260dp" />
+</merge>

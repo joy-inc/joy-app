@@ -102,13 +102,13 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
     }
 
     @Override
-    protected void wrapContentView(FrameLayout rootView, View contentView) {
+    protected void wrapContentView(FrameLayout contentParent, View contentView) {
 
         LayoutParams photoLp = new LayoutParams(LayoutParams.MATCH_PARENT, 260 * DP_1_PX);
-        rootView.addView(inflateLayout(R.layout.t_header_cover_photo3), photoLp);
-        super.wrapContentView(rootView, contentView);
+        contentParent.addView(inflateLayout(R.layout.t_header_cover_photo3), photoLp);
+        super.wrapContentView(contentParent, contentView);
         LayoutParams titleLp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        rootView.addView(inflateLayout(R.layout.t_header_cover_title3), titleLp);
+        contentParent.addView(inflateLayout(R.layout.t_header_cover_title3), titleLp);
     }
 
     @Override
