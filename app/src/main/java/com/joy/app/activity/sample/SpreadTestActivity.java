@@ -53,7 +53,7 @@ public class SpreadTestActivity extends BaseUiActivity implements SpreadView.OnS
 
     private void setupSpreadBackground(Bundle savedInstanceState) {
 
-        mSvBg.setFillPaintColor(getColor(R.color.color_accent));
+        mSvBg.setFillPaintColor(getResources().getColor(R.color.color_accent));
         mSvBg.setOnStateChangeListener(this);
         if (savedInstanceState == null) {
 
