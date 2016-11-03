@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/acbBook"
         android:layout_alignParentTop="true"
-        android:background="@color/color_grey">
+        android:background="@color/gray">
 
         <LinearLayout
             android:layout_width="match_parent"

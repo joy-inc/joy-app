@@ -37,7 +37,6 @@ import com.joy.app.R;
 import com.joy.app.adapter.sample.CityDetailRvAdapter;
 import com.joy.app.bean.sample.CityDetail;
 import com.joy.app.utils.http.sample.TestHtpUtil;
-import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,17 +175,17 @@ public class DetailTestActivity3 extends BaseHttpRvActivity<CityDetail> implemen
 
         float minOverlayTransitionY = -mFlexibleHeight;
         float transY = ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0f);
-        ViewHelper.setTranslationY(mCoverSdvPhoto, transY);
+        mCoverSdvPhoto.setTranslationY(transY);
 
         // Translate title text
         if (mCoverTvTitle.getWidth() > 0 || mCoverTvTitle.getHeight() > 0) {
 
             float titleTranslationY = mFlexibleHeight / 2 - scrollY / 2;
             titleTranslationY = Math.max(STATUS_BAR_HEIGHT + (TITLE_BAR_HEIGHT - mCoverTvTitle.getHeight()) / 2, titleTranslationY);
-            ViewHelper.setTranslationY(mCoverTvTitle, titleTranslationY);
+            mCoverTvTitle.setTranslationY(titleTranslationY);
             float titleTranslationX = SCREEN_WIDTH / 2 - mCoverTvTitle.getWidth() / 2 - scrollY / 2;
             titleTranslationX = Math.max(getToolbar().getContentInsetLeft() * 2 + mIbBack.getWidth() + HORIZONTAL_MARGINS, titleTranslationX);
-            ViewHelper.setTranslationX(mCoverTvTitle, titleTranslationX);
+            mCoverTvTitle.setTranslationX(titleTranslationX);
 
             showView(mCoverTvTitle);
         }

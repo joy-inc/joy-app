@@ -152,7 +152,7 @@
                 android:id="@+id/rvStatus1Div"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_grey"
+                android:background="@color/gray"
                 android:padding="12dp">
 
                 <com.android.library.widget.JTextView
@@ -177,7 +177,7 @@
                 android:id="@+id/rvStatus2Div"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_grey"
+                android:background="@color/gray"
                 android:padding="12dp">
 
                 <com.android.library.widget.JTextView
